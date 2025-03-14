@@ -3,11 +3,12 @@
 }
 
 .services-header {
-  background-color: #fff;
+  background: url('../assets/images/header.jpg') center/cover no-repeat; /* Caminho da imagem */
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  color: #fff; /* Ajuste a cor do texto para garantir legibilidade */
 }
 
 .services-header h1 {

@@ -3,39 +3,47 @@
 }
 
 .home-header {
-  background-color: #fff;
+  background: url('../assets/images/header.jpg') center/cover no-repeat; /* Caminho da imagem */
+  background-color: rgba(0, 0, 0, 0.05); /* Cor de fundo semi-transparente */
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  color: #fff; /* Ajuste a cor do texto para garantir legibilidade */
 }
 
 .home-header h1 {
   font-size: 2.5rem;
-  color: #333;
+  color: #fff; /* Ajuste a cor do texto para garantir legibilidade */
 }
 
 .home-header p {
   font-size: 1.2rem;
-  color: #666;
+  color: #fff; /* Ajuste a cor do texto para garantir legibilidade */
 }
 
 .home-banner {
-  margin-top: 2rem;
-  text-align: center;
-  padding: 3rem 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: url('../assets/images/banner.jpg') center/cover no-repeat; /* Caminho da imagem */
-  color: #fff;
-  border-radius: 12px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  position: relative;
-  overflow: hidden;
+  background-color: rgba(190, 181, 181, 0.0); /* Cor de fundo quase transparente */
+  z-index: -1;
+}
+.home-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7); /* Cor de fundo semi-transparente */
+  z-index: -1;
 }
 
-.home-banner img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.home-content {
+  position: relative;
+  z-index: 1;
 }
