@@ -68,3 +68,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+site-institucional/
+├── public/
+│   ├── index.html
+│   ├── favicon.ico
+├── src/
+│   ├── assets/            # Arquivos estáticos como imagens, fontes, etc.
+│   ├── components/        # Componentes reutilizáveis
+│   ├── pages/             # Páginas principais
+│   ├── App.js             # Componente principal
+│   ├── index.js           # Entrada do React
+│   ├── styles/            # Arquivos de CSS/Styled Components
+│   ├── data.js            # Dados para o site (ex: informações institucionais)
+└── package.json
