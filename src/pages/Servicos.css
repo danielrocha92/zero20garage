@@ -1,21 +1,47 @@
-.servicos {
-    padding: 2rem;
-  }
-  
-  .servicos-header {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .servicos-header h1 {
-    font-size: 2.5rem;
-    color: #333;
-  }
-  
-  .servicos-header p {
-    font-size: 1.2rem;
-    color: #666;
-  }
+.services {
+  padding: 2rem;
+}
+
+.services-header {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.services-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.services-header p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.services-list {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.service-item {
+  flex: 1 1 calc(33.333% - 2rem);
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.service-item h2 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.service-item p {
+  font-size: 1rem;
+  color: #666;
+}

@@ -10,6 +10,26 @@
 .navbar-logo a {
   display: flex;
   align-items: center;
+  gap: 12px; /* Espaçamento entre o logo e o texto */
+  text-decoration: none;
+  color: inherit; /* Mantém a cor do tema */
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.navbar-logo a img {
+  max-height: 50px; /* Garante que o logo não fique muito grande */
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar-logo a:hover {
+  transform: scale(1.05); /* Leve aumento ao passar o mouse */
+  opacity: 0.9;
+}
+
+.navbar-logo a:hover img {
+  transform: rotate(-5deg); /* Efeito sutil no logo ao passar o mouse */
 }
 
 .logo-image {
