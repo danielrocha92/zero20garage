@@ -1,7 +1,12 @@
 body {
-  background: url('../assets/images/banner.jpg') repeat; /* Caminho da imagem e repetição */
+  background: url('./assets/images/banner.jpg') center center repeat; /* Caminho da imagem, centralização e repetição */
+  background-size: cover; /* Garante que a imagem cubra toda a tela */
+  background-attachment: fixed; /* Mantém a imagem fixa ao rolar a página */
   background-color: rgba(190, 181, 181, 0.0); /* Cor de fundo quase transparente */
   position: relative;
+  min-height: 100vh; /* Garante que o background cubra toda a altura da página */
+  margin: 0; /* Remove margens padrão */
+  padding: 0; /* Remove padding padrão */
 }
 
 body::before {
@@ -11,6 +16,6 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.7); /* Cor de fundo semi-transparente */
+  background-color: rgba(255, 255, 255, 0.3); /* Cor de fundo mais transparente */
   z-index: -1;
 }

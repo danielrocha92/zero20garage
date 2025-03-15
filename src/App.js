@@ -6,6 +6,7 @@ import Contato from './pages/Contato';
 import Servicos from './pages/Servicos';
 import Blog from './pages/Blog';
 import Navbar from './components/Navbar';
+
 import './App.css'; // Certifique-se de que o arquivo CSS global está sendo importado
 
 function App() {
