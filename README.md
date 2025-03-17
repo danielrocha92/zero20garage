@@ -1,6 +1,6 @@
 # Zero 20 Garage
 
-site institucional para oficina mecânica e retifica de motores.
+Site institucional para oficina mecânica e retifica de motores.
 
 ## 🚀 Tecnologias
 
