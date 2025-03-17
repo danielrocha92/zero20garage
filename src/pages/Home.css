@@ -2,26 +2,6 @@
   padding: 2rem;
 }
 
-.home-header {
-  background: url('../assets/images/header.jpg') center/cover no-repeat; /* Caminho da imagem */
-  background-color: rgba(0, 0, 0, 0.05); /* Cor de fundo semi-transparente */
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  color: #fff; /* Ajuste a cor do texto para garantir legibilidade */
-}
-
-.home-header h1 {
-  font-size: 2.5rem;
-  color: #fff; /* Ajuste a cor do texto para garantir legibilidade */
-}
-
-.home-header p {
-  font-size: 1.2rem;
-  color: #fff; /* Ajuste a cor do texto para garantir legibilidade */
-}
-
 .home-banner {
   position: fixed;
   top: 0;
@@ -32,6 +12,7 @@
   background-color: rgba(190, 181, 181, 0.0); /* Cor de fundo quase transparente */
   z-index: -1;
 }
+
 .home-banner::before {
   content: '';
   position: absolute;
