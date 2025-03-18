@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Contato.css';
 import DynamicHeader from '../components/DynamicHeader';
+import Layout from '../components/Layout';
 
 function Contato() {
   const messages = [
@@ -37,6 +38,7 @@ function Contato() {
   };
 
   return (
+    <Layout>
     <div className="contato">
       <DynamicHeader messages={messages} />
       <div className="contato-container">
@@ -86,6 +88,8 @@ function Contato() {
         </div>
       </div>
     </div>
+    </Layout>
+// Compare this snippet from src/pages/Contato.jsx:
   );
 }
 

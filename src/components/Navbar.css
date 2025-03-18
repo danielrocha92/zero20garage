@@ -3,13 +3,26 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #333;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo preto com transparência */
   color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: sticky; /* Fixa o navbar no topo ao rolar a página */
+  top: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease; /* Transição suave para mudanças de cor */
+}
+
+.navbar:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Fundo mais opaco ao passar o mouse */
 }
 
 .navbar-logo img {
   height: 50px;
+  transition: transform 0.3s ease;
+}
+
+.navbar-logo img:hover {
+  transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
 }
 
 .navbar-links {
@@ -26,6 +39,8 @@
   color: #fff;
   text-decoration: none;
   font-size: 1rem;
+  font-weight: 500;
+  position: relative;
   transition: color 0.3s ease;
 }
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
 import GoogleReviews from '../components/GoogleReviews';
+import Layout from '../components/Layout';
 
 function Home() {
   const [headerContent, setHeaderContent] = useState({
@@ -34,6 +35,7 @@ function Home() {
   }, []);
 
   return (
+    <Layout>
     <div className="home">
       <div className="home-content">
         <header className="header">
@@ -119,6 +121,7 @@ function Home() {
         </section>
       </div>
     </div>
+    </Layout>
   );
 }
 

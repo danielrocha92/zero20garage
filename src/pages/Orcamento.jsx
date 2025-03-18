@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Orcamento.css';
 import DynamicHeader from '../components/DynamicHeader';
+import Layout from '../components/Layout';
 
 function Orcamento() {
   const messages = [
@@ -44,6 +45,7 @@ function Orcamento() {
   };
 
   return (
+    <Layout>
     <div className="orcamento">
       <DynamicHeader
         messages={messages} />
@@ -168,6 +170,7 @@ function Orcamento() {
         <button type="submit">Enviar</button>
       </form>
     </div>
+    </Layout>
   );
 }
 

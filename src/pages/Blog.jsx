@@ -1,6 +1,7 @@
 import React from 'react';
 import './Blog.css';
 import DynamicHeader from '../components/DynamicHeader';
+import Layout from '../components/Layout';
 
 function Blog() {
   const messages = [
@@ -19,6 +20,7 @@ function Blog() {
   ];
 
   return (
+    <Layout>
     <div className="blog">
       <DynamicHeader messages={messages} />
       <section>
@@ -164,6 +166,7 @@ function Blog() {
         </p>
       </section>
     </div>
+    </Layout>
   );
 }
 

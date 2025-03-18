@@ -1,6 +1,7 @@
 import React from 'react';
 import './Servicos.css';
 import DynamicHeader from '../components/DynamicHeader';
+import Layout from '../components/Layout';
 
 const Servicos = () => {
     const messages = [
@@ -19,6 +20,7 @@ const Servicos = () => {
     ];
 
   return (
+    <Layout>
     <div className="services">
       <DynamicHeader messages={messages} />
       <div className="services-list">
@@ -48,6 +50,8 @@ const Servicos = () => {
         </div>
       </div>
     </div>
+    </Layout>
+// Compare this snippet from src/pages/Servicos.jsx:
   );
 };
 export default Servicos;
