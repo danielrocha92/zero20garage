@@ -1,13 +1,26 @@
 import React from 'react';
 import './Servicos.css';
+import DynamicHeader from '../components/DynamicHeader';
 
 const Servicos = () => {
+    const messages = [
+      {
+        title: 'Nossos Serviços',
+        subtitle: 'Conheça tudo o que podemos fazer por você',
+      },
+      {
+        title: 'Retífica de Motores',
+        subtitle: 'Serviços especializados para motores nacionais e importados',
+      },
+      {
+        title: 'Manutenção Preventiva',
+        subtitle: 'Cuide do seu carro com nossa equipe experiente',
+      },
+    ];
+
   return (
     <div className="services">
-      <header className="services-header">
-        <h1>Nossos Serviços</h1>
-        <p>Oferecemos uma ampla gama de serviços de retífica de motores para atender às suas necessidades.</p>
-      </header>
+      <DynamicHeader messages={messages} />
       <div className="services-list">
         <div className="service-item">
           <h2>Retífica de Motores</h2>
@@ -37,5 +50,4 @@ const Servicos = () => {
     </div>
   );
 };
-
 export default Servicos;

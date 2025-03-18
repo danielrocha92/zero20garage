@@ -25,6 +25,9 @@ function Navbar() {
           <Link to="/servicos">Serviços</Link>
         </li>
         <li>
+          <Link to="/orcamento">Orçamentos</Link>
+        </li>
+        <li>
           <Link to="/blog">Blog</Link>
         </li>
       </ul>

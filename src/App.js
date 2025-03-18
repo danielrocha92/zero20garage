@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Sobre from './pages/Sobre';
 import Contato from './pages/Contato';
 import Servicos from './pages/Servicos';
+import Orcamento from './pages/Orcamento';
 import Blog from './pages/Blog';
 import Navbar from './components/Navbar';
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/contato" element={<Contato />} />
         <Route path="/servicos" element={<Servicos />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/orcamento" element={<Orcamento />} />
       </Routes>
     </Router>
   );

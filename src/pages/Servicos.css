@@ -2,25 +2,6 @@
   padding: 2rem;
 }
 
-.services-header {
-  background: url('../assets/images/header.jpg') center/cover no-repeat; /* Caminho da imagem */
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  color: #fff; /* Ajuste a cor do texto para garantir legibilidade */
-}
-
-.services-header h1 {
-  font-size: 2.5rem;
-  color: #333;
-}
-
-.services-header p {
-  font-size: 1.2rem;
-  color: #666;
-}
-
 .services-list {
   margin-top: 2rem;
   display: flex;

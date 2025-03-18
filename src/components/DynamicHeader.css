@@ -1,0 +1,32 @@
+.header {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f9f9f9; /* Fundo quase branco */
+    border-bottom: 2px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin: 0;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .header p {
+    font-size: 1.2rem;
+    color: #555;
+    margin: 0.5rem 0 0;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
