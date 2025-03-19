@@ -6,22 +6,24 @@ import Contato from './pages/Contato';
 import Servicos from './pages/Servicos';
 import Orcamento from './pages/Orcamento';
 import Blog from './pages/Blog';
-import Navbar from './components/Navbar';
+import Layout from './components/Layout';
 
-import './App.css'; // Certifique-se de que o arquivo CSS global está sendo importado
+import './App.css';
+import './GlobalStyles.css';
 
 function App() {
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/sobre" element={<Sobre />} />
-        <Route path="/contato" element={<Contato />} />
-        <Route path="/servicos" element={<Servicos />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/orcamento" element={<Orcamento />} />
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/sobre" element={<Sobre />} />
+          <Route path="/contato" element={<Contato />} />
+          <Route path="/servicos" element={<Servicos />} />
+          <Route path="/orcamento" element={<Orcamento />} />
+          <Route path="/blog" element={<Blog />} />
+        </Routes>
+      </Layout>
     </Router>
   );
 }

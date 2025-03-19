@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
 import GoogleReviews from '../components/GoogleReviews';
-import Layout from '../components/Layout';
 
 function Home() {
   const [headerContent, setHeaderContent] = useState({
@@ -35,18 +34,14 @@ function Home() {
   }, []);
 
   return (
-    <Layout>
     <div className="home">
       <div className="home-content">
         <header className="header">
           <h1 className="fade">{headerContent.title}</h1>
           <p className="fade">{headerContent.subtitle}</p>
         </header>
+        <section className="background">
         <section className="home">
-          <GoogleReviews />
-          {/* Conteúdo adicional */}
-
-          {/* Mensagem Principal */}
             <header className="hero">
               <h1>Excelência em Retífica de Motores e Soluções Mecânicas Sob Medida</h1>
               <p>Atendimento especializado para veículos nacionais e importados.</p>
@@ -54,21 +49,18 @@ function Home() {
             </header>
 
             {/* Serviços Destacados */}
-            <section className="services">
+            <section className="highlights">
               <h2>Nossos Serviços</h2>
-              <div className="services-grid">
-                <div className="service-item">
-                  <img src="/images/retifica.jpg" alt="Retífica de Motores" />
+              <div className="highlights-grid">
+                <div className="highlight-item">
                   <h3>Retífica de Motores</h3>
                   <p>Recuperação completa do motor com precisão e qualidade.</p>
                 </div>
-                <div className="service-item">
-                  <img src="/images/manutencao.jpg" alt="Manutenção Preventiva" />
+                <div className="highlight-item">
                   <h3>Manutenção Preventiva</h3>
                   <p>Evite problemas futuros com revisões regulares.</p>
                 </div>
-                <div className="service-item">
-                  <img src="/images/revisao.jpg" alt="Revisão Completa" />
+                <div className="highlight-item">
                   <h3>Revisão Completa</h3>
                   <p>Diagnóstico avançado para garantir o melhor desempenho do seu veículo.</p>
                 </div>
@@ -93,7 +85,10 @@ function Home() {
                 </div>
               </div>
             </section>
+            <GoogleReviews />
+          {/* Conteúdo adicional */}
 
+          {/* Mensagem Principal */}
             {/* Depoimentos */}
             <section className="testimonials">
               <h2>O que Nossos Clientes Dizem</h2>
@@ -109,6 +104,7 @@ function Home() {
 
             {/* Contato Rápido */}
             <section className="contact">
+              <section className="highlight">
               <h2>Entre em Contato</h2>
               <p>Estamos prontos para atender você. Ligue ou envie uma mensagem agora mesmo!</p>
               <div className="contact-info">
@@ -116,12 +112,13 @@ function Home() {
                 <p><strong>E-mail:</strong> contato@zero20garage.com</p>
                 <a href="https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.3263499,-46.5770842,17z/data=!3m1!4b1!4m6!3m5!1s0x94ceede375ca12c9:0xa22173d27f744745!8m2!3d-23.3263499!4d-46.5745093!16s%2Fg%2F11sgrc1ckt?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="cta-button">Ver Localização</a>
               </div>
+              </section>
             </section>
 
         </section>
+        </section>
       </div>
     </div>
-    </Layout>
   );
 }
 

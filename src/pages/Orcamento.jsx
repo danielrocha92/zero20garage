@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Orcamento.css';
 import DynamicHeader from '../components/DynamicHeader';
-import Layout from '../components/Layout';
 
 function Orcamento() {
   const messages = [
@@ -45,10 +44,9 @@ function Orcamento() {
   };
 
   return (
-    <Layout>
     <div className="orcamento">
-      <DynamicHeader
-        messages={messages} />
+      <DynamicHeader messages={messages} />
+      <section className="container">
       <h2>Solicite um Orçamento</h2>
       <p>Preencha o formulário abaixo para solicitar um orçamento.</p>
       <form onSubmit={handleSubmit}>
@@ -169,8 +167,8 @@ function Orcamento() {
         </div>
         <button type="submit">Enviar</button>
       </form>
+      </section>
     </div>
-    </Layout>
   );
 }
 

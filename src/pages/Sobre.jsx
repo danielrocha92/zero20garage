@@ -1,7 +1,6 @@
 import React from 'react';
 import './Sobre.css';
 import DynamicHeader from '../components/DynamicHeader';
-import Layout from '../components/Layout';
 
 function Sobre() {
   const messages = [
@@ -20,15 +19,14 @@ function Sobre() {
   ];
 
   return (
-    <Layout>
     <div className="sobre">
-      <DynamicHeader messages={messages} />
-      <section>
-        <p>Conteúdo da página Sobre...</p>
+        <DynamicHeader messages={messages} />
+      <section className="background">
+        <section>
+          <p>Conteúdo da página Sobre...</p>
+        </section>
       </section>
     </div>
-    </Layout>
-// Compare this snippet from src/pages/Contato.jsx:
   );
 }
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import './Blog.css';
 import DynamicHeader from '../components/DynamicHeader';
-import Layout from '../components/Layout';
 
 function Blog() {
   const messages = [
@@ -20,8 +19,8 @@ function Blog() {
   ];
 
   return (
-    <Layout>
     <div className="blog">
+      <section className="background">
       <DynamicHeader messages={messages} />
       <section>
         <h2>Artigos do Blog</h2>
@@ -165,8 +164,8 @@ function Blog() {
           A manutenção preventiva é a chave para maximizar a vida útil do motor do seu veículo. Com cuidados simples e uma abordagem regular, você pode evitar problemas maiores e garantir que o motor do seu carro continue funcionando de maneira eficiente por muitos anos.
         </p>
       </section>
+    </section>
     </div>
-    </Layout>
   );
 }
 
