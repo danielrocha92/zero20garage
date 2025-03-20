@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Orcamento.css';
+import '../styles/styles.css';
 import DynamicHeader from '../components/DynamicHeader';
 
 function Orcamento() {
@@ -30,6 +30,7 @@ function Orcamento() {
     motorizacao: '',
     orcamento: '',
     codigo: '',
+    arquivo: null, // Novo campo para o arquivo
   });
 
   const handleChange = (e) => {
@@ -39,12 +40,53 @@ function Orcamento() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Dados do formulário:', formData);
-    alert('Sua solicitação foi enviada com sucesso!');
+  
+    const formDataToSend = new FormData();
+    formDataToSend.append('nome', formData.nome);
+    formDataToSend.append('telefone', formData.telefone);
+    formDataToSend.append('email', formData.email);
+    formDataToSend.append('cidade', formData.cidade);
+    formDataToSend.append('estado', formData.estado);
+    formDataToSend.append('marca', formData.marca);
+    formDataToSend.append('modelo', formData.modelo);
+    formDataToSend.append('ano', formData.ano);
+    formDataToSend.append('motorizacao', formData.motorizacao);
+    formDataToSend.append('orcamento', formData.orcamento);
+    formDataToSend.append('codigo', formData.codigo);
+    if (formData.arquivo) {
+      formDataToSend.append('arquivo', formData.arquivo);
+    }
+  
+    fetch('http://localhost:5000/api/orcamento', {
+      method: 'POST',
+      body: formDataToSend,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert('Formulário enviado com sucesso!');
+        setFormData({
+          nome: '',
+          telefone: '',
+          email: '',
+          cidade: '',
+          estado: '',
+          marca: '',
+          modelo: '',
+          ano: '',
+          motorizacao: '',
+          orcamento: '',
+          codigo: '',
+          arquivo: null,
+        });
+      })
+      .catch((error) => {
+        console.error('Erro ao enviar o formulário:', error);
+        alert('Ocorreu um erro ao enviar o formulário.');
+      });
   };
 
   return (
-    <div className="orcamento">
+    <div className="container">
       <DynamicHeader messages={messages} />
       <section className="container">
       <h2>Solicite um Orçamento</h2>
@@ -164,6 +206,15 @@ function Orcamento() {
             onChange={handleChange}
             required
           />
+          <div className="form-group">
+            <label>*Anexar Arquivo:</label>
+            <input
+              type="file"
+              name="arquivo"
+              onChange={(e) => setFormData({ ...formData, arquivo: e.target.files[0] })}
+              required
+            />
+          </div>
         </div>
         <button type="submit">Enviar</button>
       </form>

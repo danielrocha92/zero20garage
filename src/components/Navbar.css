@@ -4,8 +4,8 @@
   align-items: center;
   padding: 1rem 2rem;
   background-color: rgba(0, 0, 0, 0.5); /* Fundo preto com transparência */
-  color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #2C2C2C;
+  box-shadow: 0 4px 6px rgba(241, 6, 6, 0.1);
   position: sticky; /* Fixa o navbar no topo ao rolar a página */
   top: 0;
   z-index: 1000;
@@ -36,14 +36,14 @@
 }
 
 .navbar-links a {
-  color: #fff;
+  color: #D3D3D3;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
   position: relative;
-  transition: color 0.3s ease;
+  transition: color 0.4s ease;
 }
 
 .navbar-links a:hover {
-  color: #f0a500;
+  color: #D90000;
 }

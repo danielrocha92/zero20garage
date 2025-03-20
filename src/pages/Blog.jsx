@@ -1,5 +1,5 @@
-import React from 'react';
-import './Blog.css';
+import React, { useState, useEffect } from 'react';
+import '../styles/styles.css';
 import DynamicHeader from '../components/DynamicHeader';
 
 function Blog() {
@@ -18,11 +18,34 @@ function Blog() {
     },
   ];
 
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // Função para monitorar o scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Função para rolar até o topo
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
-    <div className="blog">
-      <section className="background">
+    <div className="container">
       <DynamicHeader messages={messages} />
-      <section>
+      <section className="container">
         <h2>Artigos do Blog</h2>
         <ul className="blog-links">
           <li>
@@ -164,7 +187,13 @@ function Blog() {
           A manutenção preventiva é a chave para maximizar a vida útil do motor do seu veículo. Com cuidados simples e uma abordagem regular, você pode evitar problemas maiores e garantir que o motor do seu carro continue funcionando de maneira eficiente por muitos anos.
         </p>
       </section>
-    </section>
+
+      {/* Botão "Voltar ao Topo" */}
+      {showScrollTop && (
+        <button className="arrow-up" onClick={scrollToTop}>
+          ☝️
+        </button>
+      )}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Contato.css';
+import '../styles/styles.css';
 import DynamicHeader from '../components/DynamicHeader';
 
 function Contato() {
@@ -22,6 +22,7 @@ function Contato() {
     nome: '',
     email: '',
     mensagem: '',
+    arquivo: null, // Novo campo para o arquivo
   });
 
   const handleChange = (e) => {
@@ -31,25 +32,67 @@ function Contato() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Dados do formulário:', formData);
-    alert('Sua mensagem foi enviada com sucesso!');
-    setFormData({ nome: '', email: '', mensagem: '' });
+  
+    const formDataToSend = new FormData();
+    formDataToSend.append('nome', formData.nome);
+    formDataToSend.append('email', formData.email);
+    formDataToSend.append('mensagem', formData.mensagem);
+    if (formData.arquivo) {
+      formDataToSend.append('arquivo', formData.arquivo);
+    }
+  
+    // Exemplo de envio para um servidor
+    fetch('/api/enviar-formulario', {
+      method: 'POST',
+      body: formDataToSend,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert('Formulário enviado com sucesso!');
+        setFormData({ nome: '', email: '', mensagem: '', arquivo: null });
+      })
+      .catch((error) => {
+        console.error('Erro ao enviar o formulário:', error);
+        alert('Ocorreu um erro ao enviar o formulário.');
+      });
   };
+  
 
   return (
-    <div className="contato">
+    <div className="container">
       <DynamicHeader messages={messages} />
-      <section className="container">
-      <div className="contato-container">
-        <div className="contato-info">
-          <h2>Entre em Contato</h2>
-          <p>Estamos aqui para ajudar. Entre em contato conosco pelos canais abaixo:</p>
-          <ul>
-            <li><strong>Endereço:</strong> Avenida Laura Gomes Hannickel, 153 - CAPOAVINHA, Mairiporã - SP</li>
-            <li><strong>Telefone:</strong> (11) 94109-7471</li>
-            <li><strong>E-mail:</strong> contato@zero20garage.com</li>
-          </ul>
-        </div>
+
+      {/* Destaques */}
+      <section className="highlights">
+            <div className="highlights-grid">
+              <div className="highlight-item">
+                <div className="contato-info">
+                <h2>Entre em Contato</h2>
+                  <p>Estamos aqui para ajudar. Entre em contato conosco pelos canais abaixo:</p>
+                  <ul className="contact-list">
+                    <li>
+                      <i className="fas fa-map-marker-alt"></i>
+                      <strong>Endereço:</strong> Avenida Laura Gomes Hannickel, 153 - CAPOAVINHA, Mairiporã - SP
+                    </li>
+                    <li>
+                      <i className="fas fa-phone-alt"></i>
+                      <strong>Telefone:</strong> <a href="tel:+5511941097471">(11) 94109-7471</a>
+                    </li>
+                    <li>
+                      <i className="fas fa-envelope"></i>
+                      <strong>E-mail:</strong> <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a>
+                    </li>
+                  </ul>
+              </div>
+              
+            </div>
+            </div>
+          </section>
+
+      {/* Destaques */}
+      <section className="highlights">
+            <div className="highlights-grid">
+              <div className="highlight-item">
         <div className="contato-form">
           <h2>Envie uma Mensagem</h2>
           <form onSubmit={handleSubmit}>
@@ -81,10 +124,20 @@ function Contato() {
                 onChange={handleChange}
                 required
               ></textarea>
+              <div className="form-group">
+                <label>*Anexar Arquivo:</label>
+                <input
+                  type="file"
+                  name="arquivo"
+                  onChange={(e) => setFormData({ ...formData, arquivo: e.target.files[0] })}
+                  required
+                />
+              </div>
             </div>
             <button type="submit">Enviar</button>
           </form>
         </div>
+      </div>  
       </div>
       </section>
     </div>

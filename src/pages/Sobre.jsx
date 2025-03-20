@@ -1,5 +1,5 @@
 import React from 'react';
-import './Sobre.css';
+import '../styles/styles.css';
 import DynamicHeader from '../components/DynamicHeader';
 
 function Sobre() {
@@ -19,13 +19,11 @@ function Sobre() {
   ];
 
   return (
-    <div className="sobre">
+    <div className="container">
         <DynamicHeader messages={messages} />
-      <section className="background">
         <section>
           <p>Conteúdo da página Sobre...</p>
         </section>
-      </section>
     </div>
   );
 }

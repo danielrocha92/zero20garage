@@ -1,5 +1,5 @@
 import React from 'react';
-import './Servicos.css';
+import '../styles/styles.css';
 import DynamicHeader from '../components/DynamicHeader';
 
 const Servicos = () => {
@@ -19,8 +19,7 @@ const Servicos = () => {
     ];
 
   return (
-    <div className="services">
-        <section className="background">
+    <div className="container">
         <DynamicHeader messages={messages} />
         <div className="services-list">
           <div className="service-item">
@@ -48,7 +47,6 @@ const Servicos = () => {
             <p>Consultoria especializada para ajudar você a tomar as melhores decisões para o seu veículo.</p>
           </div>
         </div>
-      </section>
     </div>
   );
 };
