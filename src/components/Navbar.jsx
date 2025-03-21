@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './styles.css'; // Certifique-se de que o caminho está corretorta o arquivo global de estilos
-import logo from '../assets/logo.png'; // Certifique-se de que o caminho para a imagem está correto
+import '../styles/styles.css'; // Importando o arquivo de estilos
+import logo from '../assets/images/logo.png'; // Importando a imagem do logo
 
 function Navbar() {
 
