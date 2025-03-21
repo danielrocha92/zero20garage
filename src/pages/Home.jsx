@@ -24,7 +24,6 @@ function Home() {
     <div className="container">
       <DynamicHeader messages={messages} />
           {/* Hero Section */}
-          <header className="hero">
             <div
               className="hero"
               style={{
@@ -38,7 +37,6 @@ function Home() {
               <p>Atendimento especializado para veículos nacionais e importados.</p>
               <a href="/orcamento" className="cta-button">Solicite um Orçamento</a>
             </div>
-          </header>
 
           {/* Serviços Destacados */}
           <section className="highlights">
