@@ -3,6 +3,12 @@ import '../styles/styles.css';
 import DynamicHeader from '../components/DynamicHeader';
 
 function Blog() {
+
+  // Rola para o topo ao montar o componente
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const messages = [
     {
       title: 'Retífica de Motores',
