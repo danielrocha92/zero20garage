@@ -71,16 +71,16 @@ function Contato() {
                   <p>Estamos aqui para ajudar. Entre em contato conosco pelos canais abaixo:</p>
                   <ul className="contact-list">
                     <li>
-                      <i className="fas fa-map-marker-alt"></i>
-                      <strong>Endereço:</strong> Avenida Laura Gomes Hannickel, 153 - CAPOAVINHA, Mairiporã - SP
+                      <i className="fas fa-map-marker-alt"></i><p>
+                      <strong>Endereço:</strong> Avenida Laura Gomes Hannickel, 153 - Capoavinha Mairiporã - SP</p>
                     </li>
                     <li>
                       <i className="fas fa-phone-alt"></i>
-                      <strong>Telefone:</strong> <a href="tel:+5511941097471">(11) 94109-7471</a>
+                      <strong><p>Telefone:</p></strong> <a href="tel:+5511941097471"><p>(11) 94109-7471</p></a>
                     </li>
                     <li>
                       <i className="fas fa-envelope"></i>
-                      <strong>E-mail:</strong> <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a>
+                      <strong><p>E-mail:</p></strong> <a href="mailto:contato@zero20garage.com"><p>contato@zero20garage.com</p></a>
                     </li>
                   </ul>
               </div>
@@ -89,7 +89,7 @@ function Contato() {
             </div>
           </section>
 
-      {/* Destaques */}
+      {/* Formulário de contato */}
       <section className="highlights">
             <div className="highlights-grid">
               <div className="highlight-item">

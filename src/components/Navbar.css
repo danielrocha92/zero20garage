@@ -3,30 +3,36 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0.5rem 0.5rem;
   background-color: rgba(0, 0, 0, 0.5); /* Fundo preto com transparência */
   color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: sticky; /* Fixa o navbar no topo ao rolar a página */
   top: 0;
   z-index: 1000;
-  transition: background-color 0.3s ease; /* Transição suave para mudanças de cor */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave para mudanças de cor */
 }
 
 .navbar:hover {
   background-color: rgba(0, 0, 0, 0.8); /* Fundo mais opaco ao passar o mouse */
 }
 
+.navbar.scrolled {
+  background-color: rgba(0, 0, 0, 0.9); /* Fundo mais opaco ao rolar */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
 .navbar-logo img {
-  max-width: 150px;
+  max-width: 50px;
+  transition: transform 0.3s ease;
 }
 
 /* Links da Navbar */
 .navbar-links {
   display: flex;
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: 10;
+  padding: 10;
 }
 
 .navbar-links li {

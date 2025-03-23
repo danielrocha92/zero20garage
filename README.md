@@ -94,3 +94,11 @@ site-institucional/
 │   ├── styles/            # Arquivos de CSS/Styled Components
 │   ├── data.js            # Dados para o site (ex: informações institucionais)
 └── package.json
+
+Paleta Industrial (Vermelho e Prata)
+💠 #212121 (Preto grafite - Fundo)
+💠 #B0BEC5 (Cinza metálico - Elementos e textos)
+💠 #D32F2F (Vermelho mecânico - Chamadas de ação)
+💠 #FFFFFF (Branco - Destaques e contraste)
+
+🔹 Por que? O vermelho remete a velocidade e potência, enquanto o cinza lembra metal e tecnologia.

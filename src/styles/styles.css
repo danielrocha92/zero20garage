@@ -35,29 +35,28 @@ body {
     /* Estilos do Container */
     .container {
       font-family: Arial, sans-serif;
-      color: #333;
+      color: #c5b0b0;
       line-height: 1.6;
       max-width: 800px;
       margin: 0 auto;
       padding: 2rem;
-      background-color: #D3D3D3;
+      background-color: #212121;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
   
-  .hero {
+  .home {
     text-align: center;
     padding: 3rem 1rem;
-    background: url('../assets/images/hero-bg.jpg') no-repeat center center/cover;
     color: #fff;
   }
   
-  .hero h1 {
+  .home h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
   }
   
-  .hero p {
+  .home p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
   }
@@ -80,14 +79,14 @@ body {
   
   .highlights, .testimonials, .contact {
     padding: 2rem;
-    background-color: #2c2c2c6b;
+    background-color: #eaeaeacc;
     color: #fff;
     text-align: center;
   }
   
   .highlights-grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
     justify-content: center;
   }
@@ -117,7 +116,7 @@ body {
     max-width: 800px;
     margin: 0 auto;
     padding: 2rem;
-    background-color: #D3D3D3;
+    background-color: #B0BEC5;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
@@ -125,13 +124,13 @@ body {
   .orcamento h1 {
     font-size: 2rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: #B0BEC5;
   }
   
   .orcamento p {
     font-size: 1rem;
     margin-bottom: 2rem;
-    color: #555;
+    color: #B0BEC5;
   }
   
   .form-group {
@@ -142,7 +141,7 @@ body {
     display: block;
     font-size: 1rem;
     margin-bottom: 0.5rem;
-    color: #333;
+    color: #B0BEC5;
   }
   
   .form-group input,
@@ -223,7 +222,7 @@ body {
   
   .service-item h2 {
     font-size: 1.5rem;
-    color: #333;
+    color: #fff;
   }
   
   .service-item p {
@@ -452,4 +451,8 @@ body {
   .hamburger button {
     display: block;
   }
+}
+
+.p {
+  color: #B0BEC5;
 }
