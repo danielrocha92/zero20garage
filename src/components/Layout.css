@@ -12,12 +12,10 @@
   .footer {
     text-align: center;
     padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.7); /* Fundo preto com transparência */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo preto com transparência */
     color: #D3D3D3;
     font-size: 0.9rem;
     padding: 1rem 2rem;
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo preto com transparência */
-    color: #2C2C2C;
     box-shadow: 0 4px 6px rgba(241, 6, 6, 0.1);
     position: sticky; /* Fixa o navbar no topo ao rolar a página */
     top: 0;

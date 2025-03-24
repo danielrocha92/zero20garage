@@ -88,7 +88,10 @@ function Orcamento() {
   return (
     <div className="container">
       <DynamicHeader messages={messages} />
-      <section className="section">
+
+      {/* Destaques */}
+      <section className="highlights">
+      <div className="highlight-item">
       <h2>Solicite um Orçamento</h2>
       <p>Preencha o formulário abaixo para solicitar um orçamento.</p>
       <form onSubmit={handleSubmit}>
@@ -218,6 +221,7 @@ function Orcamento() {
         </div>
         <button type="submit">Enviar</button>
       </form>
+    </div>
       </section>
     </div>
   );

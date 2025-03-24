@@ -26,40 +26,21 @@ function Navbar() {
       </button>
       <div className={`menu ${menuOpen ? 'open' : ''}`}>
         <ul className="navbar-links">
-          <li>
-            <Link to="/" onClick={handleMenuClick}>
-              Home
-            </Link>
+          <li><Link to="/" onClick={handleMenuClick}>Home</Link>
           </li>
-          <li>
-            <Link to="/servicos" onClick={handleMenuClick}>
-              Serviços
-            </Link>
+          <li><Link to="/servicos" onClick={handleMenuClick}>Serviços</Link>
           </li>
-          <li>
-            <Link to="/orcamento" onClick={handleMenuClick}>
-              Orçamentos
-            </Link>
+          <li><Link to="/orcamento" onClick={handleMenuClick}>Orçamentos</Link>
           </li>
-          <li>
-            <Link to="/contato" onClick={handleMenuClick}>
-              Contato
-            </Link>
+          <li><Link to="/contato" onClick={handleMenuClick}>Contato</Link>
           </li>
-          <li>
-            <Link to="/sobre" onClick={handleMenuClick}>
-              Sobre
-            </Link>
+          <li><Link to="/sobre" onClick={handleMenuClick}>Sobre</Link>
           </li>
-          <li>
-            <Link to="/blog" onClick={handleMenuClick}>
-              Blog
-            </Link>
+          <li><Link to="/blog" onClick={handleMenuClick}>Blog</Link>
           </li>
         </ul>
       </div>
     </nav>
   );
 }
-
 export default Navbar;

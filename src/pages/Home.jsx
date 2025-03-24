@@ -24,22 +24,15 @@ function Home() {
       <DynamicHeader messages={messages} />
           {/* Card padrão Section */}
           <section className="highlights">
-            <div className="highlight-grid">
-              <div className="highlight-item">
                   <h2>Entre em Contato</h2>
                 <h1>Excelência em Retífica de Motores e Soluções Mecânicas Sob Medida</h1>
                 <p>Atendimento especializado para veículos nacionais e importados.</p>
                 <a href="/orcamento" className="cta-button">Solicite um Orçamento</a>
-              </div>
-            </div>
           </section>
 
             {/* Serviços Destacados */}
             <section className="highlights">
-              <div className="highlight-grid">
-                <div className="highlight-item">
                   <h2>Nossos Serviços</h2>
-                  <div className="highlights-grid">
                     <div className="highlight-item">
                       <h2>Retífica de Motores</h2>
                       <p>Recuperação completa do motor com precisão e qualidade.</p>
@@ -52,9 +45,6 @@ function Home() {
                       <h2>Revisão Completa</h2>
                       <p>Diagnóstico avançado para garantir o melhor desempenho do seu veículo.</p>
                     </div>
-                  </div>
-                </div>
-              </div>
             </section>
 
           {/* Destaques */}

@@ -1,11 +1,62 @@
-/* Estilos Globais */
+/* Estilo global para o corpo */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #2c2c2c6b;
-  }
+  color: #333; /* Cor do texto principal */
+  background-color: #f9f9f9; /* Fundo claro */
+  font-family: 'Roboto', Arial, sans-serif;
+  line-height: 1.6;
+}
 
+/* Títulos */
+h1, h2, h3, h4, h5, h6 {
+  color: #222; /* Cor mais escura para títulos */
+  margin-bottom: 1rem;
+}
+
+/* Parágrafos */
+p {
+  color: #555; /* Cor intermediária para parágrafos */
+  margin-bottom: 1.5rem;
+}
+
+/* Links */
+a {
+  color: #007bff; /* Azul para links */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #5e0101; /* Azul mais escuro ao passar o mouse */
+}
+
+/* Listas */
+ul, ol {
+  color: #555; /* Cor intermediária para listas */
+  margin-bottom: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* Formulários */
+input, textarea, select {
+  color: #333; /* Texto escuro */
+  background-color: #fff; /* Fundo branco */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.8rem;
+  font-size: 1rem;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #aaa; /* Cor mais clara para placeholders */
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #007bff; /* Azul no foco */
+  outline: none;
+}
   /* Estilo global para o header */
 .header {
   width: 100%;
@@ -34,13 +85,14 @@ body {
   /* Estilos da Página Inicial */
     /* Estilos do Container */
     .container {
+      margin: 1rem;
+      padding: 1rem;
       font-family: Arial, sans-serif;
       color: #c5b0b0;
       line-height: 1.6;
-      max-width: 800px;
+      max-width: 850px;
       margin: 0 auto;
-      padding: 2rem;
-      background-color: #212121;
+      background-color: #2121216b;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
@@ -58,7 +110,7 @@ body {
   
   .home p {
     font-size: 1.2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
   
   .cta-button {
@@ -68,20 +120,23 @@ body {
     color: #fff;
     background-color: #d90000c4;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
   }
   
   .cta-button:hover {
     background-color: #d90000;
+    transform: scale(1.05);
   }
   
   .highlights, .testimonials, .contact {
+    margin: 2rem 0;
     padding: 2rem;
     background-color: #eaeaeacc;
     color: #fff;
     text-align: center;
+    border-radius: 8px;
   }
   
   .highlights-grid {
@@ -92,10 +147,12 @@ body {
   }
   
   .highlight-item {
-    flex: 1;
-    min-width: 250px;
-    background: #fff;
     padding: 1rem;
+    text-align: center;
+    margin: 0.5rem;
+    flex: 1;
+    min-width: 150px;
+    background: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
@@ -227,7 +284,7 @@ body {
   
   .service-item p {
     font-size: 1rem;
-    color: #666;
+    color: #fff;
   }
 
   /* Estilos do Contato */  
@@ -290,27 +347,55 @@ body {
   .blog{
     padding: 2rem;
   }
-  .blog-links {
-    list-style: none;
-    padding: 0;
-    margin: 2rem 0;
-  }
-  
-  .blog-links li {
-    margin-bottom: 1rem;
-  }
-  
-  .blog-links a {
-    text-decoration: none;
-    color: #007bff; /* Azul para os links */
-    font-size: 1.1rem;
-    transition: color 0.3s ease;
-  }
-  
-  .blog-links a:hover {
-    color: #0056b3; /* Azul mais escuro ao passar o mouse */
-    text-decoration: underline;
-  }
+ /* Estilos Modernos para os Links do Blog */
+.blog-links {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.blog-links li {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espaçamento entre o ícone e o texto */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 0.8rem;
+  border-radius: 8px;
+  background-color: #f9f9f9; /* Fundo claro para destacar os links */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.blog-links li:hover {
+  transform: translateX(10px); /* Move o link ligeiramente para a direita */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Sombra mais forte no hover */
+}
+
+.blog-links a {
+  text-decoration: none;
+  color: #007bff; /* Azul para os links */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espaçamento entre o texto e o ícone */
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.blog-links a:hover {
+  color: #0056b3; /* Azul mais escuro ao passar o mouse */
+  transform: scale(1.05); /* Leve aumento no tamanho */
+}
+
+.blog-links a i {
+  font-size: 1.2rem; /* Tamanho do ícone */
+  color: #007bff;
+  transition: color 0.3s ease;
+}
+
+.blog-links a:hover i {
+  color: #0056b3; /* Cor do ícone ao passar o mouse */
+}
 
   /* Estilos do to-top */
   .arrow-up {
@@ -381,8 +466,9 @@ body {
   align-items: center;
   padding: 1rem 2rem;
   background-color: rgba(0, 0, 0, 0.5); /* Fundo preto com transparência */
+  color: #fff; /* Texto claro */
   color: #2C2C2C;
-  box-shadow: 0 4px 6px rgba(241, 6, 6, 0.1);
+  box-shadow: 0 4px 6px rgba(241, 6, 6, 0.103);
   position: sticky; /* Fixa o navbar no topo ao rolar a página */
   top: 0;
   z-index: 1000;
@@ -456,3 +542,276 @@ body {
 .p {
   color: #B0BEC5;
 }
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+/* Margem padrão para as páginas */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Seções gerais */
+.section {
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Títulos */
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* Grid padrão */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Itens destacados */
+.card {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  color: #007bff;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Highlights Section */
+.highlights {
+  padding: 2rem;
+  background-color: #D3D3D3;
+  text-align: center;
+}
+
+.highlights h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.highlight-item {
+  background-color: #2c2c2c6b;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.highlight-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
+}
+
+.highlight-item h3 {
+  font-size: 1.5rem;
+  color: #007bff;
+  margin-bottom: 0.5rem;
+}
+
+.highlight-item p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: 2rem;
+  background-color: #D3D3D3;
+  color: #000000;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.testimonials h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+}
+
+.testimonial-item {
+  background-color: #ff0000d0;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 1rem auto;
+  max-width: 600px;
+  font-style: italic;
+}
+
+.testimonial-item p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.testimonial-item strong {
+  font-size: 1rem;
+  display: block;
+  margin-top: 0.5rem;
+  color: #f0f0f0;
+}
+
+/* Ajustes para dispositivos móveis */
+@media (max-width: 768px) {
+  /* Ajuste do corpo */
+  body {
+    font-size: 1rem; /* Tamanho base do texto */
+    line-height: 1.8; /* Aumenta o espaçamento entre linhas */
+    padding: 0.5rem;
+  }
+
+  /* Títulos */
+  h1 {
+    font-size: 1.8rem; /* Reduz o tamanho do título principal */
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: 1.5rem; /* Ajusta o tamanho dos subtítulos */
+    margin-bottom: 0.8rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+  }
+
+  /* Parágrafos */
+  p {
+    font-size: 1rem; /* Ajusta o tamanho do texto */
+    line-height: 1.6; /* Espaçamento entre linhas */
+    margin-bottom: 1rem;
+  }
+
+  /* Listas */
+  ul, ol {
+    padding-left: 1.5rem; /* Adiciona recuo para listas */
+    margin-bottom: 1rem;
+  }
+
+  li {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Botões */
+  button, .button {
+    font-size: 1rem; /* Ajusta o tamanho do texto nos botões */
+    padding: 0.8rem 1rem;
+  }
+
+  /* Links */
+  a {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Formulários */
+  .form-group label {
+    font-size: 0.9rem; /* Ajusta o tamanho do texto dos rótulos */
+  }
+
+  .form-group input,
+  .form-group textarea {
+    font-size: 1rem; /* Ajusta o tamanho do texto nos campos */
+  }
+
+  /* Ajuste de seções */
+  .section {
+    padding: 1.5rem;
+  }
+
+  .section h2 {
+    font-size: 1.8rem; /* Ajusta o tamanho do título da seção */
+  }
+
+  .section p {
+    font-size: 1rem; /* Ajusta o tamanho do texto da seção */
+  }
+
+  /* Ajuste de itens destacados */
+  .highlight-item h3 {
+    font-size: 1.3rem;
+  }
+
+  .highlight-item p {
+    font-size: 1rem;
+  }
+
+  /* Testemunhos */
+  .testimonial-item p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .testimonial-item strong {
+    font-size: 1rem;
+  }
+
+  /* Ajuste de imagens */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Ajuste de botões de CTA */
+  .cta-button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+
+  .cta-button:hover {
+    background-color: #0056b3;
+  }
+}
+

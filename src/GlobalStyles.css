@@ -115,11 +115,13 @@ body {
   background-color: #D3D3D3;
   color: #000000;
   text-align: center;
+  border-radius: 8px;
 }
 
 .testimonials h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
+  color: #ffffff;
 }
 
 .testimonial-item {
