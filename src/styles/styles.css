@@ -20,7 +20,7 @@ p {
 
 /* Links */
 a {
-  color: #007bff; /* Azul para links */
+  color: #5e0101; /* Azul para links */
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -39,16 +39,6 @@ li {
   margin-bottom: 0.5rem;
 }
 
-/* Formulários */
-input, textarea, select {
-  color: #333; /* Texto escuro */
-  background-color: #fff; /* Fundo branco */
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 0.8rem;
-  font-size: 1rem;
-}
-
 input::placeholder, textarea::placeholder {
   color: #aaa; /* Cor mais clara para placeholders */
 }
@@ -59,8 +49,9 @@ input:focus, textarea:focus, select:focus {
 }
   /* Estilo global para o header */
 .header {
-  width: 100%;
-  height: 200px; /* Define uma altura padrão */
+  width: 100%; /* Garante que o header ocupe toda a largura da tela */
+  height: 100vh; /* Garante que o header ocupe toda a altura da viewport */
+  position: relative; /* Permite posicionar a imagem dentro do header */
   background-color: #333; /* Cor de fundo padrão */
   color: #fff; /* Cor do texto */
   display: flex;
@@ -81,6 +72,15 @@ input:focus, textarea:focus, select:focus {
   font-size: 1rem; /* Tamanho padrão do subtítulo */
   margin: 0.5rem 0 0;
 }
+
+.header img {
+  width: 100%; /* Garante que a imagem ocupe toda a largura do header */
+  height: 100%; /* Garante que a imagem ocupe toda a altura do header */
+  object-fit: cover; /* Ajusta a imagem para cobrir todo o espaço, mantendo a proporção */
+  position: absolute; /* Posiciona a imagem em relação ao header */
+  top: 0;
+  left: 0;
+}
   
   /* Estilos da Página Inicial */
     /* Estilos do Container */
@@ -99,8 +99,16 @@ input:focus, textarea:focus, select:focus {
   
   .home {
     text-align: center;
-    padding: 3rem 1rem;
+    padding: 0;
     color: #fff;
+    bottom: 0;
+    left: 0;
+    opacity: 1.5;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+    pointer-events: none;
   }
   
   .home h1 {
@@ -126,7 +134,7 @@ input:focus, textarea:focus, select:focus {
   }
   
   .cta-button:hover {
-    background-color: #d90000;
+    background-color: rgba(54, 24, 24, 0.5);
     transform: scale(1.05);
   }
   
@@ -230,7 +238,7 @@ input:focus, textarea:focus, select:focus {
   }
   
   button:hover {
-    background-color: #D90000;
+    background-color: rgba(54, 24, 24, 0.5);
   }
 
   /* Estilos do Sobre */
@@ -340,7 +348,7 @@ input:focus, textarea:focus, select:focus {
   }
   
   button:hover {
-    background-color: #0056b3;
+    background-color: rgba(54, 24, 24, 0.5);
   }
   
   /* Estilos do Blog */
@@ -369,12 +377,12 @@ input:focus, textarea:focus, select:focus {
 
 .blog-links li:hover {
   transform: translateX(10px); /* Move o link ligeiramente para a direita */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Sombra mais forte no hover */
+  box-shadow: 0 6px 10px rgba(54, 24, 24, 0.5); /* Sombra mais forte no hover */
 }
 
 .blog-links a {
   text-decoration: none;
-  color: #007bff; /* Azul para os links */
+  color: #5e0101; /* Vermelho para os links */
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -383,18 +391,18 @@ input:focus, textarea:focus, select:focus {
 }
 
 .blog-links a:hover {
-  color: #0056b3; /* Azul mais escuro ao passar o mouse */
+  color: rgba(54, 24, 24, 0.5); /* Vermelho mais escuro ao passar o mouse */
   transform: scale(1.05); /* Leve aumento no tamanho */
 }
 
 .blog-links a i {
   font-size: 1.2rem; /* Tamanho do ícone */
-  color: #007bff;
+  color: #5e0101;
   transition: color 0.3s ease;
 }
 
 .blog-links a:hover i {
-  color: #0056b3; /* Cor do ícone ao passar o mouse */
+  color: rgba(54, 24, 24, 0.5); /* Cor do ícone ao passar o mouse */
 }
 
   /* Estilos do to-top */
@@ -419,7 +427,7 @@ input:focus, textarea:focus, select:focus {
   }
 
   .arrow-up:hover {
-    background-color: #d900007c;
+    background-color: rgba(54, 24, 24, 0.5);
     transform: translateY(-5px);
   }
 
@@ -468,7 +476,7 @@ input:focus, textarea:focus, select:focus {
   background-color: rgba(0, 0, 0, 0.5); /* Fundo preto com transparência */
   color: #fff; /* Texto claro */
   color: #2C2C2C;
-  box-shadow: 0 4px 6px rgba(241, 6, 6, 0.103);
+  box-shadow: 0 4px 6px #2C2C2C;
   position: sticky; /* Fixa o navbar no topo ao rolar a página */
   top: 0;
   z-index: 1000;
@@ -476,7 +484,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 .navbar:hover {
-  background-color: rgba(0, 0, 0, 0.8); /* Fundo mais opaco ao passar o mouse */
+  background-color: #2C2C2C; /* Fundo mais opaco ao passar o mouse */
 }
 
 .navbar-logo img {
@@ -520,18 +528,23 @@ input:focus, textarea:focus, select:focus {
 
 @media (max-width: 768px) {
   .navbar-links {
-    display: none;
-    flex-direction: column;
+    display: none; /* Oculta o menu por padrão */
+    flex-direction: column; /* Organiza os links em coluna */
+    width: 100%;
+    transition: max-height 0.3s ease-in-out; /* Adiciona transição */
+    max-height: 0; /* Começa com altura zero */
+    text-decoration: none;
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%;
-    background-color: #333;
+    background-color: #5e0101;
     padding: 1rem 0;
+    overflow: hidden; /* Oculta o conteúdo que excede a altura */
   }
 
   .menu.open .navbar-links {
     display: flex;
+    max-height: 500px; /* Ajuste a altura máxima conforme necessário */
   }
 
   .hamburger button {
@@ -597,7 +610,7 @@ body {
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
 }
 
 .card h3 {
@@ -749,13 +762,54 @@ body {
   }
 
   /* Formulários */
-  .form-group label {
-    font-size: 0.9rem; /* Ajusta o tamanho do texto dos rótulos */
+  .formulario {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Duas colunas de tamanho igual */
+    gap: 1.5rem; /* Espaçamento entre os campos */
+    max-width: 800px; /* Largura máxima do formulário */
+    margin: 0 auto; /* Centraliza o formulário */
   }
-
+  
+  .form-group {
+    display: flex;
+    flex-direction: column; /* Organiza os rótulos e campos verticalmente */
+  }
+  
+  .form-group label {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+  }
+  
   .form-group input,
+  .form-group select,
   .form-group textarea {
-    font-size: 1rem; /* Ajusta o tamanho do texto nos campos */
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  textarea {
+    resize: vertical; /* Permite redimensionar verticalmente */
+  }
+  
+  button {
+    grid-column: span 2; /* Faz o botão ocupar as duas colunas */
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #2C2C2C;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #2C2C2C;
   }
 
   /* Ajuste de seções */
@@ -811,7 +865,7 @@ body {
   }
 
   .cta-button:hover {
-    background-color: #0056b3;
+    background-color: rgba(54, 24, 24, 0.5);
   }
 }
 

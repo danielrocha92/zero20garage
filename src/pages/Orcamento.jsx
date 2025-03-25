@@ -91,7 +91,7 @@ function Orcamento() {
 
       {/* Destaques */}
       <section className="highlights">
-      <div className="highlight-item">
+      <div className="formulario">
       <h2>Solicite um Orçamento</h2>
       <p>Preencha o formulário abaixo para solicitar um orçamento.</p>
       <form onSubmit={handleSubmit}>
@@ -100,6 +100,7 @@ function Orcamento() {
           <input
             type="text"
             name="nome"
+            placeholder="Digite seu nome"
             value={formData.nome}
             onChange={handleChange}
             required
@@ -110,6 +111,7 @@ function Orcamento() {
           <input
             type="tel"
             name="telefone"
+            placeholder="Digite seu telefone"
             value={formData.telefone}
             onChange={handleChange}
             required
@@ -120,6 +122,7 @@ function Orcamento() {
           <input
             type="email"
             name="email"
+            placeholder="Digite seu E-mail"
             value={formData.email}
             onChange={handleChange}
             required
@@ -130,6 +133,7 @@ function Orcamento() {
           <input
             type="text"
             name="cidade"
+            placeholder="Digite sua Cidade"
             value={formData.cidade}
             onChange={handleChange}
             required
@@ -139,11 +143,12 @@ function Orcamento() {
           <label>*Estado:</label>
           <select
             name="estado"
+            placeholder="Digite seu Estado"
             value={formData.estado}
             onChange={handleChange}
             required
           >
-            <option value="">Selecione</option>
+            <option value=""></option>
             <option value="SP">São Paulo</option>
             <option value="RJ">Rio de Janeiro</option>
             <option value="MG">Minas Gerais</option>
@@ -156,6 +161,7 @@ function Orcamento() {
           <input
             type="text"
             name="marca"
+            placeholder="Marca do Veículo"
             value={formData.marca}
             onChange={handleChange}
             required
@@ -166,16 +172,18 @@ function Orcamento() {
           <input
             type="text"
             name="modelo"
+            placeholder="Modelo"
             value={formData.modelo}
             onChange={handleChange}
             required
           />
         </div>
         <div className="form-group">
-          <label>*Ano fabricação/ano modelo:</label>
+          <label>*Ano fabricação/Ano modelo:</label>
           <input
             type="text"
             name="ano"
+            placeholder="Ex: 2020, 1999."
             value={formData.ano}
             onChange={handleChange}
             required
@@ -186,6 +194,7 @@ function Orcamento() {
           <input
             type="text"
             name="motorizacao"
+            placeholder="Ex: 1.0, 2.0"
             value={formData.motorizacao}
             onChange={handleChange}
             required
@@ -195,20 +204,12 @@ function Orcamento() {
           <label>*Orçamento:</label>
           <textarea
             name="orcamento"
+            placeholder="Digite sua mensagem"
             value={formData.orcamento}
             onChange={handleChange}
             required
           ></textarea>
         </div>
-        <div className="form-group">
-          <label>Digite o código ao lado:</label>
-          <input
-            type="text"
-            name="codigo"
-            value={formData.codigo}
-            onChange={handleChange}
-            required
-          />
           <div className="form-group">
             <label>*Anexar Arquivo:</label>
             <input
@@ -218,7 +219,6 @@ function Orcamento() {
               required
             />
           </div>
-        </div>
         <button type="submit">Enviar</button>
       </form>
     </div>

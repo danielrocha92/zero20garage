@@ -20,9 +20,10 @@ function Home() {
     ];
 
   return (
-    <div className="container">
+    <div className="home">
       <DynamicHeader messages={messages} />
           {/* Card padrão Section */}
+          <div className='container'>
           <section className="highlights">
                   <h2>Entre em Contato</h2>
                 <h1>Excelência em Retífica de Motores e Soluções Mecânicas Sob Medida</h1>
@@ -107,6 +108,7 @@ function Home() {
             </div>
           </div>
           </section>
+          </div>
       </div>
   );
 }
