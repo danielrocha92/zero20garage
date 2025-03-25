@@ -57,10 +57,11 @@ function Contato() {
   };
 
   return (
-    <div className="container">
+    <div className="home">
       <DynamicHeader messages={messages} />
 
       {/* Informações de Contato */}
+      <div className='container'>
       <section className="highlights">
         <div className="highlights-grid">
           <div className="highlight-item">
@@ -153,6 +154,7 @@ function Contato() {
           </form>
         </div>
       </section>
+      </div>
     </div>
   );
 }

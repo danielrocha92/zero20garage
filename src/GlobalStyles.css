@@ -29,7 +29,7 @@ body {
 @media (max-width: 768px) {
   /* Ajuste para smartphones */
   .section {
-    font-size: 0.3rem; /* Tamanho base menor para smartphones */
+    font-size: 1.5rem; /* Tamanho base menor para smartphones */
   }
 }
 
@@ -43,7 +43,7 @@ body {
 @media (max-width: 768px) {
   /* Ajuste para smartphones */
   .section h2 {
-    font-size: 0.3rem; /* Tamanho base menor para smartphones */
+    font-size: 1.5rem; /* Tamanho base menor para smartphones */
   }
 }
 
@@ -170,15 +170,15 @@ body {
 
   /* Ajuste de seções */
   .section {
-    padding: 1.5rem;
+    padding: 0.5rem;
   }
 
   .section h2 {
-    font-size: 1.5rem;
+    font-size: 0.5rem;
   }
 
   .section p {
-    font-size: 1rem;
+    font-size: 0.5rem;
   }
 
   /* Ajuste de formulários */

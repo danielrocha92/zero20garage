@@ -19,11 +19,10 @@ const Servicos = () => {
     ];
 
   return (
-    <div className="container">
+    <div className="highlights">
       <DynamicHeader messages={messages} />
-      <section className="highlights">
-        <div className="highlight-grid">
-          <div className="highlight-item">
+      <div className='container'>
+          <section className="highlights">
             <h2>Retífica de Motores</h2>
                 <p>Serviço completo de retífica de motores para garantir o melhor desempenho do seu veículo.</p>
             <div className="highlights-grid">
@@ -48,9 +47,8 @@ const Servicos = () => {
               <p>Consultoria especializada para ajudar você a tomar as melhores decisões para o seu veículo.</p>
             </div>
            </div>
-         </div>
-        </div>
       </section>
+      </div>  
     </div>
   );
 };

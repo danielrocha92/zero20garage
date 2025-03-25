@@ -1,45 +1,10 @@
+/* Layout.css */
 .layout {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  
-  .content {
-    flex: 1;
-    padding: 2rem;
-  }
-  
-  .footer {
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo preto com transparência */
-    color: #fff; /* Cor do texto */
-    font-size: 0.9rem;
-    padding: 1rem 2rem;
-    position: sticky; /* Fixa o navbar no topo ao rolar a página */
-    top: 0;
-    z-index: 1000;
-    transition: background-color 0.3s ease; /* Transição suave para mudanças de cor */
-    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
-    
-  }
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garante que o layout ocupe toda a altura da tela */
+}
 
-  .footer a:hover {
-    color: #D90000;
-  }
-
-  .footer:hover {
-    background-color: rgba(0, 0, 0, 0.8); /* Fundo mais opaco ao passar o mouse */
-  }
-  .footer img {
-    height: 50px;
-    transition: transform 0.3s ease;
-  }
-
-  .footer a {
-    color: #D3D3D3;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
-    position: relative;
-    transition: color 0.4s ease;
-  }
+.content {
+  flex: 1; /* Expande para ocupar o espaço restante */
+}
