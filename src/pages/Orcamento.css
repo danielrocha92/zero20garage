@@ -1,0 +1,24 @@
+ /* Estilos do Orçamento */
+ .orcamento {
+    padding: 2rem;
+  }
+  .orcamento {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #B0BEC5;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .orcamento h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #B0BEC5;
+  }
+  
+  .orcamento p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    color: #B0BEC5;
+  }

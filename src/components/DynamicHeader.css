@@ -1,32 +1,55 @@
+/* Estilo global para o header */
 .header {
-    text-align: center;
-    padding: 2rem;
-    background-color: #f9f9f9; /* Fundo quase branco */
-    border-bottom: 2px solid #ddd;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+  width: 100%; /* Garante que o header ocupe toda a largura da tela */
+  height: 100vh; /* Garante que o header ocupe toda a altura da viewport */
+  position: relative; /* Permite posicionar a imagem dentro do header */
+  background-color: #f9f9f9; /* Fundo quase branco */
+  color: #fff; /* Cor do texto */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+  border-bottom: 2px solid #ddd;
+}
+
+.header h1 {
+  font-size: 2rem; /* Tamanho padrão do título */
+  margin: 0;
+}
+
+.header p {
+  font-size: 1rem; /* Tamanho padrão do subtítulo */
+  margin: 0.5rem 0 0;
+  color: #555;
+  animation: fadeIn 1s ease-in-out;
+}
   
-  .header h1 {
-    font-size: 2.5rem;
-    color: #333;
-    margin: 0;
-    animation: fadeIn 1s ease-in-out;
-  }
+.header img {
+  width: 100%; /* Garante que a imagem ocupe toda a largura do header */
+  height: 100%; /* Garante que a imagem ocupe toda a altura do header */
+  object-fit: cover; /* Ajusta a imagem para cobrir todo o espaço, mantendo a proporção */
+  position: absolute; /* Posiciona a imagem em relação ao header */
+  top: 0;
+  left: 0;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin: 0;
+  animation: fadeIn 1s ease-in-out;
+}
   
-  .header p {
-    font-size: 1.2rem;
-    color: #555;
-    margin: 0.5rem 0 0;
-    animation: fadeIn 1s ease-in-out;
+@keyframes fadeIn {
+  0% {
+    opacity: 5;
+    transform: translateY(-10px);
   }
-  
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
+}

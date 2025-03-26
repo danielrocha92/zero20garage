@@ -2,6 +2,7 @@
 import React from 'react';
 import '../styles/styles.css';
 import DynamicHeader from '../components/DynamicHeader';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 function Sobre() {
   const messages = [
@@ -20,8 +21,9 @@ function Sobre() {
   ];
 
   return (
-    <div className="highlights">
+    <div className="sobre">
       <DynamicHeader messages={messages} />
+      <WhatsAppButton />
       <div className='container'>
         <section className="highlights">
           <h2>Sobre a Zero20 Garage</h2>

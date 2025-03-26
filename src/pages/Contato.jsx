@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/styles.css';
 import DynamicHeader from '../components/DynamicHeader';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 function Contato() {
   const messages = [
@@ -59,6 +60,7 @@ function Contato() {
   return (
     <div className="home">
       <DynamicHeader messages={messages} />
+      <WhatsAppButton />
 
       {/* Informações de Contato */}
       <div className='container'>

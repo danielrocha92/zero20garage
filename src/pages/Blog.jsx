@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import '../styles/styles.css';
 import DynamicHeader from '../components/DynamicHeader';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 function Blog() {
 
@@ -27,8 +28,9 @@ function Blog() {
 
 
   return (
-    <div className="highlights">
+    <div className="blog">
       <DynamicHeader messages={messages} />
+      <WhatsAppButton />
       <div className='container'>
       <section className="highlights">
             <h2>Artigos do Blog</h2>

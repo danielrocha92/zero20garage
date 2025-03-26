@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/styles.css';
 import DynamicHeader from '../components/DynamicHeader';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 const Servicos = () => {
     const messages = [
@@ -19,8 +20,9 @@ const Servicos = () => {
     ];
 
   return (
-    <div className="highlights">
+    <div className="servicos">
       <DynamicHeader messages={messages} />
+      <WhatsAppButton />
       <div className='container'>
           <section className="highlights">
             <h2>Retífica de Motores</h2>

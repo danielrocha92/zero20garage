@@ -1,0 +1,53 @@
+/* Estilos do Blog */
+.blog{
+    padding: 2rem;
+  }
+ /* Estilos Modernos para os Links do Blog */
+.blog-links {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.blog-links li {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espaçamento entre o ícone e o texto */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 0.8rem;
+  border-radius: 8px;
+  background-color: #f9f9f9; /* Fundo claro para destacar os links */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.blog-links li:hover {
+  transform: translateX(10px); /* Move o link ligeiramente para a direita */
+  box-shadow: 0 6px 10px rgba(54, 24, 24, 0.5); /* Sombra mais forte no hover */
+}
+
+.blog-links a {
+  text-decoration: none;
+  color: #5e0101; /* Vermelho para os links */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espaçamento entre o texto e o ícone */
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.blog-links a:hover {
+  color: rgba(54, 24, 24, 0.5); /* Vermelho mais escuro ao passar o mouse */
+  transform: scale(1.05); /* Leve aumento no tamanho */
+}
+
+.blog-links a i {
+  font-size: 1.2rem; /* Tamanho do ícone */
+  color: #5e0101;
+  transition: color 0.3s ease;
+}
+
+.blog-links a:hover i {
+  color: rgba(54, 24, 24, 0.5); /* Cor do ícone ao passar o mouse */
+}

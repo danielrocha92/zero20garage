@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/styles.css';
 import DynamicHeader from '../components/DynamicHeader';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 function Orcamento() {
   const messages = [
@@ -86,8 +87,9 @@ function Orcamento() {
   };
 
   return (
-    <div className="highlights">
+    <div className="orcamentos">
       <DynamicHeader messages={messages} />
+      <WhatsAppButton />
 
       {/* Destaques */}
       <div className='container'>

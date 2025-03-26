@@ -1,0 +1,30 @@
+/* Estilos do Serviços */
+.services {
+    padding: 2rem;
+  }
+  
+  .services-list {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  
+  .service-item {
+    flex: 1 1 calc(33.333% - 2rem);
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .service-item h2 {
+    font-size: 1.5rem;
+    color: #fff;
+  }
+  
+  .service-item p {
+    font-size: 1rem;
+    color: #fff;
+  }
