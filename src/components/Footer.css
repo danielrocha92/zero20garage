@@ -1,33 +1,49 @@
 /* Footer.css */
 .footer {
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    font-size: 0.9rem;
-    padding: 1rem 2rem;
-    width: 100%;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 1rem 2rem;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.footer a:hover {
+  color: #D90000;
+}
+
+.footer:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.footer img {
+  height: 50px;
+  transition: transform 0.3s ease;
+}
+
+.footer a {
+  color: #D3D3D3;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.4s ease;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .footer {
+    padding: 2rem; /* Reduz o preenchimento */
+    font-size: 0.8rem; /* Reduz o tamanho da fonte */
   }
-  
-  .footer a:hover {
-    color: #D90000;
-  }
-  
-  .footer:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-  
+
   .footer img {
-    height: 50px;
-    transition: transform 0.3s ease;
+    height: 40px; /* Reduz a altura da imagem */
   }
-  
+
   .footer a {
-    color: #D3D3D3;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
-    position: relative;
-    transition: color 0.4s ease;
+    font-size: 0.9rem; /* Reduz o tamanho da fonte dos links */
   }
+}

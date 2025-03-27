@@ -139,6 +139,8 @@ p {
     /* Responsivo: Mover para o canto inferior esquerdo em telas menores */
     @media screen and (max-width: 768px) {
       .arrow-up {
+        bottom: 20px;
+        right: 20px;
         z-index: 1000; /* Garante que o botão fique sempre na frente */
       }
     }
@@ -306,87 +308,7 @@ body {
   color: #fff;
 }
 
-/* Highlights Section */
-.highlights {
-  padding: 2rem;
-  background-color: #D3D3D3;
-  text-align: center;
-}
 
-.highlights h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  color: #D3D3D3;
-}
-
-.highlights-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-.highlight-item {
-  background-color: #2c2c2c6b;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.highlight-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
-}
-
-.highlight-item h3 {
-  font-size: 1.5rem;
-  color: #c50404;
-  margin-bottom: 0.5rem;
-}
-
-.highlight-item p {
-  font-size: 1rem;
-  color: #fff;
-}
-
-/* Testimonials Section */
-.testimonials {
-  padding: 2rem;
-  background-color: #D3D3D3;
-  color: #000000;
-  text-align: center;
-  border-radius: 8px;
-}
-
-.testimonials h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: #D3D3D3;
-}
-
-.testimonial-item {
-  background-color: hsl(0, 80%, 52%);
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  color: #D3D3D3;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 1rem auto;
-  max-width: 600px;
-  font-style: italic;
-}
-
-.testimonial-item p {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.testimonial-item strong {
-  font-size: 1rem;
-  display: block;
-  margin-top: 0.5rem;
-  color: #D3D3D3;
-}
 
 /* Ajustes para dispositivos móveis */
 @media (max-width: 768px) {

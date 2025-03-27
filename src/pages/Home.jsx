@@ -1,7 +1,8 @@
 import React from 'react';
-import '../styles/styles.css'; // Importa o arquivo global de estilos
+import './Home.css' // Importa o arquivo global de estilos
 import GoogleReviews from '../components/GoogleReviews';
 import DynamicHeader from '../components/DynamicHeader';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 function Home() {
     const messages = [
@@ -22,17 +23,21 @@ function Home() {
   return (
     <div className="home">
       <DynamicHeader messages={messages} />
+      <WhatsAppButton />
           {/* Card padrão Section */}
           <div className='container'>
           <section className="highlights">
+            <div className='home-section'>
                   <h2>Entre em Contato</h2>
                 <h1>Excelência em Retífica de Motores e Soluções Mecânicas Sob Medida</h1>
                 <p>Atendimento especializado para veículos nacionais e importados.</p>
                 <a href="/orcamento" className="cta-button">Solicite um Orçamento</a>
+                </div>
           </section>
 
             {/* Serviços Destacados */}
             <section className="highlights">
+            <div className='home-section'>
                   <h2>Nossos Serviços</h2>
                     <div className="highlight-item">
                       <h2>Retífica de Motores</h2>
@@ -46,10 +51,12 @@ function Home() {
                       <h2>Revisão Completa</h2>
                       <p>Diagnóstico avançado para garantir o melhor desempenho do seu veículo.</p>
                     </div>
+                    </div>
             </section>
 
           {/* Destaques */}
           <section className="highlights">
+          <div className='home-section'>
               <div className="highlight-grid">
                 <div className="highlight-item">
                   <h2>Por que Escolher a Zero20 Garage?</h2>
@@ -69,11 +76,13 @@ function Home() {
                   </div>
                 </div>
               </div>
+              </div>
           </section>
           {/* Conteúdo adicional */}
     
           {/* Depoimentos */}
           <section className="highlights">
+          <div className='home-section'>
           <div className="highlights-grid">
             <div className="highlight-item">
               <h2>O que Nossos Clientes Dizem</h2>
@@ -89,10 +98,12 @@ function Home() {
               </div>
               </div>
             </div>
+            </div>
           </section>
 
           {/* Contato */}
           <section className="highlights">
+          <div className='home-section'>
           <div className="highlights-grid">
               <div className="highlight-item">
               <div className="contato-info">
@@ -106,6 +117,7 @@ function Home() {
                 <a href="https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.3263499,-46.5770842,17z/data=!3m1!4b1!4m6!3m5!1s0x94ceede375ca12c9:0xa22173d27f744745!8m2!3d-23.3263499!4d-46.5745093!16s%2Fg%2F11sgrc1ckt?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="cta-button">Ver Localização</a>
               </div>
             </div>
+          </div>
           </div>
           </section>
           </div>
