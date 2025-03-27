@@ -1,37 +1,30 @@
 import React, { useState } from 'react';
-import '../styles/styles.css';
+import './Orcamento.css';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
 
 function Orcamento() {
   const messages = [
     {
-      title: 'Formulário de Orçamento',
-      subtitle: 'Para solicitar um orçamento a Zero 20 Garage, preencha abaixo suas informações e clique em enviar. Sua solicitação será respondida em tempo hábil.',
+      title: 'Solicite um Orçamento',
+      subtitle: 'Preencha o formulário e receba um orçamento personalizado',
     },
     {
-      title: 'Conte-nos sobre seu veículo',
-      subtitle: 'Preencha os campos abaixo com as informações do seu veículo',
+      title: 'Orçamento Rápido e Fácil',
+      subtitle: 'Receba um orçamento em até 24 horas',
     },
     {
-      title: 'Estamos Aqui para Ajudar',
-      subtitle: 'Visite nossa oficina ou ligue para nós',
+      title: 'Transparência e Confiança',
+      subtitle: 'Orçamentos detalhados e sem compromisso',
     },
   ];
 
   const [formData, setFormData] = useState({
     nome: '',
-    telefone: '',
     email: '',
-    cidade: '',
-    estado: '',
-    marca: '',
-    modelo: '',
-    ano: '',
-    motorizacao: '',
-    orcamento: '',
-    codigo: '',
-    arquivo: null, // Novo campo para o arquivo
+    telefone: '',
+    servico: '',
+    mensagem: '',
   });
 
   const handleChange = (e) => {
@@ -41,191 +34,88 @@ function Orcamento() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
-    const formDataToSend = new FormData();
-    formDataToSend.append('nome', formData.nome);
-    formDataToSend.append('telefone', formData.telefone);
-    formDataToSend.append('email', formData.email);
-    formDataToSend.append('cidade', formData.cidade);
-    formDataToSend.append('estado', formData.estado);
-    formDataToSend.append('marca', formData.marca);
-    formDataToSend.append('modelo', formData.modelo);
-    formDataToSend.append('ano', formData.ano);
-    formDataToSend.append('motorizacao', formData.motorizacao);
-    formDataToSend.append('orcamento', formData.orcamento);
-    formDataToSend.append('codigo', formData.codigo);
-    if (formData.arquivo) {
-      formDataToSend.append('arquivo', formData.arquivo);
-    }
-  
-    fetch('http://localhost:5000/api/orcamento', {
-      method: 'POST',
-      body: formDataToSend,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        alert('Formulário enviado com sucesso!');
-        setFormData({
-          nome: '',
-          telefone: '',
-          email: '',
-          cidade: '',
-          estado: '',
-          marca: '',
-          modelo: '',
-          ano: '',
-          motorizacao: '',
-          orcamento: '',
-          codigo: '',
-          arquivo: null,
-        });
-      })
-      .catch((error) => {
-        console.error('Erro ao enviar o formulário:', error);
-        alert('Ocorreu um erro ao enviar o formulário.');
-      });
+    // Aqui você pode adicionar a lógica para enviar o formulário
+    console.log('Formulário enviado:', formData);
+    alert('Formulário enviado com sucesso!');
   };
 
   return (
-    <div className="orcamentos">
+    <div className="orcamento-page">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
 
-      {/* Destaques */}
-      <div className='container'>
-          <section className="highlights">
-      <div className="formulario">
-      <h2>Solicite um Orçamento</h2>
-      <p>Preencha o formulário abaixo para solicitar um orçamento.</p>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>*Seu nome:</label>
-          <input
-            type="text"
-            name="nome"
-            placeholder="Digite seu nome"
-            value={formData.nome}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>*Telefone para contato:</label>
-          <input
-            type="tel"
-            name="telefone"
-            placeholder="Digite seu telefone"
-            value={formData.telefone}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>*E-mail:</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="Digite seu E-mail"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>*Cidade:</label>
-          <input
-            type="text"
-            name="cidade"
-            placeholder="Digite sua Cidade"
-            value={formData.cidade}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>*Estado:</label>
-          <select
-            name="estado"
-            placeholder="Digite seu Estado"
-            value={formData.estado}
-            onChange={handleChange}
-            required
-          >
-            <option value=""></option>
-            <option value="SP">São Paulo</option>
-            <option value="RJ">Rio de Janeiro</option>
-            <option value="MG">Minas Gerais</option>
-            <option value="ES">Espírito Santo</option>
-            {/* Adicione outros estados aqui */}
-          </select>
-        </div>
-        <div className="form-group">
-          <label>*Marca:</label>
-          <input
-            type="text"
-            name="marca"
-            placeholder="Marca do Veículo"
-            value={formData.marca}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>*Modelo:</label>
-          <input
-            type="text"
-            name="modelo"
-            placeholder="Modelo"
-            value={formData.modelo}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>*Ano fabricação/Ano modelo:</label>
-          <input
-            type="text"
-            name="ano"
-            placeholder="Ex: 2020, 1999."
-            value={formData.ano}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>*Motorização:</label>
-          <input
-            type="text"
-            name="motorizacao"
-            placeholder="Ex: 1.0, 2.0"
-            value={formData.motorizacao}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>*Orçamento:</label>
-          <textarea
-            name="orcamento"
-            placeholder="Digite sua mensagem"
-            value={formData.orcamento}
-            onChange={handleChange}
-            required
-          ></textarea>
-        </div>
-          <div className="form-group">
-            <label>*Anexar Arquivo:</label>
-            <input
-              type="file"
-              name="arquivo"
-              onChange={(e) => setFormData({ ...formData, arquivo: e.target.files[0] })}
-              required
-            />
-          </div>
-        <button type="submit">Enviar</button>
-      </form>
-    </div>
-      </section>
+      <div className="container">
+        <section className="orcamento-section">
+          <h2>Solicite um Orçamento</h2>
+          <p>Preencha o formulário abaixo para receber um orçamento detalhado e personalizado.</p>
+          <form className="orcamento-form" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="nome">Nome:</label>
+              <input
+                type="text"
+                id="nome"
+                name="nome"
+                value={formData.nome}
+                onChange={handleChange}
+                required
+                placeholder="Digite seu nome"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">E-mail:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                placeholder="Digite seu e-mail"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="telefone">Telefone:</label>
+              <input
+                type="tel"
+                id="telefone"
+                name="telefone"
+                value={formData.telefone}
+                onChange={handleChange}
+                placeholder="Digite seu telefone"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="servico">Serviço Desejado:</label>
+              <select
+                id="servico"
+                name="servico"
+                value={formData.servico}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Selecione um serviço</option>
+                <option value="retifica">Retífica de Motores</option>
+                <option value="manutencao">Manutenção Preventiva</option>
+                <option value="revisao">Revisão Completa</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="mensagem">Mensagem:</label>
+              <textarea
+                id="mensagem"
+                name="mensagem"
+                value={formData.mensagem}
+                onChange={handleChange}
+                rows="4"
+                placeholder="Digite sua mensagem"
+              ></textarea>
+            </div>
+            <button type="submit" className="submit-button">
+              Solicitar Orçamento
+            </button>
+          </form>
+        </section>
       </div>
     </div>
   );

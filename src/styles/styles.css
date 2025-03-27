@@ -1,9 +1,14 @@
 /* Estilo global para o corpo */
 body {
-  color: #333; /* Cor do texto principal */
   background-color: #f9f9f9; /* Fundo claro */
-  font-family: 'Roboto', Arial, sans-serif;
   line-height: 1.6;
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", 'Roboto', Arial, "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 400;
+  color: #ffffff;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Títulos */
@@ -29,99 +34,22 @@ p {
   margin-bottom: 1rem;
 }
 
-
-
-/* Títulos */
-h1, h2, h3, h4, h5, h6 {
-  color: #222; /* Cor mais escura para títulos */
-  margin-bottom: 1rem;
+/* Estilos do Container */
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #353535;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
-
-/* Parágrafos */
-p {
-  color: #555; /* Cor intermediária para parágrafos */
-  margin-bottom: 1.5rem;
-}
-
-/* Links */
-a {
-  color: #5e0101; /* Azul para links */
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: #5e0101; /* Azul mais escuro ao passar o mouse */
-}
-
-/* Listas */
-/* Listas */
-ul, ol {
-  padding-left: 1.5rem; /* Adiciona recuo para listas */
-  margin-bottom: 1rem;
-}
-
-li {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-}
-ul, ol {
-  color: #555; /* Cor intermediária para listas */
-  margin-bottom: 1.5rem;
-}
-
-input::placeholder, textarea::placeholder {
-  color: #aaa; /* Cor mais clara para placeholders */
-}
-
-input:focus, textarea:focus, select:focus {
-  border-color: #5e0101; /* Azul no foco */
-  outline: none;
-}
-
-  
-  /* Estilos da Página Inicial */
-    /* Estilos do Container */
-    .container {
-      margin: 1rem;
-      padding: 1rem;
-      font-family: Arial, sans-serif;
-      color: #c5b0b0;
-      line-height: 1.6;
-      max-width: 850px;
-      margin: 0 auto;
-      background-color: #2121216b;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-  
-  .home {
-    text-align: center;
-    padding: 0;
-    color: #fff;
-    bottom: 0;
-    left: 0;
-    opacity: 1.5;
-    right: 0;
-    top: 0;
-  }
-  
-  .home h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .home p {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-  }
   
   .cta-button {
     display: inline-block;
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
     color: #fff;
-    background-color: #d90000c4;
+    background-color: #c50404;
     border: none;
     border-radius: 8px;
     text-decoration: none;
@@ -131,12 +59,13 @@ input:focus, textarea:focus, select:focus {
   
   .cta-button:hover {
     background-color: rgba(54, 24, 24, 0.5);
+    color: #fff;
     transform: scale(1.05);
   }
 
   .cta-button:focus,
 .button:active {
-  outline: 2px solid #007bff; /* Adiciona um contorno azul ao focar ou clicar */
+  outline: 2px solid #c50404; /*Adiciona um contorno azul ao focar ou clicar */
   outline-offset: 2px; /* Evita que o contorno se sobreponha ao botão */
 }
 
@@ -182,59 +111,6 @@ input:focus, textarea:focus, select:focus {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
-  .contact-info {
-    margin-top: 1rem;
-  }
-  
-  .contact-info p {
-    margin: 0.5rem 0;
-  }
-
- 
-  
-  .form-group {
-    margin-bottom: 1.5rem;
-  }
-  
-  .form-group label {
-    display: block;
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    color: #B0BEC5;
-  }
-  
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    width: 100%;
-    padding: 0.8rem;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  .form-group textarea {
-    resize: vertical;
-    height: 100px;
-  }
-  
-  button {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    color: #fff;
-    background-color: #D90000;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: rgba(54, 24, 24, 0.5);
-  }
 
   /* Estilos do to-top */
   .arrow-up {
@@ -244,28 +120,26 @@ input:focus, textarea:focus, select:focus {
     align-items: center;
     bottom: 90px;
     right: 20px;
-    background-color: #D90000;
-    color: #fff;
+    background-color: #ea1a1a;
+    color: white;
     border-radius: 50%;
     width: 60px;
     height: 60px;
     font-size: 2rem;
-    cursor: pointer;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
-    z-index: 1000;
+    z-index: 1000; /* Garante que o botão fique sempre na frente */
   }
 
   .arrow-up:hover {
     background-color: rgba(54, 24, 24, 0.5);
-    transform: translateY(-5px);
+    transform: scale(1.1);
   }
 
     /* Responsivo: Mover para o canto inferior esquerdo em telas menores */
     @media screen and (max-width: 768px) {
       .arrow-up {
-      bottom: 20px;
-      right: 20px;
+        z-index: 1000; /* Garante que o botão fique sempre na frente */
       }
     }
 
@@ -285,12 +159,12 @@ input:focus, textarea:focus, select:focus {
   
   .contact-list li i {
     font-size: 1.5rem;
-    color: #007bff;
+    color: #c50404;
     margin-right: 0.5rem;
   }
   
   .contact-list li a {
-    color: #007bff;
+    color: #c50404;
     text-decoration: none;
   }
   
@@ -387,13 +261,6 @@ body {
   padding: 0;
 }
 
-/* Margem padrão para as páginas */
-.page-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
 /* Seções gerais */
 .section {
   padding: 2rem;
@@ -436,7 +303,7 @@ body {
 
 .card p {
   font-size: 1rem;
-  color: #555;
+  color: #fff;
 }
 
 /* Highlights Section */
@@ -473,13 +340,13 @@ body {
 
 .highlight-item h3 {
   font-size: 1.5rem;
-  color: #007bff;
+  color: #c50404;
   margin-bottom: 0.5rem;
 }
 
 .highlight-item p {
   font-size: 1rem;
-  color: #555;
+  color: #fff;
 }
 
 /* Testimonials Section */
@@ -498,7 +365,7 @@ body {
 }
 
 .testimonial-item {
-  background-color: #ff0000d0;
+  background-color: hsl(0, 80%, 52%);
   padding: 1.5rem;
   border-radius: 8px;
   margin-bottom: 1.5rem;
@@ -542,57 +409,7 @@ body {
     line-height: 1.6;
   }
 
-  /* Formulários */
-  .formulario {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Duas colunas de tamanho igual */
-    gap: 1.5rem; /* Espaçamento entre os campos */
-    max-width: 800px; /* Largura máxima do formulário */
-    margin: 0 auto; /* Centraliza o formulário */
-  }
   
-  .form-group {
-    display: flex;
-    flex-direction: column; /* Organiza os rótulos e campos verticalmente */
-  }
-  
-  .form-group label {
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-    color: #000000;
-  }
-  
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    padding: 0.8rem;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  textarea {
-    resize: vertical; /* Permite redimensionar verticalmente */
-  }
-  
-  button {
-    grid-column: span 2; /* Faz o botão ocupar as duas colunas */
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    color: #D3D3D3;
-    background-color: #2C2C2C;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #2C2C2C;
-  }
-
   /* Ajuste de seções */
   .section {
     padding: 1.5rem;

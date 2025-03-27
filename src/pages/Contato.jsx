@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import '../styles/styles.css';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
+import './Contato.css';
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
 
 function Contato() {
   const messages = [
@@ -58,104 +59,117 @@ function Contato() {
   };
 
   return (
-    <div className="home">
+    <div className="contato-page">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
 
-      {/* Informações de Contato */}
-      <div className='container'>
-      <section className="highlights">
-        <div className="highlights-grid">
-          <div className="highlight-item">
-            <div className="contato-info">
-              <h2>Entre em Contato</h2>
-              <p>Estamos aqui para ajudar. Entre em contato conosco pelos canais abaixo:</p>
-              <ul className="contact-list">
-                <li>
-                  <i className="fas fa-map-marker-alt"></i>
-                  <p>
-                    <strong>Endereço:</strong> Avenida Laura Gomes Hannickel, 153 - Capoavinha, Mairiporã - SP
-                  </p>
-                </li>
-                <li>
-                  <i className="fas fa-phone-alt"></i>
-                  <p>
-                    <strong>Telefone:</strong>{' '}
-                    <a href="tel:+5511941097471">(11) 94109-7471</a>
-                  </p>
-                </li>
-                <li>
-                  <i className="fas fa-envelope"></i>
-                  <p>
-                    <strong>E-mail:</strong>{' '}
-                    <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a>
-                  </p>
-                </li>
-                <li>
-                  <i className="fab fa-whatsapp"></i>
-                  <p>
-                    <strong>WhatsApp:</strong>{' '}
-                    <a
-                      href="https://wa.me/5511941097471?text=Olá! Gostaria de mais informações sobre os serviços."
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Enviar Mensagem
-                    </a>
-                  </p>
-                </li>
-              </ul>
-            </div>
+      <div className="container">
+        <section className="contato-info-section">
+          <div className='contato-info-section'>
+          <div className='highlight-item'>
+          <h2>Entre em Contato</h2>
+          <p>Estamos aqui para ajudar. Entre em contato conosco pelos canais abaixo:</p>
+          <ul className="contact-list">
+            <li>
+              <FaMapMarkerAlt />
+              <span>Avenida Laura Gomes Hannickel, 153 - Capoavinha, Mairiporã - SP</span>
+            </li>
+            <li>
+              <FaPhoneAlt />
+              <a href="tel:+5511941097471">(11) 94109-7471</a>
+            </li>
+            <li>
+              <FaEnvelope />
+              <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a>
+            </li>
+            <li>
+              <FaWhatsapp />
+              <a
+                href="https://wa.me/5511941097471?text=Olá! Gostaria de mais informações sobre os serviços."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Enviar Mensagem
+              </a>
+            </li>
+          </ul>
           </div>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* Formulário de Contato */}
-      <section className="highlights">
-        <div className="formulario">
+        {/* Google Maps Section */}
+        <section className="map-section">
+          <div className='highlight-item'>
+          <h2>Localização</h2>
+          <div className="google-map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.799744734953!2d-46.5745093!3d-23.3263499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ceede375ca12c9%3A0xa22173d27f744745!2sZERO%2020%20GARAGE!5e0!3m2!1spt-BR!2sbr!4v1711478418134!5m2!1spt-BR!2sbr"
+              width="600"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Localização da Zero20 Garage no Google Maps"
+            ></iframe>
+          </div>
+          </div>
+        </section>
+
+        <section className="formulario-section">
+        <div className='highlight-item'>
           <h2>Envie uma Mensagem</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="contato-form">
             <div className="form-group">
-              <label>*Seu Nome:</label>
+              <label htmlFor="nome">Seu Nome:</label>
               <input
                 type="text"
+                id="nome"
                 name="nome"
                 value={formData.nome}
                 onChange={handleChange}
                 required
+                placeholder="Digite seu nome"
               />
             </div>
             <div className="form-group">
-              <label>*E-mail:</label>
+              <label htmlFor="email">Seu E-mail:</label>
               <input
                 type="email"
+                id="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
+                placeholder="Digite seu e-mail"
               />
             </div>
             <div className="form-group">
-              <label>*Mensagem:</label>
+              <label htmlFor="mensagem">Sua Mensagem:</label>
               <textarea
+                id="mensagem"
                 name="mensagem"
                 value={formData.mensagem}
                 onChange={handleChange}
                 required
+                placeholder="Digite sua mensagem"
               ></textarea>
             </div>
             <div className="form-group">
-              <label>Anexar Arquivo:</label>
+              <label htmlFor="arquivo">Anexar Arquivo:</label>
               <input
                 type="file"
+                id="arquivo"
                 name="arquivo"
                 onChange={(e) => setFormData({ ...formData, arquivo: e.target.files[0] })}
               />
             </div>
-            <button type="submit">Enviar</button>
+            <button type="submit" className="submit-button">
+              Enviar
+            </button>
           </form>
-        </div>
-      </section>
+          </div>
+        </section>
       </div>
     </div>
   );

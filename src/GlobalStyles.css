@@ -70,13 +70,13 @@ body {
 
 .card h3 {
   font-size: 1.5rem;
-  color: #007bff;
+  color: #c50404;
   margin-bottom: 0.5rem;
 }
 
 .card p {
   font-size: 1rem;
-  color: #555;
+  color: #fff;
 }
 
 /* Highlights Section */
@@ -113,13 +113,13 @@ body {
 
 .highlight-item h3 {
   font-size: 1.5rem;
-  color: #007bff;
+  color: #c50404;
   margin-bottom: 0.5rem;
 }
 
 .highlight-item p {
   font-size: 1rem;
-  color: #555;
+  color: #fff;
 }
 
 /* Testimonials Section */

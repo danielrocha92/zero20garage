@@ -3,8 +3,8 @@
   width: 100%; /* Garante que o header ocupe toda a largura da tela */
   height: 100vh; /* Garante que o header ocupe toda a altura da viewport */
   position: relative; /* Permite posicionar a imagem dentro do header */
-  background-color: #f9f9f9; /* Fundo quase branco */
-  color: #fff; /* Cor do texto */
+  background-color: #000000; /* Fundo quase branco */
+  color: #000000; /* Cor do texto */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,7 +12,8 @@
   text-align: center;
   padding: 2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
-  border-bottom: 2px solid #ddd;
+  border-bottom: 2px solid #1d1d1d;
+  opacity: 0.7;
 }
 
 .header h1 {
@@ -23,7 +24,7 @@
 .header p {
   font-size: 1rem; /* Tamanho padrão do subtítulo */
   margin: 0.5rem 0 0;
-  color: #555;
+  color: #fff;
   animation: fadeIn 1s ease-in-out;
 }
   
@@ -38,7 +39,7 @@
 
 .header h1 {
   font-size: 2.5rem;
-  color: #333;
+  color: #fff7f7;
   margin: 0;
   animation: fadeIn 1s ease-in-out;
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import '../styles/styles.css'; // Importa o arquivo global de estilos
 import GoogleReviews from '../components/GoogleReviews';
 import DynamicHeader from '../components/DynamicHeader';
-import WhatsAppButton from '../components/WhatsAppButton';
 
 function Home() {
     const messages = [
@@ -23,7 +22,6 @@ function Home() {
   return (
     <div className="home">
       <DynamicHeader messages={messages} />
-      <WhatsAppButton />
           {/* Card padrão Section */}
           <div className='container'>
           <section className="highlights">
