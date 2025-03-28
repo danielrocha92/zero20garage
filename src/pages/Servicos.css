@@ -1,13 +1,37 @@
 /* Estilos do Serviços */
 .services {
+    background-color: #2e2f31;
+    padding: 0rem 0;
+  }
+
+  .container {
+    max-width: 1500px;
+    margin: 0 auto;
     padding: 2rem;
+    background-color: #353535;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+
+  .services-info-section {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .services-info-section h2 {
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
   }
   
+  .services-info-section p {
+    font-size: 1.1rem;
+    color: #ffffff;
+  }
   .services-list {
-    margin-top: 2rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
   }
   
   .service-item {
@@ -20,11 +44,28 @@
   }
   
   .service-item h2 {
-    font-size: 1.5rem;
-    color: #fff;
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
   }
   
   .service-item p {
     font-size: 1rem;
     color: #fff;
   }
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .services-info-section h2 {
+    font-size: 1.75rem;
+  }
+
+  .services-info-section p {
+    font-size: 1rem;
+  }
+
+}

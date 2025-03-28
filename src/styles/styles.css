@@ -12,19 +12,11 @@ body {
 }
 
 /* Títulos */
-h1 {
-  font-size: 1.8rem; /* Reduz o tamanho do título principal */
-  margin-bottom: 1rem;
-}
-
-h2 {
-  font-size: 1.5rem; /* Ajusta o tamanho dos subtítulos */
-  margin-bottom: 0.8rem;
-}
-
-h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0.6rem;
+h1, h2, h3, h4, h5, h6 {
+  font-family:#ffffff;
+  font-weight: 700;
+  color:#ffffff;
+  margin-bottom: 0.5rem;
 }
 
 /* Parágrafos */

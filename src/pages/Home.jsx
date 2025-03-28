@@ -25,19 +25,22 @@ function Home() {
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
           {/* Card padrão Section */}
-          <div className='container'>
-          <section className="highlights">
-            <div className='home-section'>
-                  <h2>Entre em Contato</h2>
-                <h1>Excelência em Retífica de Motores e Soluções Mecânicas Sob Medida</h1>
-                <p>Atendimento especializado para veículos nacionais e importados.</p>
-                <a href="/orcamento" className="cta-button">Solicite um Orçamento</a>
+          <div className="container">
+            <section className="contato-info-section">
+              <div className='contato-info-section'>
+                <div className='highlight-item'>
+                    <h2>Entre em Contato</h2>
+                  <h1>Excelência em Retífica de Motores e Soluções Mecânicas Sob Medida</h1>
+                  <p>Atendimento especializado para veículos nacionais e importados.</p>
+                  <a href="/orcamento" className="cta-button">Solicite um Orçamento</a>
                 </div>
-          </section>
+              </div>
+            </section>
 
             {/* Serviços Destacados */}
-            <section className="highlights">
-            <div className='home-section'>
+            <section className="contato-info-section">
+              <div className='contato-info-section'>
+                <div className='highlight-item'>
                   <h2>Nossos Serviços</h2>
                     <div className="highlight-item">
                       <h2>Retífica de Motores</h2>
@@ -51,16 +54,15 @@ function Home() {
                       <h2>Revisão Completa</h2>
                       <p>Diagnóstico avançado para garantir o melhor desempenho do seu veículo.</p>
                     </div>
-                    </div>
+                </div>
+              </div>
             </section>
 
           {/* Destaques */}
-          <section className="highlights">
-          <div className='home-section'>
-              <div className="highlight-grid">
-                <div className="highlight-item">
+          <section className="contato-info-section">
+              <div className='contato-info-section'>
+                <div className='highlight-item'>
                   <h2>Por que Escolher a Zero20 Garage?</h2>
-                  <div className="highlights-grid">
                     <div className="highlight-item">
                       <h2>Ofertas Especiais</h2>
                       <p>Descontos exclusivos para serviços de retífica e manutenção.</p>
@@ -73,31 +75,27 @@ function Home() {
                       <h2>Clientes Satisfeitos</h2>
                       <p>Veja o que nossos clientes dizem sobre nossos serviços.</p>
                     </div>
-                  </div>
                 </div>
-              </div>
               </div>
           </section>
           {/* Conteúdo adicional */}
     
           {/* Depoimentos */}
-          <section className="highlights">
-          <div className='home-section'>
-          <div className="highlights-grid">
-            <div className="highlight-item">
-              <h2>O que Nossos Clientes Dizem</h2>
-              {/* Avaliações Google Maps */}
-              <GoogleReviews />
-              <div className="testimonial-item">
-                <p>"Serviço impecável! Meu carro nunca esteve tão bom. Recomendo a Zero20 Garage para todos."</p>
-                <strong>- João Silva</strong>
+          <section className="contato-info-section">
+            <div className='contato-info-section'>
+              <div className='highlight-item'>
+                <h2>O que Nossos Clientes Dizem</h2>
+                {/* Avaliações Google Maps */}
+                <GoogleReviews />
+                <div className="testimonial-item">
+                  <p>"Serviço impecável! Meu carro nunca esteve tão bom. Recomendo a Zero20 Garage para todos."</p>
+                  <strong>- João Silva</strong>
+                </div>
+                <div className="testimonial-item">
+                  <p>"Atendimento rápido e eficiente. A equipe é muito profissional e confiável."</p>
+                  <strong>- Maria Oliveira</strong>
+                </div>
               </div>
-              <div className="testimonial-item">
-                <p>"Atendimento rápido e eficiente. A equipe é muito profissional e confiável."</p>
-                <strong>- Maria Oliveira</strong>
-              </div>
-              </div>
-            </div>
             </div>
           </section>
 

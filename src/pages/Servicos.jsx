@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/styles.css';
+import './Servicos.css';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
 
@@ -20,11 +20,13 @@ const Servicos = () => {
     ];
 
   return (
-    <div className="servicos">
+    <div className="services">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
-      <div className='container'>
-          <section className="highlights">
+      <div className="container">
+        <section className="services-info-section">
+          <div className='services-info-section'>
+          <div className='highlight-item'>
             <h2>Retífica de Motores</h2>
                 <p>Serviço completo de retífica de motores para garantir o melhor desempenho do seu veículo.</p>
             <div className="highlights-grid">
@@ -48,6 +50,8 @@ const Servicos = () => {
               <h2>Consultoria Técnica</h2>
               <p>Consultoria especializada para ajudar você a tomar as melhores decisões para o seu veículo.</p>
             </div>
+           </div>
+           </div>
            </div>
       </section>
       </div>  
