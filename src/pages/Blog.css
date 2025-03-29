@@ -11,6 +11,7 @@
   background-color: #353535;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  font-family:'Garamond';
 }
 
 .blog-highlights {
@@ -19,9 +20,11 @@
 }
 
 .blog-highlights h2 {
+  font-family:'Arial';
   font-size: 2rem;
   color: #ffffff;
   margin-bottom: 1rem;
+  font-size: 3rem;
 }
 
 .blog-links {
@@ -56,6 +59,7 @@
   color: #ea1a1a;
   margin-bottom: 1.5rem;
   text-align: center;
+  font-size: 3rem;
 }
 
 .blog-section h3 {
