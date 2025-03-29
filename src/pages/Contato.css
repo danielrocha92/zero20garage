@@ -120,8 +120,12 @@
 }
 
 .submit-button:hover {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor */
   background-color: rgba(54, 24, 24, 0.5);
-  color: #fff;
+  color: #c50404;
   transform: scale(1.05);
 }
 

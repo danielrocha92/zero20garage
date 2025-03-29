@@ -26,7 +26,7 @@
     text-align: center;
   }
   .home h1 {
-    font-size: 2.5rem;
+    font-size: 5rem;
     margin-bottom: 1rem;
   }
   
@@ -68,6 +68,19 @@
   box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
 }
 
+.highlight-item h1 {
+  font-size: 6rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  font-family: 'Vivaldi', sans-serif;
+}
+
+.highlight-item h2 {
+  font-size: 3rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
 .highlight-item h3 {
   font-size: 1.5rem;
   color: #c50404;
@@ -107,7 +120,7 @@
 }
 
 .testimonial-item p {
-  font-size: 1rem;
+  font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
@@ -116,4 +129,87 @@
   display: block;
   margin-top: 0.5rem;
   color: #D3D3D3;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #c50404;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer; /* Adiciona um cursor de ponteiro */
+  }
+
+  .cta-button:hover {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor */
+    background-color: rgba(54, 24, 24, 0.5);
+    color: #c50404;
+    transform: scale(1.05);
+    }
+
+    .cta-button:focus,
+.button:active {
+  outline: 2px solid #530000; /*Adiciona um contorno azul ao focar ou clicar */
+  outline-offset: 2px; /* Evita que o contorno se sobreponha ao botão */
+}
+
+/* Home.css */
+/* Estilos existentes */
+
+/* Media Query para telas menores (dispositivos móveis) */
+@media (max-width: 768px) {
+  .home-section h2 {
+    font-size: 1.5rem; /* Reduz o tamanho do título */
+  }
+
+  .home h1 {
+    font-size: 3rem; /* Reduz o tamanho do título principal */
+  }
+
+  .home p {
+    font-size: 0.9rem; /* Reduz o tamanho do parágrafo */
+  }
+
+  .highlights h2 {
+    font-size: 2rem; /* Reduz o tamanho do título da seção de destaques */
+  }
+
+  .highlight-item h1 {
+    font-size: 3rem; /* Reduz o tamanho do título do item de destaque */
+  }
+
+  .highlight-item h2 {
+    font-size: 1.8rem; /* Reduz o tamanho do subtítulo do item de destaque */
+  }
+
+  .highlight-item h3 {
+    font-size: 1.2rem; /* Reduz o tamanho do título 3 do item de destaque */
+  }
+
+  .highlight-item p {
+    font-size: 0.8rem; /* Reduz o tamanho do parágrafo do item de destaque */
+  }
+
+  .testimonials h2 {
+    font-size: 1.8rem; /* Reduz o tamanho do título da seção de depoimentos */
+  }
+
+  .testimonial-item p {
+    font-size: 1.2rem; /* Reduz o tamanho do parágrafo do depoimento */
+  }
+
+  .testimonial-item strong {
+    font-size: 0.9rem; /* Reduz o tamanho do nome do autor do depoimento */
+  }
+
+  .cta-button {
+    font-size: 0.9rem; /* Reduz o tamanho do texto do botão */
+  }
 }

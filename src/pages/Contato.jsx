@@ -66,10 +66,10 @@ function Contato() {
       <div className="container">
         <section className="contato-info-section">
           <div className='contato-info-section'>
-          <div className='highlight-item'>
-          <h2>Entre em Contato</h2>
-          <p>Estamos aqui para ajudar. Entre em contato conosco pelos canais abaixo:</p>
-          <ul className="contact-list">
+            <div className='highlight-item'>
+              <h2>Entre em Contato</h2>
+                <p>Estamos aqui para ajudar. Entre em contato conosco pelos canais abaixo:</p>
+              <ul className="contact-list">
             <li>
               <FaMapMarkerAlt />
               <span>Avenida Laura Gomes Hannickel, 153 - Capoavinha, Mairiporã - SP</span>

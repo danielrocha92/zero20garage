@@ -1,56 +1,85 @@
-/* Estilo global para o header */
+/* DynamicHeader.css */
 .header {
-  width: 100%; /* Garante que o header ocupe toda a largura da tela */
-  height: 100vh; /* Garante que o header ocupe toda a altura da viewport */
-  position: relative; /* Permite posicionar a imagem dentro do header */
-  background-color: #000000; /* Fundo quase branco */
-  color: #000000; /* Cor do texto */
+  width: 100%;
+  height: 100vh;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-bottom: 2px solid #1d1d1d;
-  opacity: 0.7;
+  opacity: 0.8;
+  overflow: hidden;
+  background: url('../assets/images/header.jpg') center/cover no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  background-color: rgb(46, 47, 49);
+  color: rgba(0, 0, 0, 1.9);
+  opacity: 0.5
+  z-index 1000;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.header > * {
+  z-index: 2;
 }
 
 .header h1 {
-  font-size: 2rem; /* Tamanho padrão do título */
+  font-size: 5rem; /* Tamanho padrão do título */
   margin: 0;
+  color: #f50203;
+  animation: fadeIn 1s ease-in-out;
 }
 
 .header p {
-  font-size: 1rem; /* Tamanho padrão do subtítulo */
+  font-size: 1.2rem; /* Tamanho padrão do subtítulo */
   margin: 0.5rem 0 0;
-  color: #fff;
+  color: #f0f0f0;
   animation: fadeIn 1s ease-in-out;
-}
-  
-.header img {
-  width: 100%; /* Garante que a imagem ocupe toda a largura do header */
-  height: 100%; /* Garante que a imagem ocupe toda a altura do header */
-  object-fit: cover; /* Ajusta a imagem para cobrir todo o espaço, mantendo a proporção */
-  position: absolute; /* Posiciona a imagem em relação ao header */
-  top: 0;
-  left: 0;
 }
 
-.header h1 {
-  font-size: 2.5rem;
-  color: #fff7f7;
-  margin: 0;
-  animation: fadeIn 1s ease-in-out;
+.header img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.7;
 }
-  
+
 @keyframes fadeIn {
   0% {
-    opacity: 5;
+    opacity: 0;
     transform: translateY(-10px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Media Query para telas menores */
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 2rem; /* Tamanho do título em telas menores */
+  }
+
+  .header p {
+    font-size: 1rem; /* Tamanho do subtítulo em telas menores */
   }
 }

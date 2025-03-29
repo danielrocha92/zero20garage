@@ -33,7 +33,7 @@ const Servicos = () => {
               <div className="highlight-item">
                 <h2>Manutenção Preventiva</h2>
                 <p>Manutenção regular para evitar problemas futuros e prolongar a vida útil do motor.</p>
-            </div>
+              </div>
             <div className="highlight-item">
               <h2>Diagnóstico de Problemas</h2>
               <p>Diagnóstico preciso para identificar e resolver problemas no motor do seu veículo.</p>

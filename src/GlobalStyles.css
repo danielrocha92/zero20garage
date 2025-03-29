@@ -5,6 +5,9 @@
   box-sizing: border-box;
 }
 
+/* Exemplo com Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
@@ -206,22 +209,6 @@ body {
     padding: 0.5rem;
   }
 
-  /* Botões */
-  button {
-    width: 100%;
-    padding: 0.8rem;
-    font-size: 1rem;
-    background-color: #d90000c4;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  button:hover {
-    background-color: rgba(54, 24, 24, 0.5);
-  }
 
   /* Ajuste de grades */
   .highlights-grid,
@@ -248,23 +235,58 @@ body {
     max-width: 100%;
     height: auto;
   }
-
-  /* Ajuste de botões de CTA */
-  .cta-button {
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding: 0.8rem;
-    font-size: 1rem;
-    background-color: #d90000c4;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-  }
-
-  .cta-button:hover {
-    background-color: rgba(54, 24, 24, 0.5);
-  }
 }
 
+/* GlobalStyles.css */
+/* Estilos globais existentes */
+
+/* Media Query para telas menores (dispositivos móveis) */
+@media (max-width: 768px) {
+  .home-section h2 {
+    font-size: 1.5rem; /* Reduz o tamanho do título */
+  }
+
+  .home h1 {
+    font-size: 3rem; /* Reduz o tamanho do título principal */
+  }
+
+  .home p {
+    font-size: 0.9rem; /* Reduz o tamanho do parágrafo */
+  }
+
+  .highlights h2 {
+    font-size: 2rem; /* Reduz o tamanho do título da seção de destaques */
+  }
+
+  .highlight-item h1 {
+    font-size: 3rem; /* Reduz o tamanho do título do item de destaque */
+  }
+
+  .highlight-item h2 {
+    font-size: 1.8rem; /* Reduz o tamanho do subtítulo do item de destaque */
+  }
+
+  .highlight-item h3 {
+    font-size: 1.2rem; /* Reduz o tamanho do título 3 do item de destaque */
+  }
+
+  .highlight-item p {
+    font-size: 0.8rem; /* Reduz o tamanho do parágrafo do item de destaque */
+  }
+
+  .testimonials h2 {
+    font-size: 1.8rem; /* Reduz o tamanho do título da seção de depoimentos */
+  }
+
+  .testimonial-item p {
+    font-size: 1.2rem; /* Reduz o tamanho do parágrafo do depoimento */
+  }
+
+  .testimonial-item strong {
+    font-size: 0.9rem; /* Reduz o tamanho do nome do autor do depoimento */
+  }
+
+  .cta-button {
+    font-size: 0.9rem; /* Reduz o tamanho do texto do botão */
+  }
+}

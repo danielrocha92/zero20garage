@@ -25,8 +25,27 @@
 }
 
 .navbar-logo img {
-  max-width: 50px;
-  transition: transform 0.3s ease;
+  width: 7rem; /* Largura do logo */
+  height: auto; /* Mantém a proporção */
+  display: block; /* Remove espaço extra abaixo do SVG */
+  margin: 0 auto; /* Centraliza horizontalmente */
+  transition: transform 0.3s ease; /* Adiciona uma transição suave */
+}
+
+.navbar-logo img:hover {
+  transform: scale(1.1); /* Aumenta o tamanho no hover */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .navbar-logo {
+    width: 4rem; /* Reduz o tamanho em telas menores */
+    position: center;
+    height: auto; /* Mantém a proporção */
+    display: block; /* Remove espaço extra abaixo do SVG */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    transition: transform 0.3s ease; /* Adiciona uma transição suave */
+  }
 }
 
 /* Links da Navbar */
@@ -97,6 +116,7 @@
   .hamburger {
     display: flex;
     justify-content: flex-end;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
   }
 
   .navbar-links li {
@@ -105,6 +125,10 @@
   }
 
   .navbar-links a {
+    font-size: 1.2rem;
+  }
+
+  .navbar-links:hover {
     font-size: 1.2rem;
   }
 }
