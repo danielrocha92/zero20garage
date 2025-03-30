@@ -20,13 +20,13 @@
 
   .services-info-section h2 {
     font-size: 2rem;
-    color: #ffffff;
+    color: #2e2f31;
     margin-bottom: 1rem;
   }
   
   .services-info-section p {
     font-size: 1.1rem;
-    color: #ffffff;
+    color: #2e2f31;
   }
   .services-list {
   list-style: none;
@@ -36,7 +36,7 @@
   
   .service-item {
     flex: 1 1 calc(33.333% - 2rem);
-    background-color: #fff;
+    background-color: #2e2f31;
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -52,6 +52,12 @@
   .service-item p {
     font-size: 1rem;
     color: #fff;
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
   }
 
 /* Responsividade */
