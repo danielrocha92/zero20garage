@@ -21,6 +21,8 @@
   color: rgba(0, 0, 0, 1.9);
   opacity: 0.5
   z-index 1000;
+  font-family: 'Nunito', sans-serif; /* Aplica a fonte Nunito */
+
 }
 
 .header::before {
@@ -43,10 +45,11 @@
   margin: 0;
   color: #f50203;
   animation: fadeIn 1s ease-in-out;
+  font-family: 'Nunito', sans-serif; /* Aplica a fonte Nunito */
 }
 
 .header p {
-  font-size: 1.2rem; /* Tamanho padrão do subtítulo */
+  font-size: 2.5rem; /* Tamanho padrão do subtítulo */
   margin: 0.5rem 0 0;
   color: #f0f0f0;
   animation: fadeIn 1s ease-in-out;

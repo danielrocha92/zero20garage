@@ -39,7 +39,7 @@
 /* Responsividade */
 @media (max-width: 768px) {
   .navbar-logo {
-    width: 4rem; /* Reduz o tamanho em telas menores */
+    width: 6rem; /* Reduz o tamanho em telas menores */
     position: center;
     height: auto; /* Mantém a proporção */
     display: block; /* Remove espaço extra abaixo do SVG */
