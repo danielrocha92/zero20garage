@@ -31,7 +31,7 @@ const Servicos = () => {
                 <p>Serviço completo de retífica de motores para garantir o melhor desempenho do seu veículo.</p>
             <div className="service-grid">
               <div className="service-item">
-              <a href="/servicos/manutencao-preventiva" className='service-button'>
+              <a href="/mp" className='service-button'>
                 <h2>Manutenção Preventiva</h2>
                 <p>Manutenção regular para evitar problemas futuros e prolongar a vida útil do motor.</p>
                 </a>

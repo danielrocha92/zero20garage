@@ -2,9 +2,9 @@
 import React from 'react';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
-import './ManutencaoPreventiva.css'; 
+import './mp.css'; 
 
-function ManutencaoPreventiva() {
+function Mp() {
   const messages = [
     {
       title: 'Manutenção Preventiva',
@@ -17,7 +17,7 @@ function ManutencaoPreventiva() {
   ];
 
   return (
-    <div className="manutencao-preventiva-page">
+    <div className="mp-page">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
 
@@ -52,4 +52,4 @@ function ManutencaoPreventiva() {
   );
 }
 
-export default ManutencaoPreventiva;
+export default Mp;
