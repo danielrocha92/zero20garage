@@ -37,25 +37,25 @@ const Servicos = () => {
                 </a>
               </div>
             <div className="service-item">
-            <a href="/diagnostico" className='service-button'>
+            <a href="/dp" className='service-button'>
               <h2>Diagnóstico de Problemas</h2>
               <p>Diagnóstico preciso para identificar e resolver problemas no motor do seu veículo.</p>
               </a>
             </div>
             <div className="service-item">
-            <a href="/servicos/manutencao-preventiva" className='service-button'>
+            <a href="/mp" className='service-button'>
               <h2>Troca de Peças</h2>
               <p>Substituição de peças desgastadas ou danificadas por componentes de alta qualidade.</p>
               </a>
             </div>
             <div className="service-item">
-            <a href="/servicos/manutencao-preventiva" className='service-button'>
+            <a href="/td" className='service-button'>
               <h2>Teste de Desempenho</h2>
               <p>Testes rigorosos para garantir que o motor esteja funcionando de maneira eficiente.</p>
               </a>
             </div>
             <div className="service-item">
-            <a href="/servicos/manutencao-preventiva" className='service-button'>
+            <a href="/ct" className='service-button'>
               <h2>Consultoria Técnica</h2>
               <p>Consultoria especializada para ajudar você a tomar as melhores decisões para o seu veículo.</p>
               </a>

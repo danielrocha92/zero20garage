@@ -2,9 +2,9 @@
 import React from 'react';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
-import './Diagnostico.css'; // Importe o CSS para estilização
+import './Td.css';
 
-function Diagnostico() {
+function Td() {
   const messages = [
     {
       title: 'Diagnóstico de Problemas',
@@ -17,26 +17,30 @@ function Diagnostico() {
   ];
 
   return (
-    <div className="diagnostico-page">
+    <div className="td-page">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
 
       <div className="container">
-      <section className="diag-info-section">
-          <div className='diag-info-section'>
-          <div className='diag-item'>
-          <h2>Diagnóstico de Problemas</h2>
-          <p>Diagnóstico preciso para identificar e resolver problemas no motor do seu veículo.</p>
+      <section className="td-info-section">
+          <div className='td-info-section'>
+          <div className='td-item'>
+          <h2>Troca de Peças com Qualidade e Precisão para o Seu Motor</h2>
+          <p>Utilizamos apenas peças de alta qualidade, garantindo o desempenho e a durabilidade do seu motor. Nossa equipe especializada realiza a substituição com precisão, seguindo rigorosos padrões de qualidade.</p>
 
-          <h3>Por que fazer um diagnóstico?</h3>
+          <h3>Por que a Troca de Peças é Essencial?</h3>
           <p>Um diagnóstico preciso é essencial para identificar a causa raiz dos problemas do seu veículo e evitar gastos desnecessários. Com o diagnóstico correto, você pode ter certeza de que está resolvendo o problema certo.</p>
 
-          <h3>O que inclui o diagnóstico?</h3>
+          <h3>Benefícios da troca de peças desgastadas ou danificadas</h3>
           <ul>
-            <li>Diagnóstico eletrônico</li>
-            <li>Teste de compressão</li>
-            <li>Análise de gases</li>
-            <li>Inspeção visual detalhada</li>
+            <li>Melhora no desempenho do motor.
+            </li>
+            <li>Aumento da vida útil do veículo.
+            </li>
+            <li>Redução do consumo de combustível.
+            </li>
+            <li>Prevenção de problemas futuros.
+            </li>
           </ul>
 
           <h3>Agende seu diagnóstico</h3>
@@ -49,5 +53,4 @@ function Diagnostico() {
     </div>
   );
 }
-
-export default Diagnostico;
+export default Td;

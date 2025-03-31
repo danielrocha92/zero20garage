@@ -2,7 +2,7 @@
 import React from 'react';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
-import './mp.css'; 
+import './Mp.css'; 
 
 function Mp() {
   const messages = [

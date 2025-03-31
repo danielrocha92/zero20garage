@@ -1,67 +1,67 @@
-/* Diagnostico.css */
-.diagnostico-page {
-  text-align: center;
-  background-color: #2e2f31;
-  padding: 0rem 0;
-  color: #fff;
-  bottom: 0;
-  left: 0;
-  opacity: 1.5;
-  right: 0;
-  top: 0;
-  }
-  
-  .container {
+/* Troca Peça.css */
+.td-page {
+    text-align: center;
+    background-color: #2e2f31;
+    padding: 0rem 0;
+    color: #fff;
+    bottom: 0;
+    left: 0;
+    opacity: 1.5;
+    right: 0;
+    top: 0;
+    }
+    
+.container {
     max-width: 1500px;
     margin: 0 auto;
     padding: 2rem;
     background-color: #353535;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-  }
-  
-  .diag-info-section {
+}
+    
+.td-info-section {
     margin-bottom: 2rem;
     text-align: center;
-  }
+}
 
-  .diag-info-section h2 {
+.td-info-section h2 {
     font-size: 2rem;
     color: #ffffff;
     margin-bottom: 1rem;
-  }
-  
-  .diag-info-section p {
+}
+
+.td-info-section p {
     font-size: 1.1rem;
     color: #ffffff;
-  }
+}
 
-  .diag-items h2 {
+.td-items h2 {
     font-size: 2.5rem;
     color: #ffffff;
     margin-bottom: 1rem;
-  }
-  
-  .diag-items p {
+}
+
+.td-items p {
     font-size: 1.1rem;
     color: #ffffff;
     line-height: 1.6;
     margin-bottom: 1rem;
-  }
-  
-  .diag-items ul {
+}
+
+.td-items ul {
     list-style: disc;
     padding-left: 2rem;
     margin-bottom: 1rem;
-  }
-  
-  .diag-items li {
+}
+
+.td-items li {
     font-size: 1.1rem;
     color: #ffffff;
     line-height: 1.6;
-  }
-  
-  .cta-button {
+}
+
+.cta-button {
     display: inline-block;
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
@@ -72,10 +72,10 @@
     text-decoration: none;
     transition: background-color 0.3s ease, transform 0.3s ease;
     cursor: pointer;
-  }
-  
-  .cta-button:hover {
+}
+
+.cta-button:hover {
     background-color: rgba(54, 24, 24, 0.5);
     color: #c50404;
     transform: scale(1.05);
-  }
+}

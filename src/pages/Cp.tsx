@@ -2,9 +2,9 @@
 import React from 'react';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
-import './Tp.css';
+import './Cp.css';
 
-function Tp() {
+function Cp() {
   const messages = [
     {
       title: 'Diagnóstico de Problemas',
@@ -17,14 +17,14 @@ function Tp() {
   ];
 
   return (
-    <div className="tp-page">
+    <div className="cp-page">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
 
       <div className="container">
-      <section className="tp-info-section">
-          <div className='tp-info-section'>
-          <div className='tp-item'>
+      <section className="cp-info-section">
+          <div className='cp-info-section'>
+          <div className='cp-item'>
           <h2>Troca de Peças com Qualidade e Precisão para o Seu Motor</h2>
           <p>Utilizamos apenas peças de alta qualidade, garantindo o desempenho e a durabilidade do seu motor. Nossa equipe especializada realiza a substituição com precisão, seguindo rigorosos padrões de qualidade.</p>
 
@@ -53,4 +53,4 @@ function Tp() {
     </div>
   );
 }
-export default Tp;
+export default Cp;
