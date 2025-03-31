@@ -9,7 +9,9 @@ import Orcamento from './pages/Orcamento';
 import Blog from './pages/Blog';
 import Layout from './components/Layout';
 import ToTop from './components/ToTop';
-import ManutencaoPreventiva from './pages/ManutencaoPreventiva'; // Importe o componente
+import ManutencaoPreventiva from './pages/ManutencaoPreventiva';
+import Diagnostico from './pages/Diagnostico'; // Importe o componente Diagnostico
+
 
 import './App.css';
 import './GlobalStyles.css';
@@ -36,7 +38,8 @@ function App() {
           <Route path="/servicos" element={<Servicos />} />
           <Route path="/orcamento" element={<Orcamento />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/servicos/manutencao-preventiva" element={<ManutencaoPreventiva />} /> {/* Adicione a rota */}
+          <Route path="/servico/manutencao-preventiva" element={<ManutencaoPreventiva />} />
+          <Route path="/diagnostico" element={<Diagnostico />} />
         </Routes>
         <ToTop />
       </Layout>

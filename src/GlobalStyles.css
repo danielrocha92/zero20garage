@@ -5,10 +5,30 @@
   box-sizing: border-box;
 }
 
+/* GlobalStyles.css */
+/* Remover sublinhado de todos os links */
+a {
+  text-decoration: none; /* Remove o sublinhado */
+}
+
+a:hover {
+  text-decoration: none; /* Remove o sublinhado no hover */
+}
+
+/* Seletor mais específico (se necessário) */
+.navbar a {
+  text-decoration: none; /* Remove o sublinhado */
+}
+
+.navbar a:hover {
+  text-decoration: none; /* Remove o sublinhado no hover */
+}
+
 /* Exemplo com Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 body {
+  font-family: Arial, sans-serif, 'Garamond';
   line-height: 1.6;
   color: #333;
   background-color: #f9f9f9;

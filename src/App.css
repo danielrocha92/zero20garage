@@ -5,11 +5,9 @@ body {
   background: url('./assets/images/banner.jpg') center center repeat;
   background-size: cover;
   background-attachment: fixed;
-  background-color: rgba(190, 181, 181, 9);
   position: relative;
   min-height: 100vh;
   margin: 0;
-  padding: 0;
 }
 
 body::before {
@@ -27,7 +25,6 @@ body::before {
 html,
 body {
   height: 100%;
-  margin: 0;
 }
 
 /* Estilos para o root */
@@ -40,4 +37,63 @@ body {
 /* Estilos para o main */
 main {
   flex: 1; /* Faz o conteúdo crescer e empurrar o footer para o final */
+}
+
+/* Navegação Superior */
+header {
+  background-color: #333;
+  padding: 10px 0;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Estilo do Mapa do Site */
+.mapa {
+  padding: 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.mapa h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.mapa ul {
+  list-style: none;
+  padding: 0;
+}
+
+.mapa ul li {
+  margin: 10px 0;
+}
+
+.mapa ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+}
+
+.mapa ul li a:hover {
+  text-decoration: underline;
 }

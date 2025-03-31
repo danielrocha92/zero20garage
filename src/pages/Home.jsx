@@ -26,8 +26,8 @@ function Home() {
       <WhatsAppButton />
           {/* Card padrão Section */}
           <div className="container">
-            <section className="contato-info-section">
-              <div className='contato-info-section'>
+            <section className="home-info-section">
+              <div className='home-info-section'>
                 <div className='highlight-item'>
                 <h1>Zero 20 Garage</h1>
                 <h2>Excelência em Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
