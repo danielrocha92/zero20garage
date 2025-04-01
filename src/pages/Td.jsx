@@ -1,10 +1,9 @@
-// Diagnostico.jsx
-import React from 'react';
+import React from 'react-router-dom';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
-import './Cp.css';
+import './Td.css';
 
-function Cp() {
+function Td() {
   const messages = [
     {
       title: 'Diagnóstico de Problemas',
@@ -17,14 +16,14 @@ function Cp() {
   ];
 
   return (
-    <div className="cp-page">
+    <div className="td-page">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
 
       <div className="container">
-      <section className="cp-info-section">
-          <div className='cp-info-section'>
-          <div className='cp-item'>
+      <section className="td-info-section">
+          <div className='td-info-section'>
+          <div className='td-item'>
           <h2>Troca de Peças com Qualidade e Precisão para o Seu Motor</h2>
           <p>Utilizamos apenas peças de alta qualidade, garantindo o desempenho e a durabilidade do seu motor. Nossa equipe especializada realiza a substituição com precisão, seguindo rigorosos padrões de qualidade.</p>
 
@@ -53,4 +52,4 @@ function Cp() {
     </div>
   );
 }
-export default Cp;
+export default Td;

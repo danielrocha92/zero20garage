@@ -85,19 +85,30 @@ function Orcamento() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="servico">Serviço Desejado:</label>
+              <label 
+              htmlFor="servico">Serviço Desejado:</label>
               <select
+                className="option"
                 id="servico"
                 name="servico"
                 value={formData.servico}
                 onChange={handleChange}
                 required
               >
-                <option value="">Selecione um serviço</option>
-                <option value="retifica">Retífica de Motores</option>
-                <option value="manutencao">Manutenção Preventiva</option>
-                <option value="revisao">Revisão Completa</option>
-                <option value="outro">Outro</option>
+                <option className="option"
+                value="">Selecione um serviço</option>
+                <option 
+                className="option"
+                value="retifica">Retífica de Motores</option>
+                <option
+                className="option"
+                value="manutencao">Manutenção Preventiva</option>
+                <option 
+                className="option"
+                value="revisao">Revisão Completa</option>
+                <option 
+                className="option"
+                value="outro">Outro</option>
               </select>
             </div>
             <div className="form-group">

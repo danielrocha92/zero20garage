@@ -1,5 +1,4 @@
 .home {
-    text-align: center;
     background-color: #2e2f31;
     padding: 0rem 0;
     color: #fff;
@@ -80,12 +79,6 @@
 
 .highlight-item {
   flex: 1 1 calc(33.333% - 2rem);
-  background-color: #2c2c2c6b;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .highlight-item:hover {

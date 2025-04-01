@@ -1,6 +1,6 @@
 /* Diagnostico.css */
 .mp-page {
-  text-align: center;
+  display: grid;
   background-color: #2e2f31;
   padding: 0rem 0;
   color: #fff;
@@ -53,6 +53,7 @@
     list-style: disc;
     padding-left: 2rem;
     margin-bottom: 1rem;
+    align-items: flex-end;
   }
   
   .mp-items li {

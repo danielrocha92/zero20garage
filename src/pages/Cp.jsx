@@ -1,14 +1,14 @@
 // Diagnostico.jsx
-import React from 'react';
+import React from 'react-router-dom';
+import './Cp.css'; 
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
-import './Td.css';
 
-function Td() {
+function Cp() {
   const messages = [
     {
-      title: 'Diagnóstico de Problemas',
-      subtitle: 'Identifique e resolva problemas no motor do seu veículo',
+      title: 'Consultoria Técnica',
+      subtitle: 'Consultoria especializada para ajudar você a tomar as melhores decisões para o seu veículo.',
     },
     {
       title: 'Equipamentos de Última Geração',
@@ -17,14 +17,14 @@ function Td() {
   ];
 
   return (
-    <div className="td-page">
+    <div className="cp-page">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
 
       <div className="container">
-      <section className="td-info-section">
-          <div className='td-info-section'>
-          <div className='td-item'>
+      <section className="cp-info-section">
+          <div className='cp-info-section'>
+          <div className='cp-item'>
           <h2>Troca de Peças com Qualidade e Precisão para o Seu Motor</h2>
           <p>Utilizamos apenas peças de alta qualidade, garantindo o desempenho e a durabilidade do seu motor. Nossa equipe especializada realiza a substituição com precisão, seguindo rigorosos padrões de qualidade.</p>
 
@@ -53,4 +53,4 @@ function Td() {
     </div>
   );
 }
-export default Td;
+export default Cp;

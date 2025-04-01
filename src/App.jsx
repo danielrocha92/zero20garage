@@ -3,21 +3,17 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import ToTop from './components/ToTop';
-
 import Home from './pages/Home';
 import Sobre from './pages/Sobre';
 import Contato from './pages/Contato';
-
 import Servicos from './pages/Servicos';
 import Dp from './pages/Dp';
 import Tp from './pages/Tp';
 import Mp from './pages/Mp';
 import Td from './pages/Td';
 import Cp from './pages/Cp';
-
 import Orcamento from './pages/Orcamento';
 import Blog from './pages/Blog';
-
 import './App.css';
 import './GlobalStyles.css';
 

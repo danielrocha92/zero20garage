@@ -25,7 +25,7 @@ function Dp() {
       <section className="dp-info-section">
           <div className='dp-info-section'>
           <div className='dp-item'>
-          <h2>Diagnóstico de Problemas</h2>
+          <h2>Diagnóstico de Problemas no Motor</h2>
           <p>Diagnóstico preciso para identificar e resolver problemas no motor do seu veículo.</p>
 
           <h3>Por que fazer um diagnóstico?</h3>

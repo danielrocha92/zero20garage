@@ -61,6 +61,20 @@
   text-decoration: none;
 }
 
+.option {
+  padding: 0.8rem;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  transition: border-color 0.3s ease;
+  color: #353535;
+}
+
+option:focus{
+  border-color: #c50404;
+  outline: none;
+}
+
 .contact-list a:hover {
   color: #c50404;
   text-decoration: underline;
@@ -74,6 +88,7 @@
 }
 
 .orcamento-form {
+  margin: 1rem 15rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;

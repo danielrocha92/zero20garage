@@ -15,6 +15,11 @@ a:hover {
   text-decoration: none; /* Remove o sublinhado no hover */
 }
 
+li {
+  display: contents;
+  text-align: left;
+}
+
 /* Seletor mais específico (se necessário) */
 .navbar a {
   text-decoration: none; /* Remove o sublinhado */
@@ -30,7 +35,6 @@ a:hover {
 body {
   font-family: Arial, sans-serif, 'Garamond';
   line-height: 1.6;
-  color: #333;
   background-color: #f9f9f9;
   margin: 0;
   padding: 0;
@@ -307,5 +311,6 @@ body {
 
   .cta-button {
     font-size: 0.9rem; /* Reduz o tamanho do texto do botão */
+    margin: auto;
   }
 }
