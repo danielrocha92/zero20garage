@@ -43,7 +43,7 @@ const Servicos = () => {
               </a>
             </div>
             <div className="service-item">
-            <a href="/mp" className='service-button'>
+            <a href="/tp" className='service-button'>
               <h2>Troca de Peças</h2>
               <p>Substituição de peças desgastadas ou danificadas por componentes de alta qualidade.</p>
               </a>

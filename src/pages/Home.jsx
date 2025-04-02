@@ -38,8 +38,8 @@ function Home() {
             </section>
 
           {/* Destaques */}
-          <section className="contato-info-section">
-              <div className='contato-info-section'>
+          <section className="home-info-section">
+              <div className='home-info-section'>
                 <div className='highlight-item'>
                   <h2>Por que Escolher a Zero20 Garage?</h2>
                   <div className="highlights-grid">
@@ -61,8 +61,8 @@ function Home() {
           </section>
 
             {/* Serviços Destacados */}
-            <section className="contato-info-section">
-              <div className='contato-info-section'>
+            <section className="home-info-section">
+              <div className='home-info-section'>
                 <div className='highlight-item'>
                       <h2>Retífica de Motores</h2>
                       <p>Recuperação completa do motor com precisão e qualidade.</p>
@@ -83,8 +83,8 @@ function Home() {
           {/* Conteúdo adicional */}
     
           {/* Depoimentos */}
-          <section className="contato-info-section">
-            <div className='contato-info-section'>
+          <section className="home-info-section">
+            <div className='home-info-section'>
               <div className='highlight-item'>
                 <h2>O que Nossos Clientes Dizem</h2>
                 {/* Avaliações Google Maps */}
@@ -101,10 +101,10 @@ function Home() {
             </div>
           </section>
 
-      {/* Contato */}
+      {/* home */}
       <div className='home-section'>
             <div className="highlight-item">
-              <div className="contato-info">
+              <div className="home-info">
                 <h2>Estamos Aqui para Ajudar</h2>
                 <p>Entre em contato conosco para agendar um serviço ou tirar dúvidas.</p>
                 <a href="/contato" className="cta-button">Fale Conosco</a>

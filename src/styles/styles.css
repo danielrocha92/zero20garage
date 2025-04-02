@@ -61,16 +61,6 @@ p {
 .button:active {
   outline: 2px solid #c50404; /*Adiciona um contorno azul ao focar ou clicar */
   outline-offset: 2px; /* Evita que o contorno se sobreponha ao botão */
-}
-
-/* Estilos para dispositivos móveis */
-@media (max-width: 768px) {
-  button,
-  .button {
-    font-size: 1rem;
-    padding: 1rem 1.5rem;
-  }
-}
   
 /* src/styles/styles.css */
 
@@ -129,15 +119,6 @@ p {
     background-color: rgba(54, 24, 24, 0.5);
     transform: scale(1.1);
   }
-
-    /* Responsivo: Mover para o canto inferior esquerdo em telas menores */
-    @media screen and (max-width: 768px) {
-      .arrow-up {
-        bottom: 20px;
-        right: 20px;
-        z-index: 1000; /* Garante que o botão fique sempre na frente */
-      }
-    }
 
   .contact-list {
     list-style: none;
@@ -235,7 +216,33 @@ p {
   .hamburger button {
     display: block;
   }
+  
+  .arrow-up {
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000; /* Garante que o botão fique sempre na frente */
+  }
 }
+
+  /* Ajuste do corpo */
+  body {
+    font-size: 1rem; /* Tamanho base do texto */
+    line-height: 1.8; /* Aumenta o espaçamento entre linhas */
+    padding: 0.5rem;
+  }
+
+  /* Botões */
+  button, .button {
+    font-size: 1rem; /* Ajusta o tamanho do texto nos botões */
+    padding: 0.8rem 1rem;
+  }
+
+  /* Links */
+  a {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
 
 .p {
   color: #B0BEC5;
@@ -299,32 +306,7 @@ body {
 .card p {
   font-size: 1rem;
   color: #fff;
-}
-
-
-
-/* Ajustes para dispositivos móveis */
-@media (max-width: 768px) {
-  /* Ajuste do corpo */
-  body {
-    font-size: 1rem; /* Tamanho base do texto */
-    line-height: 1.8; /* Aumenta o espaçamento entre linhas */
-    padding: 0.5rem;
-  }
-
-  /* Botões */
-  button, .button {
-    font-size: 1rem; /* Ajusta o tamanho do texto nos botões */
-    padding: 0.8rem 1rem;
-  }
-
-  /* Links */
-  a {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-
-  
+}  
   /* Ajuste de seções */
   .section {
     padding: 1.5rem;

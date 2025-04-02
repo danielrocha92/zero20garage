@@ -1,6 +1,8 @@
 // App.jsx
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import 'font-awesome/css/font-awesome.min.css';
+
 import Layout from './components/Layout';
 import ToTop from './components/ToTop';
 import Home from './pages/Home';

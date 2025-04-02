@@ -33,7 +33,7 @@ li {
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 body {
-  font-family: Arial, sans-serif, 'Garamond';
+  font-family: Open Sans, sans-serif;
   line-height: 1.6;
   background-color: #f9f9f9;
   margin: 0;
@@ -52,25 +52,12 @@ body {
   padding: 2rem;
   text-align: center;
 }
-@media (max-width: 768px) {
-  /* Ajuste para smartphones */
-  .section {
-    font-size: 1.5rem; /* Tamanho base menor para smartphones */
-  }
-}
 
 /* Títulos */
 .section h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
   color: #333;
-}
-
-@media (max-width: 768px) {
-  /* Ajuste para smartphones */
-  .section h2 {
-    font-size: 1.5rem; /* Tamanho base menor para smartphones */
-  }
 }
 
 /* Grid padrão */
@@ -187,79 +174,6 @@ body {
   color: #f0f0f0;
 }
 
-/* Global Responsiveness for Mobile Devices */
-@media (max-width: 768px) {
-  /* Ajuste do container principal */
-  .container {
-    padding: 1rem;
-  }
-
-  /* Ajuste de seções */
-  .section {
-    padding: 0.5rem;
-  }
-
-  .section h2 {
-    font-size: 0.5rem;
-  }
-
-  .section p {
-    font-size: 0.5rem;
-  }
-
-  /* Ajuste de formulários */
-  .form-group {
-    margin-bottom: 1rem;
-  }
-
-  .form-group label {
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-    display: block;
-  }
-
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    width: 100%;
-    padding: 0.8rem;
-    font-size: 0.9rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-
-  .form-group input[type="file"] {
-    padding: 0.5rem;
-  }
-
-
-  /* Ajuste de grades */
-  .highlights-grid,
-  .form-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  /* Ajuste de tabelas */
-  table {
-    width: 100%;
-    font-size: 0.9rem;
-  }
-
-  table th,
-  table td {
-    padding: 0.5rem;
-    text-align: left;
-  }
-
-  /* Ajuste de imagens */
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-}
-
 /* GlobalStyles.css */
 /* Estilos globais existentes */
 
@@ -312,5 +226,78 @@ body {
   .cta-button {
     font-size: 0.9rem; /* Reduz o tamanho do texto do botão */
     margin: auto;
+  }
+
+  .section h2 {
+    font-size: 1.5rem; /* Tamanho base menor para smartphones */
+  }
+
+  .container {
+    padding: 1rem;
+  }
+
+  /* Ajuste de seções */
+  .section {
+    padding: 0.5rem;
+    font-size: 1.5rem; /* Tamanho base menor para smartphones */
+  }
+
+  .section h2 {
+    font-size: 0.5rem;
+  }
+
+  .section p {
+    font-size: 0.5rem;
+  }
+
+  /* Ajuste de formulários */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .form-group input[type="file"] {
+    padding: 0.5rem;
+  }
+
+  /* Ajuste de grades */
+  .highlights-grid,
+  .form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Ajuste de tabelas */
+  table {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  table th,
+  table td {
+    padding: 0.5rem;
+    text-align: left;
+  }
+
+  /* Ajuste de imagens */
+  img {
+    max-width: 100%;
+    height: auto;
   }
 }
