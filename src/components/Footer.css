@@ -9,6 +9,13 @@
   box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
 }
 
+.footer-content-wrapper {
+  display: flex; /* Habilita o Flexbox */
+  justify-content: space-between; /* Distribui o espaço entre os elementos */
+  align-items: center; /* Alinha os itens verticalmente ao centro */
+  width: 100%; /* Garante que o contêiner ocupe toda a largura */
+}
+
 .footer a:hover {
   color: #D90000;
 }
@@ -80,26 +87,23 @@
 }
 
 .footer-nav ul {
-  list-style-type: none;
+  list-style: none; /* Remove os marcadores de lista */
   padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 2rem; /* Adiciona espaçamento entre os links */
+  margin: 0;
 }
 
 .footer-nav li {
-  font-size: 1rem;
+  display: block; /* Garante que os itens da lista sejam exibidos como blocos */
+  margin-bottom: 10px; /* Adiciona um espaço entre os links */
 }
 
 .footer-nav a {
-  color: #D3D3D3;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 500;
+  text-decoration: none; /* Remove o sublinhado padrão dos links */
+  color: #ffffff; /* Define a cor do texto dos links */
 }
 
 .footer-nav a:hover {
-  color: #D90000;
+  text-decoration: underline; /* Adiciona um sublinhado ao passar o mouse */
 }
 
 /* Responsividade */

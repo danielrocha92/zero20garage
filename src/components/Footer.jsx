@@ -21,6 +21,7 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer-content">
+      <div className="footer-content-wrapper">
         {/* Seção Formas de Pagamento */}
         <div className="footer-card">
           <span className="title">Formas de Pagamento:</span>
@@ -69,13 +70,14 @@ function Footer() {
         <ul>
           <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
           <li><a href="/servicos">Serviços</a></li>
-          <li><a href="/sobre-nos">Sobre Nós</a></li>
+          <li><a href="/sobre">Sobre Nós</a></li>
           <li><a href="/contato">Contato</a></li>
         </ul>
       </div>
 
       <div className="footer-card">
         <span className="title">© 2025 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™ Todos os direitos reservados.</span>
+        </div>
       </div>
     </footer>
   );
