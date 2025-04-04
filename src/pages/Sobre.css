@@ -116,7 +116,20 @@
   color: #fff;
 }
 
+/* Sobre.css */
+/* ... outros estilos ... */
+.team-image-container {
+  display: flex; /* Para controlar o alinhamento da imagem dentro do container */
+  justify-content: center; /* Centraliza a imagem horizontalmente */
+  margin-top: 20px; /* Adiciona um espaço acima da imagem */
+}
 
+.team-image {
+  max-width: 80%; /* Define uma largura máxima para a imagem */
+  height: auto; /* Mantém a proporção da imagem */
+  border-radius: 8px; /* Adiciona bordas arredondadas (opcional) */
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave (opcional) */
+}
 
 /* Responsividade */
 @media (max-width: 768px) {

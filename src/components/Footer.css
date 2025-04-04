@@ -10,7 +10,7 @@
 }
 
 .footer-content-wrapper {
-  display: flex; /* Habilita o Flexbox */
+  display: inline-flex; /* Habilita o Flexbox */
   justify-content: space-between; /* Distribui o espaço entre os elementos */
   align-items: center; /* Alinha os itens verticalmente ao centro */
   width: 100%; /* Garante que o contêiner ocupe toda a largura */
@@ -83,7 +83,7 @@
 
 /* Estilos para a nova seção footer-nav */
 .footer-nav {
-  padding: 2rem 0;
+  padding: 2rem 1rem;
 }
 
 .footer-nav ul {
@@ -132,6 +132,8 @@
   .footer-nav ul {
     flex-direction: column;
     gap: 1rem;
+    display: block;
+    unicode-bidi: isolate;
   }
 
   .footer-content {

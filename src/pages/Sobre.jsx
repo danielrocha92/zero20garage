@@ -3,6 +3,8 @@ import React from 'react';
 import './Sobre.css';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
+import teamImage from '../assets/images/team.jpg'; // Importe a imagem da sua equipe
+import teamImage2 from '../assets/images/team2.jpg'; // Importe a imagem da sua equipe
 
 function Sobre() {
   const messages = [
@@ -33,49 +35,54 @@ function Sobre() {
               <p>Desde o início, investimos em equipamentos de última geração e na capacitação de nossa equipe, garantindo que cada motor receba o cuidado e a atenção que merece.</p>
             </div>
           </div>
-        
-            <div className="highlights-grid">
-              <div className="highlight-item">
-                <h3>Nossa Missão</h3>
-                  <p>
-                    Oferecer serviços de retífica e mecânica automotiva com qualidade, confiança e excelência, superando as expectativas de nossos clientes.
-                  </p>
-              </div>
 
-              <div className="highlight-item">
-                <h3>Nossa Visão</h3>
+          <div className="highlights-grid">
+            <div className="highlight-item">
+              <h3>Nossa Missão</h3>
                 <p>
-                  Ser referência no mercado de retífica e mecânica automotiva, reconhecida pela qualidade dos serviços, inovação e compromisso com a satisfação dos clientes.
+                  Oferecer serviços de retífica e mecânica automotiva com qualidade, confiança e excelência, superando as expectativas de nossos clientes.
                 </p>
-              </div>
-
-              <div className="highlight-item">
-                <h3>Nossos Valores</h3>
-                  <ul>
-                    <p>Qualidade: Compromisso com a excelência em cada serviço.</p>
-                    <p>Confiança: Relações transparentes e honestas com nossos clientes.</p>
-                    <p>Inovação: Busca constante por novas tecnologias e soluções.</p>
-                    <p>Compromisso: Dedicação em atender e superar as expectativas dos clientes.</p>
-                  </ul>
-              </div>
             </div>
+
+            <div className="highlight-item">
+              <h3>Nossa Visão</h3>
+              <p>
+                Ser referência no mercado de retífica e mecânica automotiva, reconhecida pela qualidade dos serviços, inovação e compromisso com a satisfação dos clientes.
+              </p>
+            </div>
+
+            <div className="highlight-item">
+              <h3>Nossos Valores</h3>
+                <ul>
+                  <p>Qualidade: Compromisso com a excelência em cada serviço.</p>
+                  <p>Confiança: Relações transparentes e honestas com nossos clientes.</p>
+                  <p>Inovação: Busca constante por novas tecnologias e soluções.</p>
+                  <p>Compromisso: Dedicação em atender e superar as expectativas dos clientes.</p>
+                </ul>
+            </div>
+          </div>
         </section>
 
         <section className="sobre-section">
           <div className='sobre-section'>
             <section className="highlights-item">
-                <div className="highlight-item">
-                  <h2>Nossa Equipe</h2>
-                  <div className="highlights-grid">
-                    <div className="highlight-item">
-                      <p>Contamos com uma equipe de profissionais altamente qualificados e apaixonados por motores. Nossos técnicos são certificados e possuem vasta experiência em retífica e mecânica automotiva.</p>
-                    </div>
-                    <div className="highlight-item">
-                      <p>Estamos sempre atualizados com as últimas tendências e tecnologias do mercado, garantindo que nossos clientes recebam o melhor serviço possível.</p>
-                    </div>
+              <div className="highlight-item">
+                <h2>Nossa Equipe</h2>
+                <div className="highlights-grid">
+                  <div className="highlight-item">
+                    <p>Contamos com uma equipe de profissionais altamente qualificados e apaixonados por motores. Nossos técnicos são certificados e possuem vasta experiência em retífica e mecânica automotiva.</p>
+                  </div>
+                  <div className="highlight-item">
+                    <p>Estamos sempre atualizados com as últimas tendências e tecnologias do mercado, garantindo que nossos clientes recebam o melhor serviço possível.</p>
+                  </div>
                 </div>
+                <div className="team-image-container"> {/* Container para a imagem */}
+                  <img src={teamImage} alt="Nossa Equipe" className="team-image" />
                 </div>
-
+                <div className="team-image-container"> {/* Container para a imagem */}
+                  <img src={teamImage2} alt="Nossa Equipe" className="team-image" />
+                </div>
+              </div>
             </section>
           </div>
         </section>
@@ -113,31 +120,31 @@ function Sobre() {
                             <p>"Serviço excelente! Recomendo a Zero20 Garage para todos que precisam de retífica de motores."</p>
                             <strong>- João Silva</strong>
                           </div>
-                          </div>
+                        </div>
 
-                            <div className="highlights-grid">
-                            <div className="testimonial-item">
-                              <p>"Atendimento nota 10! A equipe é muito profissional e prestativa."</p>
-                              <strong>- Maria Oliveira</strong>
-                            </div>
+                        <div className="highlights-grid">
+                          <div className="testimonial-item">
+                            <p>"Atendimento nota 10! A equipe é muito profissional e prestativa."</p>
+                            <strong>- Maria Oliveira</strong>
                           </div>
                         </div>
-                    </div>
-                </div>
-              </section>
+                      </div>
+                  </div>
+              </div>
+            </section>
         </div>
       </section>
 
-        <section className="sobre-section">
-          <div className='sobre-section'>
-            <div className='highlight-item'>
-              <h2>Entre em Contato</h2>
-              <p>Estamos prontos para atender você! Entre em contato conosco para agendar um serviço ou tirar dúvidas.</p>
-              <a href="/contato" className="cta-button">Fale Conosco</a>
-            </div>
+      <section className="sobre-section">
+        <div className='sobre-section'>
+          <div className='highlight-item'>
+            <h2>Entre em Contato</h2>
+            <p>Estamos prontos para atender você! Entre em contato conosco para agendar um serviço ou tirar dúvidas.</p>
+            <a href="/contato" className="cta-button">Fale Conosco</a>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+    </div>
     </div>
   );
 }

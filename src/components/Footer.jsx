@@ -22,6 +22,17 @@ function Footer() {
     <footer className="footer">
       <div className="footer-content">
       <div className="footer-content-wrapper">
+        
+      {/* Seção de navegação */}
+      <div className="footer-nav">
+        <ul>
+          <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
+          <li><a href="/servicos">Serviços</a></li>
+          <li><a href="/sobre">Sobre Nós</a></li>
+          <li><a href="/contato">Contato</a></li>
+        </ul>
+      </div>
+
         {/* Seção Formas de Pagamento */}
         <div className="footer-card">
           <span className="title">Formas de Pagamento:</span>
@@ -63,16 +74,6 @@ function Footer() {
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Seção de navegação */}
-      <div className="footer-nav">
-        <ul>
-          <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
-          <li><a href="/servicos">Serviços</a></li>
-          <li><a href="/sobre">Sobre Nós</a></li>
-          <li><a href="/contato">Contato</a></li>
-        </ul>
       </div>
 
       <div className="footer-card">
