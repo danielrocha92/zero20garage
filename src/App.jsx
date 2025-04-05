@@ -16,6 +16,7 @@ import Td from './pages/Td';
 import Cp from './pages/Cp';
 import Orcamento from './pages/Orcamento';
 import Blog from './pages/Blog';
+import NotFound from './pages/NotFound'; // Importe o componente NotFound
 import './App.css';
 import './GlobalStyles.css';
 
@@ -46,6 +47,8 @@ function App() {
           <Route path="/cp" element={<Cp />} />
           <Route path="/orcamento" element={<Orcamento />} />
           <Route path="/blog" element={<Blog />} />
+          {/* Rota para a página 404 - deve ser a última rota */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <ToTop />
       </Layout>
