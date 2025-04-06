@@ -5,6 +5,18 @@ import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
 import teamImage from '../assets/images/team.jpg'; // Importe a imagem da sua equipe
 import teamImage2 from '../assets/images/team2.jpg'; // Importe a imagem da sua equipe
+import Slider from 'react-slick'; // Importa o Slider do react-slick
+
+// Configuração do carrossel
+const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true, // Habilita o autoplay
+  autoplaySpeed: 3000, // Tempo entre cada slide
+};
 
 function Sobre() {
   const messages = [
@@ -76,17 +88,23 @@ function Sobre() {
                     <p>Estamos sempre atualizados com as últimas tendências e tecnologias do mercado, garantindo que nossos clientes recebam o melhor serviço possível.</p>
                   </div>
                 </div>
-                <div className="team-image-container"> {/* Container para a imagem */}
-                  <img src={teamImage} alt="Nossa Equipe" className="team-image" />
-                </div>
-                <div className="team-image-container"> {/* Container para a imagem */}
-                  <img src={teamImage2} alt="Nossa Equipe" className="team-image" />
-                </div>
+
+                {/* Carrossel de imagens */}
+                <Slider {...settings}>
+                  <div className="team-image-container">
+                    <img src={teamImage} alt="Nossa Equipe" className="team-image" />
+                  </div>
+                  <div className="team-image-container">
+                    <img src={teamImage2} alt="Nossa Equipe" className="team-image" />
+                  </div>
+                  {/* Adicione mais imagens conforme necessário */}
+                </Slider>
               </div>
             </section>
           </div>
         </section>
 
+        {/* O restante da seção */}
         <section className="sobre-section">
           <div className='sobre-section'>
             <section className="highlights-item">
@@ -107,6 +125,7 @@ function Sobre() {
           </div>
         </section>
 
+        {/* Seção de Depoimentos */}
         <section className="sobre-section">
           <div className='sobre-section'>
             <section className="highlights-item">

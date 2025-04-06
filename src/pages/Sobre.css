@@ -4,6 +4,9 @@
   padding: 0rem 0;
 }
 
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
 .container {
   max-width: 1500px;
   margin: 0 auto;
@@ -27,6 +30,32 @@
 .sobre-section p {
   font-size: 1.1rem;
   color: #ffffff;
+}
+
+.team-image-container {
+  display: flex; /* Para controlar o alinhamento da imagem dentro do container */
+  justify-content: center; /* Centraliza a imagem horizontalmente */
+  margin-top: 20px; /* Adiciona um espaço acima da imagem */
+}
+
+.team-image {
+  max-width: 30%; /* Reduz a largura máxima para o carrossel */
+  height: auto; /* Mantém a proporção da imagem */
+  border-radius: 8px; /* Adiciona bordas arredondadas (opcional) */
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave (opcional) */
+  margin: 0 auto; /* Centraliza as imagens dentro do container */
+}
+
+/* Ajustes específicos para o carrossel */
+.slick-slide {
+  display: flex;
+  justify-content: center; /* Centraliza o carrossel */
+}
+
+
+.slick-prev:hover, .slick-next:hover {
+  background-color: #e23838; /* Cor do botão de navegação ao passar o mouse */
+  border-radius: 50%;
 }
 
 .contact {
@@ -125,7 +154,7 @@
 }
 
 .team-image {
-  max-width: 80%; /* Define uma largura máxima para a imagem */
+  max-width: 100%; /* Define uma largura máxima para a imagem */
   height: auto; /* Mantém a proporção da imagem */
   border-radius: 8px; /* Adiciona bordas arredondadas (opcional) */
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave (opcional) */
@@ -143,5 +172,9 @@
 
   .sobre-section p {
     font-size: 1rem;
+  }
+
+  .team-image {
+    max-width: 70%; /* Ajusta a largura máxima das imagens em telas menores */
   }
 }
