@@ -177,6 +177,29 @@
   outline-offset: 2px; /* Evita que o contorno se sobreponha ao botão */
 }
 
+
+/* Seção de contato */
+.contact-info {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #707070 ;
+    border-radius: 5px;
+    border: 1px solid #530000;
+}
+
+.contact-info h2 {
+    border-bottom-color: #ddd;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+}
+
+.contact-info strong {
+    font-weight: bold;
+    color: #333;
+}
+
 /* Home.css */
 /* Estilos existentes */
 

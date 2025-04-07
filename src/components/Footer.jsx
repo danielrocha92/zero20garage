@@ -26,7 +26,7 @@ function Footer() {
       {/* Seção de navegação */}
       <div className="footer-nav">
         <ul>
-          <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
+          <li><a href="/politica">Política de Privacidade</a></li>
           <li><a href="/servicos">Serviços</a></li>
           <li><a href="/sobre">Sobre Nós</a></li>
           <li><a href="/contato">Contato</a></li>
