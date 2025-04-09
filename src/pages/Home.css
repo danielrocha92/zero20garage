@@ -14,7 +14,7 @@
     margin: 0 auto;
     padding: 2rem;
     background-color: #353535;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(247, 247, 247, 0.1);
     border-radius: 8px;
   }
 
@@ -52,101 +52,6 @@
     line-height: 1.6;
     margin-bottom: 1rem;
   }
-  /* Highlights Section */
-.highlights {
-  padding: 2rem;
-  background-color: #D3D3D3;
-  text-align: center;
-}
-
-.highlights h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  color: #D3D3D3;
-}
-
-.highlights-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  padding: 0.8rem 1.5rem;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor */
-  color: #c50404;
-  transform: scale(1.05);
-}
-
-.highlight-item {
-  flex: 1 1 calc(33.333% - 2rem);
-}
-
-.highlight-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
-}
-
-.highlight-item h1 {
-  font-size: 4rem;
-  color: #ffffff;
-  margin-bottom: 0.5rem;
-}
-
-.highlight-item h2 {
-  font-size: 3rem;
-  color: #ffffff;
-  margin-bottom: 0.5rem;
-}
-
-.highlight-item h3 {
-  font-size: 1.5rem;
-  color: #c50404;
-  margin-bottom: 0.5rem;
-}
-
-.highlight-item p {
-  font-size: 1rem;
-  color: #fff;
-}
-
-/* Testimonials Section */
-.testimonials {
-  padding: 2rem;
-  background-color: #D3D3D3;
-  color: #000000;
-  text-align: center;
-  border-radius: 8px;
-}
-
-.testimonials h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: #D3D3D3;
-}
-
-.testimonial-item {
-  background-color: hsl(0, 80%, 52%);
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  color: #D3D3D3;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 1rem auto;
-  max-width: 600px;
-  font-style: italic;
-}
-
-.testimonial-item p {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.testimonial-item strong {
-  font-size: 1rem;
-  display: block;
-  margin-top: 0.5rem;
-  color: #D3D3D3;
-}
 
 .cta-button {
   display: inline-block;
@@ -176,7 +81,6 @@
   outline: 2px solid #530000; /*Adiciona um contorno azul ao focar ou clicar */
   outline-offset: 2px; /* Evita que o contorno se sobreponha ao botão */
 }
-
 
 /* Seção de contato */
 .contact-info {

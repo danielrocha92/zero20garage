@@ -1,5 +1,6 @@
 import React from 'react';
 import './Home.css' // Importa o arquivo global de estilos
+import '../GlobalStyles.css'; // Importa o arquivo de estilos específico para a página Home
 import GoogleReviews from '../components/GoogleReviews';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
