@@ -235,10 +235,6 @@ body {
     margin: auto;
   }
 
-  .section h2 {
-    font-size: 1.5rem; /* Tamanho base menor para smartphones */
-  }
-
   .container {
     padding: 1rem;
   }
@@ -246,16 +242,15 @@ body {
   /* Ajuste de seções */
   .section {
     padding: 0.5rem;
-    font-size: 1.5rem; /* Tamanho base menor para smartphones */
   }
-
+  
   .section h2 {
-    font-size: 0.5rem;
+    font-size: 1.2rem;
   }
-
+  
   .section p {
-    font-size: 0.5rem;
-  }
+    font-size: 0.9rem;
+  }  
 
   /* Ajuste de formulários */
   .form-group {
