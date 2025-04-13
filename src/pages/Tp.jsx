@@ -22,9 +22,9 @@ function Tp() {
       <WhatsAppButton />
 
       <div className="container">
-      <section className="tp-info-section">
-          <div className='tp-info-section'>
-          <div className='tp-item'>
+      <section className="section">
+          <div className='section'>
+          <div className='item'>
           <h2>Troca de Peças com Qualidade e Precisão para o Seu Motor</h2>
           <p>Utilizamos apenas peças de alta qualidade, garantindo o desempenho e a durabilidade do seu motor. Nossa equipe especializada realiza a substituição com precisão, seguindo rigorosos padrões de qualidade.</p>
 

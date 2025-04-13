@@ -22,7 +22,6 @@
   opacity: 0.5
   z-index 1000;
   font-family: 'Nunito', sans-serif; /* Aplica a fonte Nunito */
-
 }
 
 .header::before {
@@ -63,6 +62,18 @@
   top: 0;
   left: 0;
   opacity: 0.7;
+}
+
+.fade {
+  transition: opacity 0.5s ease-in-out; /* Ajuste a duração da transição conforme necessário */
+}
+
+.fade-in {
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 0;
 }
 
 @keyframes fadeIn {

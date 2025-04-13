@@ -9,36 +9,11 @@
     top: 0;
   }
 
-  .container {
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: #353535;
-    box-shadow: 0 4px 6px rgba(247, 247, 247, 0.1);
-    border-radius: 8px;
-  }
-
-  .home-section h2 {
+  .home h2 {
     font-size: 2rem;
     color: #ea1a1a;
     margin-bottom: 1.5rem;
     text-align: center;
-  }
-
-  .home-info-section {
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-
-  .home-info-section h2 {
-    font-size: 2rem;
-    color: #ffffff;
-    margin-bottom: 1rem;
-  }
-  
-  .home-info-section p {
-    font-size: 1.1rem;
-    color: #ffffff;
   }
 
   .home h1 {
@@ -52,108 +27,3 @@
     line-height: 1.6;
     margin-bottom: 1rem;
   }
-
-.cta-button {
-  display: inline-block;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  color: #fff;
-  background-color: #c50404;
-  border: none;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  cursor: pointer; /* Adiciona um cursor de ponteiro */
-  }
-
-  .cta-button:hover {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor */
-    background-color: rgba(54, 24, 24, 0.5);
-    color: #c50404;
-    transform: scale(1.05);
-    }
-
-    .cta-button:focus,
-.button:active {
-  outline: 2px solid #530000; /*Adiciona um contorno azul ao focar ou clicar */
-  outline-offset: 2px; /* Evita que o contorno se sobreponha ao botão */
-}
-
-/* Seção de contato */
-.contact-info {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #707070 ;
-    border-radius: 5px;
-    border: 1px solid #530000;
-}
-
-.contact-info h2 {
-    border-bottom-color: #ddd;
-}
-
-.contact-info p {
-    margin-bottom: 10px;
-}
-
-.contact-info strong {
-    font-weight: bold;
-    color: #333;
-}
-
-/* Home.css */
-/* Estilos existentes */
-
-/* Media Query para telas menores (dispositivos móveis) */
-@media (max-width: 768px) {
-  .home-section h2 {
-    font-size: 1.5rem; /* Reduz o tamanho do título */
-  }
-
-  .home h1 {
-    font-size: 3rem; /* Reduz o tamanho do título principal */
-  }
-
-  .home p {
-    font-size: 0.9rem; /* Reduz o tamanho do parágrafo */
-  }
-
-  .highlights h2 {
-    font-size: 2rem; /* Reduz o tamanho do título da seção de destaques */
-  }
-
-  .highlight-item h1 {
-    font-size: 3rem; /* Reduz o tamanho do título do item de destaque */
-  }
-
-  .highlight-item h2 {
-    font-size: 1.8rem; /* Reduz o tamanho do subtítulo do item de destaque */
-  }
-
-  .highlight-item h3 {
-    font-size: 1.2rem; /* Reduz o tamanho do título 3 do item de destaque */
-  }
-
-  .highlight-item p {
-    font-size: 0.8rem; /* Reduz o tamanho do parágrafo do item de destaque */
-  }
-
-  .testimonials h2 {
-    font-size: 1.8rem; /* Reduz o tamanho do título da seção de depoimentos */
-  }
-
-  .testimonial-item p {
-    font-size: 1.2rem; /* Reduz o tamanho do parágrafo do depoimento */
-  }
-
-  .testimonial-item strong {
-    font-size: 0.9rem; /* Reduz o tamanho do nome do autor do depoimento */
-  }
-
-  .cta-button {
-    font-size: 0.9rem; /* Reduz o tamanho do texto do botão */
-  }
-}

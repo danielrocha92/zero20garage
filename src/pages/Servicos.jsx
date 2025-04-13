@@ -24,9 +24,9 @@ const Servicos = () => {
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
       <div className="container">
-        <section className="services-info-section">
-          <div className='services-info-section'>
-          <div className='service-item'>
+        <section className="section">
+          <div className='section'>
+          <div className='highlight-item'>
             <h2>Retífica de Motores</h2>
                 <p>Serviço completo de retífica de motores para garantir o melhor desempenho do seu veículo.</p>
             <div className="service-grid">

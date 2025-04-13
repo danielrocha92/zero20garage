@@ -1,6 +1,5 @@
 import React from 'react';
 import './Home.css' // Importa o arquivo global de estilos
-import '../GlobalStyles.css'; // Importa o arquivo de estilos específico para a página Home
 import GoogleReviews from '../components/GoogleReviews';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
@@ -27,8 +26,8 @@ function Home() {
       <WhatsAppButton />
           {/* Card padrão Section */}
           <div className="container">
-            <section className="home-info-section">
-              <div className='home-info-section'>
+            <section className="section">
+              <div className='section'>
                 <div className='highlight-item'>
                 <h1>Zero 20 Garage</h1>
                 <h2>Excelência em Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
@@ -39,8 +38,8 @@ function Home() {
             </section>
 
           {/* Destaques */}
-          <section className="home-info-section">
-              <div className='home-info-section'>
+          <section className="section">
+              <div className='section'>
                 <div className='highlight-item'>
                   <h2>Por que Escolher a Zero20 Garage?</h2>
                   <div className="highlights-grid">
@@ -62,8 +61,8 @@ function Home() {
           </section>
 
             {/* Serviços Destacados */}
-            <section className="home-info-section">
-              <div className='home-info-section'>
+            <section className="section">
+              <div className='section'>
                 <div className='highlight-item'>
                       <h2>Retífica de Motores</h2>
                       <p>Recuperação completa do motor com precisão e qualidade.</p>
@@ -84,8 +83,8 @@ function Home() {
           {/* Conteúdo adicional */}
     
           {/* Depoimentos */}
-          <section className="home-info-section">
-            <div className='home-info-section'>
+          <section className="section">
+            <div className='section'>
               <div className='highlight-item'>
                 <h2>O que Nossos Clientes Dizem</h2>
                 {/* Avaliações Google Maps */}
@@ -103,7 +102,7 @@ function Home() {
           </section>
 
       {/* home */}
-      <div className='home-section'>
+      <div className='home'>
             <div className="highlight-item">
               <div className="home-info">
                 <h2>Estamos Aqui para Ajudar</h2>

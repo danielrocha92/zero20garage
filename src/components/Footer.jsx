@@ -18,6 +18,13 @@ function Footer() {
     { nome: '', link: 'https://www.instagram.com/zero20garage', icone: <FaInstagram /> },
   ];
 
+  const menuToggle = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('.menu');
+
+    menuToggle.addEventListener('click', () => {
+    menu.classList.toggle('show');
+});
+
   return (
     <footer className="footer">
       <div className="footer-content">

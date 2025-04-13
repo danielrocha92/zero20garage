@@ -4,15 +4,6 @@
   padding: 0rem 0;
 }
 
-.container {
-  max-width: 1500px;
-  margin: 0 auto;
-  padding: 2rem;
-  background-color: #353535;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
-
 .orcamento-section {
   margin-bottom: 2rem;
   text-align: center;
@@ -68,10 +59,14 @@
   font-size: 1.5rem;
   transition: border-color 0.3s ease;
   color: #353535;
+  max-height: 100%;
+  margin-bottom: 1rem;
+  cursor: pointer; /* Adiciona um cursor de ponteiro */
 }
 
 option:focus{
   border-color: #c50404;
+  background-color: #c50404;
   outline: none;
 }
 
@@ -80,7 +75,7 @@ option:focus{
   text-decoration: underline;
 }
 
-.formulario-section h2 {
+.section h2 {
   font-size: 2rem;
   color: #ffffff;
   margin-bottom: 1.5rem;
