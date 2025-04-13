@@ -2,27 +2,23 @@
 
 /* Estilos gerais */
 .contato-page {
-  padding: 2rem;
-  text-align: center;
+  background-color: #2e2f31;
+  padding: 0rem 0;
+  color: #fff;
+  bottom: 0;
+  left: 0;
+  opacity: 1.5;
+  right: 0;
+  top: 0;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-/* Seção de informações */
-.info-section {
-  margin-bottom: 2rem;
-}
-
-.info-section h2 {
+.contato-section h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
+  max-width: 800px;
 }
 
-.info-section p {
+.contato-section p {
   font-size: 1rem;
   margin-bottom: 1rem;
 }
@@ -115,7 +111,7 @@
     padding: 1rem;
   }
 
-  .info-section h2,
+  .contato-section h2,
   .formulario-section h2 {
     font-size: 1.5rem;
   }
@@ -144,7 +140,7 @@
 }
 
 @media (max-width: 480px) {
-  .info-section h2,
+  .contato-section h2,
   .formulario-section h2 {
     font-size: 1.2rem;
   }

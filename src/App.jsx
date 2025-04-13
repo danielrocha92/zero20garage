@@ -23,6 +23,7 @@ import FAQ from './pages/FAQ';
 import Atendimento from './pages/Atendimento';
 import TrabalheConosco from './pages/TrabalheConosco';
 import MapaDoSite from './pages/MapaDoSite';
+import Termos from './pages/Termos';
 import './App.css';
 import './GlobalStyles.css';
 
@@ -48,6 +49,8 @@ function App() {
           <Route path="/atendimento" element={<Atendimento />} />
           <Route path="/trabalhe-conosco" element={<TrabalheConosco />} />
           <Route path="/mapa-do-site" element={<MapaDoSite />} />
+          <Route path="/termos" element={<Termos />} />
+          
           {/* Adicione outras rotas aqui conforme necessário */}
           {/* Rota para a página de serviços - exemplo de rota aninhada */}
       

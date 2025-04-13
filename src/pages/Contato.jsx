@@ -62,7 +62,7 @@ function Contato() {
       <div className="container">
         <section className="info-section">
           <div className='info-section'>
-            <div className='highlight-item'>
+            <div className='contato-item'>
               <h2>Entre em Contato</h2>
               <p>Estamos aqui para ajudar. Entre em contato conosco pelos canais abaixo:</p>
               <ul className="contact-list">
@@ -95,7 +95,7 @@ function Contato() {
 
         {/* Google Maps Section */}
         <section className="map-section">
-          <div className='highlight-item'>
+          <div className='contato-item'>
             <h2>Localização</h2>
             <div className="google-map">
               <iframe
@@ -112,8 +112,8 @@ function Contato() {
           </div>
         </section>
 
-        <section className="formulario-section">
-          <div className='highlight-item'>
+        <section className="section">
+          <div className='contato-item'>
             <h2>Envie uma Mensagem</h2>
             <form onSubmit={handleSubmit} className="contato-form">
               <div className="form-group">

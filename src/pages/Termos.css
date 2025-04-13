@@ -1,0 +1,86 @@
+/* TermsOfUse.css */
+body {
+  font-family: sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+.terms-of-use-container {
+  max-width: 960px;
+  margin: 15rem auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .terms-of-use-title {
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .terms-of-use-subtitle {
+    font-size: 1.5em;
+    color: #34495e;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+  }
+  
+  .terms-of-use-paragraph {
+    margin-bottom: 15px;
+  }
+  
+  .terms-of-use-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .terms-of-use-link:hover {
+    text-decoration: underline;
+  }
+  
+  .terms-of-use-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .terms-of-use-list li {
+    margin-bottom: 5px;
+  }
+  
+  .prohibited-list {
+    color: #c0392b;
+  }
+  
+  .prohibited-paragraph {
+    color: #c0392b;
+    font-weight: bold;
+  }
+  
+  .terms-of-use-address {
+    margin-top: 20px;
+    font-style: normal;
+  }
+  
+  .acknowledgment {
+    margin-top: 30px;
+    font-style: italic;
+    color: #777;
+  }
+  
+  .terms-of-use-last-updated {
+    margin-top: 10px;
+    color: #999;
+    font-size: 0.9em;
+    text-align: right;
+  }
+  
+  /* Estilos adicionais podem ser adicionados conforme a necessidade */

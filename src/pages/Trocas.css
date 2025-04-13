@@ -1,31 +1,87 @@
-/* Estilos gerais */
-.trocas-page {
+/* RefundPolicy.css */
+body {
     font-family: sans-serif;
     line-height: 1.6;
     color: #333;
     background-color: #f4f4f4;
+    margin: 0;
     padding: 20px;
 }
-
-/* Container principal */
-.trocas-container {
+.refund-policy-container {
     max-width: 960px;
-    margin: 2rem auto;
+    margin: 15rem auto;
     background-color: #fff;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Título principal */
-.trocas-page h1 {
+  }
+  
+  .refund-policy-title {
+    font-size: 2em;
     color: #2c3e50;
+    margin-bottom: 20px;
     text-align: center;
-    margin-bottom: 30px;
-}
-
-/* Parágrafos */
-.trocas-page p {
+  }
+  
+  .refund-policy-subtitle {
+    font-size: 1.5em;
+    color: #34495e;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+  }
+  
+  .refund-policy-paragraph {
     margin-bottom: 15px;
-    color: #555;
-}
+  }
+  
+  .refund-policy-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .refund-policy-list li {
+    margin-bottom: 5px;
+  }
+  
+  .refund-policy-ordered-list {
+    list-style-type: decimal;
+    padding-left: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .refund-policy-ordered-list li {
+    margin-bottom: 10px;
+  }
+  
+  .inner-list {
+    list-style-type: circle;
+    margin-top: 10px;
+  }
+  
+  .prohibited-list {
+    color: #c0392b;
+  }
+  
+  .contact-info address {
+    margin-top: 15px;
+    font-style: normal;
+    line-height: 1.8;
+  }
+  
+  .refund-policy-last-updated {
+    margin-top: 20px;
+    color: #999;
+    font-size: 0.9em;
+    text-align: right;
+  }
+  
+  .acknowledgment {
+    margin-top: 30px;
+    font-style: italic;
+    color: #777;
+  }
+  
+  /* Estilos adicionais podem ser adicionados conforme a necessidade */

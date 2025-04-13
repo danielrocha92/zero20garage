@@ -1,7 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Politica.css'; // Importe o arquivo CSS para estilos específicos
 
 const Privacidade = () => {
+
+  const [lastUpdated, setLastUpdated] = useState('');
+  
+      // Função para atualizar a data
+      const updateLastUpdated = () => {
+        const now = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        setLastUpdated(now.toLocaleDateString('pt-BR', options));
+      };
+    
+      // UseEffect para definir a data inicial ao montar o componente
+      useEffect(() => {
+        updateLastUpdated();
+      }, []); // O array de dependências vazio garante que isso rode apenas uma vez na montagem
+    
+      // Função simulada para quando o conteúdo da página é atualizado
+      const handleContentUpdate = () => {
+        // Aqui você teria a lógica real para verificar se o conteúdo mudou
+        // Por exemplo, comparar o conteúdo atual com uma versão anterior
+        console.log('Conteúdo da página foi atualizado!');
+        updateLastUpdated();
+        // Você pode adicionar aqui qualquer outra lógica necessária após a atualização
+      };
+
+      
   return (
     <div className="privacy-policy-container">
       <h1>Política de Privacidade - ZERO 20 GARAGE™</h1>
@@ -70,16 +95,29 @@ const Privacidade = () => {
 
       <h2>10. Contato:</h2>
       <p>Se você tiver alguma dúvida, preocupação ou solicitação em relação a esta Política de Privacidade ou ao tratamento de suas informações pessoais, entre em contato conosco através das seguintes informações:</p>
-      <address>
-        <b>ZERO 20 GARAGE™</b><br />
-        Avenida Laura Gomes Hannickel, 153 - CAPOAVINHA, Mairiporã - SP, 07629-136<br />
-        <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a><br />
-        <a href="tel:+5511941097471">(11) 94109-7471</a>
-      </address>
+      <section className="terms-of-use-section">
+        <h3 className="terms-of-use-subtitle">11. Contato</h3>
+        <p className="terms-of-use-paragraph">
+          Se você tiver alguma dúvida ou preocupação sobre estes Termos de Uso, entre em contato conosco através das seguintes informações:
+        </p>
+        <address className="terms-of-use-address">
+          <strong>ZER0 20 GARAGE™</strong><br />
+          <a href='https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.326345,-46.5770842,17z/data=!3m1!4b1!4m6!3m5!1s0x94ceede375ca12c9:0xa22173d27f744745!8m2!3d-23.3263499!4d-46.5745093!16s%2Fg%2F11sgrc1ckt?authuser=0&entry=ttu&g_ep=EgoyMDI1MDQwOS4wIKXMDSoASAFQAw%3D%3D'target='blank'>Avenida Laura Gomes Hannickel, 153 - Capoavinha, Mairiporã - SP</a><br />
+          <a href="tel:+5511941097471">(11) 94109-7471</a><br />
+          <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a>
+        </address>
+      </section>
 
-      <p><b>Data da Última Atualização:</b> 07/04/2025</p>
+      <p className="terms-of-use-paragraph acknowledgment">
+        Ao utilizar nosso site, você reconhece que leu, entendeu e concorda com todos os termos e condições apresentados neste documento.
+      </p>
+      {/* Botão simulado para acionar a atualização do conteúdo */}
+      <p className="terms-of-use-last-updated">
+        Data da última atualização: {lastUpdated}
+      </p>
 
-      <p>Ao usar nosso website, você reconhece que leu e compreendeu esta Política de Privacidade e concorda com seus termos.</p>
+      {/* Botão simulado para acionar a atualização do conteúdo */}
+      <button onClick={handleContentUpdate}>.</button>
     </div>
   );
 };
