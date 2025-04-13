@@ -1,6 +1,6 @@
 // App.jsx
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'font-awesome/css/font-awesome.min.css';
 
 import Layout from './components/Layout';
@@ -18,23 +18,17 @@ import Orcamento from './pages/Orcamento';
 import Blog from './pages/Blog';
 import Politica from './pages/Politica';
 import NotFound from './pages/NotFound'; // Importe o componente NotFound
+import Trocas from './pages/Trocas';
+import FAQ from './pages/FAQ';
+import Atendimento from './pages/Atendimento';
+import TrabalheConosco from './pages/TrabalheConosco';
+import MapaDoSite from './pages/MapaDoSite';
 import './App.css';
 import './GlobalStyles.css';
-
-function ScrollToTop() {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  return null;
-}
 
 function App() {
   return (
     <Router>
-      <ScrollToTop />
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -49,6 +43,14 @@ function App() {
           <Route path="/orcamento" element={<Orcamento />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/politica" element={<Politica />} />
+          <Route path="/trocas" element={<Trocas />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/atendimento" element={<Atendimento />} />
+          <Route path="/trabalhe-conosco" element={<TrabalheConosco />} />
+          <Route path="/mapa-do-site" element={<MapaDoSite />} />
+          {/* Adicione outras rotas aqui conforme necessário */}
+          {/* Rota para a página de serviços - exemplo de rota aninhada */}
+      
           {/* Rota para a página 404 - deve ser a última rota */}
           <Route path="*" element={<NotFound />} />
         </Routes>

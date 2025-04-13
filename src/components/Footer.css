@@ -9,7 +9,9 @@
   box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
   position: relative; /* Para o efeito de sombra */
   z-index: 1; /* Para garantir que a sombra fique acima de outros elementos */
-  display: flex; /* Habilita o Flexbox */
+  display: flex  ;
+  flex-direction: column-reverse;
+  align-items: center;
 }
 
 .footer-content-wrapper {
@@ -149,7 +151,7 @@
   }
 
   .footer-content-wrapper {
-    flex-direction: column; /* Altera a direção para coluna em telas menores */
+    flex-direction: row; /* Altera a direção para coluna em telas menores */
     justify-content: flex-start; /* Altera o alinhamento para o início */
     align-items: stretch; /* Altera o alinhamento para esticar os elementos */
     gap: 1rem; /* Adiciona um espaçamento entre os elementos */
@@ -171,13 +173,31 @@
     font-size: 2rem;
   }
 
-  .footer-nav ul {
+  .footer-nav {
+    display: flex; /* Usamos flex para melhor controle */
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem; /* Adiciona padding para melhor espaçamento */
+}
+
+.footer-nav ul {
+    list-style: none; /* Remove marcadores de lista */
+    padding: 0;
+    margin: 0;
     flex-direction: column;
     gap: 0.5rem;
     display: block;
     unicode-bidi: isolate;
-  }
+}
 
+.footer-nav li {
+    margin-bottom: 0.5rem; /* Adiciona margem inferior entre os itens */
+}
+
+.footer-nav a {
+    text-decoration: none;
+    color: #ffffff; /* Ajuste a cor conforme necessário */
+}
   .footer-content {
     flex-direction: column;
     gap: 1rem;

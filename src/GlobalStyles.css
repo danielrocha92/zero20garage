@@ -55,6 +55,17 @@ body {
     border-radius: 8px;
   }
 
+  .page {
+    background-color: #2e2f31;
+    padding: 0rem 0;
+    color: #fff;
+    bottom: 0;
+    left: 0;
+    opacity: 1.5;
+    right: 0;
+    top: 0;
+  }
+  
 /* Seções gerais */
 .section {
   padding: 2rem;

@@ -18,13 +18,6 @@ function Footer() {
     { nome: '', link: 'https://www.instagram.com/zero20garage', icone: <FaInstagram /> },
   ];
 
-  const menuToggle = document.querySelector('.menu-toggle');
-  const menu = document.querySelector('.menu');
-
-    menuToggle.addEventListener('click', () => {
-    menu.classList.toggle('show');
-});
-
   return (
     <footer className="footer">
       <div className="footer-content">
@@ -34,12 +27,26 @@ function Footer() {
       <div className="footer-nav">
         <ul>
           <li><a href="/politica">Política de Privacidade</a></li>
-          <li><a href="/servicos">Serviços</a></li>
-          <li><a href="/sobre">Sobre Nós</a></li>
-          <li><a href="/contato">Contato</a></li>
+          <li><a href="/termos">Termos de Uso</a></li>
+          <li><a href="/trocas">Trocas e Devoluções</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/atendimento">Atendimento</a></li>
+          <li><a href="/mapa-do-site">Mapa do Site</a></li>
         </ul>
       </div>
 
+      <div className="footer-nav">
+        <ul>
+          <li><a href="/servicos">Serviços</a></li>
+          <li><a href="/sobre">Sobre Nós</a></li>
+          <li><a href="/contato">Contato</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/trabalhe-conosco">Trabalhe Conosco</a></li>
+        </ul>
+      </div>
+      </div>
+
+      <div className="footer-content-wrapper">
         {/* Seção Formas de Pagamento */}
         <div className="footer-card">
           <span className="title">Formas de Pagamento:</span>
