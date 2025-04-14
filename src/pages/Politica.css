@@ -1,9 +1,9 @@
     /* Estilos gerais para o corpo da página */
     body {
-        font-family: sans-serif;
+        font-family: 'Montserrat', sans-serif;
         line-height: 1.6;
         color: #333;
-        background-color: #f4f4f4;
+        background-color: #f9f9f9;
         margin: 0;
         padding: 20px;
     }
@@ -18,49 +18,75 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    /* Título principal da política de privacidade */
-    h1 {
-        color: #2c3e50;
-        text-align: center;
-        margin-bottom: 30px;
-    }
+    /* Título Principal */
+.privacy-policy-title {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
 
-    /* Títulos de seção */
-    h2 {
-        color: #34495e;
-        margin-top: 25px;
-        margin-bottom: 10px;
-        border-bottom: 2px solid #ecf0f1;
-        padding-bottom: 5px;
-    }
+/* Subtítulos */
+.privacy-policy-subtitle {
+    font-size: 1.5em;
+    color: #34495e;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
 
-    /* Parágrafos de texto */
-    p {
-        margin-bottom: 15px;
-        color: #555;
-    }
+/* Parágrafos */
+.privacy-policy-paragraph {
+    margin-bottom: 15px;
+}
 
-    /* Listas */
-    ul {
-        list-style-type: disc;
-        margin-left: 20px;
-        margin-bottom: 15px;
-        color: #555;
-    }
-
-    ul li {
-        margin-bottom: 5px;
-    }
-
-    /* Links */
-    a {
-        color: #3498db;
-        text-decoration: none;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }   
+  
+.privacy-policy-link {
+    color: #c0392b;
+    text-decoration: none;
+  }
+  
+  .privacy-policy-link:hover {
+    text-decoration: underline;
+  }
+  
+  .privacy-policy-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .privacy-policy-list li {
+    margin-bottom: 5px;
+  }
+  
+  .prohibited-list {
+    color: #c0392b;
+  }
+  
+  .prohibited-paragraph {
+    color: #c0392b;
+    font-weight: bold;
+  }
+  
+  .privacy-policy-address {
+    margin-top: 20px;
+    font-style: normal;
+  }
+  
+  .acknowledgment {
+    margin-top: 30px;
+    font-style: italic;
+    color: #777;
+  }
+  
+  .privacy-policy-last-updated {
+    margin-top: 10px;
+    color: #999;
+    font-size: 0.9em;
+    text-align: right;
+  }
 
     /* Data da última atualização */
     .last-updated {
@@ -79,7 +105,7 @@
     }
 
     /* Estilos específicos para o nome da empresa */
-    .company-name {
+    .privacy-policy-company-name {
         font-weight: bold;
         color: #e67e22; /* Cor de destaque para o nome */
     }

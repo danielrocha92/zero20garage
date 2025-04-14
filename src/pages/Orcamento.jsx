@@ -27,6 +27,9 @@ function Orcamento() {
     mensagem: '',
   });
 
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(null);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -34,9 +37,23 @@ function Orcamento() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aqui você pode adicionar a lógica para enviar o formulário
-    console.log('Formulário enviado:', formData);
-    alert('Formulário enviado com sucesso!');
+
+    setLoading(true);
+    setSuccess(null);
+
+    // Simulação de envio de formulário
+    setTimeout(() => {
+      setLoading(false);
+      setSuccess(true);
+      alert('Formulário enviado com sucesso!');
+      setFormData({
+        nome: '',
+        email: '',
+        telefone: '',
+        servico: '',
+        mensagem: '',
+      });
+    }, 2000); // Simulação de tempo de envio
   };
 
   return (
@@ -48,9 +65,16 @@ function Orcamento() {
         <section className="orcamento-section">
           <h2>Solicite um Orçamento</h2>
           <p>Preencha o formulário abaixo para receber um orçamento detalhado e personalizado.</p>
+          
+          {success !== null && (
+            <div className={`feedback ${success ? 'success' : 'error'}`}>
+              {success ? 'Formulário enviado com sucesso!' : 'Ocorreu um erro ao enviar o formulário. Tente novamente!'}
+            </div>
+          )}
+
           <form className="orcamento-form" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="nome">Nome:</label>
+              <label htmlFor="nome" aria-label="Nome">Nome:</label>
               <input
                 type="text"
                 id="nome"
@@ -59,10 +83,11 @@ function Orcamento() {
                 onChange={handleChange}
                 required
                 placeholder="Digite seu nome"
+                aria-required="true"
               />
             </div>
             <div className="form-group">
-              <label htmlFor="email">E-mail:</label>
+              <label htmlFor="email" aria-label="E-mail">E-mail:</label>
               <input
                 type="email"
                 id="email"
@@ -71,10 +96,12 @@ function Orcamento() {
                 onChange={handleChange}
                 required
                 placeholder="Digite seu e-mail"
+                aria-required="true"
+                aria-invalid={formData.email && !/\S+@\S+\.\S+/.test(formData.email) ? 'true' : 'false'}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="telefone">Telefone:</label>
+              <label htmlFor="telefone" aria-label="Telefone">Telefone:</label>
               <input
                 type="tel"
                 id="telefone"
@@ -82,6 +109,7 @@ function Orcamento() {
                 value={formData.telefone}
                 onChange={handleChange}
                 placeholder="Digite seu telefone"
+                aria-required="false"
               />
             </div>
             <div className="form-group">
@@ -112,7 +140,7 @@ function Orcamento() {
               </select>
             </div>
             <div className="form-group">
-              <label htmlFor="mensagem">Mensagem:</label>
+              <label htmlFor="mensagem" aria-label="Mensagem">Mensagem:</label>
               <textarea
                 id="mensagem"
                 name="mensagem"
@@ -122,8 +150,9 @@ function Orcamento() {
                 placeholder="Digite sua mensagem"
               ></textarea>
             </div>
-            <button type="submit" className="submit-button">
-              Solicitar Orçamento
+
+            <button type="submit" className="submit-button" disabled={loading}>
+              {loading ? 'Enviando...' : 'Solicitar Orçamento'}
             </button>
           </form>
         </section>

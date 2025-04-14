@@ -33,10 +33,11 @@
   padding: 0.8rem;
   border-radius: 6px;
   transition: background-color 0.3s ease;
+  max-height: 100%;
 }
 
 .contact-list li:hover {
-  background-color: #ffffff;
+  background-color: #9e0303;
 }
 
 .contact-list i {
@@ -59,9 +60,8 @@
   font-size: 1.5rem;
   transition: border-color 0.3s ease;
   color: #353535;
-  max-height: 100%;
-  margin-bottom: 1rem;
   cursor: pointer; /* Adiciona um cursor de ponteiro */
+  width: 100%;
 }
 
 option:focus{

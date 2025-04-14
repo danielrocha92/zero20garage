@@ -2,6 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'font-awesome/css/font-awesome.min.css';
+import ScrollToTop from './components/ScrollToTop';
 
 import Layout from './components/Layout';
 import ToTop from './components/ToTop';
@@ -30,8 +31,10 @@ import './GlobalStyles.css';
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Layout>
         <Routes>
+          {/* Defina suas rotas aqui */}
           <Route path="/" element={<Home />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/contato" element={<Contato />} />

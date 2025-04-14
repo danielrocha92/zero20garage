@@ -1,78 +1,54 @@
 /* Estilos do Serviços */
 .services {
-    background-color: #2e2f31;
-    padding: 0rem 0;
-  }
-
-  .container {
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: #353535;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-
-  .list {
-  list-style: none;
+  background-color: var(--cinza-escuro);
   padding: 0;
-  margin-top: 2rem;
-  }
-  
-  .service-item {
-    flex: 1 1 calc(33.333% - 2rem);
-    background-color: #2c2c2c6b;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
+}
 
-  .service-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
-  }
-  
-  .service-item h1 {
-    font-size: 4rem;
-    color: #ffffff;
-    margin-bottom: 0.5rem;
-  }
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
 
-  .service-item h2 {
-    font-size: 3rem;
-    color: #ffffff;
-    margin-bottom: 0.5rem;
-  }
-  
-  .service-item h3 {
-    font-size: 1.5rem;
-    color: #c50404;
-    margin-bottom: 0.5rem;
-  }
+.service-item {
+  background-color: var(--cinza-medio);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-  .service-item p {
-    font-size: 1rem;
-    color: #fff;
-  }
+.service-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
+}
 
-  .service-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    padding: 0.8rem 1.5rem;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor */
-    color: #c50404;
-    transform: scale(1.05);
-  }
+.service-item h3 {
+  font-size: 1.5rem;
+  color: var(--vermelho-principal);
+  margin-bottom: 0.5rem;
+}
 
-  .service-button {
-    flex: 1 1 calc(33.333% - 2rem);
-    padding: 1.5rem;
-    border-radius: 8px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
+.service-item p {
+  font-size: 1rem;
+  color: var(--cinza-claro);
+}
+
+.service-button {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  color: var(--branco);
+  background-color: var(--vermelho-principal);
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.service-button:hover {
+  background-color: rgba(54, 24, 24, 0.5);
+  transform: scale(1.05);
+}

@@ -1,362 +1,106 @@
-/* Reset básico */
+/* ======================== */
+/* Reset e Fontes Globais   */
+/* ======================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
 }
 
-/* GlobalStyles.css */
-/* Remover linha abaixo de todos os títulos */
+html {
+  scroll-behavior: smooth;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+:root {
+  --vermelho-principal: #c50404;
+  --cinza-claro: #D3D3D3;
+  --cinza-escuro: #2e2f31;
+  --branco: #ffffff;
+  --cinza-medio: #353535;
+  --tamanho-titulo: 2rem;
+  --tamanho-paragrafo: 1rem;
+}
+
+/* ===================== */
+/* Tipografia e Elementos Globais */
+/* ===================== */
+body {
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: var(--cinza-escuro);
+}
+
 h1, h2, h3, h4, h5, h6 {
-  border-bottom: none; /* Remove qualquer linha abaixo */
-  text-decoration: none; /* Remove sublinhado, se houver */
-}
-/* Remover sublinhado de todos os links */
-a {
-  text-decoration: none; /* Remove o sublinhado */
+  border-bottom: none;
+  text-decoration: none;
 }
 
-a:hover {
-  text-decoration: none; /* Remove o sublinhado no hover */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none;
 }
 
 li {
-  display: contents;
   text-align: left;
+  list-style-position: inside;
 }
 
-/* Seletor mais específico (se necessário) */
-.navbar a {
-  text-decoration: none; /* Remove o sublinhado */
-}
-
-.navbar a:hover {
-  text-decoration: none; /* Remove o sublinhado no hover */
-}
-
-/* Exemplo com Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-
-body {
-  font-family: Open Sans, sans-serif;
-  line-height: 1.6;
-  background-color: #f9f9f9;
-  margin: 0;
-  padding: 0;
-}
-
-/* Margem padrão para as páginas */
-  .container {
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: #353535;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-
-  .page {
-    background-color: #2e2f31;
-    padding: 0rem 0;
-    color: #fff;
-    bottom: 0;
-    left: 0;
-    opacity: 1.5;
-    right: 0;
-    top: 0;
-  }
-  
-/* Seções gerais */
-.section {
+/* ================= */
+/* Layout Container */
+/* ================= */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 2rem;
-  text-align: center;
 }
 
-/* Títulos */
-.section h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: #333;
-}
-
-/* Grid padrão */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-/* Itens destacados */
-.card {
-  background-color: #fff;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
-}
-
-.card h3 {
-  font-size: 1.5rem;
-  color: #c50404;
-  margin-bottom: 0.5rem;
-}
-
-.card p {
-  font-size: 1rem;
-  color: #fff;
-}
-
-.section {
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.section h2 {
-  font-size: 2rem;
-  color: #2e2f31;
-  margin-bottom: 1rem;
-}
-
-.section p {
-  font-size: 1.1rem;
-  color: #2e2f31;
-}
-
-.item h2 {
-  font-size: 2.5rem;
-  color: #ffffff;
-  margin-bottom: 1rem;
-}
-
-.item p {
-  font-size: 1.1rem;
-  color: #ffffff;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-.item ul {
-  list-style: disc;
-  padding-left: 2rem;
-  margin-bottom: 1rem;
-}
-
-.item li {
-  font-size: 1.1rem;
-  color: #ffffff;
-  line-height: 1.6;
-}
-
-
-/* Highlights Section */
-.highlight {
-  padding: 2rem;
-  background-color: #D3D3D3;
-  text-align: center;
-}
-
-.highlight-item h2 {
-  font-size: 3rem;
-  color: #ffffff;
-  margin-bottom: 0.5rem;
-}
-
-.highlight-item h3 {
-  font-size: 1.5rem;
-  color: #c50404;
-  margin-bottom: 0.5rem;
-}
-
-.highlight-item p {
-  font-size: 1rem;
-  color: #fff;
-}
-
-.highlights-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  padding: 0.8rem 1.5rem;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor */
-  color: #c50404;
-  transform: scale(1.05);
-}
-
-.highlight-item {
-  background-color: #2c2c2c6b;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  flex: 1 1 calc(33.333% - 2rem);
-}
-
-.highlight-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
-}
-
-/* Testimonials Section */
-.testimonials {
-  padding: 2rem;
-  background-color: #D3D3D3;
-  color: #000000;
-  text-align: center;
-  border-radius: 8px;
-}
-
-.testimonials h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: #D3D3D3;
-}
-
-.testimonial-item {
-  background-color: hsl(0, 80%, 52%);
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  color: #D3D3D3;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 1rem auto;
-  max-width: 600px;
-  font-style: italic;
-}
-
-.testimonial-item p {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.testimonial-item strong {
-  font-size: 1rem;
-  display: block;
-  margin-top: 0.5rem;
-  color: #D3D3D3;
-}
-
-.cta-button {
+/* ================= */
+/* Botões Globais    */
+/* ================= */
+.button {
   display: inline-block;
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
-  color: #fff;
-  background-color: #c50404;
+  color: var(--branco);
+  background-color: var(--vermelho-principal);
   border: none;
   border-radius: 8px;
   text-decoration: none;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  cursor: pointer; /* Adiciona um cursor de ponteiro */
-  }
-  
-.cta-button:hover {
-  padding: 0.8rem 1.5rem;
-  border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor */
-  background-color: rgba(54, 24, 24, 0.5);
-  color: #c50404;
-  transform: scale(1.05);
-  }
-
-  .cta-button:focus,
-.button:active {
-outline: 2px solid #530000; /*Adiciona um contorno azul ao focar ou clicar */
-outline-offset: 2px; /* Evita que o contorno se sobreponha ao botão */
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
+.button:hover {
+  background-color: rgba(54, 24, 24, 0.5);
+  transform: scale(1.05);
+}
+
+/* ================= */
+/* Responsividade    */
+/* ================= */
 @media (max-width: 768px) {
   :root {
-    --tamanho-titulo-secao: 1.8rem;
+    --tamanho-titulo: 1.8rem;
     --tamanho-paragrafo: 0.9rem;
   }
 
-  .home-section h2,
-  .highlights h2,
-  .testimonials h2 {
-    font-size: var(--tamanho-titulo-secao);
-  }
-
-  .home h1,
-  .highlight-item h1 {
-    font-size: 3rem;
-  }
-
-  .home p,
-  .highlight-item p,
-  .testimonial-item strong,
-  .cta-button,
-  .submit-button,
-  .section p,
-  .form-group label,
-  table {
-    font-size: var(--tamanho-paragrafo);
-  }
-
-  .highlight-item h2 {
-    font-size: 1.8rem;
-  }
-
-  .highlight-item h3 {
-    font-size: 1.2rem;
-  }
-
-  .testimonial-item p {
-    font-size: 1.2rem;
-  }
-
-  .container,
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
+  .container {
     padding: 1rem;
   }
+}
 
-  .section {
-    padding: 0.5rem;
-  }
-
-  .section h2 {
-    font-size: 1.2rem;
-  }
-
-  .form-group {
-    margin-bottom: 1rem;
-  }
-
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-
-  .form-group input[type="file"] {
-    padding: 0.5rem;
-  }
-
-  .highlights-grid,
-  .form-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  table th,
-  table td {
-    padding: 0.5rem;
-    text-align: left;
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
+@media (max-width: 480px) {
+  :root {
+    --tamanho-titulo: 1.5rem;
+    --tamanho-paragrafo: 0.8rem;
   }
 }

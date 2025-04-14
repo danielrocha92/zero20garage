@@ -38,7 +38,7 @@ body {
   }
   
   .terms-of-use-link {
-    color: #007bff;
+    color: #c0392b;
     text-decoration: none;
   }
   
@@ -82,5 +82,3 @@ body {
     font-size: 0.9em;
     text-align: right;
   }
-  
-  /* Estilos adicionais podem ser adicionados conforme a necessidade */
