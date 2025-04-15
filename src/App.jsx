@@ -20,7 +20,7 @@ import Blog from './pages/Blog';
 import Politica from './pages/Politica';
 import NotFound from './pages/NotFound'; // Importe o componente NotFound
 import Trocas from './pages/Trocas';
-import FAQ from './pages/FAQ';
+import FAQ from './pages/Faq';
 import Atendimento from './pages/Atendimento';
 import TrabalheConosco from './pages/TrabalheConosco';
 import MapaDoSite from './pages/MapaDoSite';
