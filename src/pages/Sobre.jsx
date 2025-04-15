@@ -3,11 +3,13 @@ import React from 'react';
 import './Sobre.css';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
-import Equipe from '../components/sobre/Equipe';
-import MissaoVisaoValores from '../components/sobre/MissaoVisaoValores';
-import Historia from '../components/sobre/Historia';
-import Depoimentos from '../components/sobre/Depoimentos';
-import ContatoCTA from '../components/sobre/ContatoCTA';
+
+import NossaHistoria from '../components/NossaHistoria';
+import MissaoVisaoValores from '../components/MissaoVisaoValores';
+import NossaEquipe from '../components/NossaEquipe';
+import PorQueEscolher from '../components/PorQueEscolher';
+import DepoimentosClientes from '../components/DepoimentosClientes';
+import ContatoCta from '../components/ContatoCta';
 
 function Sobre() {
   const messages = [
@@ -30,11 +32,12 @@ function Sobre() {
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
       <div className="container">
-        <Historia />
+        <NossaHistoria />
         <MissaoVisaoValores />
-        <Equipe />
-        <Depoimentos />
-        <ContatoCTA />
+        <NossaEquipe />
+        <PorQueEscolher />
+        <DepoimentosClientes />
+        <ContatoCta />
       </div>
     </div>
   );

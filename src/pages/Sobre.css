@@ -32,29 +32,51 @@
   color: #ffffff;
 }
 
+/* ===== Carrossel da Equipe ===== */
 .team-image-container {
-  display: flex; /* Para controlar o alinhamento da imagem dentro do container */
-  justify-content: center; /* Centraliza a imagem horizontalmente */
-  margin-top: 20px; /* Adiciona um espaço acima da imagem */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 .team-image {
-  max-width: 30%; /* Reduz a largura máxima para o carrossel */
-  height: auto; /* Mantém a proporção da imagem */
-  border-radius: 8px; /* Adiciona bordas arredondadas (opcional) */
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave (opcional) */
-  margin: 0 auto; /* Centraliza as imagens dentro do container */
+  width: 560px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s ease;
 }
 
-/* Ajustes específicos para o carrossel */
+.team-image:hover {
+  transform: scale(1.03);
+}
+
 .slick-slide {
-  display: flex;
-  justify-content: center; /* Centraliza o carrossel */
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
 }
 
+.slick-dots li button:before {
+  font-size: 12px;
+  color: #c50404;
+}
 
-.slick-prev:hover, .slick-next:hover {
-  background-color: #e23838; /* Cor do botão de navegação ao passar o mouse */
+.slick-dots li.slick-active button:before {
+  color: #fff;
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 10;
+  color: #fff;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  background-color: #e23838;
   border-radius: 50%;
 }
 
@@ -102,7 +124,7 @@
   text-align: center;
 }
 
-  /* Highlights Section */
+/* Highlights Section */
 .highlights {
   padding: 2rem;
   background-color: #D3D3D3;
@@ -145,21 +167,6 @@
   color: #fff;
 }
 
-/* Sobre.css */
-/* ... outros estilos ... */
-.team-image-container {
-  display: flex; /* Para controlar o alinhamento da imagem dentro do container */
-  justify-content: center; /* Centraliza a imagem horizontalmente */
-  margin-top: 20px; /* Adiciona um espaço acima da imagem */
-}
-
-.team-image {
-  max-width: 100%; /* Define uma largura máxima para a imagem */
-  height: auto; /* Mantém a proporção da imagem */
-  border-radius: 8px; /* Adiciona bordas arredondadas (opcional) */
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave (opcional) */
-}
-
 /* Responsividade */
 @media (max-width: 768px) {
   .container {
@@ -175,6 +182,6 @@
   }
 
   .team-image {
-    max-width: 70%; /* Ajusta a largura máxima das imagens em telas menores */
+    max-width: 100%;
   }
 }
