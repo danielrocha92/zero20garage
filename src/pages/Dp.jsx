@@ -17,21 +17,20 @@ function Dp() {
   ];
 
   return (
-    <div className="dp-page">
+    <div className="page-container">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
 
-      <div className="container">
-      <section className="dp-info-section">
-          <div className='dp-info-section'>
-          <div className='dp-item'>
-          <h2>Diagnóstico de Problemas no Motor</h2>
-          <p>Diagnóstico preciso para identificar e resolver problemas no motor do seu veículo.</p>
+      <section className="content-section">
+        <h2 className="section-title">
+          Diagnóstico de Problemas no Motor
+        </h2>
+        <p className="section-paragraph">Diagnóstico preciso para identificar e resolver problemas no motor do seu veículo.</p>
 
-          <h3>Por que fazer um diagnóstico?</h3>
-          <p>Um diagnóstico preciso é essencial para identificar a causa raiz dos problemas do seu veículo e evitar gastos desnecessários. Com o diagnóstico correto, você pode ter certeza de que está resolvendo o problema certo.</p>
+        <h3 className="section-subtitle">Por que fazer um diagnóstico?</h3>
+          <p className="section-paragraph">Um diagnóstico preciso é essencial para identificar a causa raiz dos problemas do seu veículo e evitar gastos desnecessários. Com o diagnóstico correto, você pode ter certeza de que está resolvendo o problema certo.</p>
 
-          <h3>O que inclui o diagnóstico?</h3>
+          <h3 className="section-subtitle">O que inclui o diagnóstico?</h3>
           <ul>
             <li>Diagnóstico eletrônico</li>
             <li>Teste de compressão</li>
@@ -39,14 +38,11 @@ function Dp() {
             <li>Inspeção visual detalhada</li>
           </ul>
 
-          <h3>Agende seu diagnóstico</h3>
-          <p>Não espere que os problemas se agravem. Agende agora mesmo o diagnóstico do seu veículo e garanta a sua segurança e tranquilidade.</p>
+          <h3 className="section-subtitle">Agende seu diagnóstico</h3>
+          <p className="section-paragraph">Não espere que os problemas se agravem. Agende agora mesmo o diagnóstico do seu veículo e garanta a sua segurança e tranquilidade.</p>
           <a href="/orcamento" className="cta-button">Solicite um Orçamento</a>
-          </div>
-          </div>
         </section>
       </div>
-    </div>
   );
 }
 

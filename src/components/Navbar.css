@@ -1,9 +1,9 @@
 /* Estilos Gerais da Navbar */
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Centraliza inicialmente */
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0.5rem 0.8rem;
   background-color: rgba(0, 0, 0, 0.5); /* Fundo preto com transparência */
   color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -12,7 +12,7 @@
   top: 0;
   left: 0; /* Alinha o elemento à esquerda */
   z-index: 1000;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave para mudanças de cor */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease, justify-content 0.3s ease; /* Adiciona transição para justify-content */
 }
 
 .navbar:hover {
@@ -20,16 +20,30 @@
 }
 
 .navbar.scrolled {
-  background-color: rgba(0, 0, 0, 0.9); /* Fundo mais opaco ao rolar */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  justify-content: flex-start; /* Alinha a logo à esquerda ao rolar */
+  padding: 0.5rem 2rem; /* Recolhe o padding ao rolar */
+}
+
+/* Estilos do Logo */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  transition: margin-right 0.3s ease; /* Adiciona transição para margin-right */
+}
+
+.navbar.scrolled .navbar-logo {
+  margin-right: 1rem; /* Adiciona margem à direita ao rolar */
 }
 
 .navbar-logo img {
-  width: 7rem; /* Largura do logo */
-  height: auto; /* Mantém a proporção */
-  display: block; /* Remove espaço extra abaixo do SVG */
-  margin: 0 auto; /* Centraliza horizontalmente */
-  transition: transform 0.3s ease; /* Adiciona uma transição suave */
+  width: 7rem;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease, width 0.3s ease; /* Adiciona transição para largura */
+}
+
+.navbar.scrolled .navbar-logo img {
+  width: 5rem; /* Reduz o tamanho do logo ao rolar */
 }
 
 .navbar-logo img:hover {
@@ -40,8 +54,15 @@
 .navbar-links {
   display: flex;
   list-style: none;
-  margin: 10;
-  padding: 10;
+  margin: 0;
+  padding: 0;
+  transition: opacity 0.3s ease, margin-left 0.3s ease; /* Adiciona transição para opacidade e margin-left */
+}
+
+.navbar.scrolled .navbar-links {
+  opacity: 0;
+  margin-left: -100%; /* Esconde os links movendo para a esquerda */
+  display: none !important; /* Garante que não ocupem espaço */
 }
 
 .navbar-links li {
@@ -61,71 +82,77 @@
 
 /* Botão "Hambúrguer" */
 .hamburger {
-  display: none; /* Esconde o botão em telas maiores */
   background: none;
   border: none;
   color: #fff;
   font-size: 1.5rem;
   cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  position: absolute; /* Posiciona o botão */
+  right: 1rem; /* Alinha à direita */
+}
+
+.hamburger:hover {
+  opacity: 0.8;
 }
 
 /* Menu Responsivo */
 .menu {
   display: flex;
-  align-items: left;
+  align-items: center; /* Alinha verticalmente no centro */
 }
 
 .menu.open {
   display: flex;
-  align-items: left;
+  align-items: flex-start; /* Alinha os itens do menu dropdown à esquerda */
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 1rem 0;
+  box-shadow: 0 4px 6px rgba(253, 0, 0, 0.1);
 }
 
+.menu.open .navbar-links {
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start;
+  opacity: 1;
+  margin-left: 0;
+}
+
+.menu.open .navbar-links li {
+  margin: 0.5rem 1rem;
+  text-align: left;
+}
+
+/* Media Query para Telas Menores */
 @media (max-width: 768px) {
-  /* Esconde os links em telas menores */
-  .navbar-links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.9); /* Fundo preto mais opaco */
-    padding: 1rem 0;
-    box-shadow: 0 4px 6px rgba(253, 0, 0, 0.1);
+  .navbar {
+    justify-content: center; /* Mantém a logo centralizada inicialmente */
   }
 
-  /* Exibe os links quando o menu está aberto */
-  .menu.open .navbar-links {
-    display: flex;
-    align-items: left;
+  .navbar.scrolled {
+    justify-content: flex-start; /* Alinha a logo à esquerda ao rolar */
   }
 
-  /* Exibe o botão "Hambúrguer" em telas menores */
   .hamburger {
-    display: flex;
-    justify-content: flex-end;
-    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    display: block; /* Exibe o botão "Hambúrguer" */
   }
 
-  .navbar-links li {
-    margin: 0.5rem 1;
-    text-align: left;
+  .navbar-links {
+    display: none; /* Esconde os links por padrão em telas menores */
+    /* ... outros estilos do menu responsivo ... */
   }
 
-  .navbar-links a {
-    font-size: 1.2rem;
+  .menu {
+    display: none; /* Esconde o menu em telas menores por padrão */
+    /* ... outros estilos do menu responsivo ... */
   }
 
-  .navbar-links:hover {
-    font-size: 1.2rem;
-  }
-
-  .navbar-logo {
-    width: 6rem; /* Reduz o tamanho em telas menores */
-    position: center;
-    height: auto; /* Mantém a proporção */
-    display: block; /* Remove espaço extra abaixo do SVG */
-    margin: 0 auto; /* Centraliza horizontalmente */
-    transition: transform 0.3s ease; /* Adiciona uma transição suave */
+  .menu.open {
+    display: flex; /* Exibe o menu quando aberto */
   }
 }

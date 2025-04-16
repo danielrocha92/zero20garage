@@ -3,6 +3,7 @@ import './Servicos.css';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
 import { Helmet } from 'react-helmet';
+import { FaTools, FaSearch, FaWrench, FaTachometerAlt, FaUsersCog } from 'react-icons/fa'; // Importe os ícones
 
 const Servicos = () => {
     const messages = [
@@ -18,31 +19,31 @@ const Servicos = () => {
             title: 'Manutenção Preventiva',
             description: 'Manutenção regular para evitar problemas futuros...',
             link: '/mp',
-            image: 'images/mp.jpg', // Adicione a URL da imagem
+            icon: <FaTools size={90} />, // Ícone para Manutenção Preventiva
         },
         {
             title: 'Diagnóstico de Problemas',
             description: 'Diagnóstico preciso para identificar...',
             link: '/dp',
-            image: '/images/diagnostico.jpg',
+            icon: <FaSearch size={90} />, // Ícone para Diagnóstico de Problemas
         },
         {
             title: 'Troca de Peças',
             description: 'Substituição de peças desgastadas...',
             link: '/tp',
-            image: '/images/troca-pecas.jpg',
+            icon: <FaWrench size={90} />, // Ícone para Troca de Peças
         },
         {
             title: 'Teste de Desempenho',
             description: 'Testes rigorosos para garantir...',
             link: '/td',
-            image: '/images/teste-desempenho.jpg',
+            icon: <FaTachometerAlt size={90} />, // Ícone para Teste de Desempenho
         },
         {
             title: 'Consultoria Técnica',
             description: 'Consultoria especializada para ajudar...',
             link: '/ct',
-            image: '/images/consultoria-tecnica.jpg',
+            icon: <FaUsersCog size={90} />, // Ícone para Consultoria Técnica
         },
     ];
 
@@ -59,7 +60,7 @@ const Servicos = () => {
 
                 <div className="container">
                     <section className="section">
-                        <div className="highlight-item">
+                        <div className="service-item">
                             <h2>Retífica de Motores</h2>
                             <p>Serviço completo de retífica de motores...</p>
                         </div>
@@ -68,10 +69,10 @@ const Servicos = () => {
                             {services.map((service) => (
                                 <div className="service-item" key={service.title} data-aos="fade-up">
                                     <Link to={service.link} className="service-button">
-                                        <img src={service.image} alt={service.title} />
+                                        {service.icon} {/* Exibe o ícone */}
                                         <h2>{service.title}</h2>
                                         <p>{service.description}</p>
-                                        <button>Saiba Mais</button>
+                                        <ctn-button>Saiba Mais</ctn-button>
                                     </Link>
                                 </div>
                             ))}

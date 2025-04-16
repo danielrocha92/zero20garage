@@ -8,12 +8,13 @@
   --fonte-principal: 'Montserrat', sans-serif;
   --fonte-titulo: 'Playfair Display', serif;
 }
+
 /* Bloco: services */
 .services {
-  background-color: var(--cinza-claro); /* Usando variável */
-  padding: 2rem 0;
-  color: var(--texto-principal); /* Usando variável */
-  font-family: var(--fonte-principal); /* Usando variável */
+  background-color: var(--cinza-claro);
+  padding: 0;
+  color: var(--texto-principal);
+  font-family: var(--fonte-principal);
   line-height: 1.6;
 }
 
@@ -34,33 +35,36 @@
 
 /* Bloco: service-item */
 .service-item {
-  background-color: var(--branco); /* Usando variável */
+  background-color: var(--cinza-claro);
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease;
+  display: flex; /* Adicionado para alinhamento vertical */
+  flex-direction: column; /* Adicionado para alinhamento vertical */
+  align-items: center; /* Centraliza os elementos horizontalmente */
 }
 
 /* Modificador: service-item:hover */
 .service-item:hover {
-  transform: translateY(-8px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Elemento: service-item__title */
 .service-item__title {
   font-size: 1.8rem;
-  color: var(--cor-destaque); /* Usando variável */
+  color: var(--cor-destaque);
   margin-bottom: 1rem;
-  font-family: var(--fonte-titulo); /* Usando variável */
+  font-family: var(--fonte-titulo);
 }
 
 /* Elemento: service-item__description */
 .service-item__description {
   font-size: 1.1rem;
-  color: var(--texto-secundario); /* Usando variável */
+  color: var(--texto-secundario);
   margin-bottom: 1.5rem;
+  flex-grow: 1; /* Permite que a descrição ocupe mais espaço */
 }
 
 /* Elemento: service-item__button */
@@ -68,19 +72,27 @@
   display: inline-block;
   padding: 1rem 2rem;
   font-size: 1.1rem;
-  color: var(--branco); /* Usando variável */
-  background-color: var(--cor-destaque); /* Usando variável */
+  color: var(--branco);
+  background-color: var(--cor-destaque);
   border: none;
   border-radius: 8px;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem; /* Adicionado para espaçamento */
 }
 
 /* Modificador: service-item__button:hover */
 .service-item__button:hover {
   background-color: rgba(197, 4, 4, 0.8);
-  transform: scale(1.05);
+}
+
+/* Estilos para os ícones */
+.service-item__button svg {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 1rem;
+  transition: none;
 }
 
 /* Responsividade */
@@ -100,5 +112,10 @@
 
   .service-item__description {
       font-size: 1rem;
+  }
+
+  .service-item__button svg {
+      width: 40px;
+      height: 40px;
   }
 }
