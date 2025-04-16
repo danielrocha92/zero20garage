@@ -30,8 +30,6 @@ function Footer() {
           <li><a href="/termos">Termos de Uso</a></li>
           <li><a href="/trocas">Trocas e Devoluções</a></li>
           <li><a href="/faq">FAQ</a></li>
-          <li><a href="/atendimento">Atendimento</a></li>
-          <li><a href="/mapa-do-site">Mapa do Site</a></li>
         </ul>
       </div>
 

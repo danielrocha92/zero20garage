@@ -1,82 +1,84 @@
-/* Diagnostico.css */
-.mp-page {
-  display: grid;
-  background-color: #2e2f31;
-  padding: 0rem 0;
+/* Mp.css */
+
+.page-container {
+  background-color: #f0f0f0;
+  color: #333;
+  font-family: 'Nunito', sans-serif;
+  line-height: 1.6;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.content-section {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 3rem;
+  margin-top: 2rem;
+}
+
+.section-title {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+ 
+}
+
+.section-subtitle {
+  color: #34495e;
+  font-size: 1.8rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border: none; /* Remove a borda inferior */
+}
+
+.section-paragraph {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-list {
+  list-style-type: disc;
+  padding-left: 2rem;
+  margin-bottom: 2rem;
+}
+
+.section-list li {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.cta-button {
+  background-color: #3498db;
+  border: none; /* Remove a borda do botão */
+  border-radius: 8px;
   color: #fff;
-  bottom: 0;
-  left: 0;
-  opacity: 1.5;
-  right: 0;
-  top: 0;
-  }
-  
-  .container {
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: #353535;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-  
-  .mp-info-section {
-    margin-bottom: 2rem;
-    text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #2980b9;
+  transform: scale(1.05);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .content-section {
+      padding: 2rem;
   }
 
-  .mp-info-section h2 {
-    font-size: 2rem;
-    color: #ffffff;
-    margin-bottom: 1rem;
-  }
-  
-  .mp-info-section p {
-    font-size: 1.1rem;
-    color: #ffffff;
+  .section-title {
+      font-size: 2rem;
   }
 
-  .mp-items h2 {
-    font-size: 2.5rem;
-    color: #ffffff;
-    margin-bottom: 1rem;
+  .section-subtitle {
+      font-size: 1.5rem;
   }
-  
-  .mp-items p {
-    font-size: 1.1rem;
-    color: #ffffff;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-  }
-  
-  .mp-items ul {
-    list-style: disc;
-    padding-left: 2rem;
-    margin-bottom: 1rem;
-    align-items: flex-end;
-  }
-  
-  .mp-items li {
-    font-size: 1.1rem;
-    color: #ffffff;
-    line-height: 1.6;
-  }
-  
-  .cta-button {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    color: #fff;
-    background-color: #c50404;
-    border: none;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .cta-button:hover {
-    background-color: rgba(54, 24, 24, 0.5);
-    color: #c50404;
-    transform: scale(1.05);
-  }
+}

@@ -12,6 +12,15 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Reset para eliminar bordas indesejadas */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 :root {
@@ -46,12 +55,40 @@ a {
 
 a:hover,
 a:focus {
-  text-decoration: none;
+  outline: 2px solid var(--vermelho-principal); /* Adiciona um outline visível no foco */
+  outline-offset: 2px;  /* Melhora a visibilidade do outline */
+  text-decoration: none; /* Adiciona sublinhado ao link quando em foco */
+  color: var(--vermelho-principal); /* Muda a cor do link quando em foco */ 
 }
 
 li {
   text-align: left;
   list-style-position: inside;
+}
+
+/* ============================== */
+/* Animação para troca de página  */
+/* ============================== */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.page-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 /* ================= */

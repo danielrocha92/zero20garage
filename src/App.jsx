@@ -20,10 +20,8 @@ import Blog from './pages/Blog';
 import Politica from './pages/Politica';
 import NotFound from './pages/NotFound'; // Importe o componente NotFound
 import Trocas from './pages/Trocas';
-import FAQ from './pages/Faq';
-import Atendimento from './pages/Atendimento';
+import Faq from './pages/FAQ';
 import TrabalheConosco from './pages/TrabalheConosco';
-import MapaDoSite from './pages/MapaDoSite';
 import Termos from './pages/Termos';
 import './App.css';
 import './GlobalStyles.css';
@@ -48,10 +46,8 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/politica" element={<Politica />} />
           <Route path="/trocas" element={<Trocas />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/atendimento" element={<Atendimento />} />
+          <Route path="/faq" element={<Faq />} />
           <Route path="/trabalhe-conosco" element={<TrabalheConosco />} />
-          <Route path="/mapa-do-site" element={<MapaDoSite />} />
           <Route path="/termos" element={<Termos />} />
           
           {/* Adicione outras rotas aqui conforme necessário */}
