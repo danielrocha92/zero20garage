@@ -1,0 +1,18 @@
+/* Botões */
+.button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #c50404;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: rgba(197, 4, 4, 0.8);
+    transform: scale(1.05);
+  }
+  

@@ -2,9 +2,9 @@ import React from 'react';
 
 function BlogNav() {
   return (
-    <section className="blog-highlights highlight-item">
-      <h2>Artigos do Blog</h2>
-      <ul className="blog-links">
+    <section className="content-section">
+      <h1 className="section-title" translate="no">Artigos do Blog</h1>
+      <ul className="links">
         <li>
           <a href="#retifica-de-motores">
             Retífica de Motores: Como Saber Quando Seu Motor Precisa de Reparo?

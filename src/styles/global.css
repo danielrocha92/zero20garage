@@ -1,0 +1,45 @@
+/* Reset e Fontes Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #2e2f31;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  a:hover {
+    color: #c50404;
+  }
+  
+  /* Responsividade Global */
+  @media (max-width: 768px) {
+    body {
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    body {
+      font-size: 0.8rem;
+    }
+  }

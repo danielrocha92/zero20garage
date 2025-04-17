@@ -10,12 +10,10 @@
 }
 
 /* Bloco: services */
-.services {
-  background-color: var(--cinza-claro);
+.page {
   padding: 0;
-  color: var(--texto-principal);
-  font-family: var(--fonte-principal);
-  line-height: 1.6;
+  color: var(--branco); /* Texto branco para contraste */
+  position: relative;
 }
 
 /* Bloco: container */

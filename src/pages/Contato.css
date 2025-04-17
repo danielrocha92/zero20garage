@@ -1,6 +1,4 @@
-/* Contato.css */
-
-/* Reset e box-sizing para mais controle */
+/* ===== Reset e box-sizing ===== */
 *,
 *::before,
 *::after {
@@ -9,12 +7,23 @@
   padding: 0;
 }
 
-/* Estilos gerais */
-.contato-page {
-  background-color: #2e2f31;
-  padding: 0;
+/* ===== Estilos gerais ===== */
+:root {
+  --branco: #ffffff;
+  --cinza-claro: #e0e0e0;
+  --vermelho: #c50404;
+  --vermelho-hover: #9e0303;
+  --cinza-borda: #ccc;
+  --bg-input: #fff;
 }
 
+.page {
+  padding: 0;
+  color: var(--branco);
+  position: relative;
+}
+
+/* ===== Seção de Contato ===== */
 .contato-section {
   margin-bottom: 2rem;
   text-align: center;
@@ -23,19 +32,20 @@
 
 .contato-section h2 {
   font-size: 2rem;
-  color: #ffffff;
+  color: var(--branco);
   margin-bottom: 1rem;
 }
 
 .contato-section p {
   font-size: 1.1rem;
-  color: #e0e0e0;
+  color: var(--cinza-claro);
 }
 
+/* ===== Lista de Contato ===== */
 .contact-list {
   list-style: none;
   padding: 0;
-  margin: 2rem auto 0 auto;
+  margin: 2rem auto 0;
   max-width: 100%;
   display: flex;
   flex-direction: column;
@@ -47,7 +57,7 @@
   align-items: center;
   margin-bottom: 1rem;
   padding: 0.8rem 1rem;
-  border-radius: 6px;
+  border-radius: 8px;
   transition: background-color 0.3s ease;
   width: 100%;
   max-width: 600px;
@@ -55,16 +65,18 @@
 
 .contact-list a {
   text-decoration: none;
-  color: #c50404;
+  color: var(--vermelho);
   font-size: 1rem;
   transition: color 0.3s ease;
 }
 
-.contact-list a:hover {
-  color: #9e0303;
+.contact-list a:hover,
+.contact-list a:focus {
+  color: var(--vermelho-hover);
+  outline: none;
 }
 
-/* Google Maps */
+/* ===== Mapa ===== */
 .map-section {
   padding: 1rem;
 }
@@ -76,7 +88,7 @@
   border-radius: 8px;
 }
 
-/* Formulário */
+/* ===== Seção de Formulário ===== */
 .formulario-section {
   margin-top: 2rem;
   padding: 2rem 1rem;
@@ -85,7 +97,7 @@
 .formulario-section h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #ffffff;
+  color: var(--branco);
   text-align: center;
 }
 
@@ -100,31 +112,37 @@
 .form-group {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   width: 100%;
 }
 
 .form-group label {
   font-size: 1rem;
   margin-bottom: 0.5rem;
-  color: #ffffff;
+  color: var(--branco);
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
   padding: 0.8rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--cinza-borda);
   border-radius: 8px;
   font-size: 1rem;
-  background-color: #fff;
+  background-color: var(--bg-input);
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--vermelho);
+  outline: none;
 }
 
 .submit-button {
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
-  color: #fff;
-  background-color: #c50404;
+  color: var(--branco);
+  background-color: var(--vermelho);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -132,14 +150,17 @@
   align-self: flex-start;
 }
 
-.submit-button:hover {
-  background-color: #9e0303;
+.submit-button:hover,
+.submit-button:focus {
+  background-color: var(--vermelho-hover);
+  outline: none;
 }
 
+/* ===== Estilo do Google Maps ===== */
 .google-map {
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   display: flex;
   justify-content: center;
 }
@@ -150,7 +171,7 @@
   border: 0;
 }
 
-/* Responsividade */
+/* ===== Responsividade ===== */
 @media (max-width: 768px) {
   .contact-list {
     flex-direction: column;

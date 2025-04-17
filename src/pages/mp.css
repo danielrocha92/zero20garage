@@ -1,12 +1,19 @@
 /* Mp.css */
+/* Importar a fonte Open Sans do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
+/* Fonte padrão para todo o corpo */
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0; /* Fundo claro */
+  color: #333; /* Texto escuro para contraste */
+  line-height: 1.6;
+}
 .page-container {
   background-color: #f0f0f0;
-  color: #333;
-  font-family: 'Nunito', sans-serif;
-  line-height: 1.6;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 0rem 0;
 }
 
 .content-section {
@@ -18,11 +25,10 @@
 }
 
 .section-title {
-  color: #2c3e50;
+  color: var(--azul-esverdeado);
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   text-align: center;
- 
 }
 
 .section-subtitle {
@@ -48,24 +54,6 @@
 .section-list li {
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
-}
-
-.cta-button {
-  background-color: #3498db;
-  border: none; /* Remove a borda do botão */
-  border-radius: 8px;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 1.1rem;
-  padding: 1rem 2rem;
-  text-decoration: none;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.cta-button:hover {
-  background-color: #2980b9;
-  transform: scale(1.05);
 }
 
 /* Responsividade */

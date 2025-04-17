@@ -1,17 +1,19 @@
 import React from 'react';
-import './Footer.css';
-import { FaFacebook, FaInstagram, FaCcVisa, FaCcMastercard, FaBarcode } from 'react-icons/fa';
+import '../styles/Footer.css' // Importa o arquivo global de estilos
+import { FaFacebook, FaInstagram } from 'react-icons/fa';
+import { MdPix } from 'react-icons/md'; // Ícone do Pix
+import { FaCcVisa, FaCcMastercard, FaBarcode } from 'react-icons/fa'; // Ícones de pagamento
 
 function Footer() {
-
   const formasPagamento = [
     { nome: 'Visa', icone: <FaCcVisa /> },
     { nome: 'Mastercard', icone: <FaCcMastercard /> },
     { nome: 'Boleto', icone: <FaBarcode /> },
+    { nome: 'Pix', icone: <MdPix /> }, // Adicionado o Pix
   ];
 
   const facebook = [
-    { nome: '', link: 'https://www.facebook.com/zero20garage', icone: <FaFacebook /> },
+    { nome: '', link: 'https://www.facebook.com/zero20garage', icone: <FaFacebook className="icon-medium" /> },
   ];
 
   const instagram = [
@@ -38,7 +40,7 @@ function Footer() {
           <li><a href="/servicos">Serviços</a></li>
           <li><a href="/sobre">Sobre Nós</a></li>
           <li><a href="/contato">Contato</a></li>
-          <li><a href="/blog">Blog</a></li>
+          <li><a href="/blog" translate="no">Blog</a></li>
           <li><a href="/trabalhe-conosco">Trabalhe Conosco</a></li>
         </ul>
       </div>
@@ -50,7 +52,13 @@ function Footer() {
           <span className="title">Formas de Pagamento:</span>
           <div className="icons">
             {formasPagamento.map((formaPagamento) => (
-              <span key={formaPagamento.nome}>{formaPagamento.icone}</span>
+              <span 
+                key={formaPagamento.nome}
+                className="payment-icon"
+                title={formaPagamento.nome} // Adicionado o tooltip
+              >
+                {formaPagamento.icone}
+              </span>
             ))}
           </div>
         </div>

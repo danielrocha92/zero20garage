@@ -1,7 +1,10 @@
 /* orcamento.css */
-.orcamento-page {
-  background-color: #2e2f31;
-  padding: 0rem 0;
+.page {
+  .page {
+    padding: 0;
+    color: var(--branco); /* Texto branco para contraste */
+    position: relative;
+  }
 }
 
 .orcamento-section {

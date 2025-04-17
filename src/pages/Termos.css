@@ -1,28 +1,14 @@
 /* TermsOfUse.css */
-
-/* ===================== */
-/* Estilos Globais */
-/* ===================== */
-
-body {
-  background-color: #f4f4f4;
-  color: #333;
-  font-family: sans-serif;
-  line-height: 1.6;
-  margin: 0;
-  padding: 20px;
-}
-
 /* ===================== */
 /* Container Principal */
 /* ===================== */
 
 .terms-of-use-container {
-  background-color: #fff;
-  border-radius: 0.5rem; /* Usando rem */
+  background-color: #f0f0f0;
+  border-radius: 8px;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* Usando rem */
-  margin: 15rem auto;
-  max-width: 960px;
+  margin: 0rem auto;
+  max-width: 1200px;
   padding: 2rem; /* Usando rem */
 }
 

@@ -48,24 +48,6 @@
     margin-bottom: 0.5rem; /* Use a margin-bottom do item da lista */
   }
   
-  .cta-button {
-    background-color: #3498db; /* Use o background-color do .cta-button */
-    border: none; /* Mantenha a remoção da borda */
-    border-radius: 8px; /* Use o border-radius do .cta-button */
-    color: #fff; /* Use a cor do texto do .cta-button */
-    cursor: pointer; /* Mantenha o cursor pointer */
-    display: inline-block; /* Mantenha o display inline-block */
-    font-size: 1.1rem; /* Use o font-size do .cta-button */
-    padding: 1rem 2rem; /* Use o padding do .cta-button */
-    text-decoration: none; /* Mantenha a remoção do sublinhado */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Mantenha a transição */
-  }
-  
-  .cta-button:hover {
-    background-color: #2980b9;
-    transform: scale(1.05);
-  }
-  
   /* Responsividade */
   @media (max-width: 768px) {
     .content-section {

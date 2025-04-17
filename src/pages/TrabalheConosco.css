@@ -1,95 +1,64 @@
-/* Estilos gerais */
-.trabalhe-conosco-page {
-    font-family: 'Montserrat', sans-serif;
+/* Troca Peça.css */
+.page-container {
+    background-color: var(--branco);
+    color: var(cinza-escuro);
+    font-family: 'Nunito', sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 20px;
-}
-
-/* Container principal */
-.trabalhe-conosco-container {
-    max-width: 960px;
-    margin: 5rem auto;
-    background-color: #ffffff;
-    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .container-section {
+    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Título Principal */
-.trabalhe-conosco-title {
-    font-size: 2.5rem;
-    color: #2c3e50;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-/* Título principal */
-.trabalhe-conosco-page h1 {
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-/* Parágrafos */
-.trabalhe-conosco-page p {
-    margin-bottom: 15px;
-    color: #555;
-}
-
-/* Subtítulos */
-.trabalhe-conosco-page-subtitle {
-    font-size: 1.8rem;
-    color: #34495e;
-    margin-top: 25px;
-    margin-bottom: 10px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
-}
-
-/* Parágrafos */
-.trabalhe-conosco-page-paragraph {
-    margin-bottom: 15px;
-    color: #555;
-    font-size: 1rem;
-    line-height: 1.8;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .page-container {
-        padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    margin-top: 2rem;
+  }
+  
+  .section-title {
+    color: #2c3e50; /* Use a cor do .section-title */
+    font-size: 2.5rem; /* Use o font-size do .section-title */
+    margin-bottom: 1.5rem; /* Use a margin-bottom do .section-title */
+    text-align: center; /* Mantenha o alinhamento central */
+  }
+  
+  .section-subtitle {
+    color: #34495e; /* Use a cor do .section-subtitle */
+    font-size: 1.8rem; /* Use o font-size do .section-subtitle */
+    margin-top: 2rem; /* Use a margin-top do .section-subtitle */
+    margin-bottom: 1rem; /* Use a margin-bottom do .section-subtitle */
+    padding-bottom: 0.5rem; /* Use o padding-bottom do .section-subtitle */
+    border: none; /* Mantenha a remoção da borda */
+  }
+  
+  .section-paragraph {
+    font-size: 1.1rem; /* Use o font-size do .section-paragraph */
+    margin-bottom: 1.5rem; /* Use a margin-bottom do .section-paragraph */
+  }
+  
+  .section-list {
+    list-style-type: disc; /* Use o list-style-type do .section-list */
+    padding-left: 2rem; /* Use o padding-left do .section-list */
+    margin-bottom: 2rem; /* Use a margin-bottom do .section-list */
+  }
+  
+  .section-list li {
+    font-size: 1.1rem; /* Use o font-size do item da lista */
+    margin-bottom: 0.5rem; /* Use a margin-bottom do item da lista */
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .content-section {
+        padding: 2rem;
     }
-
-    .page-title {
+  
+    .section-title {
         font-size: 2rem;
     }
-
-    .page-subtitle {
+  
+    .section-subtitle {
         font-size: 1.5rem;
     }
-
-    .page-paragraph {
-        font-size: 0.95rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .page-container {
-        padding: 15px;
-    }
-
-    .page-title {
-        font-size: 1.8rem;
-    }
-
-    .page-subtitle {
-        font-size: 1.3rem;
-    }
-
-    .page-paragraph {
-        font-size: 0.9rem;
-    }
-}
+  }

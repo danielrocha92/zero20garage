@@ -12,14 +12,15 @@
   top: 0;
   left: 0; /* Alinha o elemento à esquerda */
   z-index: 1000;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease, justify-content 0.3s ease; /* Adiciona transição para justify-content */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease, justify-content 0.3s ease, top 0.3s ease;; /* Adiciona transição para justify-content */
 }
+
 
 .navbar:hover {
   background-color: rgba(0, 0, 0, 0.8); /* Fundo mais opaco ao passar o mouse */
 }
 
-.navbar.scrolled {
+.navbar.scrolled-down {
   justify-content: flex-start; /* Alinha a logo à esquerda ao rolar */
   padding: 0.5rem 2rem; /* Recolhe o padding ao rolar */
 }
@@ -31,7 +32,7 @@
   transition: margin-right 0.3s ease; /* Adiciona transição para margin-right */
 }
 
-.navbar.scrolled .navbar-logo {
+.navbar.scrolled-down .navbar-logo {
   margin-right: 1rem; /* Adiciona margem à direita ao rolar */
 }
 
@@ -42,7 +43,7 @@
   transition: transform 0.3s ease, width 0.3s ease; /* Adiciona transição para largura */
 }
 
-.navbar.scrolled .navbar-logo img {
+.navbar.scrolled-down .navbar-logo img {
   width: 5rem; /* Reduz o tamanho do logo ao rolar */
 }
 
@@ -59,7 +60,7 @@
   transition: opacity 0.3s ease, margin-left 0.3s ease; /* Adiciona transição para opacidade e margin-left */
 }
 
-.navbar.scrolled .navbar-links {
+.navbar.scrolled-down .navbar-links {
   opacity: 0;
   margin-left: -100%; /* Esconde os links movendo para a esquerda */
   display: none !important; /* Garante que não ocupem espaço */
@@ -80,21 +81,6 @@
   color: #ff0000; /* Azul ao passar o mouse */
 }
 
-/* Botão "Hambúrguer" */
-.hamburger {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: opacity 0.2s ease-in-out;
-  position: absolute; /* Posiciona o botão */
-  right: 1rem; /* Alinha à direita */
-}
-
-.hamburger:hover {
-  opacity: 0.8;
-}
 
 /* Menu Responsivo */
 .menu {
@@ -128,13 +114,17 @@
   text-align: left;
 }
 
+.hamburger {
+  display: none; /* Esconde o botão "Hambúrguer" por padrão */
+}
+
 /* Media Query para Telas Menores */
 @media (max-width: 768px) {
   .navbar {
     justify-content: center; /* Mantém a logo centralizada inicialmente */
   }
 
-  .navbar.scrolled {
+  .navbar.scrolled-down {
     justify-content: flex-start; /* Alinha a logo à esquerda ao rolar */
   }
 
@@ -155,4 +145,22 @@
   .menu.open {
     display: flex; /* Exibe o menu quando aberto */
   }
+
+  
+/* Botão "Hambúrguer" */
+.hamburger {
+  display: block;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  position: absolute; /* Posiciona o botão */
+  right: 1rem; /* Alinha à direita */
+}
+
+.hamburger:hover {
+  opacity: 0.8;
+}
 }

@@ -11,20 +11,16 @@
   padding: 2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-bottom: 2px solid #1d1d1d;
-  opacity: 0.8;
   overflow: hidden;
-  background: url('../assets/images/header.jpg') center/cover no-repeat;
-  background-size: cover;
-  background-position: center;
-  border-radius: 8px;
-  background-color: rgb(46, 47, 49);
-  color: rgba(0, 0, 0, 1.9);
-  opacity: 0.5
-  z-index 1000;
+
   font-family: 'Nunito', sans-serif; /* Aplica a fonte Nunito */
 }
 
 .header::before {
+   background: 
+  linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)), /* Gradiente escurecedor */
+  url('../assets/images/header.jpg') center/cover no-repeat;
+  filter: blur(0.5px); /* Desfoque */
   content: '';
   position: absolute;
   top: 0;

@@ -42,7 +42,7 @@ const Servicos = () => {
         {
             title: 'Consultoria Técnica',
             description: 'Consultoria especializada para ajudar...',
-            link: '/ct',
+            link: '/cp',
             icon: <FaUsersCog size={90} />, // Ícone para Consultoria Técnica
         },
     ];
@@ -54,14 +54,14 @@ const Servicos = () => {
                 <meta name="description" content="Oferecemos serviços especializados..." />
             </Helmet>
 
-            <div className="services">
+            <div className="page">
                 <DynamicHeader messages={messages} />
                 <WhatsAppButton />
 
                 <div className="container">
                     <section className="section">
                         <div className="service-item">
-                            <h2>Retífica de Motores</h2>
+                            <h2 translate='no'>Retífica de Motores</h2>
                             <p>Serviço completo de retífica de motores...</p>
                         </div>
 

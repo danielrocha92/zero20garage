@@ -17,7 +17,7 @@ function Dp() {
   ];
 
   return (
-    <div className="page-container">
+    <div className="container">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
 

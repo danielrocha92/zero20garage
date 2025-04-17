@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import '../components/Navbar.css';
+import '../styles/Navbar.css'; // Importa o arquivo global de estilos
 import logo from '../assets/images/logo.png'; // Certifique-se de que o caminho está correto
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset); // Rastreia a posição anterior
   const location = useLocation();
 
   const toggleMenu = () => {
@@ -18,14 +19,11 @@ function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const header = document.querySelector('header'); // Selecione sua tag <header>
-      const headerHeight = header ? header.offsetHeight : 0;
+      const currentScrollPos = window.pageYOffset;
+      const visible = prevScrollPos > currentScrollPos; // Mostra a navbar se estiver rolando para cima
 
-      if (window.scrollY > headerHeight) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(!visible); // Inverte o estado para mostrar/ocultar a navbar
+      setPrevScrollPos(currentScrollPos); // Atualiza a posição anterior
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -33,14 +31,14 @@ function Navbar() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [prevScrollPos]); // Adiciona prevScrollPos como dependência
 
   useEffect(() => {
-    setMenuOpen(false); // Fecha o menu ao mudar de rota
+    setMenuOpen(false);
   }, [location]);
 
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+    <nav className={`navbar ${scrolled ? 'scrolled-down' : ''}`}> {/* Altera a classe para 'scrolled-down' */}
       <div className="navbar-logo">
         <Link to="/">
           <img src={logo} alt="Logo" />
@@ -56,7 +54,7 @@ function Navbar() {
           <li><Link to="/orcamento" onClick={handleMenuClick}>Orçamentos</Link></li>
           <li><Link to="/contato" onClick={handleMenuClick}>Contato</Link></li>
           <li><Link to="/sobre" onClick={handleMenuClick}>Sobre</Link></li>
-          <li><Link to="/blog" onClick={handleMenuClick}>Blog</Link></li>
+          <li><Link to="/blog" onClick={handleMenuClick} translate="no">Blog</Link></li>
         </ul>
       </div>
     </nav>

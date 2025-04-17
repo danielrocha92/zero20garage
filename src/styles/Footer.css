@@ -121,6 +121,19 @@
   margin: 1rem;
 }
 
+/* Estilos para os ícones de pagamento */
+.payment-icon {
+  font-size: 2rem; /* Tamanho dos ícones */
+  margin: 0 0.5rem;
+  color: #2c3e50; /* Cor padrão dos ícones */
+  transition: color 0.3s ease;
+}
+
+.payment-icon:hover {
+  color: #c50404; /* Cor ao passar o mouse */
+  cursor: pointer;
+}
+
 /* Estilos para mobile */
 @media (max-width: 768px) {
 .menu-toggle {

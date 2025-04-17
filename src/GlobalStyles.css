@@ -1,5 +1,5 @@
 /* ======================== */
-/* Reset e Fontes Globais   */
+/* Reset e Fontes Globais    */
 /* ======================== */
 * {
   margin: 0;
@@ -29,7 +29,7 @@ html, body {
   --cinza-escuro: #2e2f31;
   --branco: #ffffff;
   --cinza-medio: #353535;
-  --tamanho-titulo: 2rem;
+  --azul-esverdeado: #2c3e50;
   --tamanho-paragrafo: 1rem;
 }
 
@@ -43,9 +43,38 @@ body {
   color: var(--cinza-escuro);
 }
 
+h1 {
+  font-size: 2.8rem; /* Maior título */
+}
+
+h2 {
+  font-size: 2.5rem; /* Título principal de seção */
+}
+
+h3 {
+  font-size: 2rem; /* Subtítulo de seção */
+}
+
+h4 {
+  font-size: 1.7rem; /* Subtítulo menor */
+}
+
+h5 {
+  font-size: 1.4rem; /* Subtítulo ainda menor */
+}
+
+h6 {
+  font-size: 1.1rem; /* Menor subtítulo */
+}
+
 h1, h2, h3, h4, h5, h6 {
   border-bottom: none;
   text-decoration: none;
+  color: var(--azul-esverdeado);
+  margin-bottom: 1rem; /* Espaçamento padrão abaixo dos títulos */
+  margin-top: 2rem; /* Use a margin-top do .section-subtitle */
+  padding-bottom: 0.5rem; /* Use o padding-bottom do .section-subtitle */
+  border: none; /* Mantenha a remoção da borda */
 }
 
 a {
@@ -55,10 +84,10 @@ a {
 
 a:hover,
 a:focus {
-  outline: 2px solid var(--vermelho-principal); /* Adiciona um outline visível no foco */
-  outline-offset: 2px;  /* Melhora a visibilidade do outline */
-  text-decoration: none; /* Adiciona sublinhado ao link quando em foco */
-  color: var(--vermelho-principal); /* Muda a cor do link quando em foco */ 
+  outline: 2px solid var(--vermelho-principal);
+  outline-offset: 2px;
+  text-decoration: none;
+  color: var(--vermelho-principal);
 }
 
 li {
@@ -67,7 +96,7 @@ li {
 }
 
 /* ============================== */
-/* Animação para troca de página  */
+/* Animação para troca de página    */
 /* ============================== */
 .page-enter {
   opacity: 0;
@@ -97,11 +126,42 @@ li {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 1rem; /* Adicionando espaçamento interno */
+  flex-direction: column;
+  align-items: center;
 }
 
 /* ================= */
-/* Botões Globais    */
+/* Layout Page */
+/* ================= */
+.page {
+  padding: 0;
+  color: var(--branco); /* Texto branco para contraste */
+  position: relative;
+}
+
+/* ================= */
+/* Section Global*/
+/* ================= */
+.section {
+  margin: 6rem 0;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.section h2 {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.section p {
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+/* ================= */
+/* Botões Globais     */
 /* ================= */
 .button {
   display: inline-block;
@@ -119,25 +179,122 @@ li {
 .button:hover {
   background-color: rgba(54, 24, 24, 0.5);
   transform: scale(1.05);
+  text-decoration: none;
 }
 
 /* ================= */
-/* Responsividade    */
+/* Links Globais      */
+/* ================= */
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+}
+
+.links li {
+  background-color: var(--vermelho-principal);
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.links a {
+  text-decoration: none;
+  color: var(--branco);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.links a:hover {
+  background-color: rgba(197, 4, 4, 0.8);
+  transform: scale(1.05);
+}
+
+/* ================= */
+/* Ícones Globais    */
+/* ================= */
+
+.icon-small {
+  font-size: 1rem;
+}
+
+.icon-medium {
+  font-size: 2rem;
+}
+
+.icon-large {
+  font-size: 3rem;
+}
+
+/* ================= */
+/* Responsividade     */
 /* ================= */
 @media (max-width: 768px) {
-  :root {
-    --tamanho-titulo: 1.8rem;
-    --tamanho-paragrafo: 0.9rem;
+  h1 {
+    font-size: 2.4rem;
+  }
+
+  h2 {
+    font-size: 2.2rem;
+  }
+
+  h3 {
+    font-size: 1.8rem;
+  }
+
+  h4 {
+    font-size: 1.6rem;
+  }
+
+  h5 {
+    font-size: 1.3rem;
+  }
+
+  h6 {
+    font-size: 1rem;
   }
 
   .container {
     padding: 1rem;
   }
+
+  .button {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+
 }
 
 @media (max-width: 480px) {
-  :root {
-    --tamanho-titulo: 1.5rem;
-    --tamanho-paragrafo: 0.8rem;
+  h1 {
+    font-size: 2rem;
   }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.6rem;
+  }
+
+  h4 {
+    font-size: 1.4rem;
+  }
+
+  h5 {
+    font-size: 1.2rem;
+  }
+
+  h6 {
+    font-size: 0.9rem;
+  }
+
+  .button {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.8rem;
+  }
+
 }

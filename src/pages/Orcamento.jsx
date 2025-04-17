@@ -57,7 +57,7 @@ function Orcamento() {
   };
 
   return (
-    <div className="orcamento-page">
+    <div className="page">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
 

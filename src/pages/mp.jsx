@@ -20,7 +20,6 @@ function Mp() {
         <div className="page-container">
             <DynamicHeader messages={messages} />
             <WhatsAppButton />
-
             <section className="content-section">
                 <h2 className="section-title">Manutenção Preventiva</h2>
                 <p className="section-paragraph">

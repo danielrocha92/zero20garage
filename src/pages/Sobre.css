@@ -1,7 +1,8 @@
 /* Estilos do Sobre */
-.sobre {
-  background-color: #2e2f31;
-  padding: 0rem 0;
+.page {
+  padding: 0;
+  color: var(--branco); /* Texto branco para contraste */
+  position: relative;
 }
 
 @import "~slick-carousel/slick/slick.css";

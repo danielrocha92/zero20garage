@@ -73,13 +73,13 @@ function Contato() {
   };
 
   return (
-    <div className="contato-page">
+    <div className="page">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
 
       <div className="container">
-        <section className="info-section">
-          <div className='info-section'>
+        <section className="section">
+          <div className='section'>
             <div className='item'>
               <h2>Entre em Contato</h2>
               <p>Estamos aqui para ajudar. Entre em contato conosco pelos canais abaixo:</p>

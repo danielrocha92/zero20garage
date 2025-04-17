@@ -1,7 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import DynamicHeader from '../components/DynamicHeader';
+import WhatsAppButton from '../components/WhatsAppButton';
 import './Termos.css';
 
 const Termos = () => {
+
+  const messages = [
+    {
+      title: 'Aceitação dos Termos',
+      subtitle: 'Ao acessar e utilizar este site, você concorda em cumprir e estar vinculado a estes Termos de Uso.',
+    },
+    {
+      title: 'Contato',
+      subtitle: 'Se você tiver alguma dúvida sobre estes Termos de Uso, entre em contato conosco através das informações de contato fornecidas no site.',
+    },
+  ];
     const [lastUpdated, setLastUpdated] = useState('');
 
     // Função para atualizar a data
@@ -27,6 +40,8 @@ const Termos = () => {
 
   return (
     <div className="terms-of-use-container">
+      <DynamicHeader messages={messages} />
+      <WhatsAppButton />
       <h2 className="terms-of-use-title">Termos de Uso - ZER0 20 GARAGE™</h2>
       <p className="terms-of-use-paragraph">
         Bem-vindo ao site da <strong>ZER0 20 GARAGE™</strong>! Ao acessar ou utilizar nosso site, você concorda com os presentes Termos de Uso. Leia atentamente este documento. Se você não concordar com algum dos termos aqui apresentados, por favor, não utilize nosso site.

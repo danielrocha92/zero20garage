@@ -28,7 +28,7 @@ function Sobre() {
   ];
 
   return (
-    <div className="sobre">
+    <div className="page">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
       <div className="container">

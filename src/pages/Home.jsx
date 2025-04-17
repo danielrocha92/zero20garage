@@ -1,5 +1,5 @@
 import React from 'react';
-import './Home.css' // Importa o arquivo global de estilos
+import '../styles/Home.css' // Importa o arquivo global de estilos
 import GoogleReviews from '../components/GoogleReviews';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
@@ -21,7 +21,7 @@ function Home() {
     ];
 
   return (
-    <div className="home">
+    <div className="page">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
           {/* Card padrão Section */}
@@ -29,7 +29,7 @@ function Home() {
             <section className="section">
               <div className='section'>
                 <div className='highlight-item'>
-                <h1>Zero 20 Garage</h1>
+                <h1 translate="no">Zero 20 Garage</h1>
                 <h2>Excelência em Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
                 <h3>Atendimento especializado para veículos nacionais e importados.</h3>
                   <a href="/orcamento" className="cta-button">Solicite um Orçamento</a>

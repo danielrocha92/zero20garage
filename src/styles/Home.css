@@ -1,0 +1,61 @@
+/* Estilos da Página Home */
+.page {
+  padding: 0;
+  color: var(--branco); /* Texto branco para contraste */
+  position: relative;
+}
+
+/* Título Principal */
+.home h1 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: var(--vermelho-principal); /* Vermelho para destaque */
+}
+
+/* Subtítulo */
+.home h2 {
+  font-size: 2rem;
+  color: var(--vermelho-principal); /* Vermelho para consistência */
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Parágrafos */
+.home p {
+  font-size: 1.2rem;
+  color: var(--branco); /* Texto branco */
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .home h1 {
+    font-size: 2.5rem;
+  }
+
+  .home h2 {
+    font-size: 1.8rem;
+  }
+
+  .home p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .home h1 {
+    font-size: 2rem;
+  }
+
+  .home h2 {
+    font-size: 1.5rem;
+  }
+
+  .home p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}

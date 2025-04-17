@@ -1,5 +1,5 @@
 import React from 'react';
-import './Blog.css';
+import '../styles/Blog.css' // Importa o arquivo global de estilos
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
 import BlogNav from '../components/BlogNav';
@@ -27,12 +27,12 @@ function Blog() {
     <div className="blog-page">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
-      <div className="container">
+      <section className="content-section">
         <BlogNav />
         <BlogSectionRetifica />
         <BlogSectionProcesso />
         <BlogSectionManutencao />
-      </div>
+      </section>
     </div>
   );
 }
