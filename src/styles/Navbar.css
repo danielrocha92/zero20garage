@@ -12,7 +12,7 @@
   top: 0;
   left: 0; /* Alinha o elemento à esquerda */
   z-index: 1000;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease, justify-content 0.3s ease, top 0.3s ease;; /* Adiciona transição para justify-content */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease; justify-content: 0.3s ease, top 0.3s ease; /* Adiciona transição para justify-content */
 }
 
 
@@ -34,13 +34,17 @@
 
 .navbar.scrolled-down .navbar-logo {
   margin-right: 1rem; /* Adiciona margem à direita ao rolar */
+  transition: transform 0.3s ease, width 0.3s ease; /* Adiciona transição para largura */
 }
 
 .navbar-logo img {
   width: 7rem;
   height: auto;
   display: block;
-  transition: transform 0.3s ease, width 0.3s ease; /* Adiciona transição para largura */
+  transition: transform 0.3s ease, width 0.3s ease, opacity 0.3s ease; /* Adiciona transição para opacity */
+  opacity: 1; /* Define a opacidade inicial como 100% */
+  filter: brightness(1); /* Define o brilho inicial como 100% */
+  margin-right: 1rem; /* Adiciona margem à direita */
 }
 
 .navbar.scrolled-down .navbar-logo img {

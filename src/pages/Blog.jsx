@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Blog.css' // Importa o arquivo global de estilos
+import '../styles/Blog.css';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
 import BlogNav from '../components/BlogNav';
@@ -24,10 +24,14 @@ function Blog() {
   ];
 
   return (
-    <div className="blog-page">
+    <div className="page-container">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
       <section className="content-section">
+        <h2 className="section-title">Blog ZER0 20 GARAGE™</h2>
+        <p className="section-paragraph">
+          Explore artigos, dicas e notícias sobre manutenção automotiva, retífica de motores e inovações do setor.
+        </p>
         <BlogNav />
         <BlogSectionRetifica />
         <BlogSectionProcesso />

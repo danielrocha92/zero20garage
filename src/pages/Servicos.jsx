@@ -50,7 +50,9 @@ const Servicos = () => {
     return (
         <>
             <Helmet>
-                <title>Serviços de Retífica de Motores e Manutenção | Zero20 Garage</title>
+                <title>
+                    Serviços de Retífica de Motores e Manutenção | Zero20 Garage
+                </title>
                 <meta name="description" content="Oferecemos serviços especializados..." />
             </Helmet>
 

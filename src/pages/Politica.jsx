@@ -25,9 +25,14 @@ const Privacidade = () => {
 
   return (
     <div className="privacy-policy-container">
-      <h2 className="privacy-policy-title">Política de Privacidade - ZER0 20 GARAGE™</h2>
-
-      <p className="privacy-policy-paragraph">
+      <h2 
+        translate="no"
+        className="privacy-policy-title">
+        Política de Privacidade - ZER0 20 GARAGE™
+        </h2>
+      <p 
+      translate="no"
+      className="privacy-policy-paragraph">
         Esta Política de Privacidade descreve como a <strong>ZERO 20 GARAGE™</strong> coleta, usa, compartilha e protege as informações pessoais dos usuários do nosso website. Ao acessar ou usar nosso website, você concorda com os termos desta Política de Privacidade.
       </p>
 

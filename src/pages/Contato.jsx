@@ -90,6 +90,7 @@ function Contato() {
                     href="https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.326345,-46.5770842,17z/data=!3m1!4b1!4m6!3m5!1s0x94ceede375ca12c9:0xa22173d27f744745!8m2!3d-23.3263499!4d-46.5745093!16s%2Fg%2F11sgrc1ckt?authuser=0&entry=ttu&g_ep=EgoyMDI1MDQwOS4wIKXMDSoASAFQAw%3D%3D"
                     target="_blank"
                     rel="noopener noreferrer"
+                    translate="no"
                     aria-label="Endereço Zero 20 Garage"
                   >
                     Avenida Laura Gomes Hannickel, 153 - Capoavinha, Mairiporã - SP

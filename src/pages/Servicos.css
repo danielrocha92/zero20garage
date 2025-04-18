@@ -5,7 +5,7 @@
   --texto-principal: #333;
   --texto-secundario: #555;
   --cor-destaque: #c50404;
-  --fonte-principal: 'Montserrat', sans-serif;
+  --fonte-principal: 'Ubuntu', sans-serif;
   --fonte-titulo: 'Playfair Display', serif;
 }
 
@@ -14,13 +14,6 @@
   padding: 0;
   color: var(--branco); /* Texto branco para contraste */
   position: relative;
-}
-
-/* Bloco: container */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
 }
 
 /* Bloco: service-grid */
@@ -33,7 +26,6 @@
 
 /* Bloco: service-item */
 .service-item {
-  background-color: var(--cinza-claro);
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -46,7 +38,8 @@
 
 /* Modificador: service-item:hover */
 .service-item:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
 }
 
 /* Elemento: service-item__title */

@@ -65,38 +65,6 @@
     color: #ffffff;
   }
 
-  .highlight-item {
-    flex: 1 1 calc(33.333% - 2rem);
-  }
-  
-  .highlight-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
-  }
-  
-  .highlight-item h1 {
-    font-size: 4rem;
-    color: #ffffff;
-    margin-bottom: 0.5rem;
-  }
-  
-  .highlight-item h2 {
-    font-size: 3rem;
-    color: #ffffff;
-    margin-bottom: 0.5rem;
-  }
-  
-  .highlight-item h3 {
-    font-size: 1.5rem;
-    color: #c50404;
-    margin-bottom: 0.5rem;
-  }
-  
-  .highlight-item p {
-    font-size: 1rem;
-    color: #fff;
-  }
-
   @media (max-width: 768px) {
   .highlight-item h1 {
     font-size: 3rem; /* Reduz o tamanho do título do item de destaque */

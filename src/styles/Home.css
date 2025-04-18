@@ -5,29 +5,17 @@
   position: relative;
 }
 
-/* Título Principal */
-.home h1 {
-  margin-bottom: 1.5rem;
-  text-align: center;
-  color: var(--vermelho-principal); /* Vermelho para destaque */
-}
 
-/* Subtítulo */
-.home h2 {
-  font-size: 2rem;
-  color: var(--vermelho-principal); /* Vermelho para consistência */
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-/* Parágrafos */
-.home p {
+.adress {
   font-size: 1.2rem;
   color: var(--branco); /* Texto branco */
   line-height: 1.8;
   margin-bottom: 1.5rem;
   text-align: center;
+  font-style: normal;
+  margin-top: 1.25rem; /* Usando rem */
 }
+
 
 /* Responsividade */
 @media (max-width: 768px) {

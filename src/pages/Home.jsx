@@ -27,42 +27,42 @@ function Home() {
           {/* Card padrão Section */}
           <div className="container">
             <section className="section">
-              <div className='section'>
                 <div className='highlight-item'>
                 <h1 translate="no">Zero 20 Garage</h1>
                 <h2>Excelência em Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
                 <h3>Atendimento especializado para veículos nacionais e importados.</h3>
                   <a href="/orcamento" className="cta-button">Solicite um Orçamento</a>
                 </div>
-              </div>
             </section>
 
           {/* Destaques */}
           <section className="section">
-              <div className='section'>
                 <div className='highlight-item'>
                   <h2>Por que Escolher a Zero20 Garage?</h2>
                   <div className="highlights-grid">
                   <div className="highlight-item">
-                      <h2>Ofertas Especiais</h2>
-                      <p>Descontos exclusivos para serviços de retífica e manutenção.</p>
+                      <h2>Pagamento</h2>
+                      <p>em até 12x (Consulte Condições)
+                      5% de Desconto no valor da Retífica Para Pagamento À Vista</p>
                     </div>
                     <div className="highlight-item">
-                      <h2>Certificações</h2>
-                      <p>Equipe certificada e equipamentos de última geração.</p>
+                      <h2>Garantia</h2>
+                      <p>8 Valvulas = 2 anos De garantia ou 100.000KM</p>
+                      <p>
+                      16 Valvulas = 1 ano ou 50.00KM</p>
                     </div>
                     <div className="highlight-item">
-                      <h2>Clientes Satisfeitos</h2>
-                      <p>Veja o que nossos clientes dizem sobre nossos serviços.</p>
+                      <h2>Tempo de entrega</h2>
+                      <p>Motor Nacional = 4 a 7 Dias Úteis</p>
+                      <p>Motor Importado = 10 a 15 Dias Úteis</p>
+                      <p>Motor Diesel = 10 a 15 Dias Úteis</p>
                     </div>
                 </div>
-              </div>
               </div>
           </section>
 
             {/* Serviços Destacados */}
             <section className="section">
-              <div className='section'>
                 <div className='highlight-item'>
                       <h2>Retífica de Motores</h2>
                       <p>Recuperação completa do motor com precisão e qualidade.</p>
@@ -77,14 +77,12 @@ function Home() {
                     </div>
                 </div>
               </div>
-              </div>
             </section>
 
           {/* Conteúdo adicional */}
     
           {/* Depoimentos */}
           <section className="section">
-            <div className='section'>
               <div className='highlight-item'>
                 <h2>O que Nossos Clientes Dizem</h2>
                 {/* Avaliações Google Maps */}
@@ -98,22 +96,17 @@ function Home() {
                   <p>- Maria Oliveira</p>
                 </div>
               </div>
-            </div>
           </section>
 
       {/* home */}
-      <div className='home'>
+      <div className='page'>
             <div className="highlight-item">
-              <div className="home-info">
-                <h2>Estamos Aqui para Ajudar</h2>
-                <p>Entre em contato conosco para agendar um serviço ou tirar dúvidas.</p>
-                <a href="/contato" className="cta-button">Fale Conosco</a>
-                </div>
-                <div className="contact-info">
-                <p><strong>Telefone:</strong> (11) 94109-7471</p>
-                <p><strong>E-mail:</strong> contato@zero20garage.com</p>
-                <a href="https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.3263499,-46.5770842,17z/data=!3m1!4b1!4m6!3m5!1s0x94ceede375ca12c9:0xa22173d27f744745!8m2!3d-23.3263499!4d-46.5745093!16s%2Fg%2F11sgrc1ckt?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="cta-button">Ver Localização</a>
-              </div>
+            <address className="address">
+          <strong>ZER0 20 GARAGE™</strong><br />
+          <a href='https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.326345,-46.5770842,17z/data=!3m1!4b1!4m6!3m5!1s0x94ceede375ca12c9:0xa22173d27f744745!8m2!3d-23.3263499!4d-46.5745093!16s%2Fg%2F11sgrc1ckt?authuser=0&entry=ttu&g_ep=EgoyMDI1MDQwOS4wIKXMDSoASAFQAw%3D%3D'target='blank'>Avenida Laura Gomes Hannickel, 153 - Capoavinha, Mairiporã - SP</a><br />
+          <a href="tel:+5511941097471">(11) 94109-7471</a><br />
+          <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a>
+        </address>
           </div>
         </div>
       </div>

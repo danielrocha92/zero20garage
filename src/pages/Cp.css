@@ -60,22 +60,3 @@
     color: #ffffff;
     line-height: 1.6;
 }
-
-.cta-button {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    color: #fff;
-    background-color: #c50404;
-    border: none;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    cursor: pointer;
-}
-
-.cta-button:hover {
-    background-color: rgba(54, 24, 24, 0.5);
-    color: #c50404;
-    transform: scale(1.05);
-}
