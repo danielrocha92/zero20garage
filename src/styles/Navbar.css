@@ -3,10 +3,10 @@
   display: flex;
   justify-content: center; /* Centraliza inicialmente */
   align-items: center;
-  padding: 0.5rem 0.8rem;
-  background-color: rgba(0, 0, 0, 0.5); /* Fundo preto com transparência */
+  padding: 0.1rem 0.1rem;
+  background-color: rgba(0, 0, 0, 0.904); /* Fundo preto com transparência */
   color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.048);
   position: fixed; /* Fixa o elemento na tela */
   width: 100%; /* Garante que ocupe toda a largura */
   top: 0;

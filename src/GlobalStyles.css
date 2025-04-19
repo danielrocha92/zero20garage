@@ -183,7 +183,7 @@ li {
   text-decoration: none;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  padding: 1rem;
+  padding: 2rem;
   transform: scale(1.05);
 }
 
@@ -201,7 +201,7 @@ li {
   justify-content: center;
 }
 
-.links li {
+.links li a {
   background-color: var(--vermelho-principal);
   padding: 10px 15px;
   border-radius: 8px;
@@ -214,10 +214,7 @@ li {
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.links a:hover {
-  background-color: rgba(197, 4, 4, 0.8);
-  transform: scale(1.05);
-}
+
 
 /* ================= */
 /* Ícones Globais    */
