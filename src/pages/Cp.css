@@ -1,62 +1,73 @@
 /* Troca Peça.css */
-.cp-page {
-    text-align: center;
-    background-color: #2e2f31;
-    padding: 0rem 0;
-    color: #fff;
-    bottom: 0;
-    left: 0;
-    opacity: 1.5;
-    right: 0;
-    top: 0;
-    }
-    
-.container {
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: #353535;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-    
-.cp-info-section {
-    margin-bottom: 2rem;
-    text-align: center;
+/* Importar a fonte Open Sans do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+/* Fonte padrão para todo o corpo */
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0; /* Fundo claro */
+  color: #333; /* Texto escuro para contraste */
+  line-height: 1.6;
 }
 
-.cp-info-section h2 {
-    font-size: 2rem;
-    color: #ffffff;
-    margin-bottom: 1rem;
+.page-container {
+  background-color: #f0f0f0;
+  padding: 0rem 0;
 }
 
-.cp-info-section p {
-    font-size: 1.1rem;
-    color: #ffffff;
+.container-section {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 3rem;
+  margin-top: 2rem;
 }
 
-.cp-items h2 {
-    font-size: 2.5rem;
-    color: #ffffff;
-    margin-bottom: 1rem;
+.section-title {
+  color: #2c3e50; /* Use a cor do .section-title */
+  font-size: 2.5rem; /* Use o font-size do .section-title */
+  margin-bottom: 1.5rem; /* Use a margin-bottom do .section-title */
+  text-align: center; /* Mantenha o alinhamento central */
 }
 
-.cp-items p {
-    font-size: 1.1rem;
-    color: #ffffff;
-    line-height: 1.6;
-    margin-bottom: 1rem;
+.section-subtitle {
+  color: #34495e; /* Use a cor do .section-subtitle */
+  font-size: 1.8rem; /* Use o font-size do .section-subtitle */
+  margin-top: 2rem; /* Use a margin-top do .section-subtitle */
+  margin-bottom: 1rem; /* Use a margin-bottom do .section-subtitle */
+  padding-bottom: 0.5rem; /* Use o padding-bottom do .section-subtitle */
+  border: none; /* Mantenha a remoção da borda */
 }
 
-.cp-items ul {
-    list-style: disc;
-    padding-left: 2rem;
-    margin-bottom: 1rem;
+.section-paragraph {
+  font-size: 1.1rem; /* Use o font-size do .section-paragraph */
+  margin-bottom: 1.5rem; /* Use a margin-bottom do .section-paragraph */
 }
 
-.cp-items li {
-    font-size: 1.1rem;
-    color: #ffffff;
-    line-height: 1.6;
+.section-list {
+  list-style-type: disc; /* Use o list-style-type do .section-list */
+  padding-left: 2rem; /* Use o padding-left do .section-list */
+  margin-bottom: 2rem; /* Use a margin-bottom do .section-list */
+}
+
+.section-list li {
+  font-size: 1.1rem; /* Use o font-size do item da lista */
+  margin-bottom: 0.5rem; /* Use a margin-bottom do item da lista */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .content-section {
+      padding: 2rem;
+  }
+
+  .section-title {
+      font-size: 2rem;
+  }
+
+  .section-subtitle {
+      font-size: 1.5rem;
+  }
 }

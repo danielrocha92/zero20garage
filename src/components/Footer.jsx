@@ -46,7 +46,7 @@ function Footer() {
       </div>
       </div>
 
-      <div className="footer-content-wrapper">
+      <div className="footer-content-wrapper-Payment">
         {/* Seção Formas de Pagamento */}
         <div className="footer-card">
           <span className="title">Formas de Pagamento:</span>

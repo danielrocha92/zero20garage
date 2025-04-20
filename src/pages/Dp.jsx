@@ -17,7 +17,7 @@ function Dp() {
   ];
 
   return (
-    <div className="container">
+    <div className="page-container">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
 
@@ -25,7 +25,9 @@ function Dp() {
         <h2 className="section-title">
           Diagnóstico de Problemas no Motor
         </h2>
-        <p className="section-paragraph">Diagnóstico preciso para identificar e resolver problemas no motor do seu veículo.</p>
+        <p className="section-paragraph">
+          Diagnóstico preciso para identificar e resolver problemas no motor do seu veículo.
+        </p>
 
         <h3 className="section-subtitle">
           Por que fazer um diagnóstico?
@@ -37,7 +39,7 @@ function Dp() {
           <h3 className="section-subtitle">
             O que inclui o diagnóstico?
           </h3>
-          <ul>
+          <ul className="section-list">
             <li>Diagnóstico eletrônico</li>
             <li>Teste de compressão</li>
             <li>Análise de gases</li>
