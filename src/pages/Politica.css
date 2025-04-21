@@ -1,47 +1,97 @@
-    /* Estilos gerais para o corpo da página */
-    body {
-        font-family: 'Montserrat', sans-serif;
-        line-height: 1.6;
-        color: #333;
-        background-color: #f9f9f9;
-        margin: 0;
-        padding: 20px;
+/* Estilos gerais para o corpo da página */
+/* Troca Peça.css */
+.page-container {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* Usando rem */
+  margin: 0rem auto;
+  max-width: 1200px;
+  padding: 2rem; /* Usando rem */
+}
+  
+  .container-section {
+    background-color: #000000;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    margin-top: 2rem;
+  }
+  
+  .section-title {
+    color: #000000; /* Use a cor do .section-title */
+    font-size: 2.5rem; /* Use o font-size do .section-title */
+    margin-bottom: 1.5rem; /* Use a margin-bottom do .section-title */
+    text-align: center; /* Mantenha o alinhamento central */
+  }
+  
+  .section-subtitle {
+    color: #000000; /* Use a cor do .section-subtitle */
+    font-size: 1.8rem; /* Use o font-size do .section-subtitle */
+    margin-top: 2rem; /* Use a margin-top do .section-subtitle */
+    margin-bottom: 1rem; /* Use a margin-bottom do .section-subtitle */
+    padding-bottom: 0.5rem; /* Use o padding-bottom do .section-subtitle */
+    border: none; /* Mantenha a remoção da borda */
+  }
+  
+  .section-paragraph {
+    font-size: 1.1rem; /* Use o font-size do .section-paragraph */
+    margin-bottom: 1.5rem; /* Use a margin-bottom do .section-paragraph */
+  }
+  
+  .section-list {
+    list-style-type: disc; /* Use o list-style-type do .section-list */
+    padding-left: 2rem; /* Use o padding-left do .section-list */
+    margin-bottom: 2rem; /* Use a margin-bottom do .section-list */
+  }
+  
+  .section-list li {
+    font-size: 1.1rem; /* Use o font-size do item da lista */
+    margin-bottom: 0.5rem; /* Use a margin-bottom do item da lista */
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .content-section {
+        padding: 2rem;
     }
-
-    /* Container principal para centralizar o conteúdo */
-    .privacy-policy-container {
-        max-width: 960px;
-        margin: 15rem auto;
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+    .section-title {
+        font-size: 2rem;
     }
+  
+    .section-subtitle {
+        font-size: 1.5rem;
+    }
+  }
 
     /* Título Principal */
 .privacy-policy-title {
     font-size: 2.5rem;
-    color: #2c3e50;
+    color: #000000;
     margin-bottom: 20px;
     text-align: center;
+    font-weight: bold;
 }
 
 /* Subtítulos */
 .privacy-policy-subtitle {
-    font-size: 1.5em;
-    color: #34495e;
-    margin-top: 25px;
-    margin-bottom: 10px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
+  border-bottom: 2px solid #ddd;
+  color: #34495e;
+  font-size: 1.5rem;
+  margin-bottom: 0.625rem; /* Usando rem */
+  margin-top: 1.5625rem; /* Usando rem */
+  padding-bottom: 0.3125rem; /* Usando rem */
 }
 
 /* Parágrafos */
 .privacy-policy-paragraph {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
+  color: #000000;
+  font-size: 1.1em;
+  line-height: 1.1;
+  text-align: justify;
 }
 
-  
 .privacy-policy-link {
     color: #c0392b;
     text-decoration: none;
@@ -53,12 +103,12 @@
   
   .privacy-policy-list {
     list-style-type: disc;
-    padding-left: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 0.9375rem; /* Usando rem */
+    padding-left: 1.25rem; /* Usando rem */
   }
   
   .privacy-policy-list li {
-    margin-bottom: 5px;
+    margin-bottom: 0.3125rem; /* Usando rem */
   }
   
   .prohibited-list {
@@ -71,20 +121,20 @@
   }
   
   .privacy-policy-address {
-    margin-top: 20px;
     font-style: normal;
+    margin-top: 1.25rem; /* Usando rem */
   }
   
   .acknowledgment {
-    margin-top: 30px;
-    font-style: italic;
     color: #777;
+    font-style: italic;
+    margin-top: 1.875rem; /* Usando rem */
   }
   
   .privacy-policy-last-updated {
-    margin-top: 10px;
     color: #999;
     font-size: 0.9em;
+    margin-top: 0.625rem; /* Usando rem */
     text-align: right;
   }
 
@@ -92,7 +142,7 @@
     .last-updated {
         margin-top: 30px;
         font-size: 0.9em;
-        color: #777;
+        color: #000000;
         text-align: center;
     }
 
@@ -100,7 +150,7 @@
     .agreement {
         margin-top: 20px;
         font-style: italic;
-        color: #666;
+        color: #000000;
         text-align: center;
     }
 

@@ -1,7 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import './Politica.css'; // Importe o arquivo CSS para estilos específicos
+import DynamicHeader from '../components/DynamicHeader';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 const Privacidade = () => {
+  const messages = [
+    {
+      title: 'Que tipo de serviços a 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™ oferece?',
+      subtitle: 'Somos uma oficina mecânica e retífica de motores especializada em veículos nacionais e importados.',
+    },
+    {
+      title: 'Vocês trabalham com carros importados?',
+      subtitle: 'Sim, somos especialistas em motores tanto de veículos nacionais quanto importados.',
+    },
+    {
+      title: 'Posso confiar nos serviços da 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™?',
+      subtitle: 'Sim, prezamos pela confiança e qualidade em todos os nossos serviços. Nossa equipe experiente está pronta para cuidar do seu carro.',
+    },
+  ];
+
 
   const [lastUpdated, setLastUpdated] = useState('');
 
@@ -24,10 +41,13 @@ const Privacidade = () => {
   };
 
   return (
-    <div className="privacy-policy-container">
+    <div className="terms-of-use-container">
+      <DynamicHeader messages={messages} />
+      <WhatsAppButton />
+
       <h2 
         translate="no"
-        className="privacy-policy-title">
+        className="terms-of-use-title">
         Política de Privacidade - ZER0 20 GARAGE™
         </h2>
       <p 
@@ -78,7 +98,7 @@ const Privacidade = () => {
         Data da última atualização: {lastUpdated}
       </p>
 
-      <button onClick={handleContentUpdate}>.</button>
+      <button onClick={handleContentUpdate}>.</button>     
     </div>
   );
 };

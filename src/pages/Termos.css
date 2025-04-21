@@ -41,7 +41,18 @@
 /* ===================== */
 
 .terms-of-use-paragraph {
-  margin-bottom: 0.9375rem; /* Usando rem */
+  margin-bottom: 15px;
+  color: #000000;
+  font-size: 1.1em;
+  line-height: 1.1;
+  text-align: justify;
+}
+
+.terms-of-use-list ul, li{
+  color: #000000;
+  font-size: 1.1em;
+  line-height: 1.1;
+  text-align: justify;
 }
 
 /* ===================== */
