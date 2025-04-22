@@ -17,10 +17,10 @@ function TrabalheConosco() {
   ];
 
   return (
-    <div className="container">
+    <div className="page">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
-      <div className="content-section">
+      <div className="container-footer">
         <h2 className="section-title">Trabalhe Conosco</h2>
         <h3>Envie seu currículo e faça parte da nossa equipe.</h3>
       </div>

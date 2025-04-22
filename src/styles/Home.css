@@ -1,11 +1,4 @@
 /* Estilos da Página Home */
-.page {
-  padding: 0;
-  color: var(--branco); /* Texto branco para contraste */
-  position: relative;
-}
-
-
 .adress {
   font-size: 1.2rem;
   color: var(--branco); /* Texto branco */

@@ -77,6 +77,42 @@ h1, h2, h3, h4, h5, h6 {
   border: none; /* Mantenha a remoção da borda */
 }
 
+/* ===================== */
+/* Título Principal */
+/* ===================== */
+
+.subPage-title {
+  color: #2c3e50;
+  font-size: 2rem;
+  margin-bottom: 1.25rem; /* Usando rem */
+  text-align: center;
+}
+
+/* ===================== */
+/* Subtítulos */
+/* ===================== */
+
+.subPage-subtitle {
+  border-bottom: 2px solid #ddd;
+  color: #34495e;
+  font-size: 1.5rem;
+  margin-bottom: 0.625rem; /* Usando rem */
+  margin-top: 1.5625rem; /* Usando rem */
+  padding-bottom: 0.3125rem; /* Usando rem */
+}
+
+/* ===================== */
+/* Parágrafos */
+/* ===================== */
+
+.subPage-paragraph {
+  margin-bottom: 15px;
+  color: #000000;
+  font-size: 1.1em;
+  line-height: 1.1;
+  text-align: justify;
+}
+
 /* ================ */
 /* Botão de âncora  */
 /* ================ */
@@ -134,6 +170,15 @@ li {
   align-items: center;
 }
 
+.container-footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem; /* Adicionando espaçamento interno */
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--branco);
+}
+
 /* ================= */
 /* Layout Page */
 /* ================= */
@@ -142,7 +187,6 @@ li {
   color: var(--branco); /* Texto branco para contraste */
   position: relative;
 }
-
 /* ================= */
 /* Section Global*/
 /* ================= */
@@ -159,6 +203,23 @@ li {
 }
 
 .section p {
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+.subPage-section {
+  margin: 2rem 0;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.subPage-section h2 {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.subPage-section p {
   font-size: 1.1rem;
   color: #ffffff;
 }
@@ -186,8 +247,6 @@ li {
   padding: 2rem;
   transform: scale(1.05);
 }
-
-
 
 /* ================= */
 /* Links Globais      */

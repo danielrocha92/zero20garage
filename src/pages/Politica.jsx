@@ -41,10 +41,10 @@ const Privacidade = () => {
   };
 
   return (
-    <div className="terms-of-use-container">
+    <div className="page">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
-
+      <div className="container-footer">
       <h2 
         translate="no"
         className="terms-of-use-title">
@@ -99,6 +99,7 @@ const Privacidade = () => {
       </p>
 
       <button onClick={handleContentUpdate}>.</button>     
+    </div>
     </div>
   );
 };
