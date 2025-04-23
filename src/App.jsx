@@ -13,7 +13,7 @@ import Contato from './pages/Contato';
 import Servicos from './pages/Servicos';
 import Dp from './pages/Dp';
 import Tp from './pages/Tp';
-import Mp from './pages/Mp';
+//*import Mp from './pages/Mp';
 import Td from './pages/Td';
 import Cp from './pages/Cp';
 import Orcamento from './pages/Orcamento';
@@ -42,7 +42,7 @@ function App() {
           <Route path="/Sobre" element={<Sobre />} />
           <Route path="/Contato" element={<Contato />} />
           <Route path="/Servicos" element={<Servicos />} />
-          <Route path="/Mp" element={<Mp />} />
+          {/*<Route path="/Mp" element={<Mp />} />*/}
           <Route path="/Dp" element={<Dp />} />
           <Route path="/Tp" element={<Tp />} />
           <Route path="/Td" element={<Td />} />
