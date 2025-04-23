@@ -13,7 +13,7 @@ import Contato from './pages/Contato';
 import Servicos from './pages/Servicos';
 import Dp from './pages/Dp';
 import Tp from './pages/Tp';
-//*import Mp from './pages/Mp';*//
+import Mp from './pages/Mp';
 import Td from './pages/Td';
 import Cp from './pages/Cp';
 import Orcamento from './pages/Orcamento';
@@ -39,21 +39,21 @@ function App() {
         <Routes>
           {/* Defina suas rotas aqui */}
           <Route path="/" element={<Home />} />
-          <Route path="/sobre" element={<Sobre />} />
-          <Route path="/contato" element={<Contato />} />
-          <Route path="/servicos" element={<Servicos />} />
-          {/*<Route path="/mp" element={<Mp />} />*/}
-          <Route path="/dp" element={<Dp />} />
-          <Route path="/tp" element={<Tp />} />
-          <Route path="/td" element={<Td />} />
-          <Route path="/cp" element={<Cp />} />
-          <Route path="/orcamento" element={<Orcamento />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/politica" element={<Politica />} />
-          <Route path="/trocas" element={<Trocas />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="/trabalhe-conosco" element={<TrabalheConosco />} />
-          <Route path="/termos" element={<Termos />} />
+          <Route path="/Sobre" element={<Sobre />} />
+          <Route path="/Contato" element={<Contato />} />
+          <Route path="/Servicos" element={<Servicos />} />
+          <Route path="/Mp" element={<Mp />} />
+          <Route path="/Dp" element={<Dp />} />
+          <Route path="/Tp" element={<Tp />} />
+          <Route path="/Td" element={<Td />} />
+          <Route path="/Cp" element={<Cp />} />
+          <Route path="/Orcamento" element={<Orcamento />} />
+          <Route path="/Blog" element={<Blog />} />
+          <Route path="/Politica" element={<Politica />} />
+          <Route path="/Trocas" element={<Trocas />} />
+          <Route path="/Faq" element={<Faq />} />
+          <Route path="/Trabalhe-conosco" element={<TrabalheConosco />} />
+          <Route path="/Termos" element={<Termos />} />
           
           {/* Adicione outras rotas aqui conforme necessário */}
           {/* Rota para a página de serviços - exemplo de rota aninhada */}
