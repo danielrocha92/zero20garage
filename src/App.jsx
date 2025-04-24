@@ -13,7 +13,7 @@ import Contato from './pages/Contato';
 import Servicos from './pages/Servicos';
 import Dp from './pages/Dp';
 import Tp from './pages/Tp';
-import Mp from './pages/mp';
+import Mp from './pages/Mp';
 import Td from './pages/Td';
 import Cp from './pages/Cp';
 import Orcamento from './pages/Orcamento';
@@ -21,7 +21,7 @@ import Blog from './pages/Blog';
 import Politica from './pages/Politica';
 import NotFound from './pages/NotFound'; // Importe o componente NotFound
 import Trocas from './pages/Trocas';
-import Faq from './pages/faq';
+import Faq from './pages/Faq';
 import TrabalheConosco from './pages/TrabalheConosco';
 import Termos from './pages/Termos';
 import './App.css';
