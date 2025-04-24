@@ -26,7 +26,7 @@ function Td() {
           Na 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™, sabemos que a performance do seu motor é crucial para o seu veículo e para o seu dia a dia. É por isso que oferecemos um serviço completo e especializado de <strong>Teste de Desempenho do Motor</strong>, utilizando tecnologia de ponta e a expertise de nossos técnicos qualificados.
         </p>
 
-        <h3 className="section-subtitle">Por que realizar um Teste de Desempenho do Motor?</h3>
+        <h3 className="subPage-section-subtitle">Por que realizar um Teste de Desempenho do Motor?</h3>
         <p className="section-paragraph">
           Assim como fazemos check-ups regulares em nossa saúde, o seu motor também precisa de avaliações periódicas para garantir seu bom funcionamento e evitar problemas futuros. O Teste de Desempenho é uma ferramenta essencial para:
         </p>
@@ -40,7 +40,7 @@ function Td() {
           <li><strong>Garantir a sua segurança:</strong> Um motor com desempenho adequado responde melhor em situações de emergência.</li>
         </ul>
 
-        <h3 className="section-subtitle">O que o nosso Teste de Desempenho Abrange?</h3>
+        <h3 className="subPage-section-subtitle">O que o nosso Teste de Desempenho Abrange?</h3>
         <p className="section-paragraph">
           Nosso serviço de Teste de Desempenho é abrangente e minucioso, utilizando equipamentos modernos e seguindo rigorosos procedimentos. Geralmente, o teste inclui:
         </p>
@@ -55,7 +55,7 @@ function Td() {
           <li><strong>Teste de desempenho em dinamômetro (opcional):</strong> Medição da potência e do torque reais do motor.</li>
         </ul>
 
-        <h3 className="section-subtitle">Para quem é indicado o Teste de Desempenho?</h3>
+        <h3 className="subPage-section-subtitle">Para quem é indicado o Teste de Desempenho?</h3>
         <p className="section-paragraph">
           Nosso serviço de Teste de Desempenho é recomendado para:
         </p>
@@ -67,7 +67,7 @@ function Td() {
           <li>Frotistas que precisam garantir a confiabilidade de seus veículos.</li>
         </ul>
 
-        <h3 className="section-subtitle">Agende agora mesmo o Teste de Desempenho do seu motor!</h3>
+        <h3 className="subPage-section-subtitle">Agende agora mesmo o Teste de Desempenho do seu motor!</h3>
         <p className="section-paragraph">
           Nossa equipe está pronta para oferecer um serviço de alta qualidade, com diagnóstico preciso e soluções eficientes para garantir a potência, a eficiência e a durabilidade do seu motor.
         </p>

@@ -9,34 +9,3 @@
   margin-top: 1.25rem; /* Usando rem */
 }
 
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .home h1 {
-    font-size: 2.5rem;
-  }
-
-  .home h2 {
-    font-size: 1.8rem;
-  }
-
-  .home p {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-}
-
-@media (max-width: 480px) {
-  .home h1 {
-    font-size: 2rem;
-  }
-
-  .home h2 {
-    font-size: 1.5rem;
-  }
-
-  .home p {
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-}

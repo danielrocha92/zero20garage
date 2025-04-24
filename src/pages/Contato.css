@@ -138,24 +138,6 @@
   outline: none;
 }
 
-.submit-button {
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  color: var(--branco);
-  background-color: var(--vermelho);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  align-self: flex-start;
-}
-
-.submit-button:hover,
-.submit-button:focus {
-  background-color: var(--vermelho-hover);
-  outline: none;
-}
-
 /* ===== Estilo do Google Maps ===== */
 .google-map {
   border-radius: 8px;

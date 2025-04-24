@@ -29,15 +29,6 @@ body {
   text-align: center;
 }
 
-.section-subtitle {
-  color: #34495e;
-  font-size: 1.8rem;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border: none;
-}
-
 .section-paragraph {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
@@ -61,10 +52,6 @@ body {
 
   .section-title {
     font-size: 2rem;
-  }
-
-  .section-subtitle {
-    font-size: 1.5rem;
   }
 }
 

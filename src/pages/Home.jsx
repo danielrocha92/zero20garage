@@ -31,7 +31,7 @@ function Home() {
                 <h1 translate="no">Zero 20 Garage</h1>
                 <h2>Excelência em Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
                 <h3>Atendimento especializado para veículos nacionais e importados.</h3>
-                  <a href="/orcamento" className="cta-button">Solicite um Orçamento</a>
+                  <a href="/orcamento" className="button">Solicite um Orçamento</a>
                 </div>
             </section>
 

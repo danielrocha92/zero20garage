@@ -44,7 +44,7 @@ const Privacidade = () => {
     <div className="page">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
-      <div className="container-footer">
+      <div className="container-diaminc">
       <h2 
         translate="no"
         className="title">
@@ -56,7 +56,7 @@ const Privacidade = () => {
         Esta Política de Privacidade descreve como a <strong>ZERO 20 GARAGE™</strong> coleta, usa, compartilha e protege as informações pessoais dos usuários do nosso website. Ao acessar ou usar nosso website, você concorda com os termos desta Política de Privacidade.
       </p>
 
-      <section className="section">
+      <section className="subPage-section">
         <h3 className="subtitle">1. Informações que Coletamos:</h3>
         <p className="paragraph">Podemos coletar os seguintes tipos de informações pessoais:</p>
         <ul className="section-list">
@@ -68,8 +68,8 @@ const Privacidade = () => {
         </ul>
       </section>
 
-      <section className="privacy-policy-section">
-        <h3 className="privacy-policy-subtitle">2. Como Usamos Suas Informações:</h3>
+      <section className="section">
+        <h3 className="subtitle">2. Como Usamos Suas Informações:</h3>
         <p className="paragraph">Utilizamos suas informações pessoais para os seguintes propósitos:</p>
         <ul className="section-list">
           <li><strong>Fornecer e melhorar nossos serviços:</strong> Responder a suas consultas, agendar serviços, fornecer orçamentos, realizar reparos e manutenções em veículos.</li>
@@ -82,8 +82,8 @@ const Privacidade = () => {
         </ul>
       </section>
 
-      <section className="privacy-policy-section">
-        <h3 className="privacy-policy-subtitle">3. Compartilhamento de Suas Informações:</h3>
+      <section className="section">
+        <h3 className="subtitle">3. Compartilhamento de Suas Informações:</h3>
         <p className="paragraph">Podemos compartilhar suas informações pessoais com terceiros nas seguintes circunstâncias:</p>
         <ul className="section-list">
           <li><strong>Prestadores de serviços:</strong> Podemos compartilhar informações com empresas terceirizadas que nos auxiliam na operação do nosso website, processamento de pagamentos, envio de e-mails, análise de dados e outros serviços.</li>

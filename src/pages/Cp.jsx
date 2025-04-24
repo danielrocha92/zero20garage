@@ -44,7 +44,7 @@ function Cp() {
 
           <h3 className="section-paragraph">Agende seu diagnóstico</h3>
           <p className="section-paragraph">Não espere que os problemas se agravem. Agende agora mesmo o diagnóstico do seu veículo e garanta a sua segurança e tranquilidade.</p>
-          <a href="/orcamento" className="cta-button">Solicite um Orçamento</a>
+          <a href="/orcamento" className="button">Solicite um Orçamento</a>
       </div>
     </div>
   );

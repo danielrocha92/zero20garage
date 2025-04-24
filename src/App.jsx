@@ -26,7 +26,6 @@ import TrabalheConosco from './pages/TrabalheConosco';
 import Termos from './pages/Termos';
 import './App.css';
 import './GlobalStyles.css';
-import './styles/global.css';
 import './styles/components.css';
 
 

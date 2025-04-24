@@ -29,14 +29,14 @@ function Dp() {
           Diagnóstico preciso para identificar e resolver problemas no motor do seu veículo.
         </p>
 
-        <h3 className="section-subtitle">
+        <h3 className="subPage-section-subtitle">
           Por que fazer um diagnóstico?
         </h3>
           <p className="section-paragraph">
             Um diagnóstico preciso é essencial para identificar a causa raiz dos problemas do seu veículo e evitar gastos desnecessários. Com o diagnóstico correto, você pode ter certeza de que está resolvendo o problema certo.
           </p>
 
-          <h3 className="section-subtitle">
+          <h3 className="subPage-section-subtitle">
             O que inclui o diagnóstico?
           </h3>
           <ul className="section-list">
@@ -46,13 +46,13 @@ function Dp() {
             <li>Inspeção visual detalhada</li>
           </ul>
 
-          <h3 className="section-subtitle">
+          <h3 className="subPage-section-subtitle">
             Agende seu diagnóstico
           </h3>
           <p className="section-paragraph">
             Não espere que os problemas se agravem. Agende agora mesmo o diagnóstico do seu veículo e garanta a sua segurança e tranquilidade.
           </p>
-          <a href="/orcamento" className="cta-button">
+          <a href="/orcamento" className="button">
             Solicite um Orçamento
           </a>
         </section>

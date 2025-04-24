@@ -32,15 +32,6 @@ body {
   text-align: center; /* Mantenha o alinhamento central */
 }
 
-.section-subtitle {
-  color: #34495e; /* Use a cor do .section-subtitle */
-  font-size: 1.8rem; /* Use o font-size do .section-subtitle */
-  margin-top: 2rem; /* Use a margin-top do .section-subtitle */
-  margin-bottom: 1rem; /* Use a margin-bottom do .section-subtitle */
-  padding-bottom: 0.5rem; /* Use o padding-bottom do .section-subtitle */
-  border: none; /* Mantenha a remoção da borda */
-}
-
 .section-paragraph {
   font-size: 1.1rem; /* Use o font-size do .section-paragraph */
   margin-bottom: 1.5rem; /* Use a margin-bottom do .section-paragraph */
@@ -67,7 +58,7 @@ body {
       font-size: 2rem;
   }
 
-  .section-subtitle {
+  .subPage-section-subtitle {
       font-size: 1.5rem;
   }
 }
