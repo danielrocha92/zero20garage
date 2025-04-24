@@ -47,19 +47,19 @@ const Privacidade = () => {
       <div className="container-footer">
       <h2 
         translate="no"
-        className="terms-of-use-title">
-        Política de Privacidade - ZER0 20 GARAGE™
+        className="title">
+          Política de Privacidade - ZER0 20 GARAGE™
         </h2>
       <p 
       translate="no"
-      className="privacy-policy-paragraph">
+      className="paragraph">
         Esta Política de Privacidade descreve como a <strong>ZERO 20 GARAGE™</strong> coleta, usa, compartilha e protege as informações pessoais dos usuários do nosso website. Ao acessar ou usar nosso website, você concorda com os termos desta Política de Privacidade.
       </p>
 
-      <section className="privacy-policy-section">
-        <h3 className="privacy-policy-subtitle">1. Informações que Coletamos:</h3>
-        <p className="privacy-policy-paragraph">Podemos coletar os seguintes tipos de informações pessoais:</p>
-        <ul className="privacy-policy-list">
+      <section className="section">
+        <h3 className="subtitle">1. Informações que Coletamos:</h3>
+        <p className="paragraph">Podemos coletar os seguintes tipos de informações pessoais:</p>
+        <ul className="section-list">
           <li><strong>Informações de contato:</strong> Nome, endereço de e-mail, número de telefone e endereço físico.</li>
           <li><strong>Informações sobre o veículo:</strong> Marca, modelo, ano, número do chassi (VIN) e histórico de serviços (se fornecido).</li>
           <li><strong>Informações de navegação:</strong> Endereço IP, tipo de navegador, sistema operacional, páginas visitadas, tempo gasto no site e outros dados de uso.</li>
@@ -70,8 +70,8 @@ const Privacidade = () => {
 
       <section className="privacy-policy-section">
         <h3 className="privacy-policy-subtitle">2. Como Usamos Suas Informações:</h3>
-        <p className="privacy-policy-paragraph">Utilizamos suas informações pessoais para os seguintes propósitos:</p>
-        <ul className="privacy-policy-list">
+        <p className="paragraph">Utilizamos suas informações pessoais para os seguintes propósitos:</p>
+        <ul className="section-list">
           <li><strong>Fornecer e melhorar nossos serviços:</strong> Responder a suas consultas, agendar serviços, fornecer orçamentos, realizar reparos e manutenções em veículos.</li>
           <li><strong>Comunicação:</strong> Entrar em contato com você sobre agendamentos, atualizações de serviços, ofertas promocionais e outras informações relevantes.</li>
           <li><strong>Personalização:</strong> Personalizar sua experiência no nosso website e fornecer conteúdo relevante para seus interesses.</li>
@@ -84,8 +84,8 @@ const Privacidade = () => {
 
       <section className="privacy-policy-section">
         <h3 className="privacy-policy-subtitle">3. Compartilhamento de Suas Informações:</h3>
-        <p className="privacy-policy-paragraph">Podemos compartilhar suas informações pessoais com terceiros nas seguintes circunstâncias:</p>
-        <ul className="privacy-policy-list">
+        <p className="paragraph">Podemos compartilhar suas informações pessoais com terceiros nas seguintes circunstâncias:</p>
+        <ul className="section-list">
           <li><strong>Prestadores de serviços:</strong> Podemos compartilhar informações com empresas terceirizadas que nos auxiliam na operação do nosso website, processamento de pagamentos, envio de e-mails, análise de dados e outros serviços.</li>
           <li><strong>Parceiros de marketing:</strong> Com seu consentimento, podemos compartilhar informações com parceiros de marketing para enviar comunicações promocionais sobre produtos e serviços que possam ser de seu interesse.</li>
           <li><strong>Obrigações legais:</strong> Podemos divulgar suas informações pessoais se formos obrigados a fazê-lo por lei, ordem judicial ou outra obrigação legal.</li>
@@ -94,7 +94,7 @@ const Privacidade = () => {
         </ul>
       </section>
 
-      <p className="privacy-policy-paragraph acknowledgment">
+      <p className="paragraph acknowledgment">
         Data da última atualização: {lastUpdated}
       </p>
 

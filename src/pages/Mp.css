@@ -1,10 +1,6 @@
 /* Mp.css */
-/* Importar a fonte Open Sans do Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
-
 /* Fonte padrão para todo o corpo */
 body {
-  font-family: 'Open Sans', sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f0f0f0; /* Fundo claro */
@@ -43,6 +39,7 @@ body {
 .section-paragraph {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
+  color: #333;
 }
 
 .section-list {

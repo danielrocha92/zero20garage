@@ -23,6 +23,8 @@ html, body {
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
+
+
 :root {
   --vermelho-principal: #c50404;
   --cinza-claro: #D3D3D3;
@@ -179,6 +181,15 @@ li {
   background-color: var(--branco);
 }
 
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem; /* Adicionando espaçamento interno */
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--branco);
+}
+
 /* ================= */
 /* Layout Page */
 /* ================= */
@@ -222,6 +233,42 @@ li {
 .subPage-section p {
   font-size: 1.1rem;
   color: #ffffff;
+}
+
+.section-title {
+  color: #000000; /* Use a cor do .section-title */
+  font-size: 2.5rem; /* Use o font-size do .section-title */
+  margin-bottom: 1.5rem; /* Use a margin-bottom do .section-title */
+  text-align: center; /* Mantenha o alinhamento central */
+}
+
+.section-subtitle {
+  border-bottom: 2px solid #ddd;
+  color: #34495e;
+  font-size: 1.5rem;
+  margin-bottom: 0.625rem; /* Usando rem */
+  margin-top: 1.5625rem; /* Usando rem */
+  padding-bottom: 0.3125rem; /* Usando rem */
+}
+
+.section-paragraph {
+  margin-bottom: 2rem;
+  color: #000000;
+  font-size: 1.1em;
+  line-height: 1.1;
+  text-align: justify;
+  padding: 0.5rem;
+}
+
+.section-list {
+  list-style-type: disc; /* Use o list-style-type do .section-list */
+  padding-left: 2rem; /* Use o padding-left do .section-list */
+  margin-bottom: 2rem; /* Use a margin-bottom do .section-list */
+}
+
+.section-list li {
+  font-size: 1.1rem; /* Use o font-size do item da lista */
+  margin-bottom: 0.5rem; /* Use a margin-bottom do item da lista */
 }
 
 /* ================= */
@@ -333,7 +380,7 @@ li {
 
 .highlight-item {
   background-color: #2c2c2c6b;
-  padding: 1.5rem;
+  padding: 1rem 0.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -356,7 +403,7 @@ li {
 }
 
 /* ================= */
-/* Responsividade     */
+/* Responsividade    */
 /* ================= */
 @media (max-width: 768px) {
   h1 {
@@ -383,6 +430,10 @@ li {
     font-size: 1rem;
   }
 
+/* ========= */
+/* Container */
+/* ========= */
+
   .container {
     padding: 1rem;
   }
@@ -391,6 +442,27 @@ li {
     font-size: 0.9rem;
     padding: 0.6rem 1rem;
   }
+
+  .content-section {
+    padding: 1rem;
+}
+
+/* ========== */
+/* Section    */
+/* ========== */
+
+.section-title {
+    font-size: 2rem;
+}
+
+.section-subtitle {
+  border-bottom: 2px solid #ddd;
+  color: #34495e;
+  font-size: 1.5rem;
+  margin-bottom: 0.625rem; /* Usando rem */
+  margin-top: 1.5625rem; /* Usando rem */
+  padding-bottom: 0.3125rem; /* Usando rem */
+}
 
 }
 
