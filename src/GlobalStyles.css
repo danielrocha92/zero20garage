@@ -938,7 +938,7 @@ option:focus{
   font-size: 1rem; /* Ajustado para mobile */
   margin-bottom: 1rem; /* Ajustado para mobile */
   color: var(branco);
-}
+  }
 
 .section-list {
   list-style-type: disc;
