@@ -22,8 +22,7 @@ html, body {
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-
-
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
 :root {
   --vermelho-principal: #c50404;
@@ -36,7 +35,7 @@ html, body {
 }
 
 /* ===================== */
-/* Tipografia e Elementos Globais */
+/* Tipografia e Elementos Globais (Mobile) */
 /* ===================== */
 body {
   font-family: 'Ubuntu', sans-serif;
@@ -46,77 +45,77 @@ body {
 }
 
 h1 {
-  font-size: 2.8rem; /* Maior título */
+  font-size: 2rem; /* Ajustado para mobile */
 }
 
 h2 {
-  font-size: 2.5rem; /* Título principal de seção */
+  font-size: 1.8rem; /* Ajustado para mobile */
 }
 
 h3 {
-  font-size: 2rem; /* Subtítulo de seção */
+  font-size: 1.6rem; /* Ajustado para mobile */
 }
 
 h4 {
-  font-size: 1.7rem; /* Subtítulo menor */
+  font-size: 1.4rem; /* Ajustado para mobile */
 }
 
 h5 {
-  font-size: 1.4rem; /* Subtítulo ainda menor */
+  font-size: 1.2rem; /* Ajustado para mobile */
 }
 
 h6 {
-  font-size: 1.1rem; /* Menor subtítulo */
+  font-size: 1rem; /* Ajustado para mobile */
 }
 
 h1, h2, h3, h4, h5, h6 {
   border-bottom: none;
   text-decoration: none;
   color: var(--azul-esverdeado);
-  margin-bottom: 1rem; /* Espaçamento padrão abaixo dos títulos */
-  margin-top: 2rem; /* Use a margin-top do .subPage-section-subtitle */
-  padding-bottom: 0.5rem; /* Use o padding-bottom do .subPage-section-subtitle */
-  border: none; /* Mantenha a remoção da borda */
+  margin-bottom: 1rem;
+  margin-top: 1.5rem; /* Ajustado para mobile */
+  padding-bottom: 0.3rem; /* Ajustado para mobile */
+  border: none;
 }
 
 /* ===================== */
-/* Título Principal */
+/* Título Principal (Mobile) */
 /* ===================== */
 
 .subPage-title {
   color: #2c3e50;
-  font-size: 2rem;
-  margin-bottom: 1.25rem; /* Usando rem */
+  font-size: 1.8rem; /* Ajustado para mobile */
+  margin-bottom: 1rem;
   text-align: center;
 }
 
 /* ===================== */
-/* Subtítulos */
+/* Subtítulos (Mobile) */
 /* ===================== */
 
 .subPage-subtitle {
   border-bottom: 2px solid #ddd;
   color: #34495e;
-  font-size: 1.5rem;
-  margin-bottom: 0.625rem; /* Usando rem */
-  margin-top: 1.5625rem; /* Usando rem */
-  padding-bottom: 0.3125rem; /* Usando rem */
+  font-size: 1.3rem; /* Ajustado para mobile */
+  margin-bottom: 0.5rem; /* Ajustado para mobile */
+  margin-top: 1.2rem; /* Ajustado para mobile */
+  padding-bottom: 0.25rem; /* Ajustado para mobile */
 }
 
 /* ===================== */
-/* Parágrafos */
+/* Parágrafos (Mobile) */
 /* ===================== */
 
 .subPage-paragraph {
-  margin-bottom: 15px;
+  margin-bottom: 1rem; /* Ajustado para mobile */
   color: #000000;
-  font-size: 1.1em;
-  line-height: 1.1;
+  font-size: 1rem; /* Ajustado para mobile */
+  line-height: 1.4; /* Ajustado para mobile */
   text-align: justify;
 }
 
 /* ================ */
-/* Botão de âncora  */
+/* Botão de âncora (Mobile) */
 /* ================ */
 a {
   text-decoration: none;
@@ -137,17 +136,17 @@ li {
 }
 
 /* ============================== */
-/* Animação para troca de página  */
+/* Animação para troca de página (Mobile) */
 /* ============================== */
 .page-enter {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(10px); /* Ajustado para mobile */
 }
 
 .page-enter-active {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease; /* Ajustado para mobile */
 }
 
 .page-exit {
@@ -157,167 +156,142 @@ li {
 
 .page-exit-active {
   opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(-10px); /* Ajustado para mobile */
+  transition: opacity 0.2s ease, transform 0.2s ease; /* Ajustado para mobile */
 }
 
 /* ================= */
-/* Layout Container */
+/* Layout Container (Mobile) */
 /* ================= */
-.container-escuro {
-  max-width: 1200px;
+.container-escuro,
+.container-claro,
+.page-container,
+.page-claro,
+.page-escuro {
   margin: 0 auto;
-  padding: 2rem 1rem; /* Adicionando espaçamento interno */
+  padding: 1rem; /* Ajustado para mobile */
+  display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  max-width: 100%; /* Garante que ocupe a largura total em mobile */
 }
 
 .container-claro {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem; /* Adicionando espaçamento interno */
-  flex-direction: column;
-  align-items: center;
   background-color: var(--branco);
+  color: var(--cinza-escuro); /* Garante que o texto seja legível */
 }
 
-.page-container {
-  margin: 0 auto;
-  padding: 2rem 1rem; /* Adicionando espaçamento interno */
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--branco);
-  color: var(--branco); /* Texto branco para contraste */
-  position: relative;
-}
-
-/* ================= */
-/* Layout Page */
-/* ================= */
-
+.page-container,
 .page-claro {
-  padding: 0;
-  color: var(--branco); /* Texto branco para contraste */
-  position: relative;
+  background-color: var(--branco);
+  color: var(--cinza-escuro); /* Garante que o texto seja legível */
 }
 
 .page-escuro {
-  margin: 0 auto;
-  padding: 2rem 1rem; /* Adicionando espaçamento interno */
-  flex-direction: column;
-  align-items: center;
-  position: relative;
+  background-color: var(--cinza-escuro);
+  color: var(--branco);
 }
+
 /* ================= */
-/* Section Global*/
+/* Section Global (Mobile) */
 /* ================= */
-.section {
-  margin: 2rem 0;
-  margin-bottom: 2rem;
+.section,
+.section-escuro,
+.subPage-section {
+  margin: 1.5rem 0; /* Ajustado para mobile */
   text-align: center;
 }
 
-.section-escuro {
-  margin: 2rem 0;
-  margin-bottom: 2rem;
-  text-align: center;
-  color: #ffffff; /* Texto branco para contraste */
+.section-escuro,
+.subPage-section {
+  color: #ffffff;
 }
-
 
 .section p {
-  font-size: 1.1rem;
+  font-size: 1rem; /* Ajustado para mobile */
   color: #000000;
 }
 
-.subPage-section {
-  margin: 2rem 0;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
 .subPage-section h2 {
-  font-size: 2rem;
+  font-size: 1.8rem; /* Ajustado para mobile */
   color: #ffffff;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem; /* Ajustado para mobile */
 }
 
 .subPage-section p {
-  font-size: 1.1rem;
+  font-size: 1rem; /* Ajustado para mobile */
   color: #ffffff;
 }
 
 .section-title {
-  color: #000000; /* Use a cor do .section-title */
-  font-size: 2.5rem; /* Use o font-size do .section-title */
-  margin-bottom: 1.5rem; /* Use a margin-bottom do .section-title */
-  text-align: center; /* Mantenha o alinhamento central */
+  color: #000000;
+  font-size: 2rem; /* Ajustado para mobile */
+  margin-bottom: 1rem; /* Ajustado para mobile */
+  text-align: center;
 }
 
 .subPage-section-subtitle {
-  color: #34495e; /* Use a cor do .subPage-section-subtitle */
-  font-size: 1.8rem; /* Use o font-size do .subPage-section-subtitle */
-  margin-top: 2rem; /* Use a margin-top do .subPage-section-subtitle */
-  margin-bottom: 1rem; /* Use a margin-bottom do .subPage-section-subtitle */
-  padding-bottom: 0.5rem; /* Use o padding-bottom do .subPage-section-subtitle */
-  border: none; /* Mantenha a remoção da borda */
+  color: #34495e;
+  font-size: 1.5rem; /* Ajustado para mobile */
+  margin-top: 1.5rem; /* Ajustado para mobile */
+  margin-bottom: 0.8rem; /* Ajustado para mobile */
+  padding-bottom: 0.3rem; /* Ajustado para mobile */
+  border: none;
 }
 
 .paragraph {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Ajustado para mobile */
   color: #030303;
-  font-size: 1.1em;
-  line-height: 1.1;
+  font-size: 1rem; /* Ajustado para mobile */
+  line-height: 1.4; /* Ajustado para mobile */
   text-align: justify;
   padding: 0.5rem;
 }
 
 .section-list {
-  list-style-type: disc; /* Use o list-style-type do .section-list */
-  padding-left: 2rem; /* Use o padding-left do .section-list */
-  margin-bottom: 2rem; /* Use a margin-bottom do .section-list */
+  list-style-type: disc;
+  padding-left: 1.5rem; /* Ajustado para mobile */
+  margin-bottom: 1.5rem; /* Ajustado para mobile */
 }
 
 .section-list li {
-  font-size: 1.1rem; /* Use o font-size do item da lista */
-  margin-bottom: 0.5rem; /* Use a margin-bottom do item da lista */
+  font-size: 1rem; /* Ajustado para mobile */
+  margin-bottom: 0.3rem; /* Ajustado para mobile */
+  text-align: left; /* Alinha o texto à esquerda em mobile também */
 }
 
 /* ================= */
-/* Botões Globais     */
+/* Botões Globais (Mobile) */
 /* ================= */
-.button, 
+.button,
 .submit-button {
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
+  padding: 0.6rem 1.2rem; /* Ajustado para mobile */
+  font-size: 0.9rem; /* Ajustado para mobile */
   color: var(--branco);
-  background-color: var(--vermelho);
+  background-color: var(--vermelho-principal);
   border: none;
   border-radius: 8px;
   transition: background-color 0.3s ease, transform 0.3s ease;
-  cursor: pointer; /* Adiciona um cursor de ponteiro */
-  align-self: flex-start;
+  cursor: pointer;
+  align-self: stretch; /* Ocupa a largura total no mobile */
 }
 
-.button:hover, 
+.button:hover,
 .submit-button:hover {
-  padding: 0.8rem 1.5rem;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor */
-  background-color: rgba(54, 24, 24, 0.5);
-  color: #c50404;
-  transform: scale(1.05);
+  background-color: rgba(197, 4, 4, 0.8);
+  transform: scale(1.02); /* Menor scale no hover para mobile */
   outline: none;
+  color: var(--branco); /* Mantém a cor do texto no hover em mobile */
 }
 
 /* ================= */
-/* Links Globais      */
+/* Links Globais (Mobile) */
 /* ================= */
 .links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.3rem; /* Menor gap no mobile */
   list-style: none;
   padding: 0;
   justify-content: center;
@@ -325,9 +299,10 @@ li {
 
 .links li a {
   background-color: var(--vermelho-principal);
-  padding: 10px 15px;
+  padding: 8px 12px; /* Menor padding no mobile */
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem; /* Menor fonte nos links */
 }
 
 .links a {
@@ -337,243 +312,215 @@ li {
 }
 
 /* ================= */
-/* Ícones Globais    */
+/* Ícones Globais (Mobile) */
 /* ================= */
 
 .icon-small {
-  font-size: 1rem;
+  font-size: 0.8rem; /* Ajustado para mobile */
 }
 
 .icon-medium {
-  font-size: 2rem;
+  font-size: 1.5rem; /* Ajustado para mobile */
 }
 
 .icon-large {
-  font-size: 3rem;
+  font-size: 2rem; /* Ajustado para mobile */
 }
 
 /* ===================== */
-/* highlights Globais    */
+/* highlights Globais (Mobile) */
 /* ===================== */
 
 .highlights {
-  padding: 2rem;
+  padding: 1rem; /* Ajustado para mobile */
   background-color: #D3D3D3;
   text-align: center;
 }
 
 .highlight-item h1 {
-  font-size: 2.8rem;
+  font-size: 2.2rem; /* Ajustado para mobile */
   color: #ffffff;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem; /* Ajustado para mobile */
 }
 
 .highlights h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
+  font-size: 2rem; /* Ajustado para mobile */
+  margin-bottom: 1rem; /* Ajustado para mobile */
   color: #D3D3D3;
 }
 
 .highlight-item h3 {
-  font-size: 2rem;
+  font-size: 1.6rem; /* Ajustado para mobile */
   color: #c50404;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem; /* Ajustado para mobile */
 }
 
 .highlight-item p {
-  font-size: 1.1rem;
+  font-size: 0.9rem; /* Ajustado para mobile */
   color: #fff;
 }
 
 .highlights-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  grid-template-columns: 1fr; /* Uma coluna no mobile */
+  gap: 1rem; /* Menor gap no mobile */
+  margin-top: 1rem; /* Menor margin-top no mobile */
 }
 
 .highlight-item {
   background-color: #2c2c2c6b;
   padding: 1rem 0.5rem;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .highlight-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
+  transform: translateY(-3px); /* Menor efeito no hover para mobile */
+  box-shadow: 0 4px 8px rgba(54, 24, 24, 0.5);
 }
 
 .highlight-item h3 {
-  font-size: 1.5rem;
+  font-size: 1.3rem; /* Ajustado para mobile */
   color: #c50404;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem; /* Ajustado para mobile */
 }
 
 .highlight-item p {
-  font-size: 1rem;
+  font-size: 0.9rem; /* Ajustado para mobile */
   color: #fff;
 }
 
-/* Troca Peça.css */
-/* Importar a fonte Open Sans do Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
-
-/* Fonte padrão para todo o corpo */
-body {
-  font-family: 'Open Sans', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0; /* Fundo claro */
-  color: #333; /* Texto escuro para contraste */
-  line-height: 1.6;
-}
+/* Troca Peça.css (Mobile) */
 
 .container-section {
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 3rem;
-  margin-top: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Menor sombra no mobile */
+  padding: 1.5rem; /* Ajustado para mobile */
+  margin-top: 1rem; /* Ajustado para mobile */
 }
 
 .section-title {
-  color: #2c3e50; /* Use a cor do .section-title */
-  font-size: 2.5rem; /* Use o font-size do .section-title */
-  margin-bottom: 1.5rem; /* Use a margin-bottom do .section-title */
-  text-align: center; /* Mantenha o alinhamento central */
+  color: #2c3e50;
+  font-size: 2rem; /* Ajustado para mobile */
+  margin-bottom: 1rem; /* Ajustado para mobile */
+  text-align: center;
 }
 
 .section-paragraph {
-  font-size: 1.1rem; /* Use o font-size do .section-paragraph */
-  margin-bottom: 1.5rem; /* Use a margin-bottom do .section-paragraph */
+  font-size: 1rem; /* Ajustado para mobile */
+  margin-bottom: 1rem; /* Ajustado para mobile */
 }
 
 .section-list {
-  list-style-type: disc; /* Use o list-style-type do .section-list */
-  padding-left: 2rem; /* Use o padding-left do .section-list */
-  margin-bottom: 2rem; /* Use a margin-bottom do .section-list */
+  list-style-type: disc;
+  padding-left: 1.5rem; /* Ajustado para mobile */
+  margin-bottom: 1rem; /* Ajustado para mobile */
 }
 
 .section-list li {
-  font-size: 1.1rem; /* Use o font-size do item da lista */
-  margin-bottom: 0.5rem; /* Use a margin-bottom do item da lista */
+  font-size: 1rem; /* Ajustado para mobile */
+  margin-bottom: 0.3rem; /* Ajustado para mobile */
 }
 
-/* Estilos da Página Home */
+/* Estilos da Página Home (Mobile) */
 .adress {
-  font-size: 1.2rem;
-  color: var(--branco); /* Texto branco */
-  line-height: 1.8;
-  margin-bottom: 1.5rem;
+  font-size: 1rem; /* Ajustado para mobile */
+  color: var(--branco);
+  line-height: 1.4; /* Ajustado para mobile */
+  margin-bottom: 1rem; /* Ajustado para mobile */
   text-align: center;
   font-style: normal;
-  margin-top: 1.25rem; /* Usando rem */
+  margin-top: 1rem; /* Ajustado para mobile */
 }
 
-/* ===== Reset e box-sizing ===== */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* ===== Reset e box-sizing (Mobile) ===== */
+/* (Já definido no início) */
 
-/* ===== Estilos gerais ===== */
-:root {
-  --branco: #ffffff;
-  --cinza-claro: #e0e0e0;
-  --vermelho: #c50404;
-  --vermelho-hover: #9e0303;
-  --cinza-borda: #ccc;
-  --bg-input: #fff;
-}
+/* ===== Estilos gerais (Mobile) ===== */
+/* (Já definido no início) */
 
-/* ===== Seção de Contato ===== */
+/* ===== Seção de Contato (Mobile) ===== */
 .contato-section {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Ajustado para mobile */
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem; /* Ajustado para mobile */
 }
 
 .contato-section h2 {
-  font-size: 2rem;
+  font-size: 1.8rem; /* Ajustado para mobile */
   color: var(--branco);
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem; /* Ajustado para mobile */
 }
 
 .contato-section p {
-  font-size: 1.1rem;
+  font-size: 1rem; /* Ajustado para mobile */
   color: var(--cinza-claro);
 }
 
-/* ===== Lista de Contato ===== */
+/* ===== Lista de Contato (Mobile) ===== */
 .contact-list {
   list-style: none;
   padding: 0;
-  margin: 2rem auto 0;
+  margin: 1.5rem auto 0; /* Ajustado para mobile */
   max-width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch; /* Ocupa a largura total no mobile */
 }
 
 .contact-list li {
   display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-  padding: 0.8rem 1rem;
+  flex-direction: column; /* Empilha os elementos no mobile */
+  align-items: flex-start; /* Alinha à esquerda no mobile */
+  margin-bottom: 0.8rem; /* Ajustado para mobile */
+  padding: 0.6rem; /* Ajustado para mobile */
   border-radius: 8px;
   transition: background-color 0.3s ease;
   width: 100%;
-  max-width: 600px;
+  max-width: 100%; /* Ocupa a largura total no mobile */
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor */
   background-color: rgba(54, 24, 24, 0.5);
 }
 
 .contact-list a {
   text-decoration: none;
-  color: var(--vermelho);
-  font-size: 1rem;
+  color: var(--vermelho-principal);
+  font-size: 0.9rem; /* Ajustado para mobile */
   transition: color 0.3s ease;
 }
 
 .contact-list a:hover,
 .contact-list a:focus {
-  padding: 0.8rem 1.5rem;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor */
-  background-color: rgba(54, 24, 24, 0.5);
-  color: #c50404;
-  transform: scale(1.05);
+  background-color: rgba(197, 4, 4, 0.8);
+  color: var(--branco); /* Cor do texto no hover em mobile */
+  transform: scale(1.01); /* Menor scale no hover para mobile */
   outline: none;
+  padding: 0.6rem; /* Mantém o padding no hover */
 }
 
-/* ===== Mapa ===== */
+/* ===== Mapa (Mobile) ===== */
 .map-section {
-  padding: 1rem;
+  padding: 1rem; /* Ajustado para mobile */
 }
 
 .map-section iframe {
   width: 100%;
-  height: 300px;
+  height: 250px; /* Ajustado para mobile */
   border: 0;
   border-radius: 8px;
 }
 
-/* ===== Seção de Formulário ===== */
+/* ===== Seção de Formulário (Mobile) ===== */
 .formulario-section {
-  margin-top: 2rem;
-  padding: 2rem 1rem;
+  margin-top: 1.5rem; /* Ajustado para mobile */
+  padding: 1.5rem 1rem; /* Ajustado para mobile */
 }
 
 .formulario-section h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: 1.8rem; /* Ajustado para mobile */
+  margin-bottom: 0.8rem; /* Ajustado para mobile */
   color: var(--branco);
   text-align: center;
 }
@@ -581,8 +528,8 @@ body {
 .contato-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  max-width: 600px;
+  gap: 0.8rem; /* Ajustado para mobile */
+  max-width: 100%; /* Ocupa a largura total no mobile */
   margin: 0 auto;
 }
 
@@ -593,45 +540,44 @@ body {
 }
 
 .form-group label {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+  font-size: 0.9rem; /* Ajustado para mobile */
+  margin-bottom: 0.3rem; /* Ajustado para mobile */
   color: var(--branco);
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 0.8rem;
+  padding: 0.6rem; /* Ajustado para mobile */
   border: 1px solid var(--cinza-borda);
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: 0.9rem; /* Ajustado para mobile */
   background-color: var(--bg-input);
   transition: border-color 0.3s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: var(--vermelho);
+  border-color: var(--vermelho-principal);
   outline: none;
 }
 
-/* ===== Estilo do Google Maps ===== */
+/* ===== Estilo do Google Maps (Mobile) ===== */
 .google-map {
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Menor sombra no mobile */
   display: flex;
   justify-content: center;
 }
 
 .google-map iframe {
-  width: 70%;
-  height: 450px;
+  width: 100%; /* Ocupa a largura total no mobile */
+  height: 300px; /* Ajustado para mobile */
   border: 0;
 }
 
-
-/* Estilos do Serviços */
+/* Estilos do Serviços (Mobile) */
 :root {
   --cinza-claro: #f0f0f0;
   --branco: #fff;
@@ -642,53 +588,53 @@ body {
   --fonte-titulo: 'Playfair Display', serif;
 }
 
-/* Bloco: service-grid */
+/* Bloco: service-grid (Mobile) */
 .service-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  grid-template-columns: 1fr; /* Uma coluna no mobile */
+  gap: 1.5rem; /* Ajustado para mobile */
+  margin-top: 1.5rem; /* Ajustado para mobile */
 }
 
-/* Bloco: service-item */
+/* Bloco: service-item (Mobile) */
 .service-item {
-  padding: 2rem;
+  padding: 1.5rem; /* Ajustado para mobile */
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Menor sombra no mobile */
   text-align: center;
   transition: box-shadow 0.3s ease;
-  display: flex; /* Adicionado para alinhamento vertical */
-  flex-direction: column; /* Adicionado para alinhamento vertical */
-  align-items: center; /* Centraliza os elementos horizontalmente */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Modificador: service-item:hover */
+/* Modificador: service-item:hover (Mobile) */
 .service-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
+  transform: translateY(-3px); /* Menor efeito no hover para mobile */
+  box-shadow: 0 4px 8px rgba(54, 24, 24, 0.5);
 }
 
-/* Elemento: service-item__title */
+/* Elemento: service-item__title (Mobile) */
 .service-item__title {
-  font-size: 1.8rem;
+  font-size: 1.6rem; /* Ajustado para mobile */
   color: var(--cor-destaque);
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem; /* Ajustado para mobile */
   font-family: var(--fonte-titulo);
 }
 
-/* Elemento: service-item__description */
+/* Elemento: service-item__description (Mobile) */
 .service-item__description {
-  font-size: 1.1rem;
+  font-size: 1rem; /* Ajustado para mobile */
   color: var(--texto-secundario);
-  margin-bottom: 1.5rem;
-  flex-grow: 1; /* Permite que a descrição ocupe mais espaço */
+  margin-bottom: 1rem; /* Ajustado para mobile */
+  flex-grow: 1;
 }
 
-/* Elemento: service-item__button */
+/* Elemento: service-item__button (Mobile) */
 .service-item__button {
   display: inline-block;
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
+  padding: 0.8rem 1.5rem; /* Ajustado para mobile */
+  font-size: 0.9rem; /* Ajustado para mobile */
   color: var(--branco);
   background-color: var(--cor-destaque);
   border: none;
@@ -696,73 +642,69 @@ body {
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 1rem; /* Adicionado para espaçamento */
+  margin-top: 0.8rem; /* Ajustado para mobile */
 }
 
-/* Modificador: service-item__button:hover */
+/* Modificador: service-item__button:hover (Mobile) */
 .service-item__button:hover {
   background-color: rgba(197, 4, 4, 0.8);
 }
 
-/* Estilos para os ícones */
+/* Estilos para os ícones (Mobile) */
 .service-item__button svg {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 1rem;
+  width: 40px; /* Ajustado para mobile */
+  height: 40px; /* Ajustado para mobile */
+  margin-bottom: 0.8rem; /* Ajustado para mobile */
   transition: none;
 }
 
-
-
-/* Estilos do Sobre */
-
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
+/* Estilos do Sobre (Mobile) */
 
 .container {
-  max-width: 1500px;
+  max-width: 100%; /* Ocupa a largura total no mobile */
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem; /* Ajustado para mobile */
   background-color: #353535;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Menor sombra no mobile */
   border-radius: 8px;
 }
 
 .sobre-section {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Ajustado para mobile */
   text-align: center;
 }
 
 .sobre-section h2 {
-  font-size: 2rem;
+  font-size: 1.8rem; /* Ajustado para mobile */
   color: #ffffff;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem; /* Ajustado para mobile */
 }
 
 .sobre-section p {
-  font-size: 1.1rem;
+  font-size: 1rem; /* Ajustado para mobile */
   color: #ffffff;
+  line-height: 1.4; /* Ajustado para mobile */
 }
 
-/* ===== Carrossel da Equipe ===== */
+/* ===== Carrossel da Equipe (Mobile) ===== */
 .team-image-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 1.5rem; /* Ajustado para mobile */
 }
 
 .team-image {
-  width: 35rem; /* Experimente com um valor fixo maior */
+  width: 100%; /* Ocupa a largura total no mobile */
   height: auto;
   object-fit: cover;
   border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Menor sombra no mobile */
   transition: transform 0.6s ease;
 }
 
 .team-image:hover {
-  transform: scale(1.03);
+  transform: scale(1.01); /* Menor scale no hover para mobile */
 }
 
 .slick-slide {
@@ -772,7 +714,7 @@ body {
 }
 
 .slick-dots li button:before {
-  font-size: 12px;
+  font-size: 10px; /* Menor tamanho dos dots no mobile */
   color: #c50404;
 }
 
@@ -784,6 +726,7 @@ body {
 .slick-next {
   z-index: 10;
   color: #fff;
+  font-size: 1.2rem; /* Menor tamanho das setas no mobile */
 }
 
 .slick-prev:hover,
@@ -795,14 +738,14 @@ body {
 .contact {
   list-style: none;
   padding: 0;
-  margin-top: 2rem;
+  margin-top: 1.5rem; /* Ajustado para mobile */
 }
 
 .contact li {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
-  padding: 0.8rem;
+  margin-bottom: 0.8rem; /* Ajustado para mobile */
+  padding: 0.6rem; /* Ajustado para mobile */
   border-radius: 6px;
   transition: background-color 0.3s ease;
 }
@@ -812,14 +755,14 @@ body {
 }
 
 .contact i {
-  font-size: 1.5rem;
-  margin-right: 1rem;
+  font-size: 1.2rem; /* Ajustado para mobile */
+  margin-right: 0.8rem; /* Ajustado para mobile */
   color: #ffffff;
 }
 
 .contact span,
 .contact a {
-  font-size: 1.1rem;
+  font-size: 0.9rem; /* Ajustado para mobile */
   color: #ffffff;
   text-decoration: none;
 }
@@ -830,44 +773,41 @@ body {
 }
 
 .formulario-section h2 {
-  font-size: 2rem;
+  font-size: 1.8rem; /* Ajustado para mobile */
   color: #ffffff;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem; /* Ajustado para mobile */
   text-align: center;
 }
 
-
-
-
-/* orcamento.css */
+/* orcamento.css (Mobile) */
 
 .orcamento-section {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Ajustado para mobile */
   text-align: center;
 }
 
 .orcamento-section h2 {
-  font-size: 2rem;
+  font-size: 1.8rem; /* Ajustado para mobile */
   color: #ffffff;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem; /* Ajustado para mobile */
 }
 
 .orcamento-section p {
-  font-size: 1.1rem;
+  font-size: 1rem; /* Ajustado para mobile */
   color: #ffffff;
 }
 
 .contact-list {
   list-style: none;
   padding: 0;
-  margin-top: 2rem;
+  margin-top: 1.5rem; /* Ajustado para mobile */
 }
 
 .contact-list li {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
-  padding: 0.8rem;
+  margin-bottom: 0.8rem; /* Ajustado para mobile */
+  padding: 0.6rem; /* Ajustado para mobile */
   border-radius: 6px;
   transition: background-color 0.3s ease;
   max-height: 100%;
@@ -878,26 +818,26 @@ body {
 }
 
 .contact-list i {
-  font-size: 1.5rem;
-  margin-right: 1rem;
+  font-size: 1.2rem; /* Ajustado para mobile */
+  margin-right: 0.8rem; /* Ajustado para mobile */
   color: #ffffff;
 }
 
 .contact-list span,
 .contact-list a {
-  font-size: 1.1rem;
+  font-size: 0.9rem; /* Ajustado para mobile */
   color: #ffffff;
   text-decoration: none;
 }
 
 .option {
-  padding: 0.8rem;
+  padding: 0.6rem; /* Ajustado para mobile */
   border: 1px solid #ffffff;
   border-radius: 8px;
-  font-size: 1.5rem;
+  font-size: 1rem; /* Ajustado para mobile */
   transition: border-color 0.3s ease;
   color: #353535;
-  cursor: pointer; /* Adiciona um cursor de ponteiro */
+  cursor: pointer;
   width: 100%;
 }
 
@@ -913,17 +853,17 @@ option:focus{
 }
 
 .section h2 {
-  font-size: 2rem;
+  font-size: 1.8rem; /* Ajustado para mobile */
   color: #ffffff;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem; /* Ajustado para mobile */
   text-align: center;
 }
 
 .orcamento-form {
-  margin: 1rem 15rem;
+  margin: 1rem; /* Ajustado para mobile */
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem; /* Ajustado para mobile */
 }
 
 .form-group {
@@ -932,18 +872,18 @@ option:focus{
 }
 
 .form-group label {
-  font-size: 1.1rem;
+  font-size: 0.9rem; /* Ajustado para mobile */
   color: #ffffff;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem; /* Ajustado para mobile */
 }
 
 .form-group input,
-.form-group textarea
+.form-group textarea,
 .form-group servico {
-  padding: 0.8rem;
+  padding: 0.6rem; /* Ajustado para mobile */
   border: 1px solid #ffffff;
   border-radius: 8px;
-  font-size: 1.5rem;
+  font-size: 0.9rem; /* Ajustado para mobile */
   transition: border-color 0.3s ease;
   color: #c50404;
 }
@@ -953,266 +893,465 @@ option:focus{
   border-color: #c50404;
   outline: none;
 }
-/* Google Maps Section */
+/* Google Maps Section (Mobile) */
 .map-section {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Ajustado para mobile */
   text-align: center;
 }
 
 .map-section h2 {
-  font-size: 2rem;
+  font-size: 1.8rem; /* Ajustado para mobile */
   color: #333;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem; /* Ajustado para mobile */
 }
 
 .google-map {
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Menor sombra no mobile */
 }
 
 .google-map iframe {
   width: 100%;
-  height: 450px;
+  height: 300px; /* Ajustado para mobile */
   border: 0;
 }
 
-
-
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
-
-body {
-  font-family: 'Open Sans', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0;
-  color: #333;
-  line-height: 1.6;
-}
+/* Estilos do Conteúdo Genérico (Mobile) */
 
 .content-section {
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 3rem;
-  margin-top: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Menor sombra no mobile */
+  padding: 1.5rem; /* Ajustado para mobile */
+  margin-top: 1rem; /* Ajustado para mobile */
 }
 
 .section-title {
   color: #2c3e50;
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
+  font-size: 2rem; /* Ajustado para mobile */
+  margin-bottom: 1rem; /* Ajustado para mobile */
   text-align: center;
 }
 
 .section-paragraph {
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
+  font-size: 1rem; /* Ajustado para mobile */
+  margin-bottom: 1rem; /* Ajustado para mobile */
   color: var(branco);
 }
 
 .section-list {
   list-style-type: disc;
-  padding-left: 2rem;
-  margin-bottom: 2rem;
+  padding-left: 1.5rem; /* Ajustado para mobile */
+  margin-bottom: 1rem; /* Ajustado para mobile */
 }
 
 .section-list li {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
+  font-size: 1rem; /* Ajustado para mobile */
+  margin-bottom: 0.3rem; /* Ajustado para mobile */
 }
 
 /* ===================== */
-/* ===== Breakpoint: max-width 768px ===== */
+/* ===== Breakpoint: min-width 768px (Tablets e Desktops) ===== */
 /* ===================== */
 
-@media (max-width: 768px) {
-
-  :root {
-    --tamanho-titulo: 2rem;
-    --tamanho-paragrafo: 1rem;
-  }
-
+@media (min-width: 768px) {
   h1 {
-    font-size: 2.4rem;
+    font-size: 2.8rem;
   }
 
   h2 {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
   }
 
   h3 {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 
   h4 {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
   }
 
   h5 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   h6 {
+    font-size: 1.1rem;
+  }
+
+  .container-escuro,
+  .container-claro,
+  .page-container {
+    padding: 2rem 1rem;
+    align-items: stretch; /* Permite que os itens flexíveis ocupem a largura total */
+  }
+
+  .button,
+  .submit-button {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+    align-self: flex-start; /* Volta ao alinhamento à esquerda em telas maiores */
+  }
+
+  .links {
+    gap: 0.5rem;
+    justify-content: flex-start; /* Alinha os links à esquerda em telas maiores */
+  }
+
+  .links li a {
+    padding: 10px 15px;
     font-size: 1rem;
   }
 
-  .container {
-    padding: 1rem;
+  .icon-small {
+    font-size: 1rem;
   }
 
-  .button {
-    font-size: 0.9rem;
-    padding: 0.6rem 1rem;
+  .icon-medium {
+    font-size: 2rem;
+  }
+
+  .icon-large {
+    font-size: 3rem;
+  }
+
+  .highlights {
+    padding: 2rem;
+  }
+
+  .highlight-item h1 {
+    font-size: 2.8rem;
+  }
+
+  .highlights h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .highlight-item h3 {
+    font-size: 2rem;
+  }
+
+  .highlight-item p {
+    font-size: 1.1rem;
+  }
+
+  .highlights-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .highlight-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
+  }
+
+  .highlight-item h3 {
+    font-size: 1.5rem;
+  }
+
+  .highlight-item p {
+    font-size: 1rem;
+  }
+
+  .container-section {
+    padding: 3rem;
+    margin-top: 2rem;
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
   }
 
-  .content-section {
-    padding: 1rem;
+  .section-paragraph {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-list {
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-list li {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    text-align: left; /* Garante o alinhamento à esquerda em telas maiores */
+  }
+
+  .adress {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    margin-top: 1.25rem;
+  }
+
+  .contato-section {
+    padding: 2rem 1rem;
+  }
+
+  .contato-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .contato-section p {
+    font-size: 1.1rem;
   }
 
   .contact-list {
-    flex-direction: column;
-    padding: 0 1rem;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start; /* Alinha os itens horizontalmente */
+    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
+    gap: 1rem; /* Espaçamento entre os itens na horizontal */
   }
 
   .contact-list li {
-    flex-direction: column;
-    text-align: center;
-    align-items: flex-start;
-  }
-
-  .contact-list a {
-    font-size: 0.95rem;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    max-width: 45%; /* Limita a largura dos itens na horizontal */
   }
 
   .contact-list i {
+    margin-bottom: 0; /* Remove a margem inferior do ícone */
+    margin-right: 1rem;
+  }
+
+  .contact-list a {
+    font-size: 1rem;
+  }
+
+  .map-section {
+    padding: 1rem;
+  }
+
+  .map-section iframe {
+    height: 450px;
+  }
+
+  .formulario-section {
+    padding: 2rem 1rem;
+  }
+
+  .formulario-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .contato-form {
+    max-width: 600px;
+    gap: 1rem;
+  }
+
+  .form-group label {
+    font-size: 1rem;
     margin-bottom: 0.5rem;
   }
 
-  .map-section iframe {
-    height: 250px;
+  .form-group input,
+  .form-group textarea {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  .google-map {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   }
 
   .google-map iframe {
-    height: 300px;
-  }
-
-  .formulario-section h2,
-  .contato-section h2,
-  .orcamento-section h2,
-  .sobre-section h2 {
-    font-size: 1.75rem;
-  }
-
-  .orcamento-section p,
-  .sobre-section p {
-    font-size: 1rem;
-  }
-
-  .form-group input,
-  .form-group textarea,
-  .submit-button {
-    font-size: 0.95rem;
-  }
-
-  .team-image {
-    max-width: 100%;
+    width: 70%;
+    height: 450px;
   }
 
   .service-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
   }
 
   .service-item {
-    padding: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   .service-item__title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
   }
 
   .service-item__description {
-    font-size: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-item__button {
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+    margin-top: 1rem;
   }
 
   .service-item__button svg {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-
-/* ===================== */
-/* ===== Breakpoint: max-width 480px ===== */
-/* ===================== */
-
-@media (max-width: 480px) {
-
-  :root {
-    --tamanho-titulo: 1.5rem;
-    --tamanho-paragrafo: 0.8rem;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
   }
 
-  h1 {
+  .container {
+    max-width: 1200px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .sobre-section {
+    margin-bottom: 2rem;
+  }
+
+  .sobre-section h2 {
     font-size: 2rem;
+    margin-bottom: 1rem;
   }
 
-  h2 {
-    font-size: 1.8rem;
+  .sobre-section p {
+    font-size: 1.1rem;
+    line-height: 1.6;
   }
 
-  h3 {
-    font-size: 1.6rem;
+  .team-image {
+    width: 35rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   }
 
-  h4 {
-    font-size: 1.4rem;
+  .slick-dots li button:before {
+    font-size: 12px;
   }
 
-  h5 {
-    font-size: 1.2rem;
+  .slick-prev,
+  .slick-next {
+    font-size: 1.5rem;
   }
 
-  h6 {
-    font-size: 0.9rem;
+  .contact {
+    margin-top: 2rem;
+  }
+
+  .contact li {
+    align-items: center;
+    padding: 0.8rem;
+  }
+
+  .contact i {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+  }
+
+  .contact span,
+  .contact a {
+    font-size: 1.1rem;
+  }
+
+  .formulario-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .orcamento-section {
+    margin-bottom: 2rem;
+  }
+
+  .orcamento-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .orcamento-section p {
+    font-size: 1.1rem;
+  }
+
+  .contact-list {
+    margin-top: 2rem;
+  }
+
+  .contact-list li {
+    padding: 0.8rem;
+  }
+
+  .contact-list i {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+  }
+
+  .contact-list span,
+  .contact-list a {
+    font-size: 1.1rem;
+  }
+
+  .option {
+    padding: 0.8rem;
+    font-size: 1.1rem;
+  }
+
+  .section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .orcamento-form {
+    margin: 1rem 15rem;
+    gap: 1.5rem;
+  }
+
+  .form-group label {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
   }
 
   .form-group input,
   .form-group textarea,
-  .submit-button,
-  .button {
-    font-size: 0.8rem;
-    padding: 0.5rem 0.8rem;
+  .form-group servico {
+    padding: 0.8rem;
+    font-size: 1.1rem;
   }
 
-  .contato-section h2,
-  .formulario-section h2 {
-    font-size: 1.4rem;
+  .map-section {
+    margin-bottom: 2rem;
   }
 
-  .contact-list li {
-    margin-bottom: 0.8rem;
-    padding: 0.6rem;
-  }
-
-  .map-section iframe {
-    height: 200px;
+  .map-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
   }
 
   .google-map iframe {
-    width: 100%;
+    height: 450px;
   }
 
-  .subPage-section-title {
-    font-size: 2rem;
+  .content-section {
+    padding: 3rem;
+    margin-top: 2rem;
   }
 
-  .subPage-section-subtitle {
-    font-size: 1.5rem;
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-paragraph {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-list {
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-list li {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
   }
 }
