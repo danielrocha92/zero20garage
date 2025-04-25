@@ -19,31 +19,31 @@ const Servicos = () => {
             title: 'Manutenção Preventiva',
             description: 'Manutenção regular para evitar problemas futuros...',
             link: '/mp',
-            icon: <FaTools size={90} />, // Ícone para Manutenção Preventiva
+            icon: <FaTools size={60} />, // Ícone para Manutenção Preventiva
         },
         {
             title: 'Diagnóstico de Problemas',
             description: 'Diagnóstico preciso para identificar...',
             link: '/dp',
-            icon: <FaSearch size={90} />, // Ícone para Diagnóstico de Problemas
+            icon: <FaSearch size={60} />, // Ícone para Diagnóstico de Problemas
         },
         {
             title: 'Troca de Peças',
             description: 'Substituição de peças desgastadas...',
             link: '/tp',
-            icon: <FaWrench size={90} />, // Ícone para Troca de Peças
+            icon: <FaWrench size={60} />, // Ícone para Troca de Peças
         },
         {
             title: 'Teste de Desempenho',
             description: 'Testes rigorosos para garantir...',
             link: '/td',
-            icon: <FaTachometerAlt size={90} />, // Ícone para Teste de Desempenho
+            icon: <FaTachometerAlt size={60} />, // Ícone para Teste de Desempenho
         },
         {
             title: 'Consultoria Técnica',
             description: 'Consultoria especializada para ajudar...',
             link: '/cp',
-            icon: <FaUsersCog size={90} />, // Ícone para Consultoria Técnica
+            icon: <FaUsersCog size={60} />, // Ícone para Consultoria Técnica
         },
     ];
 
@@ -53,33 +53,36 @@ const Servicos = () => {
                 <title>
                     Serviços de Retífica de Motores e Manutenção | Zero20 Garage
                 </title>
-                <meta name="description" content="Oferecemos serviços especializados..." />
+                <meta name="description" content="Oferecemos serviços especializados" />
             </Helmet>
 
-            <div className="page">
+            <div className="page-escuro">
                 <DynamicHeader messages={messages} />
                 <WhatsAppButton />
 
-                <div className="container">
-                    <section className="section">
-                        <div className="service-item">
-                            <h2 translate='no'>Retífica de Motores</h2>
-                            <p>Serviço completo de retífica de motores...</p>
+                <div className="container-escuro">
+                <section className="section">
+                <div className='highlight-item'>
+                <h2  
+                            className='title'
+                            translate='no'>Retífica de Motores</h2>
+                            <p>Serviço completo de retífica de motores</p>
                         </div>
-
+                        <section className="section">
                         <div className="service-grid">
                             {services.map((service) => (
                                 <div className="service-item" key={service.title} data-aos="fade-up">
-                                    <Link to={service.link} className="service-button">
+                                    <Link to={service.link} className="ctn-button">
                                         {service.icon} {/* Exibe o ícone */}
                                         <h2>{service.title}</h2>
                                         <p>{service.description}</p>
-                                        <ctn-button>Saiba Mais</ctn-button>
+                                        <button type="submit" className="submit-button">Saiba Mais</button>
                                     </Link>
                                 </div>
                             ))}
                         </div>
-                    </section>
+                        </section>
+                        </section>
                 </div>
             </div>
         </>

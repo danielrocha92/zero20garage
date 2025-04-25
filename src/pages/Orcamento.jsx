@@ -57,11 +57,11 @@ function Orcamento() {
   };
 
   return (
-    <div className="page">
+    <div className="page-escuro">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
 
-      <div className="container">
+      <div className="container-escuro">
         <section className="orcamento-section">
           <h2>Solicite um Orçamento</h2>
           <p>Preencha o formulário abaixo para receber um orçamento detalhado e personalizado.</p>

@@ -9,11 +9,6 @@ body {
   line-height: 1.6;
 }
 
-.page-container {
-  background-color: #f0f0f0;
-  padding: 0;
-}
-
 .content-section {
   background-color: #fff;
   border-radius: 8px;
@@ -32,6 +27,7 @@ body {
 .section-paragraph {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
+  color: var(branco);
 }
 
 .section-list {

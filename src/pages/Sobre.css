@@ -1,9 +1,4 @@
 /* Estilos do Sobre */
-.page {
-  padding: 0;
-  color: var(--branco); /* Texto branco para contraste */
-  position: relative;
-}
 
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
@@ -15,11 +10,6 @@
   background-color: #353535;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-}
-
-.sobre-section {
-  margin-bottom: 2rem;
-  text-align: center;
 }
 
 .sobre-section h2 {

@@ -24,11 +24,12 @@ function Blog() {
   ];
 
   return (
-    <div className="page-container">
+    <div className="page-escuro">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
-      <section className="content-section">
-        <h2 className="section-title">Blog ZER0 20 GARAGE™</h2>
+      <div className="container-escuro">
+      <section className="section-escuro">
+        <h2>Blog ZER0 20 GARAGE™</h2>
         <p className="section-paragraph">
           Explore artigos, dicas e notícias sobre manutenção automotiva, retífica de motores e inovações do setor.
         </p>
@@ -37,6 +38,7 @@ function Blog() {
         <BlogSectionProcesso />
         <BlogSectionManutencao />
       </section>
+    </div>
     </div>
   );
 }

@@ -77,7 +77,7 @@ function Contato() {
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
 
-      <div className="container">
+      <div className="container-escuro">
         <section className="section">
           <div className='section'>
             <div className='item'>

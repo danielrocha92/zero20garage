@@ -1,12 +1,4 @@
 /* Troca Peça.css */
-.page-container {
-    background-color: var(--branco);
-    color: var(cinza-escuro);
-    font-family: 'Nunito', sans-serif;
-    line-height: 1.6;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
   
   .container-section {
     background-color: #fff;

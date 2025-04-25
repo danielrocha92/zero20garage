@@ -21,15 +21,17 @@ function Home() {
     ];
 
   return (
-    <div className="page">
+    <div className="page-escuro">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
           {/* Card padrão Section */}
-          <div className="container">
+          <div className="container-escuro">
             <section className="section">
                 <div className='highlight-item'>
-                <h1 translate="no">Zero 20 Garage</h1>
-                <h2>Excelência em Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
+                <h2 
+                className="title"
+                translate="no">Zero 20 Garage</h2>
+                <h2 className="title">Excelência em Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
                 <h3>Atendimento especializado para veículos nacionais e importados.</h3>
                   <a href="/orcamento" className="button">Solicite um Orçamento</a>
                 </div>

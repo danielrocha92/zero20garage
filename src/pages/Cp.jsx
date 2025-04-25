@@ -17,7 +17,7 @@ function Cp() {
   ];
 
   return (
-    <div className="page-container">
+    <div className="page">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
 

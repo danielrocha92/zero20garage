@@ -17,10 +17,10 @@ function Mp() {
     ];
 
     return (
-        <div className="page">
+        <div className="page-claro">
             <DynamicHeader messages={messages} />
             <WhatsAppButton />
-            <div className="container-diaminc">
+            <div className="container-claro">
                 <h2 
                 className="title">
                     Manutenção Preventiva
