@@ -63,13 +63,11 @@ const Servicos = () => {
                 <div className="container-escuro">
                 <section className="section">
                 <div className='highlight-item'>
-                <h2  
-                            className='title'
-                            translate='no'>Retífica de Motores</h2>
-                            <p>Serviço completo de retífica de motores</p>
-                        </div>
-                        <section className="section">
-                        <div className="service-grid">
+                    <h2 className='title' translate='no'>Retífica de Motores</h2>
+                    <p>Serviço completo de retífica de motores</p>
+                    <div className="highlight-item">
+                    <div className="highlights-grid">
+                        
                             {services.map((service) => (
                                 <div className="service-item" key={service.title} data-aos="fade-up">
                                     <Link to={service.link} className="ctn-button">
@@ -81,10 +79,11 @@ const Servicos = () => {
                                 </div>
                             ))}
                         </div>
-                        </section>
-                        </section>
-                </div>
+                        </div>
+                    </div>
+                </section>
             </div>
+        </div>
         </>
     );
 };

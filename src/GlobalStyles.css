@@ -529,6 +529,9 @@ body {
   transition: background-color 0.3s ease;
   width: 100%;
   max-width: 600px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor */
+  background-color: rgba(54, 24, 24, 0.5);
 }
 
 .contact-list a {
@@ -540,7 +543,13 @@ body {
 
 .contact-list a:hover,
 .contact-list a:focus {
-  color: var(--vermelho-hover);
+  padding: 0.8rem 1.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor */
+  background-color: rgba(54, 24, 24, 0.5);
+  color: #c50404;
+  transform: scale(1.05);
   outline: none;
 }
 
