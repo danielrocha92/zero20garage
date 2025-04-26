@@ -1,4 +1,21 @@
 /* Estilos da Página Home */
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 .adress {
   font-size: 1.2rem;
   color: var(--branco); /* Texto branco */
