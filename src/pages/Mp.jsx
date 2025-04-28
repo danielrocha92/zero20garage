@@ -20,9 +20,9 @@ function Mp() {
         <div className="page-claro">
             <DynamicHeader messages={messages} />
             <WhatsAppButton />
+
             <div className="container-claro">
-                <h2 
-                className="title">
+                <h2 className="title">
                     Manutenção Preventiva
                 </h2>
                 <p className="paragraph">
@@ -54,7 +54,7 @@ function Mp() {
                 <p className="paragraph">
                     Não espere que os problemas apareçam. Agende agora mesmo a manutenção preventiva do seu veículo e garanta a sua segurança e tranquilidade.
                 </p>
-                <a href="/orcamento" 
+                <a href="/orcamento"
                 className="button">
                     Solicite um Orçamento
                 </a>

@@ -28,14 +28,6 @@ body {
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-
-
-
-
-
-
-
-
 :root {
   --vermelho-principal: #c50404;
   --cinza-claro: #D3D3D3;
@@ -45,8 +37,6 @@ body {
   --azul-esverdeado: #2c3e50;
   --tamanho-paragrafo: 1rem;
 }
-
-
 
 /* ===================== */
 /* Tipografia e Elementos Globais */
@@ -58,14 +48,10 @@ body {
   color: var(--cinza-escuro);
 }
 
-
-
 h1 {
   font-size: 2.8rem;
   /* Maior título */
 }
-
-
 
 h2 {
   font-size: 2.5rem;
@@ -1162,17 +1148,6 @@ body {
 }
 
 
-
-.content-section {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 3rem;
-  margin-top: 2rem;
-}
-
-
-
 .section-title {
   color: #2c3e50;
   font-size: 2.5rem;
@@ -1274,14 +1249,6 @@ body {
   .section-title {
     font-size: 2rem;
   }
-
-
-
-  .content-section {
-    padding: 1rem;
-  }
-
-
 
   .contact-list {
     flex-direction: column;
