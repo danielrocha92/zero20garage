@@ -35,6 +35,7 @@ a:hover {
   flex-direction: column;
   max-width: 100%; /* 600px */
   font-family: 'Segoe UI', sans-serif;
+  align-items: center;
 }
 
 .testimonial-header {

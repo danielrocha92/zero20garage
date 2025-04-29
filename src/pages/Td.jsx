@@ -16,18 +16,18 @@ function Td() {
   ];
 
   return (
-    <div className="page-container">
+    <div className="page-claro">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
 
-      <section className="content-section">
-        <h2 className="section-title">Teste de Desempenho do Seu Motor: Garanta Potência e Eficiência!</h2>
-        <p className="section-paragraph">
+      <div className="container-claro">
+        <h2 className="title">Teste de Desempenho do Seu Motor: Garanta Potência e Eficiência!</h2>
+        <p className="paragraph">
           Na 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™, sabemos que a performance do seu motor é crucial para o seu veículo e para o seu dia a dia. É por isso que oferecemos um serviço completo e especializado de <strong>Teste de Desempenho do Motor</strong>, utilizando tecnologia de ponta e a expertise de nossos técnicos qualificados.
         </p>
 
-        <h3 className="subPage-section-subtitle">Por que realizar um Teste de Desempenho do Motor?</h3>
-        <p className="section-paragraph">
+        <h3 className="subtitle">Por que realizar um Teste de Desempenho do Motor?</h3>
+        <p className="paragraph">
           Assim como fazemos check-ups regulares em nossa saúde, o seu motor também precisa de avaliações periódicas para garantir seu bom funcionamento e evitar problemas futuros. O Teste de Desempenho é uma ferramenta essencial para:
         </p>
         <ul className="section-list">
@@ -40,8 +40,8 @@ function Td() {
           <li><strong>Garantir a sua segurança:</strong> Um motor com desempenho adequado responde melhor em situações de emergência.</li>
         </ul>
 
-        <h3 className="subPage-section-subtitle">O que o nosso Teste de Desempenho Abrange?</h3>
-        <p className="section-paragraph">
+        <h3 className="subtitle">O que o nosso Teste de Desempenho Abrange?</h3>
+        <p className="paragraph">
           Nosso serviço de Teste de Desempenho é abrangente e minucioso, utilizando equipamentos modernos e seguindo rigorosos procedimentos. Geralmente, o teste inclui:
         </p>
         <ul className="section-list">
@@ -55,8 +55,8 @@ function Td() {
           <li><strong>Teste de desempenho em dinamômetro (opcional):</strong> Medição da potência e do torque reais do motor.</li>
         </ul>
 
-        <h3 className="subPage-section-subtitle">Para quem é indicado o Teste de Desempenho?</h3>
-        <p className="section-paragraph">
+        <h3 className="subtitle">Para quem é indicado o Teste de Desempenho?</h3>
+        <p className="paragraph">
           Nosso serviço de Teste de Desempenho é recomendado para:
         </p>
         <ul className="section-list">
@@ -67,11 +67,11 @@ function Td() {
           <li>Frotistas que precisam garantir a confiabilidade de seus veículos.</li>
         </ul>
 
-        <h3 className="subPage-section-subtitle">Agende agora mesmo o Teste de Desempenho do seu motor!</h3>
-        <p className="section-paragraph">
+        <h3 className="subtitle">Agende agora mesmo o Teste de Desempenho do seu motor!</h3>
+        <p className="paragraph">
           Nossa equipe está pronta para oferecer um serviço de alta qualidade, com diagnóstico preciso e soluções eficientes para garantir a potência, a eficiência e a durabilidade do seu motor.
         </p>
-        <p className="section-paragraph">
+        <p className="paragraph">
           Entre em contato conosco através dos seguintes canais:
         </p>
         <address className="terms-of-use-address">
@@ -80,10 +80,10 @@ function Td() {
           <a href="tel:+5511941097471">(11) 94109-7471</a><br />
           <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a>
         </address>
-        <p className="section-paragraph">
+        <p className="paragraph">
           <strong>Invista na saúde do seu motor. Invista em Teste de Desempenho na 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™!</strong>
         </p>
-      </section>
+      </div>
     </div>
   );
 }

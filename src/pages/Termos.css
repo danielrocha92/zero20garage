@@ -1,6 +1,5 @@
 /* TermsOfUse.css */
 .terms-of-use-list ul, li{
-  color: #000000;
   font-size: 1.1em;
   line-height: 1.1;
   text-align: justify;
@@ -17,6 +16,7 @@
 
 .terms-of-use-link:hover {
   text-decoration: underline;
+  color: var(--cor-destaque);
 }
 
 /* ===================== */

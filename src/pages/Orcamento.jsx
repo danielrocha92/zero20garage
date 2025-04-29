@@ -62,10 +62,11 @@ function Orcamento() {
       <WhatsAppButton />
 
       <div className="container-escuro">
-        <section className="orcamento-section">
-          <h2>Solicite um Orçamento</h2>
-          <p>Preencha o formulário abaixo para receber um orçamento detalhado e personalizado.</p>
-          
+      <section className="section">
+        <div className='highlight-item'>
+          <h2 className="title">Solicite um Orçamento</h2>
+          <p className='paragraph'>Preencha o formulário abaixo para receber um orçamento detalhado e personalizado.</p>
+
           {success !== null && (
             <div className={`feedback ${success ? 'success' : 'error'}`}>
               {success ? 'Formulário enviado com sucesso!' : 'Ocorreu um erro ao enviar o formulário. Tente novamente!'}
@@ -113,7 +114,7 @@ function Orcamento() {
               />
             </div>
             <div className="form-group">
-              <label 
+              <label
               htmlFor="servico">Serviço Desejado:</label>
               <select
                 className="option"
@@ -125,16 +126,16 @@ function Orcamento() {
               >
                 <option className="option"
                 value="">Selecione um serviço</option>
-                <option 
+                <option
                 className="option"
                 value="retifica">Retífica de Motores</option>
                 <option
                 className="option"
                 value="manutencao">Manutenção Preventiva</option>
-                <option 
+                <option
                 className="option"
                 value="revisao">Revisão Completa</option>
-                <option 
+                <option
                 className="option"
                 value="outro">Outro</option>
               </select>
@@ -155,7 +156,9 @@ function Orcamento() {
               {loading ? 'Enviando...' : 'Solicitar Orçamento'}
             </button>
           </form>
-        </section>
+
+        </div>
+      </section>
       </div>
     </div>
   );

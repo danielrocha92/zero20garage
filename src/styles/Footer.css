@@ -269,9 +269,11 @@
   .accordion-content {
     padding-left: 1rem;
     padding-bottom: 1rem;
+    font-size: 1.9rem;
   }
 
-  .social-icons a, .payment-icons span {
+  .social-icons a,
+  .payment-icons span {
     margin-right: 1rem;
     font-size: 1.5rem;
   }

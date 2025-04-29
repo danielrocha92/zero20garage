@@ -95,9 +95,7 @@ h6 {
   margin-bottom: 1rem;
   /* Espaçamento padrão abaixo dos títulos */
   margin-top: 2rem;
-  /* Use a margin-top do .subPage-section-subtitle */
   padding-bottom: 0.5rem;
-  /* Use o padding-bottom do .subPage-section-subtitle */
   border: none;
   /* Mantenha a remoção da borda */
 }
@@ -110,7 +108,7 @@ h6 {
 
 
 
-.subPage-title {
+.title {
   color: #2c3e50;
   font-size: 2rem;
   margin-bottom: 1.25rem;
@@ -126,7 +124,7 @@ h6 {
 
 
 
-.subPage-subtitle {
+.subtitle {
   border-bottom: 2px solid #ddd;
   color: #34495e;
   font-size: 1.5rem;
@@ -146,7 +144,7 @@ h6 {
 
 
 
-.subPage-paragraph {
+.paragraph {
   margin-bottom: 15px;
   color: #000000;
   font-size: 1.1em;
@@ -308,57 +306,37 @@ li {
   color: #000000;
 }
 
-
-
-.subPage-section {
+.section {
   margin: 2rem 0;
   margin-bottom: 2rem;
   text-align: center;
 }
 
-
-
-.subPage-section h2 {
+.section h2 {
   font-size: 2rem;
   color: #ffffff;
   margin-bottom: 1rem;
 }
 
-
-
-.subPage-section p {
+.section p {
   font-size: 1.1rem;
   color: #ffffff;
 }
 
-
-
-.section-title {
+.title {
   color: #000000;
-  /* Use a cor do .section-title */
   font-size: 2.5rem;
-  /* Use o font-size do .section-title */
   margin-bottom: 1.5rem;
-  /* Use a margin-bottom do .section-title */
   text-align: center;
-  /* Mantenha o alinhamento central */
 }
 
-
-
-.subPage-section-subtitle {
+.subtitle {
   color: #34495e;
-  /* Use a cor do .subPage-section-subtitle */
   font-size: 1.8rem;
-  /* Use o font-size do .subPage-section-subtitle */
   margin-top: 2rem;
-  /* Use a margin-top do .subPage-section-subtitle */
   margin-bottom: 1rem;
-  /* Use a margin-bottom do .subPage-section-subtitle */
   padding-bottom: 0.5rem;
-  /* Use o padding-bottom do .subPage-section-subtitle */
   border: none;
-  /* Mantenha a remoção da borda */
 }
 
 
@@ -539,7 +517,7 @@ li {
 
 .highlight-item {
   background-color: #2c2c2c6b;
-  padding: 1rem 0.5rem;
+  padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -694,7 +672,7 @@ li {
   border-radius: 8px;
   transition: background-color 0.3s ease;
   width: 100%;
-  max-width: 600px;
+  max-width: 100%;
   cursor: pointer;
   transition: background-color 0.3s ease;
   /* Adiciona uma transição suave para a mudança de cor */
@@ -742,71 +720,6 @@ li {
 }
 
 
-
-/* ===== Seção de Formulário ===== */
-.formulario-section {
-  margin-top: 2rem;
-  padding: 2rem 1rem;
-}
-
-
-
-.formulario-section h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: var(--branco);
-  text-align: center;
-}
-
-
-
-.contato-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-
-
-.form-group label {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  color: var(--branco);
-}
-
-
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 0.8rem;
-  border: 1px solid var(--cinza-borda);
-  border-radius: 8px;
-  font-size: 1rem;
-  background-color: var(--bg-input);
-  transition: border-color 0.3s ease;
-}
-
-
-
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: var(--vermelho);
-  outline: none;
-}
-
-
-
 /* ===== Estilo do Google Maps ===== */
 .google-map {
   border-radius: 8px;
@@ -819,7 +732,7 @@ li {
 
 
 .google-map iframe {
-  width: 70%;
+  width: 100%;
   height: 450px;
   border: 0;
 }
@@ -1236,13 +1149,9 @@ li {
     height: 250px;
   }
 
-
-
   .google-map iframe {
     height: 300px;
   }
-
-
 
   .formulario-section h2,
   .contato-section h2,
@@ -1251,14 +1160,10 @@ li {
     font-size: 1.75rem;
   }
 
-
-
   .orcamento-section p,
   .sobre-section p {
     font-size: 1rem;
   }
-
-
 
   .form-group input,
   .form-group textarea,
@@ -1266,38 +1171,26 @@ li {
     font-size: 0.95rem;
   }
 
-
-
   .team-image {
     max-width: 100%;
   }
-
-
 
   .service-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
-
-
   .service-item {
     padding: 1.5rem;
   }
-
-
 
   .service-item__title {
     font-size: 1.6rem;
   }
 
-
-
   .service-item__description {
     font-size: 1rem;
   }
-
-
 
   .service-item__button svg {
     width: 40px;
@@ -1305,107 +1198,78 @@ li {
   }
 }
 
-
-
-
-
-
 /* ===================== */
 /* ===== Breakpoint: max-width 480px ===== */
 /* ===================== */
 
-
-
 @media (max-width: 480px) {
-
-
 
   :root {
     --tamanho-titulo: 1.5rem;
     --tamanho-paragrafo: 0.8rem;
   }
 
-
-
   h1 {
     font-size: 2rem;
   }
-
-
 
   h2 {
     font-size: 1.8rem;
   }
 
-
-
   h3 {
     font-size: 1.6rem;
   }
-
-
 
   h4 {
     font-size: 1.4rem;
   }
 
-
-
   h5 {
     font-size: 1.2rem;
   }
-
-
 
   h6 {
     font-size: 0.9rem;
   }
 
-
-
   .form-group input,
   .form-group textarea,
+  .form-group servico,
   .submit-button,
-  .button {
-    font-size: 0.8rem;
-    padding: 0.5rem 0.8rem;
+  .button,
+  .option {
+    padding: 0.8rem;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    transition: border-color 0.3s ease;
+    color: #c50404;
   }
-
-
 
   .contato-section h2,
   .formulario-section h2 {
     font-size: 1.4rem;
   }
 
-
-
   .contact-list li {
     margin-bottom: 0.8rem;
     padding: 0.6rem;
   }
 
-
-
   .map-section iframe {
     height: 200px;
   }
-
-
 
   .google-map iframe {
     width: 100%;
   }
 
-
-
-  .subPage-section-title {
+  .title {
     font-size: 2rem;
   }
 
-
-
-  .subPage-section-subtitle {
+  .subtitle {
     font-size: 1.5rem;
   }
 }
