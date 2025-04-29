@@ -16,7 +16,7 @@ function GoogleReviews() {
         document.createElement('div')
       );
 
-      const placeId = 'PLACE_ID_DO_SEU_NEGÓCIO'; // Substitua pelo Place ID do seu negócio
+      const placeId = 'AIzaSyCPvu_jBGzUauSJuUKqRXfO2eOJ4wwBWmo'; // Substitua pelo Place ID do seu negócio
       const request = {
         placeId: placeId,
         fields: ['reviews'],
