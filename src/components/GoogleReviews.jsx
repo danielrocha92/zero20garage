@@ -6,7 +6,7 @@ function GoogleReviews() {
 
   useEffect(() => {
     const loader = new Loader({
-      apiKey: 'SUA_API_KEY_AQUI', // Substitua pela sua API Key
+      apiKey: 'AIzaSyCPvu_jBGzUauSJuUKqRXfO2eOJ4wwBWmo', // Substitua pela sua API Key
       version: 'weekly',
       libraries: ['places'],
     });
