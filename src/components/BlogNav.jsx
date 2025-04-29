@@ -2,7 +2,7 @@ import React from 'react';
 
 function BlogNav() {
   return (
-    <section className="content-section">
+    <section className="page-escuro">
       <h1 className="section-title" translate="no">Artigos do Blog</h1>
       <ul className="links">
         <li>

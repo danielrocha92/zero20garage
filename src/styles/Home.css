@@ -4,11 +4,9 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
-  color: #333;
 }
 
 a {
-  color: #007bff;
   text-decoration: none;
 }
 
@@ -16,7 +14,7 @@ a:hover {
   text-decoration: underline;
 }
 
-.adress {
+.address {
   font-size: 1.2rem;
   color: var(--branco); /* Texto branco */
   line-height: 1.8;
@@ -26,3 +24,60 @@ a:hover {
   margin-top: 1.25rem; /* Usando rem */
 }
 
+.testimonial-item {
+  background-color: var(vermelho); /* Fundo vermelho */
+  border: 0.0625rem solid #e0e0e0; /* 1px */
+  border-radius: 0.5rem; /* 8px */
+  padding: 1.25rem; /* 20px */
+  margin-bottom: 1.25rem; /* 20px */
+  box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.05); /* 2px 6px */
+  display: flex;
+  flex-direction: column;
+  max-width: 100%; /* 600px */
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.testimonial-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem; /* 12px */
+}
+
+.user-photo {
+  width: 3rem; /* 48px */
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.75rem; /* 12px */
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 1rem; /* 16px */
+  color: #333;
+}
+
+.review-date {
+  font-size: 0.8125rem; /* 13px */
+  color: #777;
+}
+
+.stars {
+  margin: 0.375rem 0; /* 6px vertical */
+}
+
+.star {
+  color: #fbbc04;
+  font-size: 1rem; /* 16px */
+}
+
+.testimonial-text {
+  font-size: 0.9375rem; /* 15px */
+  color: #444;
+  line-height: 1.5;
+}

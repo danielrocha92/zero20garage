@@ -41,22 +41,22 @@ const Privacidade = () => {
   };
 
   return (
-    <div className="page">
+    <div className="page-claro">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
-      <div className="container-diaminc">
-      <h2 
+      <div className="container-claro">
+      <h2
         translate="no"
         className="title">
           Política de Privacidade - ZER0 20 GARAGE™
         </h2>
-      <p 
+      <p
       translate="no"
       className="paragraph">
         Esta Política de Privacidade descreve como a <strong>ZERO 20 GARAGE™</strong> coleta, usa, compartilha e protege as informações pessoais dos usuários do nosso website. Ao acessar ou usar nosso website, você concorda com os termos desta Política de Privacidade.
       </p>
 
-      <section className="subPage-section">
+      <section className="section">
         <h3 className="subtitle">1. Informações que Coletamos:</h3>
         <p className="paragraph">Podemos coletar os seguintes tipos de informações pessoais:</p>
         <ul className="section-list">
@@ -94,12 +94,20 @@ const Privacidade = () => {
         </ul>
       </section>
 
-      <p className="paragraph acknowledgment">
-        Data da última atualização: {lastUpdated}
-      </p>
+        <address className="terms-of-use-address">
+          <strong>ZER0 20 GARAGE™</strong><br />
+          <a href='https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.326345,-46.5770842,17z/data=!3m1!4b1!4m6!3m5!1s0x94ceede375ca12c9:0xa22173d27f744745!8m2!3d-23.3263499!4d-46.5745093!16s%2Fg%2F11sgrc1ckt?authuser=0&entry=ttu&g_ep=EgoyMDI1MDQwOS4wIKXMDSoASAFQAw%3D%3D'target='blank'>Avenida Laura Gomes Hannickel, 153 - Capoavinha, Mairiporã - SP</a><br />
+          <a href="tel:+5511941097471">(11) 94109-7471</a><br />
+          <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a>
+        </address>
 
-      <button onClick={handleContentUpdate}>.</button>     
-    </div>
+        <div className="privacy-policy-last-updated">
+          <p className="paragraph acknowledgment">
+            Data da última atualização: {lastUpdated}
+          </p>
+          <button onClick={handleContentUpdate}></button>
+        </div>
+      </div>
     </div>
   );
 };

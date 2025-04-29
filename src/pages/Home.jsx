@@ -47,12 +47,7 @@
                         <p>em até 12x (Consulte Condições)
                         5% de Desconto no valor da Retífica Para Pagamento À Vista</p>
                       </div>
-                      <div className="highlight-item">
-                        <h2>Garantia</h2>
-                        <p>8 Valvulas = 2 anos De garantia ou 100.000KM</p>
-                        <p>
-                        16 Valvulas = 1 ano ou 50.00KM</p>
-                      </div>
+
                       <div className="highlight-item">
                         <h2>Tempo de entrega</h2>
                         <p>Motor Nacional = 4 a 7 Dias Úteis</p>
@@ -91,28 +86,43 @@
                   <GoogleReviews />
                   <div className="testimonial-item">
                   <strong><p>"Serviço impecável! Meu carro nunca esteve tão bom. Recomendo a Zero20 Garage para todos."</p></strong>
+                    <span class="review-date">Junho de 2024</span>
+                    <div class="stars">
+                      <span class="star">★</span>
+                      <span class="star">★</span>
+                      <span class="star">★</span>
+                      <span class="star">★</span>
+                      <span class="star">☆</span>
+                    </div>
                     <p>- João Silva</p>
                   </div>
                   <div className="testimonial-item">
                   <strong><p>"Atendimento rápido e eficiente. A equipe é muito profissional e confiável."</p></strong>
+                    <span class="review-date">Abril de 2025</span>
+                    <div class="stars">
+                      <span class="star">★</span>
+                      <span class="star">★</span>
+                      <span class="star">★</span>
+                      <span class="star">★</span>
+                      <span class="star">☆</span>
+                    </div>
                     <p>- Maria Oliveira</p>
                   </div>
                 </div>
             </section>
 
-        {/* home */}
-        <div className='page'>
+              {/* home */}
               <div className="highlight-item">
-              <address className="address">
-            <strong>ZER0 20 GARAGE™</strong><br />
-            <a href='https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.326345,-46.5770842,17z/data=!3m1!4b1!4m6!3m5!1s0x94ceede375ca12c9:0xa22173d27f744745!8m2!3d-23.3263499!4d-46.5745093!16s%2Fg%2F11sgrc1ckt?authuser=0&entry=ttu&g_ep=EgoyMDI1MDQwOS4wIKXMDSoASAFQAw%3D%3D'target='blank'>Avenida Laura Gomes Hannickel, 153 - Capoavinha, Mairiporã - SP</a><br />
-            <a href="tel:+5511941097471">(11) 94109-7471</a><br />
-            <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a>
-          </address>
-            </div>
+                <address className="address">
+                  <strong>ZER0 20 GARAGE™</strong><br />
+                  <a href='https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.326345,-46.5770842,17z/data=!3m1!4b1!4m6!3m5!1s0x94ceede375ca12c9:0xa22173d27f744745!8m2!3d-23.3263499!4d-46.5745093!16s%2Fg%2F11sgrc1ckt?authuser=0&entry=ttu&g_ep=EgoyMDI1MDQwOS4wIKXMDSoASAFQAw%3D%3D'target='blank'>Avenida Laura Gomes Hannickel, 153 - Capoavinha, Mairiporã - SP</a><br />
+                  <a href="tel:+5511941097471">(11) 94109-7471</a><br />
+                  <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a><br />
+                  <a href="https://www.instagram.com/zero20garage/" target="_blank" rel="noopener noreferrer">Instagram</a><br />
+                </address>
+              </div>
           </div>
         </div>
-      </div>
     );
   }
   export default Home;

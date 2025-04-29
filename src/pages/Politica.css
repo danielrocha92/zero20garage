@@ -1,5 +1,5 @@
 /* Estilos gerais para o corpo da página */
-/* Troca Peça.css */
+/* Política de Privacidade.css */
 
 /* Fonte padrão para todo o corpo */
 body {
@@ -11,13 +11,6 @@ body {
 }
 
 /* Título Principal */
-.privacy-policy-title {
-    font-size: 2.5rem;
-    color: #000000;
-    margin-bottom: 20px;
-    text-align: center;
-    font-weight: bold;
-}
 
 /* Subtítulos */
 .privacy-policy-subtitle {
@@ -30,54 +23,36 @@ body {
 }
 
 /* Parágrafos */
-.privacy-policy-paragraph {
-  margin-bottom: 2rem;
-  color: #000000;
-  font-size: 1.1em;
-  line-height: 1.1;
-  text-align: justify;
-  padding: 0.5rem;
-}
-
-.privacy-policy-link {
-    color: #c0392b;
-    text-decoration: none;
-  }
-  
-  .privacy-policy-link:hover {
-    text-decoration: underline;
-  }
-  
   .section-list {
     list-style-type: disc;
     margin-bottom: 0.9375rem; /* Usando rem */
     padding-left: 1.25rem; /* Usando rem */
   }
-  
+
   .section-list li {
     margin-bottom: 0.3125rem; /* Usando rem */
   }
-  
+
   .prohibited-list {
     color: #c0392b;
   }
-  
+
   .prohibited-paragraph {
     color: #c0392b;
     font-weight: bold;
   }
-  
+
   .privacy-policy-address {
     font-style: normal;
     margin-top: 1.25rem; /* Usando rem */
   }
-  
+
   .acknowledgment {
     color: #777;
     font-style: italic;
     margin-top: 1.875rem; /* Usando rem */
   }
-  
+
   .privacy-policy-last-updated {
     color: #999;
     font-size: 0.9em;

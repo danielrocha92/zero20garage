@@ -27,7 +27,6 @@ import TrabalheConosco from './pages/TrabalheConosco';
 import Termos from './pages/Termos';
 import './App.css';
 import './GlobalStyles.css';
-import './styles/components.css';
 
 
 
@@ -54,10 +53,10 @@ function App() {
           <Route path="/Faq" element={<Faq />} />
           <Route path="/Trabalhe-conosco" element={<TrabalheConosco />} />
           <Route path="/Termos" element={<Termos />} />
-          
+
           {/* Adicione outras rotas aqui conforme necessário */}
           {/* Rota para a página de serviços - exemplo de rota aninhada */}
-      
+
           {/* Rota para a página 404 - deve ser a última rota */}
           <Route path="*" element={<NotFound />} />
         </Routes>
