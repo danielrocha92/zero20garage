@@ -60,7 +60,7 @@ const Termos = () => {
         <p className="paragraph">
           A <strong>ZER0 20 GARAGE™</strong> é uma oficina especializada em retífica de motores automotivos. Nosso site tem como objetivo fornecer informações sobre nossos serviços, expertise, contato e outras informações relevantes sobre nossa empresa. Através do site, você poderá:
         </p>
-        <ul className="terms-of-use-list">
+        <ul className="section-list">
           <li>Conhecer nossos serviços de retífica de motores.</li>
           <li>Visualizar informações sobre nossa empresa e equipe.</li>
           <li>Entrar em contato conosco para solicitar orçamentos ou informações.</li>
@@ -137,7 +137,7 @@ const Termos = () => {
 
       <section className="section">
         <h3 className="subtitle">10. Disposições Gerais</h3>
-        <ul className="terms-of-use-list">
+        <ul className="section-list">
           <li>
             <strong>Integralidade do Acordo:</strong> Estes Termos de Uso constituem o acordo integral entre você e a <strong>ZER0 20 GARAGE™</strong> em relação ao uso do site e substituem todos os acordos e entendimentos anteriores ou contemporâneos, sejam eles verbais ou escritos.
           </li>

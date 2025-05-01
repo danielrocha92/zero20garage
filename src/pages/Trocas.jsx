@@ -55,7 +55,6 @@ const Trocas = () => {
         className="title">
           Trocas e Garantia - ZER0 20 GARAGE™
       </h2>
-
       <p
         translate="no"
         className="paragraph">

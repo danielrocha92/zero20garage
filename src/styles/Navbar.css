@@ -15,7 +15,6 @@
   transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease; justify-content: 0.3s ease, top 0.3s ease; /* Adiciona transição para justify-content */
 }
 
-
 .navbar:hover {
   background-color: rgba(0, 0, 0, 0.8); /* Fundo mais opaco ao passar o mouse */
 }
@@ -75,16 +74,15 @@
 }
 
 .navbar-links a {
-  color: #fff;
+  color: var(--cinza-claro);
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.3s ease;
 }
 
 .navbar-links a:hover {
-  color: #ff0000; /* Azul ao passar o mouse */
+  color: var(--vermelho-principal);
 }
-
 
 /* Menu Responsivo */
 .menu {
@@ -144,24 +142,26 @@
   .menu {
     display: none; /* Esconde o menu em telas menores por padrão */
     /* ... outros estilos do menu responsivo ... */
+    max-width: 100%;
   }
 
   .menu.open {
     display: flex; /* Exibe o menu quando aberto */
   }
 
-  
+
 /* Botão "Hambúrguer" */
 .hamburger {
   display: block;
   background: none;
   border: none;
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 2rem;
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
   position: absolute; /* Posiciona o botão */
   right: 1rem; /* Alinha à direita */
+  max-width: 100%;
 }
 
 .hamburger:hover {

@@ -6,14 +6,6 @@ body {
   background-color: #f4f4f4;
 }
 
-a {
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
 .address {
   font-size: 1.2rem;
   color: var(--branco); /* Texto branco */

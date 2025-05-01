@@ -15,12 +15,6 @@ body {
     text-align: center;
   }
 
-  .section-paragraph {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-    color: #333;
-  }
-
   .section-list {
     list-style-type: disc;
     padding-left: 2rem;

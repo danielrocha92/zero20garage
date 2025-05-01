@@ -61,29 +61,36 @@ const Servicos = () => {
                 <WhatsAppButton />
 
                 <div className="container-escuro">
-                <section className="section">
-                <div className='highlight-item'>
-                    <h2 className='title' translate='no'>Retífica de Motores</h2>
-                    <p>Serviço completo de retífica de motores</p>
-                    <div className="highlight-item">
-                    <div className="highlights-grid">
-                        
-                            {services.map((service) => (
-                                <div className="service-item" key={service.title} data-aos="fade-up">
-                                    <Link to={service.link} className="ctn-button">
-                                        {service.icon} {/* Exibe o ícone */}
-                                        <h2>{service.title}</h2>
-                                        <p>{service.description}</p>
-                                        <button type="submit" className="submit-button">Saiba Mais</button>
-                                    </Link>
-                                </div>
-                            ))}
+                    <section className="section">
+                        <div className='highlight-item'>
+                            <h2 className='title' translate='no'>Retífica de Motores</h2>
+                            <p className="paragraph">Serviço completo de retífica de motores</p>
+                            <div className="highlights-grid">
+
+                                    {services.map((service) => (
+                                        <div
+                                            className="service-item"
+                                            key={service.title}
+                                            data-aos="fade-up">
+                                                <Link
+                                                    to={service.link}
+                                                    className="ctn-button">
+                                                    {service.icon} {/* Exibe o ícone */}
+                                                    <h2 className='title'>{service.title}</h2>
+                                                    <p>{service.description}</p>
+                                                    <button
+                                                        type="submit"
+                                                        className="submit-button">
+                                                            Saiba Mais
+                                                    </button>
+                                                </Link>
+                                        </div>
+                                    ))}
+                            </div>
                         </div>
-                        </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
             </div>
-        </div>
         </>
     );
 };
