@@ -12,8 +12,6 @@ html {
   scroll-behavior: smooth;
 }
 
-
-
 /* Reset para eliminar bordas indesejadas */
 html,
 body {
@@ -42,7 +40,6 @@ body {
 /* Tipografia e Elementos Globais */
 /* ===================== */
 
-
 h1 {
   font-size: 2.8rem;
   /* Maior título */
@@ -53,35 +50,25 @@ h2 {
   /* Título principal de seção */
 }
 
-
-
 h3 {
   font-size: 2rem;
   /* Subtítulo de seção */
 }
-
-
 
 h4 {
   font-size: 1.7rem;
   /* Subtítulo menor */
 }
 
-
-
 h5 {
   font-size: 1.4rem;
   /* Subtítulo ainda menor */
 }
 
-
-
 h6 {
   font-size: 1.1rem;
   /* Menor subtítulo */
 }
-
-
 
 h1,
 h2,
@@ -100,13 +87,9 @@ h6 {
   /* Mantenha a remoção da borda */
 }
 
-
-
 /* ===================== */
 /* Título Principal */
 /* ===================== */
-
-
 
 .title {
   color: #2c3e50;
@@ -116,13 +99,9 @@ h6 {
   text-align: center;
 }
 
-
-
 /* ===================== */
 /* Subtítulos */
 /* ===================== */
-
-
 
 .subtitle {
   border-bottom: 2px solid #ddd;
@@ -136,33 +115,39 @@ h6 {
   /* Usando rem */
 }
 
-
-
 /* ===================== */
 /* Parágrafos */
 /* ===================== */
 
-
-
 .paragraph {
-  margin-bottom: 15px;
-  color: #000000;
+  margin-bottom: 2rem;
+  color: #030303;
   font-size: 1.1em;
   line-height: 1.1;
   text-align: justify;
+  padding: 0.5rem;
 }
 
-
+/* ===================== */
+/* Parágrafos Proibidos */
+/* ===================== */
+.prohibited-paragraph {
+  color: #c0392b;
+  font-weight: bold;
+}
 
 /* ================ */
 /* Botão de âncora  */
 /* ================ */
 a {
   text-decoration: none;
-  color: var(--cor-destaque)
+  color: var(--cor-destaque);
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
 }
-
-
 
 a:hover,
 a:focus {
@@ -172,14 +157,10 @@ a:focus {
   border-radius: 8px;
 }
 
-
-
 li {
   text-align: left;
   list-style-position: inside;
 }
-
-
 
 /* ============================== */
 /* Animação para troca de página  */
@@ -189,30 +170,22 @@ li {
   transform: translateY(20px);
 }
 
-
-
 .page-enter-active {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-
-
 .page-exit {
   opacity: 1;
   transform: translateY(0);
 }
-
-
 
 .page-exit-active {
   opacity: 0;
   transform: translateY(-20px);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
-
-
 
 /* ================= */
 /* Layout Container */
@@ -225,8 +198,6 @@ li {
   flex-direction: column;
   align-items: center;
 }
-
-
 
 .container-claro {
   max-width: 1200px;
@@ -286,8 +257,6 @@ li {
   margin-bottom: 2rem;
 }
 
-
-
 .section-escuro {
   margin: 2rem 0;
   margin-bottom: 2rem;
@@ -295,11 +264,6 @@ li {
   color: #ffffff;
   /* Texto branco para contraste */
 }
-
-
-
-
-
 
 .section p {
   font-size: 1.1rem;
@@ -314,13 +278,14 @@ li {
 
 .section h2 {
   font-size: 2rem;
-  color: #ffffff;
+  color: var(--cinza-borda);
   margin-bottom: 1rem;
 }
 
 .section p {
+  padding: 2rem;
   font-size: 1.1rem;
-  color: #ffffff;
+  color: var(--texto-secundario);
 }
 
 .title {
@@ -339,19 +304,6 @@ li {
   border: none;
 }
 
-
-
-.paragraph {
-  margin-bottom: 2rem;
-  color: #030303;
-  font-size: 1.1em;
-  line-height: 1.1;
-  text-align: justify;
-  padding: 0.5rem;
-}
-
-
-
 .section-list {
   list-style-type: disc;
   /* Use o list-style-type do .section-list */
@@ -368,6 +320,7 @@ li {
   /* Use o font-size do item da lista */
   margin-bottom: 0.5rem;
   /* Use a margin-bottom do item da lista */
+  color: var(--texto-secundario);
 }
 
 
@@ -571,17 +524,6 @@ li {
   text-align: center;
   /* Mantenha o alinhamento central */
 }
-
-
-
-.section-paragraph {
-  font-size: 1.1rem;
-  /* Use o font-size do .section-paragraph */
-  margin-bottom: 1.5rem;
-  /* Use a margin-bottom do .section-paragraph */
-}
-
-
 
 .section-list {
   list-style-type: disc;
@@ -1023,16 +965,6 @@ li {
   text-align: center;
 }
 
-
-
-.section-paragraph {
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
-  color: var(branco);
-}
-
-
-
 .section-list {
   list-style-type: disc;
   padding-left: 2rem;
@@ -1240,11 +1172,11 @@ li {
   .button,
   .option {
     padding: 0.8rem;
-    border: 1px solid #ffffff;
+    border: 0.8px solid #ff0000;
     border-radius: 8px;
-    font-size: 1.5rem;
+    font-size: 0.9rem;
     transition: border-color 0.3s ease;
-    color: #c50404;
+    color: #ffffff;
   }
 
   .contato-section h2,

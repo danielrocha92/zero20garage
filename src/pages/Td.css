@@ -14,11 +14,6 @@
     text-align: center; /* Mantenha o alinhamento central */
   }
 
-  .section-paragraph {
-    font-size: 1.1rem; /* Use o font-size do .section-paragraph */
-    margin-bottom: 1.5rem; /* Use a margin-bottom do .section-paragraph */
-  }
-
   .section-list {
     list-style-type: disc; /* Use o list-style-type do .section-list */
     padding-left: 2rem; /* Use o padding-left do .section-list */

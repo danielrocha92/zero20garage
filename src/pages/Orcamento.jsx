@@ -4,6 +4,7 @@ import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
 import { supabase } from '../supabaseClient';
 
+
 function Orcamento() {
   const messages = [
     {
@@ -36,6 +37,7 @@ function Orcamento() {
     setFormData({ ...formData, [name]: value });
   };
 
+<<<<<<< HEAD
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -63,8 +65,36 @@ function Orcamento() {
         servico: '',
         mensagem: '',
       });
+=======
+  const { data, error } = await supabase.from('orcamentos').insert([formData]);
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const { data, error } = await supabase.from('orcamentos').insert([formData]);
+
+      if (error) {
+        console.error('Erro ao enviar dados:', error.message);
+        alert('Erro ao enviar o orçamento. Tente novamente.');
+      } else {
+        alert('Orçamento enviado com sucesso!');
+        setFormData({
+          nome: '',
+          email: '',
+          telefone: '',
+          mensagem: '',
+        });
+      }
+    } catch (err) {
+      console.error('Erro inesperado:', err);
+      alert('Erro inesperado. Tente novamente.');
+>>>>>>> 49f59f0b158c72255581f0b1be1f6f79eaeca3ef
     }
   };
+
+
 
   return (
     <div className="page-escuro">

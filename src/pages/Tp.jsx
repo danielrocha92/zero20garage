@@ -34,7 +34,7 @@ function Tp() {
           <p className="paragraph">Um diagnóstico preciso é essencial para identificar a causa raiz dos problemas do seu veículo e evitar gastos desnecessários. Com o diagnóstico correto, você pode ter certeza de que está resolvendo o problema certo.</p>
 
           <h3 className="subtitle">Benefícios da troca de peças desgastadas ou danificadas</h3>
-          <ul>
+          <ul className="section-list">
             <li>Melhora no desempenho do motor.</li>
             <li>Aumento da vida útil do veículo.</li>
             <li>Redução do consumo de combustível.</li>

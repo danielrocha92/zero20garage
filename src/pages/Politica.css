@@ -37,11 +37,6 @@ body {
     color: #c0392b;
   }
 
-  .prohibited-paragraph {
-    color: #c0392b;
-    font-weight: bold;
-  }
-
   .privacy-policy-address {
     font-style: normal;
     margin-top: 1.25rem; /* Usando rem */
