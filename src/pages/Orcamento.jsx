@@ -3,6 +3,7 @@ import './Orcamento.css';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
 
+
 function Orcamento() {
   const messages = [
     {
@@ -35,26 +36,34 @@ function Orcamento() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const { data, error } = await supabase.from('orcamentos').insert([formData]);
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setLoading(true);
-    setSuccess(null);
+    try {
+      const { data, error } = await supabase.from('orcamentos').insert([formData]);
 
-    // Simulação de envio de formulário
-    setTimeout(() => {
-      setLoading(false);
-      setSuccess(true);
-      alert('Formulário enviado com sucesso!');
-      setFormData({
-        nome: '',
-        email: '',
-        telefone: '',
-        servico: '',
-        mensagem: '',
-      });
-    }, 2000); // Simulação de tempo de envio
+      if (error) {
+        console.error('Erro ao enviar dados:', error.message);
+        alert('Erro ao enviar o orçamento. Tente novamente.');
+      } else {
+        alert('Orçamento enviado com sucesso!');
+        setFormData({
+          nome: '',
+          email: '',
+          telefone: '',
+          mensagem: '',
+        });
+      }
+    } catch (err) {
+      console.error('Erro inesperado:', err);
+      alert('Erro inesperado. Tente novamente.');
+    }
   };
+
+
 
   return (
     <div className="page-escuro">
