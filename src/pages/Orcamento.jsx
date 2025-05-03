@@ -90,15 +90,7 @@ function Orcamento() {
         excel: excelBase64,
       }, 'NxziW1zSC820uuLvF');
 
-      // 5. Abrir link do WhatsApp com mensagem
-      const mensagemWhatsApp = encodeURIComponent(
-        `*NOVO ORÇAMENTO - ZERO 20 GARAGE™*\n\nNome: ${formData.nome}\nEmail: ${formData.email}\nTelefone: ${formData.telefone}\nServiço: ${formData.servico}\nMensagem: ${formData.mensagem}`
-      );
-      const numero = '5511941097471'; // Ex: 5531999999999
-      const url = `https://wa.me/${numero}?text=${mensagemWhatsApp}`;
-      window.open(url, '_blank');
-
-      // 6. Resetar formulário e exibir sucesso
+      // 5. Resetar formulário e exibir sucesso
       setSuccess(true);
       setFormData({
         nome: '',
