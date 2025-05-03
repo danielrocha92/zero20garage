@@ -476,14 +476,10 @@ li {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-
-
 .highlight-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
 }
-
-
 
 .highlight-item h3 {
   font-size: 1.5rem;
@@ -1099,8 +1095,12 @@ li {
 
   .form-group input,
   .form-group textarea,
-  .submit-button {
-    font-size: 0.95rem;
+  .submit-button,
+  .form-group servico,
+  .submit-button,
+  .button,
+  .option {
+    font-size: 1.25rem;
   }
 
   .team-image {
@@ -1163,20 +1163,6 @@ li {
 
   h6 {
     font-size: 0.9rem;
-  }
-
-  .form-group input,
-  .form-group textarea,
-  .form-group servico,
-  .submit-button,
-  .button,
-  .option {
-    padding: 0.8rem;
-    border: 0.8px solid #ff0000;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    transition: border-color 0.3s ease;
-    color: #ffffff;
   }
 
   .contato-section h2,

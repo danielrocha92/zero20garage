@@ -3,6 +3,10 @@ import './Orcamento.css';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
 import { supabase } from '../supabaseClient';
+import jsPDF from 'jspdf';
+import * as XLSX from 'xlsx';
+import emailjs from 'emailjs-com';
+
 
 
 function Orcamento() {
@@ -37,27 +41,65 @@ function Orcamento() {
     setFormData({ ...formData, [name]: value });
   };
 
-<<<<<<< HEAD
+  // Função para lidar com o envio do formulário
+  // Adicionando a função de envio do formulário
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setSuccess(null);
 
-    const { nome, email, telefone, servico, mensagem } = formData;
+    try {
+      // 1. Salvar no Supabase
+      const { error } = await supabase.from('orcamentos').insert([formData]);
 
-    const { error } = await supabase.from('orcamentos').insert([
-      { nome, email, telefone, servico, mensagem }
-    ]);
+      if (error) {
+        console.error('Erro ao enviar dados:', error.message);
+        setSuccess(false);
+        return;
+      }
 
-    setLoading(false);
+      // 2. Gerar PDF
+      const doc = new jsPDF();
+      doc.text('Orçamento - ZERO 20 GARAGE™', 10, 10);
+      doc.text(`Nome: ${formData.nome}`, 10, 20);
+      doc.text(`Email: ${formData.email}`, 10, 30);
+      doc.text(`Telefone: ${formData.telefone}`, 10, 40);
+      doc.text(`Serviço: ${formData.servico}`, 10, 50);
+      doc.text(`Mensagem: ${formData.mensagem}`, 10, 60);
+      const pdfBase64 = doc.output('datauristring'); // base64 inline
 
-    if (error) {
-      console.error(error);
-      setSuccess(false);
-      alert('Erro ao enviar formulário.');
-    } else {
+      // 3. Gerar Excel
+      const wb = XLSX.utils.book_new();
+      const wsData = [[
+        'Nome', 'Email', 'Telefone', 'Serviço', 'Mensagem'
+      ], [
+        formData.nome, formData.email, formData.telefone, formData.servico, formData.mensagem
+      ]];
+      const ws = XLSX.utils.aoa_to_sheet(wsData);
+      XLSX.utils.book_append_sheet(wb, ws, 'Orçamento');
+      const excelBase64 = XLSX.write(wb, { bookType: 'xlsx', type: 'base64' });
+
+      // 4. Enviar via EmailJS
+      await emailjs.send('service_mbg69sw', 'template_rg6i0fj', {
+        nome: formData.nome,
+        email: formData.email,
+        telefone: formData.telefone,
+        servico: formData.servico,
+        mensagem: formData.mensagem,
+        pdf: pdfBase64,
+        excel: excelBase64,
+      }, 'NxziW1zSC820uuLvF');
+
+      // 5. Abrir link do WhatsApp com mensagem
+      const mensagemWhatsApp = encodeURIComponent(
+        `*NOVO ORÇAMENTO - ZERO 20 GARAGE™*\n\nNome: ${formData.nome}\nEmail: ${formData.email}\nTelefone: ${formData.telefone}\nServiço: ${formData.servico}\nMensagem: ${formData.mensagem}`
+      );
+      const numero = '5511941097471'; // Ex: 5531999999999
+      const url = `https://wa.me/${numero}?text=${mensagemWhatsApp}`;
+      window.open(url, '_blank');
+
+      // 6. Resetar formulário e exibir sucesso
       setSuccess(true);
-      alert('Formulário enviado com sucesso!');
       setFormData({
         nome: '',
         email: '',
@@ -65,36 +107,14 @@ function Orcamento() {
         servico: '',
         mensagem: '',
       });
-=======
-  const { data, error } = await supabase.from('orcamentos').insert([formData]);
 
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const { data, error } = await supabase.from('orcamentos').insert([formData]);
-
-      if (error) {
-        console.error('Erro ao enviar dados:', error.message);
-        alert('Erro ao enviar o orçamento. Tente novamente.');
-      } else {
-        alert('Orçamento enviado com sucesso!');
-        setFormData({
-          nome: '',
-          email: '',
-          telefone: '',
-          mensagem: '',
-        });
-      }
     } catch (err) {
       console.error('Erro inesperado:', err);
-      alert('Erro inesperado. Tente novamente.');
->>>>>>> 49f59f0b158c72255581f0b1be1f6f79eaeca3ef
+      setSuccess(false);
+    } finally {
+      setLoading(false);
     }
   };
-
-
 
   return (
     <div className="page-escuro">
@@ -104,14 +124,8 @@ function Orcamento() {
       <div className="container-escuro">
         <section className="section">
           <div className='highlight-item'>
-            <h2 className="title">Solicite um Orçamento</h2>
-            <p className='paragraph'>Preencha o formulário abaixo para receber um orçamento detalhado e personalizado.</p>
-
-            {success !== null && (
-              <div className={`feedback ${success ? 'success' : 'error'}`}>
-                {success ? 'Formulário enviado com sucesso!' : 'Ocorreu um erro ao enviar o formulário. Tente novamente!'}
-              </div>
-            )}
+            <h1 className="title">Solicite um Orçamento</h1>
+            <h3 className='subtitle'>Preencha o formulário abaixo para receber um orçamento detalhado e personalizado.</h3>
 
             <form className="orcamento-form" onSubmit={handleSubmit}>
               <div className="form-group">
@@ -150,19 +164,26 @@ function Orcamento() {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="servico">Serviço Desejado:</label>
+                <label
+                htmlFor="servico">Serviço Desejado:</label>
                 <select
+                className='option'
                   id="servico"
                   name="servico"
                   value={formData.servico}
                   onChange={handleChange}
                   required
                 >
-                  <option value="">Selecione um serviço</option>
-                  <option value="retifica">Retífica de Motores</option>
-                  <option value="manutencao">Manutenção Preventiva</option>
-                  <option value="revisao">Revisão Completa</option>
-                  <option value="outro">Outro</option>
+                  <option
+                  className='option' value="">Selecione um serviço</option>
+                  <option
+                  className='option' value="retifica">Retífica de Motores</option>
+                  <option
+                  className='option' value="manutencao">Manutenção Preventiva</option>
+                  <option
+                  className='option' value="revisao">Revisão Completa</option>
+                  <option
+                  className='option'  value="outro">Outro</option>
                 </select>
               </div>
               <div className="form-group">
@@ -180,6 +201,11 @@ function Orcamento() {
               <button type="submit" className="submit-button" disabled={loading}>
                 {loading ? 'Enviando...' : 'Solicitar Orçamento'}
               </button>
+              {success !== null && (
+              <div className={`feedback-success ${success ? 'success' : 'feedback-error'}`}>
+                {success ? 'Formulário enviado com sucesso!' : 'Ocorreu um erro ao enviar o formulário. Tente novamente!'}
+              </div>
+            )}
             </form>
           </div>
         </section>
