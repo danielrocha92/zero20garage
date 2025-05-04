@@ -7,8 +7,6 @@ import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
 import emailjs from 'emailjs-com';
 
-
-
 function Orcamento() {
   const messages = [
     {
@@ -41,24 +39,27 @@ function Orcamento() {
     setFormData({ ...formData, [name]: value });
   };
 
-  // Função para lidar com o envio do formulário
-  // Adicionando a função de envio do formulário
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setSuccess(null);
 
     try {
-      // 1. Salvar no Supabase
       const { error } = await supabase.from('orcamentos').insert([formData]);
-
       if (error) {
         console.error('Erro ao enviar dados:', error.message);
         setSuccess(false);
         return;
       }
 
-      // 2. Gerar PDF
+      await fetch('https://script.google.com/macros/s/AKfycbyJ9imhVWYKWZUfW3IRLC9yySfhlGZozRgIC9hA1hFV2EG_RIVr0jglJ915-ChuGChIyw/exec', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
       const doc = new jsPDF();
       doc.text('Orçamento - ZERO 20 GARAGE™', 10, 10);
       doc.text(`Nome: ${formData.nome}`, 10, 20);
@@ -66,9 +67,8 @@ function Orcamento() {
       doc.text(`Telefone: ${formData.telefone}`, 10, 40);
       doc.text(`Serviço: ${formData.servico}`, 10, 50);
       doc.text(`Mensagem: ${formData.mensagem}`, 10, 60);
-      const pdfBase64 = doc.output('datauristring'); // base64 inline
+      const pdfBase64 = doc.output('datauristring');
 
-      // 3. Gerar Excel
       const wb = XLSX.utils.book_new();
       const wsData = [[
         'Nome', 'Email', 'Telefone', 'Serviço', 'Mensagem'
@@ -79,8 +79,7 @@ function Orcamento() {
       XLSX.utils.book_append_sheet(wb, ws, 'Orçamento');
       const excelBase64 = XLSX.write(wb, { bookType: 'xlsx', type: 'base64' });
 
-      // 4. Enviar via EmailJS
-      await emailjs.send('service_mbg69sw', 'template_rg6i0fj', {
+      await emailjs.send('service_mbg69sw', 'template_tso8mol', {
         nome: formData.nome,
         email: formData.email,
         telefone: formData.telefone,
@@ -90,7 +89,6 @@ function Orcamento() {
         excel: excelBase64,
       }, 'NxziW1zSC820uuLvF');
 
-      // 5. Resetar formulário e exibir sucesso
       setSuccess(true);
       setFormData({
         nome: '',
@@ -156,26 +154,20 @@ function Orcamento() {
                 />
               </div>
               <div className="form-group">
-                <label
-                htmlFor="servico">Serviço Desejado:</label>
+                <label htmlFor="servico">Serviço Desejado:</label>
                 <select
-                className='option'
+                  className='option'
                   id="servico"
                   name="servico"
                   value={formData.servico}
                   onChange={handleChange}
                   required
                 >
-                  <option
-                  className='option' value="">Selecione um serviço</option>
-                  <option
-                  className='option' value="retifica">Retífica de Motores</option>
-                  <option
-                  className='option' value="manutencao">Manutenção Preventiva</option>
-                  <option
-                  className='option' value="revisao">Revisão Completa</option>
-                  <option
-                  className='option'  value="outro">Outro</option>
+                  <option className='option' value="">Selecione um serviço</option>
+                  <option className='option' value="retifica">Retífica de Motores</option>
+                  <option className='option' value="manutencao">Manutenção Preventiva</option>
+                  <option className='option' value="revisao">Revisão Completa</option>
+                  <option className='option' value="outro">Outro</option>
                 </select>
               </div>
               <div className="form-group">
@@ -194,10 +186,10 @@ function Orcamento() {
                 {loading ? 'Enviando...' : 'Solicitar Orçamento'}
               </button>
               {success !== null && (
-              <div className={`feedback-success ${success ? 'success' : 'feedback-error'}`}>
-                {success ? 'Formulário enviado com sucesso!' : 'Ocorreu um erro ao enviar o formulário. Tente novamente!'}
-              </div>
-            )}
+                <div className={`feedback-success ${success ? 'success' : 'feedback-error'}`}>
+                  {success ? 'Formulário enviado com sucesso!' : 'Ocorreu um erro ao enviar o formulário. Tente novamente!'}
+                </div>
+              )}
             </form>
           </div>
         </section>
