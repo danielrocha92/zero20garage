@@ -3,8 +3,6 @@ import './Orcamento.css';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
 import { supabase } from '../supabaseClient';
-import jsPDF from 'jspdf';
-import * as XLSX from 'xlsx';
 import emailjs from 'emailjs-com';
 
 function Orcamento() {
@@ -45,6 +43,7 @@ function Orcamento() {
     setSuccess(null);
 
     try {
+      // Insere no Supabase
       const { error } = await supabase.from('orcamentos').insert([formData]);
       if (error) {
         console.error('Erro ao enviar dados:', error.message);
@@ -52,7 +51,7 @@ function Orcamento() {
         return;
       }
 
-      await fetch('https://script.google.com/macros/s/AKfycbyJ9imhVWYKWZUfW3IRLC9yySfhlGZozRgIC9hA1hFV2EG_RIVr0jglJ915-ChuGChIyw/exec', {
+      await fetch('http://localhost:3001/enviar-orcamento', {
         method: 'POST',
         body: JSON.stringify(formData),
         headers: {
@@ -60,33 +59,13 @@ function Orcamento() {
         }
       });
 
-      const doc = new jsPDF();
-      doc.text('Orçamento - ZERO 20 GARAGE™', 10, 10);
-      doc.text(`Nome: ${formData.nome}`, 10, 20);
-      doc.text(`Email: ${formData.email}`, 10, 30);
-      doc.text(`Telefone: ${formData.telefone}`, 10, 40);
-      doc.text(`Serviço: ${formData.servico}`, 10, 50);
-      doc.text(`Mensagem: ${formData.mensagem}`, 10, 60);
-      const pdfBase64 = doc.output('datauristring');
-
-      const wb = XLSX.utils.book_new();
-      const wsData = [[
-        'Nome', 'Email', 'Telefone', 'Serviço', 'Mensagem'
-      ], [
-        formData.nome, formData.email, formData.telefone, formData.servico, formData.mensagem
-      ]];
-      const ws = XLSX.utils.aoa_to_sheet(wsData);
-      XLSX.utils.book_append_sheet(wb, ws, 'Orçamento');
-      const excelBase64 = XLSX.write(wb, { bookType: 'xlsx', type: 'base64' });
-
+      // Envia e-mail via EmailJS (sem anexos)
       await emailjs.send('service_mbg69sw', 'template_tso8mol', {
         nome: formData.nome,
         email: formData.email,
         telefone: formData.telefone,
         servico: formData.servico,
         mensagem: formData.mensagem,
-        pdf: pdfBase64,
-        excel: excelBase64,
       }, 'NxziW1zSC820uuLvF');
 
       setSuccess(true);
