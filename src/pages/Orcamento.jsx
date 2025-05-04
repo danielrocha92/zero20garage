@@ -51,7 +51,7 @@ function Orcamento() {
         return;
       }
 
-      await fetch('http://localhost:3001/enviar-orcamento', {
+      await fetch('https://api-orcamento-proxy.onrender.com/enviar-orcamento', {
         method: 'POST',
         body: JSON.stringify(formData),
         headers: {
