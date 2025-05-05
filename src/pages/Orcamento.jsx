@@ -62,7 +62,7 @@ function Orcamento() {
       }
 
       // Envia os dados para o Google Sheets via API
-      await fetch('https://api-orcamento-n49u.onrender.com', {
+      await fetch('https://api-orcamento-n49u.onrender.com/api/orcamento', {
         method: 'POST',
         body: JSON.stringify(formDataComData),
         headers: {
