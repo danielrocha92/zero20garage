@@ -50,9 +50,9 @@
 
                       <div className="highlight-item">
                         <h2>Tempo de entrega</h2>
-                        <p>Motor Nacional = 4 a 7 Dias Úteis</p>
-                        <p>Motor Importado = 10 a 15 Dias Úteis</p>
-                        <p>Motor Diesel = 10 a 15 Dias Úteis</p>
+                        <p className='highlight-item'>Motor Nacional = 4 a 7 Dias Úteis</p>
+                        <p className='highlight-item'>Motor Importado = 10 a 15 Dias Úteis</p>
+                        <p className='highlight-item'>Motor Diesel = 10 a 15 Dias Úteis</p>
                       </div>
                   </div>
                 </div>

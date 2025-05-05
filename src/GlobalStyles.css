@@ -412,52 +412,46 @@ li {
   font-size: 3rem;
 }
 
-
-
 /* ===================== */
-/* highlights Globais    */
+/* highlights Globais     */
 /* ===================== */
-
-
 
 .highlights {
-  padding: 2rem;
+  padding: 1rem;
   background-color: #D3D3D3;
   text-align: center;
 }
-
-
 
 .highlight-item h1 {
   font-size: 2.8rem;
   color: #ffffff;
   margin-bottom: 0.5rem;
+  font-family: 'Montserrat', sans-serif; /* Adicionando uma fonte moderna */
+  font-weight: 700; /* Tornando o título mais forte */
 }
-
-
 
 .highlights h2 {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   color: #D3D3D3;
+  font-family: 'Montserrat', sans-serif; /* Adicionando uma fonte moderna */
+  font-weight: 700; /* Tornando o título mais forte */
 }
-
-
 
 .highlight-item h3 {
   font-size: 2rem;
   color: #c50404;
   margin-bottom: 0.5rem;
+  font-family: 'Open Sans', sans-serif; /* Uma fonte mais legível para subtítulos */
+  font-weight: 600; /* Dando um pouco mais de destaque */
 }
-
-
 
 .highlight-item p {
   font-size: 1.1rem;
   color: #fff;
+  font-family: 'Open Sans', sans-serif; /* Fonte legível para o texto */
+  line-height: 1.6; /* Melhorando a legibilidade do texto */
 }
-
-
 
 .highlights-grid {
   display: grid;
@@ -466,14 +460,13 @@ li {
   margin-top: 2rem;
 }
 
-
-
 .highlight-item {
   background-color: #2c2c2c6b;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center; /* Centralizando o texto dentro do item */
 }
 
 .highlight-item:hover {
@@ -481,17 +474,27 @@ li {
   box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
 }
 
-.highlight-item h3 {
+.highlight-item h2 { /* Estilizando o H2 dentro do highlight-item (Por que Escolher...) */
+  font-size: 2.2rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+.highlight-item h3 { /* Reaplicando o estilo para os H3 internos (Pagamento, Tempo de Entrega) */
   font-size: 1.5rem;
   color: #c50404;
   margin-bottom: 0.5rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
 }
 
-
-
-.highlight-item p {
+.highlight-item p { /* Reaplicando o estilo para os parágrafos internos */
   font-size: 1rem;
   color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.5;
 }
 
 
