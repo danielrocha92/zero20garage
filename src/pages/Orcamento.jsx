@@ -27,6 +27,7 @@ function Orcamento() {
     telefone: '',
     servico: '',
     mensagem: '',
+    data: '',
   });
 
   const [loading, setLoading] = useState(false);
@@ -58,7 +59,7 @@ function Orcamento() {
       }
 
       // Envia os dados para o Google Sheets via API
-      await fetch('https://api.render.com/deploy/srv-d0bhcm3uibrs73dc9lr0?key=hBH7RdTsEJg', {
+      await fetch('https://api-orcamento-n49u.onrender.com', {
         method: 'POST',
         body: JSON.stringify(formDataComData),
         headers: {
