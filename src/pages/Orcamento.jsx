@@ -43,17 +43,24 @@ function Orcamento() {
     setSuccess(null);
 
     try {
+      // Adicionando a data de envio
+      const formDataComData = {
+        ...formData,
+        data: new Date().toLocaleString('pt-BR'), // Adiciona data no formato pt-BR
+      };
+
       // Insere no Supabase
-      const { error } = await supabase.from('orcamentos').insert([formData]);
+      const { error } = await supabase.from('orcamentos').insert([formDataComData]);
       if (error) {
         console.error('Erro ao enviar dados:', error.message);
         setSuccess(false);
         return;
       }
 
-      await fetch('https://api-orcamento-proxy.onrender.com/enviar-orcamento', {
+      // Envia os dados para o Google Sheets via API
+      await fetch('https://api.render.com/deploy/srv-d0bhcm3uibrs73dc9lr0?key=hBH7RdTsEJg', {
         method: 'POST',
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formDataComData),
         headers: {
           'Content-Type': 'application/json'
         }
@@ -61,11 +68,12 @@ function Orcamento() {
 
       // Envia e-mail via EmailJS (sem anexos)
       await emailjs.send('service_mbg69sw', 'template_tso8mol', {
-        nome: formData.nome,
-        email: formData.email,
-        telefone: formData.telefone,
-        servico: formData.servico,
-        mensagem: formData.mensagem,
+        nome: formDataComData.nome,
+        email: formDataComData.email,
+        telefone: formDataComData.telefone,
+        servico: formDataComData.servico,
+        mensagem: formDataComData.mensagem,
+        data: formDataComData.data, // Envia a data no e-mail também
       }, 'NxziW1zSC820uuLvF');
 
       setSuccess(true);
