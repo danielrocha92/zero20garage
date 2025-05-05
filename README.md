@@ -8,7 +8,7 @@ Este projeto foi desenvolvido com:
 
 - React.js
 - Html
-- Css
+- Css3
 
 # Getting Started with Create React App
 
