@@ -51,7 +51,10 @@ function Orcamento() {
       };
 
       // Insere no Supabase
-      const { error } = await supabase.from('orcamentos').insert([formDataComData]);
+      const { nome, email, telefone, servico, mensagem } = formDataComData;
+      const { error } = await supabase.from('orcamentos').insert([{ nome, email, telefone, servico, mensagem }]);
+
+
       if (error) {
         console.error('Erro ao enviar dados:', error.message);
         setSuccess(false);
