@@ -1,0 +1,84 @@
+/* pages/NotFound.css */
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh; /* Garante que a página ocupe pelo menos a altura da viewport */
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .not-found-title {
+    font-size: 4em;
+    color: #d32f2f; /* Vermelho para indicar erro */
+    margin-bottom: 10px;
+  }
+  
+  .not-found-message {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+  }
+  
+  .not-found-description {
+    color: #555;
+    margin-bottom: 20px;
+  }
+
+  .not-found-link {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #c50404;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer; /* Adiciona um cursor de ponteiro */
+  }
+  
+  .not-found-link:hover {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor */
+    background-color: rgba(54, 24, 24, 0.5);
+    color: #c50404;
+    transform: scale(1.05);
+  }
+
+  .info-section {
+    margin: 6rem 0;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .info-section h2 {
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+
+  .info-section p {
+    font-size: 1.1rem;
+    color: #ffffff;
+  }
+
+  @media (max-width: 768px) {
+  .highlight-item h1 {
+    font-size: 3rem; /* Reduz o tamanho do título do item de destaque */
+  }
+
+  .highlight-item h2 {
+    font-size: 1.8rem; /* Reduz o tamanho do subtítulo do item de destaque */
+  }
+
+  .highlight-item h3 {
+    font-size: 1.2rem; /* Reduz o tamanho do título 3 do item de destaque */
+  }
+
+  .highlight-item p {
+    font-size: 0.8rem; /* Reduz o tamanho do parágrafo do item de destaque */
+  }
+}

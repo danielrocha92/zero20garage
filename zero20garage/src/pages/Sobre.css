@@ -1,0 +1,136 @@
+/* Estilos do Sobre */
+
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #353535;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.sobre-section h2 {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.sobre-section p {
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+/* ===== Carrossel da Equipe ===== */
+.team-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.team-image {
+  width: 35rem; /* Experimente com um valor fixo maior */
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.6s ease;
+}
+
+.team-image:hover {
+  transform: scale(1.03);
+}
+
+.slick-slide {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.slick-dots li button:before {
+  font-size: 12px;
+  color: #c50404;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #fff;
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 10;
+  color: #fff;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  background-color: #e23838;
+  border-radius: 50%;
+}
+
+.contact {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.contact li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.contact li:hover {
+  background-color: #e23838;
+}
+
+.contact i {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  color: #ffffff;
+}
+
+.contact span,
+.contact a {
+  font-size: 1.1rem;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.contact a:hover {
+  color: #c50404;
+  text-decoration: underline;
+}
+
+.formulario-section h2 {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .sobre-section h2 {
+    font-size: 1.75rem;
+  }
+
+  .sobre-section p {
+    font-size: 1rem;
+  }
+
+  .team-image {
+    max-width: 100%;
+  }
+}

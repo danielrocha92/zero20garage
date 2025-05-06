@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+  color: #333;
+  line-height: 1.6;
+}
+
+.section-title {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.section-list {
+  list-style-type: disc;
+  padding-left: 2rem;
+  margin-bottom: 2rem;
+}
+
+.section-list li {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+
+@media (max-width: 480px) {
+  :root {
+    --tamanho-titulo: 1.5rem;
+    --tamanho-paragrafo: 0.8rem;
+  }
+}
