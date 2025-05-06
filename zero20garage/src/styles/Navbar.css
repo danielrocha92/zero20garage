@@ -1,0 +1,170 @@
+/* Estilos Gerais da Navbar */
+.navbar {
+  display: flex;
+  justify-content: center; /* Centraliza inicialmente */
+  align-items: center;
+  padding: 0.1rem 0.1rem;
+  background-color: rgba(0, 0, 0, 0.904); /* Fundo preto com transparência */
+  color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.048);
+  position: fixed; /* Fixa o elemento na tela */
+  width: 100%; /* Garante que ocupe toda a largura */
+  top: 0;
+  left: 0; /* Alinha o elemento à esquerda */
+  z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease; justify-content: 0.3s ease, top 0.3s ease; /* Adiciona transição para justify-content */
+}
+
+.navbar:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Fundo mais opaco ao passar o mouse */
+}
+
+.navbar.scrolled-down {
+  justify-content: flex-start; /* Alinha a logo à esquerda ao rolar */
+  padding: 0.5rem 2rem; /* Recolhe o padding ao rolar */
+}
+
+/* Estilos do Logo */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  transition: margin-right 0.3s ease; /* Adiciona transição para margin-right */
+}
+
+.navbar.scrolled-down .navbar-logo {
+  margin-right: 1rem; /* Adiciona margem à direita ao rolar */
+  transition: transform 0.3s ease, width 0.3s ease; /* Adiciona transição para largura */
+}
+
+.navbar-logo img {
+  width: 7rem;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease, width 0.3s ease, opacity 0.3s ease; /* Adiciona transição para opacity */
+  opacity: 1; /* Define a opacidade inicial como 100% */
+  filter: brightness(1); /* Define o brilho inicial como 100% */
+  margin-right: 1rem; /* Adiciona margem à direita */
+}
+
+.navbar.scrolled-down .navbar-logo img {
+  width: 5rem; /* Reduz o tamanho do logo ao rolar */
+}
+
+.navbar-logo img:hover {
+  transform: scale(1.1); /* Aumenta o tamanho no hover */
+}
+
+/* Links da Navbar */
+.navbar-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  transition: opacity 0.3s ease, margin-left 0.3s ease; /* Adiciona transição para opacidade e margin-left */
+}
+
+.navbar.scrolled-down .navbar-links {
+  opacity: 0;
+  margin-left: -100%; /* Esconde os links movendo para a esquerda */
+  display: none !important; /* Garante que não ocupem espaço */
+}
+
+.navbar-links li {
+  margin: 0 1rem;
+}
+
+.navbar-links a {
+  color: var(--cinza-claro);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  color: var(--vermelho-principal);
+}
+
+/* Menu Responsivo */
+.menu {
+  display: flex;
+  align-items: center; /* Alinha verticalmente no centro */
+}
+
+.menu.open {
+  display: flex;
+  align-items: flex-start; /* Alinha os itens do menu dropdown à esquerda */
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 1rem 0;
+  box-shadow: 0 4px 6px rgba(253, 0, 0, 0.1);
+}
+
+.menu.open .navbar-links {
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start;
+  opacity: 1;
+  margin-left: 0;
+}
+
+.menu.open .navbar-links li {
+  margin: 0.5rem 1rem;
+  text-align: left;
+}
+
+.hamburger {
+  display: none; /* Esconde o botão "Hambúrguer" por padrão */
+}
+
+/* Media Query para Telas Menores */
+@media (max-width: 768px) {
+  .navbar {
+    justify-content: center; /* Mantém a logo centralizada inicialmente */
+  }
+
+  .navbar.scrolled-down {
+    justify-content: flex-start; /* Alinha a logo à esquerda ao rolar */
+  }
+
+  .hamburger {
+    display: block; /* Exibe o botão "Hambúrguer" */
+  }
+
+  .navbar-links {
+    display: none; /* Esconde os links por padrão em telas menores */
+    /* ... outros estilos do menu responsivo ... */
+  }
+
+  .menu {
+    display: none; /* Esconde o menu em telas menores por padrão */
+    /* ... outros estilos do menu responsivo ... */
+    max-width: 100%;
+  }
+
+  .menu.open {
+    display: flex; /* Exibe o menu quando aberto */
+  }
+
+
+/* Botão "Hambúrguer" */
+.hamburger {
+  display: block;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  position: absolute; /* Posiciona o botão */
+  right: 1rem; /* Alinha à direita */
+  max-width: 100%;
+}
+
+.hamburger:hover {
+  opacity: 0.8;
+}
+}

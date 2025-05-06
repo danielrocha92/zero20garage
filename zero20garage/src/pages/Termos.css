@@ -1,0 +1,73 @@
+/* TermsOfUse.css */
+.terms-of-use-list ul, li{
+  font-size: 1.1em;
+  line-height: 1.1;
+  text-align: justify;
+}
+
+/* ===================== */
+/* Links */
+/* ===================== */
+
+.terms-of-use-link {
+  color: #c0392b;
+  text-decoration: none;
+}
+
+.terms-of-use-link:hover {
+  text-decoration: underline;
+  color: var(--cor-destaque);
+}
+
+/* ===================== */
+/* Listas */
+/* ===================== */
+
+.terms-of-use-list {
+  list-style-type: disc;
+  margin-bottom: 0.9375rem; /* Usando rem */
+  padding-left: 1.25rem; /* Usando rem */
+}
+
+.terms-of-use-list li {
+  margin-bottom: 0.3125rem; /* Usando rem */
+}
+
+/* ===================== */
+/* Listas Proibidas */
+/* ===================== */
+
+.prohibited-list {
+  color: #c0392b;
+}
+
+
+
+/* ===================== */
+/* Endereço */
+/* ===================== */
+
+.terms-of-use-address {
+  font-style: normal;
+  margin-top: 1.25rem; /* Usando rem */
+}
+
+/* ===================== */
+/* Reconhecimento */
+/* ===================== */
+
+.acknowledgment {
+  color: #777;
+  font-style: italic;
+  margin-top: 1.875rem; /* Usando rem */
+}
+
+/* ===================== */
+/* Última Atualização */
+/* ===================== */
+
+.terms-of-use-last-updated {
+  color: #999;
+  font-size: 0.9em;
+  margin-top: 0.625rem; /* Usando rem */
+}
