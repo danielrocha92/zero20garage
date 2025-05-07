@@ -1,50 +1,26 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import fetch from 'node-fetch';
 
 const app = express();
-const PORT = 5000;
+app.use(cors());
+app.use(express.json());
 
-// Configurar CORS para permitir requisições do frontend
-app.use(cors({
-  origin: ['http://localhost:3000', 'https://zero20garage.vercel.app'],
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type']
-}));
+app.post('/enviar-orcamento', async (req, res) => {
+  try {
+    const response = await fetch('https://script.google.com/macros/s/AKfycby6GE30V7ep96i8FOHwyvk_o-KWEnodbLVJInx4fYvxhXwgytOfRXZjsploHRvOx_AG/exec', {
+      method: 'POST',
+      body: JSON.stringify(req.body),
+      headers: { 'Content-Type': 'application/json' },
+    });
 
-// Configurar body-parser para processar JSON
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// Rota para receber dados do formulário de Contato
-app.post('/api/contato', (req, res) => {
-  const { nome, email, mensagem } = req.body;
-
-  console.log('Dados recebidos do formulário de contato:');
-  console.log({ nome, email, mensagem });
-
-  // Aqui você pode salvar os dados ou enviar um e-mail
-  res.status(200).json({ message: 'Formulário de contato recebido com sucesso!' });
+    const data = await response.text();
+    res.status(200).send(data);
+  } catch (error) {
+    console.error('Erro no proxy:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
 });
 
-// Rota para receber dados do formulário de Orçamento (sem upload)
-app.post('/api/orcamento', (req, res) => {
-  const { nome, email, telefone, servico, mensagem } = req.body;
-
-  console.log('Dados recebidos do formulário de orçamento:');
-  console.log({
-    nome,
-    email,
-    telefone,
-    servico,
-    mensagem,
-  });
-
-  // Aqui você pode salvar os dados ou enviar um e-mail
-  res.status(200).json({ message: 'Formulário de orçamento recebido com sucesso!' });
-});
-
-// Iniciar o servidor
-app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`Proxy rodando na porta ${PORT}`));
