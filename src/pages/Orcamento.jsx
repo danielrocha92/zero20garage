@@ -44,16 +44,13 @@ function Orcamento() {
     setSuccess(null);
 
     try {
-      // Adicionando a data de envio
       const formDataComData = {
         ...formData,
-        data: new Date().toLocaleString('pt-BR'), // Adiciona data no formato pt-BR
+        data: new Date().toLocaleString('pt-BR'),
       };
 
-      // Insere no Supabase
       const { nome, email, telefone, servico, mensagem } = formDataComData;
       const { error } = await supabase.from('orcamentos').insert([{ nome, email, telefone, servico, mensagem }]);
-
 
       if (error) {
         console.error('Erro ao enviar dados:', error.message);
@@ -61,8 +58,8 @@ function Orcamento() {
         return;
       }
 
-      // Envia os dados para o Google Sheets via API
-      await fetch('https://script.google.com/macros/s/AKfycbwQmnhIM2KFkQ4xawDq_SyhzYb-ME2Vxa9zTaWMw1gF3Q1pSq9jWLfGOBf5j3CVBmaH/exec', {
+      // ✅ Envia para o Google Sheets via proxy backend hospedado no Render
+      await fetch('https://api-orcamento-n49u.onrender.com/api/orcamento', {
         method: 'POST',
         body: JSON.stringify(formDataComData),
         headers: {
@@ -70,14 +67,14 @@ function Orcamento() {
         }
       });
 
-      // Envia e-mail via EmailJS (sem anexos)
+      // ✅ Envia e-mail via EmailJS
       await emailjs.send('service_mbg69sw', 'template_tso8mol', {
         nome: formDataComData.nome,
         email: formDataComData.email,
         telefone: formDataComData.telefone,
         servico: formDataComData.servico,
         mensagem: formDataComData.mensagem,
-        data: formDataComData.data, // Envia a data no e-mail também
+        data: formDataComData.data,
       }, 'NxziW1zSC820uuLvF');
 
       setSuccess(true);
