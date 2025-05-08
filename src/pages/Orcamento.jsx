@@ -20,7 +20,7 @@ function Orcamento() {
       subtitle: 'Orçamentos detalhados e sem compromisso',
     },
   ];
-  
+
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
@@ -62,7 +62,7 @@ function Orcamento() {
       }
 
       // Envia os dados para o Google Sheets via API
-      await fetch('https://api-orcamento-n49u.onrender.com', {
+      await fetch('https://script.google.com/macros/s/AKfycbwQmnhIM2KFkQ4xawDq_SyhzYb-ME2Vxa9zTaWMw1gF3Q1pSq9jWLfGOBf5j3CVBmaH/exec', {
         method: 'POST',
         body: JSON.stringify(formDataComData),
         headers: {
