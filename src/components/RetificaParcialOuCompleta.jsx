@@ -1,6 +1,6 @@
 import React from 'react';
 
-function BlogSectionParcialCompleta() {
+function RetificaParcialOuCompleta() {
   return (
     <section className="page-claro">
       <section id="retifica-parcial-vs-completa" className="blog-section">
@@ -55,4 +55,4 @@ function BlogSectionParcialCompleta() {
   );
 }
 
-export default BlogSectionParcialCompleta;
+export default RetificaParcialOuCompleta;

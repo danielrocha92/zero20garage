@@ -1,6 +1,6 @@
 import React from 'react';
 
-function BlogSectionValeAPenaRetificar() {
+function ValeAPenaRetificar() {
   return (
     <section className="page-claro">
       <section id="retifica-ou-troca" className="blog-section">
@@ -52,4 +52,4 @@ function BlogSectionValeAPenaRetificar() {
   );
 }
 
-export default BlogSectionValeAPenaRetificar;
+export default ValeAPenaRetificar;

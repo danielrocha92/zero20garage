@@ -1,9 +1,14 @@
 import React from 'react';
+import DynamicHeader from '../components/DynamicHeader';
+import WhatsAppButton from '../components/WhatsAppButton';
 
-function BlogSectionSinaisRetifica() {
+function SinaisRetifica () {
   return (
-    <section className="page-claro">
-      <section id="sinais-retifica" className="blog-section">
+    <div className="page-claro">
+      <DynamicHeader />
+      <WhatsAppButton />
+      
+       <div className="container-claro">
         <h2 className="title">Retífica de Motores: Como Saber Quando Seu Motor Precisa de Reparo?</h2>
 
         <p className="paragraph">
@@ -54,9 +59,9 @@ function BlogSectionSinaisRetifica() {
         <p className="paragraph">
           Reconhecer os sinais de desgaste no motor é essencial para evitar falhas graves e custos elevados. Se você notar algum dos sintomas listados, procure uma oficina de confiança para avaliação. A retífica pode ser a melhor forma de restaurar seu veículo e prolongar sua vida útil.
         </p>
-      </section>
-    </section>
+      </div>
+      </div>
   );
 }
 
-export default BlogSectionSinaisRetifica;
+export default SinaisRetifica ;
