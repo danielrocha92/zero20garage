@@ -8,19 +8,28 @@ import ScrollToTop from './components/ScrollToTop';
 
 import Layout from './components/Layout';
 import ToTop from './components/ToTop';
+
 import Home from './pages/Home';
+
 import Sobre from './pages/Sobre';
+
 import Contato from './pages/Contato';
+
 import Servicos from './pages/Servicos';
 import Dp from './pages/Dp';
 import Tp from './pages/Tp';
 import Mp from './pages/Mp';
 import Td from './pages/Td';
 import Cp from './pages/Cp';
+
 import Orcamento from './pages/Orcamento';
+
 import Blog from './pages/Blog';
-import SinaisRetifica from './pages/SinaisRetifica ';
-import RetificaParcialOuCompleta from './pages/RetificaParcialOuCompleta ';
+import SinaisRetifica from './pages/SinaisRetifica';
+import CustoRetifica from './pages/CustoRetifica';
+import ManutencaoDeMotores from './pages/ManutencaoDeMotores';
+import RetificaParcialOuCompleta from './pages/RetificaParcialOuCompleta';
+import ValeAPenaRetificar from './pages/ValeAPenaRetificar';
 
 import Politica from './pages/Politica';
 import NotFound from './pages/NotFound'; // Importe o componente NotFound
@@ -43,18 +52,28 @@ function App() {
         <Routes>
           {/* Defina suas rotas aqui */}
           <Route path="/" element={<Home />} />
+
           <Route path="/Sobre" element={<Sobre />} />
+
           <Route path="/Contato" element={<Contato />} />
+
           <Route path="/Servicos" element={<Servicos />} />
           <Route path="/Mp" element={<Mp />} />
           <Route path="/Dp" element={<Dp />} />
           <Route path="/Tp" element={<Tp />} />
           <Route path="/Td" element={<Td />} />
           <Route path="/Cp" element={<Cp />} />
+
           <Route path="/Orcamento" element={<Orcamento />} />
+
           <Route path="/Blog" element={<Blog />} />
-          <Route path="/Sinais-retifica" element={<SinaisRetifica />} />
-          <Route path="/Retifica-parcial-ou-completa" element={<RetificaParcialOuCompleta />} />
+          <Route path="/" element={<Blog />} />
+          <Route path="/sinaisretifica" element={<SinaisRetifica />} />
+          <Route path="/custoretifica" element={<CustoRetifica />} />
+          <Route path="/manutencao-de-motores" element={<ManutencaoDeMotores />} />
+          <Route path="/retifica-parcial-ou-completa" element={<RetificaParcialOuCompleta />} />
+          <Route path="/retifica-ou-troca" element={<ValeAPenaRetificar />} />
+
           <Route path="/Politica" element={<Politica />} />
           <Route path="/Trocas" element={<Trocas />} />
           <Route path="/Faq" element={<Faq />} />

@@ -1,8 +1,12 @@
 import React from 'react';
+import '../styles/Blog.css';
+import WhatsAppButton from '../components/WhatsAppButton';
+import './RetificaParcialOuCompleta.css'; // Importe o CSS atualizado
 
 function RetificaParcialOuCompleta() {
   return (
     <section className="page-claro">
+      <WhatsAppButton />
       <section id="retifica-parcial-vs-completa" className="blog-section">
         <h2 className="title">
           Retífica Parcial vs. Completa: Qual a Diferença e Quando Cada Uma é Indicada?

@@ -1,8 +1,8 @@
 import React from 'react';
-import '../styles/Blog.css'; // Importe o CSS específico para este componente
 import WhatsAppButton from '../components/WhatsAppButton';
+import './CustoRetifica.css'; // Importe o CSS atualizado
 
-function Custoretifica() {
+function CustoRetifica() {
   return (
     <section className="page-claro">
         <WhatsAppButton />
@@ -66,4 +66,4 @@ function Custoretifica() {
   );
 }
 
-export default Custoretifica;
+export default CustoRetifica;

@@ -1,13 +1,15 @@
 import React from 'react';
+import '../styles/Blog.css';
 import DynamicHeader from '../components/DynamicHeader';
 import WhatsAppButton from '../components/WhatsAppButton';
+import './SinaisRetifica.css'; // Importe o CSS atualizado
 
 function SinaisRetifica () {
   return (
     <div className="page-claro">
       <DynamicHeader />
       <WhatsAppButton />
-      
+
        <div className="container-claro">
         <h2 className="title">Retífica de Motores: Como Saber Quando Seu Motor Precisa de Reparo?</h2>
 

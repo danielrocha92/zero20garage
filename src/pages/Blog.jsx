@@ -35,7 +35,13 @@ const Blog = () => {
         {
             title: 'Retífica Parcial ou Completa: Qual a Melhor Opção para o Seu Motor?',
             description: 'Descubra quando é melhor optar por uma retífica parcial ou completa.',
-            link: '/parcial-ou-completa',
+            link: '/retifica-parcial-ou-completa',
+            icon: <FaWrench size={60} />, // Ícone para retífica parcial ou completa
+        },
+        {
+            title: 'Retífica Vale a Pena ou é Melhor Trocar o Motor',
+            description: 'Neste artigo, explicamos os prós e contras de cada opção.',
+            link: '/retifica-parcial-ou-completa',
             icon: <FaWrench size={60} />, // Ícone para retífica parcial ou completa
         },
     ];
