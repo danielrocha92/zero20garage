@@ -19,12 +19,16 @@ import Td from './pages/Td';
 import Cp from './pages/Cp';
 import Orcamento from './pages/Orcamento';
 import Blog from './pages/Blog';
+import Custoretifica from './pages/Custoretifica';
+
 import Politica from './pages/Politica';
 import NotFound from './pages/NotFound'; // Importe o componente NotFound
 import Trocas from './pages/Trocas';
 import Faq from './pages/Faq';
 import TrabalheConosco from './pages/TrabalheConosco';
 import Termos from './pages/Termos';
+
+
 import './App.css';
 import './GlobalStyles.css';
 
@@ -48,6 +52,9 @@ function App() {
           <Route path="/Cp" element={<Cp />} />
           <Route path="/Orcamento" element={<Orcamento />} />
           <Route path="/Blog" element={<Blog />} />
+          <Route path="/Custoretifica" element={<Custoretifica />} />
+          <Route path="/Sinais-retifica" element={<Custoretifica />} />
+          <Route path="/Retifica-parcial-ou-completa" element={<Custoretifica />} />
           <Route path="/Politica" element={<Politica />} />
           <Route path="/Trocas" element={<Trocas />} />
           <Route path="/Faq" element={<Faq />} />
