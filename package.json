@@ -75,6 +75,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^7.0.2",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
     "react-app-rewired": "^2.2.1"
   }

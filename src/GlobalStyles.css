@@ -467,16 +467,12 @@ li {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center; /* Centralizando o texto dentro do item */
-  gap: 1rem; /* Espaçamento interno */
   display: flex; /* Flexbox para alinhamento */
   flex-direction: column; /* Alinhamento vertical */
   align-items: center; /* Centraliza os elementos horizontalmente */
   justify-content: center; /* Centraliza os elementos verticalmente */
   color: var(--branco);
   font-family: var(--fonte-texto);
-  font-size: 1.2rem;
-  line-height: 1.5;
-  text-align: justify; /* Justifica o texto */
   margin-bottom: 2rem; /* Espaçamento inferior */
   text-decoration: none; /* Remove o sublinhado do link */
   cursor: pointer; /* Muda o cursor para indicar que é clicável */

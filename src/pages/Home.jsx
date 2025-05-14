@@ -4,8 +4,6 @@
   import DynamicHeader from '../components/DynamicHeader';
   import WhatsAppButton from '../components/WhatsAppButton';
 
-  import MotorAnimado from '../components/MotorAnimado';
-
   function Home() {
       const messages = [
         {
@@ -26,7 +24,6 @@
       <div className="page-escuro">
         <DynamicHeader messages={messages} />
         <WhatsAppButton />
-        <MotorAnimado />
             {/* Card padrão Section */}
             <div className="container-escuro">
               <section className="section">

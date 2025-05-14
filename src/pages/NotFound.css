@@ -8,18 +8,18 @@
     text-align: center;
     padding: 20px;
   }
-  
+
   .not-found-title {
     font-size: 4em;
     color: #d32f2f; /* Vermelho para indicar erro */
     margin-bottom: 10px;
   }
-  
+
   .not-found-message {
     font-size: 1.5em;
     margin-bottom: 15px;
   }
-  
+
   .not-found-description {
     color: #555;
     margin-bottom: 20px;
@@ -37,7 +37,7 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
     cursor: pointer; /* Adiciona um cursor de ponteiro */
   }
-  
+
   .not-found-link:hover {
     padding: 0.8rem 1.5rem;
     border: none;
@@ -64,21 +64,3 @@
     font-size: 1.1rem;
     color: #ffffff;
   }
-
-  @media (max-width: 768px) {
-  .highlight-item h1 {
-    font-size: 3rem; /* Reduz o tamanho do título do item de destaque */
-  }
-
-  .highlight-item h2 {
-    font-size: 1.8rem; /* Reduz o tamanho do subtítulo do item de destaque */
-  }
-
-  .highlight-item h3 {
-    font-size: 1.2rem; /* Reduz o tamanho do título 3 do item de destaque */
-  }
-
-  .highlight-item p {
-    font-size: 0.8rem; /* Reduz o tamanho do parágrafo do item de destaque */
-  }
-}
