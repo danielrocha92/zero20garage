@@ -416,6 +416,38 @@ li {
 /* highlights Globais     */
 /* ===================== */
 
+.highlight-item {
+  background-color: #2c2c2c6b;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center; /* Centralizando o texto dentro do item */
+  display: flex; /* Flexbox para alinhamento */
+  flex-direction: column; /* Alinhamento vertical */
+  align-items: center; /* Centraliza os elementos horizontalmente */
+  justify-content: center; /* Centraliza os elementos verticalmente */
+  color: var(--branco);
+  font-family: var(--fonte-texto);
+  margin-bottom: 2rem; /* Espaçamento inferior */
+  text-decoration: none; /* Remove o sublinhado do link */
+  cursor: pointer; /* Muda o cursor para indicar que é clicável */
+  position: relative; /* Para o efeito de hover */
+  overflow: hidden; /* Para esconder o conteúdo que sai do item */
+  max-width: 100%; /* Limita a largura máxima */
+  height: 100%; /* Limita a altura máxima */
+  box-sizing: border-box; /* Inclui padding e border no tamanho total */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
+  /* Adiciona um fundo gradiente */
+  backdrop-filter: blur(10px); /* Adiciona um efeito de desfoque ao fundo */
+  /* Adiciona um efeito de desfoque ao fundo */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Adiciona uma borda sutil */
+  /* Adiciona uma borda sutil */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  /* Sombra sutil */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+}
+
 .highlights {
   padding: 1rem;
   background-color: #D3D3D3;
@@ -458,38 +490,6 @@ li {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
-}
-
-.highlight-item {
-  background-color: #2c2c2c6b;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center; /* Centralizando o texto dentro do item */
-  display: flex; /* Flexbox para alinhamento */
-  flex-direction: column; /* Alinhamento vertical */
-  align-items: center; /* Centraliza os elementos horizontalmente */
-  justify-content: center; /* Centraliza os elementos verticalmente */
-  color: var(--branco);
-  font-family: var(--fonte-texto);
-  margin-bottom: 2rem; /* Espaçamento inferior */
-  text-decoration: none; /* Remove o sublinhado do link */
-  cursor: pointer; /* Muda o cursor para indicar que é clicável */
-  position: relative; /* Para o efeito de hover */
-  overflow: hidden; /* Para esconder o conteúdo que sai do item */
-  max-width: 100%; /* Limita a largura máxima */
-  height: 100%; /* Limita a altura máxima */
-  box-sizing: border-box; /* Inclui padding e border no tamanho total */
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
-  /* Adiciona um fundo gradiente */
-  backdrop-filter: blur(10px); /* Adiciona um efeito de desfoque ao fundo */
-  /* Adiciona um efeito de desfoque ao fundo */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Adiciona uma borda sutil */
-  /* Adiciona uma borda sutil */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-  /* Sombra sutil */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
 }
 
 .highlight-item:hover {
