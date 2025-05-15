@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import DynamicHeader from '../components/DynamicHeader';
-import WhatsAppButton from '../components/WhatsAppButton';
+import DynamicHeader from '../../components/DynamicHeader';
+import WhatsAppButton from '../../components/WhatsAppButton';
 import './Contato.css';
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
 

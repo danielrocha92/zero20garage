@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Faq.css';
-import DynamicHeader from '../components/DynamicHeader';
-import WhatsAppButton from '../components/WhatsAppButton';
+import DynamicHeader from '../../components/DynamicHeader';
+import WhatsAppButton from '../../components/WhatsAppButton';
 
 const faqData = [
   {
@@ -72,7 +72,7 @@ const Faq = () => {
     <div className="page">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
-      
+
       <div className="container">
         <section className="section">
           <h2>Perguntas Frequentes</h2>

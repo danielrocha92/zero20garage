@@ -1,23 +1,32 @@
 // Sobre.jsx
 import React from 'react';
 import './Sobre.css';
-import DynamicHeader from '../components/DynamicHeader';
-import WhatsAppButton from '../components/WhatsAppButton';
-import ContatoCta from '../components/ContatoCta';
+import DynamicHeader from '../../components/DynamicHeader';
+import WhatsAppButton from '../../components/WhatsAppButton';
+import ContatoCta from '../../components/ContatoCta';
 
 import Slider from 'react-slick';
-import teamImage from '../assets/images/team.jpg';
-import teamImage2 from '../assets/images/team2.jpg';
+import teamImage from '../../assets/images/team.jpg';
+import teamImage2 from '../../assets/images/team2.jpg';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import 'font-awesome/css/font-awesome.min.css';
+
+import AnimatedPage from '../../components/AnimatedPage';
+
 
 const settings = {
   dots: true,
   infinite: true,
-  speed: 500,
+  speed: 600,
+  fade: true,
+  cssEase: 'ease-in-out',
   slidesToShow: 1,
   slidesToScroll: 1,
   autoplay: true,
-  autoplaySpeed: 3000,
+  autoplaySpeed: 4000,
 };
+
 
 function Sobre() {
   const messages = [
@@ -39,6 +48,7 @@ function Sobre() {
     <div className="page-escuro">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
+      <AnimatedPage />
       <div className="container-escuro">
       <section className="sobre-section">
         <div className="highlight-item">
@@ -54,7 +64,7 @@ function Sobre() {
 
       <section className="section">
         <div className="highlight-item">
-          
+
         <div className="highlights-grid">
         <div className="highlight-item">
           <h3 className="subtitle">Nossa Missão</h3>
@@ -72,12 +82,12 @@ function Sobre() {
             <p>Compromisso: Dedicação em atender e superar as expectativas dos clientes.</p>
           </ul>
         </div>
-        
-        
+
+
         </div>
         </div>
       </section>
-      
+
       <section className="sobre-section">
         <div className="highlight-item">
           <h2>Nossa Equipe</h2>
@@ -89,14 +99,32 @@ function Sobre() {
               <p>Estamos sempre atualizados com as últimas tendências e tecnologias do mercado, garantindo que nossos clientes recebam o melhor serviço possível.</p>
             </div>
           </div>
-          <Slider {...settings}>
-            <div className="team-image-container">
-              <img src={teamImage} alt="Nossa Equipe" className="team-image" />
-            </div>
-            <div className="team-image-container">
-              <img src={teamImage2} alt="Nossa Equipe" className="team-image" />
-            </div>
-          </Slider>
+            <Slider {...settings}>
+              <div className="team-image-container">
+                <div>
+                  <img src={teamImage} alt="Carlos, chefe de oficina" className="team-image" />
+                  <p className="team-caption">Carlos – Chefe de Oficina</p>
+                </div>
+              </div>
+              <div className="team-image-container">
+                <div>
+                  <img src={teamImage2} alt="Fernanda, especialista em retífica" className="team-image" />
+                  <p className="team-caption">Fernanda – Especialista em Retífica</p>
+                </div>
+              </div>
+              <div className="team-image-container">
+                <div>
+                  <img src={teamImage} alt="Bruno, mecânico sênior" className="team-image" />
+                  <p className="team-caption">Bruno – Mecânico Sênior</p>
+                </div>
+              </div>
+              <div className="team-image-container">
+                <div>
+                  <img src={teamImage2} alt="Patrícia, atendimento ao cliente" className="team-image" />
+                  <p className="team-caption">Patrícia – Atendimento ao Cliente</p>
+                </div>
+              </div>
+            </Slider>
         </div>
       </section>
       <section className="sobre-section">

@@ -1,5 +1,5 @@
 import React from 'react';
-import WhatsAppButton from '../components/WhatsAppButton';
+import WhatsAppButton from '../../components/WhatsAppButton';
 import './ValeAPenaRetificar.css'; // Importe o CSS atualizado
 
 function ValeAPenaRetificar() {

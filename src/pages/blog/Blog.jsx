@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
-import '../styles/Blog.css';
-import DynamicHeader from '../components/DynamicHeader';
-import WhatsAppButton from '../components/WhatsAppButton';
+import '../../styles/Blog.css';
+import DynamicHeader from '../../components/DynamicHeader';
+import WhatsAppButton from '../../components/WhatsAppButton';
 import { Helmet } from 'react-helmet';
 import { FaPen, FaRegNewspaper, FaTools, FaWrench } from 'react-icons/fa'; // Ícones para o blog
+import AnimatedPage from '../../components/AnimatedPage'; // Importe o componente AnimatedPage
+
 
 const Blog = () => {
     const messages = [
@@ -56,7 +58,8 @@ const Blog = () => {
             <div className="page-escuro">
                 <DynamicHeader messages={messages} />
                 <WhatsAppButton />
-
+                <AnimatedPage />
+                {/* Card padrão Section */}
                 <div className="container-escuro">
                     <section className="section">
                         <div className='highlight-item'>

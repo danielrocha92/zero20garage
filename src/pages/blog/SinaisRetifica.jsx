@@ -1,7 +1,6 @@
 import React from 'react';
-import '../styles/Blog.css';
-import DynamicHeader from '../components/DynamicHeader';
-import WhatsAppButton from '../components/WhatsAppButton';
+import DynamicHeader from '../../components/DynamicHeader';
+import WhatsAppButton from '../../components/WhatsAppButton';
 import './SinaisRetifica.css'; // Importe o CSS atualizado
 
 function SinaisRetifica () {

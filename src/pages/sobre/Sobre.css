@@ -31,8 +31,33 @@
   margin-top: 2rem;
 }
 
+.team-caption {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: #ffffff;
+  text-align: center;
+}
+.team-caption h3 {
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+.team-caption p {
+  font-size: 1rem;
+  color: #ffffff;
+}
+.team-caption a {
+  font-size: 1rem;
+  color: #ffffff;
+  text-decoration: none;
+}
+.team-caption a:hover {
+  color: #c50404;
+  text-decoration: underline;
+}
+.team-caption h3,
+.team-caption p,
 .team-image {
-  width: 35rem; /* Experimente com um valor fixo maior */
+  width: 15rem; /* Experimente com um valor fixo maior */
   height: auto;
   object-fit: cover;
   border-radius: 8px;
@@ -44,10 +69,12 @@
   transform: scale(1.03);
 }
 
-.slick-slide {
+.slick-slider {
   display: flex !important;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  weight: 100%;
 }
 
 .slick-dots li button:before {

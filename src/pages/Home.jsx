@@ -3,6 +3,7 @@
   import GoogleReviews from '../components/GoogleReviews';
   import DynamicHeader from '../components/DynamicHeader';
   import WhatsAppButton from '../components/WhatsAppButton';
+  import AnimatedPage from '../components/AnimatedPage';
 
   function Home() {
       const messages = [
@@ -24,6 +25,7 @@
       <div className="page-escuro">
         <DynamicHeader messages={messages} />
         <WhatsAppButton />
+        <AnimatedPage />
             {/* Card padrão Section */}
             <div className="container-escuro">
               <section className="section">

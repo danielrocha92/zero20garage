@@ -1,91 +1,80 @@
 // App.jsx
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { Suspense } from 'react';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import 'font-awesome/css/font-awesome.min.css';
 
 import ScrollToTop from './components/ScrollToTop';
-
-
 import Layout from './components/Layout';
 import ToTop from './components/ToTop';
+import PageTransition from './components/PageTransition';
 
 import Home from './pages/Home';
-
-import Sobre from './pages/Sobre';
-
-import Contato from './pages/Contato';
-
-import Servicos from './pages/Servicos';
-import Dp from './pages/Dp';
-import Tp from './pages/Tp';
-import Mp from './pages/Mp';
-import Td from './pages/Td';
-import Cp from './pages/Cp';
-
-import Orcamento from './pages/Orcamento';
-
-import Blog from './pages/Blog';
-import SinaisRetifica from './pages/SinaisRetifica';
-import CustoRetifica from './pages/CustoRetifica';
-import ManutencaoDeMotores from './pages/ManutencaoDeMotores';
-import RetificaParcialOuCompleta from './pages/RetificaParcialOuCompleta';
-import ValeAPenaRetificar from './pages/ValeAPenaRetificar';
-
-import Politica from './pages/Politica';
-import NotFound from './pages/NotFound'; // Importe o componente NotFound
-import Trocas from './pages/Trocas';
-import Faq from './pages/Faq';
-import TrabalheConosco from './pages/TrabalheConosco';
-import Termos from './pages/Termos';
-
+import Sobre from './pages/sobre/Sobre';
+import Contato from './pages/contato/Contato';
+import Servicos from './pages/servicos/Servicos';
+import Dp from './pages/servicos/Dp';
+import Tp from './pages/servicos/Tp';
+import Mp from './pages/servicos/Mp';
+import Td from './pages/servicos/Td';
+import Cp from './pages/servicos/Cp';
+import Orcamento from './pages/orcamento/Orcamento';
+import Blog from './pages/blog/Blog';
+import SinaisRetifica from './pages/blog/SinaisRetifica';
+import CustoRetifica from './pages/blog/CustoRetifica';
+import ManutencaoDeMotores from './pages/blog/ManutencaoDeMotores';
+import RetificaParcialOuCompleta from './pages/blog/RetificaParcialOuCompleta';
+import ValeAPenaRetificar from './pages/blog/ValeAPenaRetificar';
+import Politica from './pages/footer/Politica';
+import NotFound from './pages/footer/NotFound';
+import Trocas from './pages/footer/Trocas';
+import Faq from './pages/footer/Faq';
+import TrabalheConosco from './pages/footer/TrabalheConosco';
+import Termos from './pages/footer/Termos';
 
 import './App.css';
 import './GlobalStyles.css';
 
-
-
-function App() {
+const AnimatedRoutes = () => {
+  const location = useLocation();
   return (
-    <Router>
-      <ScrollToTop />
-      <Layout>
-        <Routes>
-          {/* Defina suas rotas aqui */}
+    <AnimatePresence mode="wait">
+      <Suspense fallback={<PageTransition />}>
+        <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
-
           <Route path="/Sobre" element={<Sobre />} />
-
           <Route path="/Contato" element={<Contato />} />
-
           <Route path="/Servicos" element={<Servicos />} />
           <Route path="/Mp" element={<Mp />} />
           <Route path="/Dp" element={<Dp />} />
           <Route path="/Tp" element={<Tp />} />
           <Route path="/Td" element={<Td />} />
           <Route path="/Cp" element={<Cp />} />
-
           <Route path="/Orcamento" element={<Orcamento />} />
-
           <Route path="/Blog" element={<Blog />} />
-          <Route path="/" element={<Blog />} />
           <Route path="/sinaisretifica" element={<SinaisRetifica />} />
           <Route path="/custoretifica" element={<CustoRetifica />} />
           <Route path="/manutencao-de-motores" element={<ManutencaoDeMotores />} />
           <Route path="/retifica-parcial-ou-completa" element={<RetificaParcialOuCompleta />} />
           <Route path="/retifica-ou-troca" element={<ValeAPenaRetificar />} />
-
           <Route path="/Politica" element={<Politica />} />
           <Route path="/Trocas" element={<Trocas />} />
           <Route path="/Faq" element={<Faq />} />
           <Route path="/Trabalhe-conosco" element={<TrabalheConosco />} />
           <Route path="/Termos" element={<Termos />} />
-
-          {/* Adicione outras rotas aqui conforme necessário */}
-          {/* Rota para a página de serviços - exemplo de rota aninhada */}
-
-          {/* Rota para a página 404 - deve ser a última rota */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+      </Suspense>
+    </AnimatePresence>
+  );
+};
+
+function App() {
+  return (
+    <Router>
+      <ScrollToTop />
+      <Layout>
+        <AnimatedRoutes />
         <ToTop />
       </Layout>
     </Router>

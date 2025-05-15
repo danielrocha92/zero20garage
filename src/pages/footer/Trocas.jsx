@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import DynamicHeader from '../components/DynamicHeader';
-import WhatsAppButton from '../components/WhatsAppButton';
+import DynamicHeader from '../../components/DynamicHeader';
+import WhatsAppButton from '../../components/WhatsAppButton';
 import './Trocas.css'; // Continua utilizando o mesmo arquivo CSS
 
 const Trocas = () => {

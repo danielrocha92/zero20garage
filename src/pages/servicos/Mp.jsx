@@ -1,7 +1,7 @@
 // ManutencaoPreventiva.jsx
 import React from 'react';
-import DynamicHeader from '../components/DynamicHeader';
-import WhatsAppButton from '../components/WhatsAppButton';
+import DynamicHeader from '../../components/DynamicHeader';
+import WhatsAppButton from '../../components/WhatsAppButton';
 import './Mp.css'; // Importe o CSS atualizado
 
 function Mp() {

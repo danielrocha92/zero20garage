@@ -1,7 +1,7 @@
 // dpnostico.jsx
 import React from 'react';
-import DynamicHeader from '../components/DynamicHeader';
-import WhatsAppButton from '../components/WhatsAppButton';
+import DynamicHeader from '../../components/DynamicHeader';
+import WhatsAppButton from '../../components/WhatsAppButton';
 import './Dp.css'; // Importe o CSS para estilização
 
 function Dp() {

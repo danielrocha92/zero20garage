@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import './Orcamento.css';
-import DynamicHeader from '../components/DynamicHeader';
-import WhatsAppButton from '../components/WhatsAppButton';
-import { supabase } from '../supabaseClient';
+import DynamicHeader from '../../components/DynamicHeader';
+import WhatsAppButton from '../../components/WhatsAppButton';
+import { supabase } from '../../supabaseClient';
 import emailjs from 'emailjs-com';
+import 'font-awesome/css/font-awesome.min.css';
+import AnimatedPage from '../../components/AnimatedPage';
+
 
 function Orcamento() {
   const messages = [
@@ -98,7 +101,7 @@ function Orcamento() {
     <div className="page-escuro">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
-
+      <AnimatedPage />
       <div className="container-escuro">
         <section className="section">
           <div className='highlight-item'>

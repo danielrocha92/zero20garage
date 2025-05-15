@@ -1,6 +1,6 @@
 import React from 'react';
-import DynamicHeader from '../components/DynamicHeader';
-import WhatsAppButton from '../components/WhatsAppButton';
+import DynamicHeader from '../../components/DynamicHeader';
+import WhatsAppButton from '../../components/WhatsAppButton';
 import './Td.css'; // Certifique-se de ter um arquivo Td.css com os estilos desejados
 
 function Td() {

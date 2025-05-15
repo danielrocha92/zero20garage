@@ -1,10 +1,28 @@
-/* Layout.css */
+/* src/components/Layout.css */
+
 .layout {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Garante que o layout ocupe toda a altura da tela */
+  min-height: 100vh;
 }
 
 .content {
-  flex: 1; /* Expande para ocupar o espaço restante */
+  flex: 1;
+  position: relative;
+}
+
+.page-transition {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.9); /* fundo escuro leve */
+  backdrop-filter: blur(6px); /* efeito de desfoque */
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lottie-wrapper {
+  width: 15rem; /* tamanho reduzido */
+  height: 15rem;
 }

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import '../styles/Navbar.css'; // Importa o arquivo global de estilos
-import logo from '../assets/images/logo.png'; // Certifique-se de que o caminho está correto
+import '../styles/Navbar.css';
+import logo from '../assets/images/logo.png';
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset); // Rastreia a posição anterior
+  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
   const location = useLocation();
 
   const toggleMenu = () => {
@@ -20,10 +20,14 @@ function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
-      const visible = prevScrollPos > currentScrollPos; // Mostra a navbar se estiver rolando para cima
 
-      setScrolled(!visible); // Inverte o estado para mostrar/ocultar a navbar
-      setPrevScrollPos(currentScrollPos); // Atualiza a posição anterior
+      if (currentScrollPos === 0) {
+        setScrolled(false); // No topo: centraliza e expande
+      } else if (currentScrollPos > prevScrollPos) {
+        setScrolled(true); // Rolando para baixo: encolhe e fixa à esquerda
+      }
+
+      setPrevScrollPos(currentScrollPos);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -31,14 +35,15 @@ function Navbar() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [prevScrollPos]); // Adiciona prevScrollPos como dependência
+  }, [prevScrollPos]);
 
   useEffect(() => {
     setMenuOpen(false);
+    setScrolled(false); // Ao trocar de rota: volta à posição inicial
   }, [location]);
 
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled-down' : ''}`}> {/* Altera a classe para 'scrolled-down' */}
+    <nav className={`navbar ${scrolled ? 'scrolled-down' : ''}`}>
       <div className="navbar-logo">
         <Link to="/">
           <img src={logo} alt="Logo" />

@@ -1,6 +1,6 @@
 import React from 'react';
-import '../styles/Blog.css';
-import WhatsAppButton from '../components/WhatsAppButton';
+import '../../styles/Blog.css';
+import WhatsAppButton from '../../components/WhatsAppButton';
 import './RetificaParcialOuCompleta.css'; // Importe o CSS atualizado
 
 function RetificaParcialOuCompleta() {
