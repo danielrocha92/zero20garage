@@ -10,25 +10,26 @@
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    font-size: 2rem;
+    font-size: 4rem; /* aumentei aqui */
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
     z-index: 1000; /* Garante que o botão fique sempre na frente */
-  }
+}
 
-  .whatsapp-button:hover {
+.whatsapp-button:hover {
     background-color: #128c7e; /* Cor verde mais escura no hover */
     transform: scale(1.1);
     border-radius: 50%;
-  }
+}
 
-  /* Responsivo: Mover para o canto inferior esquerdo em telas menores */
-  @media screen and (max-width: 768px) {
+/* Responsivo: Mover para o canto inferior esquerdo em telas menores */
+@media screen and (max-width: 768px) {
     .whatsapp-button {
       right: auto;
       left: 20px;
       width: 50px;
       height: 50px;
+      font-size: 4rem; /* manter o tamanho maior no mobile */
       z-index: 1000; /* Garante que o botão fique sempre na frente */
     }
-  }
+}

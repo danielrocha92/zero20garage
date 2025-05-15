@@ -165,10 +165,6 @@
   padding: 0.6rem;
 }
 
-.footer-nav a:hover {
-  text-decoration: underline; /* Adiciona um sublinhado ao passar o mouse */
-}
-
 /* Estilos para o menu toggle */
 .menu-toggle {
   display: none;

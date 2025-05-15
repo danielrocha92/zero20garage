@@ -1,13 +1,11 @@
 /* === Variáveis (Opcional, mas Recomendado) === */
 /* Adicione estas ao seu arquivo CSS principal ou a um arquivo de variáveis dedicado */
-/*
 :root {
-  --cinza-claro: #ccc; // Cor de exemplo, substitua pela sua cor real
-  --vermelho-principal: #f00; // Cor de exemplo, substitua pela sua cor real
-  --navbar-height-default: 6rem; // Ajuste com base no tamanho/padding do logo
-  --navbar-height-scrolled: 4rem; // Ajuste
+  --cinza-claro: #ccc; /* Cor de exemplo, substitua pela sua cor real */
+  --vermelho-principal: #f00; /* Cor de exemplo, substitua pela sua cor real */
+  --navbar-height-default: 6rem; /* Ajuste com base no tamanho/padding do logo */
+  --navbar-height-scrolled: 4rem; /* Ajuste */
 }
-*/
 
 /* === Navbar Base === */
 .navbar {
@@ -48,7 +46,7 @@
   /* Transição para a margem direita quando a página é rolada */
   transition: margin-right 0.3s ease;
   /* Use margin-left auto para empurrar o logo para a esquerda quando não rolado e os links estão centralizados */
-    margin-right: auto; /* Empurra o logo para a esquerda por padrão */
+  margin-right: auto; /* Empurra o logo para a esquerda por padrão */
 }
 
 .navbar.scrolled-down .navbar-logo {
@@ -81,6 +79,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  outline: none; /* Remove outline padrão */
   /* Não é mais necessário margin-left auto aqui porque o logo tem margin-right auto */
 }
 
@@ -91,14 +90,21 @@
 .navbar-links a {
   color: var(--cinza-claro); /* Use a variável CSS */
   text-decoration: none;
-  font-size: 1.7rem;
+  font-size: 1rem;
   transition: color 0.3s ease;
   padding: 0.5rem 0; /* Adicione padding para a área de hover */
   position: relative; /* Necessário para um possível efeito ::after no hover */
+  outline: none; /* Remove contorno padrão */
 }
 
 .navbar-links a:hover {
   color: var(--vermelho-principal); /* Use a variável CSS */
+}
+
+/* Remove outline padrão e adiciona foco visível */
+.navbar-links a:focus {
+  outline: none;
+  text-decoration: underline;
 }
 
 /* Opcional: Efeito de sublinhado no hover */
@@ -138,6 +144,14 @@
   padding: 0; /* Remove o padding padrão */
   margin-left: 1rem; /* Adiciona um pouco de espaço entre o logo e o hambúrguer */
   /* Adicione transição para o próprio botão, se necessário, por exemplo, cor ou escala */
+  outline: none; /* Remove contorno padrão */
+}
+
+/* Foco acessível no botão hamburger */
+.hamburger:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--vermelho-principal);
+  border-radius: 4px;
 }
 
 /* Estilo para as três linhas */
@@ -177,6 +191,7 @@
   /* Mostra o hambúrguer no mobile */
   .hamburger {
     display: block;
+    margin-left: auto; /* Empurra o hamburger para a direita */
   }
 
   /* Esconde os links do desktop e posiciona o container do menu */
@@ -246,8 +261,7 @@
     overflow-y: auto;
   }
 
-/* Garante que o hamburger fique à direita no desktop e mobile */
-.hamburger {
-  margin-left: auto; /* Empurra o hamburger pra direita */
-}
+  .navbar-links a {
+    font-size: 1.6rem;
+  }
 }
