@@ -5,6 +5,7 @@ import WhatsAppButton from '../../components/WhatsAppButton';
 import { Helmet } from 'react-helmet';
 import { FaTools, FaSearch, FaWrench, FaTachometerAlt, FaUsersCog } from 'react-icons/fa';
 import AnimatedPage from '../../components/AnimatedPage';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const Servicos = () => {
     const messages = [
@@ -19,7 +20,8 @@ const Servicos = () => {
             title: 'Manutenção Preventiva',
             description: 'Manutenção regular para evitar problemas futuros...',
             link: '/mp',
-            icon: <FaTools size={60} className="service-icon" />,
+            isLottie: true,
+            lottieUrl: 'https://lottie.host/a6897091-f363-45d3-8248-1f401716037c/Zu2Q1IPS9P.lottie',
         },
         {
             title: 'Diagnóstico de Problemas',
@@ -71,15 +73,21 @@ const Servicos = () => {
                                         className="service-item"
                                         key={service.title}
                                         data-aos="fade-up">
-                                        <Link
-                                            to={service.link}
-                                            className="ctn-button">
-                                            {service.icon}
+                                        <Link to={service.link} className="ctn-button">
+                                            {service.isLottie ? (
+                                                <DotLottieReact
+                                                    src={service.lottieUrl}
+                                                    loop
+                                                    autoplay
+                                                    className="service-animation"
+                                                    style={{ height: 120 }}
+                                                />
+                                            ) : (
+                                                service.icon
+                                            )}
                                             <h2 className='title'>{service.title}</h2>
                                             <p>{service.description}</p>
-                                            <button
-                                                type="submit"
-                                                className="submit-button">
+                                            <button type="submit" className="submit-button">
                                                 Saiba Mais
                                             </button>
                                         </Link>
