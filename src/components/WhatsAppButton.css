@@ -17,7 +17,7 @@
 }
 
 .whatsapp-button:hover {
-    background-color: #128c7e; /* Cor verde mais escura no hover */
+    background-color: #14eb00; /* Cor verde mais escura no hover */
     transform: scale(1.1);
     border-radius: 50%;
 }
@@ -28,8 +28,7 @@
       right: auto;
       left: 20px;
       width: 50px;
-      height: 50px;
-      font-size: 4rem; /* manter o tamanho maior no mobile */
+      height: 50px; /* manter o tamanho maior no mobile */
       z-index: 1000; /* Garante que o botão fique sempre na frente */
     }
 }

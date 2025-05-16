@@ -108,34 +108,30 @@ function Footer() {
               )}
             </div>
 
-            <div className="accordion-item">
-              <button onClick={() => toggleMenu('redes')} className="accordion-button">Zero 20 nas Redes</button>
-              {activeMenu === 'redes' && (
-                <div className="icons accordion-content">
-                  <a href="https://www.facebook.com/zero20garage" target="_blank" rel="noopener noreferrer">
-                    <FaFacebook className="icon-medium" />
-                  </a>
-                  <a href="https://www.instagram.com/zero20garage" target="_blank" rel="noopener noreferrer">
-                    <FaInstagram className="icon-medium" />
-                  </a>
-                </div>
-              )}
-            </div>
-
-            <div className="accordion-item">
-              <button onClick={() => toggleMenu('pagamento')} className="accordion-button">Formas de Pagamento</button>
-              {activeMenu === 'pagamento' && (
-                <div className="icons accordion-content">
-                  {formasPagamento.map((forma) => (
-                    <span key={forma.nome} className="payment-icon" title={forma.nome}>
-                      {forma.icone}
-                    </span>
-                  ))}
-                </div>
-              )}
+            <div className="footer-card">
+              <span className="title">Siga-nos:</span>
+              <div className="icons">
+                <a href="https://www.facebook.com/zero20garage" target="_blank" rel="noopener noreferrer">
+                  <FaFacebook className="icon-medium" />
+                </a>
+                <a href="https://www.instagram.com/zero20garage" target="_blank" rel="noopener noreferrer">
+                  <FaInstagram className="icon-medium" />
+                </a>
+              </div>
             </div>
 
             <div className="footer-card">
+                  <span className="title">Formas de Pagamento:</span>
+                  <div className="icons">
+                    {formasPagamento.map((forma) => (
+                      <span key={forma.nome} className="payment-icon" title={forma.nome}>
+                        {forma.icone}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="footer-card">
               <span className="title">© 2025 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™</span>
             </div>
           </div>
