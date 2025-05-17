@@ -27,7 +27,8 @@ const Servicos = () => {
             title: 'Diagnóstico de Problemas',
             description: 'Diagnóstico preciso para identificar...',
             link: '/dp',
-            icon: <FaSearch size={60} className="service-icon" />,
+            isLottie: true,
+            lottieUrl: 'https://lottie.host/1015c069-5700-45d3-97f2-f384e1ba5077/HtUxdY6MQL.lottie',
         },
         {
             title: 'Troca de Peças',
@@ -47,7 +48,8 @@ const Servicos = () => {
             title: 'Consultoria Técnica',
             description: 'Consultoria especializada para ajudar...',
             link: '/cp',
-            icon: <FaUsersCog size={60} className="service-icon" />,
+            isLottie: true,
+            lottieUrl: 'https://lottie.host/22e9c59d-76ec-4deb-9603-5d6540ae2fc2/kYkYTa00QB.lottie',
         },
     ];
 
