@@ -3,7 +3,7 @@ import './Servicos.css';
 import DynamicHeader from '../../components/DynamicHeader';
 import WhatsAppButton from '../../components/WhatsAppButton';
 import { Helmet } from 'react-helmet';
-import { FaTools, FaSearch, FaWrench, FaTachometerAlt, FaUsersCog } from 'react-icons/fa';
+import { FaSearch, FaUsersCog } from 'react-icons/fa';
 import AnimatedPage from '../../components/AnimatedPage';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
@@ -33,13 +33,15 @@ const Servicos = () => {
             title: 'Troca de Peças',
             description: 'Substituição de peças desgastadas...',
             link: '/tp',
-            icon: <FaWrench size={60} className="service-icon" />,
+            isLottie: true,
+            lottieUrl: 'https://lottie.host/65fd28e9-8bb9-4fc7-a243-49c4aa7483f2/fyhYTYsPTh.lottie',
         },
         {
             title: 'Teste de Desempenho',
             description: 'Testes rigorosos para garantir...',
             link: '/td',
-            icon: <FaTachometerAlt size={60} className="service-icon" />,
+            isLottie: true,
+            lottieUrl: 'https://lottie.host/569ca6d8-8079-4e2b-91bf-eed5308fec69/A1ShQBAMgI.lottie',
         },
         {
             title: 'Consultoria Técnica',
