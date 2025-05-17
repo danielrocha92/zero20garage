@@ -83,8 +83,8 @@
 
 /* Ícones dos serviços */
 .service-icon {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     color: var(--cor-destaque);
     margin-bottom: 1rem;
     transition: transform 0.3s ease, color 0.3s ease;
