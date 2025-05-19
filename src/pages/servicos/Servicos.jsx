@@ -3,7 +3,6 @@ import './Servicos.css';
 import DynamicHeader from '../../components/DynamicHeader';
 import WhatsAppButton from '../../components/WhatsAppButton';
 import { Helmet } from 'react-helmet';
-import { FaSearch, FaUsersCog } from 'react-icons/fa';
 import AnimatedPage from '../../components/AnimatedPage';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 

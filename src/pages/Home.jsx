@@ -88,25 +88,25 @@
                   <GoogleReviews />
                   <div className="testimonial-item">
                   <strong><p>"Serviço impecável! Meu carro nunca esteve tão bom. Recomendo a Zero20 Garage para todos."</p></strong>
-                    <span class="review-date">Junho de 2024</span>
-                    <div class="stars">
-                      <span class="star">★</span>
-                      <span class="star">★</span>
-                      <span class="star">★</span>
-                      <span class="star">★</span>
-                      <span class="star">☆</span>
+                    <span className="review-date">Junho de 2024</span>
+                    <div className="stars">
+                      <span className="star">★</span>
+                      <span className="star">★</span>
+                      <span className="star">★</span>
+                      <span className="star">★</span>
+                      <span className="star">☆</span>
                     </div>
                     <p>- João Silva</p>
                   </div>
                   <div className="testimonial-item">
                   <strong><p>"Atendimento rápido e eficiente. A equipe é muito profissional e confiável."</p></strong>
-                    <span class="review-date">Abril de 2025</span>
-                    <div class="stars">
-                      <span class="star">★</span>
-                      <span class="star">★</span>
-                      <span class="star">★</span>
-                      <span class="star">★</span>
-                      <span class="star">☆</span>
+                    <span className="review-date">Abril de 2025</span>
+                    <div className="stars">
+                      <span className="star">★</span>
+                      <span className="star">★</span>
+                      <span className="star">★</span>
+                      <span className="star">★</span>
+                      <span className="star">☆</span>
                     </div>
                     <p>- Maria Oliveira</p>
                   </div>
