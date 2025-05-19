@@ -29,55 +29,53 @@
             {/* Card padrão Section */}
             <div className="container-escuro">
               <section className="section">
-                  <div className='highlight-item'>
-                  <h2
-                  className="title"
-                  translate="no">Zero 20 Garage</h2>
-                  <h2 className="title">Excelência em Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
-                  <h3>Atendimento especializado para veículos nacionais e importados.</h3>
-                    <a href="/orcamento" className="button">Solicite um Orçamento</a>
-                  </div>
+                <div className='highlight-item'>
+                <h2 className="title">Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
+                <h3>Atendimento especializado para veículos nacionais e importados.</h3>
+                  <a href="/orcamento" className="button">Solicite um Orçamento</a>
+                </div>
               </section>
 
-            {/* Destaques */}
-            <section className="section">
-                  <div className='highlight-item'>
-                    <h2>Por que Escolher a Zero20 Garage?</h2>
-                    <div className="highlights-grid">
-                    <div className="highlight-item">
-                        <h2>Pagamento</h2>
-                        <p>em até 12x (Consulte Condições)
-                        5% de Desconto no valor da Retífica Para Pagamento À Vista</p>
-                      </div>
+              {/* Destaques */}
+              <section className="section">
+                <div className='highlight-item' translate='no'>
+                  <h2>Por que Escolher a Zero 20 Garage?</h2>
 
-                      <div className="highlight-item">
-                        <h2>Tempo de entrega</h2>
-                        <p className='highlight-item'>Motor Nacional = 4 a 7 Dias Úteis</p>
-                        <p className='highlight-item'>Motor Importado = 10 a 15 Dias Úteis</p>
-                        <p className='highlight-item'>Motor Diesel = 10 a 15 Dias Úteis</p>
-                      </div>
+                  <div className="highlight-item">
+                    <h2>Pagamento</h2>
+                  <div className="highlights-grid">
+                    <div className="highlight-card">
+                      <p>Em até 12x (Consulte Condições)
+                      5% de Desconto no valor da Retífica Para Pagamento À Vista</p>
+                    </div>
                   </div>
                 </div>
-            </section>
+
+                <div className="highlight-item">
+                  <h2>Tempo de entrega</h2>
+                    <div className="highlights-grid">
+                      <p className='highlight-card'>Motor Nacional = 4 a 7 Dias Úteis</p>
+                      <p className='highlight-card'>Motor Importado = 10 a 15 Dias Úteis</p>
+                      <p className='highlight-card'>Motor Diesel = 10 a 15 Dias Úteis</p>
+                    </div>
+                </div>
 
               {/* Serviços Destacados */}
-              <section className="section">
                   <div className='highlight-item'>
-                        <h2>Retífica de Motores</h2>
-                        <p>Recuperação completa do motor com precisão e qualidade.</p>
-                      <div className="highlights-grid">
-                        <div className="highlight-item">
+                    <h2 translate='no'>Retífica de Motores</h2>
+                    <div className="highlights-grid">
+                      <div className="highlight-card">
                         <h2>Manutenção Preventiva</h2>
-                        <p>Evite problemas futuros com revisões regulares.</p>
-                      </div>
-                      <div className="highlight-item">
+                         <p className='highlight-card'>Evite problemas futuros com revisões regulares.</p>
+                    </div>
+                      <div className="highlight-card">
                         <h2>Revisão Completa</h2>
-                        <p>Diagnóstico avançado para garantir o melhor desempenho do seu veículo.</p>
+                          <p className='highlight-card'>Diagnóstico avançado para garantir o melhor desempenho do seu veículo.</p>
                       </div>
                   </div>
                 </div>
-              </section>
-
+              </div>
+            </section>
             {/* Conteúdo adicional */}
 
             {/* Depoimentos */}
@@ -86,19 +84,23 @@
                   <h2>O que Nossos Clientes Dizem</h2>
                   {/* Avaliações Google Maps */}
                   <GoogleReviews />
+                  <div className="highlights-grid">
                   <div className="testimonial-item">
-                  <strong><p>"Serviço impecável! Meu carro nunca esteve tão bom. Recomendo a Zero20 Garage para todos."</p></strong>
-                    <span className="review-date">Junho de 2024</span>
-                    <div className="stars">
-                      <span className="star">★</span>
-                      <span className="star">★</span>
-                      <span className="star">★</span>
-                      <span className="star">★</span>
-                      <span className="star">☆</span>
-                    </div>
-                    <p>- João Silva</p>
+                    <div className="highlight-card">
+                      <strong><p>"Serviço impecável! Meu carro nunca esteve tão bom. Recomendo a Zero20 Garage para todos."</p></strong>
+                        <span className="review-date">Junho de 2024</span>
+                        <div className="stars">
+                          <span className="star">★</span>
+                          <span className="star">★</span>
+                          <span className="star">★</span>
+                          <span className="star">★</span>
+                          <span className="star">☆</span>
+                        </div>
+                        <p>- João Silva</p>
+                      </div>
                   </div>
                   <div className="testimonial-item">
+                    <div className="highlight-card">
                   <strong><p>"Atendimento rápido e eficiente. A equipe é muito profissional e confiável."</p></strong>
                     <span className="review-date">Abril de 2025</span>
                     <div className="stars">
@@ -109,6 +111,8 @@
                       <span className="star">☆</span>
                     </div>
                     <p>- Maria Oliveira</p>
+                  </div>
+                  </div>
                   </div>
                 </div>
             </section>

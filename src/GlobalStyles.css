@@ -465,15 +465,16 @@ li {
 }
 
 .highlights h2 {
+  margin-bottom: 1rem;
   font-size: 2.5rem;
-  margin-bottom: 1.5rem;
+  line-height: 1.3;
   color: #D3D3D3;
   font-family: 'Montserrat', sans-serif; /* Adicionando uma fonte moderna */
   font-weight: 700; /* Tornando o título mais forte */
 }
 
 .highlight-item h3 {
-  font-size: 2rem;
+  font-size: 1rem;
   color: #c50404;
   margin-bottom: 0.5rem;
   font-family: 'Open Sans', sans-serif; /* Uma fonte mais legível para subtítulos */
@@ -489,40 +490,24 @@ li {
 
 .highlights-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
   margin-top: 2rem;
+}
+
+.highlight-card {
+  background-color: #1e1e1e;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
 .highlight-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
 }
-
-.highlight-item h2 { /* Estilizando o H2 dentro do highlight-item (Por que Escolher...) */
-  font-size: 2.2rem;
-  color: #ffffff;
-  margin-bottom: 1rem;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-}
-
-.highlight-item h3 { /* Reaplicando o estilo para os H3 internos (Pagamento, Tempo de Entrega) */
-  font-size: 1.5rem;
-  color: #c50404;
-  margin-bottom: 0.5rem;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 600;
-}
-
-.highlight-item p { /* Reaplicando o estilo para os parágrafos internos */
-  font-size: 1rem;
-  color: #fff;
-  font-family: 'Open Sans', sans-serif;
-  line-height: 1.5;
-}
-
-
 
 /* Troca Peça.css */
 /* Importar a fonte Open Sans do Google Fonts */
@@ -927,7 +912,7 @@ li {
 
 
   h2 {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
 
