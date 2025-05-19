@@ -60,18 +60,20 @@
                     </div>
                 </div>
 
-              {/* Serviços Destacados */}
-                  <div className='highlight-item'>
-                    <h2 translate='no'>Retífica de Motores</h2>
-                    <div className="highlights-grid">
-                      <div className="highlight-card">
-                        <h2>Manutenção Preventiva</h2>
-                         <p className='highlight-card'>Evite problemas futuros com revisões regulares.</p>
+                {/* Serviços Destacados */}
+                <div className='highlight-item'>
+                  <h2>Manutenção Preventiva</h2>
+                  <div className="highlights-grid">
+                    <div className="highlight-card">
+                      <p>Evite problemas futuros com revisões regulares.</p>
                     </div>
-                      <div className="highlight-card">
-                        <h2>Revisão Completa</h2>
-                          <p className='highlight-card'>Diagnóstico avançado para garantir o melhor desempenho do seu veículo.</p>
-                      </div>
+                  </div>
+                </div>
+
+                <div className='highlight-item'>
+                  <h2>Revisão Completa</h2>
+                  <div className="highlights-grid">
+                    <p className='highlight-card'>Diagnóstico avançado para garantir o melhor desempenho do seu veículo.</p>
                   </div>
                 </div>
               </div>

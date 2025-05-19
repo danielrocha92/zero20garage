@@ -497,8 +497,7 @@ li {
 
 .highlight-card {
   background-color: #1e1e1e;
-  padding: 1.5rem;
-  border-radius: 1rem;
+  border-radius: 8px;
   text-align: center;
   transition: transform 0.3s ease;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
@@ -942,7 +941,7 @@ li {
 
 
   .container {
-    padding: 1rem;
+    padding: 0.5rem;
   }
 
 

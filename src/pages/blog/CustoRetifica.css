@@ -6,13 +6,6 @@
   padding: 2rem;
 }
 
-.container-claro {
-  max-width: 1200px;
-  margin: 0 auto;
-  color: #000; /* reforça texto preto */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 .page-claro h1,
 .page-claro p {
   color: #000;
