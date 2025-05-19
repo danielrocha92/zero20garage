@@ -99,27 +99,6 @@ body {
   max-width: 100%;
 }
 
-/* Itens de destaque */
-.highlight-item {
-  background: #222;
-  padding: 1.5rem;
-  border-radius: 12px;
-  color: var(--branco);
-  margin-bottom: 1.5rem;
-  text-align: left;
-}
-
-.highlight-item h2 {
-  font-size: 1.5rem;
-  color: #FFD700;
-  margin-bottom: 0.5rem;
-}
-
-.highlight-item p {
-  font-size: 1rem;
-  color: #ccc;
-}
-
 /* Endereço de contato */
 .address {
   font-size: 1.2rem;

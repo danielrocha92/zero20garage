@@ -78,12 +78,15 @@
     text-align: center;
   }
 
-  .orcamento-form {
-    margin: 1rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
+.orcamento-form {
+  width: 100%;
+  max-width: 700px; /* Ajuste conforme desejado */
+  margin: 2rem auto; /* Centraliza horizontalmente */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+}
 
   .form-group {
     display: flex;

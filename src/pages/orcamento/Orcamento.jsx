@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import './Orcamento.css';
 import DynamicHeader from '../../components/DynamicHeader';
 import WhatsAppButton from '../../components/WhatsAppButton';
-import { supabase } from '../../supabaseClient';
+// import { supabase } from '../../supabaseClient'; // Removido
 import emailjs from 'emailjs-com';
-import 'font-awesome/css/font-awesome.min.css';
 import AnimatedPage from '../../components/AnimatedPage';
-
 
 function Orcamento() {
   const messages = [
@@ -30,7 +28,6 @@ function Orcamento() {
     telefone: '',
     servico: '',
     mensagem: '',
-    data: '',
   });
 
   const [loading, setLoading] = useState(false);
@@ -52,15 +49,6 @@ function Orcamento() {
         data: new Date().toLocaleString('pt-BR'),
       };
 
-      const { nome, email, telefone, servico, mensagem } = formDataComData;
-      const { error } = await supabase.from('orcamentos').insert([{ nome, email, telefone, servico, mensagem }]);
-
-      if (error) {
-        console.error('Erro ao enviar dados:', error.message);
-        setSuccess(false);
-        return;
-      }
-
       // ✅ Envia para o Google Sheets via proxy backend hospedado no Render
       await fetch('https://api-orcamento-n49u.onrender.com/api/orcamento', {
         method: 'POST',
@@ -71,14 +59,19 @@ function Orcamento() {
       });
 
       // ✅ Envia e-mail via EmailJS
-      await emailjs.send('service_mbg69sw', 'template_tso8mol', {
-        nome: formDataComData.nome,
-        email: formDataComData.email,
-        telefone: formDataComData.telefone,
-        servico: formDataComData.servico,
-        mensagem: formDataComData.mensagem,
-        data: formDataComData.data,
-      }, 'NxziW1zSC820uuLvF');
+      await emailjs.send(
+        'service_mbg69sw',
+        'template_tso8mol',
+        {
+          nome: formDataComData.nome,
+          email: formDataComData.email,
+          telefone: formDataComData.telefone,
+          servico: formDataComData.servico,
+          mensagem: formDataComData.mensagem,
+          data: formDataComData.data,
+        },
+        'NxziW1zSC820uuLvF'
+      );
 
       setSuccess(true);
       setFormData({
@@ -88,7 +81,6 @@ function Orcamento() {
         servico: '',
         mensagem: '',
       });
-
     } catch (err) {
       console.error('Erro inesperado:', err);
       setSuccess(false);
@@ -178,7 +170,9 @@ function Orcamento() {
               </button>
               {success !== null && (
                 <div className={`feedback-success ${success ? 'success' : 'feedback-error'}`}>
-                  {success ? 'Formulário enviado com sucesso!' : 'Ocorreu um erro ao enviar o formulário. Tente novamente!'}
+                  {success
+                    ? 'Formulário enviado com sucesso!'
+                    : 'Ocorreu um erro ao enviar o formulário. Tente novamente!'}
                 </div>
               )}
             </form>
