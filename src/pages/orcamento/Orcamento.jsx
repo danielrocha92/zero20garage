@@ -90,11 +90,11 @@ function Orcamento() {
   };
 
   return (
-    <div className="page-escuro">
+    <div className="page-black">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
       <AnimatedPage />
-      <div className="container-escuro">
+      <div className="container-black">
         <section className="section">
           <div className='highlight-item'>
             <h1 className="title">Solicite um Orçamento</h1>

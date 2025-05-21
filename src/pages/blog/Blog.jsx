@@ -55,12 +55,12 @@ const Blog = () => {
                 <meta name="description" content="Artigos sobre manutenção automotiva, retífica de motores e mais." />
             </Helmet>
 
-            <div className="page-escuro">
+            <div className="page-black">
                 <DynamicHeader messages={messages} />
                 <WhatsAppButton />
                 <AnimatedPage />
                 {/* Card padrão Section */}
-                <div className="container-escuro">
+                <div className="container-black">
                     <section className="section">
                         <div className='highlight-item'>
                           <div className='highlight-item'>

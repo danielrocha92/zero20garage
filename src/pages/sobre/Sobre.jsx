@@ -45,11 +45,11 @@ function Sobre() {
   ];
 
   return (
-    <div className="page-escuro">
+    <div className="page-black">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
       <AnimatedPage />
-      <div className="container-escuro">
+      <div className="container-black">
       <section className="sobre-section">
         <div className="highlight-item nossa-historia">
           <h1>Nossa História</h1>

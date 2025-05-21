@@ -22,12 +22,12 @@
       ];
 
     return (
-      <div className="page-escuro">
+      <div className="page-black">
         <DynamicHeader messages={messages} />
         <WhatsAppButton />
         <AnimatedPage />
             {/* Card padrão Section */}
-            <div className="container-escuro">
+            <div className="container-black">
               <section className="section">
                 <div className='highlight-item'>
                 <h2 className="title">Retífica de Motores e Soluções Mecânicas Sob Medida</h2>

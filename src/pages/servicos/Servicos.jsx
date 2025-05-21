@@ -61,11 +61,11 @@ const Servicos = () => {
                 <meta name="description" content="Oferecemos serviços especializados" />
             </Helmet>
 
-            <div className="page-escuro">
+            <div className="page-black">
                 <DynamicHeader messages={messages} />
                 <WhatsAppButton />
                 <AnimatedPage />
-                <div className="container-escuro">
+                <div className="container-black">
                     <section className="section">
                         <div className='highlight-item'>
                             <h2 className='title' translate='no'>Retífica de Motores</h2>

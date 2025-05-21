@@ -190,7 +190,7 @@ li {
 /* ================= */
 /* Layout Container */
 /* ================= */
-.container-escuro {
+.container-black {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
@@ -240,7 +240,7 @@ li {
 
 
 
-.page-escuro {
+.page-black {
   margin: 0 auto;
   padding: 2rem 1rem;
   /* Adicionando espaçamento interno */

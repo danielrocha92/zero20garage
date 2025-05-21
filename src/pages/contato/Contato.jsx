@@ -21,11 +21,11 @@ function Contato() {
   ];
 
   return (
-    <div className="page-escuro">
+    <div className="page-black">
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
 
-      <div className="container-escuro">
+      <div className="container-black">
         {/* Seção de Contato */}
         <section className="section">
           <div className="highlight-item">
