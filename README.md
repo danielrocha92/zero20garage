@@ -81,6 +81,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
+
 site-institucional/
 ├── public/
 │   ├── index.html
@@ -94,6 +95,34 @@ site-institucional/
 │   ├── styles/            # Arquivos de CSS/Styled Components
 │   ├── data.js            # Dados para o site (ex: informações institucionais)
 └── package.json
+
+Wireframe (estrutura em blocos)
+--------------------------------------------------
+| LOGO             | MENU (Sobre, Serviços, Blog)|
+--------------------------------------------------
+| HERO: Título impactante + CTA (WhatsApp) +     |
+| animação Lottie (motor/pistão)                 |
+--------------------------------------------------
+| SOBRE NÓS: Texto breve + imagem da equipe/oficina|
+--------------------------------------------------
+| SERVIÇOS: Ícones + títulos + descrições curtas |
+| (Retífica completa, parcial, manutenção)       |
+--------------------------------------------------
+| PROCESSO: Infográfico ou timeline + animação   |
+--------------------------------------------------
+| DIFERENCIAIS: Ícones + textos curtos           |
+| (Garantia, Equipamentos, Atendimento)          |
+--------------------------------------------------
+| BLOG: Cards com imagem + título + link         |
+--------------------------------------------------
+| DEPOIMENTOS: Fotos + nome + texto do cliente   |
+--------------------------------------------------
+| CONTATO: Mapa interativo + formulário          |
+| Botões flutuantes: WhatsApp + Telefone         |
+--------------------------------------------------
+| RODAPÉ: Links rápidos + redes sociais + CNPJ   |
+--------------------------------------------------
+
 
 Paleta Industrial (Vermelho e Prata)
 💠 #212121 (Preto grafite - Fundo)
