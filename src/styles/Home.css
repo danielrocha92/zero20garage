@@ -88,8 +88,8 @@ body {
 /* Destaques grid com melhor flexibilidade */
 .highlights-grid {
   display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   justify-content: center;
   margin-top: 1rem;
 }

@@ -1,6 +1,5 @@
   import React from 'react';
   import '../styles/Home.css' // Importa o arquivo global de estilos
-  import GoogleReviews from '../components/GoogleReviews';
   import DynamicHeader from '../components/DynamicHeader';
   import WhatsAppButton from '../components/WhatsAppButton';
   import AnimatedPage from '../components/AnimatedPage';
@@ -38,46 +37,24 @@
 
               {/* Destaques */}
               <section className="section">
-                <div className='highlight-item' translate='no'>
-                  <h2>Por que Escolher a Zero 20 Garage?</h2>
-
-                  <div className="highlight-item">
-                    <h2>Pagamento</h2>
-                  <div className="highlights-grid">
-                    <div className="highlight-card">
-                      <p>Em até 12x (Consulte Condições)
-                      5% de Desconto no valor da Retífica Para Pagamento À Vista</p>
-                    </div>
+               <div className='highlight-item'>
+                <h2 className="title">Por que a Zero 20 Garage?</h2>
+                <div className="highlights-grid">
+                  <div className="highlight-card">
+                    <h3>Pagamento Facilitado</h3>
+                    <p>Até 12x ou 5% de desconto à vista.</p>
+                  </div>
+                  <div className="highlight-card">
+                    <h3>Entrega Ágil</h3>
+                    <p>Serviço nacional: 4 a 7 dias úteis.<br/>Importados: até 15 dias.</p>
+                  </div>
+                  <div className="highlight-card">
+                    <h3>Especialistas em Motores</h3>
+                    <p>Equipe qualificada e equipamentos modernos.</p>
                   </div>
                 </div>
-
-                <div className="highlight-item">
-                  <h2>Tempo de entrega</h2>
-                    <div className="highlights-grid">
-                      <p className='highlight-card'>Motor Nacional = 4 a 7 Dias Úteis</p>
-                      <p className='highlight-card'>Motor Importado = 10 a 15 Dias Úteis</p>
-                      <p className='highlight-card'>Motor Diesel = 10 a 15 Dias Úteis</p>
-                    </div>
                 </div>
-
-                {/* Serviços Destacados */}
-                <div className='highlight-item'>
-                  <h2>Manutenção Preventiva</h2>
-                  <div className="highlights-grid">
-                    <div className="highlight-card">
-                      <p>Evite problemas futuros com revisões regulares.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className='highlight-item'>
-                  <h2>Revisão Completa</h2>
-                  <div className="highlights-grid">
-                    <p className='highlight-card'>Diagnóstico avançado para garantir o melhor desempenho do seu veículo.</p>
-                  </div>
-                </div>
-              </div>
-            </section>
+              </section>
             {/* Conteúdo adicional */}
 
             {/* Depoimentos */}
@@ -85,7 +62,6 @@
                 <div className='highlight-item'>
                   <h2>O que Nossos Clientes Dizem</h2>
                   {/* Avaliações Google Maps */}
-                  <GoogleReviews />
                   <div className="highlights-grid">
                   <div className="testimonial-item">
                     <div className="highlight-card">
