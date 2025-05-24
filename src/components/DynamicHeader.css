@@ -1,4 +1,18 @@
-/* DynamicHeader.css */
+/* Reset global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vw;
+  overflow-x: hidden;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+/* DynamicHeader */
 .header {
   width: 100%;
   height: 100vh;
@@ -9,25 +23,25 @@
   align-items: center;
   text-align: center;
   padding: 2rem;
+
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-bottom: 2px solid #1d1d1d;
   overflow: hidden;
 
-  font-family: 'Ubuntu', sans-serif; /* Aplica a fonte Ubuntu */
+  font-family: 'Ubuntu', sans-serif; /* redundante, mas pode manter */
 }
 
 .header::before {
-   background:
-  linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)), /* Gradiente escurecedor */
+  background:
+  linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
   url('../assets/images/header.jpg') center/cover no-repeat;
-  filter: blur(0.5px); /* Desfoque */
+  filter: blur(0.5px);
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
 
@@ -36,40 +50,18 @@
 }
 
 .header h1 {
-  font-size: 5rem; /* Tamanho padrão do título */
+  font-size: 5rem;
   margin: 0;
   color: #f50203;
   animation: fadeIn 1s ease-in-out;
-  font-family: 'Nunito', sans-serif; /* Aplica a fonte Nunito */
+  font-family: 'Nunito', sans-serif;
 }
 
 .header p {
-  font-size: 2.5rem; /* Tamanho padrão do subtítulo */
+  font-size: 2.5rem;
   margin: 0.5rem 0 0;
   color: #f0f0f0;
   animation: fadeIn 1s ease-in-out;
-}
-
-.header img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0.7;
-}
-
-.fade {
-  transition: opacity 0.5s ease-in-out; /* Ajuste a duração da transição conforme necessário */
-}
-
-.fade-in {
-  opacity: 1;
-}
-
-.fade-out {
-  opacity: 0;
 }
 
 @keyframes fadeIn {
@@ -83,13 +75,26 @@
   }
 }
 
-/* Media Query para telas menores */
+/* Transição de fade opcional */
+.fade {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in {
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
   .header h1 {
-    font-size: 2.5rem; /* Tamanho do título em telas menores */
+    font-size: 2.5rem;
   }
 
   .header p {
-    font-size: 1.5rem; /* Tamanho do subtítulo em telas menores */
+    font-size: 1.5rem;
   }
 }
