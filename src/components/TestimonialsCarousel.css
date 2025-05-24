@@ -1,0 +1,190 @@
+.testimonial-carousel {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.testimonial-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.highlight-card {
+  background-color: #1c1c1e;
+  color: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+.user-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 2px solid #fff;
+}
+
+.service-photo-container {
+  margin: 1rem 0;
+}
+
+.service-photo {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.review-date {
+  display: block;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.stars {
+  color: #ffc107;
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.star {
+  margin: 0 2px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #fff;
+}
+
+.swiper-pagination-bullet {
+  background: #888;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: #fff;
+}
+
+.testimonial-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.testimonial-modal-content {
+  background: var(--cinza-medio);
+  padding: 1.5rem;
+  border-radius: 8px;
+  max-width: 400px;       /* menor largura para desktop */
+  width: 90%;
+  text-align: center;
+  position: relative;
+  max-height: 90vh;       /* limita a altura para caber na tela */
+  overflow-y: auto;       /* rolar conteúdo se passar da altura */
+}
+
+/* Para fotos no modal */
+.testimonial-modal .user-photo {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 1rem;
+}
+
+.testimonial-modal .service-photo {
+  max-height: 300px;
+  width: auto;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.testimonial-modal .service-photo {
+  width: 100%;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+
+.testimonial-modal .review-date,
+.testimonial-modal .stars,
+.testimonial-modal p {
+  margin-top: 0.5rem;
+}
+
+/* Setas customizadas do Swiper */
+.swiper-button-prev,
+.swiper-button-next {
+  color: white;           /* Cor das setas inicialmente */
+  background-color: transparent;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease;
+}
+
+/* Alterar cor e fundo ao passar o mouse */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: #e23838;  /* vermelho parecido com o usado no Sobre */
+  color: white;
+  box-shadow: 0 0 10px rgba(226, 56, 56, 0.7);
+}
+
+/* Ajuste do ícone */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Se quiser ajustar posição das setas */
+.swiper-button-prev {
+  left: 10px;
+}
+
+.swiper-button-next {
+  right: 10px;
+}
+
+
+/* Ajustes para telas pequenas */
+@media (max-width: 480px) {
+  .testimonial-modal-content {
+    max-width: 90vw;      /* quase toda a tela no celular */
+    padding: 1rem;
+  }
+
+  .testimonial-modal .user-photo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .testimonial-modal .service-photo {
+    max-height: 200px;
+  }
+
+     /* Botões */
+    .button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+}

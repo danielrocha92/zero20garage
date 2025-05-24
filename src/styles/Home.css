@@ -99,6 +99,46 @@ body {
   max-width: 100%;
 }
 
+/* Linha do Tempo do Processo de Retífica */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.timeline-step {
+  background: #1a1a1a;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.timeline-step:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+.icon-animated {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1rem;
+}
+
+/* Responsividade */
+@media (min-width: 768px) {
+  .timeline {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .timeline-step {
+    flex: 1;
+  }
+}
+
+
 /* Endereço de contato */
 .address {
   font-size: 1.2rem;
@@ -123,7 +163,7 @@ body {
 }
 
 /* Depoimentos */
-.testimonial-item {
+.testimonial-item,
 .highlight-item {
   background: #222;
   padding: 1.5rem;
@@ -138,17 +178,14 @@ body {
   width: 100%;
 }
 
-}
 
 .section,
 .highlight-item,
-.testimonial-item,
 .address {
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
 }
-
 
 .testimonial-header {
   display: flex;
@@ -156,13 +193,16 @@ body {
   margin-bottom: 1rem;
 }
 
-.user-photo {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 1rem;
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #fff;
 }
+
+.swiper-pagination-bullet {
+  background: #fff;
+}
+
 
 .user-info {
   display: flex;

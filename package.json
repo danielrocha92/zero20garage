@@ -40,6 +40,7 @@
     "react-transition-group": "^4.4.5",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.15",
+    "swiper": "^11.2.8",
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5"
   },
