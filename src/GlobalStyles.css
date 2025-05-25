@@ -202,9 +202,9 @@ li {
 /* Layout Container */
 /* ================= */
 .container-black {
-  max-width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0;
+  padding: 2rem 1rem;
   /* Adicionando espaçamento interno */
   flex-direction: column;
   align-items: center;

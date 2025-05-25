@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import '../../styles/Home.css';
+import '../../styles/Home.css'; // Importa o arquivo global de estilos
 import DynamicHeader from '../../components/DynamicHeader';
 import WhatsAppButton from '../../components/WhatsAppButton';
 import AnimatedPage from '../../components/AnimatedPage';
@@ -28,20 +28,19 @@ function Home() {
       <WhatsAppButton />
       <AnimatedPage />
 
+      {/* Card padrão Section */}
       <div className="container-black">
-
-        {/* Seção principal */}
         <section className="section">
-          <div className="highlight-item">
-            <h2>Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
+          <div className='highlight-item'>
+            <h2 className="title">Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
             <h3>Atendimento especializado para veículos nacionais e importados.</h3>
-            <Link to="/orcamento" className="cnt-button">Solicite um Orçamento</Link>
+            <a href="/orcamento" className="button">Solicite um Orçamento</a>
           </div>
         </section>
 
         {/* Destaques */}
         <section className="section">
-          <div className="highlight-item">
+          <div className='highlight-item'>
             <h2 className="title">Por que a Zero 20 Garage?</h2>
             <div className="highlights-grid">
               <div className="highlight-card">
@@ -60,7 +59,7 @@ function Home() {
           </div>
         </section>
 
-        {/* Linha do Tempo */}
+        {/* Linha do Tempo do Processo de Retífica */}
         <section className="section">
           <div className="highlight-item">
             <h2 className="title">Como Funciona o Processo de Retífica</h2>
@@ -76,6 +75,7 @@ function Home() {
                   Diagnóstico e Avaliação Técnica
                 </p>
               </div>
+
               <div className="timeline-step">
                 <div className="icon-animated">
                   <FaCogs size={60} color="#e63946" />
@@ -87,6 +87,7 @@ function Home() {
                   Desmontagem do Motor
                 </p>
               </div>
+
               <div className="timeline-step">
                 <div className="icon-animated">
                   <FaWrench size={60} color="#e63946" />
@@ -98,6 +99,7 @@ function Home() {
                   Usinagem e Correção
                 </p>
               </div>
+
               <div className="timeline-step">
                 <div className="icon-animated">
                   <FaCheckCircle size={60} color="#ff0015" />
@@ -112,41 +114,26 @@ function Home() {
             </div>
           </div>
         </section>
+        {/* Serviços */}
 
         {/* Depoimentos */}
         <section className="section">
-          <div className="highlight-item">
-            <h2 className="title">O que Nossos Clientes Dizem</h2>
-            <TestimonialsCarousel />
+          <div className='highlight-item'>
+            <h2>O que Nossos Clientes Dizem</h2>
+              <TestimonialsCarousel />
           </div>
         </section>
 
         {/* Endereço */}
-        <section className="section">
-          <div className="highlight-item">
-            <h2 className="title">Entre em Contato</h2>
-            <address className="address">
-              <strong>ZERO 20 GARAGE™</strong><br />
-              <a
-                href='https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.326345,-46.5770842,17z/data=!3m1!4b1!4m6!3m5!1s0x94ceede375ca12c9:0xa22173d27f744745!8m2!3d-23.3263499!4d-46.5745093!16s%2Fg%2F11sgrc1ckt?authuser=0&entry=ttu'
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Avenida Laura Gomes Hannickel, 153 - Capoavinha, Mairiporã - SP
-              </a><br />
-              <a href="tel:+5511941097471">(11) 94109-7471</a><br />
-              <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a><br />
-              <a
-                href="https://www.instagram.com/zero20garage/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Instagram
-              </a>
-            </address>
-          </div>
-        </section>
-
+        <div className="highlight-item">
+          <address className="address">
+            <strong>ZER0 20 GARAGE™</strong><br />
+            <a href='https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.326345,-46.5770842,17z/data=!3m1!4b1!4m6!3m5!1s0x94ceede375ca12c9:0xa22173d27f744745!8m2!3d-23.3263499!4d-46.5745093!16s%2Fg%2F11sgrc1ckt?authuser=0&entry=ttu' target="_blank" rel="noopener noreferrer">Avenida Laura Gomes Hannickel, 153 - Capoavinha, Mairiporã - SP</a><br />
+            <a href="tel:+5511941097471">(11) 94109-7471</a><br />
+            <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a><br />
+            <a href="https://www.instagram.com/zero20garage/" target="_blank" rel="noopener noreferrer">Instagram</a><br />
+          </address>
+        </div>
       </div>
     </div>
   );
