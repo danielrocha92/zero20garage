@@ -1,9 +1,6 @@
-/* Estilos do Sobre */
+/* Sobre.css */
 
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
-
-.container {
+.container-black {
   max-width: 1500px;
   margin: 0 auto;
   padding: 2rem;
@@ -12,28 +9,30 @@
   border-radius: 8px;
 }
 
-.sobre-section h2 {
+.sobre-section h2, .sobre-section h1 {
   font-size: 2rem;
   color: #ffffff;
   margin-bottom: 1rem;
 }
 
-.sobre-section p {
+.sobre-section p,
+.sobre-paragraph {
   font-size: 1.1rem;
   color: #ffffff;
+  line-height: 1.6;
 }
 
 .nossa-historia .sobre-paragraph {
   font-size: 1.5rem; /* aproximadamente 24px */
-  line-height: 1.8;
   font-weight: 400;
-  color: #f1f1f1; /* tom claro para fundo escuro */
   margin-bottom: 1rem;
+  color: #f1f1f1; /* tom claro para fundo escuro */
 }
 
 /* ===== Carrossel da Equipe ===== */
 .team-image-container {
-  display: flex;
+  display: flex !important;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
@@ -45,27 +44,9 @@
   color: #ffffff;
   text-align: center;
 }
-.team-caption h3 {
-  font-size: 1.2rem;
-  color: #ffffff;
-}
-.team-caption p {
-  font-size: 1rem;
-  color: #ffffff;
-}
-.team-caption a {
-  font-size: 1rem;
-  color: #ffffff;
-  text-decoration: none;
-}
-.team-caption a:hover {
-  color: #c50404;
-  text-decoration: underline;
-}
-.team-caption h3,
-.team-caption p,
+
 .team-image {
-  width: 15rem; /* Experimente com um valor fixo maior */
+  width: 15rem;
   height: auto;
   object-fit: cover;
   border-radius: 8px;
@@ -98,6 +79,10 @@
 .slick-next {
   z-index: 10;
   color: #fff;
+  background: transparent;
+  border-radius: 50%;
+  padding: 0.3rem 0.5rem;
+  transition: background-color 0.3s ease;
 }
 
 .slick-prev:hover,
@@ -106,70 +91,61 @@
   border-radius: 50%;
 }
 
-.contact {
-  list-style: none;
-  padding: 0;
-  margin-top: 2rem;
-}
-
-.contact li {
-  display: flex;
-  align-items: center;
+/* Depoimentos */
+.highlight-card {
+  background-color: #424242;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   margin-bottom: 1rem;
-  padding: 0.8rem;
-  border-radius: 6px;
-  transition: background-color 0.3s ease;
 }
 
-.contact li:hover {
-  background-color: #e23838;
+.review-date {
+  font-size: 0.9rem;
+  color: #ddd;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: block;
 }
 
-.contact i {
-  font-size: 1.5rem;
-  margin-right: 1rem;
-  color: #ffffff;
+.stars {
+  color: #e23838;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
 }
 
-.contact span,
-.contact a {
-  font-size: 1.1rem;
-  color: #ffffff;
-  text-decoration: none;
+.star {
+  margin-right: 0.1rem;
 }
 
-.contact a:hover {
-  color: #c50404;
-  text-decoration: underline;
+.section-list {
+  padding-left: 1.4rem;
+  margin-top: 0.5rem;
+  color: #eee;
 }
 
-.formulario-section h2 {
-  font-size: 2rem;
-  color: #ffffff;
-  margin-bottom: 1.5rem;
-  text-align: center;
+.highlight-item h3 {
+  color: #fff;
+  margin-bottom: 0.8rem;
 }
 
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .container {
-    padding: 1rem;
-  }
-
-  .sobre-section h2 {
-    font-size: 1.75rem;
-  }
-
-  .sobre-section p {
-    font-size: 1rem;
-  }
-
-  .team-image {
-    max-width: 100%;
-  }
-
-  .nossa-historia .sobre-paragraph {
-    font-size: 1rem; /* ~16px */
-  }
+.highlight-item p {
+  margin-bottom: 1rem;
 }
+
+/* Grid */
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  gap: 1.8rem;
+}
+
+/* Ajustes gerais */
+.page-black {
+  background-color: #000000;
+  min-height: 100vh;
+  padding-top: 5rem;
+  padding-bottom: 3rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+

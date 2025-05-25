@@ -1,5 +1,4 @@
 /* === Variáveis (Opcional, mas Recomendado) === */
-/* Adicione estas ao seu arquivo CSS principal ou a um arquivo de variáveis dedicado */
 :root {
   --cinza-claro: #ccc; /* Cor de exemplo, substitua pela sua cor real */
   --vermelho-principal: #f00; /* Cor de exemplo, substitua pela sua cor real */
@@ -10,20 +9,17 @@
 /* === Navbar Base === */
 .navbar {
   display: flex;
-  /* No padrão, centraliza o conteúdo */
   justify-content: center;
   align-items: center;
-  /* Ajuste o padding para controlar a altura da navbar quando não estiver rolada */
-  padding: 0.5rem 0.5rem; /* Padding ligeiramente aumentado para espaço visual */
+  padding: 0.1rem 0.9rem;
   background-color: rgba(0, 0, 0, 0.904);
   color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligeiramente ajustada */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 1000;
-  /* Transição suave para propriedades que mudam quando a página é rolada */
   transition: background-color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -33,40 +29,35 @@
 
 /* Estilos quando a página é rolada */
 .navbar.scrolled-down {
-  /* Quando a página é rolada, alinha os itens ao início e ajusta o padding */
   justify-content: flex-start;
-  padding: 0.3rem 2rem; /* Padding menor quando rolada */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra mais proeminente quando rolada */
+  padding: 0.3rem 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* === Logo === */
 .navbar-logo {
   display: flex;
   align-items: center;
-  /* Transição para a margem direita quando a página é rolada */
   transition: margin-right 0.3s ease;
-  /* Use margin-left auto para empurrar o logo para a esquerda quando não rolado e os links estão centralizados */
-  margin-right: auto; /* Empurra o logo para a esquerda por padrão */
+  margin-right: auto;
 }
 
 .navbar.scrolled-down .navbar-logo {
-  /* Quando a página é rolada, remove a margem automática e adiciona uma margem fixa */
   margin-right: 1rem;
-  margin-left: 0; /* Redefine a margem esquerda quando rolada */
+  margin-left: 0;
 }
 
 .navbar-logo img {
-  width: 7rem; /* Tamanho padrão */
+  width: 7rem;
   height: auto;
   display: block;
-  /* Transições suaves para largura e transformação */
   transition: width 0.3s ease, transform 0.3s ease;
-  opacity: 1; /* Garante que a opacidade seja 1 por padrão */
+  opacity: 1;
   filter: brightness(1);
 }
 
 .navbar.scrolled-down .navbar-logo img {
-  width: 5rem; /* Tamanho menor quando rolada */
+  width: 5rem;
 }
 
 .navbar-logo img:hover {
@@ -75,12 +66,10 @@
 
 /* === Links da Navbar (Desktop) === */
 .navbar-links {
-  display: flex; /* Display flex para os links do desktop */
+  display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
-  outline: none; /* Remove outline padrão */
-  /* Não é mais necessário margin-left auto aqui porque o logo tem margin-right auto */
 }
 
 .navbar-links li {
@@ -88,23 +77,24 @@
 }
 
 .navbar-links a {
-  color: var(--cinza-claro); /* Use a variável CSS */
+  color: var(--cinza-claro);
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.3s ease;
-  padding: 0.5rem 0; /* Adicione padding para a área de hover */
-  position: relative; /* Necessário para um possível efeito ::after no hover */
-  outline: none; /* Remove contorno padrão */
+  padding: 0.5rem 0;
+  position: relative;
+  outline: none; /* REMOVE outline */
 }
 
 .navbar-links a:hover {
-  color: var(--vermelho-principal); /* Use a variável CSS */
+  color: var(--vermelho-principal);
 }
 
-/* Remove outline padrão e adiciona foco visível */
+/* Remove a linha sublinhada no foco, adiciona box-shadow para foco acessível */
 .navbar-links a:focus {
   outline: none;
-  text-decoration: underline;
+  box-shadow: 0 0 6px 2px var(--vermelho-principal);
+  border-radius: 4px;
 }
 
 /* Opcional: Efeito de sublinhado no hover */
@@ -123,34 +113,38 @@
   width: 100%;
 }
 
+/* === Classe Glow (Ativo) === */
+.glow {
+  color: var(--vermelho-principal);
+  text-shadow: 0 0 8px var(--vermelho-principal), 0 0 16px var(--vermelho-principal);
+  font-weight: bold;
+}
+
 /* === Container do Menu (para a sobreposição no mobile) === */
 .menu {
-  /* Estado padrão: escondido no desktop, visível no mobile */
-  /* No desktop, é apenas um container para os links */
   display: flex;
   align-items: center;
 }
 
 /* === Botão Hambúrguer === */
 .hamburger {
-  display: none; /* Escondido no desktop */
+  display: none;
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 1001; /* Garante que o hambúrguer esteja acima da sobreposição do menu */
-  width: 30px; /* Largura da área do botão hambúrguer */
-  height: 24px; /* Altura da área do botão hambúrguer */
-  position: relative; /* Posição relativa para os spans filhos */
-  padding: 0; /* Remove o padding padrão */
-  margin-left: 1rem; /* Adiciona um pouco de espaço entre o logo e o hambúrguer */
-  /* Adicione transição para o próprio botão, se necessário, por exemplo, cor ou escala */
-  outline: none; /* Remove contorno padrão */
+  z-index: 1001;
+  width: 30px;
+  height: 24px;
+  position: relative;
+  padding: 0;
+  margin-left: 1rem;
+  outline: none; /* REMOVE outline */
 }
 
-/* Foco acessível no botão hamburger */
+/* Foco acessível no botão hamburger sem outline */
 .hamburger:focus {
   outline: none;
-  box-shadow: 0 0 0 3px var(--vermelho-principal);
+  box-shadow: 0 0 6px 3px var(--vermelho-principal);
   border-radius: 4px;
 }
 
@@ -158,11 +152,11 @@
 .hamburger span {
   display: block;
   width: 100%;
-  height: 3px; /* Espessura das linhas */
-  background-color: #fff; /* Cor das linhas */
+  height: 3px;
+  background-color: #fff;
   position: absolute;
   left: 0;
-  transition: all 0.3s ease; /* Transição suave para as transformações das linhas */
+  transition: all 0.3s ease;
   opacity: 1;
 }
 
@@ -171,30 +165,28 @@
 .hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
 .hamburger span:nth-child(3) { bottom: 0; }
 
-/* Estado quando o menu está aberto (classe hamburger--open ativa) */
+/* Estado quando o menu está aberto */
 .hamburger--open span:nth-child(1) {
   top: 50%;
-  transform: translateY(-50%) rotate(45deg); /* Rotaciona para formar parte do X */
+  transform: translateY(-50%) rotate(45deg);
 }
 
 .hamburger--open span:nth-child(2) {
-  opacity: 0; /* Esconde a linha do meio */
+  opacity: 0;
 }
 
 .hamburger--open span:nth-child(3) {
   bottom: 50%;
-  transform: translateY(50%) rotate(-45deg); /* Rotaciona para formar parte do X */
+  transform: translateY(50%) rotate(-45deg);
 }
 
 /* === Media Query para Mobile === */
 @media (max-width: 768px) {
-  /* Mostra o hambúrguer no mobile */
   .hamburger {
     display: block;
-    margin-left: auto; /* Empurra o hamburger para a direita */
+    margin-left: auto;
   }
 
-  /* Esconde os links do desktop e posiciona o container do menu */
   .navbar-links {
     display: flex;
     flex-direction: column;
@@ -208,14 +200,12 @@
     margin: 0;
   }
 
-  /* Quando o menu está aberto, torna os links visíveis e com transform normal */
   .menu.open .navbar-links {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
   }
 
-  /* Links dentro do menu mobile aberto */
   .menu.open .navbar-links li {
     margin: 0.75rem 1rem;
     width: fit-content;
@@ -224,27 +214,14 @@
     transition: opacity 0.4s ease, transform 0.4s ease;
   }
 
-  /* Efeito de fade-in escalonado - cada link com delay diferente */
-  .menu.open .navbar-links li:nth-child(1) {
-    transition-delay: 0.1s;
-  }
-  .menu.open .navbar-links li:nth-child(2) {
-    transition-delay: 0.15s;
-  }
-  .menu.open .navbar-links li:nth-child(3) {
-    transition-delay: 0.2s;
-  }
-  .menu.open .navbar-links li:nth-child(4) {
-    transition-delay: 0.25s;
-  }
-  .menu.open .navbar-links li:nth-child(5) {
-    transition-delay: 0.3s;
-  }
-  .menu.open .navbar-links li:nth-child(6) {
-    transition-delay: 0.35s;
-  }
+  /* Fade-in escalonado */
+  .menu.open .navbar-links li:nth-child(1) { transition-delay: 0.1s; }
+  .menu.open .navbar-links li:nth-child(2) { transition-delay: 0.15s; }
+  .menu.open .navbar-links li:nth-child(3) { transition-delay: 0.2s; }
+  .menu.open .navbar-links li:nth-child(4) { transition-delay: 0.25s; }
+  .menu.open .navbar-links li:nth-child(5) { transition-delay: 0.3s; }
+  .menu.open .navbar-links li:nth-child(6) { transition-delay: 0.35s; }
 
-  /* Container menu aberto */
   .menu.open {
     display: flex;
     flex-direction: column;
@@ -263,5 +240,12 @@
 
   .navbar-links a {
     font-size: 1.6rem;
+    outline: none; /* REMOVE outline */
+  }
+
+  .navbar-links a:focus {
+    outline: none;
+    box-shadow: 0 0 6px 3px var(--vermelho-principal);
+    border-radius: 4px;
   }
 }

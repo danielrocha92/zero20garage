@@ -4,10 +4,11 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 import { AnimatePresence } from 'framer-motion';
 import 'font-awesome/css/font-awesome.min.css';
 
-import ScrollToTop from './components/ScrollToTop';
 import Layout from './components/Layout';
-import ToTop from './components/ToTop';
 import PageTransition from './components/PageTransition';
+import ScrollToTopButton from './components/ScrollToTopButton';
+import ScrollToTop from './components/ScrollToTop';
+
 
 import Home from './pages/home/Home';
 import Sobre from './pages/sobre/Sobre';
@@ -85,10 +86,11 @@ const AnimatedRoutes = () => {
 function App() {
   return (
     <Router>
-      <ScrollToTop />
+
       <Layout>
         <AnimatedRoutes />
-        <ToTop />
+        <ScrollToTop />
+        <ScrollToTopButton />
       </Layout>
     </Router>
   );

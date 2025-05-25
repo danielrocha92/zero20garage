@@ -63,7 +63,6 @@
   .option:focus {
     border-color: (--vermelho-hover);
     color: var(--vermelho-hover);
-    outline: none;
   }
 
   .contact-list a:hover {
@@ -108,9 +107,7 @@
 
   .form-group input,
   .form-group textarea,
-  .form-group servico,
-  .submit-button,
-  .button {
+  .form-group servico {
     padding: 0.8rem;
     border: 1px solid #ffffff;
     border-radius: 8px;
@@ -122,7 +119,6 @@
   .form-group input:focus,
   .form-group textarea:focus {
     border-color: #c50404;
-    outline: none;
   }
 
   /* Google Maps Section */

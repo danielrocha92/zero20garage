@@ -82,7 +82,6 @@ body {
 .button:hover,
 .button:focus {
   background-color: #e6c200;
-  outline: none;
 }
 
 /* Destaques grid com melhor flexibilidade */
@@ -159,7 +158,6 @@ body {
 .address a:hover,
 .address a:focus {
   color: #ffccbc;
-  outline: none;
 }
 
 /* Depoimentos */

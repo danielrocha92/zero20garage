@@ -5,10 +5,10 @@ function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0); // Rola para o topo da página
-  }, [pathname]); // Executa sempre que o caminho da URL mudar
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [pathname]);
 
-  return null; // Este componente não renderiza nada
+  return null;
 }
 
 export default ScrollToTop;
