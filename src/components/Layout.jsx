@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import PageTransition from './PageTransition';
+import WhatsAppButton from './WhatsAppButton';
 import './Layout.css';
 
 const Layout = ({ children }) => {
@@ -26,6 +27,7 @@ const Layout = ({ children }) => {
         {loading ? <PageTransition /> : children}
       </main>
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };

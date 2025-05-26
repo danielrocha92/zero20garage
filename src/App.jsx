@@ -86,7 +86,6 @@ const AnimatedRoutes = () => {
 function App() {
   return (
     <Router>
-
       <Layout>
         <AnimatedRoutes />
         <ScrollToTop />

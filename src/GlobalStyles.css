@@ -24,18 +24,23 @@ body {
   color: var(--cinza-escuro);
 }
 
-.container-escuro {
-  background-color: var(--cinza-escuro);
+.container-black {
   color: var(--cinza-claro);
+
+  opacity: 0.95;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .page-claro {
   background-color: var(--cinza-claro);
 }
 
-.page-escuro {
-  background-color: var(--cinza-escuro);
+.page-black {
   color: var(--cinza-claro);
+  opacity: 0.95;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 /* ===== Cabeçalhos ===== */

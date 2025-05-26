@@ -16,14 +16,6 @@ body {
   color: var(--cinza-escuro);
 }
 
-/* Container fluído e responsivo */
-.container-black {
-  max-width: 90vw;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
 @media (min-width: 1200px) {
   .container-black {
     max-width: 1100px;

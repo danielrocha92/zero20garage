@@ -10,6 +10,8 @@ import teamImage2 from '../../assets/images/team2.jpg';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import { FaBullseye, FaEye, FaStar } from 'react-icons/fa';
+
 import AnimatedPage from '../../components/AnimatedPage';
 
 const settings = {
@@ -86,6 +88,7 @@ function Sobre() {
           <div className="highlight-item equipe-container">
             <h2>Nossa Equipe</h2>
             <div className="equipe-grid">
+              {/* Slider com fotos da equipe */}
               <div className="equipe-slider">
                 <Slider {...settings}>
                   <div className="team-image-container">
@@ -107,16 +110,23 @@ function Sobre() {
                 </Slider>
               </div>
 
+              {/* Blocos de texto estilo cartões */}
               <div className="equipe-textos">
-                <p className="sobre-paragraph">
-                  Contamos com uma equipe de profissionais altamente especializados e apaixonados por motores.
-                </p>
-                <p className="sobre-paragraph">
-                  Nossa equipe possui anos de experiência no mercado automotivo.
-                </p>
-                <p className="sobre-paragraph">
-                  Mais que profissionais, somos apaixonados pelo que fazemos.
-                </p>
+                <div className="highlight-card">
+                  <h3 className="subtitle">Profissionais Especializados</h3>
+                  <p className="sobre-paragraph">
+                    Contamos com uma equipe de profissionais altamente especializados e apaixonados por motores.
+                    Nossos técnicos são certificados e possuem vasta experiência em retífica e mecânica automotiva.
+                  </p>
+                </div>
+
+                <div className="highlight-card" style={{ marginTop: '1.5rem' }}>
+                  <h3 className="subtitle">Experiência Comprovada</h3>
+                  <p className="sobre-paragraph">
+                    Nossa equipe possui anos de experiência no mercado automotivo, garantindo serviços de alta qualidade
+                    para todos os tipos de veículos.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -124,32 +134,58 @@ function Sobre() {
 
 
 
-        <section className="section">
-          <div className="highlight-item">
-            <div className="highlights-grid">
-              <div className="highlight-item">
-                <h3 className="subtitle">Nossa Missão</h3>
-                <p className='sobre-paragraph'>
-                  Oferecer serviços de retífica e mecânica automotiva com qualidade, confiança e excelência, superando as expectativas de nossos clientes.
-                </p>
-              </div>
-              <div className="highlight-item">
-                <h3 className="subtitle">Nossa Visão</h3>
-                <p className='sobre-paragraph'>
-                  Ser referência no mercado de retífica e mecânica automotiva, reconhecida pela qualidade dos serviços, inovação e compromisso com a satisfação dos clientes.
-                </p>
-              </div>
-              <div className="highlight-item">
-                <h3 className="subtitle">Nossos Valores</h3>
-                <ul className="section-list">
-                  <li className='sobre-paragraph'>Qualidade: Compromisso com a excelência em cada serviço.</li>
-                  <li className='sobre-paragraph'>Confiança: Relações transparentes e honestas com nossos clientes.</li>
-                  <li className='sobre-paragraph'>Compromisso: Dedicação em atender e superar as expectativas dos clientes.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
+
+<section className="section">
+  <div className="highlight-item">
+    <h2>Nossos Princípios</h2>
+    <div className="principios-grid">
+
+      {/* Missão */}
+      <div className="principio-item">
+        <FaBullseye className="principio-icon" />
+        <div>
+          <h3 className="subtitle">Nossa Missão</h3>
+          <p className="sobre-paragraph">
+            Oferecer serviços de retífica e mecânica automotiva com qualidade, confiança e excelência,
+            superando as expectativas de nossos clientes.
+          </p>
+        </div>
+      </div>
+
+      {/* Visão */}
+      <div className="principio-item">
+        <FaEye className="principio-icon" />
+        <div>
+          <h3 className="subtitle">Nossa Visão</h3>
+          <p className="sobre-paragraph">
+            Ser referência no mercado de retífica e mecânica automotiva, reconhecida pela qualidade dos
+            serviços, inovação e compromisso com a satisfação dos clientes.
+          </p>
+        </div>
+      </div>
+
+      {/* Valores */}
+      <div className="principio-item">
+        <FaStar className="principio-icon" />
+        <div>
+          <h3 className="subtitle">Nossos Valores</h3>
+          <ul className="section-list">
+            <li className="sobre-paragraph">
+              <strong>Qualidade:</strong> Compromisso com a excelência em cada serviço.
+            </li>
+            <li className="sobre-paragraph">
+              <strong>Confiança:</strong> Relações transparentes e honestas com nossos clientes.
+            </li>
+            <li className="sobre-paragraph">
+              <strong>Compromisso:</strong> Dedicação em atender e superar as expectativas dos clientes.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 
         <section className="sobre-section">

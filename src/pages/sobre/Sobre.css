@@ -55,7 +55,6 @@
 }
 
 .page-black {
-  background-color: #121212;
   color: #e0e0e0;
   font-family: 'Roboto', sans-serif;
   min-height: 100vh;
@@ -166,12 +165,40 @@
   color: var(--vermelho-principal);
 }
 
+.principios-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.25); /* fundo escuro translúcido */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.principio-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  color: var(--cinza-claro);
+}
+
+.principio-icon {
+  font-size: 2rem;
+  color: var(--vermelho-principal);
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+
+
 .testimonial-item {
   margin-bottom: 24px;
 }
 
 .highlight-card {
-  background-color: #222;
+  background-color: #790709;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
