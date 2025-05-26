@@ -7,20 +7,34 @@ import ContatoCta from '../../components/ContatoCta';
 import Slider from 'react-slick';
 import teamImage from '../../assets/images/team.jpg';
 import teamImage2 from '../../assets/images/team2.jpg';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import AnimatedPage from '../../components/AnimatedPage';
 
 const settings = {
-  dots: true,
-  infinite: true,
-  speed: 600,
-  fade: true,
-  cssEase: 'ease-in-out',
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  autoplay: true,
-  autoplaySpeed: 4000,
+  dots: true,                // bolinhas de navegação
+  infinite: true,            // loop infinito
+  speed: 500,                // velocidade da transição
+  slidesToShow: 1,           // mostrar 1 slide por vez
+  slidesToScroll: 1,         // rolar 1 slide por vez
+  autoplay: true,            // ativar autoplay
+  autoplaySpeed: 3000,       // tempo entre slides (ms)
+  arrows: true,              // setas de navegação
+  pauseOnHover: true,        // pausa autoplay ao passar o mouse
+  responsive: [
+    {
+      breakpoint: 768,       // até 768px
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,       // remover setas no mobile
+        dots: true
+      }
+    }
+  ]
 };
+
 
 function Sobre() {
   const messages = [
@@ -40,25 +54,75 @@ function Sobre() {
 
   return (
     <div className="page-black">
+
+
       <DynamicHeader messages={messages} />
       <WhatsAppButton />
       <AnimatedPage />
+
+
       <div className="container-black">
         <section className="sobre-section">
           <div className="highlight-item nossa-historia">
             <h1>Nossa História</h1>
-            <div className="highlights-grid">
-              <div className="highlight-item">
-                <p className='sobre-paragraph' translate='no'>
-                  A Zero 20 Garage nasceu da paixão por motores e do desejo de oferecer serviços de retífica e mecânica automotiva de alta qualidade. Fundada em 2020, nossa oficina se destaca pela excelência no atendimento e pela precisão em cada serviço realizado.
+            <div className="historia-grid">
+              <div className="historia-text">
+                <p className='sobre-paragraph'>
+                  A Zero20 Garage nasceu da paixão por motores e do desejo de oferecer serviços de retífica e mecânica automotiva de alta qualidade. Fundada em 2020, nossa oficina se destaca pela excelência no atendimento e pela precisão em cada serviço realizado.
                 </p>
                 <p className='sobre-paragraph'>
                   Desde o início, investimos em equipamentos de última geração e na capacitação de nossa equipe, garantindo que cada motor receba o cuidado e a atenção que merece.
                 </p>
               </div>
+              <div className="historia-image">
+                <img src={teamImage} alt="Equipe Zero20 Garage" />
+              </div>
             </div>
           </div>
         </section>
+
+
+        <section className="sobre-section">
+          <div className="highlight-item equipe-container">
+            <h2>Nossa Equipe</h2>
+            <div className="equipe-grid">
+              <div className="equipe-slider">
+                <Slider {...settings}>
+                  <div className="team-image-container">
+                    <img src={teamImage} alt="Carlos, chefe de oficina" className="team-image" />
+                    <p className="team-caption">Carlos – Chefe de Oficina</p>
+                  </div>
+                  <div className="team-image-container">
+                    <img src={teamImage2} alt="Fernanda, especialista em retífica" className="team-image" />
+                    <p className="team-caption">Fernanda – Especialista em Retífica</p>
+                  </div>
+                  <div className="team-image-container">
+                    <img src={teamImage} alt="Bruno, mecânico sênior" className="team-image" />
+                    <p className="team-caption">Bruno – Mecânico Sênior</p>
+                  </div>
+                  <div className="team-image-container">
+                    <img src={teamImage2} alt="Patrícia, atendimento ao cliente" className="team-image" />
+                    <p className="team-caption">Patrícia – Atendimento ao Cliente</p>
+                  </div>
+                </Slider>
+              </div>
+
+              <div className="equipe-textos">
+                <p className="sobre-paragraph">
+                  Contamos com uma equipe de profissionais altamente especializados e apaixonados por motores.
+                </p>
+                <p className="sobre-paragraph">
+                  Nossa equipe possui anos de experiência no mercado automotivo.
+                </p>
+                <p className="sobre-paragraph">
+                  Mais que profissionais, somos apaixonados pelo que fazemos.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
 
         <section className="section">
           <div className="highlight-item">
@@ -76,8 +140,7 @@ function Sobre() {
                 </p>
               </div>
               <div className="highlight-item">
-                <h3>Nossos Valores</h3>
-                {/* Alterei para lista correta */}
+                <h3 className="subtitle">Nossos Valores</h3>
                 <ul className="section-list">
                   <li className='sobre-paragraph'>Qualidade: Compromisso com a excelência em cada serviço.</li>
                   <li className='sobre-paragraph'>Confiança: Relações transparentes e honestas com nossos clientes.</li>
@@ -88,41 +151,6 @@ function Sobre() {
           </div>
         </section>
 
-        <section className="sobre-section">
-          <div className="highlight-item">
-            <h2>Nossa Equipe</h2>
-            <div className="highlights-grid">
-              <div className="highlight-item">
-                <p className='sobre-paragraph'>
-                  Contamos com uma equipe de profissionais altamente qualificados e apaixonados por motores. Nossos técnicos são certificados e possuem vasta experiência em retífica e mecânica automotiva.
-                </p>
-              </div>
-              <div className="highlight-item">
-                <p className='sobre-paragraph'>
-                  Estamos sempre atualizados com as últimas tendências e tecnologias do mercado, garantindo que nossos clientes recebam o melhor serviço possível.
-                </p>
-              </div>
-            </div>
-            <Slider {...settings}>
-              <div className="team-image-container">
-                <img src={teamImage} alt="Carlos, chefe de oficina" className="team-image" />
-                <p className="team-caption">Carlos – Chefe de Oficina</p>
-              </div>
-              <div className="team-image-container">
-                <img src={teamImage2} alt="Fernanda, especialista em retífica" className="team-image" />
-                <p className="team-caption">Fernanda – Especialista em Retífica</p>
-              </div>
-              <div className="team-image-container">
-                <img src={teamImage} alt="Bruno, mecânico sênior" className="team-image" />
-                <p className="team-caption">Bruno – Mecânico Sênior</p>
-              </div>
-              <div className="team-image-container">
-                <img src={teamImage2} alt="Patrícia, atendimento ao cliente" className="team-image" />
-                <p className="team-caption">Patrícia – Atendimento ao Cliente</p>
-              </div>
-            </Slider>
-          </div>
-        </section>
 
         <section className="sobre-section">
           <div className="highlight-item">
@@ -177,6 +205,15 @@ function Sobre() {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section className="sobre-section">
+          <div className="highlight-item">
+            <h2>Visite a Zero20 Garage</h2>
+            <p className='sobre-paragraph'>
+              Venha nos visitar e conheça nossos serviços de perto! Será um prazer receber você em nossa oficina e apresentar toda a estrutura e equipe que fazem da Zero20 Garage uma referência em qualidade e confiança.
+            </p>
           </div>
         </section>
 
