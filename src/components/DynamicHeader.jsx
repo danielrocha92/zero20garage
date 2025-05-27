@@ -44,7 +44,7 @@ function DynamicHeader({ messages, intervalTime = 4500, page = '' }) {
     <header
       className={`header ${page}`}
       style={{
-        background: `linear-gradient(rgba(0,0,0,0.89), rgba(0,0,0,0.753)), url(${backgroundImage}) center/cover no-repeat`,
+        background: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url(${backgroundImage}) center/cover no-repeat`
       }}
     >
       <h1 className={`fade ${fade ? 'fade-in' : 'fade-out'}`}>{headerContent.title}</h1>

@@ -17,136 +17,17 @@
   text-align: center;
   padding: 2rem;
 
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8);
   border-bottom: 2px solid #1d1d1d;
   overflow: hidden;
 
-  font-family: 'Ubuntu', sans-serif; /* redundante, mas pode manter */
+  font-family: 'Ubuntu', sans-serif;
 }
 
-/* Imagem Padrão */
-.header::before {
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
-    url('../assets/images/header.jpg') center/cover no-repeat;
-    filter: blur(0.5px);
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 70vh;
-    z-index: 1;
-}
-
-/* home */
-.header.home::before {
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
-    url('../assets/images/home.jpg') center/cover no-repeat;
-    filter: blur(0.5px);
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 70vh;
-    z-index: 1;
-}
-
-/* Sobre */
-.header.sobre::before {
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
-    url('../assets/images/sobre.jpg') center/cover no-repeat;
-    filter: blur(0.5px);
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 70vh;
-    z-index: 1;
-}
-
-/* Serviços */
-.header.servicos::before {
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
-    url('../assets/images/servicos.jpg') center/cover no-repeat;
-    filter: blur(0.5px);
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 70vh;
-    z-index: 1;
-}
-
-/* Orçamento */
-.header.orcamento::before {
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
-    url('../assets/images/orcamento.jpg') center/cover no-repeat;
-    filter: blur(0.5px);
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 70vh;
-    z-index: 1;
-}
-
-/* Contato */
-.header.contato::before {
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
-    url('../assets/images/contato.jpg') center/cover no-repeat;
-    filter: blur(0.5px);
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 70vh;
-    z-index: 1;
-}
-
-/* Blog */
-.header.blog::before {
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
-    url('../assets/images/blog-header.jpg') center/cover no-repeat;
-    filter: blur(0.5px);
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 70vh;
-    z-index: 1;
-}
-
-/* Páginas do footer */
-.header.footer::before {
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
-    url('../assets/images/footer.jpg') center/cover no-repeat;
-    filter: blur(0.5px);
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 70vh;
-    z-index: 1;
-}
-
+/* ::before removido para simplificar e evitar sobreposição */
 
 .header > * {
-  z-index: 2;
+  z-index: 1;
 }
 
 .header h1 {
@@ -175,7 +56,7 @@
   }
 }
 
-/* Transição de fade opcional */
+/* Transição de fade */
 .fade {
   transition: opacity 0.5s ease-in-out;
 }
