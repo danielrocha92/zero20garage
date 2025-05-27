@@ -1,6 +1,6 @@
 import React from 'react';
 import DynamicHeader from '../../components/DynamicHeader';
-import WhatsAppButton from '../../components/WhatsAppButton';
+
 import './Contato.css';
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
 
@@ -22,8 +22,8 @@ function Contato() {
 
   return (
     <div className="page-black">
-      <DynamicHeader messages={messages} />
-      <WhatsAppButton />
+    <DynamicHeader page="contato" messages={messages} />
+
 
       <div className="container-black">
         {/* Seção de Contato */}

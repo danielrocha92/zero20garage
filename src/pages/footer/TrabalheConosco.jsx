@@ -1,7 +1,7 @@
 // dpnostico.jsx
 import React from 'react';
 import DynamicHeader from '../../components/DynamicHeader';
-import WhatsAppButton from '../../components/WhatsAppButton';
+
 import './TrabalheConosco.css'; // Importe o CSS para estilização
 
 function TrabalheConosco() {
@@ -19,7 +19,7 @@ function TrabalheConosco() {
   return (
     <div className="page">
       <DynamicHeader messages={messages} />
-      <WhatsAppButton />
+
       <div className="container-footer">
         <h2 className="section-title">Trabalhe Conosco</h2>
         <h3>Envie seu currículo e faça parte da nossa equipe.</h3>

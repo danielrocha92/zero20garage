@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DynamicHeader from '../../components/DynamicHeader';
-import WhatsAppButton from '../../components/WhatsAppButton';
+
 import './Termos.css';
 
 const Termos = () => {
@@ -41,7 +41,7 @@ const Termos = () => {
   return (
     <div className="page-claro">
       <DynamicHeader messages={messages} />
-      <WhatsAppButton />
+
       <div className="container-claro">
       <h2 translate='no' className="title">Termos de Uso - ZER0 20 GARAGE™</h2>
       <p className="paragraph">

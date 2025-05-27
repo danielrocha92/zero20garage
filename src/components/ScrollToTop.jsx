@@ -1,14 +1,32 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { FaArrowUp } from 'react-icons/fa'; // Instale: npm install react-icons
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
+const ScrollToTopButton = () => {
+  const [isVisible, setIsVisible] = useState(false);
 
+  // Mostrar botão ao rolar
   useEffect(() => {
+    const toggleVisibility = () => {
+      setIsVisible(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [pathname]);
+  };
 
-  return null;
-}
+  return (
+    <button
+      className={`scroll-to-top ${isVisible ? 'show' : ''}`}
+      onClick={scrollToTop}
+      aria-label="Voltar ao topo"
+    >
+      <FaArrowUp />
+    </button>
+  );
+};
 
-export default ScrollToTop;
+export default ScrollToTopButton;

@@ -2,7 +2,7 @@
 :root {
   --preto: #000000;
   --cinza-escuro: #121212;
-  --cinza-medio: #333333;
+  --cinza-medio: #8f8989;
   --cinza-claro: #f5f5f5;
   --vermelho-principal: #ff0000;
   --vermelho-hover: #cc0000;
@@ -20,20 +20,93 @@ body {
 }
 
 .container-claro {
-  background-color: var(--cinza-claro);
   color: var(--cinza-escuro);
-}
-
-.container-black {
-  color: var(--cinza-claro);
-
   opacity: 0.95;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
+.container-black {
+  color: var(--cinza-claro);
+  opacity: 0.95;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* ===== Estilos específicos para .page-claro (Manutenção Preventiva e similares) ===== */
 .page-claro {
   background-color: var(--cinza-claro);
+  color: var(--cinza-escuro);
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.page-claro .container-claro {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.page-claro .section {
+  margin-bottom: 3rem;
+}
+
+.page-claro .title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--vermelho-principal);
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  margin-bottom: 1rem;
+}
+
+.page-claro h3,
+.page-claro .subtitle {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem;
+  color: var(--cinza-claro);
+  font-family: 'Nunito', sans-serif;
+}
+
+.page-claro .paragraph,
+.page-claro p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  color: var(--cinza-medio);
+}
+
+.page-claro .section-list {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.page-claro .section-list li {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+  color: var(--cinza-medio);
+}
+
+.page-claro .button {
+  display: inline-block;
+  background-color: var(--vermelho-principal);
+  color: var(--cinza-claro);
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 4px 8px rgba(255, 0, 0, 0.4);
+  text-align: center;
+}
+
+.page-claro .button:hover {
+  background-color: var(--vermelho-hover);
 }
 
 .page-black {
@@ -231,4 +304,26 @@ a:focus, .button:focus, .submit-button:focus {
   a {
     font-size: 0.9rem;
   }
+
+  /* ===== Estilos específicos para .page-claro (Manutenção Preventiva e similares) ===== */
+    .page-claro .title {
+    font-size: 2rem;
+  }
+
+  .page-claro .subtitle,
+  .page-claro h3 {
+    font-size: 1.4rem;
+  }
+
+  .page-claro .paragraph,
+  .page-claro p,
+  .page-claro .section-list li {
+    font-size: 1rem;
+  }
+
+  .page-claro .button {
+    font-size: 0.95rem;
+    padding: 0.6rem 1.2rem;
+  }
+  /* ===== Fim de Estilos específicos para .page-claro (Manutenção Preventiva e similares) ===== */
 }

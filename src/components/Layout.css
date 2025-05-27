@@ -14,13 +14,22 @@
 .page-transition {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.9); /* fundo escuro leve */
-  backdrop-filter: blur(6px); /* efeito de desfoque */
+  background-color: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(6px);
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: all;
 }
+
+.page-transition.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
 
 .lottie-wrapper {
   width: 15rem; /* tamanho reduzido */

@@ -5,17 +5,10 @@
   box-sizing: border-box;
 }
 
-html, body {
-  width: 100vw;
-  height: 100vw;
-  overflow-x: hidden;
-  font-family: 'Ubuntu', sans-serif;
-}
-
 /* DynamicHeader */
 .header {
   width: 100%;
-  height: 100vh;
+  height: 70vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -31,19 +24,126 @@ html, body {
   font-family: 'Ubuntu', sans-serif; /* redundante, mas pode manter */
 }
 
+/* Imagem Padrão */
 .header::before {
   background:
-  linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
-  url('../assets/images/header.jpg') center/cover no-repeat;
-  filter: blur(0.5px);
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100%;
-  z-index: 1;
+    linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
+    url('../assets/images/header.jpg') center/cover no-repeat;
+    filter: blur(0.5px);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 70vh;
+    z-index: 1;
 }
+
+/* home */
+.header.home::before {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
+    url('../assets/images/home.jpg') center/cover no-repeat;
+    filter: blur(0.5px);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 70vh;
+    z-index: 1;
+}
+
+/* Sobre */
+.header.sobre::before {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
+    url('../assets/images/sobre.jpg') center/cover no-repeat;
+    filter: blur(0.5px);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 70vh;
+    z-index: 1;
+}
+
+/* Serviços */
+.header.servicos::before {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
+    url('../assets/images/servicos.jpg') center/cover no-repeat;
+    filter: blur(0.5px);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 70vh;
+    z-index: 1;
+}
+
+/* Orçamento */
+.header.orcamento::before {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
+    url('../assets/images/orcamento.jpg') center/cover no-repeat;
+    filter: blur(0.5px);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 70vh;
+    z-index: 1;
+}
+
+/* Contato */
+.header.contato::before {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
+    url('../assets/images/contato.jpg') center/cover no-repeat;
+    filter: blur(0.5px);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 70vh;
+    z-index: 1;
+}
+
+/* Blog */
+.header.blog::before {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
+    url('../assets/images/blog-header.jpg') center/cover no-repeat;
+    filter: blur(0.5px);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 70vh;
+    z-index: 1;
+}
+
+/* Páginas do footer */
+.header.footer::before {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.753)),
+    url('../assets/images/footer.jpg') center/cover no-repeat;
+    filter: blur(0.5px);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 70vh;
+    z-index: 1;
+}
+
 
 .header > * {
   z-index: 2;

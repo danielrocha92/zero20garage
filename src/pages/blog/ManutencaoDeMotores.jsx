@@ -1,11 +1,10 @@
-import React from 'react';
 import '../../styles/Blog.css';
-import WhatsAppButton from '../../components/WhatsAppButton';
+
 
 function ManutencaoDeMotores() {
   return (
     <section className="page-claro">
-      <WhatsAppButton />
+
       <section id="manutencao-de-motores" className="blog-section">
         <h2 className="title">
           Manutenção de Motores: Dicas de Profissionais para Maximizar a Vida Útil do Seu Motor

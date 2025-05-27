@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Orcamento.css';
 import DynamicHeader from '../../components/DynamicHeader';
-import WhatsAppButton from '../../components/WhatsAppButton';
+
 // import { supabase } from '../../supabaseClient'; // Removido
 import emailjs from 'emailjs-com';
 import AnimatedPage from '../../components/AnimatedPage';
@@ -91,8 +91,8 @@ function Orcamento() {
 
   return (
     <div className="page-black">
-      <DynamicHeader messages={messages} />
-      <WhatsAppButton />
+    <DynamicHeader page="orcamento" messages={messages} />
+
       <AnimatedPage />
       <div className="container-black">
         <section className="section">

@@ -1,8 +1,6 @@
 // Diagnostico.jsx
-import React from 'react-router-dom';
-import './Cp.css';
 import DynamicHeader from '../../components/DynamicHeader';
-import WhatsAppButton from '../../components/WhatsAppButton';
+
 
 function Cp() {
   const messages = [
@@ -19,7 +17,7 @@ function Cp() {
   return (
     <div className="page-claro">
       <DynamicHeader messages={messages} />
-      <WhatsAppButton />
+
 
       <div className="container-claro">
         <h2 className="title">

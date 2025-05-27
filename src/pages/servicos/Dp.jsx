@@ -1,8 +1,7 @@
 // dpnostico.jsx
 import React from 'react';
 import DynamicHeader from '../../components/DynamicHeader';
-import WhatsAppButton from '../../components/WhatsAppButton';
-import './Dp.css'; // Importe o CSS para estilização
+
 
 function Dp() {
   const messages = [
@@ -19,7 +18,7 @@ function Dp() {
   return (
     <div className="page-claro">
       <DynamicHeader messages={messages} />
-      <WhatsAppButton />
+
 
       <div className="container-claro">
         <h2 className="title">

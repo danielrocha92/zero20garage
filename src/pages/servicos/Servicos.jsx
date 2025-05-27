@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './Servicos.css';
 import DynamicHeader from '../../components/DynamicHeader';
-import WhatsAppButton from '../../components/WhatsAppButton';
+
 import { Helmet } from 'react-helmet';
 import AnimatedPage from '../../components/AnimatedPage';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
@@ -62,8 +62,9 @@ const Servicos = () => {
             </Helmet>
 
             <div className="page-black">
-                <DynamicHeader messages={messages} />
-                <WhatsAppButton />
+            <DynamicHeader page="servicos" messages={messages} />
+
+
                 <AnimatedPage />
                 <div className="container-black">
                     <section className="section">

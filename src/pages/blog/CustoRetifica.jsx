@@ -1,11 +1,10 @@
-import React from 'react';
-import WhatsAppButton from '../../components/WhatsAppButton';
-import './CustoRetifica.css'; // Importe o CSS atualizado
+import '../../styles/Blog.css';
+
 
 function CustoRetifica() {
   return (
     <section className="page-claro">
-        <WhatsAppButton />
+
       <section id="custo-retifica-motor" className="blog-section">
         <h2 className="title">
           Quanto Custa uma Retífica de Motor? Fatores que Influenciam no Valor

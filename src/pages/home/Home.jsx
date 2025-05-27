@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import '../../styles/Home.css'; // Importa o arquivo global de estilos
 import DynamicHeader from '../../components/DynamicHeader';
-import WhatsAppButton from '../../components/WhatsAppButton';
 import AnimatedPage from '../../components/AnimatedPage';
 import TestimonialsCarousel from '../../components/TestimonialsCarousel';
 import { FaTools, FaCogs, FaWrench, FaCheckCircle } from 'react-icons/fa';
@@ -24,8 +23,7 @@ function Home() {
 
   return (
     <div className="page-black">
-      <DynamicHeader messages={messages} />
-      <WhatsAppButton />
+    <DynamicHeader page="home" messages={messages} />
       <AnimatedPage />
 
       {/* Card padrão Section */}

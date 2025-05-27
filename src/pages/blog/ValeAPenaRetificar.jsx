@@ -1,11 +1,10 @@
-import React from 'react';
-import WhatsAppButton from '../../components/WhatsAppButton';
-import './ValeAPenaRetificar.css'; // Importe o CSS atualizado
+import '../../styles/Blog.css';
+
 
 function ValeAPenaRetificar() {
   return (
     <section className="page-claro">
-      <WhatsAppButton />
+
       <section id="retifica-ou-troca" className="blog-section">
         <h2 className="title">
           Retífica Vale a Pena ou é Melhor Trocar o Motor?

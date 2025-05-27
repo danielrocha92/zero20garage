@@ -8,13 +8,7 @@
   --amarelo: #fbbc04;
 }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: var(--cinza-claro);
-  color: var(--cinza-escuro);
-}
+
 
 @media (min-width: 1200px) {
   .container-black {

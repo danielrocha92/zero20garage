@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import '../../styles/Blog.css';
 import DynamicHeader from '../../components/DynamicHeader';
-import WhatsAppButton from '../../components/WhatsAppButton';
+
 import { Helmet } from 'react-helmet';
 import { FaPen, FaRegNewspaper, FaTools, FaWrench } from 'react-icons/fa'; // Ícones para o blog
 import AnimatedPage from '../../components/AnimatedPage'; // Importe o componente AnimatedPage
+
 
 
 const Blog = () => {
@@ -56,8 +57,7 @@ const Blog = () => {
             </Helmet>
 
             <div className="page-black">
-                <DynamicHeader messages={messages} />
-                <WhatsAppButton />
+            <DynamicHeader page="blog" messages={messages} />
                 <AnimatedPage />
                 {/* Card padrão Section */}
                 <div className="container-black">

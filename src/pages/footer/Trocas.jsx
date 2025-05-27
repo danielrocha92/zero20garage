@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DynamicHeader from '../../components/DynamicHeader';
-import WhatsAppButton from '../../components/WhatsAppButton';
+
 import './Trocas.css'; // Continua utilizando o mesmo arquivo CSS
 
 const Trocas = () => {
@@ -48,7 +48,7 @@ const Trocas = () => {
   return (
     <div className="page-claro">
       <DynamicHeader messages={messages} />
-      <WhatsAppButton />
+
       <div className="container-claro">
       <h2
         translate="no"

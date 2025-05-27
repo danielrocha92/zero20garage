@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Politica.css'; // Importe o arquivo CSS para estilos específicos
 import DynamicHeader from '../../components/DynamicHeader';
-import WhatsAppButton from '../../components/WhatsAppButton';
+
 
 const Privacidade = () => {
   const messages = [
@@ -43,7 +43,7 @@ const Privacidade = () => {
   return (
     <div className="page-claro">
       <DynamicHeader messages={messages} />
-      <WhatsAppButton />
+
       <div className="container-claro">
       <h2
         translate="no"

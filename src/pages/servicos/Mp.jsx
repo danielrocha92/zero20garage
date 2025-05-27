@@ -1,8 +1,7 @@
 // ManutencaoPreventiva.jsx
 import React from 'react';
 import DynamicHeader from '../../components/DynamicHeader';
-import WhatsAppButton from '../../components/WhatsAppButton';
-import './Mp.css'; // Importe o CSS atualizado
+
 
 function Mp() {
     const messages = [
@@ -17,22 +16,24 @@ function Mp() {
     ];
 
     return (
+
         <div className="page-claro">
             <DynamicHeader messages={messages} />
-            <WhatsAppButton />
+
 
             <div className="container-claro">
+                <section className="section">
                 <h2 className="title">
                     Manutenção Preventiva
                 </h2>
-                <p className="paragraph">
+                <p>
                     Manutenção regular para evitar problemas futuros e prolongar a vida útil do motor.
                 </p>
                 <section className="section">
-                <h3 className="subtitle">
+                <h3>
                     Por que fazer manutenção preventiva?
                 </h3>
-                <p className="paragraph">
+                <p>
                     A manutenção preventiva é essencial para garantir o bom funcionamento do seu veículo e evitar surpresas desagradáveis. Com a manutenção regular, você pode identificar e corrigir problemas antes que eles se tornem grandes e caros.
                 </p>
 
@@ -58,6 +59,7 @@ function Mp() {
                 className="button">
                     Solicite um Orçamento
                 </a>
+                </section>
                 </section>
             </div>
         </div>

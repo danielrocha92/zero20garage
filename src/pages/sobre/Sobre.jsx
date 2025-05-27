@@ -1,7 +1,7 @@
 import React from 'react';
 import './Sobre.css';
 import DynamicHeader from '../../components/DynamicHeader';
-import WhatsAppButton from '../../components/WhatsAppButton';
+
 import ContatoCta from '../../components/ContatoCta';
 
 import Slider from 'react-slick';
@@ -57,11 +57,8 @@ function Sobre() {
   return (
     <div className="page-black">
 
-
-      <DynamicHeader messages={messages} />
-      <WhatsAppButton />
+      <DynamicHeader page="sobre" messages={messages} />
       <AnimatedPage />
-
 
       <div className="container-black">
         <section className="sobre-section">
@@ -132,61 +129,55 @@ function Sobre() {
           </div>
         </section>
 
+      <section className="section">
+        <div className="highlight-item">
+          <h2>Nossos Princípios</h2>
+          <div className="principios-grid">
 
+            {/* Missão */}
+            <div className="principio-item">
+              <FaBullseye className="principio-icon" />
+              <div>
+                <h3 className="subtitle">Nossa Missão</h3>
+                <p className="sobre-paragraph">
+                  Oferecer serviços de retífica e mecânica automotiva com qualidade, confiança e excelência,
+                  superando as expectativas de nossos clientes.
+                </p>
+              </div>
+            </div>
 
+            {/* Visão */}
+            <div className="principio-item">
+              <FaEye className="principio-icon" />
+              <div>
+                <h3 className="subtitle">Nossa Visão</h3>
+                <p className="sobre-paragraph">
+                  Ser referência no mercado de retífica e mecânica automotiva, reconhecida pela qualidade dos
+                  serviços, inovação e compromisso com a satisfação dos clientes.
+                </p>
+              </div>
+            </div>
 
-<section className="section">
-  <div className="highlight-item">
-    <h2>Nossos Princípios</h2>
-    <div className="principios-grid">
+            {/* Valores */}
+            <div className="principio-item">
+              <FaStar className="principio-icon" />
+              <div>
+                <h3 className="subtitle">Nossos Valores</h3>
+                <p className="sobre-paragraph">
+                    <strong>Qualidade:</strong> Compromisso com a excelência em cada serviço.
+                </p>
+                <p className="sobre-paragraph">
+                  <strong>Confiança:</strong> Relações transparentes e honestas com nossos clientes.
+                </p>
+                <p className="sobre-paragraph">
+                  <strong>Compromisso:</strong> Dedicação em atender e superar as expectativas dos clientes.
+                </p>
+              </div>
+            </div>
 
-      {/* Missão */}
-      <div className="principio-item">
-        <FaBullseye className="principio-icon" />
-        <div>
-          <h3 className="subtitle">Nossa Missão</h3>
-          <p className="sobre-paragraph">
-            Oferecer serviços de retífica e mecânica automotiva com qualidade, confiança e excelência,
-            superando as expectativas de nossos clientes.
-          </p>
+          </div>
         </div>
-      </div>
-
-      {/* Visão */}
-      <div className="principio-item">
-        <FaEye className="principio-icon" />
-        <div>
-          <h3 className="subtitle">Nossa Visão</h3>
-          <p className="sobre-paragraph">
-            Ser referência no mercado de retífica e mecânica automotiva, reconhecida pela qualidade dos
-            serviços, inovação e compromisso com a satisfação dos clientes.
-          </p>
-        </div>
-      </div>
-
-      {/* Valores */}
-      <div className="principio-item">
-        <FaStar className="principio-icon" />
-        <div>
-          <h3 className="subtitle">Nossos Valores</h3>
-          <ul className="section-list">
-            <li className="sobre-paragraph">
-              <strong>Qualidade:</strong> Compromisso com a excelência em cada serviço.
-            </li>
-            <li className="sobre-paragraph">
-              <strong>Confiança:</strong> Relações transparentes e honestas com nossos clientes.
-            </li>
-            <li className="sobre-paragraph">
-              <strong>Compromisso:</strong> Dedicação em atender e superar as expectativas dos clientes.
-            </li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
+      </section>
 
         <section className="sobre-section">
           <div className="highlight-item">
