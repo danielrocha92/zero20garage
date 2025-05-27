@@ -130,7 +130,8 @@ Acesse: http://localhost:3000
 Daniel Rocha
 Front-End Developer apaixonado por criar experiências digitais impactantes.
 
-📫 LinkedIn
+📫 LinkedIn  
+[Daniel Rocha](https://www.linkedin.com/in/danielrocha92)
 
 ⸻
 
