@@ -3,7 +3,6 @@ import '../../styles/Blog.css';
 import DynamicHeader from '../../components/DynamicHeader';
 
 import { Helmet } from 'react-helmet';
-import { FaPen, FaRegNewspaper, FaTools, FaWrench } from 'react-icons/fa'; // Ícones para o blog
 import AnimatedPage from '../../components/AnimatedPage'; // Importe o componente AnimatedPage
 
 
@@ -16,38 +15,39 @@ const Blog = () => {
         },
     ];
 
-    const blogPosts = [
-        {
-            title: 'Retífica de Motores: Como Saber Quando Seu Motor Precisa de Reparo?',
-            description: 'Aprenda a identificar sinais de que seu motor pode precisar de retífica.',
-            link: '/sinais-retifica',
-            icon: <FaPen size={60} />, // Ícone para artigo de retífica
-        },
-        {
-            title: 'Quanto Custa uma Retífica de Motor?',
-            description: 'Entenda os custos envolvidos no processo de retífica de motores.',
-            link: '/custoretifica',
-            icon: <FaRegNewspaper size={60} />, // Ícone para custo de retífica
-        },
-        {
-            title: 'Manutenção de Motores: Dicas de Profissionais para Maximizar a Vida Útil do Seu Motor',
-            description: 'Saiba como cuidar do motor do seu veículo para que ele dure mais tempo.',
-            link: '/manutencao-de-motores',
-            icon: <FaTools size={60} />, // Ícone para manutenção de motores
-        },
-        {
-            title: 'Retífica Parcial ou Completa: Qual a Melhor Opção para o Seu Motor?',
-            description: 'Descubra quando é melhor optar por uma retífica parcial ou completa.',
-            link: '/retifica-parcial-ou-completa',
-            icon: <FaWrench size={60} />, // Ícone para retífica parcial ou completa
-        },
-        {
-            title: 'Retífica Vale a Pena ou é Melhor Trocar o Motor',
-            description: 'Neste artigo, explicamos os prós e contras de cada opção.',
-            link: '/retifica-parcial-ou-completa',
-            icon: <FaWrench size={60} />, // Ícone para retífica parcial ou completa
-        },
-    ];
+const blogPosts = [
+    {
+        title: 'Retífica de Motores',
+        description: 'Aprenda a identificar sinais de que seu motor pode precisar de retífica',
+        link: '/sinais-retifica',
+        image: '/images/retifica.jpg' // Caminho da imagem
+    },
+    {
+        title: 'Quanto Custa uma Retífica de Motor?',
+        description: 'Entenda os custos envolvidos no processo de retífica de motores.',
+        link: '/custoretifica',
+        image: '/images/custo.jpg'
+    },
+    {
+        title: 'Manutenção de Motores',
+        description: 'Dicas de Profissionais para Maximizar a Vida Útil do Seu Motor',
+        link: '/manutencao-de-motores',
+        image: '/images/manutencao.jpg'
+    },
+    {
+        title: 'Retífica Parcial ou Completa',
+        description: 'Qual a Melhor Opção para o Seu Motor?',
+        link: '/retifica-parcial-ou-completa',
+        image: '/images/retifica-parcial.jpg'
+    },
+    {
+        title: 'Retíficar ou Trocar o Motor?',
+        description: 'Neste artigo, explicamos os prós e contras de cada opção.',
+        link: '/retifica-parcial-ou-completa',
+        image: '/images/trocar-motor.jpg'
+    },
+];
+
 
     return (
         <>
@@ -64,30 +64,42 @@ const Blog = () => {
                     <section className="section">
                         <div className='highlight-item'>
                           <div className='highlight-item'>
-                            <h2 className='title' translate='no'>Blog ZER0 20 GARAGE™</h2>
-                            <p className="paragraph">Explore artigos, dicas e novidades sobre manutenção automotiva e retífica de motores.</p>
+                            <h2 translate='no'>Blog ZER0 20 GARAGE™</h2>
+                            <p>Explore artigos, dicas e novidades sobre manutenção automotiva e retífica de motores.</p>
                             </div>
-                            <div className="blog-grid">
-                                {blogPosts.map((post) => (
-                                    <div
-                                        className="blog-item"
-                                        key={post.title}
-                                        data-aos="fade-up">
-                                        <Link
-                                            to={post.link}
-                                            className="ctn-button">
-                                            {post.icon} {/* Exibe o ícone */}
-                                            <h2 className='title'>{post.title}</h2>
-                                            <p>{post.description}</p>
-                                            <button
-                                                type="submit"
-                                                className="submit-button">
-                                                    Leia Mais
-                                            </button>
-                                        </Link>
-                                    </div>
-                                ))}
-                            </div>
+ <div className="blog-grid">
+    {blogPosts.map((post) => (
+        <div
+            className="blog-item"
+            key={post.title}
+            data-aos="fade-up">
+            <Link
+                to={post.link}
+                className="ctn-button">
+
+                {/* ✅ Apenas imagem no topo */}
+                <img
+                    src={post.image}
+                    alt={post.title}
+                    className="blog-item__image"
+                />
+
+                {/* ✅ Remover linha {post.icon} */}
+
+                <h2 className='title'>{post.title}</h2>
+                <p>{post.description}</p>
+
+                <button
+                    type="submit"
+                    className="submit-button">
+                        Leia Mais
+                </button>
+            </Link>
+        </div>
+    ))}
+</div>
+
+
                         </div>
                     </section>
                 </div>

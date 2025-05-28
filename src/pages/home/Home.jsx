@@ -30,7 +30,7 @@ function Home() {
       <div className="container-black">
         <section className="section">
           <div className='highlight-item'>
-            <h2 className="title">Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
+            <h2>Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
             <h3>Atendimento especializado para veículos nacionais e importados.</h3>
             <a href="/orcamento" className="button">Solicite um Orçamento</a>
           </div>
@@ -39,7 +39,7 @@ function Home() {
         {/* Destaques */}
         <section className="section">
           <div className='highlight-item'>
-            <h2 className="title">Por que a Zero 20 Garage?</h2>
+            <h2>Por que a Zero 20 Garage?</h2>
             <div className="highlights-grid">
               <div className="highlight-card">
                 <h3>Pagamento Facilitado</h3>
@@ -60,11 +60,11 @@ function Home() {
         {/* Linha do Tempo do Processo de Retífica */}
         <section className="section">
           <div className="highlight-item">
-            <h2 className="title">Como Funciona o Processo de Retífica</h2>
+            <h2>Como Funciona o Processo de Retífica</h2>
             <div className="timeline">
               <div className="timeline-step">
                 <div className="icon-animated">
-                  <FaTools size={60} color="#e63946" />
+                  <FaTools size={60} color="#ff0015" />
                 </div>
                 <h3>
                   <Link to="/home/diagnostico" className="link-timeline">1. Diagnóstico</Link>
@@ -76,7 +76,7 @@ function Home() {
 
               <div className="timeline-step">
                 <div className="icon-animated">
-                  <FaCogs size={60} color="#e63946" />
+                  <FaCogs size={60} color="#ff0015" />
                 </div>
                 <h3>
                   <Link to="/home/desmontagem" className="link-timeline">2. Desmontagem</Link>
@@ -88,7 +88,7 @@ function Home() {
 
               <div className="timeline-step">
                 <div className="icon-animated">
-                  <FaWrench size={60} color="#e63946" />
+                  <FaWrench size={60} color="#ff0015" />
                 </div>
                 <h3>
                   <Link to="/home/usinagem" className="link-timeline">3. Usinagem</Link>

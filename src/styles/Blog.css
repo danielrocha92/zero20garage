@@ -1,95 +1,161 @@
-/* Bloco: blog-grid */
-.Blog-grid {
+/* Grid principal responsivo */
+.blog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  margin-top: 2rem;
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Bloco: blog-item */
+/* Card individual com glassmorphism */
 .blog-item {
-  background-color: #2c2c2c6b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center; /* Centralizando o texto dentro do item */
-  gap: 1rem; /* Espaçamento interno */
-  display: flex; /* Flexbox para alinhamento */
-  flex-direction: column; /* Alinhamento vertical */
-  align-items: center; /* Centraliza os elementos horizontalmente */
-  justify-content: center; /* Centraliza os elementos verticalmente */
+
   color: var(--branco);
   font-family: var(--fonte-texto);
-  font-size: 1.2rem;
-  line-height: 1.5;
-  text-align: justify; /* Justifica o texto */
-  margin-bottom: 2rem; /* Espaçamento inferior */
-  text-decoration: none; /* Remove o sublinhado do link */
-  cursor: pointer; /* Muda o cursor para indicar que é clicável */
-  position: relative; /* Para o efeito de hover */
-  overflow: hidden; /* Para esconder o conteúdo que sai do item */
-  max-width: 100%; /* Limita a largura máxima */
-  height: 100%; /* Limita a altura máxima */
-  box-sizing: border-box; /* Inclui padding e border no tamanho total */
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
-  /* Adiciona um fundo gradiente */
-  backdrop-filter: blur(10px); /* Adiciona um efeito de desfoque ao fundo */
-  /* Adiciona um efeito de desfoque ao fundo */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Adiciona uma borda sutil */
-  /* Adiciona uma borda sutil */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-  /* Sombra sutil */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+  text-align: center;
+  cursor: pointer;
 }
 
-/* Modificador: blog-item:hover */
+/* Efeito de hover */
 .blog-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(54, 24, 24, 0.5);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
 
-/* Elemento: blog-item__title */
+/* Título */
 .blog-item__title {
-  font-size: 1.8rem;
-  color: var(--cor-destaque);
-  margin-bottom: 1rem;
+  font-size: 1.6rem;
   font-family: var(--fonte-titulo);
+  margin-bottom: 1rem;
+  color: var(--cor-destaque);
 }
 
-/* Elemento: blog-item__description */
+/* Descrição */
 .blog-item__description {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--texto-secundario);
   margin-bottom: 1.5rem;
-  flex-grow: 1;
-  /* Permite que a descrição ocupe mais espaço */
+  line-height: 1.6;
 }
 
-/* Elemento: blog-item__button */
+/* Botão de ação */
 .blog-item__button {
   display: inline-block;
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
+  padding: 0.8rem 1.8rem;
+  font-size: 1rem;
   color: var(--branco);
-  background-color: var(--cor-destaque);
+  background: var(--cor-destaque);
   border: none;
   border-radius: 8px;
   text-decoration: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
-/* Modificador: blog-item__button:hover */
 .blog-item__button:hover {
-  background-color: rgba(197, 4, 4, 0.8);
+  background: rgba(197, 4, 4, 0.8);
+  transform: translateY(-3px);
 }
 
-/* Estilos para os ícones */
-.blog-item__button svg {
-  width: 60px;
-  height: 60px;
+/* Ícone opcional */
+.blog-item .icon {
+  font-size: 3rem;
   margin-bottom: 1rem;
-  transition: none;
+  color: var(--cor-destaque);
+  transition: transform 0.3s ease;
+}
+
+.blog-item:hover .icon {
+  transform: rotate(10deg) scale(1.1);
+}
+
+/* Imagem no topo do blog-item */
+.blog-item__image {
+  width: 100%;
+  height: 180px; /* Ajuste conforme desejar */
+  object-fit: cover;
+  border-radius: 0.8rem 0.8rem 0 0; /* Arredonda só o topo */
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+/* Efeito suave ao passar o mouse */
+.blog-item:hover .blog-item__image {
+  transform: scale(1.05);
+}
+
+/* Responsividade */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .blog-grid {
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .blog-item {
+    padding: 1.5rem;
+  }
+
+  .blog-item__title {
+    font-size: 1.4rem;
+  }
+
+  .blog-item__description {
+    font-size: 0.95rem;
+  }
+
+  .blog-item .icon {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .blog-grid {
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .blog-item {
+    padding: 1rem;
+  }
+
+  .blog-item__title {
+    font-size: 1.2rem;
+  }
+
+  .blog-item__description {
+    font-size: 0.9rem;
+  }
+
+  .blog-item__button {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.9rem;
+  }
+
+  .blog-item .icon {
+    font-size: 2rem;
+  }
 }
