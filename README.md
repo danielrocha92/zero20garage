@@ -1,133 +1,149 @@
-# Zero 20 Garage
+# 🚗 Zero20 Garage ![Vercel](https://vercelbadge.vercel.app/api/danielrocha92/zero20garage)
 
-Site institucional para oficina mecânica e retifica de motores.
+**Site institucional para oficina mecânica e retífica de motores**  
+💡 Desenvolvido para destacar a qualidade dos serviços da Zero20 Garage, com foco em performance, design responsivo e experiência do usuário.
 
-## 🚀 Tecnologias
+🔗 **[Acesse o site](https://zero20garage.vercel.app/)**
 
-Este projeto foi desenvolvido com:
+---
 
-- React.js
-- Html
-- Css3
+## 🛠️ Tecnologias Utilizadas
 
-# Getting Started with Create React App
+- **React.js** — SPA moderna e performática.
+- **HTML5** — Estrutura semântica e acessível.
+- **CSS3** — Design responsivo com estilização modular.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## 🎯 Propósito do Projeto
 
-In the project directory, you can run:
+Criar uma presença digital profissional para a **Zero20 Garage**, destacando:
 
-### `npm start`
+✅ Serviços especializados de retífica e manutenção de motores.  
+✅ Processo técnico apresentado com infográficos e animações.  
+✅ Diferenciais competitivos da oficina.  
+✅ Canal direto de contato via WhatsApp.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
+## 🖼️ Estrutura do Projeto
 
 site-institucional/
 ├── public/
 │   ├── index.html
 │   ├── favicon.ico
 ├── src/
-│   ├── assets/            # Arquivos estáticos como imagens, fontes, etc.
+│   ├── assets/            # Imagens e fontes
 │   ├── components/        # Componentes reutilizáveis
 │   ├── pages/             # Páginas principais
-│   ├── App.js             # Componente principal
+│   ├── App.js             # Componente raiz
 │   ├── index.js           # Entrada do React
-│   ├── styles/            # Arquivos de CSS/Styled Components
-│   ├── data.js            # Dados para o site (ex: informações institucionais)
+│   ├── styles/            # CSS modularizado
+│   ├── data.js            # Conteúdo institucional
 └── package.json
 
-Wireframe (estrutura em blocos)
---------------------------------------------------
-| LOGO             | MENU (Sobre, Serviços, Blog)|
---------------------------------------------------
-| HERO: Título impactante + CTA (WhatsApp) +     |
-| animação Lottie (motor/pistão)                 |
---------------------------------------------------
-| SOBRE NÓS: Texto breve + imagem da equipe/oficina|
---------------------------------------------------
-| SERVIÇOS: Ícones + títulos + descrições curtas |
-| (Retífica completa, parcial, manutenção)       |
---------------------------------------------------
-| PROCESSO: Infográfico ou timeline + animação   |
---------------------------------------------------
-| DIFERENCIAIS: Ícones + textos curtos           |
-| (Garantia, Equipamentos, Atendimento)          |
---------------------------------------------------
-| BLOG: Cards com imagem + título + link         |
---------------------------------------------------
-| DEPOIMENTOS: Fotos + nome + texto do cliente   |
---------------------------------------------------
-| CONTATO: Mapa interativo + formulário          |
-| Botões flutuantes: WhatsApp + Telefone         |
---------------------------------------------------
-| RODAPÉ: Links rápidos + redes sociais + CNPJ   |
---------------------------------------------------
+---
 
+## 🖌️ Wireframe Conceitual
 
-Paleta Industrial (Vermelho e Prata)
-💠 #212121 (Preto grafite - Fundo)
-💠 #B0BEC5 (Cinza metálico - Elementos e textos)
-💠 #D32F2F (Vermelho mecânico - Chamadas de ação)
-💠 #FFFFFF (Branco - Destaques e contraste)
+| LOGO             | MENU (Sobre, Serviços, Blog) |
 
-🔹 Por que? O vermelho remete a velocidade e potência, enquanto o cinza lembra metal e tecnologia.
+| HERO: Título impactante + CTA (WhatsApp)        |
+| + animação Lottie (motor/pistão)                |
+
+| SOBRE: Texto + imagem da equipe/oficina         |
+
+| SERVIÇOS: Ícones + descrição (Retífica, etc.)   |
+
+| PROCESSO: Timeline + animação                   |
+
+| DIFERENCIAIS: Ícones + textos curtos            |
+
+| BLOG: Cards com imagem + título + link          |
+
+| DEPOIMENTOS: Fotos + nome + opinião             |
+
+| CONTATO: Mapa + formulário + botões flutuantes  |
+
+| RODAPÉ: Links rápidos + redes sociais + CNPJ    |
+
+---
+
+## 🎨 Paleta Industrial
+
+| Cor                  | Código   | Uso                                  |
+| -------------------- | -------- | ------------------------------------ |
+| Preto Grafite        | #212121  | Fundo principal                      |
+| Cinza Metálico       | #B0BEC5  | Elementos, textos secundários        |
+| Vermelho Mecânico    | #D32F2F  | Botões, CTAs (ações principais)      |
+| Branco               | #FFFFFF  | Contraste e destaques                |
+
+**Por que essas cores?**  
+🔴 Vermelho: velocidade e potência.  
+⚪ Cinza: metal e tecnologia.
+
+---
+
+## 🚀 Como Rodar Localmente
+
+Clone o repositório:
+
+```bash
+git clone https://github.com/danielrocha92/zero20garage.git
+cd zero20garage
+npm install
+npm start
+
+Acesse: http://localhost:3000
+
+⸻
+
+📦 Scripts Disponíveis
+	•	npm start — Executa em modo desenvolvimento.
+	•	npm test — Roda os testes interativos.
+	•	npm run build — Compila para produção.
+	•	npm run eject — Exibe as configurações do CRA.
+
+⸻
+
+✨ Funcionalidades em Destaque
+
+✅ Animação Lottie integrada no Hero e processo.
+✅ Design responsivo: mobile, tablet e desktop.
+✅ Contato rápido: botão fixo de WhatsApp.
+✅ Blog institucional: dicas e informações sobre retífica.
+✅ Infográfico do processo: educativo e visual.
+
+⸻
+
+🌱 Aprendizados e Práticas Aplicadas
+	•	Arquitetura de componentes reutilizáveis.
+	•	Organização modular de estilos.
+	•	Integração de animações JSON com React.
+	•	Deploy contínuo na Vercel.
+	•	Acessibilidade e boas práticas de UX/UI.
+
+⸻
+
+👨‍💻 Autor
+
+Daniel Rocha
+Front-End Developer apaixonado por criar experiências digitais impactantes.
+
+📫 LinkedIn  
+[Daniel Rocha](https://www.linkedin.com/in/danielrocha92)
+
+⸻
+
+🚧 Próximos Passos
+	•	Implementar testes unitários com Jest.
+	•	SEO técnico: otimização de metatags.
+	•	Melhorar acessibilidade (a11y) com ARIA.
+
+⸻
+
+📄 Licença
+
+Este projeto está sob a licença MIT.
+
+---
