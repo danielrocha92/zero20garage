@@ -1,10 +1,20 @@
+import React from 'react';
 import '../../styles/Blog.css';
+import DynamicHeader from '../../components/DynamicHeader';
 
 
-function CustoRetifica() {
+const CustoRetifica = () => {
+const messages = [
+    {
+      title: 'Retífica de Motores',
+      subtitle: 'Como Saber Quando Seu Motor Precisa de Reparo?',
+    },
+  ];
+
   return (
-    <section className="page-claro">
-
+    <div className="page-claro">
+      <DynamicHeader messages={messages} />
+    <div className="container-claro">
       <section id="custo-retifica-motor" className="blog-section">
         <h2 className="title">
           Quanto Custa uma Retífica de Motor? Fatores que Influenciam no Valor
@@ -61,7 +71,8 @@ function CustoRetifica() {
           O custo da retífica de motor depende de múltiplos fatores, como o tipo de motor, a gravidade do desgaste, as peças utilizadas e a mão de obra. Apesar do investimento, a retífica é muitas vezes mais vantajosa do que a troca do motor. Sempre busque uma oficina de confiança, como a ZER0 20 GARAGE™, para garantir qualidade e segurança no serviço.
         </p>
       </section>
-    </section>
+      </div>
+    </div>
   );
 }
 

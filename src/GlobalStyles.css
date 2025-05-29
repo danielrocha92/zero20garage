@@ -44,6 +44,9 @@ body {
   background-color: var(--cinza-claro);
   color: var(--cinza-escuro);
   font-family: 'Ubuntu', sans-serif;
+  min-height: 100vh;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 .page-claro .container-claro {
@@ -52,13 +55,10 @@ body {
   padding: 2rem 1rem;
 }
 
-.page-claro .section {
-  margin-bottom: 3rem;
-}
-
 .page-claro .title {
   font-size: 2.5rem;
   font-weight: 700;
+  line-height: 1.2; /* ajuste */
   color: var(--vermelho-principal);
   text-align: center;
   font-family: 'Nunito', sans-serif;
@@ -313,13 +313,17 @@ a:focus, .button:focus, .submit-button:focus {
   }
 
   /* ===== Estilos específicos para .page-claro (Manutenção Preventiva e similares) ===== */
+
     .page-claro .title {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
-  .page-claro .subtitle,
-  .page-claro h3 {
-    font-size: 1.4rem;
+  .page-claro .subtitle {
+    font-size: 1.3rem;
+  }
+
+    .page-claro .title {
+    font-size: 2rem;
   }
 
   .page-claro .paragraph,

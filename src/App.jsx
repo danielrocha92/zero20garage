@@ -26,12 +26,14 @@ import Usinagem from './pages/home/Usinagem';
 import MontagemTeste from './pages/home/MontagemTeste';
 
 import Orcamento from './pages/orcamento/Orcamento';
+
 import Blog from './pages/blog/Blog';
-import SinaisRetifica from './pages/blog/SinaisRetifica';
 import CustoRetifica from './pages/blog/CustoRetifica';
 import ManutencaoDeMotores from './pages/blog/ManutencaoDeMotores';
 import RetificaParcialOuCompleta from './pages/blog/RetificaParcialOuCompleta';
+import SinaisRetifica from './pages/blog/SinaisRetifica';
 import ValeAPenaRetificar from './pages/blog/ValeAPenaRetificar';
+
 import Politica from './pages/footer/Politica';
 import NotFound from './pages/footer/NotFound';
 import Trocas from './pages/footer/Trocas';
@@ -65,12 +67,14 @@ const AnimatedRoutes = () => {
         <Route path="/Home/montagemteste" element={<MontagemTeste />} />
 
         <Route path="/Orcamento" element={<Orcamento />} />
+
         <Route path="/Blog" element={<Blog />} />
-        <Route path="/sinaisretifica" element={<SinaisRetifica />} />
-        <Route path="/custoretifica" element={<CustoRetifica />} />
+        <Route path="/sinais-retifica" element={<SinaisRetifica />} />
+        <Route path="/custo-retifica" element={<CustoRetifica />} />
         <Route path="/manutencao-de-motores" element={<ManutencaoDeMotores />} />
         <Route path="/retifica-parcial-ou-completa" element={<RetificaParcialOuCompleta />} />
-        <Route path="/retifica-ou-troca" element={<ValeAPenaRetificar />} />
+        <Route path="/trocar-motor" element={<ValeAPenaRetificar />} />
+
         <Route path="/Politica" element={<Politica />} />
         <Route path="/Trocas" element={<Trocas />} />
         <Route path="/Faq" element={<Faq />} />

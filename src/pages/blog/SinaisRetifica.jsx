@@ -1,13 +1,21 @@
+import React from 'react';
+import '../../styles/Blog.css';
 import DynamicHeader from '../../components/DynamicHeader';
 
 
-function SinaisRetifica () {
+const SinaisRetifica = () => {
+const messages = [
+    {
+      title: 'Retífica de Motores',
+      subtitle: 'Como Saber Quando Seu Motor Precisa de Reparo?',
+    },
+  ];
+
   return (
     <div className="page-claro">
-      <DynamicHeader />
-
-
-       <div className="container-claro">
+      <DynamicHeader messages={messages} />
+    <div className="container-claro">
+      <section id="custo-retifica-motor" className="blog-section">
         <h2 className="title">Retífica de Motores: Como Saber Quando Seu Motor Precisa de Reparo?</h2>
 
         <p className="paragraph">
@@ -58,6 +66,7 @@ function SinaisRetifica () {
         <p className="paragraph">
           Reconhecer os sinais de desgaste no motor é essencial para evitar falhas graves e custos elevados. Se você notar algum dos sintomas listados, procure uma oficina de confiança para avaliação. A retífica pode ser a melhor forma de restaurar seu veículo e prolongar sua vida útil.
         </p>
+      </section>
       </div>
       </div>
   );

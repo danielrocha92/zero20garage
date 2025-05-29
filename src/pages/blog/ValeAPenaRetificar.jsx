@@ -1,11 +1,21 @@
+import React from 'react';
 import '../../styles/Blog.css';
+import DynamicHeader from '../../components/DynamicHeader';
 
 
-function ValeAPenaRetificar() {
+const ValeAPenaRetificar = () => {
+const messages = [
+    {
+      title: 'Retífica de Motores',
+      subtitle: 'Como Saber Quando Seu Motor Precisa de Reparo?',
+    },
+  ];
+
   return (
-    <section className="page-claro">
-
-      <section id="retifica-ou-troca" className="blog-section">
+    <div className="page-claro">
+      <DynamicHeader messages={messages} />
+    <div className="container-claro">
+      <section id="custo-retifica-motor" className="blog-section">
         <h2 className="title">
           Retífica Vale a Pena ou é Melhor Trocar o Motor?
         </h2>
@@ -50,7 +60,8 @@ function ValeAPenaRetificar() {
           A retífica é uma excelente alternativa para quem deseja restaurar o motor com menor custo, especialmente se for a primeira intervenção. Já a troca é indicada para casos extremos ou quando se busca praticidade. Em ambos os casos, o mais importante é contar com profissionais especializados, como os da ZER0 20 GARAGE™, para garantir segurança e qualidade.
         </p>
       </section>
-    </section>
+    </div>
+    </div>
   );
 }
 

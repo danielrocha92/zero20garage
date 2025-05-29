@@ -1,11 +1,21 @@
+import React from 'react';
 import '../../styles/Blog.css';
+import DynamicHeader from '../../components/DynamicHeader';
 
 
-function RetificaParcialOuCompleta() {
+const RetificaParcialOuCompleta = () => {
+const messages = [
+    {
+      title: 'Retífica de Motores',
+      subtitle: 'Como Saber Quando Seu Motor Precisa de Reparo?',
+    },
+  ];
+
   return (
-    <section className="page-claro">
-
-      <section id="retifica-parcial-vs-completa" className="blog-section">
+    <div className="page-claro">
+      <DynamicHeader messages={messages} />
+    <div className="container-claro">
+      <section id="custo-retifica-motor" className="blog-section">
         <h2 className="title">
           Retífica Parcial vs. Completa: Qual a Diferença e Quando Cada Uma é Indicada?
         </h2>
@@ -53,7 +63,8 @@ function RetificaParcialOuCompleta() {
           Saber a diferença entre retífica parcial e completa é fundamental para tomar a melhor decisão para o seu carro. Em caso de dúvida, conte com a ZER0 20 GARAGE™: temos profissionais capacitados para diagnosticar com precisão e orientar sobre o melhor caminho.
         </p>
       </section>
-    </section>
+    </div>
+    </div>
   );
 }
 

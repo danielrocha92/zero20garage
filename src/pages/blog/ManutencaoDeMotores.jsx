@@ -1,11 +1,21 @@
+import React from 'react';
 import '../../styles/Blog.css';
+import DynamicHeader from '../../components/DynamicHeader';
 
 
-function ManutencaoDeMotores() {
+const ManutencaoDeMotores = () => {
+const messages = [
+    {
+      title: 'Retífica de Motores',
+      subtitle: 'Como Saber Quando Seu Motor Precisa de Reparo?',
+    },
+  ];
+
   return (
-    <section className="page-claro">
-
-      <section id="manutencao-de-motores" className="blog-section">
+    <div className="page-claro">
+      <DynamicHeader messages={messages} />
+    <div className="container-claro">
+      <section id="custo-retifica-motor" className="blog-section">
         <h2 className="title">
           Manutenção de Motores: Dicas de Profissionais para Maximizar a Vida Útil do Seu Motor
         </h2>
@@ -54,7 +64,8 @@ function ManutencaoDeMotores() {
           A vida útil do motor depende de cuidados simples, mas constantes. Investir em manutenção preventiva garante economia e tranquilidade ao dirigir. Conte com a ZER0 20 GARAGE™ para manter seu motor sempre em forma.
         </p>
       </section>
-    </section>
+    </div>
+    </div>
   );
 }
 
