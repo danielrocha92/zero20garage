@@ -28,11 +28,9 @@
 }
 
 .scroll-to-top:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    0 6px 16px rgba(0, 0, 0, 0.35),
-    0 0 10px rgba(255, 59, 63, 0.6);
-  background: linear-gradient(135deg, #c80000, #900000);
+  outline: none;
+  box-shadow: 0 0 6px 2px var(--vermelho-principal);
+  border-radius: 50%;
 }
 
 @keyframes fadeInUp {

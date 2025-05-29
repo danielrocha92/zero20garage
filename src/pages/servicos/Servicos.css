@@ -63,10 +63,12 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-top: 1rem;
+  outline: none;
 }
 
 .service-item__button:hover {
   background-color: rgba(197, 4, 4, 0.8);
+  outline: none;
 }
 
 .service-icon,
@@ -152,6 +154,7 @@
   .service-item__button {
     padding: 0.8rem 1.8rem;  /* Reduzir o tamanho do botão */
     font-size: 1rem;
+    outline: none;
   }
 }
 
@@ -182,5 +185,6 @@
   .service-item__button {
     padding: 0.8rem 1.5rem;  /* Ajuste no tamanho do botão */
     font-size: 1rem;
+    outline: none;
   }
 }

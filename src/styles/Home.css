@@ -28,10 +28,12 @@ h3 {
   border-radius: 0.5rem;
   text-decoration: none;
   transition: background 0.3s ease;
+  outline: none;
 }
 
 .button:hover {
   background: #cc0012;
+  outline: none;
 }
 
 /* Grid de destaques */
@@ -116,6 +118,7 @@ h3 {
   .button {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
+    outline: none;
   }
 
   .highlights-grid {

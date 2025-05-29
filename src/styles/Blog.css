@@ -77,11 +77,13 @@
   text-decoration: none;
 
   transition: background 0.3s ease, transform 0.3s ease;
+  outline: none;
 }
 
 .blog-item__button:hover {
   background: rgba(197, 4, 4, 0.8);
   transform: translateY(-3px);
+  outline: none;
 }
 
 /* Ícone opcional */
@@ -159,6 +161,7 @@
   .blog-item__button {
     padding: 0.6rem 1.4rem;
     font-size: 0.9rem;
+    outline: none;
   }
 
   .blog-item .icon {

@@ -12,7 +12,7 @@
   padding: 1rem;
 }
 
-.highlight-card {
+.highlight-testimonial-card {
   background-color: #1c1c1e;
   color: #fff;
   border-radius: 1rem;
@@ -38,50 +38,20 @@
 
 .service-photo {
   width: 100%;
-  max-height: 400px;
+  max-height: 350px; /* Ajuste para desktop */
   object-fit: cover;
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-.review-date {
-  display: block;
-  margin: 0.5rem 0;
-  font-size: 0.9rem;
-  color: #ccc;
-}
-
-.stars {
-  color: #ffc107;
-  font-size: 1.2rem;
-  margin: 0.5rem 0;
-}
-
-.star {
-  margin: 0 2px;
-}
-
-.swiper-button-next,
-.swiper-button-prev {
-  color: #fff;
-}
-
-.swiper-pagination-bullet {
-  background: #888;
-  opacity: 1;
-}
-
-.swiper-pagination-bullet-active {
-  background: #fff;
-}
-
+/* Modal */
 .testimonial-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.822);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,18 +59,18 @@
 }
 
 .testimonial-modal-content {
-  background: var(--cinza-medio);
+  background: var(-webkit-backdrop-filter, blur(10px));
+  backdrop-filter: blur(10px);
   padding: 1.5rem;
   border-radius: 8px;
-  max-width: 400px;       /* menor largura para desktop */
+  max-width: 600px; /* Aumentado para desktop */
   width: 90%;
   text-align: center;
   position: relative;
-  max-height: 90vh;       /* limita a altura para caber na tela */
-  overflow-y: auto;       /* rolar conteúdo se passar da altura */
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
-/* Para fotos no modal */
 .testimonial-modal .user-photo {
   width: 60px;
   height: 60px;
@@ -108,15 +78,10 @@
 }
 
 .testimonial-modal .service-photo {
-  max-height: 300px;
-  width: auto;
-  border-radius: 8px;
-  margin-top: 1rem;
-}
-
-.testimonial-modal .service-photo {
   width: 100%;
-  border-radius: 0.5rem;
+  height: auto;
+  object-fit: contain; /* Exibe imagem completa */
+  border-radius: 8px;
   margin-top: 1rem;
 }
 
@@ -126,10 +91,10 @@
   margin-top: 0.5rem;
 }
 
-/* Setas customizadas do Swiper */
+/* Swiper */
 .swiper-button-prev,
 .swiper-button-next {
-  color: white;           /* Cor das setas inicialmente */
+  color: white;
   background-color: transparent;
   width: 40px;
   height: 40px;
@@ -141,22 +106,19 @@
   transition: background-color 0.3s ease;
 }
 
-/* Alterar cor e fundo ao passar o mouse */
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
-  background-color: #e23838;  /* vermelho parecido com o usado no Sobre */
+  background-color: #e23838;
   color: white;
   box-shadow: 0 0 10px rgba(226, 56, 56, 0.7);
 }
 
-/* Ajuste do ícone */
 .swiper-button-prev::after,
 .swiper-button-next::after {
   font-size: 20px;
   font-weight: bold;
 }
 
-/* Se quiser ajustar posição das setas */
 .swiper-button-prev {
   left: 10px;
 }
@@ -165,26 +127,49 @@
   right: 10px;
 }
 
+.swiper-pagination-bullet {
+  background: #888;
+  opacity: 1;
+}
 
-/* Ajustes para telas pequenas */
+.swiper-pagination-bullet-active {
+  background: #fff;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .service-photo {
+    max-height: 250px; /* Menor altura no mobile */
+  }
+}
+
 @media (max-width: 480px) {
   .testimonial-modal-content {
-    max-width: 90vw;      /* quase toda a tela no celular */
+    max-width: 90vw;
     padding: 1rem;
   }
 
   .testimonial-modal .user-photo {
     width: 50px;
     height: 50px;
+    margin-bottom: 1rem;
   }
 
   .testimonial-modal .service-photo {
-    max-height: 200px;
+    width: 100%;
+    height: auto;
+    max-height: 45vh; /* Limita para não ocupar a tela toda, mas maior que antes */
+    object-fit: contain; /* Exibe a imagem completa no modal */
+    display: block;
+    border-radius: 0.5rem;
   }
 
-     /* Botões */
-    .button {
-        padding: 0.6rem 1rem;
-        font-size: 0.9rem;
-    }
+  .service-photo {
+    max-height: 200px; /* Reduzido ainda mais no mobile */
+  }
+
+  .button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
 }

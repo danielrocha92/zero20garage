@@ -17,9 +17,9 @@
 }
 
 .whatsapp-button:hover {
-    background-color: #14eb00; /* Cor verde mais escura no hover */
-    transform: scale(1.1);
-    border-radius: 50%;
+  outline: none;
+  box-shadow: 0 0 6px 2px #14eb00;
+  border-radius: 50%;
 }
 
 /* Responsivo: Mover para o canto inferior esquerdo em telas menores */

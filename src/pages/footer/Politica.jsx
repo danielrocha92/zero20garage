@@ -43,8 +43,8 @@ const Privacidade = () => {
   return (
     <div className="page-claro">
       <DynamicHeader messages={messages} />
-
       <div className="container-claro">
+        <section className="footer-section">
       <h2
         translate="no"
         className="title">
@@ -107,6 +107,7 @@ const Privacidade = () => {
           </p>
           <button onClick={handleContentUpdate}></button>
         </div>
+        </section>
       </div>
     </div>
   );

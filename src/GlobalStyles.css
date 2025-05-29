@@ -33,6 +33,7 @@ body {
 }
 
 .container-black {
+  padding: 2rem 0.5rem;
   color: var(--cinza-claro);
   opacity: 0.75;
   backdrop-filter: blur(10px);
@@ -67,15 +68,17 @@ body {
 
 .page-claro h3,
 .page-claro .subtitle {
+  padding: 1rem;
   font-size: 1.6rem;
   font-weight: 600;
   margin: 2rem 0 1rem;
-  color: var(--cinza-claro);
+  color: var(--cinza-escuro);
   font-family: 'Nunito', sans-serif;
 }
 
 .page-claro .paragraph,
 .page-claro p {
+  padding: 2rem;
   font-size: 1.1rem;
   line-height: 1.7;
   margin-bottom: 1rem;
@@ -109,10 +112,12 @@ body {
   margin-top: 1rem;
   box-shadow: 0 4px 8px rgba(255, 0, 0, 0.4);
   text-align: center;
+  outline: none;
 }
 
 .page-claro .button:hover {
   background-color: var(--vermelho-hover);
+  outline: none;
 }
 
 .page-black {
@@ -190,6 +195,7 @@ h3 {
   background-color: var(--vermelho-hover);
   box-shadow: 0 6px 12px rgba(204, 0, 0, 0.6);
   transform: translateY(-2px);
+  outline: none;
 }
 
 a {
@@ -271,6 +277,7 @@ a:focus, .button:focus, .submit-button:focus {
   }
   .button, .submit-button {
     background-color: var(--vermelho-hover);
+    outline: none;
   }
   .highlight-item {
     background-color: rgba(18, 18, 18, 0.3);
@@ -307,6 +314,7 @@ a:focus, .button:focus, .submit-button:focus {
     padding: 0.4rem 0.8rem;
     font-size: 0.85rem;
     max-width: 120px;
+    outline: none;
   }
   a {
     font-size: 0.9rem;
@@ -335,6 +343,7 @@ a:focus, .button:focus, .submit-button:focus {
   .page-claro .button {
     font-size: 0.95rem;
     padding: 0.6rem 1.2rem;
+    outline: none;
   }
   /* ===== Fim de Estilos específicos para .page-claro (Manutenção Preventiva e similares) ===== */
 }

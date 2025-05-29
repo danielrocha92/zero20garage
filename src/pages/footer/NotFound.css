@@ -36,6 +36,7 @@
     text-decoration: none;
     transition: background-color 0.3s ease, transform 0.3s ease;
     cursor: pointer; /* Adiciona um cursor de ponteiro */
+    outline: none;
   }
 
   .not-found-link:hover {
@@ -46,6 +47,7 @@
     background-color: rgba(54, 24, 24, 0.5);
     color: #c50404;
     transform: scale(1.05);
+    outline: none;
   }
 
   .info-section {

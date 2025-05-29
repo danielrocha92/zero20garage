@@ -1,0 +1,39 @@
+.carousel-container {
+  max-width: 800px;
+  margin: 3rem auto 2rem auto;
+  padding: 0 1rem; /* padding lateral para evitar colar na borda no mobile */
+}
+
+.carousel-image {
+  width: 100%;
+  height: 300px; /* altura fixa para manter consistência visual */
+  border-radius: 1rem; /* bordas mais suaves */
+  object-fit: cover;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* profundidade moderna */
+  transition: transform 0.3s ease;
+}
+
+.carousel-image:hover {
+  transform: scale(1.02); /* efeito de zoom leve ao hover */
+}
+
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+  .carousel-container {
+    max-width: 100%;
+    padding: 0 0.5rem;
+    margin-top: 2rem;
+  }
+
+  .carousel-image {
+    height: 200px; /* altura menor para telas pequenas */
+    border-radius: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-image {
+    height: 180px; /* ainda menor para celulares */
+    border-radius: 0.5rem;
+  }
+}

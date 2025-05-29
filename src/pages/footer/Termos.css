@@ -12,11 +12,13 @@
 .terms-of-use-link {
   color: #c0392b;
   text-decoration: none;
+  outline: none;
 }
 
 .terms-of-use-link:hover {
   text-decoration: underline;
   color: var(--cor-destaque);
+  outline: none;
 }
 
 /* ===================== */

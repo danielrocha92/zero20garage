@@ -61,16 +61,20 @@ const TestimonialsCarousel = () => {
               className="testimonial-item"
               onClick={() => setSelectedTestimonial(item)}
             >
-              <div className="highlight-card">
+              <div className="highlight-testimonial-card">
                 <img src={item.profilePhoto} alt={item.name} className="user-photo" />
-                <strong><p>{item.review.substring(0, 100)}...</p></strong>
+                <strong>
+                  <p>{item.review.substring(0, 100)}...</p>
+                </strong>
                 <div className="service-photo-container">
                   <img src={item.servicePhoto} alt={`Serviço de ${item.name}`} className="service-photo" />
                 </div>
                 <span className="review-date">{item.date}</span>
                 <div className="stars">
                   {Array.from({ length: 5 }, (_, i) => (
-                    <span key={i} className="star">{i < item.rating ? '★' : '☆'}</span>
+                    <span key={i} className="star">
+                      {i < item.rating ? '★' : '☆'}
+                    </span>
                   ))}
                 </div>
                 <p>- {item.name}</p>
@@ -84,18 +88,28 @@ const TestimonialsCarousel = () => {
         <div className="testimonial-modal" onClick={() => setSelectedTestimonial(null)}>
           <div className="testimonial-modal-content" onClick={e => e.stopPropagation()}>
             <img src={selectedTestimonial.profilePhoto} alt={selectedTestimonial.name} className="user-photo" />
-            <strong><p>{selectedTestimonial.review}</p></strong>
+            <strong>
+              <p>{selectedTestimonial.review}</p>
+            </strong>
             <div className="service-photo-container">
-              <img src={selectedTestimonial.servicePhoto} alt={`Serviço de ${selectedTestimonial.name}`} className="service-photo" />
+              <img
+                src={selectedTestimonial.servicePhoto}
+                alt={`Serviço de ${selectedTestimonial.name}`}
+                className="service-photo"
+              />
             </div>
             <span className="review-date">{selectedTestimonial.date}</span>
             <div className="stars">
               {Array.from({ length: 5 }, (_, i) => (
-                <span key={i} className="star">{i < selectedTestimonial.rating ? '★' : '☆'}</span>
+                <span key={i} className="star">
+                  {i < selectedTestimonial.rating ? '★' : '☆'}
+                </span>
               ))}
             </div>
             <p>- {selectedTestimonial.name}</p>
-            <button onClick={() => setSelectedTestimonial(null)} className="button">Fechar</button>
+            <button onClick={() => setSelectedTestimonial(null)} className="button">
+              Fechar
+            </button>
           </div>
         </div>
       )}

@@ -10,7 +10,7 @@
   background-repeat: no-repeat;
   background-blend-mode: lighten;
   background-color: rgba(0, 0, 0, 0.4);
-  margin-top: 60px; /* compensação da altura da navbar */
+  margin-top: 111px; /* compensação da altura da navbar */
 }
 
 
@@ -94,7 +94,8 @@
 /* Responsividade */
 @media (max-width: 768px) {
   .header {
-    height: 40vh;
+    height: 70vh;
+    margin-top: 95px; /* compensação da altura da navbar */
   }
 
   .message-container {
@@ -113,7 +114,8 @@
 
 @media (max-width: 480px) {
   .header {
-    height: 30vh;
+    height: 50vh;
+    margin-top: 95px; /* compensação da altura da navbar */
   }
 
   .message-container {
