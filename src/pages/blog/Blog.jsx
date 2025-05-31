@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import '../../styles/Blog.css';
 import DynamicHeader from '../../components/DynamicHeader';
+import Breadcrumbs from '../../components/Breadcrumbs';
 import { Helmet } from 'react-helmet';
 import AnimatedPage from '../../components/AnimatedPage';
 
@@ -61,6 +62,7 @@ const Blog = () => {
 
             <div className="page-black">
                 <DynamicHeader page="blog" messages={messages} />
+                <Breadcrumbs />
                 <AnimatedPage />
 
                 <div className="container-black">

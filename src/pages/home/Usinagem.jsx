@@ -38,7 +38,10 @@ function Usinagem() {
       <DynamicHeader page="home" messages={messages} />
       <AnimatedPage />
 
-      {/* Carrossel de imagens */}
+      <div className="container-black">
+        <section className="section">
+          <div className='highlight-item'>
+                  {/* Carrossel de imagens */}
       <div className="carousel-container">
         <Slider {...sliderSettings}>
           {images.map((src, index) => (
@@ -48,10 +51,6 @@ function Usinagem() {
           ))}
         </Slider>
       </div>
-
-      <div className="container-black">
-        <section className="section">
-          <div className='highlight-item'>
             <h1 className='title'>Usinagem de Motores</h1>
             <h3 className='subtitle'>Precisão, Qualidade e Tecnologia Avançada</h3>
             <p className='paragraph'>
