@@ -15,7 +15,7 @@ function Cp() {
   ];
 
   return (
-    <div className="page-claro">
+    <div className="page modo-claro">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
 

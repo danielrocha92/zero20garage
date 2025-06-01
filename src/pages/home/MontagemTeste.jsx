@@ -34,7 +34,7 @@ function MontagemTeste() {
   };
 
   return (
-    <div className="page-black">
+    <div className="page modo-escuro">
       <DynamicHeader page="home" messages={messages} />
       <Breadcrumbs />
 

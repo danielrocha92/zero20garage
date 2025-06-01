@@ -13,7 +13,7 @@ const messages = [
   ];
 
   return (
-    <div className="page-claro">
+    <div className="page modo-claro">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
     <div className="container-claro">

@@ -22,7 +22,7 @@ function Contato() {
   ];
 
   return (
-    <div className="page-black">
+    <div className="page modo-escuro">
     <DynamicHeader page="contato" messages={messages} />
     <Breadcrumbs />
 

@@ -12,7 +12,7 @@ const messages = [
   ];
 
   return (
-    <div className="page-claro">
+    <div className="page modo-claro">
       <DynamicHeader messages={messages} />
     <div className="container-claro">
       <section id="custo-retifica-motor" className="blog-section">

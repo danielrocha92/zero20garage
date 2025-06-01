@@ -114,13 +114,6 @@ h3 {
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .container-black {
-    padding: 1rem;
-    border-radius: 0.5rem;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(8px);
-  }
-
   .button {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;

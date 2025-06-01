@@ -8,6 +8,7 @@
   --vermelho-hover: #cc0000;
 }
 
+/* ===== Reset ===== */
 *,
 *::before,
 *::after {
@@ -25,22 +26,27 @@ body {
   color: var(--cinza-escuro);
 }
 
-.container-claro {
-  color: var(--cinza-escuro);
+/* ===== Containers gerais ===== */
+.container-claro, .container-black {
+  max-width: 1100px;
+  padding: 2rem 0.5rem;
   opacity: 0.75;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  margin: 0 auto;
+  padding: 0 20px;
+  background: rgba(0, 0, 0, 0.397);
+}
+
+.container-claro {
+  color: var(--cinza-escuro);
 }
 
 .container-black {
-  padding: 2rem 0.5rem;
   color: var(--cinza-claro);
-  opacity: 0.75;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
-/* ===== Estilos específicos para .page-claro (Manutenção Preventiva e similares) ===== */
+/* ===== Estilos .page-claro ===== */
 .page-claro {
   background-color: var(--cinza-claro);
   color: var(--cinza-escuro);
@@ -59,7 +65,7 @@ body {
 .page-claro .title {
   font-size: 2.5rem;
   font-weight: 700;
-  line-height: 1.2; /* ajuste */
+  line-height: 1.2;
   color: var(--vermelho-principal);
   text-align: center;
   font-family: 'Nunito', sans-serif;
@@ -117,17 +123,21 @@ body {
 
 .page-claro .button:hover {
   background-color: var(--vermelho-hover);
-  outline: none;
 }
 
-.page-black {
+/* ===== Estilos .page modo-escuro ===== */
+.page modo-escuro {
+  background-color: var(--cinza-escuro);
   color: var(--cinza-claro);
+  min-height: 100vh;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
   opacity: 0.95;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
-/* ===== Cabeçalhos ===== */
+/* ===== Cabeçalhos gerais ===== */
 .title, h1 {
   font-size: 2rem;
   font-weight: bold;
@@ -154,7 +164,7 @@ h3 {
 /* ===== Seções ===== */
 .container-section {
   padding: 4rem;
-  background-color: rgba(245, 245, 245, 0.731); /* branco com transparência */
+  background-color: rgba(245, 245, 245, 0.731);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 12px;
@@ -163,54 +173,38 @@ h3 {
 }
 
 /* ===== Botões e Links ===== */
-.button,
-.submit-button {
+.button, .submit-button {
   background-color: var(--vermelho-principal);
   color: var(--cinza-claro);
   border: none;
   padding: 0.5rem 1rem;
   cursor: pointer;
-  text-decoration: none;
   font-size: 0.9rem;
   font-weight: 600;
   border-radius: 8px;
-  outline: none;
-
   max-width: 190px;
   width: 100%;
   box-sizing: border-box;
-
   box-shadow: 0 4px 8px rgba(255, 0, 0, 0.4);
-  transition:
-    background-color 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.15s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
   user-select: none;
-
   display: block;
   margin: 0 auto;
-  align-items: center;
   text-align: center;
 }
 
-/* Hover */
-.button:hover,
-.submit-button:hover {
-  background-color: #cc0000; /* tom mais escuro */
+.button:hover, .submit-button:hover {
+  background-color: var(--vermelho-hover);
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(255, 0, 0, 0.5);
 }
 
-/* Foco acessível */
-.button:focus,
-.submit-button:focus {
+.button:focus, .submit-button:focus {
   outline: 2px solid #ffffffcc;
   outline-offset: 2px;
 }
 
-/* Desabilitado */
-.button:disabled,
-.submit-button:disabled {
+.button:disabled, .submit-button:disabled {
   background-color: #999;
   color: #ccc;
   cursor: not-allowed;
@@ -219,9 +213,7 @@ h3 {
   opacity: 0.6;
 }
 
-/* Ícone à esquerda */
-.button i,
-.submit-button i {
+.button i, .submit-button i {
   margin-right: 0.5rem;
   font-size: 1rem;
   vertical-align: middle;
@@ -247,7 +239,7 @@ input, textarea {
   font-size: 1rem;
 }
 
-/* ===== Destaques / Highlights ===== */
+/* ===== Destaques ===== */
 .highlights-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -256,7 +248,7 @@ input, textarea {
 }
 
 .highlight-item {
-  background-color: rgba(245, 245, 245, 0.15); /* branco translúcido */
+  background-color: rgba(245, 245, 245, 0.8); /* Menos transparente */
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-radius: 12px;
@@ -273,6 +265,7 @@ input, textarea {
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
+/* ===== FAQ ===== */
 .faq-section {
   padding: 2rem 1rem;
   background-color: var(--cinza-fundo);
@@ -343,8 +336,6 @@ input, textarea {
   background-color: #555;
 }
 
-
-
 /* ===== Animações ===== */
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -355,106 +346,72 @@ input, textarea {
   animation: fadeIn 1s ease-in-out;
 }
 
-/* ===== Efeitos de foco ===== */
-a:focus, .button:focus, .submit-button:focus {
-  outline: none;
-}
-
 /* ===== Dark Mode ===== */
 @media (prefers-color-scheme: dark) {
   body {
     background-color: var(--cinza-escuro);
     color: var(--cinza-claro);
   }
+
   .container-claro, .page-claro, .container-section {
-  background-color: rgba(245, 245, 245, 0.731); /* branco com transparência */
+    background-color: rgba(245, 245, 245, 0.731);
     color: var(--cinza-claro);
   }
+
   .title, .subtitle, .section h2 {
     color: var(--cinza-claro);
     font-size: 2rem;
   }
+
   a {
     color: var(--cinza-claro);
   }
+
   .button, .submit-button {
     background-color: var(--vermelho-hover);
-    outline: none;
   }
+
   .highlight-item {
-    background-color: rgba(18, 18, 18, 0.3);
+    background-color: rgba(18, 18, 18, 0.7); /* Menos transparente no dark mode */
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
 
 /* ===== Responsividade ===== */
 
-/* Telas médias: tablets */
+/* Telas médias */
 @media (max-width: 768px) {
   h1 { font-size: 2rem; }
   h2 { font-size: 1.8rem; }
   h3 { font-size: 1.5rem; }
-  .highlights-grid {
-    grid-template-columns: 1fr;
-  }
-  .container-section {
-    padding: 2rem;
-
-  }
+  .highlights-grid { grid-template-columns: 1fr; }
+  .container-section { padding: 2rem; }
 }
 
-/* Telas pequenas: celulares */
+/* Telas pequenas */
 @media (max-width: 480px) {
   h1 { font-size: 1.6rem; }
   h2 { font-size: 1.4rem; }
   h3 { font-size: 1.2rem; }
-  .highlight-item {
-    padding: 1.5rem;
-    min-height: auto;
-  }
+  .highlight-item { padding: 1.5rem; min-height: auto; }
+
   .button, .submit-button {
-  .button,
-  .submit-button {
     max-width: 100%;
     font-size: 1rem;
   }
-    outline: none;
-  }
-  a {
-    font-size: 0.9rem;
-  }
 
-  /* ===== Estilos específicos para .page-claro (Manutenção Preventiva e similares) ===== */
+  a { font-size: 0.9rem; }
 
-  .page-claro .title {
-    font-size: 1.8rem;
-  }
-
-  .page-claro .subtitle {
-    font-size: 1.3rem;
-  }
-
-    .page-claro .title {
-    font-size: 2rem;
-  }
-
+  .page-claro .title { font-size: 1.8rem; }
+  .page-claro .subtitle { font-size: 1.3rem; }
   .page-claro .paragraph,
   .page-claro p,
-  .page-claro .section-list li {
-    font-size: 1rem;
-  }
+  .page-claro .section-list li { font-size: 1rem; }
 
   .page-claro .button {
     font-size: 0.95rem;
     padding: 0.6rem 1.2rem;
-    outline: none;
   }
 
-  .title, h1 {
-  font-size: 1.7rem;
-  font-weight: bold;
-}
-
-  /* ===== Fim de Estilos específicos para .page-claro (Manutenção Preventiva e similares) ===== */
-
+  .title, h1 { font-size: 1.7rem; }
 }

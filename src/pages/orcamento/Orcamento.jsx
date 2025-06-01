@@ -81,7 +81,7 @@ function Orcamento() {
   };
 
   return (
-    <div className="page-black">
+    <div className="page modo-escuro">
       <DynamicHeader page="orcamento" messages={messages} />
       <Breadcrumbs />
 
