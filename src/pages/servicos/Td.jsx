@@ -1,4 +1,5 @@
 import DynamicHeader from '../../components/DynamicHeader';
+import Breadcrumbs from '../../components/Breadcrumbs';
 
 
 function Td() {
@@ -16,6 +17,7 @@ function Td() {
   return (
     <div className="page-claro">
       <DynamicHeader messages={messages} />
+      <Breadcrumbs />
 
 
       <div className="container-claro">

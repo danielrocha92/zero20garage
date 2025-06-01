@@ -1,5 +1,6 @@
 import React from 'react';
 import DynamicHeader from '../../components/DynamicHeader';
+import Breadcrumbs from '../../components/Breadcrumbs';
 
 import './Contato.css';
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
@@ -23,6 +24,7 @@ function Contato() {
   return (
     <div className="page-black">
     <DynamicHeader page="contato" messages={messages} />
+    <Breadcrumbs />
 
 
       <div className="container-black">

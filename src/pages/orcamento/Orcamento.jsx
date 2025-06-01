@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import './Orcamento.css';
 import DynamicHeader from '../../components/DynamicHeader';
-
-// import { supabase } from '../../supabaseClient'; // Removido
+import Breadcrumbs from '../../components/Breadcrumbs';
 import emailjs from 'emailjs-com';
-import AnimatedPage from '../../components/AnimatedPage';
 
 function Orcamento() {
   const messages = [
@@ -49,26 +47,19 @@ function Orcamento() {
         data: new Date().toLocaleString('pt-BR'),
       };
 
-      // ✅ Envia para o Google Sheets via proxy backend hospedado no Render
       await fetch('https://api-orcamento-n49u.onrender.com/api/orcamento', {
         method: 'POST',
         body: JSON.stringify(formDataComData),
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       });
 
-      // ✅ Envia e-mail via EmailJS
       await emailjs.send(
         'service_mbg69sw',
         'template_tso8mol',
         {
-          nome: formDataComData.nome,
-          email: formDataComData.email,
-          telefone: formDataComData.telefone,
-          servico: formDataComData.servico,
-          mensagem: formDataComData.mensagem,
-          data: formDataComData.data,
+          ...formDataComData,
         },
         'NxziW1zSC820uuLvF'
       );
@@ -91,14 +82,16 @@ function Orcamento() {
 
   return (
     <div className="page-black">
-    <DynamicHeader page="orcamento" messages={messages} />
+      <DynamicHeader page="orcamento" messages={messages} />
+      <Breadcrumbs />
 
-      <AnimatedPage />
       <div className="container-black">
         <section className="section">
-          <div className='highlight-item'>
+          <div className="highlight-item">
             <h1 className="title">Solicite um Orçamento</h1>
-            <h3 className='subtitle'>Preencha o formulário abaixo para receber um orçamento detalhado e personalizado.</h3>
+            <h3 className="subtitle">
+              Preencha o formulário abaixo para receber um orçamento detalhado e personalizado.
+            </h3>
 
             <form className="orcamento-form" onSubmit={handleSubmit}>
               <div className="form-group">
@@ -113,6 +106,7 @@ function Orcamento() {
                   placeholder="Digite seu nome"
                 />
               </div>
+
               <div className="form-group">
                 <label htmlFor="email">E-mail:</label>
                 <input
@@ -125,6 +119,7 @@ function Orcamento() {
                   placeholder="Digite seu e-mail"
                 />
               </div>
+
               <div className="form-group">
                 <label htmlFor="telefone">Telefone:</label>
                 <input
@@ -136,23 +131,24 @@ function Orcamento() {
                   placeholder="Digite seu telefone"
                 />
               </div>
+
               <div className="form-group">
                 <label htmlFor="servico">Serviço Desejado:</label>
                 <select
-                  className='option'
                   id="servico"
                   name="servico"
                   value={formData.servico}
                   onChange={handleChange}
                   required
                 >
-                  <option className='option' value="">Selecione um serviço</option>
-                  <option className='option' value="retifica">Retífica de Motores</option>
-                  <option className='option' value="manutencao">Manutenção Preventiva</option>
-                  <option className='option' value="revisao">Revisão Completa</option>
-                  <option className='option' value="outro">Outro</option>
+                  <option value="">Selecione um serviço</option>
+                  <option value="retifica">Retífica de Motores</option>
+                  <option value="manutencao">Manutenção Preventiva</option>
+                  <option value="revisao">Revisão Completa</option>
+                  <option value="outro">Outro</option>
                 </select>
               </div>
+
               <div className="form-group">
                 <label htmlFor="mensagem">Mensagem:</label>
                 <textarea
@@ -161,15 +157,16 @@ function Orcamento() {
                   value={formData.mensagem}
                   onChange={handleChange}
                   rows="4"
-                  placeholder="Digite sua mensagem"
+                  placeholder="Descreva o serviço desejado, problemas do veículo, modelo/ano etc."
                 ></textarea>
               </div>
 
               <button type="submit" className="submit-button" disabled={loading}>
                 {loading ? 'Enviando...' : 'Solicitar Orçamento'}
               </button>
+
               {success !== null && (
-                <div className={`feedback-success ${success ? 'success' : 'feedback-error'}`}>
+                <div className={`feedback ${success ? 'feedback-success' : 'feedback-error'}`}>
                   {success
                     ? 'Formulário enviado com sucesso!'
                     : 'Ocorreu um erro ao enviar o formulário. Tente novamente!'}

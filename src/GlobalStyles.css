@@ -69,7 +69,7 @@ body {
 .page-claro h3,
 .page-claro .subtitle {
   padding: 1rem;
-  font-size: 1.6rem;
+  font-size: 1.9rem;
   font-weight: 600;
   margin: 2rem 0 1rem;
   color: var(--cinza-escuro);
@@ -79,10 +79,10 @@ body {
 .page-claro .paragraph,
 .page-claro p {
   padding: 2rem;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   line-height: 1.7;
   margin-bottom: 1rem;
-  color: var(--cinza-medio);
+  color: var(--cinza-escuro);
 }
 
 .page-claro .section-list {
@@ -129,7 +129,7 @@ body {
 
 /* ===== Cabeçalhos ===== */
 .title, h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bold;
   color: var(--preto);
 }
@@ -189,13 +189,42 @@ h3 {
 
   display: block;
   margin: 0 auto;
+  align-items: center;
+  text-align: center;
 }
 
-.button:hover, .submit-button:hover {
-  background-color: var(--vermelho-hover);
-  box-shadow: 0 6px 12px rgba(204, 0, 0, 0.6);
+/* Hover */
+.button:hover,
+.submit-button:hover {
+  background-color: #cc0000; /* tom mais escuro */
   transform: translateY(-2px);
-  outline: none;
+  box-shadow: 0 6px 12px rgba(255, 0, 0, 0.5);
+}
+
+/* Foco acessível */
+.button:focus,
+.submit-button:focus {
+  outline: 2px solid #ffffffcc;
+  outline-offset: 2px;
+}
+
+/* Desabilitado */
+.button:disabled,
+.submit-button:disabled {
+  background-color: #999;
+  color: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+  opacity: 0.6;
+}
+
+/* Ícone à esquerda */
+.button i,
+.submit-button i {
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  vertical-align: middle;
 }
 
 a {
@@ -244,6 +273,78 @@ input, textarea {
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
+.faq-section {
+  padding: 2rem 1rem;
+  background-color: var(--cinza-fundo);
+  border-radius: 12px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  color: var(--vermelho-principal);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.faq-item {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.faq-item:hover {
+  background-color: #f9f9f9;
+}
+
+.faq-question {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--preto);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-answer-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-item.ativo .faq-answer-wrapper {
+  max-height: 500px;
+  margin-top: 0.5rem;
+}
+
+.faq-answer {
+  font-size: 0.95rem;
+  color: var(--cinza-escuro);
+  line-height: 1.6;
+}
+
+.btn-ver-mais {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-ver-mais:hover {
+  background-color: #555;
+}
+
+
+
 /* ===== Animações ===== */
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -271,6 +372,7 @@ a:focus, .button:focus, .submit-button:focus {
   }
   .title, .subtitle, .section h2 {
     color: var(--cinza-claro);
+    font-size: 2rem;
   }
   a {
     color: var(--cinza-claro);
@@ -311,9 +413,11 @@ a:focus, .button:focus, .submit-button:focus {
     min-height: auto;
   }
   .button, .submit-button {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.85rem;
-    max-width: 120px;
+  .button,
+  .submit-button {
+    max-width: 100%;
+    font-size: 1rem;
+  }
     outline: none;
   }
   a {
@@ -322,7 +426,7 @@ a:focus, .button:focus, .submit-button:focus {
 
   /* ===== Estilos específicos para .page-claro (Manutenção Preventiva e similares) ===== */
 
-    .page-claro .title {
+  .page-claro .title {
     font-size: 1.8rem;
   }
 
@@ -345,5 +449,12 @@ a:focus, .button:focus, .submit-button:focus {
     padding: 0.6rem 1.2rem;
     outline: none;
   }
+
+  .title, h1 {
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+
   /* ===== Fim de Estilos específicos para .page-claro (Manutenção Preventiva e similares) ===== */
+
 }

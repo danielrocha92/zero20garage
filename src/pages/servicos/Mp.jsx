@@ -1,7 +1,7 @@
 // ManutencaoPreventiva.jsx
 import React from 'react';
 import DynamicHeader from '../../components/DynamicHeader';
-
+import Breadcrumbs from '../../components/Breadcrumbs';
 
 function Mp() {
     const messages = [
@@ -19,7 +19,7 @@ function Mp() {
 
         <div className="page-claro">
             <DynamicHeader messages={messages} />
-
+            <Breadcrumbs />
 
             <div className="container-claro">
                 <section className="section">

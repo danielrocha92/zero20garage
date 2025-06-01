@@ -43,6 +43,7 @@ import Termos from './pages/footer/Termos';
 
 import './App.css';
 import './GlobalStyles.css';
+import AnimatedPage from './components/AnimatedPage';
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -54,11 +55,11 @@ const AnimatedRoutes = () => {
         <Route path="/Sobre" element={<Sobre />} />
         <Route path="/Contato" element={<Contato />} />
         <Route path="/Servicos" element={<Servicos />} />
-        <Route path="/Mp" element={<Mp />} />
-        <Route path="/Dp" element={<Dp />} />
-        <Route path="/Tp" element={<Tp />} />
-        <Route path="/Td" element={<Td />} />
-        <Route path="/Cp" element={<Cp />} />
+        <Route path="/Servicos/Mp" element={<Mp />} />
+        <Route path="/Servicos/Dp" element={<Dp />} />
+        <Route path="/Servicos/Tp" element={<Tp />} />
+        <Route path="/Servicos/Td" element={<Td />} />
+        <Route path="/Servicos/Cp" element={<Cp />} />
 
         {/* ✅ Novas rotas explicativas */}
         <Route path="/Home/diagnostico" element={<Diagnostico />} />
@@ -91,6 +92,7 @@ function App() {
   return (
     <Router>
       <Layout>
+        <AnimatedPage />
         <AnimatedRoutes />
         <ScrollToTop />
         <ScrollToTopButton />

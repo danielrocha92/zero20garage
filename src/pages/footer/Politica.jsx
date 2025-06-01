@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Politica.css'; // Importe o arquivo CSS para estilos específicos
 import DynamicHeader from '../../components/DynamicHeader';
+import Breadcrumbs from '../../components/Breadcrumbs';
 
 
 const Privacidade = () => {
@@ -43,6 +44,8 @@ const Privacidade = () => {
   return (
     <div className="page-claro">
       <DynamicHeader messages={messages} />
+      <Breadcrumbs />
+
       <div className="container-claro">
         <section className="footer-section">
       <h2

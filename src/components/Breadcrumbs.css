@@ -1,54 +1,111 @@
 .breadcrumbs {
   width: 100%;
-  background: rgba(0,0,0,0.15);
-  padding: 0.5rem 1.5rem;
-  font-size: 1rem;
-  color: #d3d3d3;
+  background: none; /* Sem fundo */
+  padding: 0.5rem 1rem; /* Espaçamento confortável */
+  font-size: 0.8rem;
+  color: #d3d3d3; /* Cor clara conforme sua paleta */
   display: flex;
   align-items: center;
   box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: Arial, sans-serif; /* Similar ao usado na imagem */
 }
 
 .breadcrumbs ul {
   list-style: none;
   display: flex;
-  gap: 0.5rem;
+  gap: 0.2rem;
   padding: 0;
   margin: 0;
-  flex-wrap: wrap;
 }
 
 .breadcrumbs li {
   display: flex;
   align-items: center;
+  white-space: nowrap;
 }
 
 .breadcrumbs li:not(:last-child)::after {
-  content: '>';
-  margin: 0 0.5rem;
-  color: #ff3b3f;
-  font-weight: bold;
+  content: '/';
+  margin: 0 0.3rem;
+  color: #d3d3d3; /* Cinza claro da sua paleta */
+  font-weight: normal;
+  font-size: 0.8rem;
 }
 
 .breadcrumbs a {
-  color: #ff3b3f;
+  color: var(--vermelho-principal, #ff3b3f); /* Mantendo seu vermelho principal */
   text-decoration: none;
   transition: color 0.2s;
   font-weight: 500;
 }
 
 .breadcrumbs a:hover {
-  color: #fff;
+  color: #fff; /* Mantendo hover branco como no estilo inicial */
 }
 
 .breadcrumbs li[aria-current="page"] {
-  color: #fff;
+  color: #fff; /* Mantendo branco para destaque */
   font-weight: bold;
 }
 
+/* Ajustes para mobile */
 @media (max-width: 768px) {
   .breadcrumbs {
-    font-size: 0.9rem;
-    padding: 0.5rem 0.8rem;
+    font-size: 0.7rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .breadcrumbs ul {
+    gap: 0.1rem;
+  }
+
+  .breadcrumbs li {
+    white-space: nowrap;
+  }
+
+  .breadcrumbs li:not(:last-child)::after {
+    content: '/';
+    margin: 0 0.2rem;
+    font-size: 0.7rem;
+  }
+
+  .breadcrumbs a {
+    font-size: 0.7rem;
+  }
+
+  .breadcrumbs li[aria-current="page"] {
+    font-weight: normal; /* Ajustando o peso da fonte para mobile */
+  }
+  .breadcrumbs li[aria-current="page"]::after {
+    content: none; /* Removendo o separador após o item atual */
+  }
+  .breadcrumbs li[aria-current="page"] {
+    color: #d3d3d3; /* Mantendo a cor clara para o item atual */
+  }
+  .breadcrumbs li[aria-current="page"] a {
+    color: #d3d3d3; /* Mantendo a cor clara para o link do item atual */
+  }
+  .breadcrumbs li[aria-current="page"] a:hover {
+    color: #d3d3d3; /* Mantendo a cor clara no hover do link do item atual */
+  }
+  .breadcrumbs li:not(:last-child) {
+    margin-right: 0.1rem; /* Ajustando o espaçamento entre os itens */
+  }
+  .breadcrumbs li {
+    font-size: 0.7rem; /* Ajustando o tamanho da fonte para mobile */
+  }
+  .breadcrumbs a {
+    font-size: 0.7rem; /* Ajustando o tamanho da fonte dos links para mobile */
+  }
+  .breadcrumbs a:hover {
+    font-size: 0.7rem; /* Ajustando o tamanho da fonte no hover dos links para mobile */
+  }
+
+  .breadcrumbs li:not(:last-child)::after {
+    margin: 0 0.2rem;
+    font-size: 0.7rem;
   }
 }

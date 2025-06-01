@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import DynamicHeader from '../../components/DynamicHeader';
-import AnimatedPage from '../../components/AnimatedPage';
+import Breadcrumbs from '../../components/Breadcrumbs';
 import '../../styles/HomeDetails.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -36,7 +36,7 @@ function MontagemTeste() {
   return (
     <div className="page-black">
       <DynamicHeader page="home" messages={messages} />
-      <AnimatedPage />
+      <Breadcrumbs />
 
       <div className="container-black">
         <section className="section">

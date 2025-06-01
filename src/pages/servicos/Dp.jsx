@@ -1,6 +1,7 @@
 // dpnostico.jsx
 import React from 'react';
 import DynamicHeader from '../../components/DynamicHeader';
+import Breadcrumbs from '../../components/Breadcrumbs';
 
 
 function Dp() {
@@ -18,7 +19,7 @@ function Dp() {
   return (
     <div className="page-claro">
       <DynamicHeader messages={messages} />
-
+      <Breadcrumbs />
 
       <div className="container-claro">
         <h2 className="title">

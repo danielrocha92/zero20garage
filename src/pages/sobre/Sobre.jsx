@@ -9,10 +9,9 @@ import teamImage from '../../assets/images/team.jpg';
 import teamImage2 from '../../assets/images/team2.jpg';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Breadcrumbs from '../../components/Breadcrumbs';
 
 import { FaBullseye, FaEye, FaStar } from 'react-icons/fa';
-
-import AnimatedPage from '../../components/AnimatedPage';
 
 const settings = {
   dots: true,                // bolinhas de navegação
@@ -58,7 +57,7 @@ function Sobre() {
     <div className="page-black">
 
       <DynamicHeader page="sobre" messages={messages} />
-      <AnimatedPage />
+      <Breadcrumbs />
 
       <div className="container-black">
         <section className="sobre-section">

@@ -1,6 +1,6 @@
 // Diagnostico.jsx
 import DynamicHeader from '../../components/DynamicHeader';
-
+import Breadcrumbs from '../../components/Breadcrumbs';
 
 function Cp() {
   const messages = [
@@ -17,6 +17,7 @@ function Cp() {
   return (
     <div className="page-claro">
       <DynamicHeader messages={messages} />
+      <Breadcrumbs />
 
 
       <div className="container-claro">

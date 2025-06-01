@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
 import '../../styles/Home.css'; // Importa o arquivo global de estilos
 import DynamicHeader from '../../components/DynamicHeader';
-import AnimatedPage from '../../components/AnimatedPage';
+import Breadcrumbs from '../../components/Breadcrumbs';
 import TestimonialsCarousel from '../../components/TestimonialsCarousel';
 import { FaTools, FaCogs, FaWrench, FaCheckCircle } from 'react-icons/fa';
+import FAQSection from '../../components/FAQSection';
+
+
 
 function Home() {
   const messages = [
@@ -24,8 +27,7 @@ function Home() {
   return (
     <div className="page-black">
     <DynamicHeader page="home" messages={messages} />
-      <AnimatedPage />
-
+    <Breadcrumbs />
       {/* Card padrão Section */}
       <div className="container-black">
         <section className="section">
@@ -121,6 +123,10 @@ function Home() {
               <TestimonialsCarousel />
           </div>
         </section>
+
+        <FAQSection />
+        {/* Fale Conosco */}
+
 
         {/* Endereço */}
         <div className="highlight-item">

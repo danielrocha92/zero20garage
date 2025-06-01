@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../styles/Blog.css';
 import DynamicHeader from '../../components/DynamicHeader';
+import Breadcrumbs from '../../components/Breadcrumbs';
 
 
 const CustoRetifica = () => {
@@ -14,6 +15,7 @@ const messages = [
   return (
     <div className="page-claro">
       <DynamicHeader messages={messages} />
+      <Breadcrumbs />
     <div className="container-claro">
       <section id="custo-retifica-motor" className="blog-section">
         <h2 className="title">
