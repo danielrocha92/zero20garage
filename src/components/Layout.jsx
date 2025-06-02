@@ -44,7 +44,8 @@ const Layout = ({ children }) => {
         )}
         {!loading && children}
       </main>
-      <Footer />
+      {!loading && <Footer />}
+      <div className={`overlay ${loading ? 'visible' : ''}`}></div>
       <WhatsAppButton />
     </div>
   );

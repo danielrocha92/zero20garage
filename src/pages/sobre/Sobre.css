@@ -1,6 +1,20 @@
+/* Não defina variáveis aqui se já estão no global */
+/*
 :root {
   --vermelho-principal: #ff0000;
   --vermelho-hover: #cc0000;
+}
+*/
+
+/* O .page.modo-escuro agora é controlado pelo body.dark-mode no global.
+   Se esta página específica *sempre* for escura, você pode aplicar a classe dark-mode no body ou em um container mais alto.
+   Caso contrário, remova este bloco e deixe o global cuidar.
+*/
+.page.dark-mode { /* Mudança de 'page modo-escuro' para 'page.dark-mode' */
+  color: #e0e0e0;
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+  padding-bottom: 40px;
 }
 
 .historia-grid {
@@ -9,7 +23,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  flex-wrap: wrap; /* Mantém responsividade */
+  flex-wrap: wrap;
   margin-top: 1.5rem;
 }
 
@@ -42,50 +56,48 @@
   flex-direction: column;
   gap: 2rem;
   margin-top: 1.5rem;
-  flex-wrap: wrap; /* Mantém responsividade */
+  flex-wrap: wrap;
 }
 
 .equipe-slider {
   width: 100%;
-  max-width: 400px; /* Ajuste conforme o tamanho desejado */
+  max-width: 400px;
 }
 
 .equipe-textos {
   flex: 1 1 300px;
 }
 
-.page modo-escuro {
-  color: #e0e0e0;
-  font-family: 'Roboto', sans-serif;
-  min-height: 100vh;
-  padding-bottom: 40px;
-}
-
 .sobre-section {
-  margin: 40px 0;
+  margin: 1rem 0;
+  padding: 20px;
 }
 
 .nossa-historia h1 {
   font-size: 2.8rem;
   font-weight: 700;
   margin-bottom: 24px;
-  color: #ff3b3f; /* vermelho vibrante para destaque */
+  color: #ff3b3f;
   text-align: center;
 }
 
 .sobre-paragraph {
   font-size: 1.125rem;
   line-height: 1.6;
-  color: #dcdcdc;
+  color: #dcdcdc; /* Cor específica para parágrafos nesta página */
   margin-bottom: 16px;
 }
 
-.subtitle {
+/* O seletor '.subtitle, h2' no global é mais genérico.
+   Mantenha este H2 específico para sobrescrever o estilo global para esta seção. */
+.sobre-section h2 { /* Mais específico para o h2 dentro de sobre-section */
   font-size: 1.8rem;
   font-weight: 600;
   margin-bottom: 16px;
   color: #ff3b3f;
 }
+
+
 
 .section-list {
   list-style-type: disc;
@@ -95,15 +107,14 @@
 
 .team-image-container {
   position: relative;
-  text-align: left; /* Alinha o conteúdo à esquerda */
-  padding: 0; /* Remover espaçamento interno para preencher totalmente */
+  text-align: left;
+  padding: 0;
   box-sizing: border-box;
   width: 100%;
-  height: 350px; /* altura fixa para desktop */
+  height: 350px;
   overflow: hidden;
 }
 
-/* Imagem preenche totalmente o container */
 .team-image {
   width: 100%;
   object-fit: cover;
@@ -111,11 +122,10 @@
   border: 2px solid var(--vermelho-principal);
   box-shadow: 0 0 10px var(--vermelho-principal);
   transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-  object-fit: cover; /* Garante que a imagem preencha sem distorcer */
+  object-fit: cover;
   display: block;
 }
 
-/* Neon efeito borda no hover */
 .team-image:hover {
   border-color: var(--vermelho-hover);
   box-shadow:
@@ -126,13 +136,12 @@
   transform: scale(1.05);
 }
 
-/* Legenda da imagem, alinhada à esquerda */
 .team-caption {
   margin-top: 10px;
   font-weight: 600;
   color: var(--vermelho-principal);
   font-size: 1.125rem;
-  text-align: left; /* legenda alinhada à esquerda */
+  text-align: left;
 }
 
 /* Ajustes específicos do react-slick */
@@ -151,7 +160,7 @@
   flex-direction: column;
   gap: 2rem;
   padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.25); /* fundo escuro translúcido */
+  background-color: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 16px;
@@ -172,14 +181,12 @@
   flex-shrink: 0;
 }
 
-
-
 .testimonial-item {
   margin-bottom: 24px;
 }
 
 .highlight-card {
-  background-color: #790709;
+  background-color: #790709; /* Cor de fundo específica, sobrescreve .highlight-item */
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
@@ -194,7 +201,7 @@
 
 .stars {
   margin: 8px 0;
-  color: #ffc107; /* amarelo para estrelas */
+  color: #ffc107;
   font-size: 1.25rem;
 }
 
@@ -202,12 +209,13 @@
   margin-right: 2px;
 }
 
-h2 {
+/* Removido o h2 genérico daqui, use .sobre-section h2 ou deixe o global cuidar */
+/* h2 {
   font-size: 2rem;
   margin-bottom: 20px;
   color: #ff3b3f;
   text-align: center;
-}
+} */
 
 /* Responsividade simples */
 
@@ -216,11 +224,11 @@ h2 {
     grid-template-columns: repeat(2, 1fr);
   }
 
-    .team-image {
+  .team-image {
     height: 100%;
   }
 
-    .equipe-grid {
+  .equipe-grid {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;

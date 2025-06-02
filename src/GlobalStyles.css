@@ -13,6 +13,8 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /* ===== Estrutura principal ===== */
@@ -24,6 +26,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   color: var(--cinza-escuro);
+  scroll-behavior: smooth;
 }
 
 /* ===== Containers gerais ===== */
@@ -35,15 +38,16 @@ body {
   -webkit-backdrop-filter: blur(10px);
   margin: 0 auto;
   padding: 0 20px;
-  background: rgba(0, 0, 0, 0.397);
 }
 
 .container-claro {
   color: var(--cinza-escuro);
+  background-color: var(--cinza-medio);
 }
 
 .container-black {
   color: var(--cinza-claro);
+  background-color: var(--cinza-escuro);
 }
 
 /* ===== Estilos .page-claro ===== */
@@ -125,8 +129,8 @@ body {
   background-color: var(--vermelho-hover);
 }
 
-/* ===== Estilos .page modo-escuro ===== */
-.page modo-escuro {
+/* ===== Estilos .page-modo-escuro ===== */
+.page-modo-escuro {
   background-color: var(--cinza-escuro);
   color: var(--cinza-claro);
   min-height: 100vh;
@@ -135,6 +139,11 @@ body {
   opacity: 0.95;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+}
+
+.page-modo-escuro .container-black {
+  background-color: rgba(18, 18, 18, 0.85);
+  color: var(--cinza-claro);
 }
 
 /* ===== Cabeçalhos gerais ===== */
@@ -258,6 +267,7 @@ input, textarea {
   justify-content: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
 }
 
 .highlight-item:hover {
@@ -265,10 +275,28 @@ input, textarea {
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
+.principio-item {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 8px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.highlight-item h3 {
+  font-size: 1.5rem;
+  color: var(--vermelho-principal);
+  margin-bottom: 0.5rem;
+  align-items: center;
+}
+
 /* ===== FAQ ===== */
 .faq-section {
   padding: 2rem 1rem;
-  background-color: var(--cinza-fundo);
+  background-color: var(--cinza-claro);
   border-radius: 12px;
   max-width: 800px;
   margin: 0 auto;
@@ -353,9 +381,14 @@ input, textarea {
     color: var(--cinza-claro);
   }
 
-  .container-claro, .page-claro, .container-section {
-    background-color: rgba(245, 245, 245, 0.731);
+  /* Só afeta containers que são modo escuro, sem afetar containers claros */
+  .container-black,
+  .page-modo-escuro,
+  .page-modo-escuro .container-black,
+  .container-section.dark {
+    background-color: rgba(18, 18, 18, 0.85);
     color: var(--cinza-claro);
+    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
   }
 
   .title, .subtitle, .section h2 {
@@ -374,6 +407,12 @@ input, textarea {
   .highlight-item {
     background-color: rgba(18, 18, 18, 0.7); /* Menos transparente no dark mode */
     border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Ajuste FAQ modo escuro se necessário */
+  .faq-section.dark {
+    background-color: rgba(30, 30, 30, 0.9);
+    color: var(--cinza-claro);
   }
 }
 
@@ -409,9 +448,7 @@ input, textarea {
   .page-claro .section-list li { font-size: 1rem; }
 
   .page-claro .button {
-    font-size: 0.95rem;
-    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    padding: 0.7rem 1.2rem;
   }
-
-  .title, h1 { font-size: 1.7rem; }
 }

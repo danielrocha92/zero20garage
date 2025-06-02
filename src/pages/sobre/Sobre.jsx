@@ -10,6 +10,7 @@ import teamImage2 from '../../assets/images/team2.jpg';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Breadcrumbs from '../../components/Breadcrumbs';
+import TestimonialsCarousel from '../../components/TestimonialsCarousel';
 
 import { FaBullseye, FaEye, FaStar } from 'react-icons/fa';
 
@@ -66,7 +67,7 @@ function Sobre() {
             <div className="historia-grid">
               <div className="historia-text">
                 <p className='sobre-paragraph'>
-                  A Zero20 Garage nasceu da paixão por motores e do desejo de oferecer serviços de retífica e mecânica automotiva de alta qualidade. Fundada em 2020, nossa oficina se destaca pela excelência no atendimento e pela precisão em cada serviço realizado.
+                  a Zero 20 Garage nasceu da paixão por motores e do desejo de oferecer serviços de retífica e mecânica automotiva de alta qualidade. Fundada em 2020, nossa oficina se destaca pela excelência no atendimento e pela precisão em cada serviço realizado.
                 </p>
                 <p className='sobre-paragraph'>
                   Desde o início, investimos em equipamentos de última geração e na capacitação de nossa equipe, garantindo que cada motor receba o cuidado e a atenção que merece.
@@ -128,11 +129,10 @@ function Sobre() {
           </div>
         </section>
 
-      <section className="section">
-        <div className="highlight-item">
-          <h2>Nossos Princípios</h2>
+      <section className="sobre-section">
+        <div className="highlight-item nossa-historia">
+         <h2>Nossos Princípios</h2>
           <div className="principios-grid">
-
             {/* Missão */}
             <div className="principio-item">
               <FaBullseye className="principio-icon" />
@@ -161,7 +161,7 @@ function Sobre() {
             <div className="principio-item">
               <FaStar className="principio-icon" />
               <div>
-                <h3 className="subtitle">Nossos Valores</h3>
+                <h3 className="subtitle-p">Nossos Valores</h3>
                 <p className="sobre-paragraph">
                     <strong>Qualidade:</strong> Compromisso com a excelência em cada serviço.
                 </p>
@@ -179,14 +179,14 @@ function Sobre() {
       </section>
 
         <section className="sobre-section">
-          <div className="highlight-item">
-            <h2>Por que Escolher a Zero20 Garage?</h2>
+          <div className="highlight-item nossa-historia">
+            <h2>Por que Escolher a Zero 20 Garage?</h2>
             <div className="highlights-grid">
-              <div className="highlight-item">
+              <div className="highlight-item nossa-historia">
                 <p className='sobre-paragraph'>Equipamentos de última geração</p>
                 <p className='sobre-paragraph'>Profissionais altamente qualificados</p>
               </div>
-              <div className="highlight-item">
+              <div className="highlight-item nossa-historia">
                 <p className='sobre-paragraph'>Compromisso com a qualidade</p>
                 <p className='sobre-paragraph'>Atendimento diferenciado</p>
               </div>
@@ -194,55 +194,34 @@ function Sobre() {
           </div>
         </section>
 
+        {/* Depoimentos */}
+        <section className="section">
+          <div className='highlight-item'>
+            <h2>O que Nossos Clientes Dizem</h2>
+              <TestimonialsCarousel />
+          </div>
+        </section>
+
         <section className="sobre-section">
-          <div className="highlight-item">
-            <h2>Depoimentos de Clientes</h2>
-            <div className="highlights-grid">
-              <div className="testimonial-item">
-                <div className="highlight-card">
-                  <p className='sobre-paragraph'>
-                    "Serviço excelente! Recomendo a Zero20 Garage para todos que precisam de retífica de motores."
-                  </p>
-                  <span className="review-date">Abril de 2025</span>
-                  <div className="stars">
-                    <span className="star">★</span>
-                    <span className="star">★</span>
-                    <span className="star">★</span>
-                    <span className="star">★</span>
-                    <span className="star">☆</span>
-                  </div>
-                  <strong>- João Silva</strong>
-                </div>
-              </div>
-              <div className="testimonial-item">
-                <div className="highlight-card">
-                  <p className='sobre-paragraph'>
-                    "Atendimento nota 10! A equipe é muito profissional e prestativa."
-                  </p>
-                  <span className="review-date">Abril de 2025</span>
-                  <div className="stars">
-                    <span className="star">★</span>
-                    <span className="star">★</span>
-                    <span className="star">★</span>
-                    <span className="star">★</span>
-                    <span className="star">☆</span>
-                  </div>
-                  <strong>- Maria Oliveira</strong>
-                </div>
-              </div>
+          <div className="highlight-item nossa-historia">
+            <h2 translate='no'>Visite a Zero 20 Garage</h2>
+            <p className='sobre-paragraph'>
+              Venha nos visitar e conheça nossos serviços de perto! Será um prazer receber você em nossa oficina e apresentar toda a estrutura e equipe que fazem da Zero 20 Garage uma referência em qualidade e confiança.
+            </p>
+            <div className="map-container">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.799744734953!2d-46.5745093!3d-23.3263499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ceede375ca12c9%3A0xa22173d27f744745!2sZERO%2020%20GARAGE!5e0!3m2!1spt-BR!2sbr!4v1711478418134!5m2!1spt-BR!2sbr"
+                width="100%"
+                height="500"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Localização da Zero 20 Garage"
+              ></iframe>
             </div>
           </div>
         </section>
-
-        <section className="sobre-section">
-          <div className="highlight-item">
-            <h2>Visite a Zero20 Garage</h2>
-            <p className='sobre-paragraph'>
-              Venha nos visitar e conheça nossos serviços de perto! Será um prazer receber você em nossa oficina e apresentar toda a estrutura e equipe que fazem da Zero20 Garage uma referência em qualidade e confiança.
-            </p>
-          </div>
-        </section>
-
         <ContatoCta />
       </div>
     </div>

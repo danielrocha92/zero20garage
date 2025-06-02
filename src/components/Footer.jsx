@@ -24,7 +24,6 @@ function Footer() {
         {/* DESKTOP FOOTER */}
         <div className="footer-desktop">
           <div className="footer-content-wrapper">
-            {/* Seções de Navegação */}
             <div className="footer-nav">
               <ul>
                 <li><a href="/politica">Política de Privacidade</a></li>
@@ -78,33 +77,40 @@ function Footer() {
         {/* MOBILE FOOTER */}
         <div className="footer-mobile">
           <div className="accordion">
+
             <div className="accordion-item">
-              <button onClick={() => toggleMenu('sobre')} className="accordion-button">Sobre a Zero 20 Garagem</button>
+              <button onClick={() => toggleMenu('sobre')} className="accordion-button">
+                Sobre a Zero 20 Garagem
+              </button>
               {activeMenu === 'sobre' && (
-                <ul className="accordion-content">
-                  <li><a href="/sobre">Sobre Nós</a></li>
-                  <li><a href="/trabalhe-conosco">Trabalhe Conosco</a></li>
-                </ul>
+                <div className="accordion-content">
+                  <a href="/sobre">Sobre Nós</a>
+                  <a href="/trabalhe-conosco">Trabalhe Conosco</a>
+                </div>
               )}
             </div>
 
             <div className="accordion-item">
-              <button onClick={() => toggleMenu('privacidade')} className="accordion-button">Portal de Privacidade</button>
+              <button onClick={() => toggleMenu('privacidade')} className="accordion-button">
+                Portal de Privacidade
+              </button>
               {activeMenu === 'privacidade' && (
-                <ul className="accordion-content">
-                  <li><a href="/politica">Política de Privacidade</a></li>
-                  <li><a href="/faq">FAQ</a></li>
-                </ul>
+                <div className="accordion-content">
+                  <a href="/politica">Política de Privacidade</a>
+                  <a href="/faq">FAQ</a>
+                </div>
               )}
             </div>
 
             <div className="accordion-item">
-              <button onClick={() => toggleMenu('atendimento')} className="accordion-button">Atendimento</button>
+              <button onClick={() => toggleMenu('atendimento')} className="accordion-button">
+                Atendimento
+              </button>
               {activeMenu === 'atendimento' && (
-                <ul className="accordion-content">
-                  <li><a href="/trocas">Trocas e Devoluções</a></li>
-                  <li><a href="/termos">Termos de Uso</a></li>
-                </ul>
+                <div className="accordion-content">
+                  <a href="/trocas">Trocas e Devoluções</a>
+                  <a href="/termos">Termos de Uso</a>
+                </div>
               )}
             </div>
 
@@ -121,17 +127,17 @@ function Footer() {
             </div>
 
             <div className="footer-card">
-                  <span className="title">Formas de Pagamento:</span>
-                  <div className="icons">
-                    {formasPagamento.map((forma) => (
-                      <span key={forma.nome} className="payment-icon" title={forma.nome}>
-                        {forma.icone}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+              <span className="title">Formas de Pagamento:</span>
+              <div className="icons">
+                {formasPagamento.map((forma) => (
+                  <span key={forma.nome} className="payment-icon" title={forma.nome}>
+                    {forma.icone}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-                <div className="footer-card">
+            <div className="footer-card">
               <span className="title">© 2025 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™</span>
             </div>
           </div>

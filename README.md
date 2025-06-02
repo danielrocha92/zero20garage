@@ -1,7 +1,7 @@
 # 🚗 Zero20 Garage ![Vercel](https://vercelbadge.vercel.app/api/danielrocha92/zero20garage)
 
-**Site institucional para oficina mecânica e retífica de motores**  
-💡 Desenvolvido para destacar a qualidade dos serviços da Zero20 Garage, com foco em performance, design responsivo e experiência do usuário.
+**Site institucional para oficina mecânica e retífica de motores**
+💡 Desenvolvido para destacar a qualidade dos serviços da Zero 20 Garage, com foco em performance, design responsivo e experiência do usuário.
 
 🔗 **[Acesse o site](https://zero20garage.vercel.app/)**
 
@@ -19,9 +19,9 @@
 
 Criar uma presença digital profissional para a **Zero20 Garage**, destacando:
 
-✅ Serviços especializados de retífica e manutenção de motores.  
-✅ Processo técnico apresentado com infográficos e animações.  
-✅ Diferenciais competitivos da oficina.  
+✅ Serviços especializados de retífica e manutenção de motores.
+✅ Processo técnico apresentado com infográficos e animações.
+✅ Diferenciais competitivos da oficina.
 ✅ Canal direto de contato via WhatsApp.
 
 ---
@@ -78,8 +78,8 @@ site-institucional/
 | Vermelho Mecânico    | #D32F2F  | Botões, CTAs (ações principais)      |
 | Branco               | #FFFFFF  | Contraste e destaques                |
 
-**Por que essas cores?**  
-🔴 Vermelho: velocidade e potência.  
+**Por que essas cores?**
+🔴 Vermelho: velocidade e potência.
 ⚪ Cinza: metal e tecnologia.
 
 ---
@@ -130,7 +130,7 @@ Acesse: http://localhost:3000
 Daniel Rocha
 Front-End Developer apaixonado por criar experiências digitais impactantes.
 
-📫 LinkedIn  
+📫 LinkedIn
 [Daniel Rocha](https://www.linkedin.com/in/danielrocha92)
 
 ⸻
