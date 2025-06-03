@@ -232,10 +232,11 @@ a {
   color: var(--vermelho-principal);
   text-decoration: none;
   font-weight: bold;
+  underline: none;
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 /* ===== Formulários ===== */
@@ -365,14 +366,6 @@ input, textarea {
 }
 
 /* ===== Animações ===== */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.fade-in {
-  animation: fadeIn 1s ease-in-out;
-}
 
 /* ===== Dark Mode ===== */
 @media (prefers-color-scheme: dark) {
@@ -387,7 +380,7 @@ input, textarea {
   .page-modo-escuro .container-black,
   .container-section.dark {
     background-color: rgba(18, 18, 18, 0.85);
-    color: var(--cinza-claro);
+    color: var(--cinza-escuro);
     box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
   }
 
