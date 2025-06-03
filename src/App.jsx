@@ -43,7 +43,6 @@ import Termos from './pages/footer/Termos';
 
 import './App.css';
 import './GlobalStyles.css';
-import AnimatedPage from './components/AnimatedPage';
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -92,7 +91,7 @@ function App() {
   return (
     <Router>
       <Layout>
-        <AnimatedPage />
+       
         <AnimatedRoutes />
         <ScrollToTop />
         <ScrollToTopButton />
