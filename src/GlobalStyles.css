@@ -40,12 +40,12 @@ body {
 }
 
 .container-claro {
-  color: var(--cinza-escuro);
-  background-color: var(--cinza-medio);
+  color: var(--cinza-claro);
+  background-color: var(--cinza-claro);
 }
 
 .container-black {
-  color: var(--cinza-claro);
+  color: var(--cinza-escuro);
   background-color: var(--cinza-escuro);
 }
 
