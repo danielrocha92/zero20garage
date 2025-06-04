@@ -54,7 +54,7 @@ const Trocas = () => {
       <div className="container-claro">
       <h2
         translate="no"
-        className="title">
+        className="titulo-escuro">
           Trocas e Garantia - ZER0 20 GARAGE™
       </h2>
       <p
@@ -64,23 +64,23 @@ const Trocas = () => {
       </p>
 
       <section className="section">
-        <h3 className="subtitle">1. Política de Trocas e Garantia:</h3>
-        <p className="paragraph">
+        <h3 className="subtitulo-escuro">1. Política de Trocas e Garantia:</h3>
+        <p className="paragrafo-escuro">
           Oferecemos <strong>garantia de 90 dias</strong> para todos os produtos e serviços prestados pela <strong>ZER0 20 GARAGE™</strong>, respeitando as normas de proteção ao consumidor.
         </p>
       </section>
 
       <section className="section">
-        <h3 className="subtitle">2. Condições para Troca ou Garantia:</h3>
-        <p className="paragraph">
+        <h3 className="subtitulo-escuro">2. Condições para Troca ou Garantia:</h3>
+        <p className="paragrafo-escuro">
           A troca ou acionamento da garantia poderá ser solicitado sempre que for identificado <strong>defeito de fabricação</strong> ou <strong>problemas decorrentes da execução do serviço</strong>.
           É necessário que o produto ou serviço não apresente <strong>sinais de mau uso</strong>, instalação incorreta, acidentes ou modificações não autorizadas.
         </p>
       </section>
 
       <section className="section">
-        <h3 className="subtitle">3. Procedimento para Solicitação:</h3>
-        <p className="paragraph">
+        <h3 className="subtitulo-escuro">3. Procedimento para Solicitação:</h3>
+        <p className="paragrafo-escuro">
           Para solicitar a troca ou acionar a garantia, entre em contato com nosso suporte pelos canais disponíveis no site. Será necessário informar:
         </p>
         <ul className="section-list">
@@ -91,15 +91,15 @@ const Trocas = () => {
       </section>
 
       <section className="section">
-        <h3 className="subtitle">4. Análise e Prazos:</h3>
-        <p className="paragraph">
+        <h3 className="subtitulo-escuro">4. Análise e Prazos:</h3>
+        <p className="paragrafo-escuro">
           Após o recebimento da solicitação, nossa equipe técnica realizará uma análise detalhada em até <strong>7 dias úteis</strong>. Sendo constatado o defeito ou falha, realizaremos a <strong>troca</strong>, o <strong>reparo</strong> ou o <strong>reembolso</strong> correspondente.
         </p>
       </section>
 
       <section className="section">
-        <h3 className="subtitle">5. Exclusões de Garantia:</h3>
-        <p className="paragraph">
+        <h3 className="subtitulo-escuro">5. Exclusões de Garantia:</h3>
+        <p className="paragrafo-escuro">
           A garantia não cobre danos decorrentes de:
         </p>
         <ul className="section-list">
