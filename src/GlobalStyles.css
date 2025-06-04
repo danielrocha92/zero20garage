@@ -145,6 +145,10 @@ body {
   color: var(--cinza-claro);
 }
 
+.paragrafo-claro {
+  color: var(--cinza-claro);
+  }
+
 /* ===== Cabeçalhos gerais ===== */
 .title, h1 {
   font-size: 2rem;
