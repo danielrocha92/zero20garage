@@ -52,22 +52,22 @@ function Desmontagem() {
               </Slider>
             </div>
 
-            <h1 className='title'>Desmontagem do Motor</h1>
-            <h3 className='subtitle'>Precisão, Cuidado e Responsabilidade Técnica</h3>
+            <h1 className='titulo-claro'>Desmontagem do Motor</h1>
+            <h3 className='subtitulo-claro'>Precisão, Cuidado e Responsabilidade Técnica</h3>
 
-            <p className='paragraph'>
+            <p className="paragrafo-claro">
               A desmontagem do motor é uma etapa fundamental para a correta avaliação de todos os seus componentes. Nossos técnicos altamente capacitados realizam esse processo de forma sistemática e cuidadosa, garantindo que cada peça seja retirada sem causar danos estruturais.
             </p>
 
-            <p className='paragraph'>
+            <p className='paragrafo-claro'>
               Utilizamos ferramentas específicas e técnicas avançadas para assegurar a integridade dos componentes durante a desmontagem. Todo o processo é documentado e organizado para que seja possível identificar a origem de falhas e determinar as necessidades de reparo, substituição ou recuperação de peças.
             </p>
 
-            <p className='paragraph'>
+            <p className='paragrafo-claro'>
               A inspeção minuciosa pós-desmontagem inclui a análise de trincas, desgastes excessivos, deformações e falhas ocultas, com o apoio de instrumentos de medição de alta precisão. Esse rigor técnico assegura um diagnóstico preciso e uma base sólida para a próxima etapa do serviço: a usinagem ou reparação adequada.
             </p>
 
-            <p className='paragraph'>
+            <p className='paragrafo-claro'>
               Confie em nossa equipe para realizar uma desmontagem segura, responsável e alinhada com os mais altos padrões de qualidade da engenharia automotiva.
             </p>
 
