@@ -128,6 +128,14 @@ body {
   background-color: var(--vermelho-hover);
 }
 
+.paragrafo-claro {
+  color: var(--cinza-claro);
+  }
+  
+.li, ul {
+  color: var(--cinza-medio);
+}
+
 /* ===== Estilos .page-modo-escuro ===== */
 .page-modo-escuro {
   background-color: var(--cinza-escuro);
@@ -145,8 +153,8 @@ body {
   color: var(--cinza-claro);
 }
 
-.paragrafo-claro {
-  color: var(--cinza-claro);
+.paragrafo-escuro {
+  color: var(--cinza-escuro);
   }
 
 /* ===== Cabeçalhos gerais ===== */
