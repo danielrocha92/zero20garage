@@ -169,6 +169,10 @@ body {
   color: var(--cinza-escuro);
 }
 
+.titulo-escuro {
+  color: var(--cinza-escuro);
+}
+
 /* ===== Cabeçalhos gerais ===== */
 .title, h1 {
   font-size: 2rem;
