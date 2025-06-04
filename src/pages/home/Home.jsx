@@ -45,15 +45,15 @@ function Home() {
             <div className="highlights-grid">
               <div className="highlight-card">
                 <h3>Pagamento Facilitado</h3>
-                <p>Até 12x ou 5% de desconto à vista.</p>
+                <p className="paragrafo-claro">Até 12x ou 5% de desconto à vista.</p>
               </div>
               <div className="highlight-card">
                 <h3>Entrega Ágil</h3>
-                <p>Serviço nacional: 4 a 7 dias úteis.<br />Importados: até 15 dias.</p>
+                <p className="paragrafo-claro">Serviço nacional: 4 a 7 dias úteis.<br />Importados: até 15 dias.</p>
               </div>
               <div className="highlight-card">
                 <h3>Especialistas em Motores</h3>
-                <p>Equipe qualificada e equipamentos modernos.</p>
+                <p className="paragrafo-claro">Equipe qualificada e equipamentos modernos.</p>
               </div>
             </div>
           </div>
