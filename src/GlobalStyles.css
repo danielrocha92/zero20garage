@@ -132,8 +132,12 @@ body {
   color: var(--cinza-claro);
   }
   
-.li, ul {
+.lista-claro li, ul {
   color: var(--cinza-medio);
+}
+
+.subtitulo-claro {
+  color: var(--cinza-claro);
 }
 
 /* ===== Estilos .page-modo-escuro ===== */
@@ -156,6 +160,14 @@ body {
 .paragrafo-escuro {
   color: var(--cinza-escuro);
   }
+  
+.lista-escuro li, ul {
+  color: var(--cinza-escuro);
+}
+  
+.subtitulo-escuro {
+  color: var(--cinza-escuro);
+}
 
 /* ===== Cabeçalhos gerais ===== */
 .title, h1 {
