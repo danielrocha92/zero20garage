@@ -54,19 +54,19 @@ function Diagnostico() {
             <h1 className='title'>Diagnóstico e Avaliação Técnica</h1>
             <h3 className='subtitle'>Análise Completa com Equipamentos de Última Geração</h3>
 
-            <p className='paragraph'>
+            <p className='paragrafo-claro'>
               O diagnóstico é o primeiro e um dos mais importantes passos no processo de retífica de motores. Nossa equipe realiza uma avaliação minuciosa utilizando scanners automotivos OBD, estetoscópios mecânicos e ferramentas de medição de alta precisão, capazes de identificar desde falhas eletrônicas até desgastes internos imperceptíveis a olho nu.
             </p>
 
-            <p className='paragraph'>
+            <p className='paragrafo-claro'>
               Durante a análise, inspecionamos cuidadosamente componentes críticos como bloco do motor, cabeçote, virabrequim, bronzinas, pistões, bielas, além dos sistemas de lubrificação e arrefecimento. Essa abordagem detalhada permite detectar fissuras, empenamentos, folgas excessivas e outros problemas que comprometem a performance e segurança do motor.
             </p>
 
-            <p className='paragraph'>
+            <p className='paragrafo-claro'>
               Com base no diagnóstico, elaboramos um laudo técnico que orienta todas as etapas seguintes da retífica. Esse planejamento é fundamental para assegurar que cada intervenção seja realizada com máxima precisão, prevenindo falhas futuras, otimizando o desempenho e garantindo a durabilidade do motor.
             </p>
 
-            <p className='paragraph'>
+            <p className='paragrafo-claro'>
               Conte com a nossa expertise e tecnologia avançada para obter um diagnóstico confiável e assertivo, o primeiro passo para devolver ao seu veículo a potência e a eficiência de um motor novo.
             </p>
 
