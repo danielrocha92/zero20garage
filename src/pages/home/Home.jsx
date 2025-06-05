@@ -32,8 +32,8 @@ function Home() {
       <div className="container-black">
         <section className="section">
           <div className='highlight-item'>
-            <h2>Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
-            <h3>Atendimento especializado para veículos nacionais e importados.</h3>
+            <h2 className="titulo-claro">Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
+            <h3 className="subtitulo-claro">Atendimento especializado para veículos nacionais e importados.</h3>
             <a href="/orcamento" className="button">Solicite um Orçamento</a>
           </div>
         </section>
@@ -41,18 +41,18 @@ function Home() {
         {/* Destaques */}
         <section className="section">
           <div className='highlight-item'>
-            <h2>Por que a Zero 20 Garage?</h2>
+            <h2 className="titulo-claro">Por que a Zero 20 Garage?</h2>
             <div className="highlights-grid">
               <div className="highlight-card">
-                <h3>Pagamento Facilitado</h3>
+                <h3 className="subtitulo-claro">Pagamento Facilitado</h3>
                 <p className="paragrafo-claro">Até 12x ou 5% de desconto à vista.</p>
               </div>
               <div className="highlight-card">
-                <h3>Entrega Ágil</h3>
+                <h3 className="subtitulo-claro">Entrega Ágil</h3>
                 <p className="paragrafo-claro">Serviço nacional: 4 a 7 dias úteis.<br />Importados: até 15 dias.</p>
               </div>
               <div className="highlight-card">
-                <h3>Especialistas em Motores</h3>
+                <h3 className="subtitulo-claro">Especialistas em Motores</h3>
                 <p className="paragrafo-claro">Equipe qualificada e equipamentos modernos.</p>
               </div>
             </div>
@@ -62,16 +62,16 @@ function Home() {
         {/* Linha do Tempo do Processo de Retífica */}
         <section className="section">
           <div className="highlight-item">
-            <h2>Como Funciona o Processo de Retífica</h2>
+            <h2 className="titulo-claro">Como Funciona o Processo de Retífica</h2>
             <div className="timeline">
               <div className="timeline-step">
                 <div className="icon-animated">
                   <FaTools size={60} color="#ff0015" />
                 </div>
-                <h3>
+                <h3 className="subtitulo-claro">
                   <Link to="/home/diagnostico" className="link-timeline">1. Diagnóstico</Link>
                 </h3>
-                <p className="paragrafo-claro" className="paragrafo-claro" title="Na Zero 20 Garage™ iniciamos o processo de retífica com uma análise minuciosa do motor, utilizando equipamentos de última geração. Esse diagnóstico completo identifica falhas ocultas e desgastes em componentes como: bloco do motor, cabeçote, virabrequim, sistema de lubrificação e arrefecimento, garantindo um plano de retífica preciso e seguro.">
+                <p className="paragrafo-claro" title="Na Zero 20 Garage™ iniciamos o processo de retífica com uma análise minuciosa do motor, utilizando equipamentos de última geração. Esse diagnóstico completo identifica falhas ocultas e desgastes em componentes como: bloco do motor, cabeçote, virabrequim, sistema de lubrificação e arrefecimento, garantindo um plano de retífica preciso e seguro.">
                   Diagnóstico e Avaliação Técnica
                 </p>
               </div>
@@ -80,7 +80,7 @@ function Home() {
                 <div className="icon-animated">
                   <FaCogs size={60} color="#ff0015" />
                 </div>
-                <h3>
+                <h3 className="subtitulo-claro">
                   <Link to="/home/desmontagem" className="link-timeline">2. Desmontagem</Link>
                 </h3>
                 <p className="paragrafo-claro" title="A desmontagem é realizada de forma criteriosa, garantindo a integridade das peças e evitando danos adicionais. Cada componente é separado e classificado para uma avaliação individualizada, permitindo uma análise detalhada de desgastes, trincas ou deformações.">
@@ -92,7 +92,7 @@ function Home() {
                 <div className="icon-animated">
                   <FaWrench size={60} color="#ff0015" />
                 </div>
-                <h3>
+                <h3 className="subtitulo-claro">
                   <Link to="/home/usinagem" className="link-timeline">3. Usinagem</Link>
                 </h3>
                 <p className="paragrafo-claro" title="A Zero 20 Garage™ executa processos de usinagem com precisão milimétrica para corrigir imperfeições no bloco, cabeçote e outras partes fundamentais do motor. Garantimos o alinhamento perfeito e o correto funcionamento, respeitando todas as especificações técnicas.">
@@ -104,7 +104,7 @@ function Home() {
                 <div className="icon-animated">
                   <FaCheckCircle size={60} color="#ff0015" />
                 </div>
-                <h3>
+                <h3 className="subtitulo-claro">
                   <Link to="/home/montagemteste" className="link-timeline">4. Montagem e Teste</Link>
                 </h3>
                 <p className="paragrafo-claro" title="Após a preparação das peças, realizamos a montagem técnica do motor, utilizando ferramentas calibradas e peças de alta qualidade. Todo o processo segue rigorosos padrões de torque e ajuste para garantir durabilidade e performance.">
@@ -119,7 +119,7 @@ function Home() {
         {/* Depoimentos */}
         <section className="section">
           <div className='highlight-item'>
-            <h2>O que Nossos Clientes Dizem</h2>
+            <h2 className="titulo-claro">O que Nossos Clientes Dizem</h2>
               <TestimonialsCarousel />
           </div>
         </section>

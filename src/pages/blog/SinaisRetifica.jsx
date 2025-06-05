@@ -13,24 +13,24 @@ const messages = [
   ];
 
   return (
-    <div className="page modo-claro">
+    <div className="page-claro">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
     <div className="container-claro">
       <section id="custo-retifica-motor" className="blog-section">
         <h2 className="title">Retífica de Motores: Como Saber Quando Seu Motor Precisa de Reparo?</h2>
 
-        <p className="paragraph">
+        <p className="paragrafo-escuro">
           Saber o momento certo de fazer a retífica do motor pode evitar danos maiores e preservar a vida útil do seu veículo. Neste artigo, explicamos os principais sinais de que seu motor pode precisar desse reparo essencial.
         </p>
 
-        <h3 className="subtitle">1. O que é a retífica de motor?</h3>
-        <p className="paragraph">
+        <h3 className="subtitulo-escuro">1. O que é a retífica de motor?</h3>
+        <p className="paragrafo-escuro">
           A retífica é um processo de restauração que visa devolver ao motor o seu desempenho original. Envolve a desmontagem completa do motor, inspeção, usinagem de peças desgastadas e substituição de componentes danificados.
         </p>
 
-        <h3 className="subtitle">2. Principais sinais de que o motor precisa de retífica</h3>
-        <ul className="section-list">
+        <h3 className="subtitulo-escuro">2. Principais sinais de que o motor precisa de retífica</h3>
+        <ul className="lista-escuro">
           <li>
             <strong>Consumo excessivo de óleo:</strong> Se o óleo do motor está acabando rapidamente e não há vazamentos aparentes, pode haver desgaste interno que exige retífica.
           </li>
@@ -51,21 +51,21 @@ const messages = [
           </li>
         </ul>
 
-        <h3 className="subtitle">3. Quando vale a pena fazer a retífica?</h3>
-        <p className="paragraph">
+        <h3 className="subtitulo-escuro">3. Quando vale a pena fazer a retífica?</h3>
+        <p className="paragrafo-escuro">
           A retífica é recomendada quando o custo é menor do que a troca por outro motor e o veículo está em boas condições gerais. Também é vantajosa quando há valor sentimental ou utilitário no carro.
         </p>
 
-        <h3 className="subtitle">4. Como prevenir a necessidade de retífica?</h3>
-        <ul className="section-list">
+        <h3 className="subtitulo-escuro">4. Como prevenir a necessidade de retífica?</h3>
+        <ul className="lista-escuro">
           <li><strong>Troque o óleo regularmente:</strong> Isso evita o desgaste prematuro das peças internas do motor.</li>
           <li><strong>Use combustível de qualidade:</strong> Combustíveis adulterados aceleram o desgaste e provocam acúmulo de resíduos.</li>
           <li><strong>Mantenha o sistema de arrefecimento em dia:</strong> Isso evita superaquecimentos e danos à junta do cabeçote.</li>
           <li><strong>Faça revisões periódicas:</strong> A manutenção preventiva é sempre mais barata do que uma retífica completa.</li>
         </ul>
 
-        <h3 className="subtitle">Conclusão:</h3>
-        <p className="paragraph">
+        <h3 className="subtitulo-escuro">Conclusão:</h3>
+        <p className="paragrafo-escuro">
           Reconhecer os sinais de desgaste no motor é essencial para evitar falhas graves e custos elevados. Se você notar algum dos sintomas listados, procure uma oficina de confiança para avaliação. A retífica pode ser a melhor forma de restaurar seu veículo e prolongar sua vida útil.
         </p>
       </section>

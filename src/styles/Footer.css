@@ -15,7 +15,24 @@
 }
 
 .footer-section {
-  background-color: rgb(245, 245, 245); /* branco com transparência */
+  background-color: var(--branco);
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1200px; /* Limita a largura máxima */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #333; /* Cor do texto */
+  font-size: 1rem; /* Tamanho da fonte */
+  line-height: 1.5; /* Espaçamento entre linhas */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave */
+  margin: 0 auto; /* Centraliza o footer */
+  padding: 2rem; /* Espaçamento interno */
+  box-sizing: border-box; /* Inclui padding e border no cálculo da largura */
 }
 
 .footer-desktop {

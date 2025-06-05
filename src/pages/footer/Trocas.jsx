@@ -47,7 +47,7 @@ const Trocas = () => {
   };
 
   return (
-    <div className="page modo-claro">
+    <div className="page-claro">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
 
@@ -83,7 +83,7 @@ const Trocas = () => {
         <p className="paragrafo-escuro">
           Para solicitar a troca ou acionar a garantia, entre em contato com nosso suporte pelos canais disponíveis no site. Será necessário informar:
         </p>
-        <ul className="section-list">
+        <ul className="lista-escuro">
           <li>Número do pedido;</li>
           <li>Data da compra;</li>
           <li>Descrição detalhada do problema encontrado.</li>
@@ -102,7 +102,7 @@ const Trocas = () => {
         <p className="paragrafo-escuro">
           A garantia não cobre danos decorrentes de:
         </p>
-        <ul className="section-list">
+        <ul className="lista-escuro">
           <li><strong>Mau uso</strong> ou <strong>instalação incorreta</strong> dos produtos;</li>
           <li><strong>Desgaste natural</strong> de componentes;</li>
           <li><strong>Acidentes</strong> ou <strong>modificações não autorizadas</strong>.</li>

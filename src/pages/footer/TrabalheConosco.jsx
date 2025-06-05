@@ -19,7 +19,7 @@ function TrabalheConosco() {
   ];
 
   return (
-    <div className="page modo-claro">
+    <div className="page-claro">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
 

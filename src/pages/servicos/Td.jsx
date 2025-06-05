@@ -15,7 +15,7 @@ function Td() {
   ];
 
   return (
-    <div className="page modo-claro">
+    <div className="page-claro">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
 
@@ -30,7 +30,7 @@ function Td() {
         <p>
           Assim como fazemos check-ups regulares em nossa saúde, o seu motor também precisa de avaliações periódicas para garantir seu bom funcionamento e evitar problemas futuros. O Teste de Desempenho é uma ferramenta essencial para:
         </p>
-        <ul className="section-list">
+        <ul className="lista-escuro">
           <li><strong>Diagnosticar problemas:</strong> Identificar falhas em componentes que podem estar comprometendo a potência e a eficiência do motor.</li>
           <li><strong>Avaliar a condição geral:</strong> Verificar o estado de desgaste das peças internas, a compressão dos cilindros e a presença de vazamentos.</li>
           <li><strong>Otimizar o desempenho:</strong> Após a retífica ou qualquer intervenção, o teste garante que o motor esteja entregando a potência e o torque ideais.</li>
@@ -44,7 +44,7 @@ function Td() {
         <p>
           Nosso serviço de Teste de Desempenho é abrangente e minucioso, utilizando equipamentos modernos e seguindo rigorosos procedimentos. Geralmente, o teste inclui:
         </p>
-        <ul className="section-list">
+        <ul className="lista-escuro">
           <li><strong>Inspeção visual:</strong> Verificação de possíveis vazamentos, ruídos anormais e o estado geral do motor.</li>
           <li><strong>Teste de compressão dos cilindros:</strong> Medição da pressão em cada cilindro.</li>
           <li><strong>Teste de vazamento de cilindro (Leak Down Test):</strong> Identificação precisa de onde ocorre a perda de pressão.</li>
@@ -59,7 +59,7 @@ function Td() {
         <p>
           Nosso serviço de Teste de Desempenho é recomendado para:
         </p>
-        <ul className="section-list">
+        <ul className="lista-escuro">
           <li>Proprietários de veículos que desejam manter seus motores em perfeitas condições.</li>
           <li>Veículos com histórico de problemas ou sintomas de falha.</li>
           <li>Após serviços de retífica, para garantir o desempenho esperado.</li>

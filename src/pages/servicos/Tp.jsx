@@ -16,7 +16,7 @@ function Tp() {
   ];
 
   return (
-    <div className="page modo-claro">
+    <div className="page-claro">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
 
@@ -34,7 +34,7 @@ function Tp() {
           <p>Um diagnóstico preciso é essencial para identificar a causa raiz dos problemas do seu veículo e evitar gastos desnecessários. Com o diagnóstico correto, você pode ter certeza de que está resolvendo o problema certo.</p>
 
           <h3>Benefícios da troca de peças desgastadas ou danificadas</h3>
-          <ul className="section-list">
+          <ul className="lista-escuro">
             <li>Melhora no desempenho do motor.</li>
             <li>Aumento da vida útil do veículo.</li>
             <li>Redução do consumo de combustível.</li>

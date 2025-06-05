@@ -68,7 +68,7 @@ const Servicos = () => {
                     <section className="section">
                         <div className='highlight-item'>
                             <h2 className='title' translate='no'>Retífica de Motores</h2>
-                            <p className="paragraph">Serviço completo de retífica de motores</p>
+                            <p className="paragrafo-escuro">Serviço completo de retífica de motores</p>
                             <div className="highlights-grid">
                                 {services.map((service) => (
                                     <div

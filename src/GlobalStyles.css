@@ -6,6 +6,7 @@
   --cinza-claro: #f5f5f5;
   --vermelho-principal: #ff0000;
   --vermelho-hover: #cc0000;
+  --branco: #ffffff;
 }
 
 /* ===== Reset ===== */
@@ -32,7 +33,6 @@ body {
 .container-claro, .container-black {
   max-width: 1100px;
   padding: 2rem 0.5rem;
-  opacity: 0.75;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   margin: 0 auto;
@@ -40,8 +40,9 @@ body {
 }
 
 .container-claro {
-  color: var(--cinza-claro);
-  background-color: var(--cinza-claro);
+  color: var(--branco);
+  background-color: var(--branco);
+  opacity: 0.75;
 }
 
 .container-black {
@@ -51,7 +52,7 @@ body {
 
 /* ===== Estilos .page-claro ===== */
 .page-claro {
-  background-color: var(--cinza-claro);
+  background-color: var(--branco);
   color: var(--cinza-escuro);
   font-family: 'Ubuntu', sans-serif;
   min-height: 100vh;
@@ -94,13 +95,27 @@ body {
   color: var(--cinza-escuro);
 }
 
+.page-claro .section {
+  padding: 2rem;
+  background-color: rgba(245, 245, 245, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.page-claro .section h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--vermelho-principal);
+  margin-bottom: 1rem;
+}
+
 .page-claro .section-list {
   list-style-type: disc;
-  padding-left: 1.5rem;
+  padding: 1.5rem;
   margin-bottom: 2rem;
 }
 
-.page-claro .section-list li {
+.page-claro {
   font-size: 1rem;
   line-height: 1.6;
   margin-bottom: 0.5rem;
@@ -128,16 +143,52 @@ body {
   background-color: var(--vermelho-hover);
 }
 
+/* ===== Estilos Tipografia Modo Claro ===== */
+
+.titulo-claro {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--vermelho-principal);
+  font-family: 'Ubuntu', sans-serif;
+  margin-bottom: 1rem;
+  padding: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  text-decoration-color: var(--vermelho-principal);
+  text-underline-offset: 0.2rem;
+}
+
 .paragrafo-claro {
+  font-size: 1.4rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  padding: 2rem;
   color: var(--cinza-claro);
-  }
-  
-.lista-claro li, ul {
-  color: var(--cinza-medio);
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
 }
 
 .subtitulo-claro {
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem;
+  text-align: center;
   color: var(--cinza-claro);
+  font-family: 'Ubuntu', sans-serif;
+  letter-spacing: 0.05rem;
+}
+
+.lista-claro li, ul {
+  color: var(--cinza-escuro);
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 /* ===== Estilos .page-modo-escuro ===== */
@@ -147,7 +198,6 @@ body {
   min-height: 100vh;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  opacity: 0.95;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -157,44 +207,56 @@ body {
   color: var(--cinza-claro);
 }
 
+/* ===== Estilos Tipografia Modo Escuro ===== */
+
 .paragrafo-escuro {
+  margin-bottom: 1rem;
+  padding: 2rem;
   color: var(--cinza-escuro);
-  }
-  
+  font-size: 1.4rem;
+  line-height: 1;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+}
+
 .lista-escuro li, ul {
   color: var(--cinza-escuro);
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
 }
-  
+
 .subtitulo-escuro {
   color: var(--cinza-escuro);
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem;
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+  letter-spacing: 0.05rem;
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  margin-bottom: 1rem;
+  text-decoration-color: var(--vermelho-principal);
+  text-underline-offset: 0.2rem;
 }
 
 .titulo-escuro {
+  padding: 2rem;
   color: var(--cinza-escuro);
-}
-
-/* ===== Cabeçalhos gerais ===== */
-.title, h1 {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--preto);
-}
-
-.subtitle, h2 {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--vermelho-principal);
-}
-
-.section h2 {
-  margin-top: 2rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
   margin-bottom: 1rem;
-}
-
-h3 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
 }
 
 /* ===== Seções ===== */
@@ -259,7 +321,7 @@ a {
   color: var(--vermelho-principal);
   text-decoration: none;
   font-weight: bold;
-  underline: none;
+  transition: color 0.3s ease;
 }
 
 a:hover {
@@ -285,7 +347,7 @@ input, textarea {
 }
 
 .highlight-item {
-  background-color: rgba(245, 245, 245, 0.8); /* Menos transparente */
+  background-color: rgba(15, 15, 15, 0.918); /* Menos transparente */
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-radius: 12px;
@@ -300,7 +362,7 @@ input, textarea {
 
 .highlight-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.288);
 }
 
 .principio-item {
@@ -316,7 +378,6 @@ input, textarea {
 
 .highlight-item h3 {
   font-size: 1.5rem;
-  color: var(--vermelho-principal);
   margin-bottom: 0.5rem;
   align-items: center;
 }
