@@ -26,14 +26,14 @@ function Mp() {
                 <h2 className="title">
                     Manutenção Preventiva
                 </h2>
-                <p>
+                <p className="paragrafo-claro">
                     Manutenção regular para evitar problemas futuros e prolongar a vida útil do motor.
                 </p>
                 <section className="section">
                 <h3>
                     Por que fazer manutenção preventiva?
                 </h3>
-                <p>
+                <p className="paragrafo-claro">
                     A manutenção preventiva é essencial para garantir o bom funcionamento do seu veículo e evitar surpresas desagradáveis. Com a manutenção regular, você pode identificar e corrigir problemas antes que eles se tornem grandes e caros.
                 </p>
 

@@ -30,7 +30,7 @@ body {
 }
 
 /* ===== Containers gerais ===== */
-.container-claro, .container-black {
+.container-claro, .container-escuro {
   max-width: 1100px;
   padding: 2rem 0.5rem;
   backdrop-filter: blur(10px);
@@ -42,10 +42,9 @@ body {
 .container-claro {
   color: var(--branco);
   background-color: var(--branco);
-  opacity: 0.75;
 }
 
-.container-black {
+.container-escuro {
   color: var(--cinza-escuro);
   background-color: var(--cinza-escuro);
 }
@@ -92,7 +91,6 @@ body {
   font-size: 1.4rem;
   line-height: 1.7;
   margin-bottom: 1rem;
-  color: var(--cinza-escuro);
 }
 
 .page-claro .section {
@@ -143,10 +141,10 @@ body {
   background-color: var(--vermelho-hover);
 }
 
-/* ===== Estilos Tipografia Modo Claro ===== */
+/* ===== Tipografia Modo Claro ===== */
 
-.titulo-claro {
-  font-size: 2.5rem;
+.titulo-claro, h2 {
+  font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.2;
   text-align: center;
@@ -159,17 +157,18 @@ body {
   text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
   text-decoration-color: var(--vermelho-principal);
   text-underline-offset: 0.2rem;
+
 }
 
 .paragrafo-claro {
-  font-size: 1.4rem;
-  line-height: 1.7;
+  font-size: 1.1rem;
+  line-height: 1.2;
   margin-bottom: 1rem;
   padding: 2rem;
   color: var(--cinza-claro);
   font-family: 'Ubuntu', sans-serif;
   font-weight: 600;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.03rem;
 }
 
 .subtitulo-claro {
@@ -202,12 +201,12 @@ body {
   -webkit-backdrop-filter: blur(10px);
 }
 
-.page-modo-escuro .container-black {
+.page-modo-escuro .container-escuro {
   background-color: rgba(18, 18, 18, 0.85);
   color: var(--cinza-claro);
 }
 
-/* ===== Estilos Tipografia Modo Escuro ===== */
+/* ===== Tipografia Modo Escuro ===== */
 
 .paragrafo-escuro {
   margin-bottom: 1rem;
@@ -247,15 +246,15 @@ body {
 }
 
 .titulo-escuro {
-  padding: 2rem;
-  color: var(--cinza-escuro);
-  font-size: 2.5rem;
+  padding: 1rem;
+  color: var(--vermelho-principal);
+  font-size: 1.8rem;
   font-weight: 700;
   text-align: center;
   font-family: 'Ubuntu', sans-serif;
   margin-bottom: 1rem;
   text-transform: uppercase;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.03rem;
   text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
 }
 
@@ -378,7 +377,7 @@ input, textarea {
 
 .highlight-item h3 {
   font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
   align-items: center;
 }
 
@@ -463,22 +462,13 @@ input, textarea {
   }
 
   /* Só afeta containers que são modo escuro, sem afetar containers claros */
-  .container-black,
+  .container-escuro,
   .page-modo-escuro,
-  .page-modo-escuro .container-black,
+  .page-modo-escuro .container-escuro,
   .container-section.dark {
     background-color: rgba(18, 18, 18, 0.85);
     color: var(--cinza-escuro);
     box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
-  }
-
-  .title, .subtitle, .section h2 {
-    color: var(--cinza-claro);
-    font-size: 2rem;
-  }
-
-  a {
-    color: var(--cinza-claro);
   }
 
   .button, .submit-button {
@@ -488,6 +478,10 @@ input, textarea {
   .highlight-item {
     background-color: rgba(18, 18, 18, 0.7); /* Menos transparente no dark mode */
     border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    color: var(--cinza-claro);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+
   }
 
   /* Ajuste FAQ modo escuro se necessário */

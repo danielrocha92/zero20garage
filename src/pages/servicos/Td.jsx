@@ -22,12 +22,12 @@ function Td() {
 
       <div className="container-claro">
         <h2 className="title">Teste de Desempenho do Seu Motor: Garanta Potência e Eficiência!</h2>
-        <p>
+        <p className="paragrafo-claro">
           Na 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™, sabemos que a performance do seu motor é crucial para o seu veículo e para o seu dia a dia. É por isso que oferecemos um serviço completo e especializado de <strong>Teste de Desempenho do Motor</strong>, utilizando tecnologia de ponta e a expertise de nossos técnicos qualificados.
         </p>
 
         <h3>Por que realizar um Teste de Desempenho do Motor?</h3>
-        <p>
+        <p className="paragrafo-claro">
           Assim como fazemos check-ups regulares em nossa saúde, o seu motor também precisa de avaliações periódicas para garantir seu bom funcionamento e evitar problemas futuros. O Teste de Desempenho é uma ferramenta essencial para:
         </p>
         <ul className="lista-escuro">
@@ -41,7 +41,7 @@ function Td() {
         </ul>
 
         <h3>O que o nosso Teste de Desempenho Abrange?</h3>
-        <p>
+        <p className="paragrafo-claro">
           Nosso serviço de Teste de Desempenho é abrangente e minucioso, utilizando equipamentos modernos e seguindo rigorosos procedimentos. Geralmente, o teste inclui:
         </p>
         <ul className="lista-escuro">
@@ -56,7 +56,7 @@ function Td() {
         </ul>
 
         <h3>Para quem é indicado o Teste de Desempenho?</h3>
-        <p>
+        <p className="paragrafo-claro">
           Nosso serviço de Teste de Desempenho é recomendado para:
         </p>
         <ul className="lista-escuro">
@@ -68,10 +68,10 @@ function Td() {
         </ul>
 
         <h3>Agende agora mesmo o Teste de Desempenho do seu motor!</h3>
-        <p>
+        <p className="paragrafo-claro">
           Nossa equipe está pronta para oferecer um serviço de alta qualidade, com diagnóstico preciso e soluções eficientes para garantir a potência, a eficiência e a durabilidade do seu motor.
         </p>
-        <p>
+        <p className="paragrafo-claro">
           Entre em contato conosco através dos seguintes canais:
         </p>
         <address className="terms-of-use-address">
@@ -80,7 +80,7 @@ function Td() {
           <a href="tel:+5511941097471">(11) 94109-7471</a><br />
           <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a>
         </address>
-        <p>
+        <p className="paragrafo-claro">
           <strong>Invista na saúde do seu motor. Invista em Teste de Desempenho na 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™!</strong>
         </p>
       </div>

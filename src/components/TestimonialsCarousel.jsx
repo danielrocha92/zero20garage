@@ -64,7 +64,7 @@ const TestimonialsCarousel = () => {
               <div className="highlight-testimonial-card">
                 <img src={item.profilePhoto} alt={item.name} className="user-photo" />
                 <strong>
-                  <p>{item.review.substring(0, 100)}...</p>
+                  <p className="paragrafo-claro">{item.review.substring(0, 100)}...</p>
                 </strong>
                 <div className="service-photo-container">
                   <img src={item.servicePhoto} alt={`Serviço de ${item.name}`} className="service-photo" />
@@ -77,7 +77,7 @@ const TestimonialsCarousel = () => {
                     </span>
                   ))}
                 </div>
-                <p>- {item.name}</p>
+                <p className="paragrafo-claro">- {item.name}</p>
               </div>
             </div>
           </SwiperSlide>
@@ -89,7 +89,7 @@ const TestimonialsCarousel = () => {
           <div className="testimonial-modal-content" onClick={e => e.stopPropagation()}>
             <img src={selectedTestimonial.profilePhoto} alt={selectedTestimonial.name} className="user-photo" />
             <strong>
-              <p>{selectedTestimonial.review}</p>
+              <p className="paragrafo-claro">{selectedTestimonial.review}</p>
             </strong>
             <div className="service-photo-container">
               <img
@@ -106,7 +106,7 @@ const TestimonialsCarousel = () => {
                 </span>
               ))}
             </div>
-            <p>- {selectedTestimonial.name}</p>
+            <p className="paragrafo-claro">- {selectedTestimonial.name}</p>
             <button onClick={() => setSelectedTestimonial(null)} className="button">
               Fechar
             </button>

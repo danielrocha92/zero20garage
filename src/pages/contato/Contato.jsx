@@ -27,12 +27,12 @@ function Contato() {
     <Breadcrumbs />
 
 
-      <div className="container-black">
+      <div className="container-escuro">
         {/* Seção de Contato */}
         <section className="section">
           <div className="highlight-item">
             <h2 className="title">Nossos Canais de Atendimento</h2>
-            <p>Escolha o canal que preferir para falar conosco:</p>
+            <p className="paragrafo-claro">Escolha o canal que preferir para falar conosco:</p>
             <div className="contact-cards">
               <div className="contact-card">
                 <FaMapMarkerAlt className="contact-icon" />
@@ -76,7 +76,7 @@ function Contato() {
         <section className="section">
           <div className="highlight-item">
             <h2 className="title">Onde Estamos</h2>
-            <p>Venha nos visitar ou encontre facilmente no Google Maps:</p>
+            <p className="paragrafo-claro">Venha nos visitar ou encontre facilmente no Google Maps:</p>
             <div className="map-container">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.799744734953!2d-46.5745093!3d-23.3263499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ceede375ca12c9%3A0xa22173d27f744745!2sZERO%2020%20GARAGE!5e0!3m2!1spt-BR!2sbr!4v1711478418134!5m2!1spt-BR!2sbr"

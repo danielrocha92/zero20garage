@@ -60,7 +60,7 @@ function Sobre() {
       <DynamicHeader page="sobre" messages={messages} />
       <Breadcrumbs />
 
-      <div className="container-black">
+      <div className="container-escuro">
         <section className="sobre-section">
           <div className="highlight-item nossa-historia">
             <h1>Nossa História</h1>
@@ -83,7 +83,7 @@ function Sobre() {
 
         <section className="sobre-section">
           <div className="highlight-item equipe-container">
-            <h2>Nossa Equipe</h2>
+            <h2 className='subtitulo-claro' translate='no'>Nossa Equipe</h2>
             <div className="equipe-grid">
               {/* Slider com fotos da equipe */}
               <div className="equipe-slider">
@@ -131,7 +131,7 @@ function Sobre() {
 
       <section className="sobre-section">
         <div className="highlight-item nossa-historia">
-         <h2>Nossos Princípios</h2>
+         <h2 className='subtitulo-claro' translate='no'>Nossos Princípios</h2>
           <div className="principios-grid">
             {/* Missão */}
             <div className="principio-item">
@@ -180,7 +180,7 @@ function Sobre() {
 
         <section className="sobre-section">
           <div className="highlight-item nossa-historia">
-            <h2>Por que Escolher a Zero 20 Garage?</h2>
+            <h2 className='subtitulo-claro' translate='no'>Por que Escolher a Zero 20 Garage?</h2>
             <div className="highlights-grid">
               <div className="highlight-item nossa-historia">
                 <p className='sobre-paragraph'>Equipamentos de última geração</p>
@@ -197,7 +197,7 @@ function Sobre() {
         {/* Depoimentos */}
         <section className="section">
           <div className='highlight-item'>
-            <h2>O que Nossos Clientes Dizem</h2>
+            <h2 className='subtitulo-claro' translate='no'>O que Nossos Clientes Dizem</h2>
               <TestimonialsCarousel />
           </div>
         </section>

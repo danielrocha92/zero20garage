@@ -86,7 +86,7 @@ const Faq = () => {
               <span className="arrow">{activeIndex === index ? '−' : '+'}</span>
             </div>
             <div className="faq-answer">
-              <p>{item.answer}</p>
+              <p className="paragrafo-claro">{item.answer}</p>
             </div>
           </div>
         ))}

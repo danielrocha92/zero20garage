@@ -37,7 +37,7 @@ function Diagnostico() {
       <DynamicHeader page="home" messages={messages} />
       <Breadcrumbs />
 
-      <div className="container-black">
+      <div className="container-escuro">
         <section className="section">
           <div className='highlight-item'>
             {/* Carrossel de imagens */}

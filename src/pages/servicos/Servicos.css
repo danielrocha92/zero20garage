@@ -94,8 +94,8 @@
 }
 
 .service-animation {
-  width: 160px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
   margin: 0 auto 1rem auto; /* centraliza horizontalmente */
   display: flex;
   justify-content: center;
@@ -147,8 +147,8 @@
   }
 
   .service-animation {
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
   }
 
   .service-item__button {

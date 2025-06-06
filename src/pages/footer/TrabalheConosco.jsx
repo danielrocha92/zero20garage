@@ -34,7 +34,7 @@ function TrabalheConosco() {
           Para candidatar-se, envie um e-mail para: <a href="mailto:contato@zero20garage.com.br">contato@zero20garage.com.br</a>
         </p>
 
-        <p>
+        <p className="paragrafo-claro">
           Acompanhe também nossas atualizações de vagas e novidades pelo nosso LinkedIn:
         </p>
 

@@ -85,7 +85,7 @@ function Orcamento() {
       <DynamicHeader page="orcamento" messages={messages} />
       <Breadcrumbs />
 
-      <div className="container-black">
+      <div className="container-escuro">
         <section className="section">
           <div className="highlight-item">
             <h1 className="title">Solicite um Orçamento</h1>

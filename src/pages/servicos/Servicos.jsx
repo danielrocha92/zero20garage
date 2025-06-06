@@ -54,7 +54,7 @@ const Servicos = () => {
     return (
         <>
             <Helmet>
-                <title>
+                <title translate="no" className='subtitle-claro'>
                     Serviços de Retífica de Motores e Manutenção | Zero20 Garage
                 </title>
                 <meta name="description" content="Oferecemos serviços especializados" />
@@ -64,11 +64,11 @@ const Servicos = () => {
             <DynamicHeader page="servicos" messages={messages} />
             <Breadcrumbs />
 
-                <div className="container-black">
+                <div className="container-escuro">
                     <section className="section">
                         <div className='highlight-item'>
-                            <h2 className='title' translate='no'>Retífica de Motores</h2>
-                            <p className="paragrafo-escuro">Serviço completo de retífica de motores</p>
+                            <h2 className='subtitulo-claro' translate='no'>Retífica de Motores</h2>
+                            <p className="paragrafo-claro">Serviço completo de retífica de motores</p>
                             <div className="highlights-grid">
                                 {services.map((service) => (
                                     <div
@@ -87,8 +87,8 @@ const Servicos = () => {
                                             ) : (
                                                 service.icon
                                             )}
-                                            <h2 className='title'>{service.title}</h2>
-                                            <p>{service.description}</p>
+                                            <h2 className='titulo-claro'>{service.title}</h2>
+                                            <p className="subtitulo-claro">{service.description}</p>
                                             <button type="submit" className="submit-button">
                                                 Saiba Mais
                                             </button>

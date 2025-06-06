@@ -36,7 +36,7 @@ const Privacidade = () => {
     <div id="privacy-policy-page" className="page-claro">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
-
+        <div className="container-claro">
         <section className="footer-section">
           <h2 translate="no" className="titulo-escuro">
             Política de Privacidade - ZER0 20 GARAGE™
@@ -104,6 +104,7 @@ const Privacidade = () => {
 
           </div>
         </section>
+      </div>
     </div>
   );
 };

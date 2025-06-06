@@ -28,8 +28,9 @@ function Home() {
     <div className="page modo-escuro">
     <DynamicHeader page="home" messages={messages} />
     <Breadcrumbs />
-      {/* Card padrão Section */}
-      <div className="container-black">
+
+      <div className="container-escuro">
+        {/* Card padrão Section */}
         <section className="section">
           <div className='highlight-item'>
             <h2 className="titulo-claro">Retífica de Motores e Soluções Mecânicas Sob Medida</h2>

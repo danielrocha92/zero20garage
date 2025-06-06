@@ -69,7 +69,7 @@ const Blog = () => {
                     <section className="section">
                         <div className='highlight-item'>
                             <h2 translate='no'>Blog ZER0 20 GARAGE™</h2>
-                            <p>Explore artigos, dicas e novidades sobre manutenção automotiva e retífica de motores.</p>
+                            <p className="paragrafo-claro">Explore artigos, dicas e novidades sobre manutenção automotiva e retífica de motores.</p>
 
                             <div className="blog-grid">
                                 {blogPosts.map((post) => (
@@ -86,7 +86,7 @@ const Blog = () => {
                                                 className="blog-item__image"
                                             />
                                             <h2 className='title'>{post.title}</h2>
-                                            <p>{post.description}</p>
+                                            <p className="paragrafo-claro">{post.description}</p>
                                             <button
                                                 type="submit"
                                                 className="submit-button">

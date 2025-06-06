@@ -3,7 +3,7 @@ import React from 'react';
 function ServicosNav() {
   return (
     <section className="blog-highlights highlight-item">
-      <h2>Artigos do Blog</h2>
+      <h2 className='subtitulo-claro' translate='no'>Artigos do Blog</h2>
       <ul className="blog-links">
         <li>
           <a href="#retifica-de-motores">
