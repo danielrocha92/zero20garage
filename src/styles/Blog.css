@@ -8,8 +8,8 @@
 .blog-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  padding: 2rem;
+  gap: 1rem;
+  padding: 1rem;
   width: 100%;
   box-sizing: border-box;
 }
@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: space-between;
 
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 8px;
   background: linear-gradient(
     135deg,
