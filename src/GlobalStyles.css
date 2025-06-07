@@ -152,7 +152,6 @@ body {
   font-family: 'Ubuntu', sans-serif;
   margin-bottom: 1rem;
   padding: 2rem;
-  text-transform: uppercase;
   letter-spacing: 0.05rem;
   text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
   text-decoration-color: var(--vermelho-principal);
@@ -253,7 +252,6 @@ body {
   text-align: center;
   font-family: 'Ubuntu', sans-serif;
   margin-bottom: 1rem;
-  text-transform: uppercase;
   letter-spacing: 0.03rem;
   text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
 }
