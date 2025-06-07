@@ -91,9 +91,11 @@ const Termos = () => {
         <p className="paragrafo-escuro">
           Todo o conteúdo presente neste site, incluindo, mas não se limitando a textos, imagens, logotipos, vídeos, gráficos, ícones, softwares e outros materiais, são de propriedade exclusiva da <strong>ZER0 20 GARAGE™</strong> ou de terceiros que nos concederam licença para utilizá-los, e estão protegidos por leis de direitos autorais e outras leis de propriedade intelectual.
         </p>
-        <p className="paragraph prohibited-paragraph">
+
+        <h3 className="prohibited">
           É estritamente proibida a reprodução, distribuição, modificação, exibição ou qualquer outra forma de utilização não autorizada do conteúdo deste site, total ou parcialmente, sem a prévia e expressa autorização por escrito da <strong>ZER0 20 GARAGE™</strong>.
-        </p>
+        </h3>
+
         <p className="paragrafo-escuro">
           A marca <strong>ZER0 20 GARAGE™</strong> e seu logotipo são marcas registradas de nossa propriedade. É proibida a utilização dessas marcas sem nossa expressa autorização por escrito.
         </p>
@@ -168,12 +170,12 @@ const Termos = () => {
         </address>
       </section>
 
-      <p className="paragraph acknowledgment">
+      <p className="paragrafo acknowledgment">
         Ao utilizar nosso site, você reconhece que leu, entendeu e concorda com todos os termos e condições apresentados neste documento.
       </p>
       {/* Botão simulado para acionar a atualização do conteúdo */}
       <div className="terms-of-use-last-updated">
-        <p className="paragraph acknowledgment">
+        <p className="paragrafo acknowledgment">
           Data da última atualização: {lastUpdated}
         </p>
         <button onClick={handleContentUpdate}></button>

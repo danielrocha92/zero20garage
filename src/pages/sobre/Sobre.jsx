@@ -66,10 +66,10 @@ function Sobre() {
             <h1>Nossa História</h1>
             <div className="historia-grid">
               <div className="historia-text">
-                <p className='sobre-paragraph'>
+                <p className='sobre-paragrafo'>
                   a Zero 20 Garage nasceu da paixão por motores e do desejo de oferecer serviços de retífica e mecânica automotiva de alta qualidade. Fundada em 2020, nossa oficina se destaca pela excelência no atendimento e pela precisão em cada serviço realizado.
                 </p>
-                <p className='sobre-paragraph'>
+                <p className='sobre-paragrafo'>
                   Desde o início, investimos em equipamentos de última geração e na capacitação de nossa equipe, garantindo que cada motor receba o cuidado e a atenção que merece.
                 </p>
               </div>
@@ -111,7 +111,7 @@ function Sobre() {
               <div className="equipe-textos">
                 <div className="highlight-card">
                   <h3 className="subtitle">Profissionais Especializados</h3>
-                  <p className="sobre-paragraph">
+                  <p className="sobre-paragrafo">
                     Contamos com uma equipe de profissionais altamente especializados e apaixonados por motores.
                     Nossos técnicos são certificados e possuem vasta experiência em retífica e mecânica automotiva.
                   </p>
@@ -119,7 +119,7 @@ function Sobre() {
 
                 <div className="highlight-card" style={{ marginTop: '1.5rem' }}>
                   <h3 className="subtitle">Experiência Comprovada</h3>
-                  <p className="sobre-paragraph">
+                  <p className="sobre-paragrafo">
                     Nossa equipe possui anos de experiência no mercado automotivo, garantindo serviços de alta qualidade
                     para todos os tipos de veículos.
                   </p>
@@ -138,7 +138,7 @@ function Sobre() {
               <FaBullseye className="principio-icon" />
               <div>
                 <h3 className="subtitle">Nossa Missão</h3>
-                <p className="sobre-paragraph">
+                <p className="sobre-paragrafo">
                   Oferecer serviços de retífica e mecânica automotiva com qualidade, confiança e excelência,
                   superando as expectativas de nossos clientes.
                 </p>
@@ -150,7 +150,7 @@ function Sobre() {
               <FaEye className="principio-icon" />
               <div>
                 <h3 className="subtitle">Nossa Visão</h3>
-                <p className="sobre-paragraph">
+                <p className="sobre-paragrafo">
                   Ser referência no mercado de retífica e mecânica automotiva, reconhecida pela qualidade dos
                   serviços, inovação e compromisso com a satisfação dos clientes.
                 </p>
@@ -162,13 +162,13 @@ function Sobre() {
               <FaStar className="principio-icon" />
               <div>
                 <h3 className="subtitle-p">Nossos Valores</h3>
-                <p className="sobre-paragraph">
+                <p className="sobre-paragrafo">
                     <strong>Qualidade:</strong> Compromisso com a excelência em cada serviço.
                 </p>
-                <p className="sobre-paragraph">
+                <p className="sobre-paragrafo">
                   <strong>Confiança:</strong> Relações transparentes e honestas com nossos clientes.
                 </p>
-                <p className="sobre-paragraph">
+                <p className="sobre-paragrafo">
                   <strong>Compromisso:</strong> Dedicação em atender e superar as expectativas dos clientes.
                 </p>
               </div>
@@ -183,12 +183,12 @@ function Sobre() {
             <h2 className='subtitulo-claro' translate='no'>Por que Escolher a Zero 20 Garage?</h2>
             <div className="highlights-grid">
               <div className="highlight-item nossa-historia">
-                <p className='sobre-paragraph'>Equipamentos de última geração</p>
-                <p className='sobre-paragraph'>Profissionais altamente qualificados</p>
+                <p className='sobre-paragrafo'>Equipamentos de última geração</p>
+                <p className='sobre-paragrafo'>Profissionais altamente qualificados</p>
               </div>
               <div className="highlight-item nossa-historia">
-                <p className='sobre-paragraph'>Compromisso com a qualidade</p>
-                <p className='sobre-paragraph'>Atendimento diferenciado</p>
+                <p className='sobre-paragrafo'>Compromisso com a qualidade</p>
+                <p className='sobre-paragrafo'>Atendimento diferenciado</p>
               </div>
             </div>
           </div>
@@ -205,7 +205,7 @@ function Sobre() {
         <section className="sobre-section">
           <div className="highlight-item nossa-historia">
             <h2 translate='no'>Visite a Zero 20 Garage</h2>
-            <p className='sobre-paragraph'>
+            <p className='sobre-paragrafo'>
               Venha nos visitar e conheça nossos serviços de perto! Será um prazer receber você em nossa oficina e apresentar toda a estrutura e equipe que fazem da Zero 20 Garage uma referência em qualidade e confiança.
             </p>
             <div className="map-container">

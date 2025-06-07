@@ -26,11 +26,11 @@ function TrabalheConosco() {
       <div className="container-claro">
         <h2 className="section-title">Trabalhe Conosco</h2>
 
-        <p className="paragraph" translate='no'>
+        <p className="paragrafo" translate='no'>
           Se você é apaixonado por mecânica e deseja fazer parte de uma equipe que valoriza a excelência, a <strong>Zero 20 Garage</strong> está sempre em busca de novos talentos que buscam desafios e evolução constante. Se você quer fazer parte de uma equipe apaixonada por excelência automotiva, envie seu currículo!
         </p>
 
-        <p className="paragraph" translate='no'>
+        <p className="paragrafo" translate='no'>
           Para candidatar-se, envie um e-mail para: <a href="mailto:contato@zero20garage.com.br">contato@zero20garage.com.br</a>
         </p>
 

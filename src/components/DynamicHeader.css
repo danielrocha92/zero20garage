@@ -92,7 +92,10 @@
   white-space: pre-wrap;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  display: inline-block;
+  /* Remova ou comente a linha abaixo */
+  /* display: inline-block; */
+  /* Adicione se necessário: */
+  /* width: 100%; */
 }
 
 .message-container p {

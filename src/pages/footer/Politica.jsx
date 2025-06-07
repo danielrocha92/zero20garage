@@ -98,7 +98,7 @@ const Privacidade = () => {
           </address>
 
           <div className="privacy-policy-last-updated">
-            <p className="paragraph acknowledgment">
+            <p className="paragrafo acknowledgment">
               Data da última atualização: {lastUpdated}
             </p>
 

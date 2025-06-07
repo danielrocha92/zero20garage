@@ -85,7 +85,7 @@ body {
   font-family: 'Nunito', sans-serif;
 }
 
-.page-claro .paragraph,
+.page-claro,
 .page-claro p {
   padding: 2rem;
   font-size: 1.4rem;
@@ -518,7 +518,7 @@ input, textarea {
 
   .page-claro .title { font-size: 1.8rem; }
   .page-claro .subtitle { font-size: 1.3rem; }
-  .page-claro .paragraph,
+  .page-claro .paragrafo,
   .page-claro p,
   .page-claro .section-list li { font-size: 1rem; }
 
