@@ -32,7 +32,7 @@ body {
 /* ===== Containers gerais ===== */
 .container-claro, .container-escuro {
   max-width: 1100px;
-  padding: 2rem 0.5rem;
+  padding: 1rem 0.5rem;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   margin: 0 auto;
@@ -62,7 +62,7 @@ body {
 .page-claro .container-claro {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 1rem 1rem;
 }
 
 .page-claro .title {
@@ -87,14 +87,14 @@ body {
 
 .page-claro,
 .page-claro p {
-  padding: 2rem;
+  padding: 1rem;
   font-size: 1.4rem;
   line-height: 1.7;
   margin-bottom: 1rem;
 }
 
 .page-claro .section {
-  padding: 2rem;
+  padding: 1rem;
   background-color: rgba(245, 245, 245, 0.8);
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -110,7 +110,7 @@ body {
 .page-claro .section-list {
   list-style-type: disc;
   padding: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .page-claro {
@@ -151,7 +151,7 @@ body {
   color: var(--vermelho-principal);
   font-family: 'Ubuntu', sans-serif;
   margin-bottom: 1rem;
-  padding: 2rem;
+  padding: 1rem;
   letter-spacing: 0.05rem;
   text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
   text-decoration-color: var(--vermelho-principal);
@@ -163,7 +163,7 @@ body {
   font-size: 1.1rem;
   line-height: 1.2;
   margin-bottom: 1rem;
-  padding: 2rem;
+  padding: 1rem;
   color: var(--cinza-claro);
   font-family: 'Ubuntu', sans-serif;
   font-weight: 600;
@@ -209,7 +209,7 @@ body {
 
 .paragrafo-escuro {
   margin-bottom: 1rem;
-  padding: 2rem;
+  padding: 1rem;
   color: var(--cinza-escuro);
   font-size: 1.4rem;
   line-height: 1;
@@ -354,7 +354,7 @@ input, textarea {
   justify-content: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .highlight-item:hover {
@@ -370,7 +370,7 @@ input, textarea {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .highlight-item h3 {
@@ -381,7 +381,7 @@ input, textarea {
 
 /* ===== FAQ ===== */
 .faq-section {
-  padding: 2rem 1rem;
+  padding: 1rem 1rem;
   background-color: var(--cinza-claro);
   border-radius: 12px;
   max-width: 800px;
@@ -497,7 +497,7 @@ input, textarea {
   h2 { font-size: 1.8rem; }
   h3 { font-size: 1.5rem; }
   .highlights-grid { grid-template-columns: 1fr; }
-  .container-section { padding: 2rem; }
+  .container-section { padding: 1rem; }
 }
 
 /* Telas pequenas */
