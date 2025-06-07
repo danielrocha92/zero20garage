@@ -59,7 +59,7 @@ const Trocas = () => {
       </h2>
       <p
         translate="no"
-        className="paragrafo">
+        className="paragrafo-escuro">
         Na <strong>ZER0 20 GARAGE™</strong>, prezamos pela sua satisfação e pela qualidade dos nossos serviços e produtos. Por isso, oferecemos a você a tranquilidade de uma <strong>garantia de 90 dias</strong>, conforme estabelecido pelo Código de Defesa do Consumidor.
       </p>
 
