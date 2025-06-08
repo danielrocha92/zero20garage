@@ -1,16 +1,13 @@
 // src/components/ScrollToTopButton.jsx
 import React, { useState, useEffect } from 'react';
+import { FiArrowUp } from 'react-icons/fi'; // Ícone moderno
 import './ScrollToTopButton.css';
 
 const ScrollToTopButton = () => {
   const [visible, setVisible] = useState(false);
 
   const toggleVisibility = () => {
-    if (window.pageYOffset > 300) {
-      setVisible(true);
-    } else {
-      setVisible(false);
-    }
+    setVisible(window.pageYOffset > 300);
   };
 
   useEffect(() => {
@@ -28,7 +25,7 @@ const ScrollToTopButton = () => {
       onClick={scrollToTop}
       aria-label="Scroll to top"
     >
-      ↑
+      <FiArrowUp />
     </button>
   );
 };

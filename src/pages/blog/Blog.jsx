@@ -56,22 +56,21 @@ const Blog = () => {
     return (
         <>
             <Helmet>
-                <title>Blog de Retífica de Motores e Manutenção | Zero20 Garage</title>
+                <title translate='no'>Blog de Retífica de Motores e Manutenção | Zero20 Garage</title>
                 <meta name="description" content="Artigos sobre manutenção automotiva, retífica de motores e mais." />
             </Helmet>
 
-            <div className="page modo-escuro">
+            <div className="page-escuro">
                 <DynamicHeader page="blog" messages={messages} />
                 <Breadcrumbs />
                 <AnimatedPage />
 
-                <div className="container-black">
-                    <section className="section">
+                <div className="container-escuro">
                         <div className='highlight-item'>
                             <h2 translate='no'>Blog ZER0 20 GARAGE™</h2>
                             <p className="paragrafo-claro">Explore artigos, dicas e novidades sobre manutenção automotiva e retífica de motores.</p>
 
-                            <div className="blog-grid">
+                            <div translate='no' className="blog-grid">
                                 {blogPosts.map((post) => (
                                     <div
                                         className="blog-item"
@@ -97,7 +96,6 @@ const Blog = () => {
                                 ))}
                             </div>
                         </div>
-                    </section>
                 </div>
             </div>
         </>

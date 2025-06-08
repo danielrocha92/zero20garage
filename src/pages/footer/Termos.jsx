@@ -40,25 +40,34 @@ const Termos = () => {
     };
 
   return (
-    <div className="page-claro">
+    <div className="page-escuro">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
 
       <div className="container-claro">
-      <h2 translate='no' className="titulo-escuro">Termos de Uso - ZER0 20 GARAGE™</h2>
-      <p className="paragrafo-escuro">
-        Bem-vindo ao site da <strong>ZER0 20 GARAGE™</strong>! Ao acessar ou utilizar nosso site, você concorda com os presentes Termos de Uso. Leia atentamente este documento. Se você não concordar com algum dos termos aqui apresentados, por favor, não utilize nosso site.
-      </p>
+
+        <section className="section">
+          <h2 translate='no' className="titulo-escuro">
+            Termos de Uso - ZER0 20 GARAGE™
+          </h2>
+          <p className="paragrafo-escuro">
+            Bem-vindo ao site da <strong>ZER0 20 GARAGE™</strong>! Ao acessar ou utilizar nosso site, você concorda com os presentes Termos de Uso. Leia atentamente este documento. Se você não concordar com algum dos termos aqui apresentados, por favor, não utilize nosso site.
+          </p>
+        </section>
+
+        <section className="section">
+          <h3 className="subtitulo-escuro">
+            1. Aceitação dos Termos
+          </h3>
+          <p className="paragrafo-escuro">
+            Ao acessar e navegar neste site, você declara ter lido, compreendido e aceitado integralmente estes Termos de Uso, bem como nossa <a href="/politica" className="terms-of-use-link">Política de Privacidade</a>. Estes termos podem ser atualizados periodicamente sem aviso prévio, sendo sua responsabilidade verificar esta página regularmente para estar ciente de quaisquer modificações. O uso continuado do site após a publicação de alterações constitui sua aceitação dessas modificações.
+          </p>
+        </section>
 
       <section className="section">
-        <h3 className="subtitulo-escuro">1. Aceitação dos Termos</h3>
-        <p className="paragrafo-escuro">
-          Ao acessar e navegar neste site, você declara ter lido, compreendido e aceitado integralmente estes Termos de Uso, bem como nossa <a href="/politica" className="terms-of-use-link">Política de Privacidade</a>. Estes termos podem ser atualizados periodicamente sem aviso prévio, sendo sua responsabilidade verificar esta página regularmente para estar ciente de quaisquer modificações. O uso continuado do site após a publicação de alterações constitui sua aceitação dessas modificações.
-        </p>
-      </section>
-
-      <section className="section">
-        <h3 className="subtitulo-escuro">2. Descrição dos Serviços</h3>
+        <h3 className="subtitulo-escuro">
+          2. Descrição dos Serviços
+        </h3>
         <p className="paragrafo-escuro">
           A <strong>ZER0 20 GARAGE™</strong> é uma oficina especializada em retífica de motores automotivos. Nosso site tem como objetivo fornecer informações sobre nossos serviços, expertise, contato e outras informações relevantes sobre nossa empresa. Através do site, você poderá:
         </p>

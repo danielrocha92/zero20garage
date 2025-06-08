@@ -24,7 +24,6 @@ const FAQSection = () => {
   };
 
   return (
-        <section className="section">
           <div className='highlight-item'>
       <h2 className="section-title">Perguntas Frequentes</h2>
 
@@ -36,7 +35,7 @@ const FAQSection = () => {
               <span className="arrow">{activeIndex === index ? '−' : '+'}</span>
             </div>
             <div className="faq-answer">
-              <p className="paragrafo-claro">{item.answer}</p>
+              <p className="paragrafo-escuro">{item.answer}</p>
 
           </div>
         </div>
@@ -44,7 +43,6 @@ const FAQSection = () => {
         </div>
         <a href="/Faq" className="button">Ver Mais</a>
         </div>
-    </section>
 
   );
 };

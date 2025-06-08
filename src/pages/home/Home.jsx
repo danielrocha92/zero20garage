@@ -30,17 +30,14 @@ function Home() {
     <Breadcrumbs />
 
       <div className="container-escuro">
-        {/* Card padrão Section */}
-        <section className="section">
+
           <div className='highlight-item'>
             <h2 className="titulo-claro">Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
             <h3 className="subtitulo-claro">Atendimento especializado para veículos nacionais e importados.</h3>
             <a href="/orcamento" className="button">Solicite um Orçamento</a>
           </div>
-        </section>
 
         {/* Destaques */}
-        <section className="section">
           <div className='highlight-item'>
             <h2 className="titulo-claro">Por que a Zero 20 Garage?</h2>
             <div className="highlights-grid">
@@ -58,10 +55,8 @@ function Home() {
               </div>
             </div>
           </div>
-        </section>
 
         {/* Linha do Tempo do Processo de Retífica */}
-        <section className="section">
           <div className="highlight-item">
             <h2 className="titulo-claro">Como Funciona o Processo de Retífica</h2>
             <div className="timeline">
@@ -114,20 +109,16 @@ function Home() {
               </div>
             </div>
           </div>
-        </section>
         {/* Serviços */}
 
         {/* Depoimentos */}
-        <section className="section">
           <div className='highlight-item'>
             <h2 className="titulo-claro">O que Nossos Clientes Dizem</h2>
               <TestimonialsCarousel />
           </div>
-        </section>
 
         <FAQSection />
         {/* Fale Conosco */}
-
 
         {/* Endereço */}
         <div className="highlight-item">

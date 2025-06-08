@@ -29,7 +29,6 @@ function Contato() {
 
       <div className="container-escuro">
         {/* Seção de Contato */}
-        <section className="section">
           <div className="highlight-item">
             <h2 className="title">Nossos Canais de Atendimento</h2>
             <p className="paragrafo-claro">Escolha o canal que preferir para falar conosco:</p>
@@ -70,10 +69,8 @@ function Contato() {
               </div>
             </div>
           </div>
-        </section>
 
         {/* Seção do Mapa */}
-        <section className="section">
           <div className="highlight-item">
             <h2 className="title">Onde Estamos</h2>
             <p className="paragrafo-claro">Venha nos visitar ou encontre facilmente no Google Maps:</p>
@@ -90,7 +87,6 @@ function Contato() {
               ></iframe>
             </div>
           </div>
-        </section>
       </div>
     </div>
   );

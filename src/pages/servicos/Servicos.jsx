@@ -65,39 +65,36 @@ const Servicos = () => {
             <Breadcrumbs />
 
                 <div className="container-escuro">
-                    <section className="section">
-                        <div className='highlight-item'>
-                            <h2 className='subtitulo-claro' translate='no'>Retífica de Motores</h2>
-                            <p className="paragrafo-claro">Serviço completo de retífica de motores</p>
-                            <div className="highlights-grid">
-                                {services.map((service) => (
-                                    <div
-                                        className="service-item"
-                                        key={service.title}
-                                        data-aos="fade-up">
-                                        <Link to={service.link} className="ctn-button">
-                                            {service.isLottie ? (
-                                                <DotLottieReact
-                                                    src={service.lottieUrl}
-                                                    loop
-                                                    autoplay
-                                                    className="service-animation"
-                                                    style={{ height: 120 }}
-                                                />
-                                            ) : (
-                                                service.icon
-                                            )}
-                                            <h2 className='titulo-claro'>{service.title}</h2>
-                                            <p className="subtitulo-claro">{service.description}</p>
-                                            <button type="submit" className="submit-button">
-                                                Saiba Mais
-                                            </button>
-                                        </Link>
-                                    </div>
-                                ))}
-                            </div>
+                    <h2 className='subtitulo-claro' translate='no'>Serviços que executamos</h2>
+                    <div className='highlight-item'>
+                        <div className="highlights-grid">
+                            {services.map((service) => (
+                                <div
+                                    className="service-item"
+                                    key={service.title}
+                                    data-aos="fade-up">
+                                    <Link to={service.link} className="ctn-button">
+                                        {service.isLottie ? (
+                                            <DotLottieReact
+                                                src={service.lottieUrl}
+                                                loop
+                                                autoplay
+                                                className="service-animation"
+                                                style={{ height: 160 }}
+                                            />
+                                        ) : (
+                                            service.icon
+                                        )}
+                                        <h2 className='titulo-claro'>{service.title}</h2>
+                                        <p className="subtitulo-claro">{service.description}</p>
+                                        <button type="submit" className="submit-button">
+                                            Saiba Mais
+                                        </button>
+                                    </Link>
+                                </div>
+                            ))}
                         </div>
-                    </section>
+                    </div>
                 </div>
             </div>
         </>

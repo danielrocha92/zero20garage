@@ -43,7 +43,7 @@
   color: #c0392b;
 }
 
-.prohibited p{
+.prohibited {
   color: #c0392b;
 }
 
@@ -53,8 +53,14 @@
 /* ===================== */
 
 .terms-of-use-address {
-  font-style: normal;
-  margin-top: 1.25rem; /* Usando rem */
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 1rem 0 0.5rem;
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+  letter-spacing: 0.05rem;
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  color: var(--vermelho-principal);
 }
 
 /* ===================== */

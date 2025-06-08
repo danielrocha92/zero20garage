@@ -70,13 +70,12 @@ const Faq = () => {
   };
 
   return (
-    <div className="page-claro">
+    <div className="page-escuro">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
 
-
-      <div className="container-claro">
-          <h2 translate='no' className="title">Perguntas Frequentes</h2>
+      <div className="container-escuro">
+          <h2 translate='no' className="subtitulo-escuro">Perguntas Frequentes</h2>
 
           <div className="faq-list">
         {faqData.map((item, index) => (
@@ -86,7 +85,7 @@ const Faq = () => {
               <span className="arrow">{activeIndex === index ? '−' : '+'}</span>
             </div>
             <div className="faq-answer">
-              <p className="paragrafo-claro">{item.answer}</p>
+              <p className="paragrafo-escuro">{item.answer}</p>
             </div>
           </div>
         ))}
