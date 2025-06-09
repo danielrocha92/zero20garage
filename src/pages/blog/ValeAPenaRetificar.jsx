@@ -18,7 +18,7 @@ const messages = [
       <Breadcrumbs />
 
     <div className="container-claro">
-      <section id="custo-retifica-motor" className="blog-section">
+      <section id="custo-retifica-motor" className="section">
         <h2 className="title">
           Retífica Vale a Pena ou é Melhor Trocar o Motor?
         </h2>

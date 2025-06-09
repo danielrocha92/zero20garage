@@ -1,8 +1,11 @@
+// TesteDesempenho.jsx
+import React, { useState, useEffect } from 'react';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
 
+import '../../styles/Blog.css';
 
-function Td() {
+const Td = () => {
   const messages = [
     {
       title: 'Teste de Desempenho do Motor',
@@ -14,78 +17,102 @@ function Td() {
     },
   ];
 
+  const [lastUpdated, setLastUpdated] = useState('');
+
+  const updateLastUpdated = () => {
+    const now = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    setLastUpdated(now.toLocaleDateString('pt-BR', options));
+  };
+
+  useEffect(() => {
+    updateLastUpdated();
+  }, []);
+
+  const handleContentUpdate = () => {
+    console.log('Conteúdo atualizado!');
+    updateLastUpdated();
+  };
+
   return (
-    <div className="page-claro">
+    <div className="page-escuro">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
-
-
       <div className="container-claro">
-        <h2 className="title">Teste de Desempenho do Seu Motor: Garanta Potência e Eficiência!</h2>
-        <p className="paragrafo-claro">
-          Na 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™, sabemos que a performance do seu motor é crucial para o seu veículo e para o seu dia a dia. É por isso que oferecemos um serviço completo e especializado de <strong>Teste de Desempenho do Motor</strong>, utilizando tecnologia de ponta e a expertise de nossos técnicos qualificados.
+
+        <section className="section">
+          <h2 className="titulo-escuro">
+            Teste de Desempenho do Seu Motor: Garanta Potência e Eficiência!
+          </h2>
+          <p className="paragrafo-escuro">
+            Na <strong>ZER0 20 GARAGE™</strong>, sabemos que a performance do seu motor é essencial para o bom funcionamento do veículo. Por isso, oferecemos um serviço completo de Teste de Desempenho, com tecnologia de ponta e diagnósticos precisos.
+          </p>
+        </section>
+
+        <section className="section">
+          <h3 className="subtitulo-escuro">1. Por que fazer o Teste de Desempenho?</h3>
+          <ul className="lista-escuro">
+            <li><strong>Diagnóstico preventivo:</strong> Identifica falhas antes que se tornem problemas graves.</li>
+            <li><strong>Verificação de eficiência:</strong> Mede o desempenho real do motor em termos de torque e potência.</li>
+            <li><strong>Economia de combustível:</strong> Motores otimizados consomem menos.</li>
+            <li><strong>Maior segurança:</strong> Garante que o motor está operando com plena confiabilidade.</li>
+            <li><strong>Vida útil prolongada:</strong> Um motor avaliado com frequência tende a durar mais.</li>
+          </ul>
+        </section>
+
+        <section className="section">
+          <h3 className="subtitulo-escuro">2. O que está incluso no nosso Teste de Desempenho?</h3>
+          <ul className="lista-escuro">
+            <li><strong>Inspeção visual detalhada:</strong> Identificamos vazamentos e sinais de desgaste.</li>
+            <li><strong>Teste de compressão:</strong> Avaliação da pressão em cada cilindro.</li>
+            <li><strong>Leak Down Test:</strong> Localiza onde está ocorrendo perda de pressão.</li>
+            <li><strong>Análise de gases:</strong> Avalia a eficiência da queima de combustível.</li>
+            <li><strong>Leitura via scanner:</strong> Diagnóstico eletrônico de falhas.</li>
+            <li><strong>Teste de pressão de óleo:</strong> Verificação do sistema de lubrificação.</li>
+            <li><strong>Checagem do arrefecimento:</strong> Garante que o motor trabalha na temperatura ideal.</li>
+            <li><strong>Dinamômetro (opcional):</strong> Mede a potência e torque reais.</li>
+          </ul>
+        </section>
+
+        <section className="section">
+          <h3 className="subtitulo-escuro">3. Quem deve fazer esse teste?</h3>
+          <ul className="lista-escuro">
+            <li>Veículos com perda de desempenho ou consumo elevado.</li>
+            <li>Após serviços de retífica ou troca de peças importantes.</li>
+            <li>Antes de viagens longas ou uso intenso do motor.</li>
+            <li>Frotas que exigem confiabilidade constante.</li>
+            <li>Compradores de veículos usados.</li>
+          </ul>
+        </section>
+
+        <section className="section">
+          <h3 className="subtitulo-escuro">4. Agende seu teste com a ZER0 20 GARAGE™</h3>
+          <p className="paragrafo-escuro">
+            Conte com nossa equipe técnica altamente qualificada e equipamentos modernos para diagnosticar com precisão a real condição do seu motor.
+          </p>
+          <p className="paragrafo-escuro">
+            📍 <a href="https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.326345,-46.5770842,17z/data=!3m1!4b1!4m6!3m5!1s0x94ceede375ca12c9:0xa22173d27f744745!8m2!3d-23.3263499!4d-46.5745093!16s%2Fg%2F11sgrc1ckt?authuser=0&entry=ttu" target="_blank" rel="noopener noreferrer">
+              Avenida Laura Gomes Hannickel, 153 - Capoavinha, Mairiporã - SP
+            </a><br />
+            📞 <a href="tel:+5511941097471">(11) 94109-7471</a><br />
+            📧 <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a>
+          </p>
+        </section>
+
+        <p className="paragrafo acknowledgment">
+          <strong>Invista na saúde do seu motor. Agende seu Teste de Desempenho com a ZER0 20 GARAGE™!</strong>
         </p>
 
-        <h3>Por que realizar um Teste de Desempenho do Motor?</h3>
-        <p className="paragrafo-claro">
-          Assim como fazemos check-ups regulares em nossa saúde, o seu motor também precisa de avaliações periódicas para garantir seu bom funcionamento e evitar problemas futuros. O Teste de Desempenho é uma ferramenta essencial para:
-        </p>
-        <ul className="lista-escuro">
-          <li><strong>Diagnosticar problemas:</strong> Identificar falhas em componentes que podem estar comprometendo a potência e a eficiência do motor.</li>
-          <li><strong>Avaliar a condição geral:</strong> Verificar o estado de desgaste das peças internas, a compressão dos cilindros e a presença de vazamentos.</li>
-          <li><strong>Otimizar o desempenho:</strong> Após a retífica ou qualquer intervenção, o teste garante que o motor esteja entregando a potência e o torque ideais.</li>
-          <li><strong>Prevenir danos maiores:</strong> Ao identificar problemas em estágio inicial, você evita que eles se agravem e causem danos mais sérios.</li>
-          <li><strong>Aumentar a vida útil do motor:</strong> Um motor com desempenho otimizado tende a ter uma vida útil mais longa.</li>
-          <li><strong>Melhorar a eficiência de combustível:</strong> Um motor funcionando corretamente consome menos combustível.</li>
-          <li><strong>Garantir a sua segurança:</strong> Um motor com desempenho adequado responde melhor em situações de emergência.</li>
-        </ul>
+        <div className="terms-of-use-last-updated">
+          <p className="paragrafo acknowledgment">
+            Data da última atualização: {lastUpdated}
+          </p>
+          <button onClick={handleContentUpdate}></button>
+        </div>
 
-        <h3>O que o nosso Teste de Desempenho Abrange?</h3>
-        <p className="paragrafo-claro">
-          Nosso serviço de Teste de Desempenho é abrangente e minucioso, utilizando equipamentos modernos e seguindo rigorosos procedimentos. Geralmente, o teste inclui:
-        </p>
-        <ul className="lista-escuro">
-          <li><strong>Inspeção visual:</strong> Verificação de possíveis vazamentos, ruídos anormais e o estado geral do motor.</li>
-          <li><strong>Teste de compressão dos cilindros:</strong> Medição da pressão em cada cilindro.</li>
-          <li><strong>Teste de vazamento de cilindro (Leak Down Test):</strong> Identificação precisa de onde ocorre a perda de pressão.</li>
-          <li><strong>Análise de gases de escape:</strong> Avaliação da composição dos gases para identificar problemas de combustão.</li>
-          <li><strong>Diagnóstico eletrônico (Scanner Automotivo):</strong> Leitura de códigos de falha da central eletrônica.</li>
-          <li><strong>Teste de pressão de óleo:</strong> Verificação da pressão do óleo lubrificante.</li>
-          <li><strong>Avaliação do sistema de arrefecimento:</strong> Verificação de pressão, vazamentos e eficiência.</li>
-          <li><strong>Teste de desempenho em dinamômetro (opcional):</strong> Medição da potência e do torque reais do motor.</li>
-        </ul>
-
-        <h3>Para quem é indicado o Teste de Desempenho?</h3>
-        <p className="paragrafo-claro">
-          Nosso serviço de Teste de Desempenho é recomendado para:
-        </p>
-        <ul className="lista-escuro">
-          <li>Proprietários de veículos que desejam manter seus motores em perfeitas condições.</li>
-          <li>Veículos com histórico de problemas ou sintomas de falha.</li>
-          <li>Após serviços de retífica, para garantir o desempenho esperado.</li>
-          <li>Antes da compra ou venda de um veículo usado.</li>
-          <li>Frotistas que precisam garantir a confiabilidade de seus veículos.</li>
-        </ul>
-
-        <h3>Agende agora mesmo o Teste de Desempenho do seu motor!</h3>
-        <p className="paragrafo-claro">
-          Nossa equipe está pronta para oferecer um serviço de alta qualidade, com diagnóstico preciso e soluções eficientes para garantir a potência, a eficiência e a durabilidade do seu motor.
-        </p>
-        <p className="paragrafo-claro">
-          Entre em contato conosco através dos seguintes canais:
-        </p>
-        <address className="terms-of-use-address">
-          <strong>𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™</strong><br />
-          <a href='https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.326345,-46.5770842,17z/data=!3m1!4b1!4m6!3m5!1s0x94ceede375ca12c9:0xa22173d27f744745!8m2!3d-23.3263499!4d-46.5745093!16s%2Fg%2F11sgrc1ckt?authuser=0&entry=ttu&g_ep=EgoyMDI1MDQwOS4wIKXMDSoASAFQAw%3D%3D'target='blank'>Avenida Laura Gomes Hannickel, 153 - Capoavinha, Mairiporã - SP</a><br />
-          <a href="tel:+5511941097471">(11) 94109-7471</a><br />
-          <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a>
-        </address>
-        <p className="paragrafo-claro">
-          <strong>Invista na saúde do seu motor. Invista em Teste de Desempenho na 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™!</strong>
-        </p>
       </div>
     </div>
   );
-}
+};
 
 export default Td;

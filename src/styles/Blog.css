@@ -1,6 +1,12 @@
-.blog-section {
-  background-color: rgb(245, 245, 245);
-  color: var(--cinza-claro);
+.section {
+  padding: 2rem;
+  background-color: rgba(245, 245, 245, 0.731);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  color: var(--cinza-escuro);
+  margin-bottom: 2rem;
 }
 
 /* Grid principal responsivo (padrão: mobile) */
@@ -90,12 +96,12 @@
 /* Imagem no topo do blog-item */
 .blog-item__image {
   width: 100%;
-  height: 180px;
+  aspect-ratio: 16 / 9; /* Garante proporção sem height fixa */
   object-fit: cover;
   border-radius: 0.8rem 0.8rem 0 0;
-  margin-bottom: 1rem;
   transition: transform 0.3s ease;
 }
+
 
 .blog-item:hover .blog-item__image {
   transform: scale(1.05);

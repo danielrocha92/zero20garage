@@ -5,7 +5,7 @@ import Breadcrumbs from '../../components/Breadcrumbs';
 
 import '../../styles/Blog.css'; // Novo CSS para padronizar o tema do blog
 
-const ManutencaoPreventiva = () => {
+const Mp = () => {
   const messages = [
     {
       title: 'Manutenção Preventiva',
@@ -113,4 +113,4 @@ const ManutencaoPreventiva = () => {
   );
 };
 
-export default ManutencaoPreventiva;
+export default Mp;

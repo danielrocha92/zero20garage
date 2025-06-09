@@ -17,7 +17,7 @@ const messages = [
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
     <div className="container-claro">
-      <section id="custo-retifica-motor" className="blog-section">
+      <section id="custo-retifica-motor" className="section">
         <h2 className="title">
           Manutenção de Motores: Dicas de Profissionais para Maximizar a Vida Útil do Seu Motor
         </h2>

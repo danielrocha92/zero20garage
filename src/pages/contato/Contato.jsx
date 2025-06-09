@@ -3,7 +3,7 @@ import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
 
 import './Contato.css';
-import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
+import ContatoCta from '../../components/ContatoCta';
 
 function Contato() {
   const messages = [
@@ -28,47 +28,9 @@ function Contato() {
 
 
       <div className="container-escuro">
+        
         {/* Seção de Contato */}
-          <div className="highlight-item">
-            <h2 className="title">Nossos Canais de Atendimento</h2>
-            <p className="paragrafo-claro">Escolha o canal que preferir para falar conosco:</p>
-            <div className="contact-cards">
-              <div className="contact-card">
-                <FaMapMarkerAlt className="contact-icon" />
-                <a
-                  href="https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.326345,-46.5770842,17z"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Endereço da oficina"
-                >
-                  Av. Laura Gomes Hannickel, 153<br />Capoavinha - Mairiporã, SP
-                </a>
-              </div>
-              <div className="contact-card">
-                <FaPhoneAlt className="contact-icon" />
-                <a href="tel:+5511941097471" aria-label="Ligar para (11) 94109-7471">
-                  (11) 94109-7471
-                </a>
-              </div>
-              <div className="contact-card">
-                <FaEnvelope className="contact-icon" />
-                <a href="mailto:contato@zero20garage.com">
-                  contato@zero20garage.com
-                </a>
-              </div>
-              <div className="contact-card">
-                <FaWhatsapp className="contact-icon" />
-                <a
-                  href="https://wa.me/5511941097471?text=Olá! Gostaria de mais informações sobre os serviços."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Enviar mensagem via WhatsApp"
-                >
-                  Fale pelo WhatsApp
-                </a>
-              </div>
-            </div>
-          </div>
+        <ContatoCta />
 
         {/* Seção do Mapa */}
           <div className="highlight-item">

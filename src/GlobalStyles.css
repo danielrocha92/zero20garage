@@ -184,7 +184,6 @@ body {
 /* ===== Modo Escuro ===== */
 .page-escuro .container-escuro {
   background-color: rgba(18, 18, 18, 0.85);
-  color: var(--cinza-claro);
 }
 
 .paragrafo-escuro {

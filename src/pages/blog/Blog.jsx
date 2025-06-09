@@ -89,7 +89,7 @@ const Blog = () => {
                                             <button
                                                 type="submit"
                                                 className="submit-button">
-                                                Leia Mais
+                                                Ler artigo →
                                             </button>
                                         </Link>
                                     </div>
