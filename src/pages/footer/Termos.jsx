@@ -50,7 +50,7 @@ const Termos = () => {
           <h2 translate='no' className="titulo-escuro">
             Termos de Uso - ZER0 20 GARAGE™
           </h2>
-          <p className="paragrafo-escuro">
+          <p translate='no' className="paragrafo-escuro">
             Bem-vindo ao site da <strong>ZER0 20 GARAGE™</strong>! Ao acessar ou utilizar nosso site, você concorda com os presentes Termos de Uso. Leia atentamente este documento. Se você não concordar com algum dos termos aqui apresentados, por favor, não utilize nosso site.
           </p>
         </section>

@@ -63,7 +63,7 @@ function Sobre() {
       <div className="container-escuro">
         <section className="sobre-section">
           <div className="highlight-item nossa-historia">
-            <h1>Nossa História</h1>
+            <h1 className='titulo-claro'>Nossa História</h1>
             <div className="historia-grid">
               <div className="historia-text">
                 <p className='sobre-paragrafo'>
@@ -133,6 +133,7 @@ function Sobre() {
         <div className="highlight-item nossa-historia">
          <h2 className='subtitulo-claro' translate='no'>Nossos Princípios</h2>
           <div className="principios-grid">
+
             {/* Missão */}
             <div className="principio-item">
               <FaBullseye className="principio-icon" />
@@ -178,50 +179,13 @@ function Sobre() {
         </div>
       </section>
 
-        <section className="sobre-section">
-          <div className="highlight-item nossa-historia">
-            <h2 className='subtitulo-claro' translate='no'>Por que Escolher a Zero 20 Garage?</h2>
-            <div className="highlights-grid">
-              <div className="highlight-item nossa-historia">
-                <p className='sobre-paragrafo'>Equipamentos de última geração</p>
-                <p className='sobre-paragrafo'>Profissionais altamente qualificados</p>
-              </div>
-              <div className="highlight-item nossa-historia">
-                <p className='sobre-paragrafo'>Compromisso com a qualidade</p>
-                <p className='sobre-paragrafo'>Atendimento diferenciado</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Depoimentos */}
-        <section className="section">
           <div className='highlight-item'>
             <h2 className='subtitulo-claro' translate='no'>O que Nossos Clientes Dizem</h2>
               <TestimonialsCarousel />
           </div>
-        </section>
 
-        <section className="sobre-section">
-          <div className="highlight-item nossa-historia">
-            <h2 translate='no'>Visite a Zero 20 Garage</h2>
-            <p className='sobre-paragrafo'>
-              Venha nos visitar e conheça nossos serviços de perto! Será um prazer receber você em nossa oficina e apresentar toda a estrutura e equipe que fazem da Zero 20 Garage uma referência em qualidade e confiança.
-            </p>
-            <div className="map-container">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.799744734953!2d-46.5745093!3d-23.3263499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ceede375ca12c9%3A0xa22173d27f744745!2sZERO%2020%20GARAGE!5e0!3m2!1spt-BR!2sbr!4v1711478418134!5m2!1spt-BR!2sbr"
-                width="100%"
-                height="500"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Localização da Zero 20 Garage"
-              ></iframe>
-            </div>
-          </div>
-        </section>
+        {/* Contatos */}
         <ContatoCta />
       </div>
     </div>

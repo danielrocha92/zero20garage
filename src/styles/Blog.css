@@ -144,6 +144,11 @@
   list-style: disc inside;
   padding-left: 1rem;
   margin-top: 1rem;
+
+  text-align: justify;
+  word-break: normal;
+  word-spacing: normal;
+  line-height: 1.6;
 }
 
 .button {

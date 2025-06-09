@@ -6,16 +6,12 @@ import Breadcrumbs from '../../components/Breadcrumbs';
 const Privacidade = () => {
   const messages = [
     {
-      title: 'Que tipo de serviços a 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™ oferece?',
-      subtitle: 'Somos uma oficina mecânica e retífica de motores especializada em veículos nacionais e importados.',
+title: 'Privacidade e Proteção de Dados',
+  subtitle: 'Entenda como suas informações são coletadas, usadas e protegidas por nós.',
     },
     {
-      title: 'Vocês trabalham com carros importados?',
-      subtitle: 'Sim, somos especialistas em motores tanto de veículos nacionais quanto importados.',
-    },
-    {
-      title: 'Posso confiar nos serviços da 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™?',
-      subtitle: 'Sim, prezamos pela confiança e qualidade em todos os nossos serviços. Nossa equipe experiente está pronta para cuidar do seu carro.',
+  title: 'Sua Privacidade Importa',
+  subtitle: 'Transparência no uso dos seus dados, com segurança e respeito.',
     },
   ];
 
@@ -33,11 +29,13 @@ const Privacidade = () => {
   }, []);
 
   return (
-    <div id="privacy-policy-page" className="page-claro">
+    <div className="page-escuro">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
+
         <div className="container-claro">
-        <section className="footer-section">
+
+        <section className="section">
           <h2 translate="no" className="titulo-escuro">
             Política de Privacidade - ZER0 20 GARAGE™
           </h2>
