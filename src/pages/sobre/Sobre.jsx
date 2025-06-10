@@ -89,20 +89,20 @@ function Sobre() {
               <div className="equipe-slider">
                 <Slider {...settings}>
                   <div className="team-image-container">
-                    <img src={teamImage} alt="Carlos, chefe de oficina" className="team-image" />
-                    <p className="team-caption">Carlos – Chefe de Oficina</p>
+                    <img src={teamImage} alt="Francisco Borges, Chefe de Oficina" className="team-image" />
+                    <p className="team-caption">Francisco Borges, Chefe de Oficina</p>
                   </div>
                   <div className="team-image-container">
-                    <img src={teamImage2} alt="Fernanda, especialista em retífica" className="team-image" />
-                    <p className="team-caption">Fernanda – Especialista em Retífica</p>
+                    <img src={teamImage2} alt="Rodney Santos, Especialista em Retífica" className="team-image" />
+                    <p className="team-caption">Rodney Santos, Especialista em Retífica</p>
                   </div>
                   <div className="team-image-container">
-                    <img src={teamImage} alt="Bruno, mecânico sênior" className="team-image" />
-                    <p className="team-caption">Bruno – Mecânico Sênior</p>
+                    <img src={teamImage} alt="Reginaldo Pia, mecânico sênior" className="team-image" />
+                    <p className="team-caption">Reginaldo Pia, mecânico Sênior</p>
                   </div>
                   <div className="team-image-container">
-                    <img src={teamImage2} alt="Patrícia, atendimento ao cliente" className="team-image" />
-                    <p className="team-caption">Patrícia – Atendimento ao Cliente</p>
+                    <img src={teamImage2} alt="Enzo Gabriel, Jovem Aprendiz" className="team-image" />
+                    <p className="team-caption">Enzo Gabriel, Jovem Aprendiz</p>
                   </div>
                 </Slider>
               </div>
