@@ -39,7 +39,7 @@ function Usinagem() {
       <Breadcrumbs />
 
       <div className="container-escuro">
-        <section className="section">
+    
           <div className='highlight-item'>
                   {/* Carrossel de imagens */}
       <div className="carousel-container">
@@ -65,7 +65,7 @@ function Usinagem() {
 
             <Link to="/" className='button'>← Voltar para Home</Link>
           </div>
-        </section>
+        
       </div>
     </div>
   );
