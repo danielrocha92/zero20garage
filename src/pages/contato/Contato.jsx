@@ -22,19 +22,19 @@ function Contato() {
   ];
 
   return (
-    <div className="page modo-escuro">
+    <div className="page-escuro">
     <DynamicHeader page="contato" messages={messages} />
     <Breadcrumbs />
 
 
       <div className="container-escuro">
-        
+
         {/* Seção de Contato */}
         <ContatoCta />
 
         {/* Seção do Mapa */}
           <div className="highlight-item">
-            <h2 className="title">Onde Estamos</h2>
+            <h2 className="titulo-claro">Onde Estamos</h2>
             <p className="paragrafo-claro">Venha nos visitar ou encontre facilmente no Google Maps:</p>
             <div className="map-container">
               <iframe

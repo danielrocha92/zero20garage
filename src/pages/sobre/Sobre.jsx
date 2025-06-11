@@ -55,7 +55,7 @@ function Sobre() {
   ];
 
   return (
-    <div className="page modo-escuro">
+    <div className="page-escuro">
 
       <DynamicHeader page="sobre" messages={messages} />
       <Breadcrumbs />

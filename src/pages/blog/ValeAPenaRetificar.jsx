@@ -19,7 +19,7 @@ const messages = [
 
     <div className="container-claro">
       <section id="custo-retifica-motor" className="section">
-        <h2 className="title">
+        <h2 className="titulo-claro">
           Retífica Vale a Pena ou é Melhor Trocar o Motor?
         </h2>
 

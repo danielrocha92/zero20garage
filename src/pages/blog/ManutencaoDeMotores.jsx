@@ -18,7 +18,7 @@ const messages = [
       <Breadcrumbs />
     <div className="container-claro">
       <section id="custo-retifica-motor" className="section">
-        <h2 className="title">
+        <h2 className="titulo-claro">
           Manutenção de Motores: Dicas de Profissionais para Maximizar a Vida Útil do Seu Motor
         </h2>
 

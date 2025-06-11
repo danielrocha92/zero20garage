@@ -60,7 +60,7 @@ const Servicos = () => {
                 <meta name="description" content="Oferecemos serviços especializados" />
             </Helmet>
 
-            <div className="page modo-escuro">
+            <div className="page-escuro">
             <DynamicHeader page="servicos" messages={messages} />
             <Breadcrumbs />
 

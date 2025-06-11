@@ -13,13 +13,13 @@ const messages = [
   ];
 
   return (
-    <div className="page modo-escuro">
+    <div className="page-escuro">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
 
     <div className="container-claro">
       <section className="section">
-        <h2 className="title">Retífica de Motores: Como Saber Quando Seu Motor Precisa de Reparo?</h2>
+        <h2 className="titulo-claro">Retífica de Motores: Como Saber Quando Seu Motor Precisa de Reparo?</h2>
 
         <p className="paragrafo-escuro">
           Saber o momento certo de fazer a retífica do motor pode evitar danos maiores e preservar a vida útil do seu veículo. Neste artigo, explicamos os principais sinais de que seu motor pode precisar desse reparo essencial.

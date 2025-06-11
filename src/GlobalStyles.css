@@ -134,8 +134,8 @@ body {
   text-align: center;
   color: var(--vermelho-principal);
   font-family: 'Ubuntu', sans-serif;
-  margin-bottom: 1rem;
-  padding: 1rem;
+  padding: 0.5rem;
+  margin-top: 1rem;
   letter-spacing: 0.05rem;
   text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
 }
@@ -355,6 +355,57 @@ textarea {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
+
+.highlight-card {
+  background-color: rgba(18, 18, 18, 0.9);
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: var(--branco);
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.highlight-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(255, 0, 0, 0.4);
+}
+
+.highlight-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--vermelho-principal);
+  margin-bottom: 0.5rem;
+}
+
+.highlight-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--cinza-claro);
+  font-weight: 500;
+  text-align: justify;
+}
+
+.highlight-card a {
+  margin-top: auto;
+  font-weight: bold;
+  color: var(--vermelho-principal);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.highlight-card a:hover {
+  color: var(--vermelho-hover);
+}
+
 
 @media (min-width: 600px) {
 

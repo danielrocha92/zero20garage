@@ -25,7 +25,7 @@ function Home() {
   ];
 
   return (
-    <div className="page modo-escuro">
+    <div className="page-escuro">
     <DynamicHeader page="home" messages={messages} />
     <Breadcrumbs />
 
@@ -122,7 +122,7 @@ function Home() {
 
         {/* Endereço */}
           <div className="highlight-item">
-            <h2 className="title">Nossos Canais de Atendimento</h2>
+            <h2 className="titulo-claro">Nossos Canais de Atendimento</h2>
             <p className="paragrafo-claro">Escolha o canal que preferir para falar conosco:</p>
             <div className="contact-cards">
               <div className="contact-card">

@@ -34,12 +34,12 @@ function Usinagem() {
   };
 
   return (
-    <div className="page modo-escuro">
+    <div className="page-escuro">
       <DynamicHeader page="home" messages={messages} />
       <Breadcrumbs />
 
       <div className="container-escuro">
-    
+
           <div className='highlight-item'>
                   {/* Carrossel de imagens */}
       <div className="carousel-container">
@@ -65,7 +65,7 @@ function Usinagem() {
 
             <Link to="/" className='button'>← Voltar para Home</Link>
           </div>
-        
+
       </div>
     </div>
   );
