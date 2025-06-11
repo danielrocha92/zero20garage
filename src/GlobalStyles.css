@@ -175,7 +175,13 @@ body {
 
   text-align: left;
   line-height: 1.8;
-  word-break: break-all;
+  
+  text-align: justify;
+  word-break: break-word;
+  hyphens: auto;
+  letter-spacing: 0.2px; /* Ajuste conforme necessário */
+  word-spacing: 0.5px; /* Ajuste conforme necessário */
+}
 }
 
 .lista-claro li::before {
