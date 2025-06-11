@@ -52,7 +52,7 @@ function MontagemTeste() {
               </Slider>
             </div>
 
-            <h1 className='title'>Usinagem de Motores</h1>
+            <h2 className='title'>Usinagem de Motores</h2>
             <h3 className='subtitle'>Precisão, Eficiência e Durabilidade</h3>
 
             <p className='paragrafo'>
