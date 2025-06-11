@@ -27,7 +27,7 @@ const Layout = ({ children }) => {
   }, [location.pathname]);
 
   return (
-    <div className="layout">
+    <div translate='no' className="layout">
       <Navbar />
       <main className="content">
         {loading && (

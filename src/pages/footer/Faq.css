@@ -9,7 +9,7 @@
 
 .faq-item {
   border: 1px solid #ddd;
-  border-radius: 0.5rem; /* 8px */
+  border-radius: 8px; /* 8px */
   overflow: hidden;
   transition: box-shadow 0.3s ease;
   color: #080808;

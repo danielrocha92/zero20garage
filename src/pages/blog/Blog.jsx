@@ -60,7 +60,7 @@ const Blog = () => {
                 <meta name="description" content="Artigos sobre manutenção automotiva, retífica de motores e mais." />
             </Helmet>
 
-            <div className="page-escuro">
+            <div translate='no' className="page-escuro">
                 <DynamicHeader page="blog" messages={messages} />
                 <Breadcrumbs />
                 <AnimatedPage />
