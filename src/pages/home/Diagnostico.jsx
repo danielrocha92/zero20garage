@@ -33,7 +33,7 @@ function Diagnostico() {
   };
 
   return (
-    <div className="page modo-escuro">
+    <div className="page-escuro">
       <DynamicHeader page="home" messages={messages} />
       <Breadcrumbs />
 
