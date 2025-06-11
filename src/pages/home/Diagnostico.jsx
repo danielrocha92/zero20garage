@@ -51,7 +51,7 @@ function Diagnostico() {
               </Slider>
             </div>
 
-            <h1 className='title'>Diagnóstico e Avaliação Técnica</h1>
+            <h2 className='title'>Diagnóstico e Avaliação Técnica</h2>
             <h3 className='subtitle'>Análise Completa com Equipamentos de Última Geração</h3>
 
             <p className='paragrafo-claro'>
