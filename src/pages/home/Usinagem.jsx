@@ -51,7 +51,7 @@ function Usinagem() {
           ))}
         </Slider>
       </div>
-            <h1 className='title'>Usinagem de Motores</h1>
+            <h2 className='title'>Usinagem de Motores</h2>
             <h3 className='subtitle'>Precisão, Qualidade e Tecnologia Avançada</h3>
             <p className='paragrafo'>
               A usinagem é uma etapa essencial na retífica de motores, focada na correção e recuperação de componentes desgastados. Utilizamos máquinas CNC e equipamentos de alta precisão para restaurar as dimensões originais das peças, garantindo máxima eficiência e desempenho.
