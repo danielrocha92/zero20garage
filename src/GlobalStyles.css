@@ -148,7 +148,7 @@ body {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 600;
   letter-spacing: 0.03rem;
-  
+
   text-align: justify;
   word-break: break-word;
   hyphens: auto;
@@ -175,13 +175,12 @@ body {
 
   text-align: left;
   line-height: 1.8;
-  
+
   text-align: justify;
   word-break: break-word;
   hyphens: auto;
   letter-spacing: 0.2px; /* Ajuste conforme necessário */
   word-spacing: 0.5px; /* Ajuste conforme necessário */
-}
 }
 
 .lista-claro li::before {
@@ -260,7 +259,7 @@ body {
 
 /* ===== Seções ===== */
 .section {
-  padding: 2rem;
+  padding: 0.5rem;
   background-color: rgba(245, 245, 245, 0.731);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);

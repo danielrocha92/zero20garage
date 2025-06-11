@@ -43,6 +43,7 @@ title: 'Privacidade e Proteção de Dados',
           <p translate="no" className="paragrafo-escuro">
             Esta Política de Privacidade descreve como a <strong>ZERO 20 GARAGE™</strong> coleta, usa, compartilha e protege as informações pessoais dos usuários do nosso website. Ao acessar ou usar nosso website, você concorda com os termos desta Política de Privacidade.
           </p>
+        </section>
 
           <section className="section">
             <h3 className="subtitulo-escuro">1. Informações que Coletamos:</h3>
@@ -101,7 +102,7 @@ title: 'Privacidade e Proteção de Dados',
             </p>
 
           </div>
-        </section>
+
       </div>
     </div>
   );
