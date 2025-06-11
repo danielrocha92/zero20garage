@@ -148,11 +148,11 @@ body {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 600;
   letter-spacing: 0.03rem;
-
+  
   text-align: justify;
-  word-break: normal;
-  word-spacing: normal;
-  line-height: 1.6;
+  word-break: break-word;
+  hyphens: auto;
+  letter-spacing: 0.2px; /* Ajuste conforme necessário */
 }
 
 .subtitulo-claro {
