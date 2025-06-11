@@ -93,7 +93,7 @@
     color: #d3d3d3; /* Mantendo a cor clara no hover do link do item atual */
   }
   .breadcrumbs li:not(:last-child) {
-    margin-right: 0.1rem; /* Ajustando o espaçamento entre os itens */
+    margin-right: 0.05rem; /* Ajustando o espaçamento entre os itens */
   }
   .breadcrumbs li {
     font-size: 1rem; /* Ajustando o tamanho da fonte para mobile */
