@@ -52,7 +52,7 @@ function Desmontagem() {
               </Slider>
             </div>
 
-            <h1 className='titulo-claro'>Desmontagem do Motor</h1>
+            <h2 className='titulo-claro'>Desmontagem do Motor</h2>
             <h3 className='subtitulo-claro'>Precisão, Cuidado e Responsabilidade Técnica</h3>
 
             <p className="paragrafo-claro">
