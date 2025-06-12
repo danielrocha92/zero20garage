@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Faq.css';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
+import ContatoCta from '../../components/ContatoCta';
 
 
 const faqData = [
@@ -90,6 +91,14 @@ const Faq = () => {
           </div>
         ))}
       </div>
+        {/* Seção de Contato */}
+        <section className="section">
+          <h3 className="subtitulo-escuro">Contato</h3>
+          <p className="paragrafo-escuro">
+            Se você tiver alguma dúvida entre em contato conosco através dos seguintes canais:
+          </p>
+          <ContatoCta />
+        </section>
       </div>
     </div>
   );

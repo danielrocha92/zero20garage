@@ -57,22 +57,3 @@
   color: var(--vermelho-principal);
 }
 
-/* ===================== */
-/* Reconhecimento */
-/* ===================== */
-
-.acknowledgment {
-  color: #777;
-  font-style: italic;
-  margin-top: 1.875rem; /* Usando rem */
-}
-
-/* ===================== */
-/* Última Atualização */
-/* ===================== */
-
-.terms-of-use-last-updated {
-  color: #999;
-  font-size: 0.9em;
-  margin-top: 0.625rem; /* Usando rem */
-}

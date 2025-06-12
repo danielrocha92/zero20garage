@@ -11,6 +11,7 @@ import custoRetificaImg from '../../assets/images/custo-retifica.jpg';
 import manutencaoMotoresImg from '../../assets/images/manutencao-de-motores.jpg';
 import retificaParcialImg from '../../assets/images/retifica-parcial-ou-completa.jpg';
 import trocarMotorImg from '../../assets/images/trocar-motor.jpg';
+import valeAPenaRetificarImg from '../../assets/images/valeAPenaRetificarImg.jpg';
 
 const Blog = () => {
     const messages = [
@@ -24,32 +25,38 @@ const Blog = () => {
         {
             title: 'Retífica de Motores',
             description: 'Aprenda a identificar sinais de que seu motor pode precisar de retífica',
-            link: '/sinais-retifica',
+            link: '/blog/SinaisRetifica',
             image: sinaisRetificaImg
         },
         {
             title: 'Quanto Custa uma Retífica de Motor?',
             description: 'Entenda os custos envolvidos no processo de retífica de motores.',
-            link: '/custo-retifica',
+            link: '/blog/CustoRetifica',
             image: custoRetificaImg
         },
         {
             title: 'Manutenção de Motores',
             description: 'Dicas de Profissionais para Maximizar a Vida Útil do Seu Motor',
-            link: '/manutencao-de-motores',
+            link: '/blog/ManutencaoDeMotores',
             image: manutencaoMotoresImg
         },
         {
             title: 'Retífica Parcial ou Completa',
             description: 'Qual a Melhor Opção para o Seu Motor?',
-            link: '/retifica-parcial-ou-completa',
+            link: '/blog/RetificaParcialOuCompleta',
             image: retificaParcialImg
         },
         {
             title: 'Retíficar ou Trocar o Motor?',
             description: 'Neste artigo, explicamos os prós e contras de cada opção.',
-            link: '/trocar-motor',
+            link: '/blog/TrocarMotor',
             image: trocarMotorImg
+        },
+                {
+            title: 'Vale a Pena Retificar?',
+            description: 'Retífica Vale a Pena ou é Melhor Trocar o Motor?',
+            link: '/blog/ValeAPenaRetificar',
+            image: valeAPenaRetificarImg
         },
     ];
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Politica.css'; // Estilos específicos
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
+import ContatoCta from '../../components/ContatoCta';
 
 const Privacidade = () => {
   const messages = [
@@ -83,26 +84,19 @@ title: 'Privacidade e Proteção de Dados',
             </ul>
           </section>
 
-          <address translate="no" className="terms-of-use-address">
-            <strong>ZER0 20 GARAGE™</strong><br />
-            <a
-              href="https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.326345,-46.5770842,17z/data=!3m1!4b1!4m6!3m5!1s0x94ceede375ca12c9:0xa22173d27f744745!8m2!3d-23.3263499!4d-46.5745093!16s%2Fg%2F11sgrc1ckt?authuser=0&entry=ttu"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Avenida Laura Gomes Hannickel, 153 - Capoavinha, Mairiporã - SP
-            </a><br />
-            <a href="tel:+5511941097471">(11) 94109-7471</a><br />
-            <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a>
-          </address>
+          <section className="section">
+            <h3 className="subtitulo-escuro">4. Contato</h3>
+            <p className="paragrafo-escuro">
+              Se você tiver alguma dúvida ou preocupação sobre nossa Política de Prrivacidade, entre em contato conosco através dos seguintes canais:
+            </p>
+            <ContatoCta />
+          </section>
 
           <div className="privacy-policy-last-updated">
             <p className="paragrafo acknowledgment">
               Data da última atualização: {lastUpdated}
             </p>
-
           </div>
-
       </div>
     </div>
   );

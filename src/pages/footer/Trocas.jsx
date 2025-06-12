@@ -42,84 +42,84 @@ const Trocas = () => {
     updateLastUpdated();
   }, []);
 
-  const handleContentUpdate = () => {
-    console.log('Conteúdo da política de privacidade foi atualizado!');
-    updateLastUpdated();
-  };
-
   return (
-    <div className="page-claro">
+    <div className="page-escuro">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
 
-      <div className="container-claro">
-      <h2
-        translate="no"
-        className="titulo-escuro">
-          Trocas e Garantia - ZER0 20 GARAGE™
-      </h2>
-      <p
-        translate="no"
-        className="paragrafo-escuro">
-        Na <strong>ZER0 20 GARAGE™</strong>, prezamos pela sua satisfação e pela qualidade dos nossos serviços e produtos. Por isso, oferecemos a você a tranquilidade de uma <strong>garantia de 90 dias</strong>, conforme estabelecido pelo Código de Defesa do Consumidor.
-      </p>
-
-      <section className="section">
-        <h3 className="subtitulo-escuro">1. Política de Trocas e Garantia:</h3>
-        <p className="paragrafo-escuro">
-          Oferecemos <strong>garantia de 90 dias</strong> para todos os produtos e serviços prestados pela <strong>ZER0 20 GARAGE™</strong>, respeitando as normas de proteção ao consumidor.
+        <div className="container-claro">
+        <h2
+          translate="no"
+          className="titulo-escuro">
+            Trocas e Garantia - ZER0 20 GARAGE™
+        </h2>
+        <p
+          translate="no"
+          className="paragrafo-escuro">
+          Na <strong>ZER0 20 GARAGE™</strong>, prezamos pela sua satisfação e pela qualidade dos nossos serviços e produtos. Por isso, oferecemos a você a tranquilidade de uma <strong>garantia de 90 dias</strong>, conforme estabelecido pelo Código de Defesa do Consumidor.
         </p>
-      </section>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">2. Condições para Troca ou Garantia:</h3>
-        <p className="paragrafo-escuro">
-          A troca ou acionamento da garantia poderá ser solicitado sempre que for identificado <strong>defeito de fabricação</strong> ou <strong>problemas decorrentes da execução do serviço</strong>.
-          É necessário que o produto ou serviço não apresente <strong>sinais de mau uso</strong>, instalação incorreta, acidentes ou modificações não autorizadas.
-        </p>
-      </section>
+        <section className="section">
+          <h3 className="subtitulo-escuro">1. Política de Trocas e Garantia:</h3>
+          <p className="paragrafo-escuro">
+            Oferecemos <strong>garantia de 90 dias</strong> para todos os produtos e serviços prestados pela <strong>ZER0 20 GARAGE™</strong>, respeitando as normas de proteção ao consumidor.
+          </p>
+        </section>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">3. Procedimento para Solicitação:</h3>
-        <p className="paragrafo-escuro">
-          Para solicitar a troca ou acionar a garantia, entre em contato com nosso suporte pelos canais disponíveis no site. Será necessário informar:
-        </p>
-        <ul className="lista-escuro">
-          <li>Número do pedido;</li>
-          <li>Data da compra;</li>
-          <li>Descrição detalhada do problema encontrado.</li>
-        </ul>
-      </section>
+        <section className="section">
+          <h3 className="subtitulo-escuro">2. Condições para Troca ou Garantia:</h3>
+          <p className="paragrafo-escuro">
+            A troca ou acionamento da garantia poderá ser solicitado sempre que for identificado <strong>defeito de fabricação</strong> ou <strong>problemas decorrentes da execução do serviço</strong>.
+            É necessário que o produto ou serviço não apresente <strong>sinais de mau uso</strong>, instalação incorreta, acidentes ou modificações não autorizadas.
+          </p>
+        </section>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">4. Análise e Prazos:</h3>
-        <p className="paragrafo-escuro">
-          Após o recebimento da solicitação, nossa equipe técnica realizará uma análise detalhada em até <strong>7 dias úteis</strong>. Sendo constatado o defeito ou falha, realizaremos a <strong>troca</strong>, o <strong>reparo</strong> ou o <strong>reembolso</strong> correspondente.
-        </p>
-      </section>
+        <section className="section">
+          <h3 className="subtitulo-escuro">3. Procedimento para Solicitação:</h3>
+          <p className="paragrafo-escuro">
+            Para solicitar a troca ou acionar a garantia, entre em contato com nosso suporte pelos canais disponíveis no site. Será necessário informar:
+          </p>
+          <ul className="lista-escuro">
+            <li>Número do pedido;</li>
+            <li>Data da compra;</li>
+            <li>Descrição detalhada do problema encontrado.</li>
+          </ul>
+        </section>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">5. Exclusões de Garantia:</h3>
-        <p className="paragrafo-escuro">
-          A garantia não cobre danos decorrentes de:
-        </p>
-        <ul className="lista-escuro">
-          <li><strong>Mau uso</strong> ou <strong>instalação incorreta</strong> dos produtos;</li>
-          <li><strong>Desgaste natural</strong> de componentes;</li>
-          <li><strong>Acidentes</strong> ou <strong>modificações não autorizadas</strong>.</li>
-        </ul>
-      </section>
+        <section className="section">
+          <h3 className="subtitulo-escuro">4. Análise e Prazos:</h3>
+          <p className="paragrafo-escuro">
+            Após o recebimento da solicitação, nossa equipe técnica realizará uma análise detalhada em até <strong>7 dias úteis</strong>. Sendo constatado o defeito ou falha, realizaremos a <strong>troca</strong>, o <strong>reparo</strong> ou o <strong>reembolso</strong> correspondente.
+          </p>
+        </section>
 
-        {/* Seção de Contato */}
-        <ContatoCta />
+        <section className="section">
+          <h3 className="subtitulo-escuro">5. Exclusões de Garantia:</h3>
+          <p className="paragrafo-escuro">
+            A garantia não cobre danos decorrentes de:
+          </p>
+          <ul className="lista-escuro">
+            <li><strong>Mau uso</strong> ou <strong>instalação incorreta</strong> dos produtos;</li>
+            <li><strong>Desgaste natural</strong> de componentes;</li>
+            <li><strong>Acidentes</strong> ou <strong>modificações não autorizadas</strong>.</li>
+          </ul>
+        </section>
 
-      <div className="privacy-policy-last-updated">
-        <p className="paragrafo acknowledgment">
-          Data da última atualização: {lastUpdated}
-        </p>
-        <button onClick={handleContentUpdate}></button>
+          {/* Seção de Contato */}
+          <section className="section">
+            <h3 className="subtitulo-escuro">6. Contato</h3>
+            <p className="paragrafo-escuro">
+              Se você tiver alguma dúvida ou preocupação sobre nossa Política Trocas e Garantia, entre em contato conosco através dos seguintes canais:
+            </p>
+            <ContatoCta />
+          </section>
+
+        <div className="privacy-policy-last-updated">
+          <p className="paragrafo acknowledgment">
+            Data da última atualização: {lastUpdated}
+          </p>
+        </div>
       </div>
-    </div>
     </div>
   );
 };

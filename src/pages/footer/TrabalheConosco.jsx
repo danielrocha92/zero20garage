@@ -24,6 +24,7 @@ function TrabalheConosco() {
       <Breadcrumbs />
 
       <div className="container-claro">
+        <section className="section">
         <h2 className="titulo-claro">Trabalhe Conosco</h2>
 
         <p className="paragrafo-escuro" translate='no'>
@@ -47,6 +48,7 @@ function TrabalheConosco() {
           <FaLinkedin size={20} style={{ marginRight: '0.5rem' }} />
           Visite nosso LinkedIn
         </a>
+        </section>
       </div>
     </div>
   );

@@ -21,7 +21,7 @@ const messages = [
     <div className="container-claro">
 
       <section className="section">
-        <h2 className="titulo-claro">
+        <h2 className="titulo-escuro">
           Retífica Parcial vs. Completa: Qual a Diferença e Quando Cada Uma é Indicada?
         </h2>
 

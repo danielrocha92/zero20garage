@@ -32,7 +32,7 @@ const Mp = () => {
 
       <div className="container-claro">
         <section className="section">
-          <h2 className="titulo-escuro">Manutenção Preventiva - A Chave para a Longevidade do Seu Motor</h2>
+          <h2 className="titulo-escuro"> Manutenção Preventiva - A Chave para a Longevidade do Seu Motor</h2>
           <p className="paragrafo-escuro">
             Você sabia que mais de 60% das falhas graves no motor poderiam ser evitadas com simples manutenções periódicas? A manutenção preventiva é o segredo para manter seu veículo funcionando com segurança, economia e alta performance.
           </p>

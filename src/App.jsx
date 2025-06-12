@@ -32,6 +32,7 @@ import CustoRetifica from './pages/blog/CustoRetifica';
 import ManutencaoDeMotores from './pages/blog/ManutencaoDeMotores';
 import RetificaParcialOuCompleta from './pages/blog/RetificaParcialOuCompleta';
 import SinaisRetifica from './pages/blog/SinaisRetifica';
+import TrocarMotor from './pages/blog/TrocarMotor';
 import ValeAPenaRetificar from './pages/blog/ValeAPenaRetificar';
 
 import Politica from './pages/footer/Politica';
@@ -61,19 +62,20 @@ const AnimatedRoutes = () => {
         <Route path="/Servicos/Cp" element={<Cp />} />
 
         {/* ✅ Novas rotas explicativas */}
-        <Route path="/Home/diagnostico" element={<Diagnostico />} />
-        <Route path="/Home/desmontagem" element={<Desmontagem />} />
-        <Route path="/Home/usinagem" element={<Usinagem />} />
-        <Route path="/Home/montagemteste" element={<MontagemTeste />} />
+        <Route path="/Home/Diagnostico" element={<Diagnostico />} />
+        <Route path="/Home/Desmontagem" element={<Desmontagem />} />
+        <Route path="/Home/Usinagem" element={<Usinagem />} />
+        <Route path="/Home/MontagemTeste" element={<MontagemTeste />} />
 
         <Route path="/Orcamento" element={<Orcamento />} />
 
         <Route path="/Blog" element={<Blog />} />
-        <Route path="/sinais-retifica" element={<SinaisRetifica />} />
-        <Route path="/custo-retifica" element={<CustoRetifica />} />
-        <Route path="/manutencao-de-motores" element={<ManutencaoDeMotores />} />
-        <Route path="/retifica-parcial-ou-completa" element={<RetificaParcialOuCompleta />} />
-        <Route path="/trocar-motor" element={<ValeAPenaRetificar />} />
+        <Route path="/Blog/SinaisRetifica" element={<SinaisRetifica />} />
+        <Route path="/Blog/CustoRetifica" element={<CustoRetifica />} />
+        <Route path="/Blog/ManutencaoDeMotores" element={<ManutencaoDeMotores />} />
+        <Route path="/Blog/RetificaParcialOuCompleta" element={<RetificaParcialOuCompleta />} />
+        <Route path="/Blog/TrocarMotor" element={<TrocarMotor />} />
+        <Route path="/Blog/ValeAPenaRetificar" element={<ValeAPenaRetificar />} />
 
         <Route path="/Politica" element={<Politica />} />
         <Route path="/Trocas" element={<Trocas />} />
@@ -91,7 +93,7 @@ function App() {
   return (
     <Router>
       <Layout>
-       
+
         <AnimatedRoutes />
         <ScrollToTop />
         <ScrollToTopButton />

@@ -20,7 +20,7 @@ const messages = [
     <div className="container-claro">
 
       <section className="section">
-        <h2 className="titulo-claro">
+        <h2 className="titulo-escuro">
           Quanto Custa uma Retífica de Motor? Fatores que Influenciam no Valor
         </h2>
 

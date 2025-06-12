@@ -19,7 +19,7 @@ const TrocarMotor = () => {
       <div className="container-escuro">
 
         <section className="section">
-          <h2 className="titulo-escuro">
+          <h2 className="titulo-claro">
             Retificar ou Trocar o Motor? Entenda os Prós e Contras de Cada Opção
           </h2>
           <p className="paragrafo-escuro">
