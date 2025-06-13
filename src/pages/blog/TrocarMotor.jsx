@@ -16,10 +16,10 @@ const TrocarMotor = () => {
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
 
-      <div className="container-escuro">
+      <div className="container-claro">
 
         <section className="section">
-          <h2 className="titulo-claro">
+          <h2 className="titulo-escuro">
             Retificar ou Trocar o Motor? Entenda os Prós e Contras de Cada Opção
           </h2>
           <p className="paragrafo-escuro">

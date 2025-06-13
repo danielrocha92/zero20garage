@@ -3,8 +3,6 @@ import '../../styles/Blog.css';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
 
-
-
 const RetificaParcialOuCompleta = () => {
 const messages = [
     {

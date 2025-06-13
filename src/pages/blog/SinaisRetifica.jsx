@@ -2,6 +2,7 @@ import React from 'react';
 import '../../styles/Blog.css';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
+import BlogShare from '../../components/ShareBar';
 
 
 const SinaisRetifica = () => {
@@ -80,6 +81,7 @@ const messages = [
           Reconhecer os sinais de desgaste no motor é essencial para evitar falhas graves e custos elevados. Se você notar algum dos sintomas listados, procure uma oficina de confiança para avaliação. A retífica pode ser a melhor forma de restaurar seu veículo e prolongar sua vida útil.
         </p>
       </section>
+      <BlogShare views={2321} comments={0} likes={1} />
       </div>
       </div>
   );
