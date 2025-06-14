@@ -2,94 +2,79 @@ import React from 'react';
 import '../../styles/Blog.css';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
-
+import BlogShare from '../../components/ShareBar';
+import custoRetificaImg from '../../assets/images/custo-retifica.jpg';
 
 const CustoRetifica = () => {
-const messages = [
+  const messages = [
     {
-      title: 'Retífica de Motores',
-      subtitle: 'Como Saber Quando Seu Motor Precisa de Reparo?',
+      title: 'Custo da Retífica',
+      subtitle: 'Fatores que Influenciam no Preço da Retífica de Motor',
     },
   ];
 
   return (
-    <div className="page-escuro">
+    <div className="page-escuro blog-article-wrapper">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
 
-    <div className="container-claro">
+      <article className="container-claro blog-article">
+        <header className="meta-info">
+          <span>14 de jun. de 2025 · 4 min de leitura</span>
+        </header>
 
-      <section className="section">
-        <h2 className="titulo-escuro">
-          Quanto Custa uma Retífica de Motor? Fatores que Influenciam no Valor
-        </h2>
+        <h1 className="blog-titulo">
+          Quanto custa uma retífica de motor? Fatores que influenciam no valor
+        </h1>
 
-        <p className="paragrafo-escuro">
-          Uma das dúvidas mais comuns entre motoristas é quanto custa para retificar um motor. O valor pode variar bastante dependendo de vários fatores, desde o tipo de motor até a extensão dos danos. Neste artigo, vamos explicar o que influencia no custo da retífica e como se preparar para esse investimento.
+        <p className="blog-paragrafo">
+          Uma das dúvidas mais comuns entre motoristas é sobre o valor da retífica de motor. Esse processo, essencial para restaurar o desempenho do veículo, pode variar bastante de preço.
         </p>
-      </section>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">1. Tipo de motor</h3>
-        <p className="paragrafo-escuro">
-          O custo da retífica varia conforme o tipo e a complexidade do motor. Motores de 3 ou 4 cilindros tendem a ser mais baratos para retificar do que motores 6 cilindros ou turboalimentados.
-        </p>
-        <ul className="lista-escuro">
-          <li><strong>Motor 1.0 ou 1.6:</strong> custo geralmente menor, peças acessíveis.</li>
-          <li><strong>Motor 2.0 ou superior:</strong> mais peças e mão de obra especializada, o que eleva o preço.</li>
-          <li><strong>Motor turbo ou diesel:</strong> componentes mais caros e técnicas específicas de retífica.</li>
-        </ul>
-      </section>
+        <figure>
+          <img src={custoRetificaImg} alt="Retífica de motor sendo realizada" className="blog-img" />
+        </figure>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">2. Nível de desgaste do motor</h3>
-        <p className="paragrafo-escuro">
-          Quanto maior o desgaste das peças, maior será o custo do serviço. Um motor que precisa de retífica completa, com substituição de pistões, virabrequim, bronzinas e cabeçote, será mais caro do que uma retífica parcial.
-        </p>
-        <ul className="lista-escuro">
-          <li><strong>Retífica parcial:</strong> geralmente envolve apenas o cabeçote e custa menos.</li>
-          <li><strong>Retífica completa:</strong> envolve o motor inteiro e pode dobrar ou triplicar o valor final.</li>
-        </ul>
-      </section>
+        <section className="section">
+          <h2 className="blog-subtitulo">1. Tipo de motor</h2>
+          <p className="blog-paragrafo">
+            Motores maiores, como os de 6 ou 8 cilindros, costumam exigir mais peças e mão de obra, elevando o custo total.
+          </p>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">3. Peças utilizadas</h3>
-        <p className="paragrafo-escuro">
-          O tipo e a origem das peças afetam diretamente o custo. Peças originais ou de marcas renomadas tendem a ser mais caras, mas garantem maior durabilidade.
-        </p>
-        <ul className="lista-escuro">
-          <li><strong>Peças paralelas:</strong> custo menor, mas podem comprometer a qualidade a longo prazo.</li>
-          <li><strong>Peças originais ou premium:</strong> preço mais alto, mas oferecem maior confiabilidade.</li>
-        </ul>
-      </section>
+          <h2 className="blog-subtitulo">2. Nível de desgaste</h2>
+          <p className="blog-paragrafo">
+            Um motor com maior desgaste pode demandar a substituição de diversos componentes, como pistões, bronzinas, válvulas e virabrequim.
+          </p>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">4. Mão de obra e especialização</h3>
-        <p className="paragrafo-escuro">
-          Oficinas com equipamentos modernos e profissionais especializados podem cobrar mais, mas entregam um serviço com mais garantia e precisão. A retífica exige conhecimento técnico e uso de ferramentas específicas.
-        </p>
-      </section>
+          <h2 className="blog-subtitulo">3. Qualidade das peças</h2>
+          <p className="blog-paragrafo">
+            Peças originais têm maior durabilidade, mas são mais caras. Já peças paralelas ou recondicionadas podem reduzir o valor final, com impacto variável na qualidade.
+          </p>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">5. Preço médio de uma retífica no Brasil</h3>
-        <p className="paragrafo-escuro">
-          Os valores podem variar bastante, mas para referência:
-        </p>
-        <ul className="lista-escuro">
-          <li><strong>Retífica parcial:</strong> entre R$ 1.200 e R$ 3.000, dependendo do veículo.</li>
-          <li><strong>Retífica completa:</strong> pode variar de R$ 3.500 a R$ 8.000 ou mais, conforme o motor e as peças necessárias.</li>
-        </ul>
-      </section>
+          <h2 className="blog-subtitulo">4. Mão de obra e localização</h2>
+          <p className="blog-paragrafo">
+            Oficinas especializadas podem cobrar mais pela retífica devido à qualidade do serviço. Regiões metropolitanas também tendem a ter preços mais elevados.
+          </p>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">Conclusão:</h3>
-        <p className="paragrafo-escuro">
-          O custo da retífica de motor depende de múltiplos fatores, como o tipo de motor, a gravidade do desgaste, as peças utilizadas e a mão de obra. Apesar do investimento, a retífica é muitas vezes mais vantajosa do que a troca do motor. Sempre busque uma oficina de confiança, como a ZER0 20 GARAGE™, para garantir qualidade e segurança no serviço.
-        </p>
-      </section>
-      </div>
+          <h2 className="blog-subtitulo">5. Exemplo de valores</h2>
+          <ul className="blog-lista">
+            <li><strong>Motor 1.0 ou 1.6:</strong> custo geralmente menor, de R$ 3.000 a R$ 5.000.</li>
+            <li><strong>Motor 2.0 ou superior:</strong> pode ultrapassar R$ 7.000 dependendo das peças e mão de obra.</li>
+            <li><strong>Retífica parcial:</strong> quando o dano é localizado, o custo pode ser reduzido pela metade.</li>
+          </ul>
+
+          <h2 className="blog-subtitulo">Conclusão</h2>
+          <p className="blog-paragrafo">
+            O custo da retífica de motor depende de diversos fatores, como tipo de motor, nível de desgaste e qualidade das peças utilizadas. Consultar uma oficina especializada é a melhor forma de obter um orçamento preciso.
+          </p>
+        </section>
+
+        <footer>
+          <BlogShare views={1987} comments={2} likes={7} />
+        </footer>
+      </article>
     </div>
   );
-}
+};
 
 export default CustoRetifica;

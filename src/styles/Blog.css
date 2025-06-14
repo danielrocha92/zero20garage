@@ -1,3 +1,17 @@
+/* ===== Estilos base (mobile first) ===== */
+
+.page-escuro {
+  background-color: #1212126b;
+  color: #f0f0f0;
+  padding-bottom: 2rem;
+}
+
+.container-claro {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
 .section {
   padding: 2rem;
   background-color: rgba(245, 245, 245, 0.731);
@@ -9,7 +23,56 @@
   margin-bottom: 2rem;
 }
 
-/* Grid principal responsivo (padrão: mobile) */
+/* Títulos e texto */
+.titulo-escuro {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.subtitulo-escuro {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.paragrafo-escuro {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.lista-escuro {
+  list-style: disc inside;
+  padding-left: 1rem;
+  margin-top: 1rem;
+  text-align: justify;
+  word-break: normal;
+  word-spacing: normal;
+  line-height: 1.6;
+}
+
+.data-atualizacao {
+  font-size: 0.9rem;
+  color: #aaaaaa;
+  margin-top: 1rem;
+}
+
+/* Botão */
+.button {
+  display: inline-block;
+  background-color: #c40000;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #a30000;
+}
+
+/* ===== Cards e grid ===== */
 .blog-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -19,13 +82,12 @@
   box-sizing: border-box;
 }
 
-/* Card individual com glassmorphism */
 .blog-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem;
+  padding: 0.75rem;
   border-radius: 8px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
   backdrop-filter: blur(12px);
@@ -39,13 +101,11 @@
   cursor: pointer;
 }
 
-/* Efeito de hover */
 .blog-item:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
 
-/* Título */
 .blog-item__title {
   font-size: 1.2rem;
   font-family: var(--fonte-titulo);
@@ -53,7 +113,6 @@
   color: var(--cor-destaque);
 }
 
-/* Descrição */
 .blog-item__description {
   font-size: 0.9rem;
   color: var(--texto-secundario);
@@ -61,7 +120,6 @@
   line-height: 1.6;
 }
 
-/* Botão de ação */
 .blog-item__button {
   display: inline-block;
   padding: 0.6rem 1.4rem;
@@ -81,7 +139,6 @@
   outline: none;
 }
 
-/* Ícone opcional */
 .blog-item .icon {
   font-size: 2rem;
   margin-bottom: 1rem;
@@ -93,85 +150,19 @@
   transform: rotate(10deg) scale(1.1);
 }
 
-/* Imagem no topo do blog-item */
 .blog-item__image {
   width: 100%;
-  aspect-ratio: 16 / 9; /* Garante proporção sem height fixa */
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   border-radius: 0.8rem 0.8rem 0 0;
   transition: transform 0.3s ease;
 }
 
-
 .blog-item:hover .blog-item__image {
   transform: scale(1.05);
 }
 
-/* BlogPost.css */
-.page-escuro {
-  background-color: #1212126b;
-  color: #f0f0f0;
-  padding-bottom: 2rem;
-}
-
-.container-claro {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-
-.section {
-  margin-bottom: 2rem;
-}
-
-.titulo-escuro {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.subtitulo-escuro {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.paragrafo-escuro {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-.lista-escuro {
-  list-style: disc inside;
-  padding-left: 1rem;
-  margin-top: 1rem;
-
-  text-align: justify;
-  word-break: normal;
-  word-spacing: normal;
-  line-height: 1.6;
-}
-
-.button {
-  display: inline-block;
-  background-color: #c40000;
-  color: #fff;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.button:hover {
-  background-color: #a30000;
-}
-
-.data-atualizacao {
-  font-size: 0.9rem;
-  color: #aaaaaa;
-  margin-top: 1rem;
-}
-
+/* ===== Media Queries ===== */
 
 /* Tablet (≥481px) */
 @media (min-width: 481px) {
@@ -200,6 +191,14 @@
   .blog-item__button {
     padding: 0.75rem 1.6rem;
     font-size: 1rem;
+  }
+
+  .titulo-escuro {
+    font-size: 2rem;
+  }
+
+  .subtitulo-escuro {
+    font-size: 1.5rem;
   }
 }
 
