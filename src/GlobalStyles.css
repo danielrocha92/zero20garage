@@ -469,6 +469,47 @@ textarea {
   margin-bottom: 1rem;
 }
 
+.container-escuro {
+  padding: 2rem 1rem;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.home-carousel-wrapper {
+  margin-bottom: 2.5rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+}
+
+.home-carousel-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.home-[etapa]-content {
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.05);
+}
+
+.home-button-voltar {
+  display: inline-block;
+  margin-top: 2rem;
+  background-color: #e60000;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 0.4rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.home-button-voltar:hover {
+  background-color: #cc0000;
+}
 
 @media (min-width: 600px) {
 
