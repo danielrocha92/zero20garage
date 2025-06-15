@@ -3,6 +3,7 @@ import '../../styles/Blog.css';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import BlogShare from '../../components/BlogShare';
+import retificaParcialImg from '../../assets/images/retifica-parcial-ou-completa.jpg';
 
 const RetificaParcialOuCompleta = () => {
   const messages = [
@@ -29,6 +30,10 @@ const RetificaParcialOuCompleta = () => {
         <p className="subtitulo-italico">
           Quando o motor apresenta falhas ou desgaste, a retífica surge como uma solução técnica eficaz. Mas você sabe a diferença entre uma retífica parcial e uma completa? Entender essas modalidades ajuda a tomar decisões mais seguras e econômicas para seu veículo.
         </p>
+
+        <figure className="blog-figure">
+          <img src={retificaParcialImg} alt="Retífica de motor sendo realizada" className="blog-img" />
+        </figure>
 
         <section className="section">
           <h3 className="blog-subtitulo">1. O que é uma retífica parcial?</h3>

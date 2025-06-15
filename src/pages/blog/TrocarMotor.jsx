@@ -3,6 +3,7 @@ import '../../styles/Blog.css';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import BlogShare from '../../components/BlogShare';
+import trocarMotorImg from '../../assets/images/trocar-motor.jpg';
 
 const TrocarMotor = () => {
   const messages = [
@@ -29,6 +30,10 @@ const TrocarMotor = () => {
         <p className="subtitulo-italico">
           Quando o motor apresenta falhas graves, surge a dúvida: compensa retificar ou é melhor trocar? Ambas as alternativas possuem vantagens e desvantagens que precisam ser avaliadas com cuidado.
         </p>
+
+        <figure className="blog-figure">
+          <img src={trocarMotorImg} alt="Retífica de motor sendo realizada" className="blog-img" />
+        </figure>
 
         <section className="section">
           <h3 className="blog-subtitulo">1. Quando optar pela retífica?</h3>

@@ -3,6 +3,7 @@ import '../../styles/Blog.css';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import BlogShare from '../../components/BlogShare';
+import manutencaoMotoresImg from '../../assets/images/manutencao-de-motores.jpg';
 
 const ManutencaoDeMotores = () => {
   const messages = [
@@ -29,6 +30,10 @@ const ManutencaoDeMotores = () => {
         <p className="subtitulo-italico">
           Saiba como cuidar do motor do seu veículo para que ele dure mais tempo. A manutenção preventiva evita falhas, aumenta o desempenho e reduz os custos com reparos.
         </p>
+
+        <figure className="blog-figure">
+          <img src={manutencaoMotoresImg} alt="Retífica de motor sendo realizada" className="blog-img" />
+        </figure>
 
         <section className="section">
           <h3 className="blog-subtitulo">1. Troca regular de óleo e filtro</h3>
