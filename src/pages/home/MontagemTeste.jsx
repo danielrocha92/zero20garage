@@ -38,82 +38,83 @@ function MontagemTeste() {
       <DynamicHeader page="home" messages={messages} />
       <Breadcrumbs />
 
-      <div className="container-escuro">
+      <div className="container-escuro home-montagem-content">
+        {/* Carrossel de imagens */}
+        <div className="home-carousel-wrapper">
+          <Slider {...sliderSettings}>
+            {images.map((src, index) => (
+              <div key={index}>
+                <img
+                  src={src}
+                  alt={`Montagem e Teste ${index + 1}`}
+                  className="home-carousel-image"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
 
-          <div className='highlight-item'>
-            {/* Carrossel de imagens */}
-            <div className="carousel-container">
-              <Slider {...sliderSettings}>
-                {images.map((src, index) => (
-                  <div key={index}>
-                    <img src={src} alt={`Usinagem ${index + 1}`} className="carousel-image"/>
-                  </div>
-                ))}
-              </Slider>
-            </div>
+        <h2 className="titulo-claro">Usinagem de Motores</h2>
+        <h3 className="subtitulo-claro">Precisão, Eficiência e Durabilidade</h3>
 
-            <h2 className='title'>Usinagem de Motores</h2>
-            <h3 className='subtitle'>Precisão, Eficiência e Durabilidade</h3>
+        <p className="paragrafo-claro">
+          A usinagem de motores é um dos pilares fundamentais no processo de retífica, responsável por garantir a integridade estrutural, a funcionalidade e a longevidade dos componentes internos do motor.
+        </p>
 
-            <p className='paragrafo'>
-              A usinagem de motores é um dos pilares fundamentais no processo de retífica, responsável por garantir a integridade estrutural, a funcionalidade e a longevidade dos componentes internos do motor. Trata-se de um conjunto de operações que visa restaurar as especificações geométricas e dimensionais originais, ou mesmo adaptá-las a novos padrões técnicos, utilizando tecnologia de ponta e rigorosos controles de qualidade.
-            </p>
+        <p className="paragrafo-claro">
+          Os componentes internos — como blocos, cabeçotes, virabrequins, bielas e camisas de cilindro — sofrem desgastes provocados por atrito e temperatura. Quando perdem suas especificações, comprometem a eficiência e segurança do motor.
+        </p>
 
-            <p className='paragrafo'>
-              Os componentes internos do motor — como blocos, cabeçotes, virabrequins, bielas e camisas de cilindro — sofrem desgastes naturais provocados por atrito, temperatura e esforço mecânico. Quando esses componentes perdem suas especificações originais, surgem folgas, desalinhamentos e superfícies irregulares que comprometem a eficiência energética, a lubrificação, a compressão e a vedação do sistema.
-            </p>
+        <p className="paragrafo-claro">
+          A usinagem remove deformações e garante tolerâncias rigorosas, restabelecendo o equilíbrio dos componentes.
+        </p>
 
-            <p className='paragrafo'>
-              A usinagem, nesse contexto, visa remover deformações e desgastes, garantir tolerâncias dimensionais rigorosas, assegurar acabamentos superficiais adequados e restabelecer o equilíbrio dinâmico entre os componentes.
-            </p>
+        <h3 className="subtitulo-claro">Processos Essenciais na Usinagem</h3>
 
-            <h3 className='subtitle'>Processos Essenciais na Usinagem</h3>
+        <p className="paragrafo-claro">
+          <strong>Mandrilamento de Cilindros:</strong> Corrige ovalizações e garante paralelismo dos cilindros com rugosidade ideal.
+        </p>
 
-            <p className='paragrafo'>
-              <strong>Mandrilamento de Cilindros:</strong> remove ovalizações e desgastes, garantindo a geometria correta e o paralelismo dos cilindros, com rugosidade controlada para retenção ideal de óleo.
-            </p>
+        <p className="paragrafo-claro">
+          <strong>Plaina de Cabeçotes e Blocos:</strong> Elimina empenamentos, garantindo vedação perfeita da junta.
+        </p>
 
-            <p className='paragrafo'>
-              <strong>Plaina de Cabeçotes e Blocos:</strong> corrige empenamentos e ondulações nas faces de apoio, assegurando vedação perfeita da junta e evitando vazamentos.
-            </p>
+        <p className="paragrafo-claro">
+          <strong>Brunimento:</strong> Garante lubrificação ideal e melhor assentamento dos anéis de pistão.
+        </p>
 
-            <p className='paragrafo'>
-              <strong>Brunimento:</strong> cria a textura cruzada necessária na parede dos cilindros, garantindo a correta lubrificação e assentamento dos anéis de pistão.
-            </p>
+        <p className="paragrafo-claro">
+          <strong>Retífica de Virabrequim e Comando:</strong> Restaura geometrias e funcionamento dos mancais.
+        </p>
 
-            <p className='paragrafo'>
-              <strong>Retífica de Virabrequim e Comando:</strong> restaura os colos do virabrequim e do comando, assegurando concentricidade, paralelismo e o correto funcionamento dos mancais.
-            </p>
+        <p className="paragrafo-claro">
+          <strong>Usinagem de Sedes e Guias de Válvulas:</strong> Garante vedação e eficiência térmica.
+        </p>
 
-            <p className='paragrafo'>
-              <strong>Usinagem de Sedes e Guias de Válvulas:</strong> garante que as válvulas se assentem adequadamente, promovendo eficiência térmica e vedação precisa.
-            </p>
+        <h3 className="subtitulo-claro">Tecnologia Aplicada</h3>
 
-            <h3 className='subtitle'>Tecnologia Aplicada</h3>
+        <p className="paragrafo-claro">
+          Utilizamos máquinas CNC de última geração e equipamentos de medição tridimensional (CMM) para assegurar precisão micrométrica e repetibilidade.
+        </p>
 
-            <p className='paragrafo'>
-              Nosso processo é executado com o suporte de máquinas CNC de última geração e equipamentos de medição tridimensional (CMM), proporcionando precisão micrométrica, repetibilidade, controle estatístico de qualidade e redução de erros humanos.
-            </p>
+        <h3 className="subtitulo-claro">Benefícios da Usinagem de Alta Precisão</h3>
 
-            <h3 className='subtitle'>Benefícios da Usinagem de Alta Precisão</h3>
+        <p className="paragrafo-claro">
+          ✅ Redução do consumo de óleo e combustível. <br/>
+          ✅ Aumento da vida útil do motor. <br/>
+          ✅ Melhoria no desempenho. <br/>
+          ✅ Menor emissão de poluentes. <br/>
+          ✅ Redução de ruídos e vibrações.
+        </p>
 
-            <p className='paragrafo'>
-              ✅ Redução do consumo de óleo e combustível. <br/>
-              ✅ Aumento da vida útil do motor. <br/>
-              ✅ Melhora no desempenho e na resposta do motor. <br/>
-              ✅ Menor emissão de poluentes. <br/>
-              ✅ Redução de ruídos e vibrações.
-            </p>
+        <h3 className="subtitulo-claro">Excelência Garantida</h3>
 
-            <h3 className='subtitle'>Excelência Garantida</h3>
+        <p className="paragrafo-claro">
+          Contamos com equipe técnica especializada, laboratório de metrologia próprio e equipamentos modernos. Seu motor passa por um processo de recuperação com excelência.
+        </p>
 
-            <p className='paragrafo'>
-              Contamos com uma equipe altamente qualificada, laboratório de metrologia próprio e um parque fabril atualizado. Garantimos que cada componente do seu motor seja recuperado com excelência, proporcionando máxima performance, segurança e confiabilidade.
-            </p>
-
-            <Link to="/" className='button'>← Voltar para Home</Link>
-          </div>
-
+        <Link to="/" className="home-button-voltar">← Voltar para Home</Link>
       </div>
     </div>
   );
