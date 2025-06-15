@@ -38,42 +38,43 @@ function Desmontagem() {
       <DynamicHeader page="home" messages={messages} />
       <Breadcrumbs />
 
-      <div className="container-escuro">
+      <div className="container-escuro home-desmontagem-content">
+        {/* Carrossel de imagens */}
+        <div className="home-carousel-wrapper">
+          <Slider {...sliderSettings}>
+            {images.map((src, index) => (
+              <div key={index} className="home-carousel-slide">
+                <img
+                  src={src}
+                  alt={`Etapa de desmontagem do motor ${index + 1}`}
+                  className="home-carousel-image"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
 
-          <div className='highlight-item'>
-            {/* Carrossel de imagens */}
-            <div className="carousel-container">
-              <Slider {...sliderSettings}>
-                {images.map((src, index) => (
-                  <div key={index}>
-                    <img src={src} alt={`Desmontagem ${index + 1}`} className="carousel-image"/>
-                  </div>
-                ))}
-              </Slider>
-            </div>
+        <h2 className="titulo-claro">Desmontagem do Motor</h2>
+        <h3 className="subtitulo-claro">Precisão, Cuidado e Responsabilidade Técnica</h3>
 
-            <h2 className='titulo-claro'>Desmontagem do Motor</h2>
-            <h3 className='subtitulo-claro'>Precisão, Cuidado e Responsabilidade Técnica</h3>
+        <p className="paragrafo-claro">
+          A desmontagem do motor é uma etapa fundamental para a correta avaliação de todos os seus componentes. Nossos técnicos altamente capacitados realizam esse processo de forma sistemática e cuidadosa, garantindo que cada peça seja retirada sem causar danos estruturais.
+        </p>
 
-            <p className="paragrafo-claro">
-              A desmontagem do motor é uma etapa fundamental para a correta avaliação de todos os seus componentes. Nossos técnicos altamente capacitados realizam esse processo de forma sistemática e cuidadosa, garantindo que cada peça seja retirada sem causar danos estruturais.
-            </p>
+        <p className="paragrafo-claro">
+          Utilizamos ferramentas específicas e técnicas avançadas para assegurar a integridade dos componentes durante a desmontagem. Todo o processo é documentado e organizado para que seja possível identificar a origem de falhas e determinar as necessidades de reparo, substituição ou recuperação de peças.
+        </p>
 
-            <p className='paragrafo-claro'>
-              Utilizamos ferramentas específicas e técnicas avançadas para assegurar a integridade dos componentes durante a desmontagem. Todo o processo é documentado e organizado para que seja possível identificar a origem de falhas e determinar as necessidades de reparo, substituição ou recuperação de peças.
-            </p>
+        <p className="paragrafo-claro">
+          A inspeção minuciosa pós-desmontagem inclui a análise de trincas, desgastes excessivos, deformações e falhas ocultas, com o apoio de instrumentos de medição de alta precisão. Esse rigor técnico assegura um diagnóstico preciso e uma base sólida para a próxima etapa do serviço: a usinagem ou reparação adequada.
+        </p>
 
-            <p className='paragrafo-claro'>
-              A inspeção minuciosa pós-desmontagem inclui a análise de trincas, desgastes excessivos, deformações e falhas ocultas, com o apoio de instrumentos de medição de alta precisão. Esse rigor técnico assegura um diagnóstico preciso e uma base sólida para a próxima etapa do serviço: a usinagem ou reparação adequada.
-            </p>
+        <p className="paragrafo-claro">
+          Confie em nossa equipe para realizar uma desmontagem segura, responsável e alinhada com os mais altos padrões de qualidade da engenharia automotiva.
+        </p>
 
-            <p className='paragrafo-claro'>
-              Confie em nossa equipe para realizar uma desmontagem segura, responsável e alinhada com os mais altos padrões de qualidade da engenharia automotiva.
-            </p>
-
-            <Link to="/" className='button'>← Voltar para Home</Link>
-          </div>
-
+        <Link to="/" className="home-button-voltar">← Voltar para Home</Link>
       </div>
     </div>
   );
