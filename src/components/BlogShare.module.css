@@ -17,7 +17,7 @@
 
 .icons a,
 .icons button {
-  color: #fff;
+  color: var(--vermelho-principal, #ff3b3f);
   background: none;
   border: none;
   cursor: pointer;
@@ -28,7 +28,7 @@
 .icons a:hover,
 .icons button:hover {
   transform: scale(1.2);
-  color: #ff0000;
+  color: var(--vermelho-hover);
 }
 
 .meta {
@@ -41,5 +41,5 @@
 }
 
 .heart {
-  color: #ff4d4d;
+  color: var(--vermelho-principal, #ff3b3f);
 }

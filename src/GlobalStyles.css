@@ -151,7 +151,7 @@ body {
   letter-spacing: 0.03rem;
 
   text-align: center;
-  word-break: break-all;
+  word-break: auto-phrase;
   hyphens: auto;
   letter-spacing: 0.2px; /* Ajuste conforme necessário */
 }
@@ -212,7 +212,7 @@ body {
   font-weight: 550;
 
   text-align: center;
-  word-break: break-all;
+  word-break: auto-phrase;
   hyphens: auto;
   letter-spacing: 0.2px; /* Ajuste conforme necessário */
 }
@@ -230,7 +230,7 @@ body {
   letter-spacing: 0.05rem;
 
   text-align: justify;
-  word-break: break-all;
+  word-break: auto-phrase;
   word-spacing: normal;
 }
 
@@ -253,7 +253,7 @@ body {
   text-shadow:
     1px 1px 2px black,
     0 0 10px rgba(255, 0, 0, 0.5);
-  word-break: break-all;
+  word-break: auto-phrase;
   hyphens: auto;
 }
 

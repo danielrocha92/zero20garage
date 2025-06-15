@@ -44,11 +44,11 @@
 }
 
 .breadcrumbs a:hover {
-  color: #fff; /* Mantendo hover branco como no estilo inicial */
+  color: var(--vermelho-hover); /* Mantendo hover vermelho-hover como no estilo inicial */
 }
 
 .breadcrumbs li[aria-current="page"] {
-  color: #fff; /* Mantendo branco para destaque */
+  color: var(--cinza-medio); /* Mantendo branco para destaque */
   font-weight: bold;
 }
 
@@ -84,13 +84,13 @@
     content: none; /* Removendo o separador após o item atual */
   }
   .breadcrumbs li[aria-current="page"] {
-    color: #d3d3d3; /* Mantendo a cor clara para o item atual */
+    color: var(--cinza-medio); /* Mantendo a cor cinza-medio para o item atual */
   }
   .breadcrumbs li[aria-current="page"] a {
-    color: #d3d3d3; /* Mantendo a cor clara para o link do item atual */
+    color: var(--vermelho-hover); /* Mantendo a cor clara para o link do item atual */
   }
   .breadcrumbs li[aria-current="page"] a:hover {
-    color: #d3d3d3; /* Mantendo a cor clara no hover do link do item atual */
+    color: var(--vermelho-hover); /* Mantendo a cor vermelho-hover no hover do link do item atual */
   }
   .breadcrumbs li:not(:last-child) {
     margin-right: 0.05rem; /* Ajustando o espaçamento entre os itens */

@@ -2,7 +2,7 @@ import React from 'react';
 import '../../styles/Blog.css';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
-import BlogShare from '../../components/ShareBar';
+import BlogShare from '../../components/BlogShare';
 import custoRetificaImg from '../../assets/images/custo-retifica.jpg';
 
 const CustoRetifica = () => {
@@ -19,19 +19,19 @@ const CustoRetifica = () => {
       <Breadcrumbs />
 
       <article className="container-claro blog-article">
-        <header className="meta-info">
-          <span>14 de jun. de 2025 · 4 min de leitura</span>
-        </header>
+        <div className="meta-info">
+          <span >14 de jun. de 2025 · 4 min de leitura</span>
+        </div>
 
-        <h1 className="blog-titulo">
-          Quanto custa uma retífica de motor? Fatores que influenciam no valor
+        <h1 className="titulo-escuro destaque">
+          Quanto custa uma retífica de motor?
         </h1>
 
-        <p className="blog-paragrafo">
-          Uma das dúvidas mais comuns entre motoristas é sobre o valor da retífica de motor. Esse processo, essencial para restaurar o desempenho do veículo, pode variar bastante de preço.
+        <p className="subtitulo-italico">
+          Entenda os principais fatores que afetam o custo da retífica de motor e como calcular o valor final.
         </p>
 
-        <figure>
+        <figure className="blog-figure">
           <img src={custoRetificaImg} alt="Retífica de motor sendo realizada" className="blog-img" />
         </figure>
 
@@ -69,8 +69,8 @@ const CustoRetifica = () => {
           </p>
         </section>
 
-        <footer>
-          <BlogShare views={1987} comments={2} likes={7} />
+        <footer className="blog-footer">
+          <BlogShare slug="custo-retifica" />
         </footer>
       </article>
     </div>
