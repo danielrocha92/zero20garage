@@ -37,42 +37,43 @@ function Diagnostico() {
       <DynamicHeader page="home" messages={messages} />
       <Breadcrumbs />
 
-      <div className="container-escuro">
-       
-          <div className='highlight-item'>
-            {/* Carrossel de imagens */}
-            <div className="carousel-container">
-              <Slider {...sliderSettings}>
-                {images.map((src, index) => (
-                  <div key={index}>
-                    <img src={src} alt={`Diagnóstico ${index + 1}`} className="carousel-image"/>
-                  </div>
-                ))}
-              </Slider>
-            </div>
+      <div className="container-escuro home-diagnostico-content">
+        {/* Carrossel */}
+        <div className="home-carousel-wrapper">
+          <Slider {...sliderSettings}>
+            {images.map((src, index) => (
+              <div key={index} className="home-carousel-slide">
+                <img
+                  src={src}
+                  alt={`Diagnóstico ${index + 1}`}
+                  className="home-carousel-image"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
 
-            <h2 className='titulo-claro'>Diagnóstico e Avaliação Técnica</h2>
-            <h3 className='subtitulo-claro'>Análise Completa com Equipamentos de Última Geração</h3>
+        <h2 className="titulo-claro">Diagnóstico e Avaliação Técnica</h2>
+        <h3 className="subtitulo-claro">Análise Completa com Equipamentos de Última Geração</h3>
 
-            <p className='paragrafo-claro'>
-              O diagnóstico é o primeiro e um dos mais importantes passos no processo de retífica de motores. Nossa equipe realiza uma avaliação minuciosa utilizando scanners automotivos OBD, estetoscópios mecânicos e ferramentas de medição de alta precisão, capazes de identificar desde falhas eletrônicas até desgastes internos imperceptíveis a olho nu.
-            </p>
+        <p className="paragrafo-claro">
+          O diagnóstico é o primeiro e um dos mais importantes passos no processo de retífica de motores. Nossa equipe realiza uma avaliação minuciosa utilizando scanners automotivos OBD, estetoscópios mecânicos e ferramentas de medição de alta precisão, capazes de identificar desde falhas eletrônicas até desgastes internos imperceptíveis a olho nu.
+        </p>
 
-            <p className='paragrafo-claro'>
-              Durante a análise, inspecionamos cuidadosamente componentes críticos como bloco do motor, cabeçote, virabrequim, bronzinas, pistões, bielas, além dos sistemas de lubrificação e arrefecimento. Essa abordagem detalhada permite detectar fissuras, empenamentos, folgas excessivas e outros problemas que comprometem a performance e segurança do motor.
-            </p>
+        <p className="paragrafo-claro">
+          Durante a análise, inspecionamos cuidadosamente componentes críticos como bloco do motor, cabeçote, virabrequim, bronzinas, pistões, bielas, além dos sistemas de lubrificação e arrefecimento. Essa abordagem detalhada permite detectar fissuras, empenamentos, folgas excessivas e outros problemas que comprometem a performance e segurança do motor.
+        </p>
 
-            <p className='paragrafo-claro'>
-              Com base no diagnóstico, elaboramos um laudo técnico que orienta todas as etapas seguintes da retífica. Esse planejamento é fundamental para assegurar que cada intervenção seja realizada com máxima precisão, prevenindo falhas futuras, otimizando o desempenho e garantindo a durabilidade do motor.
-            </p>
+        <p className="paragrafo-claro">
+          Com base no diagnóstico, elaboramos um laudo técnico que orienta todas as etapas seguintes da retífica. Esse planejamento é fundamental para assegurar que cada intervenção seja realizada com máxima precisão, prevenindo falhas futuras, otimizando o desempenho e garantindo a durabilidade do motor.
+        </p>
 
-            <p className='paragrafo-claro'>
-              Conte com a nossa expertise e tecnologia avançada para obter um diagnóstico confiável e assertivo, o primeiro passo para devolver ao seu veículo a potência e a eficiência de um motor novo.
-            </p>
+        <p className="paragrafo-claro">
+          Conte com a nossa expertise e tecnologia avançada para obter um diagnóstico confiável e assertivo, o primeiro passo para devolver ao seu veículo a potência e a eficiência de um motor novo.
+        </p>
 
-            <Link to="/" className='button'>← Voltar para Home</Link>
-          </div>
-          
+        <Link to="/" className="home-button-voltar">← Voltar para Home</Link>
       </div>
     </div>
   );
