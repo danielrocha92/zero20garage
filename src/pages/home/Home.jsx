@@ -65,7 +65,7 @@ function Home() {
                   <FaTools size={60} color="#ff0015" />
                 </div>
                 <h3 className="subtitulo-claro">
-                  <Link to="/diagnostico" className="link-timeline">1. Diagnóstico</Link>
+                  <Link to="/home/diagnostico" className="link-timeline">1. Diagnóstico</Link>
                 </h3>
                 <p className="paragrafo-claro" title="Na Zero 20 Garage™ iniciamos o processo de retífica com uma análise minuciosa do motor, utilizando equipamentos de última geração. Esse diagnóstico completo identifica falhas ocultas e desgastes em componentes como: bloco do motor, cabeçote, virabrequim, sistema de lubrificação e arrefecimento, garantindo um plano de retífica preciso e seguro.">
                   Diagnóstico e Avaliação Técnica
@@ -77,7 +77,7 @@ function Home() {
                   <FaCogs size={60} color="#ff0015" />
                 </div>
                 <h3 className="subtitulo-claro">
-                  <Link to="/desmontagem" className="link-timeline">2. Desmontagem</Link>
+                  <Link to="/home/desmontagem" className="link-timeline">2. Desmontagem</Link>
                 </h3>
                 <p className="paragrafo-claro" title="A desmontagem é realizada de forma criteriosa, garantindo a integridade das peças e evitando danos adicionais. Cada componente é separado e classificado para uma avaliação individualizada, permitindo uma análise detalhada de desgastes, trincas ou deformações.">
                   Desmontagem do Motor
@@ -89,7 +89,7 @@ function Home() {
                   <FaWrench size={60} color="#ff0015" />
                 </div>
                 <h3 className="subtitulo-claro">
-                  <Link to="/usinagem" className="link-timeline">3. Usinagem</Link>
+                  <Link to="/home/usinagem" className="link-timeline">3. Usinagem</Link>
                 </h3>
                 <p className="paragrafo-claro" title="A Zero 20 Garage™ executa processos de usinagem com precisão milimétrica para corrigir imperfeições no bloco, cabeçote e outras partes fundamentais do motor. Garantimos o alinhamento perfeito e o correto funcionamento, respeitando todas as especificações técnicas.">
                   Usinagem e Correção
@@ -101,7 +101,7 @@ function Home() {
                   <FaCheckCircle size={60} color="#ff0015" />
                 </div>
                 <h3 className="subtitulo-claro">
-                  <Link to="/montagemteste" className="link-timeline">4. Montagem e Teste</Link>
+                  <Link to="/home/montagemteste" className="link-timeline">4. Montagem e Teste</Link>
                 </h3>
                 <p className="paragrafo-claro" title="Após a preparação das peças, realizamos a montagem técnica do motor, utilizando ferramentas calibradas e peças de alta qualidade. Todo o processo segue rigorosos padrões de torque e ajuste para garantir durabilidade e performance.">
                   Montagem Técnica
