@@ -155,7 +155,7 @@
 
 .principios-grid {
   display: flex;
-  max-width: 60%;
+  max-width: 80%;
   flex-direction: column;
   gap: 0.5rem;
   padding: 0.5rem;
