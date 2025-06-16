@@ -86,6 +86,7 @@ function Orcamento() {
       <Breadcrumbs />
 
       <div className="container-escuro">
+        <section className="orcamento-section">
           <div className="highlight-item">
             <h1 className="titulo-claro">Solicite um Orçamento</h1>
             <h3 className="subtitulo-claro">
@@ -173,6 +174,7 @@ function Orcamento() {
               )}
             </form>
           </div>
+        </section>
       </div>
     </div>
   );

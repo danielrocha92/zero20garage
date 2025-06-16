@@ -31,27 +31,31 @@ function Home() {
 
       <div className="container-escuro">
 
-          <div className='highlight-item'>
+          <div className='highlight-item home-header'>
             <h2 className="titulo-claro">Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
             <h3 className="subtitulo-claro">Atendimento especializado para veículos nacionais e importados.</h3>
             <a href="/orcamento" className="button">Solicite um Orçamento</a>
           </div>
 
         {/* Destaques */}
-          <div className='highlight-item'>
+          <div className='highlight-item home-header'>
             <h2 className="titulo-claro">Por que a Zero 20 Garage?</h2>
             <div className="highlights-grid">
               <div className="highlight-card">
-                <h3 className="subtitulo-claro">Pagamento Facilitado</h3>
-                <p className="paragrafo-claro">Até 12x ou 5% de desconto à vista.</p>
-              </div>
-              <div className="highlight-card">
-                <h3 className="subtitulo-claro">Entrega Ágil</h3>
-                <p className="paragrafo-claro">Serviço nacional: 4 a 7 dias úteis.<br />Importados: até 15 dias.</p>
-              </div>
-              <div className="highlight-card">
-                <h3 className="subtitulo-claro">Especialistas em Motores</h3>
-                <p className="paragrafo-claro">Equipe qualificada e equipamentos modernos.</p>
+                <div className="cards-beneficios">
+                  <div className="card-beneficio">
+                    <h3>Pagamento Facilitado</h3>
+                    <p>Até 12x ou 5% de desconto à vista.</p>
+                  </div>
+                  <div className="card-beneficio">
+                    <h3>Entrega Ágil</h3>
+                    <p>Serviço nacional: 4 a 7 dias úteis. Importados: até 15 dias.</p>
+                  </div>
+                  <div className="card-beneficio">
+                    <h3>Especialistas em Motores</h3>
+                    <p>Equipe qualificada e equipamentos modernos.</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -60,6 +60,59 @@
   text-decoration: underline;
 }
 
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.timeline-step {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem;
+  border-radius: 8px;
+  text-align: center;
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s ease;
+}
+
+.timeline-step:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+.icon-animated {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .timeline {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-step {
+    padding: 1rem;
+  }
+}
+
+
 /* Animação de pulsar nos ícones */
 @keyframes pulse {
   0% {
@@ -86,6 +139,55 @@
   text-decoration: underline;
 }
 
+/* ===== Cards Benefícios (melhorados) ===== */
+.cards-beneficios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.8rem;          /* Mais espaço entre os cards */
+  justify-content: center;
+  margin-top: 2.5rem;   /* Um pouco mais de espaço superior */
+  padding: 0 1rem;      /* Pequeno padding horizontal */
+}
+
+.card-beneficio {
+  background-color: #8b0000;    /* Vermelho escuro suave */
+  border-radius: 16px;          /* Bordas mais arredondadas */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65);
+  padding: 2rem 1.75rem;        /* Mais espaçamento interno */
+  flex: 1 1 280px;              /* Base maior para responsividade */
+  max-width: 320px;             /* Limite máximo de largura */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.card-beneficio:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(255, 60, 60, 0.6); /* Hover mais vibrante */
+}
+
+.card-beneficio h3 {
+  color: #ff6f6f;             /* Vermelho claro para título */
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: left;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card-beneficio p {
+  color: #dddcdc;             /* Cinza claro suave para texto */
+  font-size: 1rem;
+  line-height: 1.6;           /* Melhor espaçamento entre linhas */
+  text-align: left;
+  flex-grow: 1;               /* Texto ocupa espaço vertical */
+  font-family: 'Roboto', sans-serif;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
   .button {
@@ -104,5 +206,18 @@
 
   .timeline-step {
     padding: 0.75rem;
+  }
+
+  .cards-beneficios {
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding: 0 0.5rem;
+  }
+
+  .card-beneficio {
+    max-width: 100%;
+    flex: 1 1 auto;
+    padding: 1.75rem 1.25rem;
   }
 }

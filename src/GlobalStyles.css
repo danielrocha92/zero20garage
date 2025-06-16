@@ -141,6 +141,18 @@ body {
   text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 }
 
+.home-header .titulo-claro{
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--vermelho-principal);
+  font-family: 'Ubuntu', sans-serif;
+  padding: 0.5rem;
+  margin-top: 1rem;
+  letter-spacing: 0.05rem;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
 .paragrafo-claro {
   font-size: 1rem;
   margin-bottom: 1rem;
