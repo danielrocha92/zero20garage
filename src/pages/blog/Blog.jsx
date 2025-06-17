@@ -74,7 +74,7 @@ const Blog = () => {
 
                 <div className="container-escuro">
                         <div className='highlight-item'>
-                            <h2 translate='no'>Blog ZER0 20 GARAGE™</h2>
+                            <h2 className='titulo-claro' translate='no'>Blog ZER0 20 GARAGE™</h2>
                             <p className="paragrafo-claro">Explore artigos, dicas e novidades sobre manutenção automotiva e retífica de motores.</p>
 
                             <div translate='no' className="blog-grid">
@@ -93,11 +93,6 @@ const Blog = () => {
                                             />
                                             <h2 className='title'>{post.title}</h2>
                                             <p className="paragrafo-claro">{post.description}</p>
-                                            <button
-                                                type="submit"
-                                                className="submit-button">
-                                                Ler artigo →
-                                            </button>
                                         </Link>
                                     </div>
                                 ))}

@@ -5,6 +5,7 @@ import Breadcrumbs from '../../components/Breadcrumbs';
 import TestimonialsCarousel from '../../components/TestimonialsCarousel';
 import { FaTools, FaCogs, FaWrench, FaCheckCircle, FaPhoneAlt, FaEnvelope, FaWhatsapp, FaMapMarkerAlt } from 'react-icons/fa';
 import FAQSection from '../../components/FAQSection';
+import { Helmet } from 'react-helmet';
 
 
 
@@ -25,6 +26,27 @@ function Home() {
   ];
 
   return (
+    <>
+    <Helmet>
+  <title>ZER0 20 GARAGE™ - Retífica de Motores em Mairiporã</title>
+  <meta name="description" content="Oficina mecânica especializada em retífica de motores nacionais e importados. Diagnóstico, desmontagem, usinagem e montagem com qualidade garantida." />
+  <meta name="keywords" content="retífica de motor, oficina mecânica, Mairiporã, motor fundido, motores nacionais, motores importados, manutenção automotiva" />
+  <meta name="robots" content="index, follow" />
+
+  {/* Open Graph (para Facebook e redes) */}
+  <meta property="og:title" content="ZER0 20 GARAGE™ - Retífica de Motores em Mairiporã" />
+  <meta property="og:description" content="Especialistas em retífica de motores nacionais e importados com atendimento ágil e pagamento facilitado." />
+  <meta property="og:image" content="https://www.zero20garage.com/imagens/og-home.jpg" />
+  <meta property="og:url" content="https://www.zero20garage.com/" />
+  <meta property="og:type" content="website" />
+
+  {/* Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ZER0 20 GARAGE™ - Retífica de Motores em Mairiporã" />
+  <meta name="twitter:description" content="Oficina mecânica completa para retífica e manutenção de motores." />
+  <meta name="twitter:image" content="https://www.zero20garage.com/imagens/og-home.jpg" />
+</Helmet>
+
     <div className="page-escuro">
     <DynamicHeader page="home" messages={messages} />
     <Breadcrumbs />
@@ -38,82 +60,101 @@ function Home() {
           </div>
 
         {/* Destaques */}
-          <div className='highlight-item home-header'>
+          <div className='highlight-item'>
             <h2 className="titulo-claro">Por que a Zero 20 Garage?</h2>
-            <div className="highlights-grid">
-              <div className="highlight-card">
-                <div className="cards-beneficios">
-                  <div className="card-beneficio">
-                    <h3>Pagamento Facilitado</h3>
-                    <p>Até 12x ou 5% de desconto à vista.</p>
-                  </div>
-                  <div className="card-beneficio">
-                    <h3>Entrega Ágil</h3>
-                    <p>Serviço nacional: 4 a 7 dias úteis. Importados: até 15 dias.</p>
-                  </div>
-                  <div className="card-beneficio">
-                    <h3>Especialistas em Motores</h3>
-                    <p>Equipe qualificada e equipamentos modernos.</p>
-                  </div>
-                </div>
+          <div className="timeline">
+            <div className="timeline-step">
+              <div className="icon-animated">
+                <FaPhoneAlt size={60} color="#ff0015" />
               </div>
+              <h3 className="subtitulo-claro">Pagamento Facilitado</h3>
+              <p className="paragrafo-claro">Até 12x ou 5% de desconto à vista.</p>
+            </div>
+
+            <div className="timeline-step">
+              <div className="icon-animated">
+                <FaMapMarkerAlt size={60} color="#ff0015" />
+              </div>
+              <h3 className="subtitulo-claro">Entrega Ágil</h3>
+              <p className="paragrafo-claro">Serviço nacional: 4 a 7 dias úteis.</p>
+              <p className="paragrafo-claro">Importados: até 15 dias.</p>
+            </div>
+
+            <div className="timeline-step">
+              <div className="icon-animated">
+                <FaTools size={60} color="#ff0015" />
+              </div>
+              <h3 className="subtitulo-claro">Especialistas em Motores</h3>
+              <p className="paragrafo-claro">Equipe qualificada e equipamentos modernos.</p>
             </div>
           </div>
+        </div>
 
         {/* Linha do Tempo do Processo de Retífica */}
           <div className="highlight-item">
             <h2 className="titulo-claro">Como Funciona o Processo de Retífica</h2>
             <div className="timeline">
-              <div className="timeline-step">
-                <div className="icon-animated">
-                  <FaTools size={60} color="#ff0015" />
+              <Link to="/home/diagnostico" className="link-timeline">
+                <div className="timeline-step">
+                  <div className="icon-animated">
+                    <FaTools size={60} color="#ff0015" />
+                  </div>
+                  <h3 className="subtitulo-claro">1. Diagnóstico</h3>
+                  <p
+                    className="paragrafo-claro"
+                    title="Na Zero 20 Garage™ iniciamos o processo de retífica com uma análise minuciosa do motor, utilizando equipamentos de última geração. Esse diagnóstico completo identifica falhas ocultas e desgastes em componentes como: bloco do motor, cabeçote, virabrequim, sistema de lubrificação e arrefecimento, garantindo um plano de retífica preciso e seguro."
+                  >
+                    Diagnóstico e Avaliação Técnica
+                  </p>
                 </div>
-                <h3 className="subtitulo-claro">
-                  <Link to="/home/diagnostico" className="link-timeline">1. Diagnóstico</Link>
-                </h3>
-                <p className="paragrafo-claro" title="Na Zero 20 Garage™ iniciamos o processo de retífica com uma análise minuciosa do motor, utilizando equipamentos de última geração. Esse diagnóstico completo identifica falhas ocultas e desgastes em componentes como: bloco do motor, cabeçote, virabrequim, sistema de lubrificação e arrefecimento, garantindo um plano de retífica preciso e seguro.">
-                  Diagnóstico e Avaliação Técnica
-                </p>
-              </div>
+              </Link>
 
-              <div className="timeline-step">
-                <div className="icon-animated">
-                  <FaCogs size={60} color="#ff0015" />
+              <Link to="/home/desmontagem" className="link-timeline">
+                <div className="timeline-step">
+                  <div className="icon-animated">
+                    <FaCogs size={60} color="#ff0015" />
+                  </div>
+                  <h3 className="subtitulo-claro">2. Desmontagem</h3>
+                  <p
+                    className="paragrafo-claro"
+                    title="A desmontagem é realizada de forma criteriosa, garantindo a integridade das peças e evitando danos adicionais. Cada componente é separado e classificado para uma avaliação individualizada, permitindo uma análise detalhada de desgastes, trincas ou deformações."
+                  >
+                    Desmontagem do Motor
+                  </p>
                 </div>
-                <h3 className="subtitulo-claro">
-                  <Link to="/home/desmontagem" className="link-timeline">2. Desmontagem</Link>
-                </h3>
-                <p className="paragrafo-claro" title="A desmontagem é realizada de forma criteriosa, garantindo a integridade das peças e evitando danos adicionais. Cada componente é separado e classificado para uma avaliação individualizada, permitindo uma análise detalhada de desgastes, trincas ou deformações.">
-                  Desmontagem do Motor
-                </p>
-              </div>
+              </Link>
 
-              <div className="timeline-step">
-                <div className="icon-animated">
-                  <FaWrench size={60} color="#ff0015" />
+              <Link to="/home/usinagem" className="link-timeline">
+                <div className="timeline-step">
+                  <div className="icon-animated">
+                    <FaWrench size={60} color="#ff0015" />
+                  </div>
+                  <h3 className="subtitulo-claro">3. Usinagem</h3>
+                  <p
+                    className="paragrafo-claro"
+                    title="A Zero 20 Garage™ executa processos de usinagem com precisão milimétrica para corrigir imperfeições no bloco, cabeçote e outras partes fundamentais do motor. Garantimos o alinhamento perfeito e o correto funcionamento, respeitando todas as especificações técnicas."
+                  >
+                    Usinagem e Correção
+                  </p>
                 </div>
-                <h3 className="subtitulo-claro">
-                  <Link to="/home/usinagem" className="link-timeline">3. Usinagem</Link>
-                </h3>
-                <p className="paragrafo-claro" title="A Zero 20 Garage™ executa processos de usinagem com precisão milimétrica para corrigir imperfeições no bloco, cabeçote e outras partes fundamentais do motor. Garantimos o alinhamento perfeito e o correto funcionamento, respeitando todas as especificações técnicas.">
-                  Usinagem e Correção
-                </p>
-              </div>
+              </Link>
 
-              <div className="timeline-step">
-                <div className="icon-animated">
-                  <FaCheckCircle size={60} color="#ff0015" />
+              <Link to="/home/montagemteste" className="link-timeline">
+                <div className="timeline-step">
+                  <div className="icon-animated">
+                    <FaCheckCircle size={60} color="#ff0015" />
+                  </div>
+                  <h3 className="subtitulo-claro">4. Montagem e Teste</h3>
+                  <p
+                    className="paragrafo-claro"
+                    title="Após a preparação das peças, realizamos a montagem técnica do motor, utilizando ferramentas calibradas e peças de alta qualidade. Todo o processo segue rigorosos padrões de torque e ajuste para garantir durabilidade e performance."
+                  >
+                    Montagem Técnica
+                  </p>
                 </div>
-                <h3 className="subtitulo-claro">
-                  <Link to="/home/montagemteste" className="link-timeline">4. Montagem e Teste</Link>
-                </h3>
-                <p className="paragrafo-claro" title="Após a preparação das peças, realizamos a montagem técnica do motor, utilizando ferramentas calibradas e peças de alta qualidade. Todo o processo segue rigorosos padrões de torque e ajuste para garantir durabilidade e performance.">
-                  Montagem Técnica
-                </p>
-              </div>
+              </Link>
             </div>
           </div>
-        {/* Serviços */}
 
         {/* Depoimentos */}
           <div className='highlight-item'>
@@ -167,6 +208,7 @@ function Home() {
           </div>
       </div>
     </div>
+    </>
   );
 }
 

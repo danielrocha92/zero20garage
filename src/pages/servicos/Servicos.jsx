@@ -65,8 +65,8 @@ const Servicos = () => {
             <Breadcrumbs />
 
                 <div className="container-escuro">
-                    <h2 className='subtitulo-claro' translate='no'>Serviços que executamos</h2>
                     <div className='highlight-item'>
+                        <h2 className='titulo-claro' translate='no'>Serviços que executamos</h2>
                         <div className="highlights-grid">
                             {services.map((service) => (
                                 <div
