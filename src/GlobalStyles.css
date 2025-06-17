@@ -548,6 +548,26 @@ textarea {
   background-color: #cc0000;
 }
 
+.subheading-legal {
+  position: relative;
+  color: #ff0015; /* vermelho do texto */
+  font-weight: bold;
+  padding-left: 1rem; /* espaço para a barra */
+  margin-bottom: 0.5rem;
+}
+
+.subheading-legal::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px; /* espessura da barra */
+  background-color: #ff0015; /* cor vermelha da barra */
+  border-radius: 2px; /* cantos arredondados, opcional */
+}
+
+
 @media (min-width: 600px) {
   /* ===== Containers gerais (ajustes para telas maiores) ===== */
   .container-claro,

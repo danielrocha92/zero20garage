@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Politica.css'; // Estilos específicos
+import './Politica.css'; // Estilos compartilhados
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import ContatoCta from '../../components/ContatoCta';
@@ -7,96 +7,89 @@ import ContatoCta from '../../components/ContatoCta';
 const Privacidade = () => {
   const messages = [
     {
-title: 'Privacidade e Proteção de Dados',
-  subtitle: 'Entenda como suas informações são coletadas, usadas e protegidas por nós.',
+      title: 'Privacidade e Proteção de Dados',
+      subtitle: 'Entenda como suas informações são coletadas, usadas e protegidas por nós.',
     },
     {
-  title: 'Sua Privacidade Importa',
-  subtitle: 'Transparência no uso dos seus dados, com segurança e respeito.',
+      title: 'Sua Privacidade Importa',
+      subtitle: 'Transparência no uso dos seus dados, com segurança e respeito.',
     },
   ];
 
   const [lastUpdated, setLastUpdated] = useState('');
 
-  // Atualiza a data com a data atual
-  const updateLastUpdated = () => {
+  useEffect(() => {
     const now = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     setLastUpdated(now.toLocaleDateString('pt-BR', options));
-  };
-
-  useEffect(() => {
-    updateLastUpdated();
   }, []);
 
   return (
-    <div className="page-escuro">
+    <div className="page-dark">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
 
-        <div className="container-claro">
-
-        <section className="section">
-          <h2 translate="no" className="titulo-escuro">
+      <div className="container-light">
+        <section className="section-legal">
+          <h2 translate="no" className="heading-legal">
             Política de Privacidade - ZER0 20 GARAGE™
           </h2>
-
-          <p translate="no" className="paragrafo-escuro">
-            Esta Política de Privacidade descreve como a <strong>ZERO 20 GARAGE™</strong> coleta, usa, compartilha e protege as informações pessoais dos usuários do nosso website. Ao acessar ou usar nosso website, você concorda com os termos desta Política de Privacidade.
+          <p translate="no" className="text-legal">
+            Esta Política de Privacidade descreve como a <strong>ZER0 20 GARAGE™</strong> coleta, usa, compartilha e protege as informações pessoais dos usuários do nosso website. Ao acessar ou utilizar nossos serviços, você concorda com os termos aqui estabelecidos.
           </p>
         </section>
 
-          <section className="section">
-            <h3 className="subtitulo-escuro">1. Informações que Coletamos:</h3>
-            <p className="paragrafo-escuro">Podemos coletar os seguintes tipos de informações pessoais:</p>
-            <ul className="lista-escuro">
-              <li><strong>Informações de contato:</strong> Nome, endereço de e-mail, número de telefone e endereço físico.</li>
-              <li><strong>Informações sobre o veículo:</strong> Marca, modelo, ano, número do chassi (VIN) e histórico de serviços (se fornecido).</li>
-              <li><strong>Informações de navegação:</strong> Endereço IP, tipo de navegador, sistema operacional, páginas visitadas, tempo gasto no site e outros dados de uso.</li>
-              <li><strong>Informações fornecidas em formulários:</strong> Detalhes sobre consultas, solicitações de orçamento, agendamentos de serviços e feedback.</li>
-              <li><strong>Cookies e tecnologias similares:</strong> Podemos usar cookies e outras tecnologias de rastreamento para coletar informações sobre sua atividade de navegação.</li>
-            </ul>
-          </section>
+        <section className="section-legal">
+          <h3 className="subheading-legal">1. Informações que Coletamos</h3>
+          <p className="text-legal">Podemos coletar os seguintes tipos de dados pessoais:</p>
+          <ul className="list-legal">
+            <li><strong>Contato:</strong> Nome, e-mail, telefone, endereço.</li>
+            <li><strong>Veículo:</strong> Marca, modelo, ano, chassi (VIN), histórico de serviços.</li>
+            <li><strong>Navegação:</strong> IP, navegador, sistema, páginas visitadas, tempo de acesso.</li>
+            <li><strong>Formulários:</strong> Consultas, orçamentos, agendamentos, feedbacks.</li>
+            <li><strong>Cookies:</strong> Dados de navegação e comportamento para melhorar a experiência.</li>
+          </ul>
+        </section>
 
-          <section className="section">
-            <h3 className="subtitulo-escuro">2. Como Usamos Suas Informações:</h3>
-            <p className="paragrafo-escuro">Utilizamos suas informações pessoais para os seguintes propósitos:</p>
-            <ul className="lista-escuro">
-              <li><strong>Fornecer e melhorar nossos serviços:</strong> Responder a suas consultas, agendar serviços, fornecer orçamentos, realizar reparos e manutenções em veículos.</li>
-              <li><strong>Comunicação:</strong> Entrar em contato com você sobre agendamentos, atualizações de serviços, ofertas promocionais e outras informações relevantes.</li>
-              <li><strong>Personalização:</strong> Personalizar sua experiência no nosso website e fornecer conteúdo relevante para seus interesses.</li>
-              <li><strong>Marketing:</strong> Enviar e-mails promocionais e outras comunicações de marketing sobre nossos serviços e ofertas (com seu consentimento, quando exigido por lei).</li>
-              <li><strong>Análise e melhoria do website:</strong> Analisar o uso do nosso website para melhorar seu desempenho, design e conteúdo.</li>
-              <li><strong>Cumprimento de obrigações legais:</strong> Cumprir leis, regulamentos e processos legais aplicáveis.</li>
-              <li><strong>Segurança:</strong> Proteger nosso website e nossos usuários contra fraudes, abusos e outras atividades ilegais.</li>
-            </ul>
-          </section>
+        <section className="section-legal">
+          <h3 className="subheading-legal">2. Como Usamos Suas Informações</h3>
+          <p className="text-legal">Utilizamos os dados pessoais para os seguintes fins:</p>
+          <ul className="list-legal">
+            <li><strong>Serviços:</strong> Atendimento, orçamento, manutenção, suporte técnico.</li>
+            <li><strong>Comunicação:</strong> Informações sobre serviços, promoções e atualizações.</li>
+            <li><strong>Personalização:</strong> Conteúdo e navegação ajustados ao seu perfil.</li>
+            <li><strong>Marketing:</strong> Campanhas com seu consentimento, quando exigido.</li>
+            <li><strong>Melhoria contínua:</strong> Análise do uso do site para otimização da experiência.</li>
+            <li><strong>Obrigação legal:</strong> Cumprimento de exigências legais e normativas.</li>
+            <li><strong>Segurança:</strong> Prevenção de fraudes e acesso indevido ao sistema.</li>
+          </ul>
+        </section>
 
-          <section className="section">
-            <h3 className="subtitulo-escuro">3. Compartilhamento de Suas Informações:</h3>
-            <p className="paragrafo-escuro">Podemos compartilhar suas informações pessoais com terceiros nas seguintes circunstâncias:</p>
-            <ul className="lista-escuro">
-              <li><strong>Prestadores de serviços:</strong> Podemos compartilhar informações com empresas terceirizadas que nos auxiliam na operação do nosso website, processamento de pagamentos, envio de e-mails, análise de dados e outros serviços.</li>
-              <li><strong>Parceiros de marketing:</strong> Com seu consentimento, podemos compartilhar informações com parceiros de marketing para enviar comunicações promocionais sobre produtos e serviços que possam ser de seu interesse.</li>
-              <li><strong>Obrigações legais:</strong> Podemos divulgar suas informações pessoais se formos obrigados a fazê-lo por lei, ordem judicial ou outra obrigação legal.</li>
-              <li><strong>Transferência de negócios:</strong> No caso de uma fusão, aquisição ou venda de todos ou parte dos nossos ativos, suas informações pessoais podem ser transferidas para a entidade adquirente.</li>
-              <li><strong>Com seu consentimento:</strong> Podemos compartilhar suas informações com terceiros para outros fins com seu consentimento explícito.</li>
-            </ul>
-          </section>
+        <section className="section-legal">
+          <h3 className="subheading-legal">3. Compartilhamento de Informações</h3>
+          <p className="text-legal">Seus dados podem ser compartilhados com:</p>
+          <ul className="list-legal">
+            <li><strong>Fornecedores:</strong> Empresas de tecnologia, pagamentos, e-mail, análise.</li>
+            <li><strong>Parceiros:</strong> Com seu consentimento, para comunicações promocionais.</li>
+            <li><strong>Requisição legal:</strong> Autoridades judiciais ou administrativas.</li>
+            <li><strong>Fusão ou aquisição:</strong> Em transações societárias, com aviso prévio.</li>
+            <li><strong>Consentimento:</strong> Outros casos mediante sua autorização explícita.</li>
+          </ul>
+        </section>
 
-          <section className="section">
-            <h3 className="subtitulo-escuro">4. Contato</h3>
-            <p className="paragrafo-escuro">
-              Se você tiver alguma dúvida ou preocupação sobre nossa Política de Prrivacidade, entre em contato conosco através dos seguintes canais:
-            </p>
-            <ContatoCta />
-          </section>
+        <section className="section-legal">
+          <h3 className="subheading-legal">4. Contato</h3>
+          <p className="text-legal">
+            Caso tenha dúvidas sobre esta Política de Privacidade, entre em contato por meio dos canais abaixo:
+          </p>
+          <ContatoCta />
+        </section>
 
-          <div className="privacy-policy-last-updated">
-            <p className="paragrafo acknowledgment">
-              Data da última atualização: {lastUpdated}
-            </p>
-          </div>
+        <div className="footer-legal">
+          <p className="text-legal small">
+            Data da última atualização: {lastUpdated}
+          </p>
+        </div>
       </div>
     </div>
   );

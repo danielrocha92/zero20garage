@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
-
 import './Termos.css';
 import ContatoCta from '../../components/ContatoCta';
 
 const Termos = () => {
-
   const messages = [
     {
       title: 'Aceitação dos Termos',
@@ -17,176 +15,122 @@ const Termos = () => {
       subtitle: 'Se você tiver alguma dúvida sobre estes Termos de Uso, entre em contato conosco através das informações de contato fornecidas no site.',
     },
   ];
-    const [lastUpdated, setLastUpdated] = useState('');
 
-    // Função para atualizar a data
-    const updateLastUpdated = () => {
-      const now = new Date();
-      const options = { year: 'numeric', month: 'long', day: 'numeric' };
-      setLastUpdated(now.toLocaleDateString('pt-BR', options));
-    };
+  const [lastUpdated, setLastUpdated] = useState('');
 
-    // UseEffect para definir a data inicial ao montar o componente
-    useEffect(() => {
-      updateLastUpdated();
-    }, []); // O array de dependências vazio garante que isso rode apenas uma vez na montagem
-
-    // Função simulada para quando o conteúdo da página é atualizado
-    const handleContentUpdate = () => {
-      // Aqui você teria a lógica real para verificar se o conteúdo mudou
-      // Por exemplo, comparar o conteúdo atual com uma versão anterior
-      console.log('Conteúdo da página foi atualizado!');
-      updateLastUpdated();
-      // Você pode adicionar aqui qualquer outra lógica necessária após a atualização
-    };
+  useEffect(() => {
+    const now = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    setLastUpdated(now.toLocaleDateString('pt-BR', options));
+  }, []);
 
   return (
-    <div className="page-escuro">
+    <div className="terms-page">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
+      <div className="terms-container">
+        <section className="terms-section">
+          <h2 className="terms-title">Termos de Uso – ZER0 20 GARAGE™</h2>
+        </section>
 
-      <div className="container-claro">
-
-        <section className="section">
-          <h2 translate='no' className="titulo-escuro">
-            Termos de Uso - ZER0 20 GARAGE™
-          </h2>
-          <p translate='no' className="paragrafo-escuro">
-            Bem-vindo ao site da <strong>ZER0 20 GARAGE™</strong>! Ao acessar ou utilizar nosso site, você concorda com os presentes Termos de Uso. Leia atentamente este documento. Se você não concordar com algum dos termos aqui apresentados, por favor, não utilize nosso site.
+        <section className="terms-section">
+          <h3 className="terms-subtitle">1. Aceitação dos Termos</h3>
+          <p className="terms-paragraph">
+            Ao acessar este website, o usuário declara ter lido, compreendido e aceitado integralmente os presentes Termos de Uso, bem como a Política de Privacidade. O uso contínuo deste site, após eventuais modificações destes termos, será interpretado como aceitação tácita das novas condições. É responsabilidade do usuário revisá-los periodicamente.
           </p>
         </section>
 
-        <section className="section">
-          <h3 className="subtitulo-escuro">
-            1. Aceitação dos Termos
-          </h3>
-          <p className="paragrafo-escuro">
-            Ao acessar e navegar neste site, você declara ter lido, compreendido e aceitado integralmente estes Termos de Uso, bem como nossa <a href="/politica" className="terms-of-use-link">Política de Privacidade</a>. Estes termos podem ser atualizados periodicamente sem aviso prévio, sendo sua responsabilidade verificar esta página regularmente para estar ciente de quaisquer modificações. O uso continuado do site após a publicação de alterações constitui sua aceitação dessas modificações.
+        <section className="terms-section">
+          <h3 className="terms-subtitle">2. Descrição dos Serviços</h3>
+          <p className="terms-paragraph">
+            A <strong>ZER0 20 GARAGE™</strong> é uma empresa especializada em serviços de retífica de motores automotivos, disponibilizando por meio deste site informações institucionais, conteúdo técnico, canais de atendimento e funcionalidades voltadas à solicitação de orçamentos. O conteúdo disponibilizado tem caráter exclusivamente informativo, não constituindo vínculo contratual.
           </p>
         </section>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">
-          2. Descrição dos Serviços
-        </h3>
-        <p className="paragrafo-escuro">
-          A <strong>ZER0 20 GARAGE™</strong> é uma oficina especializada em retífica de motores automotivos. Nosso site tem como objetivo fornecer informações sobre nossos serviços, expertise, contato e outras informações relevantes sobre nossa empresa. Através do site, você poderá:
-        </p>
-        <ul className="lista-escuro">
-          <li>Conhecer nossos serviços de retífica de motores.</li>
-          <li>Visualizar informações sobre nossa empresa e equipe.</li>
-          <li>Entrar em contato conosco para solicitar orçamentos ou informações.</li>
-          <li>Acessar conteúdo informativo relacionado ao universo automotivo e à retífica de motores (como dicas e notícias).</li>
-        </ul>
-      </section>
+        <section className="terms-section">
+          <h3 className="terms-subtitle">3. Condições de Uso</h3>
+          <p className="terms-paragraph">
+            O usuário compromete-se a utilizar este site de maneira ética, responsável e em conformidade com a legislação vigente. É terminantemente vedado:
+          </p>
+          <ul className="terms-list">
+            <li>Utilizar o site com propósitos ilícitos ou lesivos à imagem da ZER0 20 GARAGE™;</li>
+            <li>Inserir ou disseminar vírus, malware ou códigos que comprometam a segurança do sistema;</li>
+            <li>Violar a integridade da estrutura do site, bem como de seus servidores;</li>
+            <li>Capturar informações ou dados pessoais sem consentimento;</li>
+            <li>Reproduzir, distribuir ou modificar qualquer conteúdo do site sem autorização expressa da empresa.</li>
+          </ul>
+        </section>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">3. Uso do Site</h3>
-        <p className="paragrafo-escuro">
-          Você concorda em utilizar o site da <strong>ZER0 20 GARAGE™</strong> de forma responsável e em conformidade com todas as leis e regulamentos aplicáveis. É proibido:
-        </p>
-        <ul className="terms-of-use-list prohibited-list">
-          <li>Utilizar o site para quaisquer fins ilegais ou não autorizados.</li>
-          <li>Transmitir ou distribuir vírus, worms, ou qualquer outro código malicioso.</li>
-          <li>Tentar obter acesso não autorizado a qualquer parte do site, servidores ou redes conectadas ao site.</li>
-          <li>Interferir ou interromper o funcionamento normal do site.</li>
-          <li>Coletar ou armazenar dados pessoais de outros usuários sem seu consentimento.</li>
-          <li>Utilizar qualquer dispositivo, software ou rotina para interferir ou tentar interferir no bom funcionamento do site.</li>
-          <li>Reproduzir, duplicar, copiar, vender, revender ou explorar qualquer parte do site para fins comerciais sem a nossa expressa autorização por escrito.</li>
-        </ul>
-      </section>
+        <section className="terms-section">
+          <h3 className="terms-subtitle">4. Propriedade Intelectual</h3>
+          <p className="terms-paragraph">
+            Todos os elementos do site – textos, logotipos, imagens, vídeos, ilustrações, layout, códigos e demais materiais – são protegidos por direitos autorais, marcas registradas e outras legislações aplicáveis à propriedade intelectual. Qualquer uso não autorizado constitui infração e poderá resultar em medidas judiciais cabíveis.
+          </p>
+        </section>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">4. Propriedade Intelectual</h3>
-        <p className="paragrafo-escuro">
-          Todo o conteúdo presente neste site, incluindo, mas não se limitando a textos, imagens, logotipos, vídeos, gráficos, ícones, softwares e outros materiais, são de propriedade exclusiva da <strong>ZER0 20 GARAGE™</strong> ou de terceiros que nos concederam licença para utilizá-los, e estão protegidos por leis de direitos autorais e outras leis de propriedade intelectual.
-        </p>
+        <section className="terms-section">
+          <h3 className="terms-subtitle">5. Links para Terceiros</h3>
+          <p className="terms-paragraph">
+            Este site pode conter links que direcionam o usuário para websites de terceiros, os quais não estão sob o controle da ZER0 20 GARAGE™. A inclusão desses links visa apenas à conveniência do usuário, não representando, em hipótese alguma, endosso ou responsabilidade sobre seus conteúdos ou práticas de privacidade.
+          </p>
+        </section>
 
-        <h3 className="prohibited">
-          É estritamente proibida a reprodução, distribuição, modificação, exibição ou qualquer outra forma de utilização não autorizada do conteúdo deste site, total ou parcialmente, sem a prévia e expressa autorização por escrito da <strong>ZER0 20 GARAGE™</strong>.
-        </h3>
+        <section className="terms-section">
+          <h3 className="terms-subtitle">6. Limitação de Responsabilidade</h3>
+          <p className="terms-paragraph">
+            A ZER0 20 GARAGE™ empenha-se em manter as informações do site precisas e atualizadas. No entanto, não garante a ausência de erros, interrupções ou falhas técnicas. O uso das informações disponibilizadas é de inteira responsabilidade do usuário. A empresa não se responsabiliza por quaisquer danos, diretos ou indiretos, decorrentes do uso ou da incapacidade de uso do site.
+          </p>
+        </section>
 
-        <p className="paragrafo-escuro">
-          A marca <strong>ZER0 20 GARAGE™</strong> e seu logotipo são marcas registradas de nossa propriedade. É proibida a utilização dessas marcas sem nossa expressa autorização por escrito.
-        </p>
-      </section>
+        <section className="terms-section">
+          <h3 className="terms-subtitle">7. Indenização</h3>
+          <p className="terms-paragraph">
+            O usuário concorda em isentar a ZER0 20 GARAGE™, seus diretores, colaboradores e parceiros de qualquer responsabilidade oriunda de ações decorrentes da violação destes Termos de Uso, comprometendo-se a arcar com todas as perdas, danos, despesas e honorários advocatícios eventualmente incorridos.
+          </p>
+        </section>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">5. Links para Outros Sites</h3>
-        <p className="paragrafo-escuro">
-          Nosso site pode conter links para sites de terceiros. Esses links são fornecidos apenas para sua conveniência e não implicam que a <strong>ZER0 20 GARAGE™</strong> endosse, aprove ou se responsabilize pelo conteúdo desses sites. Ao acessar sites de terceiros através de links em nosso site, você o faz por sua própria conta e risco, e estará sujeito aos termos de uso e políticas de privacidade desses sites.
-        </p>
-      </section>
+        <section className="terms-section">
+          <h3 className="terms-subtitle">8. Política de Privacidade</h3>
+          <p className="terms-paragraph">
+            O tratamento de dados pessoais dos usuários será realizado em conformidade com a <a href="/politica" className="terms-link">Política de Privacidade</a> da ZER0 20 GARAGE™, que integra e complementa os presentes Termos de Uso.
+          </p>
+        </section>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">6. Limitação de Responsabilidade</h3>
-        <p className="paragrafo-escuro">
-          A <strong>ZER0 20 GARAGE™</strong> empenha-se para garantir que as informações apresentadas em seu site sejam precisas e atualizadas. No entanto, não garantimos a exatidão, integridade ou atualidade de todo o conteúdo. O site e seu conteúdo são fornecidos "como estão" e "conforme disponíveis", sem garantias de qualquer tipo, expressas ou implícitas, incluindo, mas não se limitando a garantias de comercialização, adequação a um propósito específico e não violação.
-        </p>
-        <p className="paragrafo-escuro">
-          Em nenhuma hipótese a <strong>ZER0 20 GARAGE™</strong>, seus diretores, funcionários, parceiros ou fornecedores serão responsáveis por quaisquer danos diretos, indiretos, incidentais, especiais, consequenciais ou punitivos (incluindo, sem limitação, perda de lucros, dados, uso, boa vontade ou outras perdas intangíveis) resultantes do seu acesso ou uso do site, da sua incapacidade de acessar ou usar o site, de qualquer conduta ou conteúdo de terceiros no site, ou de qualquer conteúdo obtido através do site.
-        </p>
-      </section>
+        <section className="terms-section">
+          <h3 className="terms-subtitle">9. Legislação Aplicável e Foro</h3>
+          <p className="terms-paragraph">
+            Os presentes Termos de Uso serão regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da Comarca de São Paulo/SP como o único competente para dirimir eventuais controvérsias, renunciando-se a qualquer outro, por mais privilegiado que seja.
+          </p>
+        </section>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">7. Indenização</h3>
-        <p className="paragrafo-escuro">
-          Você concorda em indenizar, defender e isentar a <strong>ZER0 20 GARAGE™</strong>, seus diretores, funcionários, parceiros e fornecedores de quaisquer reclamações, responsabilidades, danos, perdas, custos e despesas (incluindo honorários advocatícios razoáveis) decorrentes de qualquer violação destes Termos de Uso por você ou por qualquer pessoa que utilize sua conta.
-        </p>
-      </section>
+        <section className="terms-section">
+          <h3 className="terms-subtitle">10. Disposições Finais</h3>
+          <ul className="terms-list">
+            <li><strong>Acordo Integral:</strong> Estes Termos constituem o acordo integral entre as partes no tocante ao uso do site.</li>
+            <li><strong>Separabilidade:</strong> A eventual nulidade de alguma cláusula não afetará a validade das demais.</li>
+            <li><strong>Renúncia:</strong> O não exercício de quaisquer direitos previstos nestes Termos não importará em renúncia, novação ou alteração contratual.</li>
+            <li><strong>Cessão:</strong> O usuário não poderá ceder os direitos e obrigações decorrentes destes Termos sem o consentimento prévio e por escrito da ZER0 20 GARAGE™. A empresa poderá ceder livremente seus direitos.</li>
+          </ul>
+        </section>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">8. Privacidade</h3>
-        <p className="paragrafo-escuro">
-          A coleta e o uso de suas informações pessoais são regidos por nossa <a href="/politica" className="terms-of-use-link">Política de Privacidade</a>, que é parte integrante destes Termos de Uso. Ao utilizar nosso site, você concorda com os termos de nossa Política de Privacidade.
-        </p>
-      </section>
+        <section className="terms-section">
+          <h3 className="terms-subtitle">11. Contato</h3>
+          <p className="terms-paragraph">
+            Para esclarecimentos, dúvidas ou solicitações relativas a estes Termos de Uso, disponibilizamos os seguintes canais de atendimento:
+          </p>
+          <ContatoCta />
+        </section>
 
-      <section className="section">
-        <h3 className="subtitulo-escuro">9. Lei Aplicável e Jurisdição</h3>
-        <p className="paragrafo-escuro">
-          Estes Termos de Uso serão regidos e interpretados de acordo com as leis da República Federativa do Brasil. Qualquer disputa decorrente ou relacionada a estes Termos de Uso será submetida à jurisdição exclusiva dos tribunais da Comarca de São Paulo, Estado de São Paulo, Brasil, renunciando as partes a qualquer outro foro, por mais privilegiado que seja.
-        </p>
-      </section>
-
-      <section className="section">
-        <h3 className="subtitulo-escuro">10. Disposições Gerais</h3>
-        <ul className="lista-escuro">
-          <li>
-            <strong>Integralidade do Acordo:</strong> Estes Termos de Uso constituem o acordo integral entre você e a <strong>ZER0 20 GARAGE™</strong> em relação ao uso do site e substituem todos os acordos e entendimentos anteriores ou contemporâneos, sejam eles verbais ou escritos.
-          </li>
-          <li>
-            <strong>Nulidade Parcial:</strong> Se qualquer disposição destes Termos de Uso for considerada inválida ou inexequível por um tribunal competente, as demais disposições permanecerão em pleno vigor e efeito. A disposição inválida ou inexequível será substituída por uma disposição válida e exequível que reflita a intenção original da disposição inválida ou inexequível, na medida do possível.
-          </li>
-          <li>
-            <strong>Renúncia:</strong> A falha da <strong>ZER0 20 GARAGE™</strong> em exercer ou fazer cumprir qualquer direito ou disposição destes Termos de Uso não constituirá uma renúncia a tal direito ou disposição.
-          </li>
-          <li>
-            <strong>Cessão:</strong> Você não poderá ceder ou transferir seus direitos ou obrigações sob estes Termos de Uso sem o consentimento prévio e por escrito da <strong>ZER0 20 GARAGE™</strong>. A <strong>ZER0 20 GARAGE™</strong> poderá ceder ou transferir seus direitos e obrigações sob estes Termos de Uso a terceiros sem o seu consentimento.
-          </li>
-        </ul>
-      </section>
-
-      <section className="section">
-        <h3 className="subtitulo-escuro">11. Contato</h3>
-        <p className="paragrafo-escuro">
-          Se você tiver alguma dúvida ou preocupação sobre estes Termos de Uso, entre em contato conosco através dos seguintes canais:
+        <p className="terms-acknowledgment">
+          Ao utilizar nosso site, você reconhece que leu, entendeu e concorda com todos os termos e condições apresentados neste documento.
         </p>
 
-        <ContatoCta />
-      </section>
-
-      <p className="paragrafo acknowledgment">
-        Ao utilizar nosso site, você reconhece que leu, entendeu e concorda com todos os termos e condições apresentados neste documento.
-      </p>
-      {/* Botão simulado para acionar a atualização do conteúdo */}
-      <div className="terms-of-use-last-updated">
-        <p className="paragrafo acknowledgment">
-          Data da última atualização: {lastUpdated}
-        </p>
-        <button onClick={handleContentUpdate}></button>
+        <div className="terms-last-updated">
+          <p className="terms-acknowledgment">
+            Data da última atualização: {lastUpdated}
+          </p>
+        </div>
       </div>
-    </div>
     </div>
   );
 };

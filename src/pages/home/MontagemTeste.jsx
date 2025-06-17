@@ -56,7 +56,7 @@ function MontagemTeste() {
         </div>
 
         <h2 className="titulo-claro">Usinagem de Motores</h2>
-        <h3 className="subtitulo-claro">Precisão, Eficiência e Durabilidade</h3>
+        <h3 className="subheading-legal">Precisão, Eficiência e Durabilidade</h3>
 
         <p className="paragrafo-claro">
           A usinagem de motores é um dos pilares fundamentais no processo de retífica, responsável por garantir a integridade estrutural, a funcionalidade e a longevidade dos componentes internos do motor.
@@ -70,7 +70,7 @@ function MontagemTeste() {
           A usinagem remove deformações e garante tolerâncias rigorosas, restabelecendo o equilíbrio dos componentes.
         </p>
 
-        <h3 className="subtitulo-claro">Processos Essenciais na Usinagem</h3>
+        <h3 className="subheading-legal">Processos Essenciais na Usinagem</h3>
 
         <p className="paragrafo-claro">
           <strong>Mandrilamento de Cilindros:</strong> Corrige ovalizações e garante paralelismo dos cilindros com rugosidade ideal.
@@ -92,13 +92,13 @@ function MontagemTeste() {
           <strong>Usinagem de Sedes e Guias de Válvulas:</strong> Garante vedação e eficiência térmica.
         </p>
 
-        <h3 className="subtitulo-claro">Tecnologia Aplicada</h3>
+        <h3 className="subheading-legal">Tecnologia Aplicada</h3>
 
         <p className="paragrafo-claro">
           Utilizamos máquinas CNC de última geração e equipamentos de medição tridimensional (CMM) para assegurar precisão micrométrica e repetibilidade.
         </p>
 
-        <h3 className="subtitulo-claro">Benefícios da Usinagem de Alta Precisão</h3>
+        <h3 className="subheading-legal">Benefícios da Usinagem de Alta Precisão</h3>
 
         <p className="paragrafo-claro">
           ✅ Redução do consumo de óleo e combustível. <br/>
@@ -108,7 +108,7 @@ function MontagemTeste() {
           ✅ Redução de ruídos e vibrações.
         </p>
 
-        <h3 className="subtitulo-claro">Excelência Garantida</h3>
+        <h3 className="subheading-legal">Excelência Garantida</h3>
 
         <p className="paragrafo-claro">
           Contamos com equipe técnica especializada, laboratório de metrologia próprio e equipamentos modernos. Seu motor passa por um processo de recuperação com excelência.

@@ -55,7 +55,8 @@ function Diagnostico() {
         </div>
 
         <h2 className="titulo-claro">Diagnóstico e Avaliação Técnica</h2>
-        <h3 className="subtitulo-claro">Análise Completa com Equipamentos de Última Geração</h3>
+        <h3 className="subheading-legal">1. Análise Completa com Equipamentos de Última Geração</h3>
+
 
         <p className="paragrafo-claro">
           O diagnóstico é o primeiro e um dos mais importantes passos no processo de retífica de motores. Nossa equipe realiza uma avaliação minuciosa utilizando scanners automotivos OBD, estetoscópios mecânicos e ferramentas de medição de alta precisão, capazes de identificar desde falhas eletrônicas até desgastes internos imperceptíveis a olho nu.

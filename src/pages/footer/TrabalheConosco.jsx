@@ -23,31 +23,31 @@ function TrabalheConosco() {
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
 
-      <div className="container-claro">
-        <section className="section">
-        <h2 className="titulo-claro">Trabalhe Conosco</h2>
+      <div className="container-light">
+        <section className="section-legal">
+          <h2 className="heading-legal">Trabalhe Conosco</h2>
 
-        <p className="paragrafo-escuro" translate='no'>
-          Se você é apaixonado por mecânica e deseja fazer parte de uma equipe que valoriza a excelência, a <strong>Zero 20 Garage</strong> está sempre em busca de novos talentos que buscam desafios e evolução constante. Se você quer fazer parte de uma equipe apaixonada por excelência automotiva, envie seu currículo!
-        </p>
+          <p className="text-legal" translate='no'>
+            Se você é apaixonado por mecânica e deseja fazer parte de uma equipe que valoriza a excelência, a <strong>Zero 20 Garage</strong> está sempre em busca de novos talentos que buscam desafios e evolução constante. Se você quer fazer parte de uma equipe apaixonada por excelência automotiva, envie seu currículo!
+          </p>
 
-        <p className="paragrafo-escuro" translate='no'>
-          Para candidatar-se, envie um e-mail para: <a href="mailto:contato@zero20garage.com.br">contato@zero20garage.com.br</a>
-        </p>
+          <p className="text-legal" translate='no'>
+            Para candidatar-se, envie um e-mail para: <a href="mailto:contato@zero20garage.com.br">contato@zero20garage.com.br</a>
+          </p>
 
-        <p className="paragrafo-escuro">
-          Acompanhe também nossas atualizações de vagas e novidades pelo nosso LinkedIn:
-        </p>
+          <p className="text-legal">
+            Acompanhe também nossas atualizações de vagas e novidades pelo nosso LinkedIn:
+          </p>
 
-        <a
-          href="https://www.linkedin.com/company/zero-20-garage/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="linkedin-button"
-        >
-          <FaLinkedin size={20} style={{ marginRight: '0.5rem' }} />
-          Visite nosso LinkedIn
-        </a>
+          <a
+            href="https://www.linkedin.com/company/zero-20-garage/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="linkedin-button"
+          >
+            <FaLinkedin size={20} style={{ marginRight: '0.5rem' }} />
+            Visite nosso LinkedIn
+          </a>
         </section>
       </div>
     </div>

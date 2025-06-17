@@ -56,7 +56,7 @@ function Desmontagem() {
         </div>
 
         <h2 className="titulo-claro">Desmontagem do Motor</h2>
-        <h3 className="subtitulo-claro">Precisão, Cuidado e Responsabilidade Técnica</h3>
+        <h3 className="subheading-legal">Precisão, Cuidado e Responsabilidade Técnica</h3>
 
         <p className="paragrafo-claro">
           A desmontagem do motor é uma etapa fundamental para a correta avaliação de todos os seus componentes. Nossos técnicos altamente capacitados realizam esse processo de forma sistemática e cuidadosa, garantindo que cada peça seja retirada sem causar danos estruturais.

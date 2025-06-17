@@ -3,9 +3,9 @@ import '../../styles/Home.css'; // Importa o arquivo global de estilos
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import TestimonialsCarousel from '../../components/TestimonialsCarousel';
-import { FaCogs, FaWrench, FaCheckCircle, FaCreditCard, FaEnvelope, FaWhatsapp, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import {FaCogs, FaTools, FaCheckCircle, FaCreditCard, FaEnvelope, FaWhatsapp, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
 import { MdEngineering } from 'react-icons/md';
-import { TbTruckDelivery } from 'react-icons/tb';import FAQSection from '../../components/FAQSection';
+import { TbTruckDelivery, TbSettingsSearch } from 'react-icons/tb';import FAQSection from '../../components/FAQSection';
 import { Helmet } from 'react-helmet';
 
 
@@ -56,7 +56,7 @@ function Home() {
 
           <div className='highlight-item home-header'>
             <h2 className="titulo-claro">Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
-            <h3 className="subtitulo-claro">Atendimento especializado para veículos nacionais e importados.</h3>
+            <h3 className="subheading-legal">Atendimento especializado para veículos nacionais e importados.</h3>
             <a href="/orcamento" className="button">Solicite um Orçamento</a>
           </div>
 
@@ -68,7 +68,7 @@ function Home() {
               <div className="icon-animated">
                 <FaCreditCard size={60} color="#ff0015" />
               </div>
-              <h3 className="subtitulo-claro">Pagamento Facilitado</h3>
+              <h3 className="subheading-legal">Pagamento Facilitado</h3>
               <p className="paragrafo-claro">Até 12x ou 5% de desconto à vista.</p>
             </div>
 
@@ -76,7 +76,7 @@ function Home() {
               <div className="icon-animated">
                 <TbTruckDelivery size={60} color="#ff0015" />
               </div>
-              <h3 className="subtitulo-claro">Entrega Ágil</h3>
+              <h3 className="subheading-legal">Entrega Ágil</h3>
               <p className="paragrafo-claro">Serviço nacional: 4 a 7 dias úteis.</p>
               <p className="paragrafo-claro">Importados: até 15 dias.</p>
             </div>
@@ -85,7 +85,7 @@ function Home() {
               <div className="icon-animated">
                 <MdEngineering size={60} color="#ff0015" />
               </div>
-              <h3 className="subtitulo-claro">Especialistas em Motores</h3>
+              <h3 className="subheading-legal">Especialistas em Motores</h3>
               <p className="paragrafo-claro">Equipe qualificada e equipamentos modernos.</p>
             </div>
           </div>
@@ -98,9 +98,9 @@ function Home() {
               <Link to="/home/diagnostico" className="link-timeline">
                 <div className="timeline-step">
                   <div className="icon-animated">
-                    <FaTools size={60} color="#ff0015" />
+                    <TbSettingsSearch size={60} color="#ff0015" />
                   </div>
-                  <h3 className="subtitulo-claro">1. Diagnóstico</h3>
+                  <h3 className="subheading-legal">1. Diagnóstico</h3>
                   <p
                     className="paragrafo-claro"
                     title="Na Zero 20 Garage™ iniciamos o processo de retífica com uma análise minuciosa do motor, utilizando equipamentos de última geração. Esse diagnóstico completo identifica falhas ocultas e desgastes em componentes como: bloco do motor, cabeçote, virabrequim, sistema de lubrificação e arrefecimento, garantindo um plano de retífica preciso e seguro."
@@ -113,9 +113,9 @@ function Home() {
               <Link to="/home/desmontagem" className="link-timeline">
                 <div className="timeline-step">
                   <div className="icon-animated">
-                    <FaWrench size={60} color="#ff0015" />
+                    <FaTools size={60} color="#ff0015" />
                   </div>
-                  <h3 className="subtitulo-claro">2. Desmontagem</h3>
+                  <h3 className="subheading-legal">2. Desmontagem</h3>
                   <p
                     className="paragrafo-claro"
                     title="A desmontagem é realizada de forma criteriosa, garantindo a integridade das peças e evitando danos adicionais. Cada componente é separado e classificado para uma avaliação individualizada, permitindo uma análise detalhada de desgastes, trincas ou deformações."
@@ -130,7 +130,7 @@ function Home() {
                   <div className="icon-animated">
                     <FaCogs size={60} color="#ff0015" />
                   </div>
-                  <h3 className="subtitulo-claro">3. Usinagem</h3>
+                  <h3 className="subheading-legal">3. Usinagem</h3>
                   <p
                     className="paragrafo-claro"
                     title="A Zero 20 Garage™ executa processos de usinagem com precisão milimétrica para corrigir imperfeições no bloco, cabeçote e outras partes fundamentais do motor. Garantimos o alinhamento perfeito e o correto funcionamento, respeitando todas as especificações técnicas."
@@ -145,7 +145,7 @@ function Home() {
                   <div className="icon-animated">
                     <FaCheckCircle size={60} color="#ff0015" />
                   </div>
-                  <h3 className="subtitulo-claro">4. Montagem e Teste</h3>
+                  <h3 className="subheading-legal">4. Montagem e Teste</h3>
                   <p
                     className="paragrafo-claro"
                     title="Após a preparação das peças, realizamos a montagem técnica do motor, utilizando ferramentas calibradas e peças de alta qualidade. Todo o processo segue rigorosos padrões de torque e ajuste para garantir durabilidade e performance."

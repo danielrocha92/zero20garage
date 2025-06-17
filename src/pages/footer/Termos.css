@@ -1,59 +1,131 @@
-/* TermsOfUse.css */
-/* ===================== */
-/* Links */
-/* ===================== */
+/* Termos.css */
 
-.terms-of-use-link {
-  color: #c0392b;
-  text-decoration: none;
-  outline: none;
+/* Variáveis de cor para fácil manutenção */
+:root {
+  --cor-fundo: #121212;
+  --cor-texto: #e0e0e0;
+  --cor-titulo: #ff0015;
+  --cor-subtitulo: #f44336;
+  --cor-link: #ff5555;
+  --cor-link-hover: #ff0000;
+  --cor-fundo-container: #1f1f1f;
+  --cor-borda: #333;
 }
 
-.terms-of-use-link:hover {
-  text-decoration: underline;
-  color: var(--cor-destaque);
-  outline: none;
+/* Página principal */
+.terms-page {
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  padding: 1rem 1.5rem;
 }
 
-/* ===================== */
-/* Listas */
-/* ===================== */
-
-.terms-of-use-list {
-  list-style-type: disc;
-  margin-bottom: 0.9375rem; /* Usando rem */
-  padding-left: 1.25rem; /* Usando rem */
+/* Container principal */
+.terms-container {
+  background-color: var(--cor-fundo-container);
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255, 0, 21, 0.15);
 }
 
-.terms-of-use-list li {
-  margin-bottom: 0.3125rem; /* Usando rem */
+/* Seções */
+.terms-section {
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
 }
 
-/* ===================== */
-/* Listas Proibidas */
-/* ===================== */
-
-.prohibited-list {
-  color: #c0392b;
-}
-
-.prohibited {
-  color: #c0392b;
-}
-
-
-/* ===================== */
-/* Endereço */
-/* ===================== */
-
-.terms-of-use-address {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 1rem 0 0.5rem;
+/* Título principal */
+.terms-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--cor-titulo);
+  margin-bottom: 1rem;
   text-align: center;
-  font-family: 'Ubuntu', sans-serif;
-  letter-spacing: 0.05rem;
-  text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
-  color: var(--vermelho-principal);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  user-select: none;
 }
 
+/* Subtítulos */
+.terms-subtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--cor-subtitulo);
+  margin-bottom: 0.75rem;
+  border-left: 5px solid var(--cor-titulo);
+  padding-left: 0.8rem;
+}
+
+/* Parágrafos */
+.terms-paragraph {
+  font-size: 1rem;
+  color: var(--cor-texto);
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+
+/* Listas */
+.terms-list {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  color: var(--cor-texto);
+  font-size: 1rem;
+}
+
+.terms-list li {
+  margin-bottom: 0.6rem;
+}
+
+/* Links */
+.terms-link {
+  color: var(--cor-link);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.terms-link:hover,
+.terms-link:focus {
+  color: var(--cor-link-hover);
+  text-decoration: underline;
+  outline: none;
+}
+
+/* Texto de reconhecimento */
+.terms-acknowledgment {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #bbbbbb;
+  margin-top: 2rem;
+  text-align: center;
+  user-select: none;
+}
+
+/* Data última atualização */
+.terms-last-updated {
+  margin-top: 1rem;
+  border-top: 1px solid var(--cor-borda);
+  padding-top: 0.8rem;
+  font-size: 0.85rem;
+  color: #999999;
+  text-align: center;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .terms-container {
+    padding: 1.5rem 1.5rem;
+    margin: 1rem;
+  }
+
+  .terms-title {
+    font-size: 1.8rem;
+  }
+
+  .terms-subtitle {
+    font-size: 1.3rem;
+  }
+}

@@ -1,68 +1,53 @@
-/* pages/NotFound.css */
+.not-found-page {
+  padding: 2rem;
+  background-color: var(--cinza-escuro);
+  color: var(--cinza-claro);
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .not-found-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 70vh; /* Garante que a página ocupe pelo menos a altura da viewport */
-    text-align: center;
-    padding: 20px;
-  }
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+  margin-top: 3rem;
+}
 
-  .not-found-title {
-    font-size: 4em;
-    color: #d32f2f; /* Vermelho para indicar erro */
-    margin-bottom: 10px;
-  }
+.not-found-section {
+  padding: 1rem;
+}
 
-  .not-found-message {
-    font-size: 1.5em;
-    margin-bottom: 15px;
-  }
+.not-found-title {
+  font-size: 6rem;
+  margin-bottom: 1rem;
+  color: var(--vermelho);
+}
 
-  .not-found-description {
-    color: #555;
-    margin-bottom: 20px;
-  }
+.not-found-message {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
 
-  .not-found-link {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    color: #fff;
-    background-color: #c50404;
-    border: none;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    cursor: pointer; /* Adiciona um cursor de ponteiro */
-    outline: none;
-  }
+.not-found-description {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
 
-  .not-found-link:hover {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor */
-    background-color: rgba(54, 24, 24, 0.5);
-    color: #c50404;
-    transform: scale(1.05);
-    outline: none;
-  }
+.not-found-link {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--vermelho);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
 
-  .info-section {
-    margin: 6rem 0;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-
-  .info-section h2 {
-    font-size: 2rem;
-    color: #ffffff;
-    margin-bottom: 1rem;
-  }
-
-  .info-section p {
-    font-size: 1.1rem;
-    color: #ffffff;
-  }
+.not-found-link:hover {
+  background-color: #cc0012;
+}

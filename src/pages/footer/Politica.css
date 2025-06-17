@@ -1,27 +1,91 @@
-/* Escopo para evitar conflitos */
-#privacy-policy-page.modo-claro {
+/* Politica.css */
 
-  .prohibited-list {
-    color: #c0392b;
+.page-escuro {
+  background-color: #121212;
+  color: #f5f5f5;
+  padding: 1.5rem 1rem;
+}
+
+.container-claro {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+}
+
+.titulo-escuro {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.subtitulo-escuro {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: #ff0015;
+}
+
+.paragrafo-escuro {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #cccccc;
+  margin-bottom: 1rem;
+}
+
+.lista-escuro {
+  padding-left: 1.25rem;
+  list-style-type: disc;
+  color: #dddddd;
+  margin-top: 0.5rem;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.privacy-policy-last-updated {
+  margin-top: 2rem;
+  text-align: right;
+}
+
+.acknowledgment {
+  font-size: 0.85rem;
+  color: #999999;
+}
+
+/* Links */
+a {
+  color: #ff0015;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .container-claro {
+    max-width: 900px;
+    padding: 2rem;
   }
 
-  /* Endereço */
-  .terms-of-use-address {
-    font-style: normal;
-    margin-top: 1.5rem;
-    color: #222;
+  .titulo-escuro {
+    font-size: 2rem;
   }
 
-  /* Data da última atualização */
-  .privacy-policy-last-updated {
-    color: #666;
-    font-size: 0.9em;
-    margin-top: 1rem;
-    text-align: right;
+  .subtitulo-escuro {
+    font-size: 1.4rem;
   }
 
-  /* Espaçamento extra em seções */
-  .section {
-    margin-bottom: 1.5rem;
+  .paragrafo-escuro {
+    font-size: 1rem;
+  }
+
+  .acknowledgment {
+    font-size: 0.9rem;
   }
 }
