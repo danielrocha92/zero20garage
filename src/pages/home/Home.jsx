@@ -3,7 +3,7 @@ import '../../styles/Home.css'; // Importa o arquivo global de estilos
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import TestimonialsCarousel from '../../components/TestimonialsCarousel';
-import { FaTools, FaCogs, FaWrench, FaCheckCircle, FaPhoneAlt, FaEnvelope, FaWhatsapp, FaMapMarkerAlt } from 'react-icons/fa';
+import { MdEngineering, FaCogs, FaWrench, FaCheckCircle, FaCreditCard, FaEnvelope, FaWhatsapp, TbTruckDelivery } from 'react-icons/fa';
 import FAQSection from '../../components/FAQSection';
 import { Helmet } from 'react-helmet';
 
@@ -65,7 +65,7 @@ function Home() {
           <div className="timeline">
             <div className="timeline-step">
               <div className="icon-animated">
-                <FaPhoneAlt size={60} color="#ff0015" />
+                <FaCreditCard size={60} color="#ff0015" />
               </div>
               <h3 className="subtitulo-claro">Pagamento Facilitado</h3>
               <p className="paragrafo-claro">Até 12x ou 5% de desconto à vista.</p>
@@ -73,7 +73,7 @@ function Home() {
 
             <div className="timeline-step">
               <div className="icon-animated">
-                <FaMapMarkerAlt size={60} color="#ff0015" />
+                <TbTruckDelivery size={60} color="#ff0015" />
               </div>
               <h3 className="subtitulo-claro">Entrega Ágil</h3>
               <p className="paragrafo-claro">Serviço nacional: 4 a 7 dias úteis.</p>
@@ -82,7 +82,7 @@ function Home() {
 
             <div className="timeline-step">
               <div className="icon-animated">
-                <FaTools size={60} color="#ff0015" />
+                <MdEngineering size={60} color="#ff0015" />
               </div>
               <h3 className="subtitulo-claro">Especialistas em Motores</h3>
               <p className="paragrafo-claro">Equipe qualificada e equipamentos modernos.</p>
@@ -112,7 +112,7 @@ function Home() {
               <Link to="/home/desmontagem" className="link-timeline">
                 <div className="timeline-step">
                   <div className="icon-animated">
-                    <FaCogs size={60} color="#ff0015" />
+                    <FaWrench size={60} color="#ff0015" />
                   </div>
                   <h3 className="subtitulo-claro">2. Desmontagem</h3>
                   <p
@@ -127,7 +127,7 @@ function Home() {
               <Link to="/home/usinagem" className="link-timeline">
                 <div className="timeline-step">
                   <div className="icon-animated">
-                    <FaWrench size={60} color="#ff0015" />
+                    <FaCogs size={60} color="#ff0015" />
                   </div>
                   <h3 className="subtitulo-claro">3. Usinagem</h3>
                   <p
