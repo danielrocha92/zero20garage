@@ -3,8 +3,9 @@ import '../../styles/Home.css'; // Importa o arquivo global de estilos
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import TestimonialsCarousel from '../../components/TestimonialsCarousel';
-import { MdEngineering, FaCogs, FaWrench, FaCheckCircle, FaCreditCard, FaEnvelope, FaWhatsapp, TbTruckDelivery } from 'react-icons/fa';
-import FAQSection from '../../components/FAQSection';
+import { FaCogs, FaWrench, FaCheckCircle, FaCreditCard, FaEnvelope, FaWhatsapp, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { MdEngineering } from 'react-icons/md';
+import { TbTruckDelivery } from 'react-icons/tb';import FAQSection from '../../components/FAQSection';
 import { Helmet } from 'react-helmet';
 
 
