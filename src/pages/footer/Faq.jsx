@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Faq.css';
+import '../../styles/Institucional.css'; // Estilos compartilhados
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import ContatoCta from '../../components/ContatoCta';
@@ -71,11 +71,11 @@ const Faq = () => {
   };
 
   return (
-    <div className="page-escuro">
+    <div className="faq-page">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
 
-      <div className="container-escuro">
+      <div className="faq-container">
           <h2 translate='no' className="subtitulo-escuro">Perguntas Frequentes</h2>
 
           <div className="faq-list">
@@ -92,13 +92,7 @@ const Faq = () => {
         ))}
       </div>
         {/* Seção de Contato */}
-        <section className="section">
-          <h3 className="subtitulo-escuro">Contato</h3>
-          <p className="paragrafo-escuro">
-            Se você tiver alguma dúvida entre em contato conosco através dos seguintes canais:
-          </p>
           <ContatoCta />
-        </section>
       </div>
     </div>
   );

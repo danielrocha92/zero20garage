@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Politica.css'; // Estilos compartilhados
+import '../../styles/Institucional.css'; // Estilos compartilhados
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import ContatoCta from '../../components/ContatoCta';
@@ -25,24 +25,24 @@ const Privacidade = () => {
   }, []);
 
   return (
-    <div className="page-dark">
+    <div className="institucional-page">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
 
-      <div className="container-light">
-        <section className="section-legal">
-          <h2 translate="no" className="heading-legal">
+      <div className="institucional-container">
+        <section className="institucional-section">
+          <h2 translate="no" className="institucional-title">
             Política de Privacidade - ZER0 20 GARAGE™
           </h2>
-          <p translate="no" className="text-legal">
+          <p translate="no" className="institucional-paragraph">
             Esta Política de Privacidade descreve como a <strong>ZER0 20 GARAGE™</strong> coleta, usa, compartilha e protege as informações pessoais dos usuários do nosso website. Ao acessar ou utilizar nossos serviços, você concorda com os termos aqui estabelecidos.
           </p>
         </section>
 
-        <section className="section-legal">
-          <h3 className="subheading-legal">1. Informações que Coletamos</h3>
-          <p className="text-legal">Podemos coletar os seguintes tipos de dados pessoais:</p>
-          <ul className="list-legal">
+        <section className="institucional-section">
+          <h3 className="institucional-subtitle">1. Informações que Coletamos</h3>
+          <p className="institucional-paragraph">Podemos coletar os seguintes tipos de dados pessoais:</p>
+          <ul className="institucional-list">
             <li><strong>Contato:</strong> Nome, e-mail, telefone, endereço.</li>
             <li><strong>Veículo:</strong> Marca, modelo, ano, chassi (VIN), histórico de serviços.</li>
             <li><strong>Navegação:</strong> IP, navegador, sistema, páginas visitadas, tempo de acesso.</li>
@@ -51,10 +51,10 @@ const Privacidade = () => {
           </ul>
         </section>
 
-        <section className="section-legal">
-          <h3 className="subheading-legal">2. Como Usamos Suas Informações</h3>
-          <p className="text-legal">Utilizamos os dados pessoais para os seguintes fins:</p>
-          <ul className="list-legal">
+        <section className="institucional-section">
+          <h3 className="institucional-subtitle">2. Como Usamos Suas Informações</h3>
+          <p className="institucional-paragraph">Utilizamos os dados pessoais para os seguintes fins:</p>
+          <ul className="institucional-list">
             <li><strong>Serviços:</strong> Atendimento, orçamento, manutenção, suporte técnico.</li>
             <li><strong>Comunicação:</strong> Informações sobre serviços, promoções e atualizações.</li>
             <li><strong>Personalização:</strong> Conteúdo e navegação ajustados ao seu perfil.</li>
@@ -65,10 +65,10 @@ const Privacidade = () => {
           </ul>
         </section>
 
-        <section className="section-legal">
-          <h3 className="subheading-legal">3. Compartilhamento de Informações</h3>
-          <p className="text-legal">Seus dados podem ser compartilhados com:</p>
-          <ul className="list-legal">
+        <section className="institucional-section">
+          <h3 className="institucional-subtitle">3. Compartilhamento de Informações</h3>
+          <p className="institucional-paragraph">Seus dados podem ser compartilhados com:</p>
+          <ul className="institucional-list">
             <li><strong>Fornecedores:</strong> Empresas de tecnologia, pagamentos, e-mail, análise.</li>
             <li><strong>Parceiros:</strong> Com seu consentimento, para comunicações promocionais.</li>
             <li><strong>Requisição legal:</strong> Autoridades judiciais ou administrativas.</li>
@@ -77,20 +77,18 @@ const Privacidade = () => {
           </ul>
         </section>
 
-        <section className="section-legal">
-          <h3 className="subheading-legal">4. Contato</h3>
-          <p className="text-legal">
+        <section className="institucional-section">
+          <h3 className="institucional-subtitle">4. Contato</h3>
+          <p className="institucional-paragraph">
             Caso tenha dúvidas sobre esta Política de Privacidade, entre em contato por meio dos canais abaixo:
           </p>
           <ContatoCta />
         </section>
 
-        <div className="footer-legal">
-          <p className="text-legal small">
+          <p className="institucional-acknowledgment">
             Data da última atualização: {lastUpdated}
           </p>
         </div>
-      </div>
     </div>
   );
 };

@@ -1,0 +1,220 @@
+/* trocas.css - Mobile First */
+
+/* Página principal - Institucional e FAQ */
+.institucional-page,
+.faq-page {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  padding: 1rem;
+  background-color: rgba(18, 18, 18, 0.719);
+  color: var(--cinza-claro, #f1f1f1); /* Corrigido para texto claro em fundo escuro */
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+}
+
+/* Container principal */
+.institucional-container,
+.faq-container {
+  background-color: var(--cor-fundo-container, #f9f9f9);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  margin: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 0, 21, 0.15);
+  max-width: 1200px;
+}
+
+/* Seções */
+.institucional-section {
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Título principal */
+.institucional-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--cor-titulo, #ffffff);
+  margin-bottom: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  user-select: none;
+}
+
+/* Subtítulos */
+.institucional-subtitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--cor-subtitulo, #dddddd);
+  margin-bottom: 0.75rem;
+  border-left: 5px solid var(--cor-titulo, #ffffff);
+  padding-left: 0.8rem;
+}
+
+/* Parágrafos */
+.institucional-paragraph {
+  font-size: 1rem;
+  color: var(--cor-texto, #e0e0e0);
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+
+/* Listas */
+.institucional-list {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  color: var(--cor-texto, #e0e0e0);
+  font-size: 1rem;
+}
+
+.institucional-list li {
+  margin-bottom: 0.6rem;
+}
+
+/* Links */
+.institucional-link {
+  color: var(--cor-link, #00bfff);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.institucional-link:hover,
+.institucional-link:focus {
+  color: var(--cor-link-hover, #009acc);
+  text-decoration: underline;
+  outline: none;
+}
+
+/* Reconhecimento */
+.institucional-acknowledgment {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #bbbbbb;
+  margin-top: 2rem;
+  text-align: center;
+  user-select: none;
+}
+
+/* Última atualização */
+.institucional-last-updated {
+  margin-top: 1rem;
+  border-top: 1px solid var(--cor-borda, #444);
+  padding-top: 0.8rem;
+  font-size: 0.85rem;
+  color: #999999;
+  text-align: center;
+}
+
+/* FAQ LISTA */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  list-style: none;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+/* FAQ ITEM */
+.faq-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  color: #080808;
+  background-color: #fff;
+}
+
+.faq-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.faq-question {
+  padding: 1rem 1.25rem;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 1.25rem;
+  background-color: var(--cinza, #f1f1f1);
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.faq-answer p {
+  margin: 1rem 0;
+}
+
+/* Item Ativo */
+.faq-item.active .faq-answer {
+  max-height: 500px;
+  padding: 1rem 1.25rem;
+}
+
+.arrow {
+  font-size: 1.25rem;
+  color: var(--vermelho, #ff0033);
+  transition: transform 0.3s ease;
+}
+
+.faq-item.active .arrow {
+  transform: rotate(90deg);
+}
+
+.faq-item.active .faq-question {
+  background-color: var(--cinza-claro, #eaeaea);
+}
+
+.faq-item.active .faq-question:hover {
+  background-color: var(--cinza-claro, #eaeaea);
+}
+
+.linkedin-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: #0077b5;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.linkedin-button:hover {
+  background-color: #005b8e;
+}
+
+/* ========================== */
+/* >> TELAS MAIORES (≥601px) */
+/* ========================== */
+
+@media (min-width: 601px) {
+  .institucional-container,
+  .faq-container {
+    max-width: 1200px;
+    padding: 2rem 2.5rem;
+    margin: 2rem auto;
+  }
+
+  .institucional-title {
+    font-size: 2.2rem;
+  }
+
+  .institucional-subtitle {
+    font-size: 1.5rem;
+  }
+}

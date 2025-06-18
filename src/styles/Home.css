@@ -1,62 +1,15 @@
-/* Home.css */
-/* Botão */
-.button {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background: #ff0015;
-  color: #fff;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background 0.3s ease;
-  outline: none;
-}
-
-.button:hover {
-  background: #cc0012;
-  outline: none;
-}
-
-/* Grid de destaques */
-.highlights-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-}
-
-.highlight-card {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 0.5rem;
-  border-radius: 8px;
-  text-align: center;
-  backdrop-filter: blur(5px);
-}
+/* ===== Home.css (Mobile First) ===== */
 
 /* Timeline */
 .timeline {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: 1fr; /* padrão mobile: 1 coluna */
   gap: 1rem;
 }
 
-.icon-animated {
-  margin-bottom: 0.5rem;
-  animation: pulse 2s infinite;
-}
-
-/* Links da timeline */
-.link-timeline {
-  color: #ff0015;
-  text-decoration: none;
-}
-
-.link-timeline:hover {
-  text-decoration: none;
-}
-
-
 .timeline-step {
   background: rgba(255, 255, 255, 0.05);
-  padding: 0.5rem;
+  padding: 0.75rem;
   border-radius: 8px;
   text-align: center;
   backdrop-filter: blur(5px);
@@ -74,55 +27,17 @@
   animation: pulse 2s infinite;
 }
 
-/* ===== Cards Benefícios (melhorados) ===== */
-.cards-beneficios {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.8rem;          /* Mais espaço entre os cards */
-  justify-content: center;
-  margin-top: 2.5rem;   /* Um pouco mais de espaço superior */
-  padding: 0 1rem;      /* Pequeno padding horizontal */
+/* Link da timeline */
+.link-timeline {
+  color: #ff0015;
+  text-decoration: none;
 }
 
-.card-beneficio {
-  background-color: #8b0000;    /* Vermelho escuro suave */
-  border-radius: 16px;          /* Bordas mais arredondadas */
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65);
-  padding: 2rem 1.75rem;        /* Mais espaçamento interno */
-  flex: 1 1 280px;              /* Base maior para responsividade */
-  max-width: 320px;             /* Limite máximo de largura */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+.link-timeline:hover {
+  text-decoration: none;
 }
 
-.card-beneficio:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 28px rgba(255, 60, 60, 0.6); /* Hover mais vibrante */
-}
-
-.card-beneficio h3 {
-  color: #ff6f6f;             /* Vermelho claro para título */
-  font-size: 1.35rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-align: left;
-  line-height: 1.2;
-  letter-spacing: 0.03em;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.card-beneficio p {
-  color: #dddcdc;             /* Cinza claro suave para texto */
-  font-size: 1rem;
-  line-height: 1.6;           /* Melhor espaçamento entre linhas */
-  text-align: left;
-  flex-grow: 1;               /* Texto ocupa espaço vertical */
-  font-family: 'Roboto', sans-serif;
-}
-
+/* Animação Pulse */
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -138,32 +53,18 @@
   }
 }
 
-/* Responsivo */
-@media (max-width: 768px) {
-  .timeline {
-    grid-template-columns: 1fr;
-  }
-
-  .timeline-step {
-    padding: 1rem;
-  }
+/* Botão */
+.button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  outline: none;
 }
 
-
-/* Animação de pulsar nos ícones */
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
+/* Highlights */
+.highlights-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* mobile: uma coluna */
+  gap: 1rem;
 }
 
 /* Endereço */
@@ -176,38 +77,22 @@
   text-decoration: underline;
 }
 
-
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .button {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    outline: none;
-  }
-
-  .highlights-grid {
-    grid-template-columns: 1fr;
-  }
-
+/* ===== Telas maiores (≥ 769px) ===== */
+@media (min-width: 769px) {
   .timeline {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 
   .timeline-step {
-    padding: 0.75rem;
+    padding: 0.5rem;
   }
 
-  .cards-beneficios {
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 2rem;
-    padding: 0 0.5rem;
+  .highlights-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 
-  .card-beneficio {
-    max-width: 100%;
-    flex: 1 1 auto;
-    padding: 1.75rem 1.25rem;
+  .button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
   }
 }

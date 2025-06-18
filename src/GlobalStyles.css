@@ -1,4 +1,5 @@
 /* ===== Cores ===== */
+/* Variáveis de cor para fácil manutenção */
 :root {
   --preto: #000000;
   --cinza-escuro: #121212;
@@ -7,6 +8,15 @@
   --vermelho-principal: #ff0000;
   --vermelho-hover: #cc0000;
   --branco: #ffffff;
+
+  --cor-fundo: #121212;
+  --cor-texto: #e0e0e0;
+  --cor-titulo: #ff0015;
+  --cor-subtitulo: #f44336;
+  --cor-link: #ff5555;
+  --cor-link-hover: #ff0000;
+  --cor-fundo-container: #1f1f1f;
+  --cor-borda: #333;
 }
 
 /* ===== Reset ===== */
@@ -223,6 +233,7 @@ ul {
   line-height: 1.6;
   margin-bottom: 0.5rem;
   /* Você pode adicionar mais estilos base que se aplicam a page-escuro em qualquer cenário */
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
 }
 
 .page-escuro .container-escuro {

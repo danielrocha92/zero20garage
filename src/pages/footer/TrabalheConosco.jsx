@@ -4,7 +4,7 @@ import { FaLinkedin } from 'react-icons/fa';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
 
-import './TrabalheConosco.css';
+import '../../styles/Institucional.css'; // Estilos compartilhados
 
 function TrabalheConosco() {
   const messages = [
@@ -19,23 +19,23 @@ function TrabalheConosco() {
   ];
 
   return (
-    <div className="page-escuro">
+    <div className="institucional-page">
       <DynamicHeader messages={messages} />
       <Breadcrumbs />
 
-      <div className="container-light">
-        <section className="section-legal">
-          <h2 className="heading-legal">Trabalhe Conosco</h2>
+      <div className="institucional-container">
+        <section className="institucional-section">
+          <h2 className="institucional-title">Trabalhe Conosco</h2>
 
-          <p className="text-legal" translate='no'>
+          <p className="institucional-paragraph" translate='no'>
             Se você é apaixonado por mecânica e deseja fazer parte de uma equipe que valoriza a excelência, a <strong>Zero 20 Garage</strong> está sempre em busca de novos talentos que buscam desafios e evolução constante. Se você quer fazer parte de uma equipe apaixonada por excelência automotiva, envie seu currículo!
           </p>
 
-          <p className="text-legal" translate='no'>
+          <p className="institucional-paragraph" translate='no'>
             Para candidatar-se, envie um e-mail para: <a href="mailto:contato@zero20garage.com.br">contato@zero20garage.com.br</a>
           </p>
 
-          <p className="text-legal">
+          <p className="institucional-paragraph">
             Acompanhe também nossas atualizações de vagas e novidades pelo nosso LinkedIn:
           </p>
 

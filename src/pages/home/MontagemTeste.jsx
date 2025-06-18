@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
-import '../../styles/HomeDetails.css';
+import ContatoCta from '../../components/ContatoCta';
+import '../../styles/Institucional.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -11,13 +12,21 @@ import MontagemTeste1 from '../../assets/images/montagem-teste1.jpg';
 import MontagemTeste2 from '../../assets/images/montagem-teste2.jpg';
 import MontagemTeste3 from '../../assets/images/montagem-teste3.jpg';
 
-function MontagemTeste() {
+const MontagemTeste = () => {
   const messages = [
     {
       title: 'Especialistas em Motores',
       subtitle: 'Serviços de alta qualidade para veículos nacionais e importados',
     }
   ];
+
+  const [lastUpdated, setLastUpdated] = useState('');
+
+  useEffect(() => {
+    const now = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    setLastUpdated(now.toLocaleDateString('pt-BR', options));
+  }, []);
 
   const images = [MontagemTeste1, MontagemTeste2, MontagemTeste3];
 
@@ -34,90 +43,92 @@ function MontagemTeste() {
   };
 
   return (
-    <div className="page-escuro">
-      <DynamicHeader page="home" messages={messages} />
+    <div className="institucional-page">
+      <DynamicHeader messages={messages} />
       <Breadcrumbs />
 
-      <div className="container-escuro home-montagem-content">
-        {/* Carrossel de imagens */}
-        <div className="home-carousel-wrapper">
-          <Slider {...sliderSettings}>
-            {images.map((src, index) => (
-              <div key={index}>
-                <img
-                  src={src}
-                  alt={`Montagem e Teste ${index + 1}`}
-                  className="home-carousel-image"
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </Slider>
+      <div className="institucional-container">
+        <section className="institucional-section">
+          <h2 className="institucional-title">Montagem e Teste de Motores</h2>
+        </section>
+
+        <section className="institucional-section">
+          <div className="carousel-container">
+            <Slider {...sliderSettings}>
+              {images.map((src, index) => (
+                <div key={index}>
+                  <img
+                    src={src}
+                    alt={`Montagem e Teste ${index + 1}`}
+                    className="carousel-image"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </Slider>
+          </div>
+        </section>
+
+        <section className="institucional-section">
+          <h3 className="institucional-subtitle">Precisão, Confiança e Rigor Técnico</h3>
+          <p className="institucional-paragraph">
+            Após a retífica e usinagem, a montagem do motor é feita com extrema precisão. Cada componente é montado seguindo rigorosamente as especificações técnicas do fabricante.
+          </p>
+          <p className="institucional-paragraph">
+            Utilizamos torquímetros calibrados, ferramentas específicas e um ambiente controlado para evitar contaminações e garantir a integridade de cada peça.
+          </p>
+          <p className="institucional-paragraph">
+            Nossa equipe é altamente qualificada e experiente na montagem de motores nacionais e importados, entregando confiabilidade e alto desempenho.
+          </p>
+        </section>
+
+        <section className="institucional-section">
+          <h3 className="institucional-subtitle">Etapas da Montagem</h3>
+          <ul className="institucional-list">
+            <li>✅ Inspeção final das peças antes da montagem.</li>
+            <li>✅ Instalação de bronzinas, pistões, anéis, virabrequim e comando de válvulas.</li>
+            <li>✅ Ajuste de folgas conforme manuais técnicos.</li>
+            <li>✅ Aplicação de torque correto em todos os parafusos.</li>
+            <li>✅ Lubrificação e limpeza durante o processo.</li>
+          </ul>
+        </section>
+
+        <section className="institucional-section">
+          <h3 className="institucional-subtitle">Teste de Motores</h3>
+          <p className="institucional-paragraph">
+            Após a montagem, realizamos testes rigorosos em bancada para validar o funcionamento do motor antes da entrega.
+          </p>
+          <p className="institucional-paragraph">
+            Monitoramos pressão de óleo, temperatura, compressão e vazamentos. Garantimos que o motor está pronto para rodar com segurança e alto desempenho.
+          </p>
+        </section>
+
+        <section className="institucional-section">
+          <h3 className="institucional-subtitle">Vantagens da Montagem Profissional</h3>
+          <ul className="institucional-list">
+            <li>✅ Redução de falhas prematuras.</li>
+            <li>✅ Garantia de montagem técnica e segura.</li>
+            <li>✅ Testes comprovando o funcionamento antes da instalação no veículo.</li>
+            <li>✅ Confiabilidade e tranquilidade para o cliente.</li>
+          </ul>
+        </section>
+
+        <section className="institucional-section">
+          <ContatoCta />
+        </section>
+
+        <div className="institucional-last-updated">
+          <p className="institucional-acknowledgment">
+            Página atualizada em: {lastUpdated}
+          </p>
         </div>
 
-        <h2 className="titulo-claro">Usinagem de Motores</h2>
-        <h3 className="subheading-legal">Precisão, Eficiência e Durabilidade</h3>
-
-        <p className="paragrafo-claro">
-          A usinagem de motores é um dos pilares fundamentais no processo de retífica, responsável por garantir a integridade estrutural, a funcionalidade e a longevidade dos componentes internos do motor.
-        </p>
-
-        <p className="paragrafo-claro">
-          Os componentes internos — como blocos, cabeçotes, virabrequins, bielas e camisas de cilindro — sofrem desgastes provocados por atrito e temperatura. Quando perdem suas especificações, comprometem a eficiência e segurança do motor.
-        </p>
-
-        <p className="paragrafo-claro">
-          A usinagem remove deformações e garante tolerâncias rigorosas, restabelecendo o equilíbrio dos componentes.
-        </p>
-
-        <h3 className="subheading-legal">Processos Essenciais na Usinagem</h3>
-
-        <p className="paragrafo-claro">
-          <strong>Mandrilamento de Cilindros:</strong> Corrige ovalizações e garante paralelismo dos cilindros com rugosidade ideal.
-        </p>
-
-        <p className="paragrafo-claro">
-          <strong>Plaina de Cabeçotes e Blocos:</strong> Elimina empenamentos, garantindo vedação perfeita da junta.
-        </p>
-
-        <p className="paragrafo-claro">
-          <strong>Brunimento:</strong> Garante lubrificação ideal e melhor assentamento dos anéis de pistão.
-        </p>
-
-        <p className="paragrafo-claro">
-          <strong>Retífica de Virabrequim e Comando:</strong> Restaura geometrias e funcionamento dos mancais.
-        </p>
-
-        <p className="paragrafo-claro">
-          <strong>Usinagem de Sedes e Guias de Válvulas:</strong> Garante vedação e eficiência térmica.
-        </p>
-
-        <h3 className="subheading-legal">Tecnologia Aplicada</h3>
-
-        <p className="paragrafo-claro">
-          Utilizamos máquinas CNC de última geração e equipamentos de medição tridimensional (CMM) para assegurar precisão micrométrica e repetibilidade.
-        </p>
-
-        <h3 className="subheading-legal">Benefícios da Usinagem de Alta Precisão</h3>
-
-        <p className="paragrafo-claro">
-          ✅ Redução do consumo de óleo e combustível. <br/>
-          ✅ Aumento da vida útil do motor. <br/>
-          ✅ Melhoria no desempenho. <br/>
-          ✅ Menor emissão de poluentes. <br/>
-          ✅ Redução de ruídos e vibrações.
-        </p>
-
-        <h3 className="subheading-legal">Excelência Garantida</h3>
-
-        <p className="paragrafo-claro">
-          Contamos com equipe técnica especializada, laboratório de metrologia próprio e equipamentos modernos. Seu motor passa por um processo de recuperação com excelência.
-        </p>
-
-        <Link to="/" className="home-button-voltar">← Voltar para Home</Link>
+        <div className="institucional-section">
+          <Link to="/" className="home-button-voltar">← Voltar para Home</Link>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default MontagemTeste;
