@@ -52,7 +52,7 @@ const Diagnostico = () => {
           <h2 className="institucional-title">Diagnóstico e Avaliação Técnica</h2>
         </section>
 
-        <section className="institucional-section">
+        <section className="section">
           <div className="carousel-container">
             <Slider {...sliderSettings}>
               {images.map((src, index) => (
