@@ -82,13 +82,12 @@ const TesteDesempenho = () => {
           <p className="institucional-paragraph">
             Nossa equipe está pronta para oferecer diagnóstico preciso e soluções eficientes. Faça agora seu agendamento com a <strong>ZER0 20 GARAGE™</strong>.
           </p>
-          <ContatoCta />
         </section>
-
+      </div>
+      <ContatoCta />
         <p className="institucional-acknowledgment">
           Última atualização: {lastUpdated}
         </p>
-      </div>
     </div>
   );
 };
