@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+ import React, { useState, useEffect } from 'react';
 import '../../styles/Institucional.css'; // Padrão institucional aplicado
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
@@ -115,7 +115,7 @@ const ManutencaoPreventiva = () => {
 
         {/* Seção de Contato */}
         <ContatoCta />
-    </ div)
+    </div>
   );
 };
 
