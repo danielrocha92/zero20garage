@@ -1,13 +1,15 @@
+/* MOBILE FIRST - padrão para telas menores */
+
 .contact-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+  margin-top: 0.5rem;
 }
 
 .contact-card {
   background-color: #1e1e1e;
-  padding: 1.5rem;
+  padding: 1.1rem;
   border-radius: 8px;
   text-align: center;
   transition: transform 0.3s ease;
@@ -21,7 +23,7 @@
 .contact-icon {
   font-size: 2.5rem;
   color: #ffcc00;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .contact-card a {
@@ -34,9 +36,26 @@
 
 .map-container {
   width: 100%;
-  height: 500px;
+  height: 300px;
   margin-top: 2rem;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+/* RESPONSIVO PARA TELAS MAIORES */
+@media (min-width: 600px) {
+  .contact-cards {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .map-container {
+    height: 400px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .map-container {
+    height: 500px;
+  }
 }
