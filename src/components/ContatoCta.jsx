@@ -7,14 +7,14 @@ const ContatoCta = () => (
     <p className="paragrafo-claro">Escolha o canal que preferir para falar conosco:</p>
     <div className="contact-cards">
       <div className="contact-card">
-        <FaMapMarkerAlt className="contact-icon" />
+        <FaWhatsapp className="contact-icon" />
         <a
-          href="https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.326345,-46.5770842,17z"
+          href="https://wa.me/5511941097471?text=Olá! Gostaria de mais informações sobre os serviços."
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Endereço da oficina"
+          aria-label="Enviar mensagem via WhatsApp"
         >
-          Av. Laura Gomes Hannickel, 153<br />Capoavinha - Mairiporã, SP
+          Fale pelo WhatsApp
         </a>
       </div>
       <div className="contact-card">
@@ -29,15 +29,15 @@ const ContatoCta = () => (
           contato@zero20garage.com
         </a>
       </div>
-      <div className="contact-card">
-        <FaWhatsapp className="contact-icon" />
+          <div className="contact-card">
+        <FaMapMarkerAlt className="contact-icon" />
         <a
-          href="https://wa.me/5511941097471?text=Olá! Gostaria de mais informações sobre os serviços."
+          href="https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.326345,-46.5770842,17z"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Enviar mensagem via WhatsApp"
+          aria-label="Endereço da oficina"
         >
-          Fale pelo WhatsApp
+          Av. Laura Gomes Hannickel, 153<br />Capoavinha - Mairiporã, SP
         </a>
       </div>
     </div>
