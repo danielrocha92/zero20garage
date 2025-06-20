@@ -79,15 +79,13 @@ const TrocaDePecas = () => {
             Evite transtornos e gastos inesperados. Agende agora mesmo uma avaliação técnica com a <strong>ZER0 20 GARAGE™</strong> e garanta a troca de peças com qualidade e precisão.
           </p>
         </section>
-
         <section className="institucional-section">
-          <ContatoCta />
         </section>
-
-        <p className="institucional-acknowledgment">
-          Data da última atualização: {lastUpdated}
-        </p>
       </div>
+      <ContatoCta />
+        <p className="institucional-acknowledgment">
+          Última atualização: {lastUpdated}
+        </p>
     </div>
   );
 };
