@@ -103,9 +103,8 @@ const ManutencaoPreventiva = () => {
           <p className="institucional-paragraph">
             Faça a manutenção preventiva com quem entende de verdade de motores. Nossa retífica é referência em qualidade, precisão e garantia. Solicite agora mesmo um diagnóstico personalizado.
           </p>
-          <ContatoCta />
         </section>
-
+         <ContatoCta />
         <p className="institucional-acknowledgment">
           Última atualização: {lastUpdated}
         </p>
