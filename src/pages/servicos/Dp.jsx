@@ -80,13 +80,12 @@ const Diagnostico = () => {
           <p className="institucional-paragraph">
             Se você notou qualquer anormalidade no funcionamento do seu veículo, não espere. Agende seu diagnóstico com a <strong>ZER0 20 GARAGE™</strong> e tenha a tranquilidade de contar com especialistas preparados para cuidar do seu motor.
           </p>
-          <ContatoCta />
         </section>
-
+      </div>
+      <ContatoCta />
         <p className="institucional-acknowledgment">
           Última atualização: {lastUpdated}
         </p>
-      </div>
     </div>
   );
 };
