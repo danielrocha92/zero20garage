@@ -1,4 +1,4 @@
- import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/Institucional.css'; // Padrão institucional aplicado
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
@@ -110,11 +110,6 @@ const ManutencaoPreventiva = () => {
           Última atualização: {lastUpdated}
         </p>
       </div>
-    </div>
-    <div className="container-escuro">
-
-        {/* Seção de Contato */}
-        <ContatoCta />
     </div>
   );
 };
