@@ -90,17 +90,15 @@ const TesteDesempenho = () => {
         </section>
 
         <section className="institucional-section">
-          <ContatoCta />
         </section>
-
-        <p className="institucional-acknowledgment">
-          <strong>Invista na saúde do seu motor. Agende seu Teste de Desempenho com a ZER0 20 GARAGE™!</strong>
-        </p>
-
         <p className="institucional-acknowledgment">
           Data da última atualização: {lastUpdated}
         </p>
       </div>
+      <ContatoCta />
+        <p className="institucional-acknowledgment">
+          Última atualização: {lastUpdated}
+        </p>
     </div>
   );
 };
