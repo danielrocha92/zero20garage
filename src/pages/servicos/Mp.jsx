@@ -111,6 +111,11 @@ const ManutencaoPreventiva = () => {
         </p>
       </div>
     </div>
+    <div className="container-escuro">
+
+        {/* Seção de Contato */}
+        <ContatoCta />
+    </ div)
   );
 };
 
