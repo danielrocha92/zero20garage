@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import ContatoCta from '../../components/ContatoCta';
@@ -20,13 +20,7 @@ const Trocas = () => {
     },
   ];
 
-  const [lastUpdated, setLastUpdated] = useState('');
-
-  useEffect(() => {
-    const now = new Date();
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    setLastUpdated(now.toLocaleDateString('pt-BR', options));
-  }, []);
+const LAST_UPDATED = '22 de junho de 2025'; // atualizado manualmente quando o conteúdo muda
 
   return (
     <div className="institucional-page">
@@ -106,7 +100,7 @@ const Trocas = () => {
 
         <footer className="footer-legal">
           <p className="institucional-acknowledgment">
-            Data da última atualização: {lastUpdated}
+            Data da última atualização: {LAST_UPDATED}
           </p>
         </footer>
       </div>

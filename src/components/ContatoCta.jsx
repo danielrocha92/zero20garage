@@ -32,7 +32,7 @@ const ContatoCta = () => (
           <div className="contact-card">
         <FaMapMarkerAlt className="contact-icon" />
         <a
-          href="https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.326345,-46.5770842,17z"
+          href="https://maps.app.goo.gl/tjceE5stfjGg3YNu7"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Endereço da oficina"

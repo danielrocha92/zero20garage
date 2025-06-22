@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import DynamicHeader from '../../components/DynamicHeader';
@@ -20,13 +20,7 @@ const MontagemTeste = () => {
     }
   ];
 
-  const [lastUpdated, setLastUpdated] = useState('');
-
-  useEffect(() => {
-    const now = new Date();
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    setLastUpdated(now.toLocaleDateString('pt-BR', options));
-  }, []);
+const LAST_UPDATED = '22 de junho de 2025'; // atualizado manualmente quando o conteúdo muda
 
   const images = [MontagemTeste1, MontagemTeste2, MontagemTeste3];
 
@@ -119,7 +113,7 @@ const MontagemTeste = () => {
 
         <div className="institucional-last-updated">
           <p className="institucional-acknowledgment">
-            Página atualizada em: {lastUpdated}
+            Página atualizada em: {LAST_UPDATED}
           </p>
         </div>
 

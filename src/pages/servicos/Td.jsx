@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import '../../styles/Institucional.css';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
@@ -16,13 +16,7 @@ const TesteDesempenho = () => {
     },
   ];
 
-  const [lastUpdated, setLastUpdated] = useState('');
-
-  useEffect(() => {
-    const now = new Date();
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    setLastUpdated(now.toLocaleDateString('pt-BR', options));
-  }, []);
+const LAST_UPDATED = '22 de junho de 2025'; // atualizado manualmente quando o conteúdo muda
 
   return (
     <div className="institucional-page">
@@ -80,24 +74,17 @@ const TesteDesempenho = () => {
           <p className="institucional-paragraph">
             Conte com nossa equipe técnica altamente qualificada e equipamentos modernos para diagnosticar com precisão a real condição do seu motor.
           </p>
-          <p className="institucional-paragraph">
-            📍 <a href="https://www.google.com/maps/place/ZERO+20+GARAGE/@-23.326345,-46.5770842,17z/data=!3m1!4b1!4m6!3m5!1s0x94ceede375ca12c9:0xa22173d27f744745!8m2!3d-23.3263499!4d-46.5745093!16s%2Fg%2F11sgrc1ckt?authuser=0&entry=ttu" target="_blank" rel="noopener noreferrer">
-              Avenida Laura Gomes Hannickel, 153 - Capoavinha, Mairiporã - SP
-            </a><br />
-            📞 <a href="tel:+5511941097471">(11) 94109-7471</a><br />
-            📧 <a href="mailto:contato@zero20garage.com">contato@zero20garage.com</a>
-          </p>
         </section>
 
         <section className="institucional-section">
         </section>
         <p className="institucional-acknowledgment">
-          Data da última atualização: {lastUpdated}
+          Data da última atualização: {LAST_UPDATED}
         </p>
       </div>
       <ContatoCta />
         <p className="institucional-acknowledgment">
-          Última atualização: {lastUpdated}
+          Última atualização: {LAST_UPDATED}
         </p>
     </div>
   );
