@@ -94,7 +94,7 @@ function Sobre() {
                     <p className="team-caption">Francisco Borges, Chefe de Oficina</p>
                   </div>
                   <div className="team-image-container">
-                    <img src={teamImage2} alt="Rodney Santos, Especialista em Retífica" className="team-image" />
+                    <img src={teamImage3} alt="Rodney Santos, Especialista em Retífica" className="team-image" />
                     <p className="team-caption">Rodney Santos, Especialista em Retífica</p>
                   </div>
                   <div className="team-image-container">
