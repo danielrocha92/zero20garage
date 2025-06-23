@@ -102,7 +102,8 @@
 
 .team-image-container {
   position: relative;
-  text-align: left;
+  box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
+  text-align: center;
   padding: 0;
   box-sizing: border-box;
   width: 100%;
@@ -124,11 +125,11 @@
 .team-image:hover {
   border-color: var(--vermelho-hover);
   box-shadow:
-    0 0 8px var(--vermelho-hover),
-    0 0 20px var(--vermelho-hover),
-    0 0 30px var(--vermelho-hover),
-    0 0 40px var(--vermelho-hover);
-  transform: scale(1.05);
+    8 8 8px var(--vermelho-hover),
+    10 10 10px var(--vermelho-hover),
+    12 12 12px var(--vermelho-hover),
+    14 14 14px var(--vermelho-hover);
+  transform: scale(1.004);
 }
 
 .team-caption {
