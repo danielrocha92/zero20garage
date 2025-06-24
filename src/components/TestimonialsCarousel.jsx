@@ -19,7 +19,7 @@ const testimonials = [
     name: "Luiz Henrique",
     profilePhoto: "https://lh3.googleusercontent.com/a-/ALV-UjUeywaFargV8Te_vT0Noy1ZsdVoOKaIPXk8uncNnfJjQn8vdq8D=w36-h36-p-rp-mo-br100",
     review: "Melhor retifica da região, além disso conta com uma oficina mecânica especializada em motores v6, v,8, motores nacionais e importados.",
-    servicePhoto: "https://lh3.googleusercontent.com/gps-cs/AIky0YUqltF3cQaCwopKT8aDLkHSdkcxBQE4YE4Hz_M_YfozqCWfzujlibKiGYVrB_q0LLaF3ZTBUVogVY7-QU3tCA6TdYvpCyWbeKh5KNE5b-lsJsyCSMK_Ed_Kw2kfEoUfbJ9wBWOLKDa8PPxW=w600-h988-p-k-no",
+    servicePhoto: "https://lh3.googleusercontent.com/gps-cs/AIky0YWgLzwVS3JwlOP5UgCDc88vtFhQtC1dCfE6Yxn5WhxHP6Ws24DcMweMbmavcvNtIfdk9N4JigL9qAAE3R3yrp3Zg4e9aLYnzLD3251m4PdGJpAaxznK-_FUp_eBmE-AQc_IATbCmDzqvy8=w960-h1581-p-k-no",
     date: "um ano atrás",
     rating: 5,
   },
