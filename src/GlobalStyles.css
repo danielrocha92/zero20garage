@@ -719,3 +719,60 @@ textarea {
     color: var(--cinza-claro); /* Texto claro */
   }
 }
+
+/* ===== Ajustes específicos para telas de até 14 polegadas (1366px) ===== */
+@media (max-width: 1400px) {
+  html {
+    font-size: 15px;
+  }
+
+  .container-claro,
+  .container-escuro {
+    padding: 1rem;
+    max-width: 30%;
+  }
+
+  .highlight-card {
+    padding: 1rem;
+  }
+
+  .page-claro .title,
+  .titulo-claro,
+  .titulo-escuro {
+    font-size: 1.8rem;
+  }
+
+  .page-claro .section h2,
+  .subheading-legal,
+  .subtitulo-claro,
+  .subtitulo-escuro {
+    font-size: 1.2rem;
+  }
+
+  .highlight-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .highlight-card p {
+    font-size: 0.95rem;
+  }
+
+  .faq-question {
+    font-size: 0.95rem;
+  }
+
+  .button,
+  .submit-button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  .section {
+    padding: 1rem;
+  }
+
+  input,
+  textarea {
+    font-size: 0.95rem;
+  }
+}

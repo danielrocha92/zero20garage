@@ -7,7 +7,6 @@ import ContatoCta from '../../components/ContatoCta';
 import Slider from 'react-slick';
 import teamImage from '../../assets/images/team.jpg';
 import teamImage2 from '../../assets/images/team2.jpg';
-import teamImage3 from '../../assets/images/team3.jpg';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Breadcrumbs from '../../components/Breadcrumbs';
@@ -94,7 +93,7 @@ function Sobre() {
                     <p className="team-caption">Francisco Borges, Chefe de Oficina</p>
                   </div>
                   <div className="team-image-container">
-                    <img src={teamImage3} alt="Rodney Santos, Especialista em Retífica" className="team-image" />
+                    <img src={teamImage2} alt="Rodney Santos, Especialista em Retífica" className="team-image" />
                     <p className="team-caption">Rodney Santos, Especialista em Retífica</p>
                   </div>
                   <div className="team-image-container">
@@ -102,7 +101,7 @@ function Sobre() {
                     <p className="team-caption">Reginaldo Pia, mecânico Sênior</p>
                   </div>
                   <div className="team-image-container">
-                    <img src={teamImage3} alt="Enzo Gabriel, Jovem Aprendiz" className="team-image" />
+                    <img src={teamImage2} alt="Enzo Gabriel, Jovem Aprendiz" className="team-image" />
                     <p className="team-caption">Enzo Gabriel, Jovem Aprendiz</p>
                   </div>
                 </Slider>
