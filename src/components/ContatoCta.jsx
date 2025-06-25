@@ -4,7 +4,7 @@ import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt, FaWhatsapp } from 'react-icons/
 const ContatoCta = () => (
   <div className="highlight-item">
     <h2 className="titulo-claro">Nossos Canais de Atendimento</h2>
-    <p className="paragrafo-claro">Escolha o canal que preferir para falar conosco:</p>
+    <p className="subtitulo-claro">Escolha o canal que preferir para falar conosco:</p>
     <div className="contact-cards">
       <div className="contact-card">
         <FaWhatsapp className="contact-icon" />

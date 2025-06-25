@@ -88,8 +88,8 @@ function Orcamento() {
       <div className="container-escuro">
         <section className="orcamento-section">
           <div className="highlight-item">
-            <h1 className="titulo-claro">Solicite um Orçamento</h1>
-            <h3 className="subheading-legal">
+            <h2 className="titulo-claro">Solicite um Orçamento</h2>
+            <h3 className="subtitulo-claro">
               Preencha o formulário abaixo para receber um orçamento detalhado e personalizado.
             </h3>
 

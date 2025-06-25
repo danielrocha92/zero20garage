@@ -63,7 +63,7 @@ function Sobre() {
       <div className="container-escuro">
         <section className="sobre-section">
           <div className="highlight-item nossa-historia">
-            <h1 className='titulo-claro'>Nossa História</h1>
+            <h2 className='titulo-claro'>Nossa História</h2>
             <div className="historia-grid">
               <div className="historia-text">
                 <p className='sobre-paragrafo'>
@@ -83,7 +83,7 @@ function Sobre() {
 
         <section className="sobre-section">
           <div className="highlight-item equipe-container">
-            <h2 className='subtitulo-claro' translate='no'>Nossa Equipe</h2>
+            <h2 className='titulo-claro' translate='no'>Nossa Equipe</h2>
             <div className="equipe-grid">
               {/* Slider com fotos da equipe */}
               <div className="equipe-slider">
@@ -110,7 +110,7 @@ function Sobre() {
               {/* Blocos de texto estilo cartões */}
               <div className="equipe-textos">
                 <div className="highlight-card">
-                  <h3 className="subtitle">Profissionais Especializados</h3>
+                  <h3 className="titulo-claro">Profissionais Especializados</h3>
                   <p className="sobre-paragrafo">
                     Contamos com uma equipe de profissionais altamente especializados e apaixonados por motores.
                     Nossos técnicos são certificados e possuem vasta experiência em retífica e mecânica automotiva.
@@ -118,7 +118,7 @@ function Sobre() {
                 </div>
 
                 <div className="highlight-card" style={{ marginTop: '1.5rem' }}>
-                  <h3 className="subtitle">Experiência Comprovada</h3>
+                  <h3 className="subtitulo-claro">Experiência Comprovada</h3>
                   <p className="sobre-paragrafo">
                     Nossa equipe possui anos de experiência no mercado automotivo, garantindo serviços de alta qualidade
                     para todos os tipos de veículos.
@@ -129,9 +129,9 @@ function Sobre() {
           </div>
         </section>
 
-      <section className="sobre-section">
-        <div className="highlight-item nossa-historia">
-         <h2 className='subtitulo-claro' translate='no'>Nossos Princípios</h2>
+        <section className="sobre-section">
+          <div className="highlight-item equipe-container">
+            <h2 className='titulo-claro'translate='no'>Nossos Princípios</h2>
           <div className="principios-grid">
 
             {/* Missão */}
@@ -176,14 +176,16 @@ function Sobre() {
             </div>
 
           </div>
-        </div>
+          </div>
       </section>
 
         {/* Depoimentos */}
-          <div className='highlight-item'>
-            <h2 className='subtitulo-claro' translate='no'>O que Nossos Clientes Dizem</h2>
+        <section className="sobre-section">
+          <div className="highlight-item equipe-container">
+            <h2 className='titulo-claro'translate='no'>Nossos Clientes Dizem</h2>
               <TestimonialsCarousel />
           </div>
+          </section>
 
         {/* Contatos */}
         <ContatoCta />

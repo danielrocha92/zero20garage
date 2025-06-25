@@ -73,31 +73,31 @@ const Blog = () => {
                 <AnimatedPage />
 
                 <div className="container-escuro">
-                        <div className='highlight-item'>
-                            <h2 className='titulo-claro' translate='no'>Blog ZER0 20 GARAGE™</h2>
-                            <p className="paragrafo-claro">Explore artigos, dicas e novidades sobre manutenção automotiva e retífica de motores.</p>
+                    <div className='highlight-item'>
+                        <h2 className='titulo-claro' translate='no'>Blog ZER0 20 GARAGE™</h2>
+                        <h3 className="subtitulo-claro">Explore artigos, dicas e novidades sobre manutenção automotiva e retífica de motores.</h3>
 
-                            <div translate='no' className="blog-grid">
-                                {blogPosts.map((post) => (
-                                    <div
-                                        className="blog-item"
-                                        key={post.title}
-                                        data-aos="fade-up">
-                                        <Link
-                                            to={post.link}
-                                            className="ctn-button">
-                                            <img
-                                                src={post.image}
-                                                alt={post.title}
-                                                className="blog-item__image"
-                                            />
-                                            <h2 className='title'>{post.title}</h2>
-                                            <p className="paragrafo-claro">{post.description}</p>
-                                        </Link>
-                                    </div>
-                                ))}
-                            </div>
+                        <div translate='no' className="blog-grid">
+                            {blogPosts.map((post) => (
+                                <div
+                                    className="blog-item"
+                                    key={post.title}
+                                    data-aos="fade-up">
+                                    <Link
+                                        to={post.link}
+                                        className="ctn-button">
+                                        <img
+                                            src={post.image}
+                                            alt={post.title}
+                                            className="blog-item__image"
+                                        />
+                                        <h2 className='title'>{post.title}</h2>
+                                        <p className="paragrafo-claro">{post.description}</p>
+                                    </Link>
+                                </div>
+                            ))}
                         </div>
+                    </div>
                 </div>
             </div>
         </>
