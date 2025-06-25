@@ -54,7 +54,8 @@
 }
 
 .navbar.scrolled-down .navbar-logo img {
-  width: 3rem;
+  width: 4rem;
+  margin-right: auto; /* empurra os outros itens para a direita */
 }
 
 .navbar-logo img:hover {
@@ -188,7 +189,7 @@
   }
 
   .navbar-logo img {
-    width: 5rem;
+    width: 6rem;
     margin: 0.3rem 0;
   }
 

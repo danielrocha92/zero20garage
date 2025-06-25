@@ -110,7 +110,7 @@ function Sobre() {
               {/* Blocos de texto estilo cartões */}
               <div className="equipe-textos">
                 <div className="highlight-card">
-                  <h3 className="titulo-claro">Profissionais Especializados</h3>
+                  <h3 className="subtitulo-claro">Profissionais Especializados</h3>
                   <p className="sobre-paragrafo">
                     Contamos com uma equipe de profissionais altamente especializados e apaixonados por motores.
                     Nossos técnicos são certificados e possuem vasta experiência em retífica e mecânica automotiva.

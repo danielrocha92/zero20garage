@@ -298,7 +298,7 @@ ul {
   text-align: center;
   font-family: 'Ubuntu', sans-serif;
   letter-spacing: 0.03rem;
-  color: var(--cinza-escuro);
+  color: var(--cinza-claro);
   text-shadow:
     1px 1px 2px rgb(0, 0, 0),
     0 0 10px rgba(0, 0, 0, 0.753);
