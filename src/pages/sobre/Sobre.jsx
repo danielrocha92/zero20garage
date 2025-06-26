@@ -1,16 +1,22 @@
 import React from 'react';
+
 import './Sobre.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import DynamicHeader from '../../components/DynamicHeader';
 
 import ContatoCta from '../../components/ContatoCta';
-
-import Slider from 'react-slick';
-import teamImage from '../../assets/images/team.jpg';
-import teamImage2 from '../../assets/images/team2.jpg';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import Breadcrumbs from '../../components/Breadcrumbs';
 import TestimonialsCarousel from '../../components/TestimonialsCarousel';
+import Slider from 'react-slick';
+// Importando imagens
+import equipe from '../../assets/images/equipe.jpg';
+import francisco from '../../assets/images/francisco.jpg';
+import rodney from '../../assets/images/rodney.jpg';
+import pia from '../../assets/images/pia.jpg';
+import enzo from '../../assets/images/enzo.jpg';
+import fachada from '../../assets/images/fachada.jpg';
 
 import { FaBullseye, FaEye, FaStar } from 'react-icons/fa';
 
@@ -66,15 +72,15 @@ function Sobre() {
             <h2 className='titulo-claro'>Nossa História</h2>
             <div className="historia-grid">
               <div className="historia-text">
-                <p className='sobre-paragrafo'>
-                  a Zero 20 Garage nasceu da paixão por motores e do desejo de oferecer serviços de retífica e mecânica automotiva de alta qualidade. Fundada em 2020, nossa oficina se destaca pela excelência no atendimento e pela precisão em cada serviço realizado.
+                <p translate='no' className='sobre-paragrafo'>
+                  A Zero 20 Garage nasceu da paixão por motores e do desejo de oferecer serviços de retífica e mecânica automotiva de alta qualidade. Fundada em 2020, nossa oficina se destaca pela excelência no atendimento e pela precisão em cada serviço realizado.
                 </p>
                 <p className='sobre-paragrafo'>
                   Desde o início, investimos em equipamentos de última geração e na capacitação de nossa equipe, garantindo que cada motor receba o cuidado e a atenção que merece.
                 </p>
               </div>
               <div className="historia-image">
-                <img src={teamImage} alt="Equipe Zero20 Garage" />
+                <img src={equipe} alt="Equipe Zero20 Garage" />
               </div>
             </div>
           </div>
@@ -89,19 +95,19 @@ function Sobre() {
               <div className="equipe-slider">
                 <Slider {...settings}>
                   <div className="team-image-container">
-                    <img src={teamImage} alt="Francisco Borges, Chefe de Oficina" className="team-image" />
+                    <img src={francisco} alt="Francisco Borges, Chefe de Oficina" className="team-image" />
                     <p className="team-caption">Francisco Borges, Chefe de Oficina</p>
                   </div>
                   <div className="team-image-container">
-                    <img src={teamImage2} alt="Rodney Santos, Especialista em Retífica" className="team-image" />
+                    <img src={rodney} alt="Rodney Santos, Especialista em Retífica" className="team-image" />
                     <p className="team-caption">Rodney Santos, Especialista em Retífica</p>
                   </div>
                   <div className="team-image-container">
-                    <img src={teamImage} alt="Reginaldo Pia, mecânico sênior" className="team-image" />
+                    <img src={pia} alt="Reginaldo Pia, mecânico sênior" className="team-image" />
                     <p className="team-caption">Reginaldo Pia, mecânico Sênior</p>
                   </div>
                   <div className="team-image-container">
-                    <img src={teamImage2} alt="Enzo Gabriel, Jovem Aprendiz" className="team-image" />
+                    <img src={enzo} alt="Enzo Gabriel, Jovem Aprendiz" className="team-image" />
                     <p className="team-caption">Enzo Gabriel, Jovem Aprendiz</p>
                   </div>
                 </Slider>
@@ -111,7 +117,7 @@ function Sobre() {
               <div className="equipe-textos">
                 <div className="highlight-card">
                   <h3 className="subtitulo-claro">Profissionais Especializados</h3>
-                  <p className="sobre-paragrafo">
+                  <p className="paragrafo-claro">
                     Contamos com uma equipe de profissionais altamente especializados e apaixonados por motores.
                     Nossos técnicos são certificados e possuem vasta experiência em retífica e mecânica automotiva.
                   </p>
@@ -119,7 +125,7 @@ function Sobre() {
 
                 <div className="highlight-card" style={{ marginTop: '1.5rem' }}>
                   <h3 className="subtitulo-claro">Experiência Comprovada</h3>
-                  <p className="sobre-paragrafo">
+                  <p className="paragrafo-claro">
                     Nossa equipe possui anos de experiência no mercado automotivo, garantindo serviços de alta qualidade
                     para todos os tipos de veículos.
                   </p>
@@ -179,10 +185,35 @@ function Sobre() {
           </div>
       </section>
 
+        <section className="sobre-section">
+          <div className="highlight-item equipe-container">
+            <h2 className='titulo-claro'translate='no'>Nossa Garagem</h2>
+            <h3 className="subtitulo-claro">
+              Nossa oficina é equipada com tecnologia de ponta e ferramentas especializadas para garantir a precisão e qualidade em todos os serviços realizados. Contamos com um ambiente limpo, organizado e seguro, onde cada veículo recebe o tratamento adequado.
+            </h3>
+            <div className="equipe-grid">
+              <div className="team-image-container">
+                <img src={fachada} alt="Nossa Garagem" />
+              </div>
+              <div className="garagem-text">
+                <p className='sobre-paragrafo'>
+                  A Zero 20 Garage é mais do que uma oficina, é um espaço onde a paixão por motores se encontra com a tecnologia de ponta. Nossa garagem é equipada com ferramentas e máquinas de última geração, garantindo serviços de alta qualidade e precisão.
+                </p>
+                <p className='sobre-paragrafo'>
+                  Cada detalhe da nossa oficina foi pensado para proporcionar um ambiente seguro e eficiente, onde nossos profissionais podem trabalhar com excelência e dedicação.
+                </p>
+              </div>
+          </div>
+          </div>
+        </section>
+
         {/* Depoimentos */}
         <section className="sobre-section">
           <div className="highlight-item equipe-container">
             <h2 className='titulo-claro'translate='no'>Nossos Clientes Dizem</h2>
+              <h3 className="subtitulo-claro">
+                A satisfação dos nossos clientes é a nossa maior conquista. Trabalhamos com dedicação para garantir que cada veículo que passa por nossa oficina receba o melhor atendimento e serviços de qualidade. Confira abaixo alguns depoimentos de clientes satisfeitos com nosso trabalho.
+              </h3>
               <TestimonialsCarousel />
           </div>
           </section>

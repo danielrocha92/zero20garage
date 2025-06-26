@@ -6,12 +6,14 @@
 }
 
 .carousel-image {
-  width: 45%;               /* largura menor para imagens mais compactas */
-  max-height: 12rem;        /* 192px altura menor */
-  object-fit: cover;
+  width: 100%;
+  height: auto;
+  max-width: 700px; /* ajuste conforme necessário */
+  max-height: 16rem; /* ajuste conforme necessário */
   display: block;
   margin: 0 auto;
-  border-radius: 0.625rem;  /* 10px */
+  border-radius: 8px;
+  object-fit: cover;
   box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
@@ -23,21 +25,18 @@
 /* Tablet (≥ 768px) */
 @media (min-width: 48rem) {
   .carousel-image {
-    width: 40%;
-    max-height: 14rem; /* 224px */
+    max-width: 600px;
+    max-height: 18rem;
     border-radius: 0.75rem;
   }
 }
 
 /* Desktop (≥ 1024px) */
 @media (min-width: 64rem) {
-  .carousel-container {
-    max-width: 52.5rem; /* 840px */
-  }
 
   .carousel-image {
-    width: 35%;
-    max-height: 16rem; /* 256px */
+    max-width: 700px;
+    max-height: 22rem;
     border-radius: 0.875rem;
   }
 }

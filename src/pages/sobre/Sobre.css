@@ -62,7 +62,7 @@
   padding: 0.5rem;
 }
 
-.nossa-historia h1 {
+.nossa-historia h2 {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -71,13 +71,12 @@
 }
 
 .sobre-paragrafo {
+  color: var(--cinza-medio);
   font-size: 1rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  color: var(--cinza-claro);
-  font-family: 'Ubuntu', sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.03rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem 0.5rem;
 
   text-align: justify;
   word-break: break-word;
@@ -87,10 +86,11 @@
 
 /* O seletor '.subtitle, h2' no global é mais genérico.
    Mantenha este H2 específico para sobrescrever o estilo global para esta seção. */
+
 .sobre-section h2 { /* Mais específico para o h2 dentro de sobre-section */
   font-size: 1.8rem;
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
   color: #ff3b3f;
 }
 
@@ -109,6 +109,13 @@
   width: 100%;
   height: auto;
   overflow: hidden;
+}
+
+.team-image-container img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* Garante que a imagem cubra o container sem distorção */
+  border-radius: 8px;
 }
 
 .team-image {
@@ -248,3 +255,4 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+

@@ -5,9 +5,11 @@ import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import ContatoCta from '../../components/ContatoCta';
 import '../../styles/Institucional.css'; // estilo institucional padronizado
+import '../../styles/HomeDetails.css';
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+// Importando imagens do diagnóstico
 import diagnostico1 from '../../assets/images/diagnostico1.jpg';
 import diagnostico2 from '../../assets/images/diagnostico2.jpg';
 import diagnostico3 from '../../assets/images/diagnostico3.jpg';
@@ -46,7 +48,6 @@ const LAST_UPDATED = '22 de junho de 2025'; // atualizado manualmente quando o c
           <h2 className="institucional-title">Diagnóstico e Avaliação Técnica</h2>
         </section>
 
-        <section className="section">
           <div className="carousel-container">
             <Slider {...sliderSettings}>
               {images.map((src, index) => (
@@ -61,7 +62,6 @@ const LAST_UPDATED = '22 de junho de 2025'; // atualizado manualmente quando o c
               ))}
             </Slider>
           </div>
-        </section>
 
         <section className="institucional-section">
           <h3 className="institucional-subtitle">Análise Completa com Equipamentos de Última Geração</h3>
