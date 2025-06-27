@@ -14,8 +14,6 @@ import Slider from 'react-slick';
 import equipe from '../../assets/images/equipe.jpg';
 import francisco from '../../assets/images/francisco.jpg';
 import rodney from '../../assets/images/rodney.jpg';
-import pia from '../../assets/images/pia.jpg';
-import enzo from '../../assets/images/enzo.jpg';
 import fachada from '../../assets/images/fachada.jpg';
 
 import { FaBullseye, FaEye, FaStar } from 'react-icons/fa';
@@ -101,14 +99,6 @@ function Sobre() {
                   <div className="team-image-container">
                     <img src={rodney} alt="Rodney Santos, Especialista em Retífica" className="team-image" />
                     <p className="team-caption">Rodney Santos, Especialista em Retífica</p>
-                  </div>
-                  <div className="team-image-container">
-                    <img src={pia} alt="Reginaldo Pia, mecânico sênior" className="team-image" />
-                    <p className="team-caption">Reginaldo Pia, mecânico Sênior</p>
-                  </div>
-                  <div className="team-image-container">
-                    <img src={enzo} alt="Enzo Gabriel, Jovem Aprendiz" className="team-image" />
-                    <p className="team-caption">Enzo Gabriel, Jovem Aprendiz</p>
                   </div>
                 </Slider>
               </div>
