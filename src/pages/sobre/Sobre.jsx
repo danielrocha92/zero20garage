@@ -185,6 +185,7 @@ function Sobre() {
           </div>
       </section>
 
+        {/* Fachada */}
         <section className="sobre-section">
           <div className="highlight-item equipe-container">
             <h2 className='titulo-claro'translate='no'>Nossa Garagem</h2>
@@ -192,7 +193,7 @@ function Sobre() {
               Nossa oficina é equipada com tecnologia de ponta e ferramentas especializadas para garantir a precisão e qualidade em todos os serviços realizados. Contamos com um ambiente limpo, organizado e seguro, onde cada veículo recebe o tratamento adequado.
             </h3>
             <div className="equipe-grid">
-              <div className="team-image-container">
+              <div className="fachada-image-container">
                 <img src={fachada} alt="Nossa Garagem" />
               </div>
               <div className="garagem-text">

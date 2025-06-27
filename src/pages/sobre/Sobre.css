@@ -118,6 +118,24 @@
   border-radius: 8px;
 }
 
+.fachada-image-container {
+  position: relative;
+  box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
+  text-align: center;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.fachada-image-container img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* Garante que a imagem cubra o container sem distorção */
+  border-radius: 8px;
+}
+
 .team-image {
   width: 100%;
   object-fit: cover;
@@ -254,5 +272,10 @@
   .highlights-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .fachada-image-container img {
+  width: 70%;
+}
+
 }
 
