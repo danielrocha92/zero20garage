@@ -3,6 +3,7 @@ import './Orcamento.css';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import emailjs from 'emailjs-com';
+import PainelOrcamentos from '../../components/PainelOrcamentos';
 
 function Orcamento() {
   const messages = [
@@ -86,6 +87,7 @@ function Orcamento() {
       <Breadcrumbs />
 
       <div className="container-escuro">
+        <PainelOrcamentos />
         <section className="orcamento-section">
           <div className="highlight-item">
             <h2 className="titulo-claro">Solicite um Orçamento</h2>

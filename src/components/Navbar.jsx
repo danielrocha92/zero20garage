@@ -134,6 +134,15 @@ function Navbar() {
               Blog
             </Link>
           </li>
+          <li>
+            <Link
+              to="/login"
+              onClick={handleMenuClick}
+              className={location.pathname === '/Login' ? 'glow' : ''}
+            >
+              Login
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
