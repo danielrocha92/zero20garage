@@ -10,7 +10,7 @@ import ScrollToTopButton from './components/ScrollToTopButton';
 import ScrollToTop from './components/ScrollToTop';
 
 import PainelOrcamentos from './components/PainelOrcamentos';
-import Login from './components/Login'; // IMPORTAR Login
+import Login from './components/Login'; // novo
 
 import Home from './pages/home/Home';
 import Sobre from './pages/sobre/Sobre';
@@ -47,14 +47,10 @@ import Termos from './pages/footer/Termos';
 import './App.css';
 import './GlobalStyles.css';
 
-// Componente para proteger rotas privadas
+// ✅ Rota protegida para admin
 function PrivateRoute({ children }) {
   const token = localStorage.getItem("authToken");
-  if (token === "acesso-liberado") {
-    return children;
-  } else {
-    return <Navigate to="/login" replace />;
-  }
+  return token === "acesso-liberado" ? children : <Navigate to="/login" replace />;
 }
 
 const AnimatedRoutes = () => {
@@ -63,11 +59,8 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <Suspense fallback={<PageTransition />}>
         <Routes location={location} key={location.pathname}>
-
-          {/* Rota pública para Login */}
+          {/* 🔐 Login e rota protegida */}
           <Route path="/login" element={<Login />} />
-
-          {/* Rota privada protegida */}
           <Route
             path="/painel-orcamentos"
             element={
@@ -77,7 +70,7 @@ const AnimatedRoutes = () => {
             }
           />
 
-          {/* Rotas públicas normais */}
+          {/* Demais rotas públicas */}
           <Route path="/" element={<Home />} />
           <Route path="/Sobre" element={<Sobre />} />
           <Route path="/Contato" element={<Contato />} />
@@ -108,8 +101,6 @@ const AnimatedRoutes = () => {
           <Route path="/Faq" element={<Faq />} />
           <Route path="/Trabalhe-conosco" element={<TrabalheConosco />} />
           <Route path="/Termos" element={<Termos />} />
-
-          {/* Rota para 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

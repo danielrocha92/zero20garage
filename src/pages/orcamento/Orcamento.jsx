@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Orcamento.css';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
@@ -6,6 +6,15 @@ import emailjs from 'emailjs-com';
 import PainelOrcamentos from '../../components/PainelOrcamentos';
 
 function Orcamento() {
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token === "acesso-liberado") {
+      setIsAdmin(true);
+    }
+  }, []);
+
   const messages = [
     {
       title: 'Solicite um Orçamento',
@@ -59,9 +68,7 @@ function Orcamento() {
       await emailjs.send(
         'service_mbg69sw',
         'template_tso8mol',
-        {
-          ...formDataComData,
-        },
+        { ...formDataComData },
         'NxziW1zSC820uuLvF'
       );
 
@@ -87,96 +94,99 @@ function Orcamento() {
       <Breadcrumbs />
 
       <div className="container-escuro">
-        <PainelOrcamentos />
-        <section className="orcamento-section">
-          <div className="highlight-item">
-            <h2 className="titulo-claro">Solicite um Orçamento</h2>
-            <h3 className="subtitulo-claro">
-              Preencha o formulário abaixo para receber um orçamento detalhado e personalizado.
-            </h3>
+        {isAdmin ? (
+          <PainelOrcamentos />
+        ) : (
+          <section className="orcamento-section">
+            <div className="highlight-item">
+              <h2 className="titulo-claro">Solicite um Orçamento</h2>
+              <h3 className="subtitulo-claro">
+                Preencha o formulário abaixo para receber um orçamento detalhado e personalizado.
+              </h3>
 
-            <form className="orcamento-form" onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="nome">Nome:</label>
-                <input
-                  type="text"
-                  id="nome"
-                  name="nome"
-                  value={formData.nome}
-                  onChange={handleChange}
-                  required
-                  placeholder="Digite seu nome"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="email">E-mail:</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  placeholder="Digite seu e-mail"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="telefone">Telefone:</label>
-                <input
-                  type="tel"
-                  id="telefone"
-                  name="telefone"
-                  value={formData.telefone}
-                  onChange={handleChange}
-                  placeholder="Digite seu telefone"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="servico">Serviço Desejado:</label>
-                <select
-                  id="servico"
-                  name="servico"
-                  value={formData.servico}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Selecione um serviço</option>
-                  <option value="retifica">Retífica de Motores</option>
-                  <option value="manutencao">Manutenção Preventiva</option>
-                  <option value="revisao">Revisão Completa</option>
-                  <option value="outro">Outro</option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="mensagem">Mensagem:</label>
-                <textarea
-                  id="mensagem"
-                  name="mensagem"
-                  value={formData.mensagem}
-                  onChange={handleChange}
-                  rows="4"
-                  placeholder="Descreva o serviço desejado, problemas do veículo, modelo/ano etc."
-                ></textarea>
-              </div>
-
-              <button type="submit" className="submit-button" disabled={loading}>
-                {loading ? 'Enviando...' : 'Solicitar Orçamento'}
-              </button>
-
-              {success !== null && (
-                <div className={`feedback ${success ? 'feedback-success' : 'feedback-error'}`}>
-                  {success
-                    ? 'Formulário enviado com sucesso!'
-                    : 'Ocorreu um erro ao enviar o formulário. Tente novamente!'}
+              <form className="orcamento-form" onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <label htmlFor="nome">Nome:</label>
+                  <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    value={formData.nome}
+                    onChange={handleChange}
+                    required
+                    placeholder="Digite seu nome"
+                  />
                 </div>
-              )}
-            </form>
-          </div>
-        </section>
+
+                <div className="form-group">
+                  <label htmlFor="email">E-mail:</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    placeholder="Digite seu e-mail"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="telefone">Telefone:</label>
+                  <input
+                    type="tel"
+                    id="telefone"
+                    name="telefone"
+                    value={formData.telefone}
+                    onChange={handleChange}
+                    placeholder="Digite seu telefone"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="servico">Serviço Desejado:</label>
+                  <select
+                    id="servico"
+                    name="servico"
+                    value={formData.servico}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Selecione um serviço</option>
+                    <option value="retifica">Retífica de Motores</option>
+                    <option value="manutencao">Manutenção Preventiva</option>
+                    <option value="revisao">Revisão Completa</option>
+                    <option value="outro">Outro</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="mensagem">Mensagem:</label>
+                  <textarea
+                    id="mensagem"
+                    name="mensagem"
+                    value={formData.mensagem}
+                    onChange={handleChange}
+                    rows="4"
+                    placeholder="Descreva o serviço desejado, problemas do veículo, modelo/ano etc."
+                  ></textarea>
+                </div>
+
+                <button type="submit" className="submit-button" disabled={loading}>
+                  {loading ? 'Enviando...' : 'Solicitar Orçamento'}
+                </button>
+
+                {success !== null && (
+                  <div className={`feedback ${success ? 'feedback-success' : 'feedback-error'}`}>
+                    {success
+                      ? 'Formulário enviado com sucesso!'
+                      : 'Ocorreu um erro ao enviar o formulário. Tente novamente!'}
+                  </div>
+                )}
+              </form>
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );

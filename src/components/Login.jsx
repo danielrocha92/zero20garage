@@ -16,7 +16,7 @@ const Login = () => {
     setErro(null);
 
     try {
-      const res = await fetch("https://zero20garage-login.onrender.com", {
+      const res = await fetch("https://api-orcamento-n49u.onrender.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -26,11 +26,11 @@ const Login = () => {
 
       if (data.status === "ok") {
         localStorage.setItem("authToken", data.token);
-        navigate("/painel-orcamentos");
+        navigate("/painel-orcamentos"); // ✅ redireciona após login
       } else {
         setErro("E-mail ou senha inválidos");
       }
-    } catch {
+    } catch (err) {
       setErro("Erro ao conectar ao servidor");
     }
   };
