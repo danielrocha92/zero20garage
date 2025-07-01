@@ -16,7 +16,7 @@ const Login = () => {
     setErro(null);
 
     try {
-      const res = await fetch("https://api-orcamento/login", {
+      const res = await fetch("https://zero20garage-login.onrender.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
