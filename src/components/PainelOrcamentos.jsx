@@ -12,7 +12,16 @@ const PainelOrcamentos = () => {
   const [historico, setHistorico] = useState([]);
 
   const handleSalvar = async (dados) => {
-    const envio = { ...dados, tipo, data: new Date().toLocaleString('pt-BR') };
+    if (!dados.nome || !dados.valorTotal) {
+      alert('Preencha todos os campos obrigatórios.');
+      return;
+    }
+
+    const envio = {
+      ...dados,
+      tipo,
+      data: new Date().toLocaleString('pt-BR'),
+    };
 
     setHistorico((prev) => [envio, ...prev]);
 
@@ -22,14 +31,22 @@ const PainelOrcamentos = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(envio),
       });
+
       const result = await res.json();
-      console.log('Google Sheets:', result);
+      if (result.status === 'success') {
+        alert('Orçamento enviado com sucesso para o Google Sheets.');
+      } else {
+        alert('Erro ao enviar para o Google Sheets.');
+        console.error(result);
+      }
     } catch (err) {
-      console.error('Erro Sheets', err);
+      console.error('Erro na conexão com Google Sheets:', err);
+      alert('Erro ao conectar com o servidor. Tente novamente.');
     }
   };
 
   const exportarExcel = () => {
+    if (historico.length === 0) return alert('Nenhum dado para exportar.');
     const ws = XLSX.utils.json_to_sheet(historico);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Orçamentos');
@@ -38,14 +55,13 @@ const PainelOrcamentos = () => {
   };
 
   const exportarPDF = () => {
+    if (historico.length === 0) return alert('Nenhum dado para exportar.');
     const doc = new jsPDF();
+    doc.setFontSize(12);
     doc.text('Histórico de Orçamentos', 10, 10);
     historico.forEach((h, i) => {
-      doc.text(
-        `${i + 1}. [${h.data}] Tipo: ${h.tipo} | Nome: ${h.nome} | Valor: ${h.valorTotal}`,
-        10,
-        20 + i * 10
-      );
+      const text = `${i + 1}. [${h.data}] Tipo: ${h.tipo} | Nome: ${h.nome} | Valor: R$ ${h.valorTotal}`;
+      doc.text(text, 10, 20 + i * 10);
     });
     doc.save('painel-orcamentos.pdf');
   };
@@ -77,26 +93,30 @@ const PainelOrcamentos = () => {
           Exportar PDF
         </button>
 
-        <table style={{ width: '100%', marginTop: '1rem', borderCollapse: 'collapse' }}>
-          <thead>
-            <tr>
-              <th>Data</th>
-              <th>Tipo</th>
-              <th>Nome</th>
-              <th>Valor Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {historico.map((h, idx) => (
-              <tr key={idx}>
-                <td>{h.data}</td>
-                <td>{h.tipo}</td>
-                <td>{h.nome}</td>
-                <td>R$ {h.valorTotal}</td>
+        {historico.length === 0 ? (
+          <p style={{ marginTop: '1rem' }}>Nenhum orçamento salvo ainda.</p>
+        ) : (
+          <table style={{ width: '100%', marginTop: '1rem', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Tipo</th>
+                <th>Nome</th>
+                <th>Valor Total</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {historico.map((h, idx) => (
+                <tr key={idx}>
+                  <td>{h.data}</td>
+                  <td>{h.tipo}</td>
+                  <td>{h.nome}</td>
+                  <td>R$ {parseFloat(h.valorTotal).toFixed(2)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </section>
     </div>
   );
