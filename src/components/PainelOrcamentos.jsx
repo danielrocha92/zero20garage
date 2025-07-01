@@ -5,7 +5,7 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 
-const WEB_APP_URL = 'https://script.google.com/macros/s/SEU_ID/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxmLpnlvPQV77Rs4jG8pLh_uSTi-xq5LqGod-ykpgYxJ9Y9pRlI7pOgdgjsMs4qSTU6Jw/exec';
 
 const PainelOrcamentos = () => {
   const [tipo, setTipo] = useState('motor');
