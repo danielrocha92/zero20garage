@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import OrcamentoCabecote from './OrcamentoCabecote';
-import OrcamentoMotorCompleto from './OrcamentoMotorCompleto';
+import OrcamentoCabecote from './orcamentoCabecote';
+import OrcamentoMotorCompleto from './orcamentoMotorCompleto';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
