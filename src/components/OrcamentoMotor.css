@@ -1,0 +1,313 @@
+/* OrcamentoMotor.css */
+
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+.orcamento-container {
+    padding: 30px;
+    max-width: 950px; /* Ajustado para ser um pouco mais largo */
+    margin: 30px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.orcamento-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 15px;
+}
+
+.orcamento-title {
+    font-size: 28px;
+    color: #2c3e50;
+    margin: 0;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.logo {
+    max-height: 90px; /* Ajuste o tamanho do logo */
+    width: auto;
+}
+
+/* Dados do Cliente */
+.client-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Mais flexível */
+    gap: 15px 25px;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #cfd8dc;
+}
+
+.client-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.client-detail-item .label {
+    font-weight: bold;
+    min-width: 60px; /* Ajuda a alinhar os labels */
+    color: #4a6572;
+}
+
+.input-field {
+    flex-grow: 1;
+    padding: 10px 12px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #34495e;
+    transition: border-color 0.3s ease;
+}
+
+.input-field:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Títulos de Seção */
+.section-title {
+    font-size: 22px;
+    color: #2c3e50;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #b0bec5;
+    padding-bottom: 8px;
+    font-weight: 600;
+}
+
+/* Grids de Peças e Serviços */
+.parts-grid, .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 2 ou 3 colunas dependendo do espaço */
+    gap: 15px 20px;
+    margin-bottom: 30px;
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 0;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #34495e;
+    cursor: pointer;
+    user-select: none; /* Evita seleção de texto ao clicar */
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.1); /* Um pouco maior */
+    cursor: pointer;
+}
+
+.item-inputs {
+    display: flex;
+    gap: 10px;
+    margin-left: 28px; /* Alinhar com o checkbox */
+    margin-top: 5px;
+    width: calc(100% - 28px);
+}
+
+.quantity-input, .value-input {
+    width: 80px; /* Ajuste a largura */
+    padding: 6px 8px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: right;
+}
+
+.quantity-input {
+    width: 60px; /* Menor para quantidade */
+}
+
+/* Sub-itens (submenus) */
+.sub-items {
+    margin-left: 35px; /* Mais indentado */
+    margin-top: 5px;
+    border-left: 2px solid #eceff1;
+    padding-left: 10px;
+}
+
+.sub-item-label {
+    margin-bottom: 3px;
+    font-size: 15px;
+    color: #546e7a;
+}
+
+/* Linhas de Total */
+.total-line {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-top: 15px;
+    padding-top: 8px;
+    border-top: 1px solid #eceff1;
+}
+
+.total-line .label {
+    margin-right: 15px;
+}
+
+.grand-total {
+    font-size: 26px;
+    font-weight: 800;
+    color: #e74c3c; /* Cor de destaque para o total geral */
+    text-align: right;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 3px solid #e74c3c; /* Borda mais grossa */
+}
+
+.mao-de-obra .input-field {
+    width: 120px; /* Largura específica para o input de mão de obra */
+    text-align: right;
+    font-weight: bold;
+    color: #34495e;
+}
+
+/* Informações adicionais (Forma de Pagamento, Garantia) */
+.additional-info {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px dashed #cfd8dc;
+    text-align: center;
+}
+
+.payment-info, .garantia-info {
+    font-size: 15px;
+    color: #546e7a;
+    margin-bottom: 10px;
+}
+
+.garantia-info .input-field.inline-input {
+    width: 200px; /* Largura para o campo de garantia */
+    display: inline-block; /* Para ficar na mesma linha do texto */
+    margin-left: 5px;
+    text-align: left;
+}
+
+
+/* Botões de Ação */
+.orcamento-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.action-btn {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 25px; /* Botões mais arredondados */
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.save-google-sheets-btn {
+    background-color: #4285F4; /* Google blue */
+}
+
+.save-google-sheets-btn:hover {
+    background-color: #357ae8;
+}
+
+.download-excel-btn {
+    background-color: #217346; /* Excel green */
+}
+
+.download-excel-btn:hover {
+    background-color: #1b5e32;
+}
+
+.download-pdf-btn {
+    background-color: #DC382C; /* PDF red */
+}
+
+.download-pdf-btn:hover {
+    background-color: #c02d22;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+    .orcamento-container {
+        padding: 15px;
+        margin: 15px auto;
+    }
+
+    .orcamento-title {
+        font-size: 22px;
+    }
+
+    .logo {
+        max-height: 70px;
+    }
+
+    .client-details, .parts-grid, .services-grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas menores */
+        gap: 15px;
+    }
+
+    .orcamento-buttons-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .action-btn {
+        width: 100%; /* Botões ocupam toda a largura */
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+
+    .item-inputs {
+        flex-direction: column; /* Inputs empilham em telas menores */
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .quantity-input, .value-input {
+        width: calc(100% - 16px); /* Ocupa toda a largura do item */
+    }
+
+    .total-line {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .total-line .label {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+}
