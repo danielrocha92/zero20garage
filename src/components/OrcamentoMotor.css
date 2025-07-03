@@ -1,313 +1,295 @@
 /* OrcamentoMotor.css */
 
-body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
-}
-
+/* ===== Container geral ===== */
 .orcamento-container {
-    padding: 30px;
-    max-width: 950px; /* Ajustado para ser um pouco mais largo */
-    margin: 30px auto;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: #121212; /* fundo escuro */
+  color: #fff; /* texto branco */
+  max-width: 960px;
+  margin: 1rem auto;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+  font-family: 'Ubuntu', sans-serif;
 }
 
-.orcamento-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 15px;
-}
-
+/* ===== Títulos ===== */
 .orcamento-title {
-    font-size: 28px;
-    color: #2c3e50;
-    margin: 0;
-    font-weight: 700;
-    text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ff0000; /* vermelho vivo */
+  text-align: center;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.1rem;
+  text-shadow: 0 0 8px #ff0000aa;
 }
 
-.logo {
-    max-height: 90px; /* Ajuste o tamanho do logo */
-    width: auto;
-}
-
-/* Dados do Cliente */
-.client-details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Mais flexível */
-    gap: 15px 25px;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-    border-bottom: 1px dashed #cfd8dc;
-}
-
-.client-detail-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.client-detail-item .label {
-    font-weight: bold;
-    min-width: 60px; /* Ajuda a alinhar os labels */
-    color: #4a6572;
-}
-
-.input-field {
-    flex-grow: 1;
-    padding: 10px 12px;
-    border: 1px solid #bdc3c7;
-    border-radius: 5px;
-    font-size: 15px;
-    color: #34495e;
-    transition: border-color 0.3s ease;
-}
-
-.input-field:focus {
-    border-color: #3498db;
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-}
-
-/* Títulos de Seção */
 .section-title {
-    font-size: 22px;
-    color: #2c3e50;
-    margin-top: 35px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #b0bec5;
-    padding-bottom: 8px;
-    font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ff3b3b;
+  margin: 1.5rem 0 1rem 0;
+  border-bottom: 2px solid #ff0000;
+  padding-bottom: 0.25rem;
 }
 
-/* Grids de Peças e Serviços */
-.parts-grid, .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 2 ou 3 colunas dependendo do espaço */
-    gap: 15px 20px;
-    margin-bottom: 30px;
+/* ===== Grid de itens ===== */
+.parts-grid,
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .grid-item {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 8px 0;
+  background-color: #1e1e1e;
+  border-radius: 6px;
+  padding: 1rem;
+  box-shadow: 0 0 8px #ff000077;
+  display: flex;
+  flex-direction: column;
 }
 
+/* ===== Checkboxes e Labels ===== */
 .checkbox-wrapper {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-    font-size: 16px;
-    color: #34495e;
-    cursor: pointer;
-    user-select: none; /* Evita seleção de texto ao clicar */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  color: #ff9999;
 }
 
 .checkbox-wrapper input[type="checkbox"] {
-    margin-right: 10px;
-    transform: scale(1.1); /* Um pouco maior */
-    cursor: pointer;
+  width: 18px;
+  height: 18px;
+  accent-color: #ff0000;
+  cursor: pointer;
 }
 
-.item-inputs {
-    display: flex;
-    gap: 10px;
-    margin-left: 28px; /* Alinhar com o checkbox */
-    margin-top: 5px;
-    width: calc(100% - 28px);
-}
-
-.quantity-input, .value-input {
-    width: 80px; /* Ajuste a largura */
-    padding: 6px 8px;
-    border: 1px solid #bdc3c7;
-    border-radius: 4px;
-    font-size: 14px;
-    text-align: right;
-}
-
+/* ===== Inputs ===== */
+.input-field,
+.value-input,
 .quantity-input {
-    width: 60px; /* Menor para quantidade */
+  background-color: #222;
+  border: 1.5px solid #ff0000;
+  color: #fff;
+  border-radius: 4px;
+  padding: 0.35rem 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 100px;
+  margin-left: 0.5rem;
+  transition: border-color 0.3s ease;
 }
 
-/* Sub-itens (submenus) */
+.input-field:focus,
+.value-input:focus,
+.quantity-input:focus {
+  outline: none;
+  border-color: #ff4d4d;
+  box-shadow: 0 0 8px #ff4d4daa;
+}
+
+/* Inputs inline com label */
+.client-detail-item {
+  margin-bottom: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.label {
+  min-width: 110px;
+  font-weight: 600;
+  color: #ff5555;
+}
+
+/* ===== Inputs especiais ===== */
+.total-input {
+  max-width: 180px;
+  font-weight: 700;
+  font-size: 1.15rem;
+  background-color: #2a2a2a;
+}
+
+/* ===== Sub-itens e submenu ===== */
 .sub-items {
-    margin-left: 35px; /* Mais indentado */
-    margin-top: 5px;
-    border-left: 2px solid #eceff1;
-    padding-left: 10px;
+  margin-top: 0.8rem;
+  padding-left: 1.5rem;
+  border-left: 2px solid #ff0000;
+  color: #ffb3b3;
+  font-weight: 500;
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 
 .sub-item-label {
-    margin-bottom: 3px;
-    font-size: 15px;
-    color: #546e7a;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
 }
 
-/* Linhas de Total */
-.total-line {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: #2c3e50;
-    margin-top: 15px;
-    padding-top: 8px;
-    border-top: 1px solid #eceff1;
+.sub-item-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #ff0000;
 }
 
-.total-line .label {
-    margin-right: 15px;
+.sub-item-valor {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-left: 1.3rem;
+  font-size: 0.95rem;
 }
 
-.grand-total {
-    font-size: 26px;
-    font-weight: 800;
-    color: #e74c3c; /* Cor de destaque para o total geral */
-    text-align: right;
-    margin-top: 30px;
-    padding-top: 15px;
-    border-top: 3px solid #e74c3c; /* Borda mais grossa */
+.sub-item-valor span {
+  min-width: 120px;
+  color: #ff6666;
+  font-weight: 600;
 }
 
-.mao-de-obra .input-field {
-    width: 120px; /* Largura específica para o input de mão de obra */
-    text-align: right;
-    font-weight: bold;
-    color: #34495e;
-}
-
-/* Informações adicionais (Forma de Pagamento, Garantia) */
-.additional-info {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px dashed #cfd8dc;
-    text-align: center;
-}
-
-.payment-info, .garantia-info {
-    font-size: 15px;
-    color: #546e7a;
-    margin-bottom: 10px;
-}
-
-.garantia-info .input-field.inline-input {
-    width: 200px; /* Largura para o campo de garantia */
-    display: inline-block; /* Para ficar na mesma linha do texto */
-    margin-left: 5px;
-    text-align: left;
-}
-
-
-/* Botões de Ação */
+/* ===== Botões ===== */
 .orcamento-buttons-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 50px;
-    padding-top: 30px;
-    border-top: 1px solid #e0e0e0;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .action-btn {
-    padding: 14px 28px;
-    border: none;
-    border-radius: 25px; /* Botões mais arredondados */
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ff0000;
+  border: none;
+  color: white;
+  font-weight: 700;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 0 10px #ff0000cc;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.action-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.action-btn:hover,
+.action-btn:focus {
+  background-color: #cc0000;
+  box-shadow: 0 0 15px #ff0000dd;
+  outline: none;
 }
 
-.save-google-sheets-btn {
-    background-color: #4285F4; /* Google blue */
+/* ===== Totalizadores ===== */
+.total-line {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #ff5555;
+  margin-top: 1rem;
+  text-align: right;
 }
 
-.save-google-sheets-btn:hover {
-    background-color: #357ae8;
+.grand-total {
+  margin-top: 2rem;
+  font-size: 1.7rem;
+  text-align: center;
+  color: #ff0000;
+  text-shadow: 0 0 10px #ff0000aa;
+  font-weight: 900;
 }
 
-.download-excel-btn {
-    background-color: #217346; /* Excel green */
+/* ===== Informações adicionais ===== */
+.additional-info {
+  margin-top: 1.7rem;
+  font-size: 0.95rem;
+  color: #ff9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
-.download-excel-btn:hover {
-    background-color: #1b5e32;
+.inline-input {
+  max-width: 200px;
+  background-color: #222;
+  border: 1.5px solid #ff0000;
+  border-radius: 4px;
+  color: #fff;
+  padding: 0.3rem 0.5rem;
+  font-weight: 600;
+  margin-left: 0.3rem;
 }
 
-.download-pdf-btn {
-    background-color: #DC382C; /* PDF red */
+/* ===== React-Select custom ===== */
+.multi-select-react {
+  margin-top: 0.5rem;
 }
 
-.download-pdf-btn:hover {
-    background-color: #c02d22;
+/* Prefixo zerogarage usado para react-select */
+.zerogarage__control {
+  background-color: #222 !important;
+  border: 1.5px solid #ff0000 !important;
+  box-shadow: none !important;
+  min-height: 38px;
 }
 
-/* Media Queries para Responsividade */
-@media (max-width: 768px) {
-    .orcamento-container {
-        padding: 15px;
-        margin: 15px auto;
-    }
+.zerogarage__control--is-focused {
+  border-color: #ff4d4d !important;
+  box-shadow: 0 0 8px #ff4d4daa !important;
+}
 
-    .orcamento-title {
-        font-size: 22px;
-    }
+.zerogarage__menu {
+  background-color: #121212 !important;
+  color: #fff !important;
+}
 
-    .logo {
-        max-height: 70px;
-    }
+.zerogarage__option {
+  color: #fff !important;
+  background-color: #121212 !important;
+  cursor: pointer;
+}
 
-    .client-details, .parts-grid, .services-grid {
-        grid-template-columns: 1fr; /* Uma coluna em telas menores */
-        gap: 15px;
-    }
+.zerogarage__option--is-focused {
+  background-color: #ff0000 !important;
+  color: #fff !important;
+}
 
-    .orcamento-buttons-container {
-        flex-direction: column;
-        gap: 10px;
-    }
+.zerogarage__option--is-selected {
+  background-color: #cc0000 !important;
+  color: #fff !important;
+}
 
-    .action-btn {
-        width: 100%; /* Botões ocupam toda a largura */
-        padding: 12px 20px;
-        font-size: 16px;
-    }
+.zerogarage__multi-value {
+  background-color: #ff0000 !important;
+  color: #fff !important;
+  border-radius: 3px;
+  padding: 2px 6px;
+  font-weight: 700;
+}
 
-    .item-inputs {
-        flex-direction: column; /* Inputs empilham em telas menores */
-        width: 100%;
-        margin-left: 0;
-    }
+.zerogarage__multi-value__label {
+  color: #fff !important;
+}
 
-    .quantity-input, .value-input {
-        width: calc(100% - 16px); /* Ocupa toda a largura do item */
-    }
+.zerogarage__multi-value__remove {
+  color: #fff !important;
+  cursor: pointer;
+}
 
-    .total-line {
-        flex-direction: column;
-        align-items: flex-end;
-    }
-
-    .total-line .label {
-        margin-right: 0;
-        margin-bottom: 5px;
-    }
+/* ===== Responsividade ===== */
+@media (max-width: 640px) {
+  .parts-grid,
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  .client-detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .label {
+    margin-bottom: 0.25rem;
+  }
 }
