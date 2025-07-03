@@ -214,192 +214,165 @@ export default function OrcamentoMotor() {
           </div>
         )}
 
+        import React, { useState } from "react";
+import Select from "react-select";
+import "./OrcamentoMotor.css";
+
+const itensPecas = [
+  {
+    nome: "Correias",
+    valor: 0,
+    tipo: "submenu",
+    filhos: [
+      { nome: "Dent kit", valor: 0 },
+      { nome: "Capa", valor: 0 },
+      { nome: "Acessórios kit", valor: 0 },
+      { nome: "Corrente kit", valor: 0 },
+    ],
+  },
+  {
+    nome: "Comando de válvula",
+    valor: 0,
+    tipo: "submenu",
+    filhos: [{ nome: "Admis", valor: 0 }, { nome: "Escape", valor: 0 }],
+  },
+];
+
+export default function OrcamentoMotor() {
+  const [selecionadosPecas, setSelecionadosPecas] = useState({});
+
+  const handleToggle = (item, parentItem = null) => {
+    setSelecionadosPecas((prev) => {
+      const newState = { ...prev };
+      const itemName = item.nome;
+
+      if (newState[itemName]) {
+        delete newState[itemName];
+      } else {
+        newState[itemName] = { valor: item.valor || 0, quantidade: 1 };
+        if (parentItem && !newState[parentItem.nome]) {
+          newState[parentItem.nome] = { valor: parentItem.valor || 0, quantidade: 1 };
+        }
+      }
+      return newState;
+    });
+  };
+
+  const handleValueChange = (itemName, value, type = 'valor') => {
+    setSelecionadosPecas((prev) => {
+      const currentItem = prev[itemName] || { valor: 0, quantidade: 1 };
+      const parsedValue = type === 'valor' ? parseFloat(value) || 0 : parseInt(value) || 1;
+
+      return {
+        ...prev,
+        [itemName]: {
+          ...currentItem,
+          [type]: parsedValue,
+        },
+      };
+    });
+  };
+
+  const renderItem = (item) => {
+    const selectedState = selecionadosPecas;
+    const isSelected = selectedState[item.nome] !== undefined;
+
+    return (
+      <div key={item.nome} className="grid-item">
+        <label className="checkbox-wrapper">
+          <input
+            type="checkbox"
+            checked={isSelected}
+            onChange={() => handleToggle(item)}
+          />
+          {item.nome}
+        </label>
+
         {item.filhos && (
           <div className="sub-items">
-            {item.filhos.map((filho) => (
-              <label key={filho.nome} className="checkbox-wrapper sub-item-label">
-                <input
-                  type="checkbox"
-                  checked={selectedState[filho.nome] !== undefined}
-                  onChange={() => handleToggle(filho, isService, item)}
-                />
-                {filho.nome}
-                {selectedState[filho.nome] !== undefined && (
-                  <input
-                    type="number"
-                    className="value-input"
-                    placeholder="R$"
-                    value={selectedState[filho.nome]?.valor || 0}
-                    onChange={(e) => handleValueChange(filho.nome, e.target.value, 'valor', isService)}
-                  />
-                )}
-              </label>
-            ))}
+            <label className="select-wrapper">
+              <span>Selecione {item.nome}:</span>
+
+              <Select
+                isMulti
+                className="multi-select-react"
+                classNamePrefix="zerogarage"
+                options={[
+                  {
+                    label: "Itens",
+                    options: item.filhos.map((filho) => ({
+                      value: filho.nome,
+                      label: filho.nome,
+                    })),
+                  },
+                ]}
+                value={item.filhos
+                  .filter((filho) => selectedState[filho.nome])
+                  .map((filho) => ({
+                    value: filho.nome,
+                    label: filho.nome,
+                  }))}
+                onChange={(selectedOptions) => {
+                  const selectedValues = selectedOptions.map((opt) => opt.value);
+                  item.filhos.forEach((filho) => {
+                    const isSelected = selectedValues.includes(filho.nome);
+                    const alreadySelected = !!selectedState[filho.nome];
+
+                    if (isSelected && !alreadySelected) {
+                      handleToggle(filho, item);
+                    } else if (!isSelected && alreadySelected) {
+                      handleToggle(filho, item);
+                    }
+                  });
+                }}
+                theme={(theme) => ({
+                  ...theme,
+                  borderRadius: 4,
+                  colors: {
+                    ...theme.colors,
+                    primary: "#ff0000",
+                    primary75: "#cc0000",
+                    primary50: "#ff4d4d",
+                    primary25: "#ffe6e6",
+                    neutral0: "#1a1a1a",
+                    neutral5: "#2c2c2c",
+                    neutral10: "#444",
+                    neutral20: "#666",
+                    neutral30: "#999",
+                    neutral80: "#fff",
+                  },
+                })}
+              />
+            </label>
+
+            {item.filhos.map(
+              (filho) =>
+                selectedState[filho.nome] && (
+                  <div key={`valor-${filho.nome}`} className="sub-item-valor">
+                    <span>{filho.nome}:</span>
+                    <input
+                      type="number"
+                      className="value-input dark-input"
+                      placeholder="R$"
+                      value={selectedState[filho.nome]?.valor || 0}
+                      onChange={(e) =>
+                        handleValueChange(filho.nome, e.target.value, "valor")
+                      }
+                    />
+                  </div>
+                )
+            )}
           </div>
         )}
       </div>
     );
   };
 
-  // Funções placeholder para os botões de ação
-  const salvarGoogleSheets = (data) => {
-    console.log("Dados para Google Sheets:", data);
-    alert("Funcionalidade de salvar no Google Sheets a ser implementada!");
-  };
-
-  const exportarExcel = (data) => {
-    console.log("Dados para Excel:", data);
-    alert("Funcionalidade de exportar para Excel a ser implementada!");
-  };
-
-  const exportarPDF = (data) => {
-    console.log("Dados para PDF:", data);
-    alert("Funcionalidade de exportar para PDF a ser implementada!");
-  };
-
   return (
     <div className="orcamento-container">
-      <div className="orcamento-header">
-        <h2 className="orcamento-title">ORÇAMENTO - RETÍFICA DE MOTORES</h2>
-        {/* Assumindo que zero20-logo.png está em src/assets */}
-      </div>
-
-      {/* Seção de Dados do Cliente */}
-      <div className="client-details">
-        <div className="client-detail-item">
-          <span className="label">Veículo:</span>
-          <input
-            type="text"
-            name="veiculo"
-            value={dadosCliente.veiculo}
-            onChange={handleClienteInputChange}
-            className="input-field"
-            placeholder="Ex: Corsa 2001"
-          />
-        </div>
-        <div className="client-detail-item">
-          <span className="label">OS:</span>
-          <input
-            type="text"
-            name="ordemServico"
-            value={dadosCliente.ordemServico}
-            onChange={handleClienteInputChange}
-            className="input-field"
-            placeholder="Ex: 143"
-          />
-        </div>
-        <div className="client-detail-item">
-          <span className="label">Cliente:</span>
-          <input
-            type="text"
-            name="cliente"
-            value={dadosCliente.cliente}
-            onChange={handleClienteInputChange}
-            className="input-field"
-            placeholder="Nome do cliente"
-          />
-        </div>
-        <div className="client-detail-item">
-          <span className="label">Data:</span>
-          <input
-            type="text"
-            name="data"
-            value={dadosCliente.data}
-            onChange={handleClienteInputChange}
-            className="input-field"
-            readOnly
-          />
-        </div>
-      </div>
-
-      {/* Seção de Peças */}
-      <h3 className="section-title">Peças</h3>
+      <h2>Peças com Submenus (react-select)</h2>
       <div className="parts-grid">
-        {itensPecas.map((item) => renderItem(item, false))}
-      </div>
-      <h3 className="total-line">Valor total de Peças: R$ {totalPecas.toFixed(2)}</h3>
-
-      {/* Seção de Serviços */}
-      <h3 className="section-title">Serviços de Retífica</h3>
-      <div className="services-grid">
-        {servicosMotor.map((item) => renderItem(item, true))}
-      </div>
-      <h3 className="total-line">Valor total de Serviços: R$ {totalServicos.toFixed(2)}</h3>
-
-      {/* Seção de Mão de Obra Mecânica */}
-      <div className="total-line mao-de-obra">
-        <span className="label">Valor total de Mão de Obra Mecânica:</span>
-        <input
-          type="number"
-          name="maoDeObraMecanica"
-          value={dadosCliente.maoDeObraMecanica}
-          onChange={handleClienteInputChange}
-          className="input-field total-input"
-          placeholder="R$"
-        />
-      </div>
-
-      {/* Total Geral */}
-      <h2 className="grand-total">TOTAL GERAL: R$ {totalGeral.toFixed(2)}</h2>
-
-      {/* Informações adicionais */}
-      <div className="additional-info">
-        <p className="payment-info">
-          Forma de pagamento: Pix, Débito e Crédito em até 10 vezes sem juros
-        </p>
-        <p className="garantia-info">
-          Garantia: <input
-            type="text"
-            name="garantia"
-            value={dadosCliente.garantia}
-            onChange={handleClienteInputChange}
-            className="input-field inline-input"
-          />
-        </p>
-      </div>
-
-
-      {/* Botões de Ação */}
-      <div className="orcamento-buttons-container">
-        <button
-          className="action-btn save-google-sheets-btn"
-          onClick={() =>
-            salvarGoogleSheets({
-              dadosCliente,
-              pecasSelecionadas: selecionadosPecas,
-              servicosSelecionados: selecionadosServicos,
-              totalGeral,
-            })
-          }
-        >
-          Salvar no Google Sheets
-        </button>
-        <button
-          className="action-btn download-excel-btn"
-          onClick={() =>
-            exportarExcel({
-              dadosCliente,
-              pecasSelecionadas: selecionadosPecas,
-              servicosSelecionados: selecionadosServicos,
-              totalGeral,
-            })
-          }
-        >
-          Baixar Excel
-        </button>
-        <button
-          className="action-btn download-pdf-btn"
-          onClick={() =>
-            exportarPDF({
-              dadosCliente,
-              pecasSelecionadas: selecionadosPecas,
-              servicosSelecionados: selecionadosServicos,
-              totalGeral,
-            })
-          }
-        >
-          Baixar PDF
-        </button>
+        {itensPecas.map((item) => renderItem(item))}
       </div>
     </div>
   );
