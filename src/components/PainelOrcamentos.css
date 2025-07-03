@@ -1,11 +1,188 @@
-.painel-orcamentos {
-  background-color: #121212;
-  padding: 2rem;
-  color: #fff;
-  max-width: 600px;
-  margin: 0 auto;
+/* src/PainelOrcamentos.css */
+
+/* Definições de Cores e Fontes (podem ser globais ou repetidas aqui para auto-suficiência) */
+:root {
+  --bg-dark: #121212;
+  --text-light: #f0f0f0;
+  --red-primary: #ff0000;
+  --red-secondary: #ff3b3b;
+  --red-light: #ff9999;
+  --red-accent: #cc0000;
+  --border-color: #ff0000; /* Para elementos interativos */
 }
 
+/* Base do container do Painel de Orçamentos */
+.painel-orcamentos-container {
+  background-color: var(--bg-dark);
+  padding: 2rem;
+  color: var(--text-light);
+  max-width: 800px; /* Um pouco maior que o 600px anterior para o histórico */
+  margin: 1.5rem auto; /* Centraliza e adiciona margem superior/inferior */
+  border-radius: 12px; /* Bordas mais suaves */
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); /* Sombra vermelha mais pronunciada */
+  font-family: 'Arial', sans-serif; /* Consistente com os orçamentos internos */
+}
+
+/* Estilos para Títulos */
+.titulo-claro {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--red-primary);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.7); /* Sombra mais forte no título */
+}
+
+.subtitulo-claro {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column; /* Stacked for mobile */
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+/* Seletor de Tipo de Orçamento - ESTILO ATUALIZADO */
+.tipo-orcamento-selector select {
+  background-color: #0d0d0d; /* Fundo bem escuro */
+  border: 1px solid #444; /* Borda inicial mais discreta */
+  color: var(--text-light);
+  padding: 0.75rem 1.25rem; /* Um pouco mais de padding */
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  appearance: none; /* Remove seta padrão em alguns navegadores */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23f0f0f0" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Seta branca */
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.2em;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tipo-orcamento-selector select:hover {
+  border-color: var(--red-secondary);
+}
+
+.tipo-orcamento-selector select:focus {
+  outline: none;
+  border-color: var(--red-primary); /* Borda vermelha forte no foco */
+  /* Ajuste no box-shadow para ser um anel de foco mais visível e uma sombra forte */
+  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.3), 0 0 15px rgba(255, 0, 0, 0.7);
+}
+
+/* Wrapper para os componentes de orçamento (OrcamentoMotorCompleto/Cabecote) */
+.orcamento-form-wrapper {
+  margin-top: 1.5rem;
+}
+
+/* Seção de Histórico */
+.historico-section {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed #444;
+}
+
+.historico-section h2 {
+  font-size: 1.8rem;
+  color: var(--red-primary);
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--red-primary);
+  padding-bottom: 0.5rem;
+}
+
+.historico-buttons-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Botões de Ação (Exportar) */
+.action-btn {
+  background-color: var(--red-primary);
+  color: var(--text-light);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+}
+
+.action-btn:hover {
+  background-color: var(--red-accent);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+}
+
+.no-historico-message {
+  margin-top: 1.5rem;
+  color: var(--red-light);
+  text-align: center;
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+/* Tabela de Histórico */
+.historico-table {
+  width: 100%;
+  margin-top: 1.5rem;
+  border-collapse: collapse;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.historico-table th,
+.historico-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #333;
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+.historico-table th {
+  background-color: #2a2a2a;
+  color: var(--red-light);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.historico-table tr:last-child td {
+  border-bottom: none;
+}
+
+.historico-table tbody tr:nth-child(odd) {
+  background-color: #1a1a1a;
+}
+
+.historico-table tbody tr:hover {
+  background-color: #282828;
+}
+
+/* Classes de status */
+.sucesso {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.erro {
+  color: #ff5252;
+  font-weight: bold;
+}
+
+/* Classes que podem vir de outros componentes (ajustadas para este contexto) */
 .form-orcamento {
   display: flex;
   flex-direction: column;
@@ -36,10 +213,53 @@
   background-color: #cc0000;
 }
 
-.sucesso {
-  color: #4caf50;
+.sub-items-list {
+  padding-left: 25px;
+  margin-top: 5px;
 }
 
-.erro {
-  color: #ff5252;
+.sub-items-list .sub-item-label {
+  font-size: 0.9em;
+  margin-bottom: 3px;
+}
+
+
+/* --- MOBILE-FIRST: Media Queries para Desktop --- */
+@media (min-width: 768px) {
+  .painel-orcamentos-container {
+    padding: 3rem;
+  }
+
+  .titulo-claro {
+    font-size: 3.5rem;
+  }
+
+  .subtitulo-claro {
+    font-size: 1.5rem;
+    flex-direction: row; /* Inline para desktop */
+    align-items: center;
+    justify-content: center; /* Centraliza no desktop */
+  }
+
+  .tipo-orcamento-selector select {
+    width: auto; /* Largura automática */
+    min-width: 220px;
+  }
+
+  .historico-buttons-group {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .action-btn {
+    width: auto;
+    min-width: 180px;
+  }
+
+  .historico-table th,
+  .historico-table td {
+    padding: 1.2rem;
+    font-size: 1rem;
+  }
 }

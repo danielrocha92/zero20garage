@@ -1,468 +1,356 @@
-import React, { useState } from "react";
-import "./OrcamentoMotor.css"; // Ensure this CSS file is created as well
+// src/components/OrcamentoCabecote.js
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./OrcamentoMotor.css"; // Reutilizando o CSS existente
+import logo from '../assets/images/logo.png';
 
-const itens = [
-  { nome: "Pistão", valor: 0, tipo: "quantidade" },
-  { nome: "Anel", valor: 0, tipo: "quantidade" },
-  { nome: "Bronzina de mancal", valor: 0, tipo: "quantidade" },
-  { nome: "Bronzina de biela", valor: 0, tipo: "quantidade" },
-  { nome: "Arruela encosto", valor: 0, tipo: "quantidade" },
-  { nome: "Bomba de óleo", valor: 0, tipo: "simples" },
-  { nome: "Bomba d’água", valor: 0, tipo: "simples" },
-  { nome: "Tubo d’água", valor: 0, tipo: "simples" },
-  { nome: "Filtro de óleo", valor: 0, tipo: "simples" },
-  { nome: "Filtro de ar", valor: 0, tipo: "simples" },
-  { nome: "Filtro de combustível", valor: 0, tipo: "simples" },
-  { nome: "Litros de óleo", valor: 0, tipo: "quantidade" },
-  { nome: "Litros de aditivo", valor: 0, tipo: "quantidade" },
-  {
-    nome: "Correias",
-    valor: 0,
-    tipo: "submenu",
-    filhos: [
-      { nome: "Dent kit", valor: 0 },
-      { nome: "Capa", valor: 0 },
-      { nome: "Acessórios kit", valor: 0 },
-      { nome: "Corrente kit", valor: 0 },
-    ],
-  },
-  { nome: "Válvula termostática", valor: 0, tipo: "simples" },
-  { nome: "Kit junta motor aço", valor: 0, tipo: "simples" },
-  { nome: "Retentor traseiro virab.", valor: 0, tipo: "simples" },
-  { nome: "Engrenagem virab.", valor: 0, tipo: "simples" },
-  { nome: "Retentor eixo comando", valor: 0, tipo: "simples" },
-  { nome: "Retentor válvula", valor: 0, tipo: "simples" },
-  {
-    nome: "Comando de válvula",
-    valor: 0,
-    tipo: "submenu",
-    filhos: [{ nome: "Admis", valor: 0 }, { nome: "Escape", valor: 0 }],
-  },
-  {
-    nome: "Mangueiras Radiador",
-    valor: 0,
-    tipo: "submenu",
-    filhos: [{ nome: "Inferior", valor: 0 }, { nome: "Superior", valor: 0 }],
-  },
-  { nome: "Válvulas escape", valor: 0, tipo: "simples" },
-  { nome: "Válvulas admissão", valor: 0, tipo: "simples" },
-  { nome: "Velas", valor: 0, tipo: "simples" },
-  { nome: "Anti Chamas", valor: 0, tipo: "simples" },
-  { nome: "Silicone", valor: 0, tipo: "simples" },
-  { nome: "Parafusos cabeçote", valor: 0, tipo: "simples" },
-  { nome: "Bobina", valor: 0, tipo: "simples" },
-  { nome: "Tuchos", valor: 0, tipo: "simples" },
-  { nome: "Cebolinha de óleo", valor: 0, tipo: "simples" },
-  { nome: "Sensor de temperatura", valor: 0, tipo: "simples" },
-  { nome: "Cabo de vela", valor: 0, tipo: "simples" },
-  { nome: "Biela", valor: 0, tipo: "simples" },
-  { nome: "Embreagem", valor: 0, tipo: "simples" },
-  { nome: "Desengripante e Limpa contato", valor: 0, tipo: "simples" },
-  { nome: "Outros", valor: 0, tipo: "simples" },
-];
+// IMPORTA OS NOVOS DADOS ESPECÍFICOS PARA O CABEÇOTE
+// Certifique-se de que este caminho e os nomes de exportação estão corretos
+import { itensCabecote, servicosCabecote } from "./DadosOrcamentoCabecote";
 
-const servicos = [
-  {
-    nome: "Cabeçote",
-    valor: 0,
-    tipo: "submenu",
-    filhos: [
-      { nome: "Usinagem Completa", valor: 0 },
-      { nome: "Limpeza e Revisão", valor: 0 },
-      { nome: "Novo", valor: 0 },
-      { nome: "Recuperação de Altura", valor: 0 },
-    ],
-  },
-  // Removed other services to match the image, if they are needed, they can be added back
-];
+// Helper para dividir um array em duas colunas (aproximadamente) - Pode ser mantido
+const splitIntoColumns = (arr) => {
+  const mid = Math.ceil(arr.length / 2);
+  return [arr.slice(0, mid), arr.slice(mid)];
+};
 
-export default function OrcamentoCabecote() {
-  const [selecionados, setSelecionados] = useState({}); // {nomeItem: valor, ...}
-  const [servicosSelecionados, setServicosSelecionados] = useState({}); // {nomeServico: valor, ...}
-  const [resumoServico, setResumoServico] = useState([]);
+export default function OrcamentoCabecote() { // Nome do componente alterado
+  const [selecionados, setSelecionados] = useState({}); // Para peças
+  const [servicosSelecionados, setServicosSelecionados] = useState({}); // Para serviços
+  const [subItensSelecionados, setSubItensSelecionados] = useState({}); // Para sub-itens de peças
+  const [subServicosSelecionados, setSubServicosSelecionados] = useState({}); // Para sub-itens de serviços
+  const [quantidades, setQuantidades] = useState({});
+
+  const [totalPecasDigitado, setTotalPecasDigitado] = useState(0);
+  const [totalServicosDigitado, setTotalServicosDigitado] = useState(0);
+  const [maoDeObraMecanicaDigitado, setMaoDeObraMecanicaDigitado] = useState(0);
+  const [totalGeralDigitado, setTotalGeralDigitado] = useState(0);
 
   const [dadosCliente, setDadosCliente] = useState({
     veiculo: "",
     ordemServico: "",
     cliente: "",
-    data: new Date().toLocaleDateString('pt-BR'), // Auto-fill current date
-    maoDeObraMecanica: 0, // Added for "Mão de Obra Mecânica"
+    data: new Date().toISOString().split('T')[0], // Data no formato YYYY-MM-DD
   });
 
-  function handleInputChange(e) {
+  useEffect(() => {
+    const pecas = parseFloat(totalPecasDigitado) || 0;
+    const servicos = parseFloat(totalServicosDigitado) || 0;
+    const maoObra = parseFloat(maoDeObraMecanicaDigitado) || 0;
+    setTotalGeralDigitado(pecas + servicos + maoObra);
+  }, [totalPecasDigitado, totalServicosDigitado, maoDeObraMecanicaDigitado]);
+
+  function handleDadosClienteChange(e) {
     const { name, value } = e.target;
     setDadosCliente((prev) => ({ ...prev, [name]: value }));
   }
 
-  const updateResumoServico = (item, type, action, value = 0, quantity = 1) => {
-    setResumoServico((prevResumo) => {
-      let newResumo = [...prevResumo];
-      const existingIndex = newResumo.findIndex(
-        (r) => r.nome === item.nome && r.tipo === type
-      );
+  function handleQuantidadeChange(nomeItem, qtd) {
+    const parsedQtd = parseInt(qtd, 10);
+    setQuantidades((prev) => ({ ...prev, [nomeItem]: parsedQtd > 0 ? parsedQtd : 1 }));
+  }
 
-      if (action === "add") {
-        if (existingIndex === -1) {
-          newResumo.push({ nome: item.nome, tipo: type, valor: value, quantidade: quantity });
-        } else {
-          newResumo[existingIndex] = { ...newResumo[existingIndex], valor: value, quantidade: quantity };
+  function handleItemToggle(item, isServico = false) {
+    const setSelectionState = isServico ? setServicosSelecionados : setSelecionados;
+    const setSubSelectionState = isServico ? setSubServicosSelecionados : setSubItensSelecionados;
+
+    setSelectionState((prev) => {
+      const newState = { ...prev };
+      if (newState[item.nome]) {
+        delete newState[item.nome];
+        if (item.filhos) {
+          setSubSelectionState(subPrev => {
+            const newSubState = { ...subPrev };
+            item.filhos.forEach(filho => delete newSubState[filho.nome]);
+            return newSubState;
+          });
         }
-      } else if (action === "remove") {
-        newResumo = newResumo.filter((r) => !(r.nome === item.nome && r.tipo === type));
-      } else if (action === "update") {
-        if (existingIndex !== -1) {
-          newResumo[existingIndex] = { ...newResumo[existingIndex], valor: value, quantidade: quantity };
+        if (item.tipo === "quantidade") {
+            setQuantidades(prevQtd => {
+              const newQtdState = { ...prevQtd };
+              delete newQtdState[item.nome];
+              return newQtdState;
+            });
+        }
+      } else {
+        newState[item.nome] = true;
+        if (item.tipo === "quantidade" && !quantidades[item.nome]) {
+            setQuantidades(prevQtd => ({ ...prevQtd, [item.nome]: 1 }));
         }
       }
-      return newResumo;
+      return newState;
     });
+  }
+
+  function handleSubItemToggle(filho, pai, isServico = false) {
+    const setSubSelectionState = isServico ? setSubServicosSelecionados : setSubItensSelecionados;
+    const setParentSelectionState = isServico ? setServicosSelecionados : setSelecionados;
+
+    setSubSelectionState((prev) => {
+      const newState = { ...prev };
+      if (newState[filho.nome]) {
+        delete newState[filho.nome];
+      } else {
+        newState[filho.nome] = true;
+        setParentSelectionState(parentPrev => ({ ...parentPrev, [pai.nome]: true }));
+      }
+      return newState;
+    });
+  }
+
+  const getFullResumoForExport = () => {
+    const allSelectedItems = [];
+
+    // Processa itens de Peças (agora usando itensCabecote)
+    itensCabecote.forEach(item => {
+      if (item.tipo === "simples" && selecionados[item.nome]) {
+        allSelectedItems.push({
+          nome: item.nome,
+          tipo: "peca",
+          quantidade: 1
+        });
+      } else if (item.tipo === "quantidade" && selecionados[item.nome]) {
+        allSelectedItems.push({
+          nome: item.nome,
+          tipo: "peca",
+          quantidade: quantidades[item.nome] || 1
+        });
+      } else if (item.tipo === "submenu") {
+        const isParentExplicitlySelected = selecionados[item.nome];
+        const isAnyChildSelected = item.filhos.some(f => subItensSelecionados[f.nome]);
+
+        if (isParentExplicitlySelected || isAnyChildSelected) {
+            item.filhos.forEach(filho => {
+                if (subItensSelecionados[filho.nome]) {
+                    allSelectedItems.push({
+                        nome: `${item.nome}: ${filho.nome}`,
+                        tipo: "peca",
+                        quantidade: 1
+                    });
+                }
+            });
+        }
+      }
+    });
+
+    // Processa itens de Serviços (agora usando servicosCabecote)
+    servicosCabecote.forEach(item => {
+      if (item.tipo === "simples" && servicosSelecionados[item.nome]) {
+        allSelectedItems.push({
+          nome: item.nome,
+          tipo: "servico",
+          quantidade: 1
+        });
+      } else if (item.tipo === "submenu") {
+        const isParentExplicitlySelected = servicosSelecionados[item.nome];
+        const isAnyChildSelected = item.filhos.some(f => subServicosSelecionados[f.nome]);
+
+        if (isParentExplicitlySelected || isAnyChildSelected) {
+            item.filhos.forEach(filho => {
+                if (subServicosSelecionados[filho.nome]) {
+                    allSelectedItems.push({
+                        nome: `${item.nome}: ${filho.nome}`,
+                        tipo: "servico",
+                        quantidade: 1
+                    });
+                }
+            });
+        }
+      }
+    });
+
+    return allSelectedItems;
   };
 
-  function toggleSelecionado(item, isServico = false) {
-    const alvo = isServico ? servicosSelecionados : selecionados;
-    const setAlvo = isServico ? setServicosSelecionados : setSelecionados;
-    const tipoItem = isServico ? "servico" : "peca";
+  const exportData = async (endpoint, fileName, responseType) => {
+    const resumoParaEnvio = getFullResumoForExport();
+    try {
+      const res = await axios.post(endpoint, {
+        dadosCliente,
+        resumoServico: resumoParaEnvio,
+        totalPecas: totalPecasDigitado,
+        totalServicos: totalServicosDigitado,
+        maoDeObraMecanica: maoDeObraMecanicaDigitado,
+        totalGeral: totalGeralDigitado,
+      }, {
+        responseType: responseType || 'json',
+      });
 
-    if (alvo[item.nome] !== undefined) {
-      const novo = { ...alvo };
-      delete novo[item.nome];
-      updateResumoServico(item, tipoItem, "remove");
-
-      if (item.filhos) {
-        item.filhos.forEach((filho) => {
-          delete novo[filho.nome];
-          updateResumoServico(filho, tipoItem, "remove");
-        });
+      if (responseType === 'blob') {
+        const url = window.URL.createObjectURL(new Blob([res.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", fileName);
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(url);
+      } else {
+        alert("Orçamento salvo no Google Sheets com sucesso!");
       }
-      setAlvo(novo);
-    } else {
-      const novo = { ...alvo, [item.nome]: item.valor || 0 };
-      updateResumoServico(item, tipoItem, "add", item.valor || 0, 1);
-
-      if (item.filhos) {
-        item.filhos.forEach((filho) => {
-          novo[filho.nome] = filho.valor || 0;
-          updateResumoServico(filho, tipoItem, "add", filho.valor || 0, 1);
-        });
-      }
-      setAlvo(novo);
+    } catch (err) {
+      console.error(`Erro ao ${fileName.split('.')[0]}:`, err.response?.data || err.message);
+      alert(`Erro ao ${fileName.split('.')[0]}. Verifique o console para detalhes.`);
     }
-  }
+  };
 
-  function toggleFilhoSelecionado(filho, pai, isServico = false) {
-    const alvo = isServico ? servicosSelecionados : selecionados;
-    const setAlvo = isServico ? setServicosSelecionados : setSelecionados;
-    const tipoItem = isServico ? "servico" : "peca";
+  const salvarGoogleSheets = () => exportData("/api/orcamentos/sheets", "sheets", "json");
+  const exportarExcel = () => exportData("/api/orcamentos/excel", `orcamento-cabecote-${dadosCliente.cliente}.xlsx`, "blob");
+  const exportarPDF = () => exportData("/api/orcamentos/pdf", `orcamento-cabecote-${dadosCliente.cliente}.pdf`, "blob");
 
-    if (alvo[filho.nome] !== undefined) {
-      const novo = { ...alvo };
-      delete novo[filho.nome];
-      setAlvo(novo);
-      updateResumoServico(filho, tipoItem, "remove");
-    } else {
-      setAlvo({ ...alvo, [filho.nome]: filho.valor || 0 });
-      updateResumoServico(filho, tipoItem, "add", filho.valor || 0, 1);
-      if (alvo[pai.nome] === undefined) {
-          setAlvo(prev => ({ ...prev, [pai.nome]: pai.valor || 0 }));
-          updateResumoServico(pai, tipoItem, "add", pai.valor || 0, 1);
-      }
-    }
-  }
-
-  function handleValorChange(nome, valor, isServico = false, quantity = 1) {
-    const alvo = isServico ? servicosSelecionados : selecionados;
-    const setAlvo = isServico ? setServicosSelecionados : setSelecionados;
-    const tipoItem = isServico ? "servico" : "peca";
-
-    const itemObj = itens.find(i => i.nome === nome) || servicos.find(s => s.nome === nome) ||
-                    itens.flatMap(i => i.filhos || []).find(f => f.nome === nome) ||
-                    servicos.flatMap(s => s.filhos || []).find(f => f.nome === nome);
-
-    setAlvo({ ...alvo, [nome]: parseFloat(valor) || 0 });
-    updateResumoServico(itemObj, tipoItem, "update", parseFloat(valor) || 0, quantity);
-  }
-
-  function handleQuantidadeChange(nome, quantidadeStr, isServico = false) {
-      const quantidade = parseInt(quantidadeStr) || 1;
-      const alvo = isServico ? servicosSelecionados : selecionados;
-      const setAlvo = isServico ? setServicosSelecionados : setSelecionados;
-      const tipoItem = isServico ? "servico" : "peca";
-
-      const itemObj = itens.find(i => i.nome === nome) || servicos.find(s => s.nome === nome) ||
-                       itens.flatMap(i => i.filhos || []).find(f => f.nome === nome) ||
-                       servicos.flatMap(s => s.filhos || []).find(f => f.nome === nome);
-
-      const valorAtual = alvo[nome] !== undefined ? alvo[nome] : 0;
-      setAlvo(prev => ({ ...prev, [nome]: valorAtual }));
-      updateResumoServico(itemObj, tipoItem, "update", valorAtual, quantidade);
-  }
-
-  const totalPecas = resumoServico
-    .filter((item) => item.tipo === "peca")
-    .reduce((acc, item) => acc + (item.valor * item.quantidade), 0);
-
-  const totalServicos = resumoServico
-    .filter((item) => item.tipo === "servico")
-    .reduce((acc, item) => acc + (item.valor * item.quantidade), 0);
-
-  const totalGeral = totalPecas + totalServicos + parseFloat(dadosCliente.maoDeObraMecanica || 0);
-
+  // Divide os itens de peças em duas colunas para o layout visual (usando itensCabecote)
+  const [pecasCol1, pecasCol2] = splitIntoColumns(itensCabecote);
 
   return (
-    <div className="orcamento-container">
-      <div className="orcamento-header">
-        <h2 className="orcamento-title">ORÇAMENTO - CABEÇOTE</h2>
-      </div>
-
-      <div className="client-details">
-        <div className="client-detail-item">
-          <span className="label">Veículo:</span>
-          <input
-            type="text"
-            name="veiculo"
-            value={dadosCliente.veiculo}
-            onChange={handleInputChange}
-            className="input-field"
-          />
+    <div className="orcamento-impresso-container">
+      <div className="header-info">
+        <div className="client-data">
+          <p>Veículo: <input type="text" name="veiculo" value={dadosCliente.veiculo} onChange={handleDadosClienteChange} /></p>
+          <p>OS: <input type="text" name="ordemServico" value={dadosCliente.ordemServico} onChange={handleDadosClienteChange} /></p>
+          <p>Cliente: <input type="text" name="cliente" value={dadosCliente.cliente} onChange={handleDadosClienteChange} /></p>
+          <p>Data:
+            <input
+              type="date"
+              name="data"
+              value={dadosCliente.data}
+              onChange={handleDadosClienteChange}
+            />
+          </p>
         </div>
-        <div className="client-detail-item">
-          <span className="label">OS:</span>
-          <input
-            type="text"
-            name="ordemServico"
-            value={dadosCliente.ordemServico}
-            onChange={handleInputChange}
-            className="input-field"
-          />
-        </div>
-        <div className="client-detail-item">
-          <span className="label">Cliente:</span>
-          <input
-            type="text"
-            name="cliente"
-            value={dadosCliente.cliente}
-            onChange={handleInputChange}
-            className="input-field"
-          />
-        </div>
-        <div className="client-detail-item">
-          <span className="label">Data:</span>
-          <input
-            type="text"
-            name="data"
-            value={dadosCliente.data}
-            onChange={handleInputChange}
-            className="input-field"
-            readOnly // Date is auto-filled
-          />
+        <div className="logo-placeholder">
+            <img src={logo} alt="Logo Zero Garage" />
         </div>
       </div>
 
-      <h3 className="section-title">Peças</h3>
-      <div className="parts-grid">
-        {itens.map((item) => (
-          <div key={item.nome} className="grid-item">
-            <label className="checkbox-wrapper">
-              <input
-                type="checkbox"
-                checked={
-                  selecionados[item.nome] !== undefined ||
-                  (item.filhos &&
-                    item.filhos.some((f) => selecionados[f.nome] !== undefined))
-                }
-                onChange={() => toggleSelecionado(item)}
-              />
-              {item.nome}
-            </label>
+      <h1 className="orcamento-impresso-title">ORÇAMENTO - CABEÇOTE</h1>
 
-            {selecionados[item.nome] !== undefined && !item.filhos && (
-              <div className="item-inputs">
-                {item.tipo === "quantidade" && (
-                  <input
-                    type="number"
-                    className="quantity-input"
-                    placeholder="Qtd."
-                    min="1"
-                    value={resumoServico.find(r => r.nome === item.nome && r.tipo === 'peca')?.quantidade || 1}
-                    onChange={(e) => handleQuantidadeChange(item.nome, e.target.value)}
-                  />
-                )}
+      <section className="section-pecas">
+        <h2>Peças para Cabeçote</h2>
+        <div className="pecas-columns">
+          {[pecasCol1, pecasCol2].map((col, colIndex) => (
+            <div key={colIndex} className="pecas-column">
+              {col.map((item) => (
+                <div key={item.nome} className="item-wrapper">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={!!selecionados[item.nome] || (item.filhos && item.filhos.some(f => subItensSelecionados[f.nome]))}
+                      onChange={() => handleItemToggle(item)}
+                    />
+                    {item.nome}
+                  </label>
+                  {item.tipo === "quantidade" && selecionados[item.nome] && (
+                    <input
+                      type="number"
+                      min="1"
+                      placeholder="Qtd"
+                      value={quantidades[item.nome] || ''}
+                      onChange={(e) => handleQuantidadeChange(item.nome, e.target.value)}
+                      className="quantity-input"
+                    />
+                  )}
+                  {item.filhos && (!!selecionados[item.nome] || item.filhos.some(f => subItensSelecionados[f.nome])) && (
+                    <div className="sub-items-list">
+                      {item.filhos.map((filho) => (
+                        <label key={filho.nome} className="sub-item-label">
+                          <input
+                            type="checkbox"
+                            checked={!!subItensSelecionados[filho.nome]}
+                            onChange={() => handleSubItemToggle(filho, item)}
+                          />
+                          {filho.nome}
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+        <p className="total-line-impresso">
+          Valor total de Peças: R$ <input
+            type="number"
+            step="0.01"
+            value={totalPecasDigitado === 0 ? '' : totalPecasDigitado}
+            onChange={(e) => setTotalPecasDigitado(parseFloat(e.target.value) || 0)}
+            className="input-total-valor"
+            placeholder="0.00"
+          />
+        </p>
+      </section>
+
+      <section className="section-servicos">
+        <h2>Serviços de Retífica de Cabeçote</h2>
+        <div className="servicos-grid">
+          {servicosCabecote.map((item) => (
+            <div key={item.nome} className="item-wrapper"> {/* AQUI ESTAVA O ERRO DE SINTAXE */}
+              <label>
                 <input
-                  type="number"
-                  className="value-input"
-                  placeholder="R$"
-                  value={selecionados[item.nome]}
-                  onChange={(e) => handleValorChange(item.nome, e.target.value, false, resumoServico.find(r => r.nome === item.nome && r.tipo === 'peca')?.quantidade || 1)}
+                  type="checkbox"
+                  checked={!!servicosSelecionados[item.nome] || (item.filhos && item.filhos.some(f => subServicosSelecionados[f.nome]))}
+                  onChange={() => handleItemToggle(item, true)}
                 />
-              </div>
-            )}
-
-            {item.filhos && (selecionados[item.nome] !== undefined || item.filhos.some(f => selecionados[f.nome] !== undefined)) && (
-              <div classNameNam="sub-items">
-                {item.filhos.map((filho) => (
-                  <label key={filho.nome} className="checkbox-wrapper sub-item-label">
-                    <input
-                      type="checkbox"
-                      checked={selecionados[filho.nome] !== undefined}
-                      onChange={() => toggleFilhoSelecionado(filho, item)}
-                    />
-                    {filho.nome}
-                    {selecionados[filho.nome] !== undefined && (
+                {item.nome}
+              </label>
+              {item.filhos && (!!servicosSelecionados[item.nome] || item.filhos.some(f => subServicosSelecionados[f.nome])) && (
+                <div className="sub-items-list">
+                  {item.filhos.map((filho) => (
+                    <label key={filho.nome} className="sub-item-label">
                       <input
-                        type="number"
-                        className="value-input"
-                        placeholder="R$"
-                        value={selecionados[filho.nome]}
-                        onChange={(e) => handleValorChange(filho.nome, e.target.value)}
+                        type="checkbox"
+                        checked={!!subServicosSelecionados[filho.nome]}
+                        onChange={() => handleSubItemToggle(filho, item, true)}
                       />
-                    )}
-                  </label>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-      <h3 className="total-line">Valor total de Peças: R$ {totalPecas.toFixed(2)}</h3>
+                      {filho.nome}
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        <p className="total-line-impresso">
+          Valor total de Serviços: R$ <input
+            type="number"
+            step="0.01"
+            value={totalServicosDigitado === 0 ? '' : totalServicosDigitado}
+            onChange={(e) => setTotalServicosDigitado(parseFloat(e.target.value) || 0)}
+            className="input-total-valor"
+            placeholder="0.00"
+          />
+        </p>
+      </section>
 
-      <h3 className="section-title">Serviços no Cabeçote - Retifica</h3>
-      <div className="services-grid">
-        {servicos.map((item) => (
-          <div key={item.nome} className="grid-item">
-            <label className="checkbox-wrapper">
-              <input
-                type="checkbox"
-                checked={
-                  servicosSelecionados[item.nome] !== undefined ||
-                  (item.filhos &&
-                    item.filhos.some((f) => servicosSelecionados[f.nome] !== undefined))
-                }
-                onChange={() => toggleSelecionado(item, true)}
-              />
-              {item.nome}
-            </label>
-
-            {item.filhos && (servicosSelecionados[item.nome] !== undefined || item.filhos.some(f => servicosSelecionados[f.nome] !== undefined)) && (
-              <div className="sub-items">
-                {item.filhos.map((filho) => (
-                  <label key={filho.nome} className="checkbox-wrapper sub-item-label">
-                    <input
-                      type="checkbox"
-                      checked={servicosSelecionados[filho.nome] !== undefined}
-                      onChange={() => toggleFilhoSelecionado(filho, item, true)}
-                    />
-                    {filho.nome}
-                    {servicosSelecionados[filho.nome] !== undefined && (
-                      <input
-                        type="number"
-                        className="value-input"
-                        placeholder="R$"
-                        value={servicosSelecionados[filho.nome]}
-                        onChange={(e) => handleValorChange(filho.nome, e.target.value, true)}
-                      />
-                    )}
-                  </label>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-      <h3 className="total-line">Valor total de Serviços: R$ {totalServicos.toFixed(2)}</h3>
-
-      <div className="total-line mao-de-obra">
-        <span className="label">Valor total de Mão de Obra Mecânica:</span>
-        <input
+      <p className="total-line-impresso">
+        Valor total de Mão de Obra Mecânica: R$ <input
           type="number"
-          name="maoDeObraMecanica"
-          value={dadosCliente.maoDeObraMecanica}
-          onChange={handleInputChange}
-          className="input-field total-input"
-          placeholder="R$"
+          step="0.01"
+          value={maoDeObraMecanicaDigitado === 0 ? '' : maoDeObraMecanicaDigitado}
+          onChange={(e) => setMaoDeObraMecanicaDigitado(parseFloat(e.target.value) || 0)}
+          className="input-total-valor"
+          placeholder="0.00"
         />
-      </div>
-
-      <h2 className="grand-total">TOTAL GERAL: R$ {totalGeral.toFixed(2)}</h2>
-
-      <p className="payment-info">
-        Forma de pagamento: Pix, Débito e Crédito em até 10 vezes sem juros
       </p>
 
-      {/* Summary Section (can be hidden or toggled if not strictly needed in the final print) */}
-      <div className="resumo-servico-container">
-        <h3 className="section-title">Resumo de Serviço no Veículo</h3>
-        {resumoServico.length === 0 ? (
-          <p>Nenhum item ou serviço selecionado para o resumo.</p>
-        ) : (
-          <ul className="resumo-list">
-            {resumoServico.map((item, index) => (
-              <li key={`${item.tipo}-${item.nome}-${index}`} className="resumo-item">
-                <span className="resumo-item-nome">{item.nome}</span>
-                {item.quantidade > 1 && <span className="resumo-item-quantidade"> (x{item.quantidade})</span>}
-                <span className="resumo-item-valor">R$ {(item.valor * item.quantidade).toFixed(2)}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <p className="total-geral-impresso">
+        TOTAL GERAL: R$ <input
+          type="number"
+          step="0.01"
+          value={totalGeralDigitado.toFixed(2)}
+          onChange={(e) => setTotalGeralDigitado(parseFloat(e.target.value) || 0)}
+          className="input-total-final"
+          placeholder="0.00"
+        />
+      </p>
+
+      <p className="form-pagamento">(Forma de pagamento: Pix, Débito e Crédito em até 10x sem juros no cartão)</p>
 
       <div className="orcamento-buttons-container">
-        <button
-          className="action-btn save-google-sheets-btn"
-          onClick={() =>
-            salvarGoogleSheets({
-              dadosCliente,
-              itensSelecionados: selecionados,
-              servicosSelecionados,
-              resumoServico,
-            })
-          }
-        >
-          Salvar no Google Sheets
-        </button>
-        <button
-          className="action-btn download-excel-btn"
-          onClick={() =>
-            exportarExcel({
-              dadosCliente,
-              itensSelecionados: selecionados,
-              servicosSelecionados,
-              resumoServico,
-            })
-          }
-        >
-          Baixar Excel
-        </button>
-        <button
-          className="action-btn download-pdf-btn"
-          onClick={() =>
-            exportarPDF({
-              dadosCliente,
-              itensSelecionados: selecionados,
-              servicosSelecionados,
-              resumoServico,
-            })
-          }
-        >
-          Baixar PDF
-        </button>
+        <button onClick={salvarGoogleSheets} className="action-btn">Salvar no Google Sheets</button>
+        <button onClick={exportarExcel} className="action-btn">Exportar Excel</button>
+        <button onClick={exportarPDF} className="action-btn">Exportar PDF</button>
       </div>
     </div>
   );
-}
-
-// Placeholder functions (as provided in your original code)
-function salvarGoogleSheets(data) {
-  console.log("Salvar no Google Sheets:", data);
-  alert("Dados prontos para salvar no Google Sheets! Verifique o console.");
-}
-
-function exportarExcel(data) {
-  console.log("Exportar para Excel:", data);
-  alert("Dados prontos para exportar para Excel! Verifique o console.");
-}
-
-function exportarPDF(data) {
-  console.log("Exportar para PDF:", data);
-  alert("Dados prontos para exportar para PDF! Verifique o console.");
 }

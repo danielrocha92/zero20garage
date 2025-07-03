@@ -4,6 +4,7 @@ import OrcamentoMotorCompleto from './OrcamentoMotorCompleto';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
+import "./PainelOrcamentos.css"; // CSS específico para este componente
 
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxmLpnlvPQV77Rs4jG8pLh_uSTi-xq5LqGod-ykpgYxJ9Y9pRlI7pOgdgjsMs4qSTU6Jw/exec';
 
@@ -68,15 +69,15 @@ const PainelOrcamentos = () => {
 
   return (
     <div>
-      <h1>Painel de Orçamentos</h1>
+      <h1 className='titulo-claro'>Painel de Orçamentos</h1>
 
-      <label>
+      <h3 className='subititulo-claro'>
         Tipo de Orçamento:{' '}
         <select value={tipo} onChange={(e) => setTipo(e.target.value)}>
           <option value="motor">Motor Completo</option>
           <option value="cabecote">Cabeçote</option>
         </select>
-      </label>
+      </h3>
 
       <div style={{ marginTop: '1.5rem' }}>
         {tipo === 'motor' ? (

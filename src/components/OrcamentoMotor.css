@@ -1,295 +1,397 @@
-/* OrcamentoMotor.css */
+/* src/components/OrcamentoImpresso.css */
 
-/* ===== Container geral ===== */
-.orcamento-container {
-  background-color: #121212; /* fundo escuro */
-  color: #fff; /* texto branco */
-  max-width: 960px;
-  margin: 1rem auto;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
-  font-family: 'Ubuntu', sans-serif;
+/* Cores e Fontes Base */
+:root {
+  --bg-dark: #121212;
+  --text-light: #f0f0f0;
+  --red-primary: #ff0000;
+  --red-secondary: #ff3b3b;
+  --red-light: #ff9999;
+  --red-accent: #cc0000;
+  --border-color: #ff0000; /* Usado mais para elementos de interface/interação */
 }
 
-/* ===== Títulos ===== */
-.orcamento-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #ff0000; /* vermelho vivo */
+/* ========================================= */
+/* ===== Mobile-First Base Styles ===== */
+/* ========================================= */
+
+.orcamento-impresso-container {
+  font-family: 'Arial', sans-serif; /* Fonte similar à da imagem */
+  background-color: #252525; /* Fundo branco para simular impressão */
+  color: var(--text-light); /* Texto preto */
+  max-width: 800px; /* Será o maximo para desktop, mobile será fluido */
+  margin: 10px auto; /* Menor margem em mobile */
+  padding: 15px; /* Menor padding em mobile */
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-sizing: border-box; /* Garante que padding não adicione largura */
+}
+
+/* Header e Logo */
+.header-info {
+  display: flex;
+  flex-direction: column; /* Stacked for mobile */
+  align-items: center; /* Center items */
+  margin-bottom: 15px;
+  border-bottom: 2px solid #000;
+  padding-bottom: 10px;
+}
+
+.client-data {
+  width: 100%; /* Full width for mobile */
+}
+
+.client-data p {
+  margin: 5px 0;
+  font-size: 0.85em; /* Smaller font for mobile */
+  display: flex;
+  flex-direction: column; /* Stack label and input for readability */
+  align-items: flex-start; /* Align text to start */
+  gap: 3px;
+}
+
+.client-data input[type="text"] {
+  border: none;
+  border-bottom: 1px dashed #666;
+  padding: 2px 5px;
+  font-size: 0.85em;
+  width: 100%; /* Full width input */
+  background-color: transparent;
+  color: #000;
+  box-sizing: border-box;
+}
+
+.logo-placeholder {
+  width: 80px; /* Smaller logo for mobile */
+  height: auto;
+  margin-top: 10px; /* Space between client data and logo */
+}
+
+.logo-placeholder img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Título Principal */
+.orcamento-impresso-title {
   text-align: center;
-  margin-bottom: 1.5rem;
-  letter-spacing: 0.1rem;
-  text-shadow: 0 0 8px #ff0000aa;
+  font-size: 1.3em; /* Smaller font for mobile */
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-.section-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #ff3b3b;
-  margin: 1.5rem 0 1rem 0;
-  border-bottom: 2px solid #ff0000;
-  padding-bottom: 0.25rem;
+/* Seções de Peças e Serviços */
+.section-pecas, .section-servicos {
+  margin-bottom: 20px; /* Smaller margin for mobile */
 }
 
-/* ===== Grid de itens ===== */
-.parts-grid,
-.services-grid {
+.section-pecas h2, .section-servicos h2 {
+  font-size: 1.1em; /* Smaller font for section titles */
+  border-bottom: 1px solid #000;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.pecas-columns {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem 1.5rem;
-  margin-bottom: 1.5rem;
+  grid-template-columns: 1fr; /* Single column for mobile */
+  gap: 10px; /* Smaller gap */
 }
 
-.grid-item {
-  background-color: #1e1e1e;
-  border-radius: 6px;
-  padding: 1rem;
-  box-shadow: 0 0 8px #ff000077;
-  display: flex;
-  flex-direction: column;
+.item-wrapper {
+  margin-bottom: 6px; /* Smaller space between items */
 }
 
-/* ===== Checkboxes e Labels ===== */
-.checkbox-wrapper {
+.item-wrapper label {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-weight: 600;
-  cursor: pointer;
-  user-select: none;
-  color: #ff9999;
-}
-
-.checkbox-wrapper input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  accent-color: #ff0000;
+  gap: 5px;
+  font-size: 0.9em; /* Smaller font for item labels */
   cursor: pointer;
 }
 
-/* ===== Inputs ===== */
-.input-field,
-.value-input,
-.quantity-input {
-  background-color: #222;
-  border: 1.5px solid #ff0000;
-  color: #fff;
-  border-radius: 4px;
-  padding: 0.35rem 0.5rem;
-  font-size: 1rem;
-  width: 100%;
-  max-width: 100px;
-  margin-left: 0.5rem;
-  transition: border-color 0.3s ease;
-}
-
-.input-field:focus,
-.value-input:focus,
-.quantity-input:focus {
-  outline: none;
-  border-color: #ff4d4d;
-  box-shadow: 0 0 8px #ff4d4daa;
-}
-
-/* Inputs inline com label */
-.client-detail-item {
-  margin-bottom: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-}
-
-.label {
-  min-width: 110px;
-  font-weight: 600;
-  color: #ff5555;
-}
-
-/* ===== Inputs especiais ===== */
-.total-input {
-  max-width: 180px;
-  font-weight: 700;
-  font-size: 1.15rem;
-  background-color: #2a2a2a;
-}
-
-/* ===== Sub-itens e submenu ===== */
-.sub-items {
-  margin-top: 0.8rem;
-  padding-left: 1.5rem;
-  border-left: 2px solid #ff0000;
-  color: #ffb3b3;
-  font-weight: 500;
-  font-size: 0.95rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-.sub-item-label {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  user-select: none;
-}
-
-.sub-item-label input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  accent-color: #ff0000;
-}
-
-.sub-item-valor {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin-left: 1.3rem;
-  font-size: 0.95rem;
-}
-
-.sub-item-valor span {
-  min-width: 120px;
-  color: #ff6666;
-  font-weight: 600;
-}
-
-/* ===== Botões ===== */
-.orcamento-buttons-container {
-  margin-top: 2rem;
+.item-wrapper input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #000;
+  background-color: #fff;
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.item-wrapper input[type="checkbox"]:checked {
+  background-color: transparent;
+}
+
+.item-wrapper input[type="checkbox"]:checked::before {
+  content: 'X';
+  font-size: 12px;
+  color: #000;
+  font-weight: bold;
+}
+
+/* Input de quantidade */
+.quantity-input {
+  border: none;
+  border-bottom: 1px dashed #666;
+  padding: 2px 5px;
+  font-size: 0.85em; /* Smaller font for quantity */
+  width: 40px;
+  margin-left: 5px;
+  text-align: center;
+  background-color: transparent;
+  color: #000;
+}
+
+/* Sub-itens */
+.sub-items-list {
+  padding-left: 15px; /* Smaller indentation */
+  margin-top: 5px;
+}
+
+.sub-items-list .sub-item-label {
+  font-size: 0.85em; /* Smaller font for sub-item labels */
+  margin-bottom: 3px;
+}
+
+/* Serviços Grid (sempre uma coluna por padrão) */
+.servicos-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+/* Total Lines (Valores digitados) */
+.total-line-impresso {
+  font-size: 1em; /* Smaller font for total lines */
+  margin: 8px 0;
+  text-align: left; /* Align to left on mobile */
+  display: flex;
+  flex-direction: column; /* Stack label and input for readability */
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.input-total-valor {
+  border: none;
+  border-bottom: 1px dashed #666;
+  padding: 2px 5px;
+  font-size: 0.95em;
+  width: 100%; /* Full width for input value */
+  text-align: left; /* Align text to left for mobile */
+  background-color: transparent;
+  color: #000;
+  box-sizing: border-box;
+}
+
+.total-geral-impresso {
+  font-size: 1.2em; /* Smaller font for grand total */
+  font-weight: bold;
+  margin-top: 15px;
+  text-align: left; /* Align to left on mobile */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.input-total-final {
+  border: none;
+  border-bottom: 1px dashed #666;
+  padding: 3px 8px;
+  font-size: 1.1em;
+  width: 100%; /* Full width for grand total input */
+  text-align: left; /* Align text to left for mobile */
+  background-color: transparent;
+  color: #000;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.form-pagamento {
+  text-align: center;
+  font-size: 0.8em; /* Smaller font */
+  margin-top: 15px;
+  color: #666;
+}
+
+/* Botões */
+.orcamento-buttons-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column; /* Stacked for mobile */
+  gap: 10px;
 }
 
 .action-btn {
-  background-color: #ff0000;
+  background-color: var(--red-primary);
   border: none;
   color: white;
   font-weight: 700;
-  padding: 0.7rem 1.5rem;
+  padding: 8px 15px; /* Smaller padding */
   border-radius: 6px;
   cursor: pointer;
-  font-size: 1rem;
-  box-shadow: 0 0 10px #ff0000cc;
+  font-size: 0.9em; /* Smaller font */
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.4);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%; /* Full width for mobile buttons */
 }
 
 .action-btn:hover,
 .action-btn:focus {
-  background-color: #cc0000;
-  box-shadow: 0 0 15px #ff0000dd;
+  background-color: var(--red-accent);
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
   outline: none;
 }
 
-/* ===== Totalizadores ===== */
-.total-line {
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: #ff5555;
-  margin-top: 1rem;
-  text-align: right;
+.logo-placeholder {
+  width: 80px; /* Ou o tamanho desejado, mas que não seja 0 */
+  height: auto; /* Importante para manter a proporção */
+  overflow: visible; /* Garante que a imagem não seja cortada */
 }
 
-.grand-total {
-  margin-top: 2rem;
-  font-size: 1.7rem;
-  text-align: center;
-  color: #ff0000;
-  text-shadow: 0 0 10px #ff0000aa;
-  font-weight: 900;
+.logo-placeholder img {
+    max-width: 100%; /* Garante que a imagem se ajuste ao contêiner */
+    height: auto;
+    display: block; /* Remove espaços extras se for inline */
+    /* Remova qualquer "display: none;", "opacity: 0;", "width: 0;", "height: 0;" */
 }
 
-/* ===== Informações adicionais ===== */
-.additional-info {
-  margin-top: 1.7rem;
-  font-size: 0.95rem;
-  color: #ff9999;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
 
-.inline-input {
-  max-width: 200px;
-  background-color: #222;
-  border: 1.5px solid #ff0000;
-  border-radius: 4px;
-  color: #fff;
-  padding: 0.3rem 0.5rem;
-  font-weight: 600;
-  margin-left: 0.3rem;
-}
+/* ========================================= */
+/* ===== Desktop and Larger Screens (min-width: 600px) ===== */
+/* ========================================= */
 
-/* ===== React-Select custom ===== */
-.multi-select-react {
-  margin-top: 0.5rem;
-}
-
-/* Prefixo zerogarage usado para react-select */
-.zerogarage__control {
-  background-color: #222 !important;
-  border: 1.5px solid #ff0000 !important;
-  box-shadow: none !important;
-  min-height: 38px;
-}
-
-.zerogarage__control--is-focused {
-  border-color: #ff4d4d !important;
-  box-shadow: 0 0 8px #ff4d4daa !important;
-}
-
-.zerogarage__menu {
-  background-color: #121212 !important;
-  color: #fff !important;
-}
-
-.zerogarage__option {
-  color: #fff !important;
-  background-color: #121212 !important;
-  cursor: pointer;
-}
-
-.zerogarage__option--is-focused {
-  background-color: #ff0000 !important;
-  color: #fff !important;
-}
-
-.zerogarage__option--is-selected {
-  background-color: #cc0000 !important;
-  color: #fff !important;
-}
-
-.zerogarage__multi-value {
-  background-color: #ff0000 !important;
-  color: #fff !important;
-  border-radius: 3px;
-  padding: 2px 6px;
-  font-weight: 700;
-}
-
-.zerogarage__multi-value__label {
-  color: #fff !important;
-}
-
-.zerogarage__multi-value__remove {
-  color: #fff !important;
-  cursor: pointer;
-}
-
-/* ===== Responsividade ===== */
-@media (max-width: 640px) {
-  .parts-grid,
-  .services-grid {
-    grid-template-columns: 1fr;
+@media (min-width: 600px) {
+  .orcamento-impresso-container {
+    padding: 30px; /* Restore larger padding */
+    margin: 20px auto;
   }
-  .client-detail-item {
-    flex-direction: column;
+
+  .header-info {
+    flex-direction: row; /* Side-by-side for desktop */
     align-items: flex-start;
+    margin-bottom: 20px;
   }
-  .label {
-    margin-bottom: 0.25rem;
+
+  .client-data {
+    width: auto; /* Restore auto width */
+    flex-grow: 1; /* Allow to grow */
+  }
+
+  .client-data p {
+    font-size: 0.9em;
+    flex-direction: row; /* Restore inline layout */
+    align-items: center;
+    gap: 5px;
+  }
+
+  .client-data input[type="text"] {
+    width: auto; /* Allow auto width based on content/flex-grow */
+    flex-grow: 1;
+    font-size: 0.9em;
+  }
+
+  .logo-placeholder {
+    width: 100px; /* Restore larger logo size */
+    margin-top: 0; /* No top margin */
+  }
+
+  .orcamento-impresso-title {
+    font-size: 1.5em;
+    margin-bottom: 25px;
+  }
+
+  .section-pecas, .section-servicos {
+    margin-bottom: 30px;
+  }
+
+  .section-pecas h2, .section-servicos h2 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+  }
+
+  .pecas-columns {
+    grid-template-columns: 1fr 1fr; /* Two columns for desktop */
+    gap: 15px 30px;
+  }
+
+  .item-wrapper {
+    margin-bottom: 8px;
+  }
+
+  .item-wrapper label {
+    font-size: 0.95em;
+  }
+
+  .quantity-input {
+    font-size: 0.9em;
+  }
+
+  .sub-items-list {
+    padding-left: 20px;
+  }
+
+  .sub-items-list .sub-item-label {
+    font-size: 0.9em;
+  }
+
+  /* Total Lines (Valores digitados) */
+  .total-line-impresso {
+    font-size: 1.1em;
+    margin: 10px 0;
+    text-align: right; /* Align right on desktop */
+    flex-direction: row; /* Inline layout */
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .input-total-valor {
+    font-size: 1em;
+    width: 100px; /* Specific width for values */
+    text-align: right; /* Align text right for desktop */
+  }
+
+  .total-geral-impresso {
+    font-size: 1.4em;
+    margin-top: 20px;
+    text-align: right;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .input-total-final {
+    font-size: 1.2em;
+    width: 120px;
+    text-align: right;
+  }
+
+  .form-pagamento {
+    font-size: 0.85em;
+    margin-top: 20px;
+  }
+
+  /* Botões */
+  .orcamento-buttons-container {
+    margin-top: 30px;
+    flex-direction: row; /* Inline for desktop */
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .action-btn {
+    padding: 10px 20px;
+    font-size: 1em;
+    width: auto; /* Auto width for desktop buttons */
   }
 }

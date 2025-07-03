@@ -1,378 +1,399 @@
+// src/components/OrcamentoImpresso.js
 import React, { useState, useEffect } from "react";
-import "./OrcamentoMotor.css";
+import axios from "axios";
+import "./OrcamentoMotor.css"; // CSS específico para este componente
+import logo from '../assets/images/logo.png';
 
-// Dados iniciais das peças
-const itensPecas = [
-  { nome: "Pistão", valor: 0, tipo: "quantidade" },
-  { nome: "Anel", valor: 0, tipo: "quantidade" },
-  { nome: "Bronzina de mancal", valor: 0, tipo: "quantidade" },
-  { nome: "Bronzina de biela", valor: 0, tipo: "quantidade" },
-  { nome: "Arruela encosto", valor: 0, tipo: "quantidade" },
-  { nome: "Bomba de óleo", valor: 0, tipo: "simples" },
-  { nome: "Bomba d’água", valor: 0, tipo: "simples" },
-  { nome: "Tubo d’água", valor: 0, tipo: "simples" },
-  { nome: "Filtro de óleo", valor: 0, tipo: "simples" },
-  { nome: "Filtro de ar", valor: 0, tipo: "simples" },
-  { nome: "Filtro de combustível", valor: 0, tipo: "simples" },
-  { nome: "Litros de óleo", valor: 0, tipo: "quantidade" },
-  { nome: "Litros de aditivo", valor: 0, tipo: "quantidade" },
-  {
-    nome: "Correias",
-    valor: 0,
-    tipo: "submenu",
-    filhos: [
-      { nome: "Dent kit", valor: 0 },
-      { nome: "Capa", valor: 0 },
-      { nome: "Acessórios kit", valor: 0 },
-      { nome: "Corrente kit", valor: 0 },
-    ],
-  },
-  { nome: "Válvula termostática", valor: 0, tipo: "simples" },
-  { nome: "Kit junta motor aço", valor: 0, tipo: "simples" },
-  { nome: "Retentor traseiro virab.", valor: 0, tipo: "simples" },
-  { nome: "Engrenagem virab.", valor: 0, tipo: "simples" },
-  { nome: "Retentor eixo comando", valor: 0, tipo: "simples" },
-  { nome: "Retentor válvula", valor: 0, tipo: "simples" },
-  {
-    nome: "Comando de válvula",
-    valor: 0,
-    tipo: "submenu",
-    filhos: [{ nome: "Admis", valor: 0 }, { nome: "Escape", valor: 0 }],
-  },
-  {
-    nome: "Mangueiras Radiador",
-    valor: 0,
-    tipo: "submenu",
-    filhos: [{ nome: "Inferior", valor: 0 }, { nome: "Superior", valor: 0 }],
-  },
-  { nome: "Válvulas escape", valor: 0, tipo: "quantidade" }, // Alterado para quantidade se a qtde variar
-  { nome: "Válvulas admissão", valor: 0, tipo: "quantidade" }, // Alterado para quantidade se a qtde variar
-  { nome: "Velas", valor: 0, tipo: "quantidade" }, // Pode ser por quantidade (4 velas, etc.)
-  { nome: "Anti Chamas", valor: 0, tipo: "simples" },
-  { nome: "Silicone", valor: 0, tipo: "simples" },
-  { nome: "Parafusos cabeçote", valor: 0, tipo: "simples" },
-  { nome: "Bobina", valor: 0, tipo: "simples" },
-  { nome: "Tuchos", valor: 0, tipo: "quantidade" }, // Pode ser por quantidade
-  { nome: "Cebolinha de óleo", valor: 0, tipo: "simples" },
-  { nome: "Sensor de temperatura", valor: 0, tipo: "simples" },
-  { nome: "Cabo de vela", valor: 0, tipo: "simples" },
-  { nome: "Biela", valor: 0, tipo: "quantidade" }, // Pode ser por quantidade
-  { nome: "Embreagem", valor: 0, tipo: "simples" },
-  { nome: "Desengripante e Limpa contato", valor: 0, tipo: "simples" },
-  { nome: "Outros: Balancinho + Escoras", valor: 0, tipo: "simples" },
-];
+// Importa os dados de itens e serviços
+import { itens, servicos } from "./DadosOrcamentoCompleto";
 
-// Dados iniciais dos serviços
-const servicosMotor = [
-  {
-    nome: "Retífica de Cabeçote",
-    valor: 0,
-    tipo: "submenu", // Submenu com checkboxes individuais para serviços
-    filhos: [
-      { nome: "Usinagem Completa", valor: 0 },
-      { nome: "Limpeza e Revisão", valor: 0 },
-      { nome: "Retífica Nova", valor: 0 },
-      { nome: "Recuperação de Altura", valor: 0 },
-    ],
-  },
-  { nome: "Retífica de Bloco (Usinagem Completa)", valor: 0, tipo: "simples" },
-  {
-    nome: "Retífica de Bielas",
-    valor: 0,
-    tipo: "submenu",
-    filhos: [{ nome: "Usinagem", valor: 0 }, { nome: "Biela Nova", valor: 0 }],
-  },
-  {
-    nome: "Retífica de Virabrequim",
-    valor: 0,
-    tipo: "submenu",
-    filhos: [{ nome: "Usinagem Completa", valor: 0 }, { nome: "Virabrequim Novo", valor: 0 }],
-  },
-  { nome: "Retífica de Volante (Usinagem Completa)", valor: 0, tipo: "simples" },
-  { nome: "Montagem de Motor Técnica", valor: 0, tipo: "simples" },
-  { nome: "Banho (cárter, suportes, parafusos etc)", valor: 0, tipo: "simples" },
-];
+// Helper para dividir um array em duas colunas (aproximadamente)
+const splitIntoColumns = (arr) => {
+  const mid = Math.ceil(arr.length / 2);
+  return [arr.slice(0, mid), arr.slice(mid)];
+};
 
-export default function OrcamentoMotor() {
-  const [selecionadosPecas, setSelecionadosPecas] = useState({}); // {nomeItem: {valor: X, quantidade: Y}, ...}
-  const [selecionadosServicos, setSelecionadosServicos] = useState({}); // {nomeServico: {valor: X, quantidade: Y}, ...}
+export default function OrcamentoImpresso() {
+  // Estado para controlar a seleção de cada item principal (checkbox)
+  const [selecionados, setSelecionados] = useState({}); // Para peças
+  const [servicosSelecionados, setServicosSelecionados] = useState({}); // Para serviços
+
+  // Estado para controlar a seleção de sub-itens (checkboxes dentro de submenus)
+  const [subItensSelecionados, setSubItensSelecionados] = useState({}); // Para sub-itens de peças
+  const [subServicosSelecionados, setSubServicosSelecionados] = useState({}); // Para sub-itens de serviços
+
+  // Estado para quantidades de itens do tipo 'quantidade'
+  const [quantidades, setQuantidades] = useState({});
+
+  // Estados para os valores totais digitados manualmente
+  const [totalPecasDigitado, setTotalPecasDigitado] = useState(0);
+  const [totalServicosDigitado, setTotalServicosDigitado] = useState(0);
+  const [maoDeObraMecanicaDigitado, setMaoDeObraMecanicaDigitado] = useState(0);
+  const [totalGeralDigitado, setTotalGeralDigitado] = useState(0);
 
   const [dadosCliente, setDadosCliente] = useState({
     veiculo: "",
     ordemServico: "",
     cliente: "",
-    data: new Date().toLocaleDateString('pt-BR'),
-    maoDeObraMecanica: 0,
-    garantia: "3 Meses / 5.000 Km", // Valor padrão para garantia
+    // MUDANÇA AQUI: Inicializa a data no formato YYYY-MM-DD para o input type="date"
+    data: new Date().toISOString().split('T')[0],
   });
 
-  // Função genérica para lidar com a mudança de estado de seleção
-  const handleToggle = (item, isService = false, parentItem = null) => {
-    const setState = isService ? setSelecionadosServicos : setSelecionadosPecas;
-    const currentState = isService ? selecionadosServicos : selecionadosPecas;
+  // Efeito para recalcular o total geral sempre que os totais de peças, serviços ou mão de obra mudam
+  useEffect(() => {
+    const pecas = parseFloat(totalPecasDigitado) || 0;
+    const servicos = parseFloat(totalServicosDigitado) || 0;
+    const maoObra = parseFloat(maoDeObraMecanicaDigitado) || 0;
+    setTotalGeralDigitado(pecas + servicos + maoObra);
+  }, [totalPecasDigitado, totalServicosDigitado, maoDeObraMecanicaDigitado]);
 
-    setState(prev => {
-      const newState = { ...prev };
-      const itemName = item.nome;
 
-      if (newState[itemName]) {
-        // Remover item
-        delete newState[itemName];
-        // Se for um item pai, remove também os filhos
-        if (item.filhos) {
-          item.filhos.forEach(filho => delete newState[filho.nome]);
-        }
-      } else {
-        // Adicionar item
-        newState[itemName] = { valor: item.valor || 0, quantidade: item.tipo === "quantidade" ? 1 : 1 };
-        // Se for um item filho, garante que o pai esteja selecionado
-        if (parentItem && !newState[parentItem.nome]) {
-          newState[parentItem.nome] = { valor: parentItem.valor || 0, quantidade: 1 };
-        }
-        // Se for um item pai, adiciona todos os filhos (com seus valores iniciais)
-        if (item.filhos) {
-          item.filhos.forEach(filho => {
-            if (!newState[filho.nome]) { // Evita sobrescrever se já foi selecionado individualmente
-                newState[filho.nome] = { valor: filho.valor || 0, quantidade: filho.tipo === "quantidade" ? 1 : 1 };
-            }
-          });
-        }
-      }
-      return newState;
-    });
-  };
-
-  // Função genérica para lidar com a mudança de valor/quantidade
-  const handleValueChange = (itemName, value, type = 'valor', isService = false) => {
-    const setState = isService ? setSelecionadosServicos : setSelecionadosPecas;
-    setState(prev => {
-      const currentItem = prev[itemName] || { valor: 0, quantidade: 1 };
-      const parsedValue = parseFloat(value) || 0;
-      const parsedQuantity = parseInt(value) || 1;
-
-      return {
-        ...prev,
-        [itemName]: {
-          ...currentItem,
-          [type]: type === 'valor' ? parsedValue : parsedQuantity
-        }
-      };
-    });
-  };
-
-  const handleClienteInputChange = (e) => {
+  function handleDadosClienteChange(e) {
     const { name, value } = e.target;
     setDadosCliente((prev) => ({ ...prev, [name]: value }));
-  };
+  }
 
-  const calculateTotal = (selectedItems) => {
-    return Object.values(selectedItems).reduce((acc, item) => {
-      return acc + (item.valor * item.quantidade);
-    }, 0);
-  };
+  function handleQuantidadeChange(nomeItem, qtd) {
+    const parsedQtd = parseInt(qtd, 10); // Use radix 10 for parseInt
+    setQuantidades((prev) => ({ ...prev, [nomeItem]: parsedQtd > 0 ? parsedQtd : 1 })); // Garante no mínimo 1
+  }
 
-  const totalPecas = calculateTotal(selecionadosPecas);
-  const totalServicos = calculateTotal(selecionadosServicos);
-  const totalMaoDeObra = parseFloat(dadosCliente.maoDeObraMecanica) || 0;
-  const totalGeral = totalPecas + totalServicos + totalMaoDeObra;
+  // Lida com o checkbox principal de um item (que pode ser simples ou pai de submenu)
+  function handleItemToggle(item, isServico = false) {
+    const setSelectionState = isServico ? setServicosSelecionados : setSelecionados;
+    const setSubSelectionState = isServico ? setSubServicosSelecionados : setSubItensSelecionados;
 
-  // Renderiza um item (checkbox + inputs)
-  const renderItem = (item, isService = false, parentItem = null) => {
-    const selectedState = isService ? selecionadosServicos : selecionadosPecas;
-    const isSelected = selectedState[item.nome] !== undefined;
-
-    return (
-      <div key={item.nome} className="grid-item">
-        <label className="checkbox-wrapper">
-          <input
-            type="checkbox"
-            checked={isSelected}
-            onChange={() => handleToggle(item, isService, parentItem)}
-          />
-          {item.nome}
-        </label>
-
-        {isSelected && (
-          <div className="item-inputs">
-            {item.tipo === "quantidade" && (
-              <input
-                type="number"
-                className="quantity-input"
-                placeholder="Qtd."
-                min="1"
-                value={selectedState[item.nome]?.quantidade || 1}
-                onChange={(e) => handleValueChange(item.nome, e.target.value, 'quantidade', isService)}
-              />
-            )}
-            <input
-              type="number"
-              className="value-input"
-              placeholder="R$"
-              value={selectedState[item.nome]?.valor || 0}
-              onChange={(e) => handleValueChange(item.nome, e.target.value, 'valor', isService)}
-            />
-          </div>
-        )}
-
-        import React, { useState } from "react";
-import Select from "react-select";
-import "./OrcamentoMotor.css";
-
-const itensPecas = [
-  {
-    nome: "Correias",
-    valor: 0,
-    tipo: "submenu",
-    filhos: [
-      { nome: "Dent kit", valor: 0 },
-      { nome: "Capa", valor: 0 },
-      { nome: "Acessórios kit", valor: 0 },
-      { nome: "Corrente kit", valor: 0 },
-    ],
-  },
-  {
-    nome: "Comando de válvula",
-    valor: 0,
-    tipo: "submenu",
-    filhos: [{ nome: "Admis", valor: 0 }, { nome: "Escape", valor: 0 }],
-  },
-];
-
-export default function OrcamentoMotor() {
-  const [selecionadosPecas, setSelecionadosPecas] = useState({});
-
-  const handleToggle = (item, parentItem = null) => {
-    setSelecionadosPecas((prev) => {
+    setSelectionState((prev) => {
       const newState = { ...prev };
-      const itemName = item.nome;
-
-      if (newState[itemName]) {
-        delete newState[itemName];
+      if (newState[item.nome]) {
+        // Se desmarcando o pai, desmarca todos os filhos também no estado de sub-itens
+        delete newState[item.nome];
+        if (item.filhos) {
+          setSubSelectionState(subPrev => {
+            const newSubState = { ...subPrev };
+            item.filhos.forEach(filho => delete newSubState[filho.nome]);
+            return newSubState;
+          });
+        }
+        // Para itens de quantidade, reseta a quantidade para 1 se desmarcado
+        if (item.tipo === "quantidade") {
+            setQuantidades(prevQtd => {
+              const newQtdState = { ...prevQtd };
+              delete newQtdState[item.nome]; // ou newQtdState[item.nome] = 1; se quiser manter 1
+              return newQtdState;
+            });
+        }
       } else {
-        newState[itemName] = { valor: item.valor || 0, quantidade: 1 };
-        if (parentItem && !newState[parentItem.nome]) {
-          newState[parentItem.nome] = { valor: parentItem.valor || 0, quantidade: 1 };
+        // Se marcando o pai
+        newState[item.nome] = true;
+        // Para itens de quantidade, garante que tenha pelo menos 1 ao marcar
+        if (item.tipo === "quantidade" && !quantidades[item.nome]) {
+            setQuantidades(prevQtd => ({ ...prevQtd, [item.nome]: 1 }));
         }
       }
       return newState;
     });
-  };
+  }
 
-  const handleValueChange = (itemName, value, type = 'valor') => {
-    setSelecionadosPecas((prev) => {
-      const currentItem = prev[itemName] || { valor: 0, quantidade: 1 };
-      const parsedValue = type === 'valor' ? parseFloat(value) || 0 : parseInt(value) || 1;
+  // Lida com o checkbox de um sub-item
+  function handleSubItemToggle(filho, pai, isServico = false) {
+    const setSubSelectionState = isServico ? setSubServicosSelecionados : setSubItensSelecionados;
+    const setParentSelectionState = isServico ? setServicosSelecionados : setSelecionados;
 
-      return {
-        ...prev,
-        [itemName]: {
-          ...currentItem,
-          [type]: parsedValue,
-        },
-      };
+    setSubSelectionState((prev) => {
+      const newState = { ...prev };
+      if (newState[filho.nome]) {
+        delete newState[filho.nome];
+        // Opcional: Se desmarcar o último filho, desmarca o pai?
+        // Neste design, o pai pode ficar marcado mesmo sem filhos,
+        // mas se a ideia é que o pai só esteja marcado se HOUVER algum filho,
+        // você precisaria de mais lógica aqui para verificar se ainda há filhos marcados
+        // e, se não houver, desmarcar o pai. Por enquanto, mantemos o pai marcado
+        // se ele foi explicitamente marcado ou se algum filho o marcou.
+      } else {
+        newState[filho.nome] = true;
+        // Se um filho está sendo marcado, o pai também deve estar marcado automaticamente
+        setParentSelectionState(parentPrev => ({ ...parentPrev, [pai.nome]: true }));
+      }
+      return newState;
     });
+  }
+
+  // --- Função para montar o resumo final para envio (PDF/Excel/Sheets) ---
+  const getFullResumoForExport = () => {
+    const allSelectedItems = [];
+
+    // Processa itens de Peças
+    itens.forEach(item => {
+      if (item.tipo === "simples" && selecionados[item.nome]) {
+        allSelectedItems.push({
+          nome: item.nome,
+          tipo: "peca",
+          quantidade: 1
+        });
+      } else if (item.tipo === "quantidade" && selecionados[item.nome]) {
+        allSelectedItems.push({
+          nome: item.nome,
+          tipo: "peca",
+          quantidade: quantidades[item.nome] || 1
+        });
+      } else if (item.tipo === "submenu") {
+        // Para submenus, adicionamos o pai se ele foi marcado, OU se algum filho foi marcado
+        const isParentExplicitlySelected = selecionados[item.nome];
+        const isAnyChildSelected = item.filhos.some(f => subItensSelecionados[f.nome]);
+
+        if (isParentExplicitlySelected || isAnyChildSelected) {
+            // Adiciona o nome do grupo pai para contexto no resumo, mas sem valor/qtd específica
+            // Se você não quiser o pai no resumo se só os filhos estiverem marcados, remova este push condicional
+            // allSelectedItems.push({
+            //     nome: item.nome,
+            //     tipo: "peca_grupo", // Tipo diferente para identificar grupo
+            //     quantidade: 0
+            // });
+
+            // Adiciona os filhos selecionados
+            item.filhos.forEach(filho => {
+                if (subItensSelecionados[filho.nome]) {
+                    allSelectedItems.push({
+                        nome: `${item.nome}: ${filho.nome}`, // Ex: "Comando de Válvula: Admissão"
+                        tipo: "peca",
+                        quantidade: 1
+                    });
+                }
+            });
+        }
+      }
+    });
+
+    // Processa itens de Serviços
+    servicos.forEach(item => {
+      if (item.tipo === "simples" && servicosSelecionados[item.nome]) {
+        allSelectedItems.push({
+          nome: item.nome,
+          tipo: "servico",
+          quantidade: 1
+        });
+      } else if (item.tipo === "submenu") {
+        const isParentExplicitlySelected = servicosSelecionados[item.nome];
+        const isAnyChildSelected = item.filhos.some(f => subServicosSelecionados[f.nome]);
+
+        if (isParentExplicitlySelected || isAnyChildSelected) {
+            // allSelectedItems.push({
+            //     nome: item.nome,
+            //     tipo: "servico_grupo",
+            //     quantidade: 0
+            // });
+            item.filhos.forEach(filho => {
+                if (subServicosSelecionados[filho.nome]) {
+                    allSelectedItems.push({
+                        nome: `${item.nome}: ${filho.nome}`,
+                        tipo: "servico",
+                        quantidade: 1
+                    });
+                }
+            });
+        }
+      }
+    });
+
+    return allSelectedItems;
   };
 
-  const renderItem = (item) => {
-    const selectedState = selecionadosPecas;
-    const isSelected = selectedState[item.nome] !== undefined;
+  // Funções de exportação
+  const exportData = async (endpoint, fileName, responseType) => {
+    const resumoParaEnvio = getFullResumoForExport();
+    try {
+      const res = await axios.post(endpoint, {
+        dadosCliente,
+        resumoServico: resumoParaEnvio,
+        totalPecas: totalPecasDigitado,
+        totalServicos: totalServicosDigitado,
+        maoDeObraMecanica: maoDeObraMecanicaDigitado,
+        totalGeral: totalGeralDigitado,
+      }, {
+        responseType: responseType || 'json',
+      });
 
-    return (
-      <div key={item.nome} className="grid-item">
-        <label className="checkbox-wrapper">
-          <input
-            type="checkbox"
-            checked={isSelected}
-            onChange={() => handleToggle(item)}
-          />
-          {item.nome}
-        </label>
-
-        {item.filhos && (
-          <div className="sub-items">
-            <label className="select-wrapper">
-              <span>Selecione {item.nome}:</span>
-
-              <Select
-                isMulti
-                className="multi-select-react"
-                classNamePrefix="zerogarage"
-                options={[
-                  {
-                    label: "Itens",
-                    options: item.filhos.map((filho) => ({
-                      value: filho.nome,
-                      label: filho.nome,
-                    })),
-                  },
-                ]}
-                value={item.filhos
-                  .filter((filho) => selectedState[filho.nome])
-                  .map((filho) => ({
-                    value: filho.nome,
-                    label: filho.nome,
-                  }))}
-                onChange={(selectedOptions) => {
-                  const selectedValues = selectedOptions.map((opt) => opt.value);
-                  item.filhos.forEach((filho) => {
-                    const isSelected = selectedValues.includes(filho.nome);
-                    const alreadySelected = !!selectedState[filho.nome];
-
-                    if (isSelected && !alreadySelected) {
-                      handleToggle(filho, item);
-                    } else if (!isSelected && alreadySelected) {
-                      handleToggle(filho, item);
-                    }
-                  });
-                }}
-                theme={(theme) => ({
-                  ...theme,
-                  borderRadius: 4,
-                  colors: {
-                    ...theme.colors,
-                    primary: "#ff0000",
-                    primary75: "#cc0000",
-                    primary50: "#ff4d4d",
-                    primary25: "#ffe6e6",
-                    neutral0: "#1a1a1a",
-                    neutral5: "#2c2c2c",
-                    neutral10: "#444",
-                    neutral20: "#666",
-                    neutral30: "#999",
-                    neutral80: "#fff",
-                  },
-                })}
-              />
-            </label>
-
-            {item.filhos.map(
-              (filho) =>
-                selectedState[filho.nome] && (
-                  <div key={`valor-${filho.nome}`} className="sub-item-valor">
-                    <span>{filho.nome}:</span>
-                    <input
-                      type="number"
-                      className="value-input dark-input"
-                      placeholder="R$"
-                      value={selectedState[filho.nome]?.valor || 0}
-                      onChange={(e) =>
-                        handleValueChange(filho.nome, e.target.value, "valor")
-                      }
-                    />
-                  </div>
-                )
-            )}
-          </div>
-        )}
-      </div>
-    );
+      if (responseType === 'blob') {
+        const url = window.URL.createObjectURL(new Blob([res.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", fileName);
+        document.body.appendChild(link);
+        link.click();
+        link.remove(); // Limpa o elemento link
+        window.URL.revokeObjectURL(url); // Libera o objeto URL
+      } else {
+        alert("Orçamento salvo no Google Sheets com sucesso!");
+      }
+    } catch (err) {
+      console.error(`Erro ao ${fileName.split('.')[0]}:`, err.response?.data || err.message);
+      alert(`Erro ao ${fileName.split('.')[0]}. Verifique o console para detalhes.`);
+    }
   };
+
+  const salvarGoogleSheets = () => exportData("/api/orcamentos/sheets", "sheets", "json");
+  const exportarExcel = () => exportData("/api/orcamentos/excel", `orcamento-${dadosCliente.cliente}.xlsx`, "blob");
+  const exportarPDF = () => exportData("/api/orcamentos/pdf", `orcamento-${dadosCliente.cliente}.pdf`, "blob");
+
+  // Divide os itens de peças em duas colunas para o layout visual
+  const [pecasCol1, pecasCol2] = splitIntoColumns(itens);
 
   return (
-    <div className="orcamento-container">
-      <h2>Peças com Submenus (react-select)</h2>
-      <div className="parts-grid">
-        {itensPecas.map((item) => renderItem(item))}
+    <div className="orcamento-impresso-container">
+      <div className="header-info">
+        <div className="client-data">
+          <p>Veículo: <input type="text" name="veiculo" value={dadosCliente.veiculo} onChange={handleDadosClienteChange} /></p>
+          <p>OS: <input type="text" name="ordemServico" value={dadosCliente.ordemServico} onChange={handleDadosClienteChange} /></p>
+          <p>Cliente: <input type="text" name="cliente" value={dadosCliente.cliente} onChange={handleDadosClienteChange} /></p>
+          {/* MUDANÇA AQUI: Campo de input de data */}
+          <p>Data:
+            <input
+              type="date" // Altera o tipo para 'date' para ativar o seletor de calendário nativo
+              name="data"
+              value={dadosCliente.data} // O valor deve ser uma string YYYY-MM-DD
+              onChange={handleDadosClienteChange}
+            />
+          </p>
+        </div>
+        <div className="logo-placeholder">
+            <img src={logo} alt="Logo Zero Garage" /> {/* Certifique-se de ter sua logo em src/assets/images/ ou ajuste o caminho */}
+        </div>
+      </div>
+
+      <h1 className="orcamento-impresso-title">ORÇAMENTO - CABEÇOTE</h1>
+
+      <section className="section-pecas">
+        <h2>Peças</h2>
+        <div className="pecas-columns">
+          {[pecasCol1, pecasCol2].map((col, colIndex) => (
+            <div key={colIndex} className="pecas-column">
+              {col.map((item) => (
+                <div key={item.nome} className="item-wrapper">
+                  <label>
+                    <input
+                      type="checkbox"
+                      // O pai estará marcado se ele mesmo foi marcado OU se QUALQUER UM de seus filhos está marcado
+                      checked={!!selecionados[item.nome] || (item.filhos && item.filhos.some(f => subItensSelecionados[f.nome]))}
+                      onChange={() => handleItemToggle(item)}
+                    />
+                    {item.nome}
+                  </label>
+                  {item.tipo === "quantidade" && selecionados[item.nome] && (
+                    <input
+                      type="number"
+                      min="1"
+                      placeholder="Qtd"
+                      value={quantidades[item.nome] || ''}
+                      onChange={(e) => handleQuantidadeChange(item.nome, e.target.value)}
+                      className="quantity-input"
+                    />
+                  )}
+                  {item.filhos && (!!selecionados[item.nome] || item.filhos.some(f => subItensSelecionados[f.nome])) && ( // Exibe sub-itens se o pai estiver marcado OU se algum filho já estiver marcado
+                    <div className="sub-items-list">
+                      {item.filhos.map((filho) => (
+                        <label key={filho.nome} className="sub-item-label">
+                          <input
+                            type="checkbox"
+                            checked={!!subItensSelecionados[filho.nome]}
+                            onChange={() => handleSubItemToggle(filho, item)}
+                          />
+                          {filho.nome}
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+        <p className="total-line-impresso">
+          Valor total de Peças: R$ <input
+            type="number"
+            step="0.01" // Permite valores decimais
+            value={totalPecasDigitado === 0 ? '' : totalPecasDigitado} // Exibe vazio para 0
+            onChange={(e) => setTotalPecasDigitado(parseFloat(e.target.value) || 0)}
+            className="input-total-valor"
+            placeholder="0.00"
+          />
+        </p>
+      </section>
+
+      <section className="section-servicos">
+        <h2>Serviços no Cabeçote - Retifica</h2>
+        <div className="servicos-grid">
+          {servicos.map((item) => (
+            <div key={item.nome} className="item-wrapper">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={!!servicosSelecionados[item.nome] || (item.filhos && item.filhos.some(f => subServicosSelecionados[f.nome]))}
+                  onChange={() => handleItemToggle(item, true)}
+                />
+                {item.nome}
+              </label>
+              {item.filhos && (!!servicosSelecionados[item.nome] || item.filhos.some(f => subServicosSelecionados[f.nome])) && ( // Exibe sub-itens se o pai estiver marcado OU se algum filho já estiver marcado
+                <div className="sub-items-list">
+                  {item.filhos.map((filho) => (
+                    <label key={filho.nome} className="sub-item-label">
+                      <input
+                        type="checkbox"
+                        checked={!!subServicosSelecionados[filho.nome]}
+                        onChange={() => handleSubItemToggle(filho, item, true)}
+                      />
+                      {filho.nome}
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        <p className="total-line-impresso">
+          Valor total de Serviços: R$ <input
+            type="number"
+            step="0.01"
+            value={totalServicosDigitado === 0 ? '' : totalServicosDigitado}
+            onChange={(e) => setTotalServicosDigitado(parseFloat(e.target.value) || 0)}
+            className="input-total-valor"
+            placeholder="0.00"
+          />
+        </p>
+      </section>
+
+      <p className="total-line-impresso">
+        Valor total de Mão de Obra Mecânica: R$ <input
+          type="number"
+          step="0.01"
+          value={maoDeObraMecanicaDigitado === 0 ? '' : maoDeObraMecanicaDigitado}
+          onChange={(e) => setMaoDeObraMecanicaDigitado(parseFloat(e.target.value) || 0)}
+          className="input-total-valor"
+          placeholder="0.00"
+        />
+      </p>
+
+      <p className="total-geral-impresso">
+        TOTAL GERAL: R$ <input
+          type="number"
+          step="0.01"
+          value={totalGeralDigitado.toFixed(2)} // Exibe formatado com 2 casas
+          onChange={(e) => setTotalGeralDigitado(parseFloat(e.target.value) || 0)}
+          className="input-total-final"
+          placeholder="0.00"
+        />
+      </p>
+
+      <p className="form-pagamento">(Forma de pagamento: Pix, Débito e Crédito em até 10x sem juros no cartão)</p>
+
+      {/* Não há um resumo visual separado como na versão anterior,
+          pois a imagem de referência não mostra um. O resumo é gerado
+          internamente para as funções de exportação. */}
+
+      <div className="orcamento-buttons-container">
+        <button onClick={salvarGoogleSheets} className="action-btn">Salvar no Google Sheets</button>
+        <button onClick={exportarExcel} className="action-btn">Exportar Excel</button>
+        <button onClick={exportarPDF} className="action-btn">Exportar PDF</button>
       </div>
     </div>
   );
