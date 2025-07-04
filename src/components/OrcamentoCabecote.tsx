@@ -103,13 +103,7 @@ export default function OrcamentoCabecote() { // Nome do componente alterado
 
     // Processa itens de Peças (agora usando itensCabecote)
     itensCabecote.forEach(item => {
-      if (item.tipo === "simples" && selecionados[item.nome]) {
-        allSelectedItems.push({
-          nome: item.nome,
-          tipo: "peca",
-          quantidade: 1
-        });
-      } else if (item.tipo === "quantidade" && selecionados[item.nome]) {
+      if (selecionados[item.nome]) {
         allSelectedItems.push({
           nome: item.nome,
           tipo: "peca",
@@ -135,11 +129,11 @@ export default function OrcamentoCabecote() { // Nome do componente alterado
 
     // Processa itens de Serviços (agora usando servicosCabecote)
     servicosCabecote.forEach(item => {
-      if (item.tipo === "simples" && servicosSelecionados[item.nome]) {
+      if (servicosSelecionados[item.nome]) {
         allSelectedItems.push({
           nome: item.nome,
           tipo: "servico",
-          quantidade: 1
+          quantidade: quantidades[item.nome] || 1
         });
       } else if (item.tipo === "submenu") {
         const isParentExplicitlySelected = servicosSelecionados[item.nome];
@@ -239,14 +233,16 @@ export default function OrcamentoCabecote() { // Nome do componente alterado
                     />
                     {item.nome}
                   </label>
-                  {item.tipo === "quantidade" && selecionados[item.nome] && (
+                  {/* Campo de quantidade para qualquer item selecionado */}
+                  {selecionados[item.nome] && (
                     <input
                       type="number"
                       min="1"
                       placeholder="Qtd"
-                      value={quantidades[item.nome] || ''}
+                      value={quantidades[item.nome] || 1}
                       onChange={(e) => handleQuantidadeChange(item.nome, e.target.value)}
                       className="quantity-input"
+                      style={{ width: 60, marginLeft: 8 }}
                     />
                   )}
                   {item.filhos && (!!selecionados[item.nome] || item.filhos.some(f => subItensSelecionados[f.nome])) && (
@@ -284,7 +280,7 @@ export default function OrcamentoCabecote() { // Nome do componente alterado
         <h2>Serviços de Retífica de Cabeçote</h2>
         <div className="servicos-grid">
           {servicosCabecote.map((item) => (
-            <div key={item.nome} className="item-wrapper"> {/* AQUI ESTAVA O ERRO DE SINTAXE */}
+            <div key={item.nome} className="item-wrapper">
               <label>
                 <input
                   type="checkbox"
@@ -293,6 +289,18 @@ export default function OrcamentoCabecote() { // Nome do componente alterado
                 />
                 {item.nome}
               </label>
+              {/* Campo de quantidade para qualquer serviço selecionado */}
+              {servicosSelecionados[item.nome] && (
+                <input
+                  type="number"
+                  min="1"
+                  placeholder="Qtd"
+                  value={quantidades[item.nome] || 1}
+                  onChange={(e) => handleQuantidadeChange(item.nome, e.target.value)}
+                  className="quantity-input"
+                  style={{ width: 60, marginLeft: 8 }}
+                />
+              )}
               {item.filhos && (!!servicosSelecionados[item.nome] || item.filhos.some(f => subServicosSelecionados[f.nome])) && (
                 <div className="sub-items-list">
                   {item.filhos.map((filho) => (

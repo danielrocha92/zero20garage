@@ -1,30 +1,43 @@
 /* src/components/OrcamentoImpresso.css */
 
-/* Cores e Fontes Base */
+/* Cores e Fontes Base - Para VISUALIZAÇÃO NA TELA */
 :root {
   --bg-dark: #121212;
-  --text-light: #f0f0f0;
+  --bg-medium: #252525; /* Mantido para o tema escuro na tela */
+  --text-light: #f0f0f0; /* Mantido para texto claro no tema escuro */
+  --text-dark: #333; /* Usado para texto na impressão e se o tema de tela for claro */
   --red-primary: #ff0000;
   --red-secondary: #ff3b3b;
   --red-light: #ff9999;
   --red-accent: #cc0000;
-  --border-color: #ff0000; /* Usado mais para elementos de interface/interação */
+  --border-color-dark: #444; /* Bordas no tema escuro */
+
+  /* Cores adicionadas/reforçadas do Orcamento.css para consistência */
+  --cinza-escuro-orcamento: #121212; /* Cor de fundo principal do Orcamento.jsx */
+  --cinza-claro-orcamento: #e0e0e0; /* Cor de texto principal do Orcamento.jsx */
+  --vermelho-principal-orcamento: #ff0015; /* Cor de título e destaque do Orcamento.jsx */
+  --cor-fundo-container-orcamento: rgba(18, 18, 18, 0.719); /* Fundo do container do Orcamento.jsx */
 }
 
+
 /* ========================================= */
-/* ===== Mobile-First Base Styles ===== */
+/* ===== Mobile-First Base Styles (Screen) ===== */
 /* ========================================= */
 
 .orcamento-impresso-container {
-  font-family: 'Arial', sans-serif; /* Fonte similar à da imagem */
-  background-color: #252525; /* Fundo branco para simular impressão */
-  color: var(--text-light); /* Texto preto */
-  max-width: 800px; /* Será o maximo para desktop, mobile será fluido */
-  margin: 10px auto; /* Menor margem em mobile */
-  padding: 15px; /* Menor padding em mobile */
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  box-sizing: border-box; /* Garante que padding não adicione largura */
+  font-family: 'Arial', sans-serif;
+  /* Aplicando estilos do .page-escuro e .container-escuro de Orcamento.css */
+  background-color: var(--cinza-escuro-orcamento); /* Fundo principal como em Orcamento.jsx */
+  color: var(--cinza-claro-orcamento); /* Texto principal como em Orcamento.jsx */
+  max-width: 800px;
+  margin: 10px auto;
+  padding: 15px;
+  border: 1px solid var(--border-color-dark); /* Manter borda original se desejar */
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1); /* Sombra mais suave como no Orcamento.jsx */
+  box-sizing: border-box;
+  backdrop-filter: blur(5px); /* Efeito de blur como no Orcamento.jsx */
+  -webkit-backdrop-filter: blur(10px); /* Efeito de blur para webkit */
+  border-radius: 8px; /* Arredondamento como no Orcamento.jsx */
 }
 
 /* Header e Logo */
@@ -33,83 +46,104 @@
   flex-direction: column; /* Stacked for mobile */
   align-items: center; /* Center items */
   margin-bottom: 15px;
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid var(--border-color-dark); /* Borda escura para tema escuro */
   padding-bottom: 10px;
-}
-
-.client-data {
-  width: 100%; /* Full width for mobile */
-}
-
-.client-data p {
-  margin: 5px 0;
-  font-size: 0.85em; /* Smaller font for mobile */
-  display: flex;
-  flex-direction: column; /* Stack label and input for readability */
-  align-items: flex-start; /* Align text to start */
-  gap: 3px;
-}
-
-.client-data input[type="text"] {
-  border: none;
-  border-bottom: 1px dashed #666;
-  padding: 2px 5px;
-  font-size: 0.85em;
-  width: 100%; /* Full width input */
-  background-color: transparent;
-  color: #000;
-  box-sizing: border-box;
+  position: relative;
 }
 
 .logo-placeholder {
   width: 80px; /* Smaller logo for mobile */
   height: auto;
-  margin-top: 10px; /* Space between client data and logo */
+  margin-top: 10px;
 }
 
 .logo-placeholder img {
-    max-width: 100%;
-    height: auto;
-    display: block;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.client-data {
+  width: 100%; /* Full width for mobile */
+  margin-top: 10px;
+}
+
+.client-data p {
+  margin: 5px 0;
+  font-size: 0.85em;
+  display: flex;
+  flex-direction: column; /* Stack label and input for readability */
+  align-items: flex-start;
+  gap: 3px;
+  color: var(--cinza-claro-orcamento); /* Texto claro para a tela */
+}
+
+.client-data .label {
+  font-weight: bold;
+  color: var(--cinza-claro-orcamento); /* Label claro para a tela */
+}
+
+.client-data input[type="text"] {
+  border: none;
+  border-bottom: 1px dashed var(--border-color-dark);
+  padding: 2px 5px;
+  font-size: 0.85em;
+  width: 100%;
+  background-color: transparent;
+  color: var(--cinza-claro-orcamento); /* Texto claro no input para a tela */
+  box-sizing: border-box;
 }
 
 /* Título Principal */
 .orcamento-impresso-title {
   text-align: center;
-  font-size: 1.3em; /* Smaller font for mobile */
+  font-size: 1.3em;
   margin-bottom: 20px;
   font-weight: bold;
   text-transform: uppercase;
+  color: var(--vermelho-principal-orcamento); /* Título vermelho como em Orcamento.jsx */
+  text-shadow: 1px 1px 2px black, 0 0 10px rgba(255, 0, 0, 0.5); /* Sombra como em Orcamento.jsx */
 }
 
 /* Seções de Peças e Serviços */
-.section-pecas, .section-servicos {
-  margin-bottom: 20px; /* Smaller margin for mobile */
+.section-pecas,
+.section-servicos {
+  margin-bottom: 20px;
 }
 
-.section-pecas h2, .section-servicos h2 {
-  font-size: 1.1em; /* Smaller font for section titles */
-  border-bottom: 1px solid #000;
+.section-pecas h2,
+.section-servicos h2 {
+  font-size: 1.1em;
+  border-bottom: 1px solid var(--border-color-dark);
   padding-bottom: 5px;
   margin-bottom: 10px;
+  color: var(--cinza-claro-orcamento); /* Título de seção claro para a tela */
 }
 
 .pecas-columns {
   display: grid;
   grid-template-columns: 1fr; /* Single column for mobile */
-  gap: 10px; /* Smaller gap */
+  gap: 10px;
 }
 
+/* === AJUSTES PARA ITENS E SUB-ITENS === */
 .item-wrapper {
-  margin-bottom: 6px; /* Smaller space between items */
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
 }
 
 .item-wrapper label {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 0.9em; /* Smaller font for item labels */
+  font-size: 0.9em;
   cursor: pointer;
+  color: var(--cinza-claro-orcamento); /* Label de item claro para a tela */
+  flex-grow: 1;
+  min-width: 120px;
 }
 
 .item-wrapper input[type="checkbox"] {
@@ -118,12 +152,13 @@
   appearance: none;
   width: 15px;
   height: 15px;
-  border: 1px solid #000;
-  background-color: #fff;
+  border: 1px solid var(--cinza-claro-orcamento); /* Borda clara do checkbox para a tela */
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .item-wrapper input[type="checkbox"]:checked {
@@ -133,100 +168,173 @@
 .item-wrapper input[type="checkbox"]:checked::before {
   content: 'X';
   font-size: 12px;
-  color: #000;
+  color: var(--cinza-claro-orcamento); /* X claro para a tela */
   font-weight: bold;
+}
+
+.item-inputs {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 /* Input de quantidade */
 .quantity-input {
   border: none;
-  border-bottom: 1px dashed #666;
+  border-bottom: 1px dashed var(--border-color-dark);
   padding: 2px 5px;
-  font-size: 0.85em; /* Smaller font for quantity */
+  font-size: 0.85em;
   width: 40px;
-  margin-left: 5px;
   text-align: center;
   background-color: transparent;
-  color: #000;
+  color: var(--cinza-claro-orcamento); /* Texto claro para a tela */
+}
+
+/* Input de valor para itens */
+.value-input-item {
+  border: none;
+  border-bottom: 1px dashed var(--border-color-dark);
+  padding: 2px 5px;
+  font-size: 0.85em;
+  width: 60px;
+  text-align: right;
+  background-color: transparent;
+  color: var(--cinza-claro-orcamento); /* Texto claro para a tela */
 }
 
 /* Sub-itens */
 .sub-items-list {
-  padding-left: 15px; /* Smaller indentation */
+  padding-left: 20px;
   margin-top: 5px;
+  width: 100%;
 }
 
-.sub-items-list .sub-item-label {
-  font-size: 0.85em; /* Smaller font for sub-item labels */
+.sub-item-label {
+  font-size: 0.85em;
   margin-bottom: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--cinza-claro-orcamento); /* Texto claro para a tela */
+  padding-left: 10px;
+}
+
+.sub-item-label .value-input-item {
+    width: 60px;
+    text-align: right;
+}
+
+/* Estilo para o 'X' ao lado do input de texto em sub-itens */
+.sub-item-remove-btn {
+    background-color: transparent;
+    border: 1px solid var(--red-primary);
+    color: var(--red-primary);
+    font-weight: bold;
+    font-size: 0.7em;
+    padding: 1px 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    line-height: 1;
+    margin-left: 5px;
+}
+
+.sub-item-remove-btn:hover {
+    background-color: var(--red-accent);
+    color: white;
 }
 
 /* Serviços Grid (sempre uma coluna por padrão) */
 .servicos-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
 }
 
 /* Total Lines (Valores digitados) */
 .total-line-impresso {
-  font-size: 1em; /* Smaller font for total lines */
+  font-size: 1em;
   margin: 8px 0;
-  text-align: left; /* Align to left on mobile */
   display: flex;
-  flex-direction: column; /* Stack label and input for readability */
-  align-items: flex-start;
-  gap: 5px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid var(--border-color-dark);
+  padding-top: 10px;
+  color: var(--cinza-claro-orcamento); /* Texto claro para a tela */
+}
+
+.total-line-impresso .label {
+  font-weight: bold;
+  color: var(--cinza-claro-orcamento); /* Label claro para a tela */
 }
 
 .input-total-valor {
   border: none;
-  border-bottom: 1px dashed #666;
+  border-bottom: 1px dashed var(--border-color-dark);
   padding: 2px 5px;
   font-size: 0.95em;
-  width: 100%; /* Full width for input value */
-  text-align: left; /* Align text to left for mobile */
+  width: 120px;
+  text-align: right;
   background-color: transparent;
-  color: #000;
+  color: var(--cinza-claro-orcamento); /* Texto claro para a tela */
   box-sizing: border-box;
 }
 
 .total-geral-impresso {
-  font-size: 1.2em; /* Smaller font for grand total */
+  font-size: 1.2em;
   font-weight: bold;
   margin-top: 15px;
-  text-align: left; /* Align to left on mobile */
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 5px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-top: 2px solid var(--border-color-dark);
+  padding-top: 10px;
+  color: var(--vermelho-principal-orcamento); /* Total geral em vermelho para a tela */
 }
 
 .input-total-final {
   border: none;
-  border-bottom: 1px dashed #666;
+  border-bottom: 1px dashed var(--border-color-dark);
   padding: 3px 8px;
   font-size: 1.1em;
-  width: 100%; /* Full width for grand total input */
-  text-align: left; /* Align text to left for mobile */
+  width: 150px;
+  text-align: right;
   background-color: transparent;
-  color: #000;
+  color: var(--vermelho-principal-orcamento); /* Total final em vermelho para a tela */
   font-weight: bold;
   box-sizing: border-box;
 }
 
-.form-pagamento {
-  text-align: center;
-  font-size: 0.8em; /* Smaller font */
+.form-pagamento, .garantia-info {
+  font-size: 0.85em;
   margin-top: 15px;
-  color: #666;
+  color: var(--cinza-claro-orcamento); /* Texto claro para a tela */
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.form-pagamento .input-field,
+.garantia-info .input-field {
+  border: none;
+  border-bottom: 1px dashed var(--border-color-dark);
+  padding: 2px 5px;
+  font-size: 0.85em;
+  background-color: transparent;
+  color: var(--cinza-claro-orcamento); /* Texto claro para a tela */
+  flex-grow: 1;
 }
 
 /* Botões */
 .orcamento-buttons-container {
   margin-top: 20px;
   display: flex;
-  flex-direction: column; /* Stacked for mobile */
+  flex-direction: column;
   gap: 10px;
 }
 
@@ -235,13 +343,13 @@
   border: none;
   color: white;
   font-weight: 700;
-  padding: 8px 15px; /* Smaller padding */
+  padding: 8px 15px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.9em; /* Smaller font */
+  font-size: 0.9em;
   box-shadow: 0 0 8px rgba(255, 0, 0, 0.4);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  width: 100%; /* Full width for mobile buttons */
+  width: 100%;
 }
 
 .action-btn:hover,
@@ -251,57 +359,48 @@
   outline: none;
 }
 
-.logo-placeholder {
-  width: 80px; /* Ou o tamanho desejado, mas que não seja 0 */
-  height: auto; /* Importante para manter a proporção */
-  overflow: visible; /* Garante que a imagem não seja cortada */
-}
-
-.logo-placeholder img {
-    max-width: 100%; /* Garante que a imagem se ajuste ao contêiner */
-    height: auto;
-    display: block; /* Remove espaços extras se for inline */
-    /* Remova qualquer "display: none;", "opacity: 0;", "width: 0;", "height: 0;" */
-}
-
-
 /* ========================================= */
 /* ===== Desktop and Larger Screens (min-width: 600px) ===== */
 /* ========================================= */
 
 @media (min-width: 600px) {
   .orcamento-impresso-container {
-    padding: 30px; /* Restore larger padding */
+    padding: 30px;
     margin: 20px auto;
   }
 
   .header-info {
-    flex-direction: row; /* Side-by-side for desktop */
+    flex-direction: row;
+    justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 20px;
   }
 
+  .logo-placeholder {
+    width: 100px;
+    margin-top: 0;
+    order: 2;
+  }
+
   .client-data {
-    width: auto; /* Restore auto width */
-    flex-grow: 1; /* Allow to grow */
+    width: auto;
+    flex-grow: 1;
+    margin-top: 0;
+    order: 1;
+    padding-right: 20px;
   }
 
   .client-data p {
     font-size: 0.9em;
-    flex-direction: row; /* Restore inline layout */
+    flex-direction: row;
     align-items: center;
     gap: 5px;
   }
 
   .client-data input[type="text"] {
-    width: auto; /* Allow auto width based on content/flex-grow */
+    width: auto;
     flex-grow: 1;
     font-size: 0.9em;
-  }
-
-  .logo-placeholder {
-    width: 100px; /* Restore larger logo size */
-    margin-top: 0; /* No top margin */
   }
 
   .orcamento-impresso-title {
@@ -309,82 +408,109 @@
     margin-bottom: 25px;
   }
 
-  .section-pecas, .section-servicos {
+  .section-pecas,
+  .section-servicos {
     margin-bottom: 30px;
   }
 
-  .section-pecas h2, .section-servicos h2 {
+  .section-pecas h2,
+  .section-servicos h2 {
     font-size: 1.2em;
     margin-bottom: 15px;
   }
 
   .pecas-columns {
-    grid-template-columns: 1fr 1fr; /* Two columns for desktop */
+    grid-template-columns: 1fr 1fr;
     gap: 15px 30px;
   }
 
+  /* === AJUSTES PARA ITENS E SUB-ITENS (DESKTOP) === */
   .item-wrapper {
-    margin-bottom: 8px;
+    flex-wrap: nowrap;
+    justify-content: space-between;
   }
 
   .item-wrapper label {
     font-size: 0.95em;
+    flex-grow: 1;
+    min-width: unset;
+  }
+
+  .item-inputs {
+    margin-left: 10px;
   }
 
   .quantity-input {
-    font-size: 0.9em;
+    width: 50px;
+  }
+
+  .value-input-item {
+    width: 70px;
   }
 
   .sub-items-list {
     padding-left: 20px;
   }
 
-  .sub-items-list .sub-item-label {
+  .sub-item-label {
     font-size: 0.9em;
+  }
+
+  .sub-item-label .value-input-item {
+      width: 70px;
   }
 
   /* Total Lines (Valores digitados) */
   .total-line-impresso {
     font-size: 1.1em;
     margin: 10px 0;
-    text-align: right; /* Align right on desktop */
-    flex-direction: row; /* Inline layout */
+    text-align: right;
     justify-content: flex-end;
-    align-items: center;
     gap: 10px;
+  }
+
+  .total-line-impresso .label {
+      width: 150px;
+      flex-shrink: 0;
   }
 
   .input-total-valor {
     font-size: 1em;
-    width: 100px; /* Specific width for values */
-    text-align: right; /* Align text right for desktop */
+    width: 120px;
   }
 
   .total-geral-impresso {
     font-size: 1.4em;
     margin-top: 20px;
-    text-align: right;
-    flex-direction: row;
     justify-content: flex-end;
-    align-items: center;
     gap: 10px;
+  }
+
+  .total-geral-impresso .label {
+    width: 150px;
+    flex-shrink: 0;
   }
 
   .input-total-final {
     font-size: 1.2em;
-    width: 120px;
-    text-align: right;
+    width: 150px;
   }
 
-  .form-pagamento {
+  .form-pagamento, .garantia-info {
     font-size: 0.85em;
     margin-top: 20px;
+    justify-content: flex-start;
+  }
+
+  .form-pagamento .input-field,
+  .garantia-info .input-field {
+    width: auto;
   }
 
   /* Botões */
   .orcamento-buttons-container {
     margin-top: 30px;
-    flex-direction: row; /* Inline for desktop */
+    flex-direction: row;
     justify-content: center;
     gap: 15px;
   }
@@ -392,6 +518,180 @@
   .action-btn {
     padding: 10px 20px;
     font-size: 1em;
-    width: auto; /* Auto width for desktop buttons */
+    width: auto;
+  }
+}
+
+/* ========================================= */
+/* ===== Print Styles ===== */
+/* ========================================= */
+
+@media print {
+  /* Define o tamanho da página A4 e as margens padrão para impressão */
+  @page {
+    size: A4; /* Define o tamanho do papel como A4 (210mm x 297mm) */
+    margin: 15mm; /* Margens padrão para a página A4 (ajuste conforme necessário) */
+  }
+
+  html, body {
+    background: #fff !important; /* Força fundo branco */
+    color: #000 !important; /* Força texto preto */
+    -webkit-print-color-adjust: exact !important; /* Imprime as cores exatas */
+    print-color-adjust: exact !important; /* Imprime as cores exatas */
+    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura/altura total */
+  }
+
+  .orcamento-impresso-container {
+    box-shadow: none !important; /* Remove sombra */
+    border: none !important; /* Remove borda */
+    margin: 0 !important; /* Remove margens */
+    padding: 0 !important; /* Reset padding para que @page margin controle */
+    max-width: 100% !important; /* Ocupa a largura total disponível dentro das margens da página */
+    /* Removendo min-height: 100vh; pois @page size A4 já define a altura da página para impressão.
+       Isso evita problemas de layout em algumas impressoras. */
+  }
+
+  /* Header e Logo na Impressão */
+  .header-info {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: flex-end !important;
+    border-bottom: 2px solid #000 !important;
+    margin-bottom: 20px !important;
+    padding-bottom: 10px !important;
+  }
+
+  .logo-placeholder {
+    width: 100px !important;
+    height: auto !important;
+    margin-top: 0 !important;
+    order: 1 !important;
+  }
+
+  .client-data {
+    order: 2 !important;
+    flex-grow: 1 !important;
+    text-align: right !important;
+    padding-right: 0 !important;
+  }
+
+  .client-data p {
+    font-size: 0.9em !important;
+    flex-direction: row !important;
+    justify-content: flex-end !important;
+    gap: 5px !important;
+    color: #000 !important;
+  }
+
+  .client-data .label {
+    font-weight: bold !important;
+    color: #000 !important;
+  }
+
+  .client-data input[type="text"] {
+    border: none !important;
+    border-bottom: 1px dashed #666 !important;
+    background-color: transparent !important;
+    color: #000 !important;
+    font-size: 0.9em !important;
+    padding: 0 2px !important;
+    width: auto !important;
+    flex-grow: unset !important;
+  }
+  .client-data input[type="text"]:read-only {
+    background-color: transparent !important;
+    color: #000 !important;
+    border: none !important;
+    border-bottom: 1px dashed #666 !important;
+  }
+
+  .orcamento-impresso-title {
+    color: #000 !important;
+  }
+
+  /* Seções */
+  .section-pecas h2,
+  .section-servicos h2 {
+    border-bottom: 1px solid #000 !important;
+    color: #000 !important;
+  }
+
+  .item-wrapper label {
+    color: #000 !important;
+  }
+
+  .item-wrapper input[type="checkbox"] {
+    border: 1px solid #000 !important;
+  }
+
+  .item-wrapper input[type="checkbox"]:checked::before {
+    content: 'X'; /* Garante que o X apareça na impressão */
+    color: #000 !important;
+  }
+
+  /* Inputs de Quantidade e Valor */
+  .quantity-input,
+  .value-input-item {
+    border: none !important;
+    border-bottom: 1px dashed #666 !important;
+    background-color: transparent !important;
+    color: #000 !important;
+    padding: 0 2px !important;
+  }
+
+  .sub-items-list .sub-item-label {
+    color: #000 !important;
+  }
+
+  .sub-item-remove-btn {
+    display: none !important; /* Esconde o botão de remover ao imprimir */
+  }
+
+  /* Linhas de Total */
+  .total-line-impresso {
+    border-top: 1px solid #000 !important;
+    color: #000 !important;
+  }
+
+  .total-line-impresso .label {
+      color: #000 !important;
+  }
+
+  .input-total-valor {
+    border: none !important;
+    border-bottom: 1px dashed #666 !important;
+    background-color: transparent !important;
+    color: #000 !important;
+  }
+
+  .total-geral-impresso {
+    border-top: 2px solid #000 !important;
+    color: #000 !important;
+  }
+
+  .input-total-final {
+    border: none !important;
+    border-bottom: 1px dashed #666 !important;
+    background-color: transparent !important;
+    color: #000 !important;
+    font-weight: bold !important;
+  }
+
+  /* Forma de Pagamento e Garantia */
+  .form-pagamento, .garantia-info {
+    color: #000 !important;
+  }
+
+  .form-pagamento .input-field,
+  .garantia-info .input-field {
+    border: none !important;
+    border-bottom: 1px dashed #666 !important;
+    background-color: transparent !important;
+    color: #000 !important;
+  }
+
+  /* Esconder elementos não imprimíveis */
+  .orcamento-buttons-container {
+    display: none !important;
   }
 }
