@@ -7,9 +7,9 @@
     "disableSolutionSearching": false,
     "disableReferencedProjectLoad": false,
 
-    "target": "es2016",
+    "target": "es6",
     "lib": [],
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "experimentalDecorators": false,
     "emitDecoratorMetadata": false,
     "jsxFactory": "",
@@ -20,7 +20,7 @@
     "useDefineForClassFields": false,
     "moduleDetection": "auto",
 
-    "module": "commonjs",
+    "module": "esnext",
     "rootDir": "./",
     "moduleResolution": "node",
     "baseUrl": "./",
@@ -37,12 +37,12 @@
     "checkJs": false,
     "maxNodeModuleJsDepth": 1,
 
-    "declaration": false,
+    "declaration": true,
     "declarationMap": false,
     "emitDeclarationOnly": false,
     "sourceMap": false,
     "outFile": "./",
-    "outDir": "./",
+    "outDir": "dist",
     "removeComments": false,
     "noEmit": false,
     "importHelpers": false,
@@ -58,7 +58,7 @@
     "noEmitHelpers": false,
     "noEmitOnError": false,
     "preserveConstEnums": false,
-    "declarationDir": "./",
+    "declarationDir": "types",
     "preserveValueImports": false,
 
     "isolatedModules": false,
@@ -89,5 +89,7 @@
 
     "skipDefaultLibCheck": false,
     "skipLibCheck": true
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
