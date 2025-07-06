@@ -3,6 +3,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "lib": ["dom", "esnext"],
+    "module": "esnext",
     "incremental": true,
     "composite": false,
     "tsBuildInfoFile": "./.tsbuildinfo",
