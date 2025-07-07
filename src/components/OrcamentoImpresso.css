@@ -1,0 +1,428 @@
+/* src/components/OrcamentoImpresso.css - VERSÃO MAIS MODERNA E ORGANIZADA */
+
+/* ========================================= */
+/* ===== Estilos para a VISUALIZAÇÃO NA TELA ===== */
+/* ========================================= */
+
+.orcamento-impresso-wrapper {
+  background-color: var(--color-screen-bg);
+  color: var(--color-screen-text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 15px; /* Mais padding para telas maiores */
+  box-sizing: border-box;
+}
+
+.orcamento-document-container {
+  font-family: var(--font-secondary);
+  background-color: var(--color-document-bg);
+  color: var(--color-document-text);
+  max-width: 210mm; /* A4 width */
+  min-height: 297mm; /* A4 height, ajustado para flexibilidade */
+  margin: 0 auto;
+  padding: 25mm 20mm; /* Margens A4 internas */
+  border: 1px solid var(--color-screen-border); /* Borda na tela */
+  box-shadow: 0 10px 25px var(--color-screen-shadow); /* Sombra mais suave */
+  border-radius: 8px; /* Cantos arredondados para modernidade */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header e Logo */
+.header-info {
+  display: flex;
+  flex-direction: column; /* Mobile first */
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--color-document-border); /* Linha fina e elegante */
+}
+
+.company-info {
+  text-align: center;
+  font-size: 0.9em;
+  line-height: 1.5;
+  color: var(--color-document-secondary-text);
+  margin-bottom: 10px; /* Espaço abaixo da info da empresa */
+}
+.company-info strong {
+    font-weight: 700;
+    color: var(--color-document-text);
+}
+
+.logo-placeholder {
+  width: 120px; /* Logo um pouco maior */
+  height: auto;
+  margin-top: 10px; /* Espaço acima do logo */
+}
+
+.logo-placeholder img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Título Principal */
+.orcamento-title {
+  text-align: center;
+  font-family: var(--font-primary);
+  font-size: 2em; /* Título maior */
+  font-weight: 700;
+  color: var(--color-document-highlight);
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px; /* Mais espaçamento para título */
+}
+
+/* Dados do Cliente */
+.client-data {
+  margin-bottom: 30px;
+  padding: 10px 0;
+  border-top: 1px solid var(--color-document-border);
+  border-bottom: 1px solid var(--color-document-border);
+}
+
+.client-data p {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 8px 0;
+  font-size: 0.95em;
+  color: var(--color-document-text);
+}
+
+.client-data .label {
+  font-weight: 600; /* Mais encorpado */
+  margin-right: 10px;
+  flex-basis: 100px; /* Um pouco mais de largura para o label */
+  flex-shrink: 0;
+  color: var(--color-document-secondary-text);
+}
+
+.client-data .value {
+  flex-grow: 1;
+  border-bottom: 1px dashed var(--color-document-border); /* Linha tracejada para os valores */
+  padding-bottom: 2px;
+  min-width: 150px; /* Garante que o valor não seja muito apertado */
+  color: var(--color-document-text);
+}
+
+/* Seções de Peças e Serviços */
+.section-pecas,
+.section-servicos {
+  margin-bottom: 30px;
+}
+
+.section-pecas h2,
+.section-servicos h2 {
+  font-family: var(--font-primary);
+  font-size: 1.4em;
+  font-weight: 700;
+  color: var(--color-document-highlight);
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-document-highlight); /* Linha mais forte para títulos de seção */
+  text-transform: uppercase;
+}
+
+/* Tabela de Itens/Serviços */
+.orcamento-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.orcamento-table th,
+.orcamento-table td {
+  padding: 10px 12px; /* Mais padding */
+  border: 1px solid var(--color-document-border);
+  text-align: left;
+  font-size: 0.9em;
+  color: var(--color-document-text);
+}
+
+.orcamento-table th {
+  background-color: var(--color-table-header-bg);
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-document-text);
+}
+
+.orcamento-table tbody tr:nth-child(odd) {
+  background-color: var(--color-table-stripe-bg); /* Linhas alternadas */
+}
+
+/* Alinhamento de colunas da tabela */
+.orcamento-table td:nth-child(2), /* Qtd */
+.orcamento-table td:nth-child(3), /* Vlr. Unit. */
+.orcamento-table td:nth-child(4) { /* Total */
+  text-align: right;
+  white-space: nowrap; /* Evita quebra de linha em números */
+}
+
+/* Para sub-itens dentro da tabela */
+.orcamento-table ul {
+  margin: 5px 0 0 0;
+  padding: 0 0 0 20px; /* Mais recuo */
+  list-style: disc;
+  font-size: 0.85em; /* Fonte um pouco menor para sub-itens */
+  color: var(--color-document-secondary-text);
+}
+.orcamento-table li {
+  margin-bottom: 2px;
+}
+
+/* Checkbox na tabela */
+.orcamento-table .checkbox-display {
+  display: inline-block; /* Para alinhar melhor */
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--color-document-text);
+  text-align: center;
+  line-height: 16px; /* Centraliza o 'X' */
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--color-document-text);
+  vertical-align: middle; /* Alinha com o texto */
+}
+
+/* Totais Finais */
+.totals-section {
+    margin-top: auto; /* Empurra para o fundo do container flex */
+    padding-top: 20px;
+}
+
+.total-line-impresso {
+  font-size: 1em;
+  margin: 10px 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline; /* Alinha o texto na base */
+  gap: 15px;
+  padding-top: 5px;
+  border-top: 1px solid var(--color-document-border); /* Linha divisora */
+  color: var(--color-document-text);
+}
+
+.total-line-impresso:first-of-type {
+  border-top: none; /* Remove borda superior da primeira linha de total */
+}
+
+.total-line-impresso .label {
+  font-weight: 600;
+  min-width: 150px; /* Largura mínima para labels de total */
+  text-align: right;
+  color: var(--color-document-secondary-text);
+}
+
+.total-line-impresso .value {
+  width: 120px;
+  text-align: right;
+  font-weight: bold;
+  color: var(--color-document-text);
+}
+
+.total-geral-impresso {
+  font-family: var(--font-primary);
+  font-size: 1.6em; /* Total geral maior */
+  font-weight: 700;
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 15px;
+  border-top: 3px solid var(--color-document-highlight); /* Borda mais forte */
+  padding-top: 15px;
+  color: var(--color-document-highlight);
+}
+
+.total-geral-impresso .label {
+  color: var(--color-document-highlight);
+}
+
+.total-geral-impresso .value {
+  width: 150px;
+  text-align: right;
+}
+
+.form-pagamento, .garantia-info {
+  font-size: 0.9em;
+  margin-top: 15px;
+  color: var(--color-document-text);
+  line-height: 1.5;
+}
+
+.form-pagamento p, .garantia-info p {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.form-pagamento .label, .garantia-info .label {
+  font-weight: 600;
+  color: var(--color-document-secondary-text);
+  white-space: nowrap; /* Evita quebra de linha no label */
+}
+
+.form-pagamento .value, .garantia-info .value {
+  flex-grow: 1;
+  border-bottom: 1px dashed var(--color-document-border);
+  padding-bottom: 2px;
+  color: var(--color-document-text);
+}
+
+
+/* Botões - Visíveis APENAS na tela */
+.orcamento-buttons-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  gap: 20px;
+}
+
+.action-btn {
+  background-color: var(--color-document-highlight);
+  border: none;
+  color: white;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  padding: 12px 25px; /* Mais padding */
+  border-radius: 8px; /* Mais arredondado */
+  cursor: pointer;
+  font-size: 1em;
+  box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3); /* Sombra mais sutil */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.action-btn:hover {
+  background-color: #c0392b; /* Tom mais escuro no hover */
+  box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
+  transform: translateY(-2px); /* Pequeno movimento no hover */
+}
+
+.action-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(231, 76, 60, 0.2);
+}
+
+
+/* ========================================= */
+/* ===== Layouts Responsivos (Desktop) ===== */
+/* ========================================= */
+
+@media (min-width: 768px) {
+  .header-info {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end; /* Alinha logo e info da empresa na base */
+  }
+
+  .company-info {
+    text-align: left;
+    margin-bottom: 0;
+  }
+
+  .logo-placeholder {
+    order: 2; /* Move logo para a direita */
+    margin-top: 0;
+    margin-left: 20px; /* Espaço entre info e logo */
+  }
+
+  .client-data p {
+    justify-content: flex-start;
+  }
+}
+
+/* ========================================= */
+/* ===== Impressão Real (@media print) ===== */
+/* ========================================= */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-sizing: border-box;
+    font-size: 9.5pt; /* Um pouco menor para impressão */
+    font-family: 'Times New Roman', serif; /* Fonte mais clássica para impressão */
+  }
+
+  .orcamento-impresso-wrapper {
+    display: block;
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: auto !important;
+    background-color: transparent !important;
+  }
+
+  .orcamento-document-container {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important; /* Margens controladas por @page */
+    max-width: 100% !important;
+    min-height: auto !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+    color: #000 !important;
+  }
+
+  /* Força cores pretas e removes shadows/borders não desejadas na impressão */
+  .header-info {
+    border-bottom-color: #000 !important;
+  }
+  .company-info, .client-data, .client-data .label, .client-data .value,
+  .section-pecas h2, .section-servicos h2, .orcamento-table th, .orcamento-table td,
+  .orcamento-table .checkbox-display, .total-line-impresso,
+  .total-line-impresso .label, .total-line-impresso .value,
+  .form-pagamento, .form-pagamento .label, .form-pagamento .value,
+  .garantia-info, .garantia-info .label, .garantia-info .value {
+    color: #000 !important;
+  }
+  .orcamento-title, .total-geral-impresso, .total-geral-impresso .label, .total-geral-impresso .value {
+    color: #e74c3c !important; /* Mantém o destaque vermelho */
+  }
+
+  .orcamento-table th {
+    background-color: #f2f2f2 !important; /* Mantém fundo do cabeçalho */
+  }
+  .orcamento-table tbody tr:nth-child(odd) {
+    background-color: #ffffff !important; /* Remove zebra na impressão */
+  }
+
+  .client-data .value,
+  .total-line-impresso .value,
+  .total-geral-impresso .value,
+  .form-pagamento .value,
+  .garantia-info .value {
+    border-bottom: 1px dashed #999 !important; /* Linha tracejada mais suave para impressão */
+  }
+  .section-pecas h2, .section-servicos h2 {
+    border-bottom-color: #999 !important; /* Borda mais suave para títulos de seção */
+  }
+  .total-geral-impresso {
+    border-top-color: #999 !important; /* Borda mais suave para total geral */
+  }
+
+  /* Garante que o 'X' apareça na impressão e remove inputs */
+  .orcamento-table .checkbox-display {
+    border-color: #000 !important;
+  }
+
+  /* Esconder elementos de interface de usuário na impressão */
+  .orcamento-buttons-container {
+    display: none !important;
+  }
+  /* Garante que nenhum input ou botão indesejado apareça */
+  input, button, select, textarea {
+    display: none !important;
+  }
+}

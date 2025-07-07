@@ -1,4 +1,4 @@
-
+{
   "compilerOptions": {
     "incremental": true,
     "composite": false,
@@ -8,7 +8,11 @@
     "disableReferencedProjectLoad": false,
 
     "target": "es6",
-    "lib": [],
+    // CORREÇÃO AQUI: Adicione as libs padrão para incluir os tipos globais
+    // 'dom' para tipos do navegador (como document, window) se for um projeto web/React
+    // 'es2022' ou 'esnext' para os tipos de funcionalidades JavaScript mais recentes
+    "lib": ["dom", "es2022"], // Ou "esnext" dependendo da sua preferência
+
     "jsx": "react-jsx",
     "experimentalDecorators": false,
     "emitDecoratorMetadata": false,
@@ -88,4 +92,7 @@
     "skipDefaultLibCheck": false,
     "skipLibCheck": true
   },
+  // Opcional: Se você usa pastas específicas para incluir ou excluir
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
