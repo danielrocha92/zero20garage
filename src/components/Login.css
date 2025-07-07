@@ -47,3 +47,18 @@
   text-align: center;
   margin-bottom: 1.5rem;
 }
+
+.botao-sair {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.botao-sair:hover {
+  background-color: #b71c1c;
+}
+

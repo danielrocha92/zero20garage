@@ -10,7 +10,7 @@ import ScrollToTopButton from './components/ScrollToTopButton';
 import ScrollToTop from './components/ScrollToTop';
 
 import PainelOrcamentos from './components/PainelOrcamentos';
-import Login from './components/Login'; // novo
+import Login from './components/Login'; // ✅ novo
 
 import Home from './pages/home/Home';
 import Sobre from './pages/sobre/Sobre';
@@ -27,7 +27,7 @@ import Desmontagem from './pages/home/Desmontagem';
 import Usinagem from './pages/home/Usinagem';
 import MontagemTeste from './pages/home/MontagemTeste';
 
-import Orcamento from './pages/orcamento/Orcamento';
+import Orcamento from './pages/orcamento/Orcamento'; // ✅ rota padrão para retorno após logout
 
 import Blog from './pages/blog/Blog';
 import CustoRetifica from './pages/blog/CustoRetifica';
@@ -47,7 +47,7 @@ import Termos from './pages/footer/Termos';
 import './App.css';
 import './GlobalStyles.css';
 
-// ✅ Rota protegida para admin
+// ✅ Rota protegida
 function PrivateRoute({ children }) {
   const token = localStorage.getItem("authToken");
   return token === "acesso-liberado" ? children : <Navigate to="/login" replace />;
@@ -59,6 +59,7 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <Suspense fallback={<PageTransition />}>
         <Routes location={location} key={location.pathname}>
+
           {/* 🔐 Login e rota protegida */}
           <Route path="/login" element={<Login />} />
           <Route
@@ -69,6 +70,9 @@ const AnimatedRoutes = () => {
               </PrivateRoute>
             }
           />
+
+          {/* Rota de retorno padrão após logout */}
+          <Route path="/orcamento" element={<Orcamento />} />
 
           {/* Demais rotas públicas */}
           <Route path="/" element={<Home />} />
@@ -85,8 +89,6 @@ const AnimatedRoutes = () => {
           <Route path="/Home/Desmontagem" element={<Desmontagem />} />
           <Route path="/Home/Usinagem" element={<Usinagem />} />
           <Route path="/Home/MontagemTeste" element={<MontagemTeste />} />
-
-          <Route path="/Orcamento" element={<Orcamento />} />
 
           <Route path="/Blog" element={<Blog />} />
           <Route path="/Blog/SinaisRetifica" element={<SinaisRetifica />} />

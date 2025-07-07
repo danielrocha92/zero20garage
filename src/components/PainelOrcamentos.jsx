@@ -48,7 +48,22 @@ const PainelOrcamentos = () => {
 
   const exportarExcel = () => {
     if (historico.length === 0) return alert('Nenhum dado para exportar.');
-    const ws = XLSX.utils.json_to_sheet(historico);
+    // Flatten para Excel: pega só os campos principais e concatena detalhes
+    const excelData = historico.map(h => ({
+      Data: h.data,
+      Tipo: h.tipo,
+      Nome: h.nome,
+      'Valor Total': h.valorTotal,
+      'Peças': h.detalhesPecas
+        ? h.detalhesPecas.map(p => `${p.nome} (Qtd: ${p.quantidade}, Vlr: ${p.valorUnitario}, Total: ${p.total})`).join('; ')
+        : '',
+      'Serviços': h.detalhesServicos
+        ? h.detalhesServicos.map(s => `${s.nome} (Vlr: ${s.valor}, Total: ${s.total})`).join('; ')
+        : '',
+      'Forma de Pagamento': h.formaPagamento || '',
+      Garantia: h.garantia || ''
+    }));
+    const ws = XLSX.utils.json_to_sheet(excelData);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Orçamentos');
     const buf = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
@@ -59,27 +74,75 @@ const PainelOrcamentos = () => {
     if (historico.length === 0) return alert('Nenhum dado para exportar.');
     const doc = new jsPDF();
     doc.setFontSize(12);
-    doc.text('Histórico de Orçamentos', 10, 10);
+    let y = 10;
     historico.forEach((h, i) => {
-      const text = `${i + 1}. [${h.data}] Tipo: ${h.tipo} | Nome: ${h.nome} | Valor: R$ ${h.valorTotal}`;
-      doc.text(text, 10, 20 + i * 10);
+      doc.text(`Orçamento #${i + 1}`, 10, y);
+      y += 8;
+      doc.text(`Data: ${h.data} | Tipo: ${h.tipo}`, 10, y);
+      y += 8;
+      doc.text(`Nome: ${h.nome} | Valor Total: R$ ${parseFloat(h.valorTotal).toFixed(2)}`, 10, y);
+      y += 8;
+      if (h.detalhesPecas && h.detalhesPecas.length > 0) {
+        doc.text('Peças:', 10, y);
+        y += 7;
+        h.detalhesPecas.forEach((p) => {
+          doc.text(
+            `- ${p.nome} | Qtd: ${p.quantidade} | Valor: R$ ${parseFloat(p.valorUnitario).toFixed(2)} | Total: R$ ${parseFloat(p.total).toFixed(2)}`,
+            12,
+            y
+          );
+          y += 7;
+          if (p.subItens && p.subItens.length > 0) {
+            p.subItens.forEach((sub) => {
+              doc.text(`   • ${sub}`, 16, y);
+              y += 6;
+            });
+          }
+        });
+      }
+      if (h.detalhesServicos && h.detalhesServicos.length > 0) {
+        doc.text('Serviços:', 10, y);
+        y += 7;
+        h.detalhesServicos.forEach((s) => {
+          doc.text(
+            `- ${s.nome} | Valor: R$ ${parseFloat(s.valor).toFixed(2)} | Total: R$ ${parseFloat(s.total).toFixed(2)}`,
+            12,
+            y
+          );
+          y += 7;
+          if (s.subItens && s.subItens.length > 0) {
+            s.subItens.forEach((sub) => {
+              doc.text(`   • ${sub}`, 16, y);
+              y += 6;
+            });
+          }
+        });
+      }
+      y += 10;
+      // Quebra de página se necessário
+      if (y > 270) {
+        doc.addPage();
+        y = 10;
+      }
     });
     doc.save('painel-orcamentos.pdf');
   };
 
   return (
-    <div>
+    <div className='painel-orcamentos-container'>
       <h1 className='titulo-claro'>Painel de Orçamentos</h1>
 
-      <h3 className='subititulo-claro'>
+      <h3 className='subtitulo-claro'>
         Tipo de Orçamento:{' '}
-        <select value={tipo} onChange={(e) => setTipo(e.target.value)}>
-          <option value="motor">Motor Completo</option>
-          <option value="cabecote">Cabeçote</option>
-        </select>
+        <div className='tipo-orcamento-selector'>
+          <select value={tipo} onChange={(e) => setTipo(e.target.value)}>
+            <option value="motor">Motor Completo</option>
+            <option value="cabecote">Cabeçote</option>
+          </select>
+        </div>
       </h3>
 
-      <div style={{ marginTop: '1.5rem' }}>
+      <div className='orcamento-form-wrapper'>
         {tipo === 'motor' ? (
           <OrcamentoMotorCompleto onSubmit={handleSalvar} />
         ) : (
@@ -87,17 +150,19 @@ const PainelOrcamentos = () => {
         )}
       </div>
 
-      <section style={{ marginTop: '2rem' }}>
+      <section className='historico-section'>
         <h2>Histórico</h2>
-        <button onClick={exportarExcel}>Exportar Excel</button>
-        <button onClick={exportarPDF} style={{ marginLeft: '0.5rem' }}>
-          Exportar PDF
-        </button>
+        <div className='historico-buttons-group'>
+          <button onClick={exportarExcel} className='action-btn'>Exportar Excel</button>
+          <button onClick={exportarPDF} className='action-btn'>
+            Exportar PDF
+          </button>
+        </div>
 
         {historico.length === 0 ? (
-          <p style={{ marginTop: '1rem' }}>Nenhum orçamento salvo ainda.</p>
+          <p className='no-historico-message'>Nenhum orçamento salvo ainda.</p>
         ) : (
-          <table style={{ width: '100%', marginTop: '1rem', borderCollapse: 'collapse' }}>
+          <table className='historico-table'>
             <thead>
               <tr>
                 <th>Data</th>
