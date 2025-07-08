@@ -20,7 +20,7 @@
 
 .orcamento-form-container {
   background-color: var(--color-form-bg);
-  padding: 30px;
+  padding: 10px;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   max-width: 900px;
@@ -58,7 +58,7 @@
 /* Seção de Dados do Cliente/Veículo */
 .client-vehicle-section {
   margin-bottom: 30px;
-  padding: 20px;
+  padding: 10px;
   background-color: #333; /* Fundo levemente diferente para a seção */
   border-radius: 8px;
 }
@@ -122,7 +122,7 @@
 /* Seções de Peças e Serviços (dentro dos formulários) */
 .section-form {
   margin-top: 35px;
-  padding: 20px;
+  padding: 10px;
   background-color: #333;
   border-radius: 8px;
 }
@@ -282,7 +282,7 @@
   border: 1px solid var(--color-document-highlight);
   color: var(--color-document-highlight);
   font-size: 0.8em; /* Fonte menor */
-  padding: 3px 8px; /* Padding menor */
+  padding: 1px 8px; /* Padding menor */
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
@@ -293,7 +293,7 @@
   color: white;
 }
 .remove-sub-item-btn {
-    padding: 3px 6px; /* Ajuste específico para o 'X' */
+    padding: 1px 6px; /* Ajuste específico para o 'X' */
 }
 
 
@@ -340,7 +340,7 @@
 /* Campo para forma de pagamento e garantia */
 .summary-section {
   margin-top: 30px;
-  padding: 20px;
+  padding: 10px;
   background-color: #333;
   border-radius: 8px;
 }
@@ -388,7 +388,7 @@
 /* Media Queries para responsividade */
 @media (max-width: 767px) {
   .orcamento-form-container {
-    padding: 20px;
+    padding: 10px;
     margin: 15px auto;
   }
   .client-vehicle-section {

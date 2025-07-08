@@ -132,8 +132,8 @@ const PainelOrcamentos = () => {
   const navigate = useNavigate();
 
 const handleLogout = () => {
-  localStorage.removeItem('userEmail'); // ou qualquer chave que você estiver usando para controle de login
-  navigate('/orcamento'); // Redireciona para a rota da página inicial de orçamentos
+  localStorage.removeItem('authToken'); // Remove o token de autenticação
+  navigate('/orcamento'); // Redireciona para a página de orçamento do cliente
 };
 
 
