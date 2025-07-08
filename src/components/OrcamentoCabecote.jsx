@@ -1,436 +1,342 @@
+// src/components/OrcamentoCabecote.jsx
 import React, { useState, useEffect } from 'react';
-import './OrcamentoForms.css';
-import * as XLSX from 'xlsx';
-import { saveAs } from 'file-saver';
+import './OrcamentoForms.css'; // Importa o novo CSS para formulários
 
-// Os dados que antes estavam em DadosOrcamentoCabecote.js, agora são definidos aqui.
-// Alternativamente, você poderia importá-los de um arquivo separado se eles forem MUITO grandes
-// ou usados em outros lugares além deste componente.
+// Dados de itens e serviços para o orçamento de Cabeçote
 const itensCabecoteData = [
-  { nome: "Anel (Cabeçote)", valor: 0, tipo: "quantidade" },
-  { nome: "Anti Chamas (Cabeçote)", valor: 0, tipo: "simples" },
-  { nome: "Retentor de Válvula", valor: 0, tipo: "simples" },
-  { nome: "Válvulas de Admissão", valor: 0, tipo: "simples" },
-  { nome: "Válvulas de Escape", valor: 0, tipo: "simples" },
-  { nome: "Parafusos do Cabeçote", valor: 0, tipo: "simples" },
-  { nome: "Junta do Cabeçote", valor: 0, tipo: "simples" },
-  { nome: "Tuchos", valor: 0, tipo: "simples" },
-  { nome: "Guias de Válvula", valor: 0, tipo: "simples" },
-  { nome: "Assentos de Válvula", valor: 0, tipo: "simples" },
-  {
-    nome: "Comando de Válvula",
-    valor: 0,
-    tipo: "submenu",
-    filhos: [
-      { nome: "Admissão" },
-      { nome: "Escape" }
-    ],
-  },
-  { nome: "Retentor Eixo Comando", valor: 0, tipo: "simples" },
-  { nome: "Outras Peças Cabeçote", valor: 0, tipo: "simples" },
+  { nome: "Anel (Cabeçote)", temQuantidade: true, subItens: [] },
+  { nome: "Tuchos", temQuantidade: true, subItens: [] },
+  { nome: "Anti Chamas (Cabeçote)", temQuantidade: true, subItens: [] },
+  { nome: "Guias de Válvula", temQuantidade: true, subItens: [] },
+  { nome: "Retentor de Válvula", temQuantidade: true, subItens: [] },
+  { nome: "Assentos de Válvula", temQuantidade: true, subItens: [] },
+  { nome: "Válvulas de Admissão", temQuantidade: true, subItens: [] },
+  { nome: "Válvulas de Escape", temQuantidade: true, subItens: [] },
+  { nome: "Parafusos do Cabeçote", temQuantidade: true, subItens: [] },
+  { nome: "Junta do Cabeçote", temQuantidade: true, subItens: [] },
+  { nome: "Comando de Válvula", temQuantidade: true, subItens: [] }, // Alterado para subItens genéricos
+  { nome: "Retentor Eixo Comando", temQuantidade: true, subItens: [] },
+  { nome: "Outras Peças Cabeçote", temQuantidade: true, subItens: [] },
 ];
 
 const servicosCabecoteData = [
-  {
-    nome: "Retífica de Cabeçote",
-    valor: 0,
-    tipo: "submenu",
-    filhos: [
-      { nome: "Desmontagem e Avaliação" },
-      { nome: "Banhos Químicos" },
-      { nome: "Teste de Trinca" },
-      { nome: "Teste de Vedação" },
-      { nome: "Planeamento da Base" },
-      { nome: "Retífica de Sedes de Válvula" },
-      { nome: "Retífica de Válvulas" },
-      { nome: "Troca de Guias" },
-      { nome: "Troca de Assentos" },
-      { nome: "Montagem de Cabeçote" },
-      { nome: "Ajuste de Folgas" },
-    ],
-  },
-  { nome: "Substituição de Válvulas", valor: 0, tipo: "simples" },
-  { nome: "Reparo de Roscas", valor: 0, tipo: "simples" },
-  { nome: "Descarbonização Completa", valor: 0, tipo: "simples" },
-  { nome: "Outros Serviços de Cabeçote", valor: 0, tipo: "simples" },
+  { nome: "Usinagem Completa", subItens: [] },
+  { nome: "Limpeza e Revisão", subItens: [] },
+  { nome: "Recuperação de Altura", subItens: [] },
+  { nome: "Montagem de Cabeçote", subItens: [] },
+  { nome: "Teste de estanqueidade", subItens: [] },
+  { nome: "Troca de selos", subItens: [] },
+  { nome: "Jateamento", subItens: [] },
+  { nome: "Retífica de Válvulas", subItens: [] },
+  { nome: "Troca de retentores de válvulas", subItens: [] },
+  { nome: "Substituição de Válvulas", subItens: [] },
+  { nome: "Reparo de Roscas", subItens: [] },
+  { nome: "Descarbonização Completa", subItens: [] },
+  { nome: "Outros Serviços de Cabeçote", subItens: [] },
 ];
 
-// O componente OrcamentoCabecote AGORA recebe `onSubmit` como prop do `PainelOrcamentos`
-const OrcamentoCabecote = ({ onSubmit, historico }) => {
-  // Estado para os dados do cliente
-  const [cliente, setCliente] = useState({
-    nome: "",
-    telefone: "",
-    veiculo: "",
-    placa: "",
-    data: new Date().toISOString().split("T")[0], // Data atual
-  });
-
-  // Estado para os itens de orçamento, inicializando com os dados e valores zerados
-  const [itensOrcamento, setItensOrcamento] = useState(
-    itensCabecoteData.map(item => ({
+const OrcamentoCabecote = ({ onSubmit }) => {
+  const [formData, setFormData] = useState({
+    nome: '',
+    telefone: '',
+    veiculo: '',
+    placa: '',
+    data: new Date().toISOString().slice(0, 10), // Data atual no formato YYYY-MM-DD
+    pecas: itensCabecoteData.map(item => ({
       ...item,
-      valorUnitario: 0, // Adiciona valor unitário para cálculos
-      quantidade: 1,    // Adiciona quantidade
-      total: 0,         // Adiciona total para cada item
-      subItensSelecionados: item.tipo === "submenu" ? item.filhos.map(() => false) : [] // Para submenus
-    }))
-  );
-
-  // Estado para os serviços de orçamento
-  const [servicosOrcamento, setServicosOrcamento] = useState(
-    servicosCabecoteData.map(servico => ({
-      ...servico,
+      selecionado: false,
+      quantidade: item.temQuantidade ? 1 : 0, // Inicia quantidade como 1 se temQuantidade for true
       valorUnitario: 0,
       total: 0,
-      subItensSelecionados: servico.tipo === "submenu" ? servico.filhos.map(() => false) : []
-    }))
-  );
+      subItens: item.subItens ? [...item.subItens] : [],
+    })),
+    servicos: servicosCabecoteData.map(servico => ({
+      ...servico,
+      selecionado: false,
+      valor: 0,
+      total: 0,
+      subItens: servico.subItens ? [...servico.subItens] : [],
+    })),
+    formaPagamento: '',
+    garantia: '',
+  });
 
-  const [totalPecas, setTotalPecas] = useState(0);
-  const [totalServicos, setTotalServicos] = useState(0);
-  const [valorTotalGeral, setValorTotalGeral] = useState(0);
-
-  // Efeito para recalcular totais sempre que itens ou serviços mudam
+  // Efeito para recalcular o total de peças quando houver mudança
   useEffect(() => {
-    let newTotalPecas = 0;
-    itensOrcamento.forEach(item => {
-      newTotalPecas += item.total;
-    });
-    setTotalPecas(newTotalPecas);
-  }, [itensOrcamento]);
+    const updatedPecas = formData.pecas.map(peca => ({
+      ...peca,
+      total: peca.selecionado ? (peca.quantidade * peca.valorUnitario).toFixed(2) : 0
+    }));
+    setFormData(prev => ({ ...prev, pecas: updatedPecas }));
+  }, [formData.pecas]);
 
+  // Efeito para recalcular o total de serviços quando houver mudança
   useEffect(() => {
-    let newTotalServicos = 0;
-    servicosOrcamento.forEach(servico => {
-      newTotalServicos += servico.total;
-    });
-    setTotalServicos(newTotalServicos);
-  }, [servicosOrcamento]);
-
-  useEffect(() => {
-    setValorTotalGeral(totalPecas + totalServicos);
-  }, [totalPecas, totalServicos]);
+    const updatedServicos = formData.servicos.map(servico => ({
+      ...servico,
+      total: servico.selecionado ? parseFloat(servico.valor || 0).toFixed(2) : 0
+    }));
+    setFormData(prev => ({ ...prev, servicos: updatedServicos }));
+  }, [formData.servicos]);
 
 
-  // Função para lidar com a mudança dos dados do cliente
-  const handleClienteChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setCliente((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Função para lidar com a mudança de valor ou quantidade de um item/serviço
-  const handleItemChange = (index, field, value, type) => {
-    const updatedArray = type === 'peca' ? [...itensOrcamento] : [...servicosOrcamento];
-    const item = updatedArray[index];
-
-    let numericValue = parseFloat(value);
-    if (isNaN(numericValue) || numericValue < 0) numericValue = 0;
-
-    if (field === 'quantidade') {
-      item.quantidade = numericValue;
-      item.total = item.valorUnitario * item.quantidade;
-    } else if (field === 'valorUnitario') {
-      item.valorUnitario = numericValue;
-      item.total = item.valorUnitario * item.quantidade;
-    } else if (field === 'subItem') {
-      // Para submenus: valorUnitario do item pai representa o total dos filhos selecionados ou um valor único
-      item.valorUnitario = numericValue;
-      item.total = numericValue; // Se for um valor total para o submenu
+  const handlePecaChange = (index, field, value) => {
+    const newPecas = [...formData.pecas];
+    newPecas[index][field] = value;
+    // Se desmarcar, zera quantidade e valor unitário
+    if (field === 'selecionado' && !value) {
+      newPecas[index].quantidade = newPecas[index].temQuantidade ? 1 : 0;
+      newPecas[index].valorUnitario = 0;
+      newPecas[index].subItens = newPecas[index].subItens ? [] : newPecas[index].subItens; // Limpa subItens se existirem
     }
-
-
-    if (type === 'peca') {
-      setItensOrcamento(updatedArray);
-    } else {
-      setServicosOrcamento(updatedArray);
-    }
+    setFormData(prev => ({ ...prev, pecas: newPecas }));
   };
 
-  // Função para lidar com a seleção/desseleção de sub-itens (checkboxes)
-  const handleSubItemToggle = (parentIndex, childIndex, type) => {
-    const updatedArray = type === 'peca' ? [...itensOrcamento] : [...servicosOrcamento];
-    const parentItem = updatedArray[parentIndex];
-
-    parentItem.subItensSelecionados[childIndex] = !parentItem.subItensSelecionados[childIndex];
-    // Aqui você pode adicionar lógica para como o valor do item pai é afetado
-    // por exemplo, se cada sub-item selecionado adiciona um valor fixo ao total do pai.
-    // Por simplicidade, neste exemplo, a lógica de valor para submenus ainda é baseada em valorUnitario.
-
-    if (type === 'peca') {
-      setItensOrcamento(updatedArray);
-    } else {
-      setServicosOrcamento(updatedArray);
+  const handleServicoChange = (index, field, value) => {
+    const newServicos = [...formData.servicos];
+    newServicos[index][field] = value;
+    // Se desmarcar, zera valor
+    if (field === 'selecionado' && !value) {
+      newServicos[index].valor = 0;
+      newServicos[index].subItens = newServicos[index].subItens ? [] : newServicos[index].subItens; // Limpa subItens se existirem
     }
+    setFormData(prev => ({ ...prev, servicos: newServicos }));
+  };
+
+  // Funções para adicionar/remover sub-itens (para peças e serviços)
+  const handleAddSubItem = (itemType, itemIndex) => {
+    const items = [...formData[itemType]];
+    if (!items[itemIndex].subItens) {
+      items[itemIndex].subItens = [];
+    }
+    items[itemIndex].subItens.push(''); // Adiciona um campo de texto vazio para o sub-item
+    setFormData(prev => ({ ...prev, [itemType]: items }));
+  };
+
+  const handleRemoveSubItem = (itemType, itemIndex, subItemIndex) => {
+    const items = [...formData[itemType]];
+    items[itemIndex].subItens.splice(subItemIndex, 1);
+    setFormData(prev => ({ ...prev, [itemType]: items }));
+  };
+
+  const handleSubItemTextChange = (itemType, itemIndex, subItemIndex, value) => {
+    const items = [...formData[itemType]];
+    items[itemIndex].subItens[subItemIndex] = value;
+    setFormData(prev => ({ ...prev, [itemType]: items }));
   };
 
 
-  // Função que será chamada quando o formulário for submetido
+  const calculateTotalPecas = () => {
+    return formData.pecas.reduce((sum, item) => sum + parseFloat(item.total || 0), 0);
+  };
+
+  const calculateTotalServicos = () => {
+    return formData.servicos.reduce((sum, item) => sum + parseFloat(item.total || 0), 0);
+  };
+
+  const totalPecas = calculateTotalPecas();
+  const totalServicos = calculateTotalServicos();
+  const totalGeral = totalPecas + totalServicos;
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Validações básicas antes de submeter
-    if (!cliente.nome || !cliente.veiculo || !cliente.placa || !valorTotalGeral) {
-      alert('Por favor, preencha Nome, Veículo, Placa e certifique-se de que o Valor Total não é zero.');
-      return;
-    }
-
-    // Prepara os dados para enviar ao componente pai (PainelOrcamentos)
-    const dadosParaSalvar = {
-      nome: cliente.nome,
-      email: cliente.email || 'N/A', // Adicione email se tiver no formData cliente
-      telefone: cliente.telefone,
-      veiculo: cliente.veiculo,
-      placa: cliente.placa,
-      data: cliente.data,
-      tipo: 'Cabeçote', // Informa o tipo de orçamento
-      valorTotal: valorTotalGeral.toFixed(2), // Garante duas casas decimais
-      detalhesPecas: itensOrcamento
-        .filter(item => item.total > 0) // Inclui apenas itens com valor
-        .map(item => ({
-          nome: item.nome,
-          quantidade: item.quantidade,
-          valorUnitario: item.valorUnitario,
-          total: item.total,
-          // Se for um submenu e tiver sub-itens selecionados, você pode incluí-los aqui
-          subItens: item.tipo === 'submenu' ? item.filhos.filter((_, idx) => item.subItensSelecionados[idx]).map(f => f.nome) : undefined
-        })),
-      detalhesServicos: servicosOrcamento
-        .filter(servico => servico.total > 0)
-        .map(servico => ({
-          nome: servico.nome,
-          valor: servico.valorUnitario, // Valor do serviço
-          total: servico.total,
-          subItens: servico.tipo === 'submenu' ? servico.filhos.filter((_, idx) => servico.subItensSelecionados[idx]).map(f => f.nome) : undefined
-        })),
+    // Crie o objeto de orçamento final com todos os dados
+    const orcamentoFinal = {
+      ...formData,
+      tipo: 'cabeçote', // Informa o tipo de orçamento
+      valorTotal: totalGeral,
+      detalhesPecas: formData.pecas.filter(p => p.selecionado || (p.subItens && p.subItens.some(sub => sub.trim() !== ''))).map(p => ({
+          ...p,
+          subItens: p.subItens ? p.subItens.filter(sub => sub.trim() !== '') : [] // Limpa subitens vazios
+      })),
+      detalhesServicos: formData.servicos.filter(s => s.selecionado || (s.subItens && s.subItens.some(sub => sub.trim() !== ''))).map(s => ({
+          ...s,
+          subItens: s.subItens ? s.subItens.filter(sub => sub.trim() !== '') : [] // Limpa subitens vazios
+      })),
     };
-
-    onSubmit(dadosParaSalvar); // Chama a função onSubmit do componente pai
-  };
-
-  const exportarExcel = () => {
-    if (historico.length === 0) return alert('Nenhum dado para exportar.');
-    // Flatten para Excel: pega só os campos principais e concatena detalhes
-    const excelData = historico.map(h => ({
-      Data: h.data,
-      Tipo: h.tipo,
-      Nome: h.nome,
-      'Valor Total': h.valorTotal,
-      'Peças': h.detalhesPecas
-        ? h.detalhesPecas.map(p => `${p.nome} (Qtd: ${p.quantidade}, Vlr: ${p.valorUnitario}, Total: ${p.total})`).join('; ')
-        : '',
-      'Serviços': h.detalhesServicos
-        ? h.detalhesServicos.map(s => `${s.nome} (Vlr: ${s.valor}, Total: ${s.total})`).join('; ')
-        : '',
-      'Forma de Pagamento': h.formaPagamento || '',
-      Garantia: h.garantia || ''
-    }));
-    const ws = XLSX.utils.json_to_sheet(excelData);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Orçamentos');
-    const buf = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-    saveAs(new Blob([buf], { type: 'application/octet-stream' }), 'painel-orcamentos.xlsx');
+    onSubmit(orcamentoFinal); // Chama a função onSubmit do PainelOrcamentos
   };
 
   return (
-    <div className="orcamento-container"> {/* Use uma classe genérica ou específica */}
-      <h2>Orçamento de Cabeçote</h2>
+    <div className="orcamento-form-container">
+      <div className="form-header">
+        <h1>Orçamento - Cabeçote</h1>
+        <p>Preencha os detalhes do orçamento para o cabeçote.</p>
+      </div>
 
-      <form onSubmit={handleSubmit} className="orcamento-form">
-        {/* Seção de Dados do Cliente */}
-        <fieldset className="form-section">
-          <legend>Dados do Cliente</legend>
+      <form onSubmit={handleSubmit}>
+        <section className="client-vehicle-section">
           <div className="form-group">
-            <label htmlFor="nomeCliente">Nome:</label>
-            <input
-              type="text"
-              id="nomeCliente"
-              name="nome"
-              value={cliente.nome}
-              onChange={handleClienteChange}
-              required
-            />
+            <label htmlFor="nome">Nome do Cliente:</label>
+            <input type="text" id="nome" name="nome" value={formData.nome} onChange={handleInputChange} required />
           </div>
           <div className="form-group">
-            <label htmlFor="telefoneCliente">Telefone:</label>
-            <input
-              type="text"
-              id="telefoneCliente"
-              name="telefone"
-              value={cliente.telefone}
-              onChange={handleClienteChange}
-            />
+            <label htmlFor="telefone">Telefone:</label>
+            <input type="text" id="telefone" name="telefone" value={formData.telefone} onChange={handleInputChange} required />
           </div>
           <div className="form-group">
-            <label htmlFor="veiculoCliente">Veículo:</label>
-            <input
-              type="text"
-              id="veiculoCliente"
-              name="veiculo"
-              value={cliente.veiculo}
-              onChange={handleClienteChange}
-              required
-            />
+            <label htmlFor="veiculo">Veículo:</label>
+            <input type="text" id="veiculo" name="veiculo" value={formData.veiculo} onChange={handleInputChange} required />
           </div>
           <div className="form-group">
-            <label htmlFor="placaCliente">Placa:</label>
-            <input
-              type="text"
-              id="placaCliente"
-              name="placa"
-              value={cliente.placa}
-              onChange={handleClienteChange}
-              required
-            />
+            <label htmlFor="placa">Placa:</label>
+            <input type="text" id="placa" name="placa" value={formData.placa} onChange={handleInputChange} required />
           </div>
           <div className="form-group">
-            <label htmlFor="dataOrcamento">Data:</label>
-            <input
-              type="date"
-              id="dataOrcamento"
-              name="data"
-              value={cliente.data}
-              readOnly
-              className="read-only-input"
-            />
+            <label htmlFor="data">Data:</label>
+            <input type="date" id="data" name="data" value={formData.data} onChange={handleInputChange} required />
           </div>
-        </fieldset>
+        </section>
 
         {/* Seção de Peças */}
-        <fieldset className="form-section">
-          <legend>Peças</legend>
-          {itensOrcamento.map((item, index) => (
-            <div key={index} className="item-group">
-              <label>{item.nome}:</label>
-              {item.tipo === "quantidade" ? (
-                <>
-                  <input
-                    type="number"
-                    placeholder="Qtd."
-                    value={item.quantidade}
-                    onChange={(e) => handleItemChange(index, 'quantidade', e.target.value, 'peca')}
-                    min="0"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Valor Unit."
-                    value={item.valorUnitario}
-                    onChange={(e) => handleItemChange(index, 'valorUnitario', e.target.value, 'peca')}
-                    min="0"
-                    step="0.01"
-                  />
-                  <span>Total: R$ {item.total.toFixed(2)}</span>
-                </>
-              ) : item.tipo === "submenu" ? (
-                <div className="submenu-container">
-                  <input
-                    type="number"
-                    placeholder="Valor Total"
-                    value={item.valorUnitario} // Usado como valor total para o submenu
-                    onChange={(e) => handleItemChange(index, 'subItem', e.target.value, 'peca')}
-                    min="0"
-                    step="0.01"
-                  />
-                  <span>Total: R$ {item.total.toFixed(2)}</span>
-                  <div className="sub-itens">
-                    {item.filhos.map((filho, childIndex) => (
-                      <label key={childIndex} className="checkbox-label">
+        <section className="section-form">
+          <h2>Peças para Cabeçote</h2>
+          <div className="items-grid">
+            {formData.pecas.map((peca, index) => (
+              <div key={index}>
+                <div className="item-row">
+                  <label className="custom-checkbox">
+                    <input
+                      type="checkbox"
+                      checked={peca.selecionado}
+                      onChange={() => handlePecaChange(index, 'selecionado', !peca.selecionado)}
+                    />
+                    <span className="checkbox-box"></span>
+                    {peca.nome}
+                  </label>
+                  {(peca.selecionado) && ( // Exibir inputs apenas se selecionado
+                    <div className="item-inputs">
+                      {peca.temQuantidade && (
                         <input
-                          type="checkbox"
-                          checked={item.subItensSelecionados[childIndex]}
-                          onChange={() => handleSubItemToggle(index, childIndex, 'peca')}
+                          type="number"
+                          placeholder="Qtd"
+                          value={peca.quantidade}
+                          onChange={(e) => handlePecaChange(index, 'quantidade', parseInt(e.target.value) || 0)}
+                          min="0"
+                          className="quantity-input"
                         />
-                        {filho.nome}
-                      </label>
-                    ))}
-                  </div>
+                      )}
+                      <input
+                        type="number"
+                        placeholder="Valor"
+                        value={peca.valorUnitario}
+                        onChange={(e) => handlePecaChange(index, 'valorUnitario', parseFloat(e.target.value) || 0)}
+                        step="0.01"
+                        className="value-input"
+                      />
+                    </div>
+                  )}
                 </div>
-              ) : (
-                <>
-                  <input
-                    type="number"
-                    placeholder="Valor"
-                    value={item.valorUnitario}
-                    onChange={(e) => handleItemChange(index, 'valorUnitario', e.target.value, 'peca')}
-                    min="0"
-                    step="0.01"
-                  />
-                  <span>Total: R$ {item.total.toFixed(2)}</span>
-                </>
-              )}
-            </div>
-          ))}
-          <div className="total-pecas">
-            <strong>Total Peças: R$ {totalPecas.toFixed(2)}</strong>
+                {/* Campos para sub-itens, se houver e selecionado */}
+                {(peca.selecionado && peca.subItens !== undefined) && (
+                  <div className="sub-items-container">
+                    {peca.subItens.map((sub, sIdx) => (
+                      <div key={sIdx} className="sub-item-input-group">
+                        <input
+                          type="text"
+                          placeholder="Detalhe do item"
+                          value={sub}
+                          onChange={(e) => handleSubItemTextChange('pecas', index, sIdx, e.target.value)}
+                        />
+                        <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('pecas', index, sIdx)}>X</button>
+                      </div>
+                    ))}
+                    <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('pecas', index)}>+ Adicionar Detalhe</button>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
-        </fieldset>
+        </section>
 
         {/* Seção de Serviços */}
-        <fieldset className="form-section">
-          <legend>Serviços</legend>
-          {servicosOrcamento.map((servico, index) => (
-            <div key={index} className="item-group">
-              <label>{servico.nome}:</label>
-              {servico.tipo === "submenu" ? (
-                <div className="submenu-container">
-                  <input
-                    type="number"
-                    placeholder="Valor Total"
-                    value={servico.valorUnitario}
-                    onChange={(e) => handleItemChange(index, 'subItem', e.target.value, 'servico')}
-                    min="0"
-                    step="0.01"
-                  />
-                  <span>Total: R$ {servico.total.toFixed(2)}</span>
-                  <div className="sub-itens">
-                    {servico.filhos.map((filho, childIndex) => (
-                      <label key={childIndex} className="checkbox-label">
-                        <input
-                          type="checkbox"
-                          checked={servico.subItensSelecionados[childIndex]}
-                          onChange={() => handleSubItemToggle(index, childIndex, 'servico')}
-                        />
-                        {filho.nome}
-                      </label>
-                    ))}
-                  </div>
+        <section className="section-form">
+          <h2>Serviços de Retífica de Cabeçote</h2>
+          <div className="items-grid">
+            {formData.servicos.map((servico, index) => (
+              <div key={index}>
+                <div className="item-row">
+                  <label className="custom-checkbox">
+                    <input
+                      type="checkbox"
+                      checked={servico.selecionado}
+                      onChange={() => handleServicoChange(index, 'selecionado', !servico.selecionado)}
+                    />
+                    <span className="checkbox-box"></span>
+                    {servico.nome}
+                  </label>
+                  {(servico.selecionado) && (
+                    <div className="item-inputs">
+                      <input
+                        type="number"
+                        placeholder="Valor"
+                        value={servico.valor}
+                        onChange={(e) => handleServicoChange(index, 'valor', parseFloat(e.target.value) || 0)}
+                        step="0.01"
+                        className="value-input"
+                      />
+                    </div>
+                  )}
                 </div>
-              ) : (
-                <>
-                  <input
-                    type="number"
-                    placeholder="Valor"
-                    value={servico.valorUnitario}
-                    onChange={(e) => handleItemChange(index, 'valorUnitario', e.target.value, 'servico')}
-                    min="0"
-                    step="0.01"
-                  />
-                  <span>Total: R$ {servico.total.toFixed(2)}</span>
-                </>
-              )}
-            </div>
-          ))}
-          <div className="total-servicos">
-            <strong>Total Serviços: R$ {totalServicos.toFixed(2)}</strong>
+                {/* Campos para sub-itens de serviços, se houver e selecionado */}
+                {(servico.selecionado && servico.subItens !== undefined) && (
+                  <div className="sub-items-container">
+                    {servico.subItens.map((sub, sIdx) => (
+                      <div key={sIdx} className="sub-item-input-group">
+                        <input
+                          type="text"
+                          placeholder="Detalhe do serviço"
+                          value={sub}
+                          onChange={(e) => handleSubItemTextChange('servicos', index, sIdx, e.target.value)}
+                        />
+                        <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('servicos', index, sIdx)}>X</button>
+                      </div>
+                    ))}
+                    <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('servicos', index)}>+ Adicionar Detalhe</button>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
-        </fieldset>
+        </section>
 
-        {/* Total Geral e Botão de Salvar */}
-        <div className="total-geral">
-          <strong>Valor Total Geral: R$ {valorTotalGeral.toFixed(2)}</strong>
+        {/* Linhas de Total */}
+        <div className="total-line-form">
+          <span className="label">Total Peças:</span>
+          <span className="value-display">R$ {totalPecas.toFixed(2)}</span>
+        </div>
+        <div className="total-line-form">
+          <span className="label">Total Serviços:</span>
+          <span className="value-display">R$ {totalServicos.toFixed(2)}</span>
+        </div>
+        <div className="total-geral-form">
+          <span className="label">TOTAL GERAL:</span>
+          <span className="value-display">R$ {totalGeral.toFixed(2)}</span>
         </div>
 
-        <button type="submit" className="btn-submit">
-          Salvar Orçamento Cabeçote
-        </button>
-      </form>
+        {/* Forma de Pagamento e Garantia */}
+        <section className="payment-warranty-section">
+            <div className="form-group">
+                <label htmlFor="formaPagamento">Forma de Pagamento:</label>
+                <input type="text" id="formaPagamento" name="formaPagamento" value={formData.formaPagamento} onChange={handleInputChange} />
+            </div>
+            <div className="form-group">
+                <label htmlFor="garantia">Garantia:</label>
+                <input type="text" id="garantia" name="garantia" value={formData.garantia} onChange={handleInputChange} />
+            </div>
+        </section>
 
-      {/* Botão para exportar para Excel */}
-      <div className="export-excel-container">
-        <button onClick={exportarExcel} className="btn-export-excel">
-          Exportar Histórico para Excel
-        </button>
-      </div>
+        {/* Botões do Formulário */}
+        <div className="form-buttons">
+          <button type="submit" className="action-btn">Salvar Orçamento</button>
+        </div>
+      </form>
     </div>
   );
 };

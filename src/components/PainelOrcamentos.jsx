@@ -5,6 +5,7 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import "./PainelOrcamentos.css"; // CSS específico para este componente
+import { useNavigate } from 'react-router-dom';
 
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxmLpnlvPQV77Rs4jG8pLh_uSTi-xq5LqGod-ykpgYxJ9Y9pRlI7pOgdgjsMs4qSTU6Jw/exec';
 
@@ -128,9 +129,20 @@ const PainelOrcamentos = () => {
     doc.save('painel-orcamentos.pdf');
   };
 
+  const navigate = useNavigate();
+
+const handleLogout = () => {
+  localStorage.removeItem('userEmail'); // ou qualquer chave que você estiver usando para controle de login
+  navigate('/orcamento'); // Redireciona para a rota da página inicial de orçamentos
+};
+
+
   return (
     <div className='painel-orcamentos-container'>
       <h1 className='titulo-claro'>Painel de Orçamentos</h1>
+      <div className="painel-header">
+        <button onClick={handleLogout} className="logout-btn">Sair</button>
+      </div>
 
       <h3 className='subtitulo-claro'>
         Tipo de Orçamento:{' '}
