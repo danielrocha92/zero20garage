@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import DynamicHeader from "./DynamicHeader";
+import Breadcrumbs from "./Breadcrumbs";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -35,8 +37,18 @@ const Login = () => {
     }
   };
 
+    const messages = [
+    {
+      title: 'Login de Administrador',
+      subtitle: 'Acesse o painel de gerenciamento de orçamentos',
+    }
+  ];
+  
   return (
-    <div className="login-container">
+       <div className="page-escuro">
+      <DynamicHeader page="login" messages={messages} />
+      <Breadcrumbs />
+      <div className="login-container">
       <h2 className="titulo-claro">Login Admin</h2>
       <form onSubmit={handleSubmit} className="form-login">
         <input
@@ -58,6 +70,7 @@ const Login = () => {
         <button type="submit">Entrar</button>
         {erro && <p className="erro">{erro}</p>}
       </form>
+    </div>
     </div>
   );
 };

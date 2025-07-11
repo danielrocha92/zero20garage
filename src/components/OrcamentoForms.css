@@ -20,10 +20,11 @@
 
 .orcamento-form-container {
   background-color: var(--color-form-bg);
-  padding: 10px;
+  padding: 30px;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  max-width: 900px;
+  width: 90%; /* Torna a largura fluida */
+  max-width: 1200px; /* Permite expansão até 1200px */
   margin: 30px auto;
   color: var(--color-form-text);
   font-family: var(--font-secondary);
@@ -58,7 +59,7 @@
 /* Seção de Dados do Cliente/Veículo */
 .client-vehicle-section {
   margin-bottom: 30px;
-  padding: 10px;
+  padding: 20px;
   background-color: #333; /* Fundo levemente diferente para a seção */
   border-radius: 8px;
 }
@@ -76,6 +77,7 @@
 .form-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed; /* Ajuda a fixar as larguras das colunas */
 }
 
 .form-table td {
@@ -122,7 +124,7 @@
 /* Seções de Peças e Serviços (dentro dos formulários) */
 .section-form {
   margin-top: 35px;
-  padding: 10px;
+  padding: 20px;
   background-color: #333;
   border-radius: 8px;
 }
@@ -140,15 +142,14 @@
 .items-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed; /* Ajuda a fixar as larguras das colunas */
 }
 
 .items-table tr {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
   border-bottom: 1px solid #444; /* Separador entre as linhas de itens */
   padding-bottom: 10px;
   margin-bottom: 10px;
+  vertical-align: top;
 }
 
 .items-table tr:last-child {
@@ -159,30 +160,31 @@
 
 .items-table td {
   padding: 5px 0; /* Ajuste o padding das células */
-  vertical-align: top;
+  vertical-align: top; /* Garante que o conteúdo se alinhe ao topo da célula */
 }
 
+/* Ajuste das larguras das colunas para melhor distribuição */
 .checkbox-cell {
-  flex-basis: 30%; /* Largura para o checkbox */
-  flex-grow: 1;
-  min-width: 150px; /* Garante que o checkbox tenha espaço mínimo */
+  width: 25%; /* Largura para o checkbox e nome do item */
+  min-width: 150px;
+  padding-right: 10px;
 }
 
 .inputs-cell {
-  flex-basis: 20%; /* Largura para os inputs de quantidade/valor */
-  min-width: 160px;
+  width: 25%; /* Mais espaço para Qtd e Valor Unit. */
+  min-width: 180px; /* Ajustado min-width para acomodar labels e inputs */
+  padding-right: 10px;
 }
 
 .subitems-cell {
-  flex-basis: 40%; /* Largura para os sub-itens */
-  flex-grow: 1;
-  min-width: 250px;
+  width: 35%; /* Largura para os sub-itens */
+  padding-right: 10px;
 }
 
 .total-cell {
-  flex-basis: 10%; /* Largura para o total do item */
+  width: 15%; /* Mais espaço para o input de total */
   text-align: right;
-  min-width: 80px;
+  min-width: 100px; /* Ajustado min-width para o input de total */
   font-weight: bold;
   color: var(--color-document-highlight);
 }
@@ -190,12 +192,11 @@
 
 /* Checkbox estilizado */
 .custom-checkbox {
-  display: inline-flex;
+  display: flex; /* Use flex para alinhar checkbox e texto */
   align-items: center;
   cursor: pointer;
   font-size: 0.95em;
   color: var(--color-form-text);
-  flex-grow: 1; /* Permite que o label ocupe espaço */
 }
 
 .custom-checkbox input[type="checkbox"] {
@@ -231,8 +232,8 @@
 /* Inputs de quantidade/valor ao lado do checkbox */
 .item-inputs {
   display: flex;
+  flex-wrap: wrap; /* Permite que inputs e labels quebrem se necessário */
   gap: 5px;
-  flex-shrink: 0; /* Não permite que os inputs encolham */
   align-items: center;
 }
 
@@ -254,27 +255,46 @@
     height: 35px; /* Altura fixa para inputs menores */
 }
 
+.input-label { /* Estilo para os novos labels de Qtd e Valor Unit. */
+  font-size: 0.85em;
+  color: var(--color-form-text);
+  white-space: nowrap;
+  margin-right: 2px;
+}
+
 
 /* Sub-itens */
 .sub-items-container {
   margin-top: 5px;
-  padding-left: 0px; /* Removido o padding para ajustar à tabela */
-  width: 100%;
+  padding-left: 0px;
+  width: 100%; /* Garante que ocupe a largura total de sua célula */
+  display: flex; /* Adicionado flexbox para alinhar sub-itens e botão */
+  flex-direction: column; /* Empilha os sub-itens e o botão */
+  gap: 5px; /* Espaçamento entre os sub-itens e o botão */
 }
 
 .sub-item-input-group {
   display: flex;
   align-items: center;
-  gap: 5px; /* Reduzido o gap */
-  margin-bottom: 5px; /* Reduzido o margin-bottom */
+  gap: 5px;
+  margin-bottom: 0; /* Removido margin-bottom para o gap do container */
   width: 100%;
 }
 
 .sub-item-input-group input[type="text"],
 .sub-item-input-group input[type="number"] {
   flex-grow: 1;
-  padding: 6px 8px; /* Ajustado padding */
-  font-size: 0.85em; /* Ajustado fonte */
+  padding: 6px 8px;
+  font-size: 0.85em;
+}
+
+/* Nova classe para a legenda dos sub-itens */
+.sub-item-label {
+  font-size: 0.85em;
+  color: var(--color-form-text);
+  white-space: nowrap; /* Garante que o texto não quebre a linha */
+  margin-right: 5px; /* Espaçamento entre a legenda e o input */
+  font-weight: 500;
 }
 
 .add-sub-item-btn, .remove-sub-item-btn {
@@ -282,7 +302,7 @@
   border: 1px solid var(--color-document-highlight);
   color: var(--color-document-highlight);
   font-size: 0.8em; /* Fonte menor */
-  padding: 1px 8px; /* Padding menor */
+  padding: 3px 8px; /* Padding menor */
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
@@ -293,7 +313,13 @@
   color: white;
 }
 .remove-sub-item-btn {
-    padding: 1px 6px; /* Ajuste específico para o 'X' */
+    padding: 3px 6px; /* Ajuste específico para o 'X' */
+}
+
+/* Alinhamento do botão + Detalhe dentro do sub-items-container */
+.sub-items-container .add-sub-item-btn {
+    align-self: flex-end; /* Alinha o botão à direita dentro do container flex */
+    margin-top: 5px; /* Espaçamento extra acima do botão */
 }
 
 
@@ -323,6 +349,19 @@
   color: var(--color-document-highlight);
 }
 
+.input-total { /* Estilo para os campos de total manual */
+  width: 150px;
+  text-align: right;
+  font-weight: bold;
+  font-family: var(--font-primary);
+  color: var(--color-document-highlight);
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-input-border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+
 .total-geral-form {
   font-family: var(--font-primary);
   font-size: 1.8em;
@@ -337,10 +376,25 @@
   color: var(--color-document-highlight);
 }
 
+.input-total-geral { /* Estilo para o total geral manual */
+  font-size: 1em; /* Ajustar o tamanho da fonte para o input */
+  width: 150px; /* Ajustar a largura para o input */
+  text-align: right;
+  font-weight: bold;
+  font-family: var(--font-primary);
+  color: var(--color-document-highlight);
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-input-border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+
+
 /* Campo para forma de pagamento e garantia */
 .summary-section {
   margin-top: 30px;
-  padding: 10px;
+  padding: 20px;
   background-color: #333;
   border-radius: 8px;
 }
@@ -388,7 +442,7 @@
 /* Media Queries para responsividade */
 @media (max-width: 767px) {
   .orcamento-form-container {
-    padding: 10px;
+    padding: 20px;
     margin: 15px auto;
   }
   .client-vehicle-section {
@@ -399,21 +453,32 @@
     width: 100%;
   }
 
+  /* Para telas menores, faça as linhas da tabela empilharem os elementos */
   .items-table tr {
-    flex-direction: column; /* Empilha as células das tabelas de itens */
-    align-items: stretch;
+    display: block; /* Faz cada linha ser um bloco, empilhando-as */
+    width: 100%;
+    margin-bottom: 20px; /* Mais espaço entre itens empilhados */
+    padding-bottom: 15px;
+  }
+  .items-table td {
+    display: block; /* Faz cada célula ser um bloco */
+    width: 100%;
+    padding: 5px 0; /* Ajusta o padding */
   }
   .checkbox-cell, .inputs-cell, .subitems-cell, .total-cell {
-    flex-basis: auto;
-    width: 100%;
-    min-width: unset;
+    width: 100%; /* Largura total para células em telas pequenas */
+    min-width: unset; /* Remove restrições de min-width */
+    padding-right: 0;
   }
-
-  .form-buttons {
-    flex-direction: column;
-    gap: 15px;
+  .item-inputs {
+    flex-wrap: wrap; /* Garante que os inputs quebrem se necessário */
+    justify-content: flex-start; /* Alinha os inputs ao início */
   }
-  .form-buttons .action-btn {
-    width: 100%;
+  .sub-items-container {
+    padding-left: 0; /* Remove padding em telas pequenas */
+    align-items: flex-start; /* Alinha sub-itens e botão à esquerda em telas pequenas */
+  }
+  .sub-items-container .add-sub-item-btn {
+      align-self: flex-start; /* Alinha o botão à esquerda em telas pequenas */
   }
 }

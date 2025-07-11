@@ -1,8 +1,8 @@
 // src/components/OrcamentoMotorCompleto.jsx
-import React, { useState, useEffect } from 'react'; // Importar useEffect
+import React, { useState } from 'react';
 import './OrcamentoForms.css'; // Certifique-se de que o CSS está acessível
 
-// Os dados de itens e serviços completos para o motor (mantidos como estão)
+// Os dados de itens e serviços completos para o motor
 const itensMotorCompletoData = [
   { nome: "Anel", temQuantidade: true },
   { nome: "Anti Chamas", temQuantidade: true },
@@ -11,8 +11,8 @@ const itensMotorCompletoData = [
     nome: "Biela",
     temQuantidade: true,
     subItens: [
-      { label: "Usinagem", type: "quantity" },
-      { label: "Nova", type: "measure" }
+      { label: "Usinagem", type: "quantity" }, // Primeiro item como quantidade
+      { label: "Nova", type: "measure" }     // Segundo item como medida
     ]
   },
   { nome: "Bobina", temQuantidade: true },
@@ -112,131 +112,35 @@ const servicosMotorCompletoData = [
   { nome: "Outros Serviços de Motor", subItens: [] },
 ];
 
-
-// Função para mapear dados do Excel para o formato do formData
-const mapExcelToFormData = (excelDataRow) => {
-  const newFormData = {
-    nome: excelDataRow['Cliente'] || '', // Ajustado para 'Cliente' conforme o docx
-    telefone: excelDataRow['Telefone'] || '', // Adicionado 'Telefone' se existir no excel
-    veiculo: excelDataRow['Veículo'] || '',
-    placa: excelDataRow['Placa'] || '', // Adicionado 'Placa' se existir no excel
-    data: excelDataRow['Data'] || new Date().toISOString().slice(0, 10),
-    formaPagamento: excelDataRow['Forma de pagamento'] || '',
-    garantia: excelDataRow['Garantia'] || '', // Adicionado 'Garantia' se existir no excel
-    totalPecasManual: parseFloat(excelDataRow['Valor total de Peças']) || 0,
-    totalServicosManual: parseFloat(excelDataRow['Valor total de Serviços']) || 0,
-    totalMaoDeObraManual: parseFloat(excelDataRow['Valor total de mão de Obra Mecânica']) || 0,
-    totalGeralManual: parseFloat(excelDataRow['TOTAL GERAL']) || 0,
-  };
-
-  // Mapeamento de Peças
-  newFormData.pecas = itensMotorCompletoData.map(item => {
-    // A chave no excel pode ser o nome da peça (ex: 'Pistão') para valores diretos,
-    // ou 'Pistão_Quantidade', 'Pistão_ValorUnitario' se as colunas forem assim.
-    // Usaremos uma abordagem flexível.
-    const excelPecaValue = excelDataRow[item.nome];
-    const excelQuantidade = excelDataRow[`${item.nome}_Quantidade`];
-    const excelValorUnitario = excelDataRow[`${item.nome}_ValorUnitario`];
-    const excelTotalPeca = excelDataRow[`Total_Item_${item.nome}`]; // Se houver um total por item no Excel
-
-    const selecionado = (excelPecaValue !== undefined && excelPecaValue !== '') ||
-                        (excelQuantidade !== undefined && excelQuantidade !== '') ||
-                        (excelValorUnitario !== undefined && excelValorUnitario !== '') ||
-                        (item.subItens && item.subItens.some(sub => excelDataRow[`${item.nome}_${sub.label}`] !== undefined && excelDataRow[`${item.nome}_${sub.label}`] !== ''));
-
-    const quantidade = item.temQuantidade ? (parseInt(excelQuantidade || excelPecaValue) || 1) : 0;
-    const valorUnitario = parseFloat(excelValorUnitario || 0); // Pode ser necessário ajustar se o valor unitário não for separado
-    const total = parseFloat(excelTotalPeca || (selecionado && quantidade && valorUnitario ? quantidade * valorUnitario : 0));
-
-    const subItens = item.subItens ? item.subItens.map(sub => ({
-      ...sub,
-      value: excelDataRow[`${item.nome}_${sub.label}`] || '',
-    })) : [];
-
-    return {
+const OrcamentoMotorCompleto = ({ onSubmit }) => {
+  const [formData, setFormData] = useState({
+    nome: '',
+    telefone: '',
+    veiculo: '',
+    placa: '',
+    data: new Date().toISOString().slice(0, 10),
+    pecas: itensMotorCompletoData.map(item => ({
       ...item,
-      selecionado,
-      quantidade,
-      valorUnitario,
-      total,
-      subItens,
-    };
-  });
-
-  // Mapeamento de Serviços
-  newFormData.servicos = servicosMotorCompletoData.map(servico => {
-    const excelServicoValue = excelDataRow[servico.nome];
-    const excelValorServico = excelDataRow[`Valor_Serviço_${servico.nome}`];
-    const excelTotalServico = excelDataRow[`Total_Item_${servico.nome}`]; // Se houver um total por item no Excel
-
-    const selecionado = (excelServicoValue !== undefined && excelServicoValue !== '') ||
-                        (excelValorServico !== undefined && excelValorServico !== '') ||
-                        (servico.subItens && servico.subItens.some(sub => excelDataRow[`${servico.nome}_${sub.label}`] !== undefined && excelDataRow[`${servico.nome}_${sub.label}`] !== ''));
-
-    const valor = parseFloat(excelValorServico || excelServicoValue || 0);
-    const total = parseFloat(excelTotalServico || (selecionado && valor ? valor : 0));
-
-    const subItens = servico.subItens ? servico.subItens.map(sub => ({
-      ...sub,
-      value: excelDataRow[`${servico.nome}_${sub.label}`] || '',
-    })) : [];
-
-    return {
+      selecionado: false,
+      quantidade: item.temQuantidade ? 1 : 0,
+      valorUnitario: 0,
+      total: 0, // Agora 'total' será preenchido manualmente se necessário
+      subItens: item.subItens ? item.subItens.map(sub => ({ ...sub, value: '' })) : [],
+    })),
+    servicos: servicosMotorCompletoData.map(servico => ({
       ...servico,
-      selecionado,
-      valor,
-      total,
-      subItens,
-    };
+      selecionado: false,
+      valor: 0,
+      total: 0, // Agora 'total' será preenchido manualmente se necessário
+      subItens: servico.subItens ? servico.subItens.map(sub => ({ ...sub, value: '' })) : [],
+    })),
+    totalPecasManual: 0,
+    totalServicosManual: 0,
+    totalGeralManual: 0,
+    totalMaoDeObraManual: 0, // Inicializa o novo campo para mão de obra mecânica
+    formaPagamento: '',
+    garantia: '',
   });
-
-  return newFormData;
-};
-
-
-const OrcamentoMotorCompleto = ({ onSubmit, initialExcelData = null }) => { // Aceita initialExcelData
-  const [formData, setFormData] = useState(() => {
-    // Inicializa o estado com dados do Excel se fornecidos, senão usa os dados padrão
-    if (initialExcelData) {
-      return mapExcelToFormData(initialExcelData);
-    }
-    return {
-      nome: '',
-      telefone: '',
-      veiculo: '',
-      placa: '',
-      data: new Date().toISOString().slice(0, 10),
-      pecas: itensMotorCompletoData.map(item => ({
-        ...item,
-        selecionado: false,
-        quantidade: item.temQuantidade ? 1 : 0,
-        valorUnitario: 0,
-        total: 0,
-        subItens: item.subItens ? item.subItens.map(sub => ({ ...sub, value: '' })) : [],
-      })),
-      servicos: servicosMotorCompletoData.map(servico => ({
-        ...servico,
-        selecionado: false,
-        valor: 0,
-        total: 0,
-        subItens: servico.subItens ? servico.subItens.map(sub => ({ ...sub, value: '' })) : [],
-      })),
-      totalPecasManual: 0,
-      totalServicosManual: 0,
-      totalGeralManual: 0,
-      totalMaoDeObraManual: 0,
-      formaPagamento: '',
-      garantia: '',
-    };
-  });
-
-  // UseEffect para atualizar o formulário se initialExcelData mudar após a montagem inicial
-  useEffect(() => {
-    if (initialExcelData) {
-      setFormData(mapExcelToFormData(initialExcelData));
-    }
-  }, [initialExcelData]);
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -281,9 +185,10 @@ const OrcamentoMotorCompleto = ({ onSubmit, initialExcelData = null }) => { // A
     setFormData(prev => ({ ...prev, [itemType]: items }));
   };
 
+  // CORREÇÃO AQUI: O parâmetro sIdx foi renomeado para subItemIndex para corresponder ao uso
   const handleSubItemTextChange = (itemType, itemIndex, subItemIndex, value) => {
     const items = [...formData[itemType]];
-    items[itemIndex].subItens[subItemIndex].value = value;
+    items[itemIndex].subItens[subItemIndex].value = value; // Usando subItemIndex
     setFormData(prev => ({ ...prev, [itemType]: items }));
   };
 
@@ -384,23 +289,30 @@ const OrcamentoMotorCompleto = ({ onSubmit, initialExcelData = null }) => { // A
                     {peca.selecionado && (
                       <div className="item-inputs">
                         {peca.temQuantidade && (
+                          <> {/* Fragmento para agrupar label e input */}
+                            <label htmlFor={`peca-${index}-quantidade`} className="input-label">Qtd:</label>
+                            <input
+                              type="number"
+                              id={`peca-${index}-quantidade`} // Adicionado ID único
+                              value={peca.quantidade}
+                              onChange={(e) => handlePecaChange(index, 'quantidade', parseInt(e.target.value) || 0)}
+                              min="0"
+                              className="quantity-input small-input"
+                            />
+                          </>
+                        )}
+                        <> {/* Fragmento para agrupar label e input */}
+                          <label htmlFor={`peca-${index}-valor`} className="input-label">Valor Unit.:</label>
                           <input
                             type="number"
-                            placeholder="Qtd"
-                            value={peca.quantidade}
-                            onChange={(e) => handlePecaChange(index, 'quantidade', parseInt(e.target.value) || 0)}
-                            min="0"
-                            className="quantity-input small-input"
+                            id={`peca-${index}-valor`} // Adicionado ID único
+                            placeholder="Valor Unit."
+                            value={peca.valorUnitario}
+                            onChange={(e) => handlePecaChange(index, 'valorUnitario', parseFloat(e.target.value) || 0)}
+                            step="0.01"
+                            className="value-input small-input"
                           />
-                        )}
-                        <input
-                          type="number"
-                          placeholder="Valor Unit."
-                          value={peca.valorUnitario}
-                          onChange={(e) => handlePecaChange(index, 'valorUnitario', parseFloat(e.target.value) || 0)}
-                          step="0.01"
-                          className="value-input small-input"
-                        />
+                        </>
                       </div>
                     )}
                   </td>
@@ -479,14 +391,18 @@ const OrcamentoMotorCompleto = ({ onSubmit, initialExcelData = null }) => { // A
                   <td className="inputs-cell">
                     {servico.selecionado && (
                       <div className="item-inputs">
-                        <input
-                          type="number"
-                          placeholder="Valor"
-                          value={servico.valor}
-                          onChange={(e) => handleServicoChange(index, 'valor', parseFloat(e.target.value) || 0)}
-                          step="0.01"
-                          className="value-input small-input"
-                        />
+                        <> {/* Fragmento para agrupar label e input */}
+                          <label htmlFor={`servico-${index}-valor`} className="input-label">Valor:</label>
+                          <input
+                            type="number"
+                            id={`servico-${index}-valor`} // Adicionado ID único
+                            placeholder="Valor"
+                            value={servico.valor}
+                            onChange={(e) => handleServicoChange(index, 'valor', parseFloat(e.target.value) || 0)}
+                            step="0.01"
+                            className="value-input small-input"
+                          />
+                        </>
                       </div>
                     )}
                   </td>
