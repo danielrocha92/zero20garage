@@ -40,7 +40,7 @@ const RetificaParcialOuCompleta = () => {
           <p className="blog-paragrafo">
             A retífica parcial é indicada quando o problema no motor está restrito a algumas partes específicas. Em geral, ela envolve o cabeçote, as válvulas ou a troca dos anéis de segmento, sem a desmontagem completa do bloco.
           </p>
-          <ul className="lista-escuro">
+          <ul className="lista-claro">
             <li><strong>Exemplos:</strong> troca da junta do cabeçote, planificação do cabeçote, troca de válvulas e vedadores.</li>
             <li><strong>Vantagem:</strong> menor custo e tempo de serviço.</li>
             <li><strong>Limitação:</strong> nem sempre resolve problemas mais profundos ou generalizados no motor.</li>
@@ -50,7 +50,7 @@ const RetificaParcialOuCompleta = () => {
           <p className="blog-paragrafo">
             A retífica completa (ou geral) é realizada quando há desgaste significativo em várias partes do motor. Nesse caso, o motor é totalmente desmontado, todas as peças são avaliadas, usinadas ou substituídas conforme necessário.
           </p>
-          <ul className="lista-escuro">
+          <ul className="lista-claro">
             <li><strong>Exemplos:</strong> usinagem de cilindros, virabrequim, troca de pistões, anéis, bronzinas, retífica de cabeçote.</li>
             <li><strong>Vantagem:</strong> restaura completamente o desempenho do motor, como se fosse novo.</li>
             <li><strong>Desvantagem:</strong> maior custo e tempo de execução.</li>
@@ -60,7 +60,7 @@ const RetificaParcialOuCompleta = () => {
           <p className="blog-paragrafo">
             A escolha depende da gravidade do problema, da quilometragem e do estado geral do motor. Veja algumas recomendações:
           </p>
-          <ul className="lista-escuro">
+          <ul className="lista-claro">
             <li><strong>Retífica parcial:</strong> indicada quando o motor ainda apresenta bom desempenho e os danos são localizados (como superaquecimento e desgaste no cabeçote).</li>
             <li><strong>Retífica completa:</strong> necessária quando há desgaste generalizado, ruídos internos, consumo de óleo e perda de compressão nos cilindros.</li>
           </ul>
@@ -71,7 +71,7 @@ const RetificaParcialOuCompleta = () => {
           </p>
 
           <h3 className="blog-subtitulo">Conclusão</h3>
-          <p className="paragrafo-escuro">
+          <p className="blog-paragrafo">
             Saber a diferença entre retífica parcial e completa é fundamental para tomar a melhor decisão para o seu carro. Em caso de dúvida, conte com a ZER0 20 GARAGE™: temos profissionais capacitados para diagnosticar com precisão e orientar sobre o melhor caminho.
           </p>
         </section>

@@ -41,7 +41,7 @@ const SinaisRetifica = () => {
           </p>
 
           <h3 className="blog-subtitulo">2. Principais sinais de que o motor precisa de retífica</h3>
-          <ul className="lista-escuro">
+          <ul className="lista-claro">
             <li><strong>Consumo excessivo de óleo:</strong> Pode haver desgaste interno mesmo sem vazamentos.</li>
             <li><strong>Fumaça azul ou branca:</strong> Indicam problemas de vedação e queima de óleo.</li>
             <li><strong>Perda de potência:</strong> Baixa compressão em cilindros é um sintoma comum.</li>
@@ -56,7 +56,7 @@ const SinaisRetifica = () => {
           </p>
 
           <h3 className="blog-subtitulo">4. Como prevenir a necessidade de retífica?</h3>
-          <ul className="lista-escuro">
+          <ul className="lista-claro">
             <li><strong>Troque o óleo regularmente:</strong> Evita o desgaste prematuro das peças.</li>
             <li><strong>Use combustível de qualidade:</strong> Previne danos causados por combustíveis adulterados.</li>
             <li><strong>Verifique o sistema de arrefecimento:</strong> Evita superaquecimentos.</li>
@@ -64,7 +64,7 @@ const SinaisRetifica = () => {
           </ul>
 
           <h3 className="blog-subtitulo">Conclusão</h3>
-          <p className="paragrafo-escuro">
+          <p className="blog-paragrafo">
             Reconhecer os sinais de desgaste no motor é essencial para evitar falhas graves e custos elevados. Se notar algum dos sintomas listados, procure uma oficina de confiança para avaliação. A retífica pode ser a melhor forma de restaurar seu veículo e prolongar sua vida útil.
           </p>
         </section>

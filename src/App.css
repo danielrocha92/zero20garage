@@ -102,6 +102,6 @@ nav ul li a:hover {
 .mapa ul li a:hover {
   text-decoration: none;
   background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  border-radius: 20px;
   transform: scale(1.05);
 }

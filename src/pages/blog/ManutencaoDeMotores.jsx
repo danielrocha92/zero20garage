@@ -40,7 +40,7 @@ const ManutencaoDeMotores = () => {
           <p className="blog-paragrafo">
             O óleo lubrificante evita o desgaste das peças internas do motor. Respeitar o intervalo de troca recomendado pelo fabricante é essencial.
           </p>
-          <ul className="lista-escuro">
+          <ul className="lista-claro">
             <li><strong>Óleo mineral:</strong> troca a cada 5.000 km, em média.</li>
             <li><strong>Óleo sintético:</strong> dura até 10.000 km, dependendo do uso.</li>
             <li><strong>Filtro de óleo:</strong> troque junto com o óleo.</li>
@@ -72,7 +72,7 @@ const ManutencaoDeMotores = () => {
           </p>
 
           <h3 className="blog-subtitulo">Conclusão</h3>
-          <p className="paragrafo-escuro">
+          <p className="blog-paragrafo">
             A vida útil do motor depende de cuidados simples, mas constantes. Investir em manutenção preventiva garante economia e tranquilidade ao dirigir. Conte com a ZER0 20 GARAGE™ para manter seu motor sempre em forma.
           </p>
         </section>

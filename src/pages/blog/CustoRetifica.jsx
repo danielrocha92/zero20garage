@@ -113,7 +113,7 @@ const CustoRetifica = () => {
             <li><strong>Retífica parcial:</strong> quando o dano é localizado, o custo pode ser reduzido pela metade.</li>
           </ul>
 
-          <h2 className="blog-subtitulo">Conclusão: vale a pena fazer a retífica?</h2>
+          <h3 className="blog-subtitulo">Conclusão: vale a pena fazer a retífica?</h3>
           <p className="blog-paragrafo">
             O custo da retífica de motor depende de diversos fatores, como tipo de motor, nível de desgaste e qualidade das peças utilizadas. Consultar uma oficina especializada é a melhor forma de obter um orçamento preciso para o seu caso.
           </p>

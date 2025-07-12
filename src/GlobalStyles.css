@@ -48,7 +48,7 @@ body {
   backdrop-filter: blur(25px); /* Aumento para um desfoque mais evidente */
   -webkit-backdrop-filter: blur(25px);
   margin: 0 auto;
-  border-radius: 18px; /* Mais arredondado, como os elementos do iOS */
+  border-radius: 20px; /* Mais arredondado, como os elementos do iOS */
   border: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
 }
 
@@ -107,7 +107,7 @@ body {
   background-color: rgba(245, 245, 245, 0.2); /* Mais transparente */
   backdrop-filter: blur(20px); /* Blur significativo para seções */
   -webkit-backdrop-filter: blur(20px);
-  border-radius: 15px; /* Bordas mais arredondadas */
+  border-radius: 20px; /* Bordas mais arredondadas */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -133,7 +133,7 @@ body {
   font-size: 1rem;
   font-weight: bold;
   border: none;
-  border-radius: 8px;
+  border-radius: 20px;
   text-decoration: none;
   transition: background-color 0.3s ease;
   margin-top: 1rem;
@@ -175,7 +175,7 @@ body {
   font-size: 1rem;
   margin-bottom: 1rem;
   padding: 0.5rem;
-  color: var(--cinza-escuro); /* Ajustado para melhor contraste */
+  color: var(--cinza-claro); /* Ajustado para melhor contraste */
   font-family: 'Ubuntu', sans-serif;
   font-weight: 600;
   letter-spacing: 0.03rem;
@@ -191,7 +191,7 @@ body {
   margin: 2rem 0 1rem;
   text-align: center;
   align-items: center;
-  color: var(--cinza-escuro); /* Ajustado para melhor contraste */
+  color: var(--cinza-claro); /* Ajustado para melhor contraste */
   font-family: 'Ubuntu', sans-serif;
   letter-spacing: 0.05rem;
   text-shadow:
@@ -246,18 +246,21 @@ ul {
 }
 
 .page-escuro .container-escuro {
-  /* Ajuste para containers dentro de page-escuro com blur e transparência */
-  background-color: rgba(18, 18, 18, 0.3); /* Mais transparente */
+  background-color: rgba(28, 28, 30, 0.25); /* Fundo mais escuro e translúcido */
   color: var(--cinza-claro);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25); /* Sombra suave porém mais intensa */
   max-width: 1200px;
-  padding: 0.5rem;
-  backdrop-filter: blur(25px); /* Blur significativo */
-  -webkit-backdrop-filter: blur(25px);
+  padding: 1rem;
   margin: 0 auto;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+
+  backdrop-filter: blur(30px) saturate(180%) contrast(110%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%) contrast(110%);
+
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Bordas mais destacadas */
+  transition: all 0.3s ease-in-out;
 }
+
 
 
 /* ===== Tipografia Modo Escuro (Mantido como estava, aplicado a elementos dentro de .page-escuro) ===== */
@@ -266,7 +269,7 @@ ul {
   line-height: 1.2;
   margin-bottom: 0.5rem;
   padding: 0.1rem;
-  color: var(--cinza-claro); /* Ajustado para texto claro em container escuro */
+  color: var(--cinza-escuro); /* Ajustado para texto claro em container escuro */
   font-family: 'Ubuntu', sans-serif;
   font-weight: 550;
   text-align: center;
@@ -278,7 +281,7 @@ ul {
 .lista-escuro li {
   list-style-type: none;
   padding-left: 0;
-  color: var(--cinza-claro); /* Ajustado para texto claro em container escuro */
+  color: var(--cinza-escuro); /* Ajustado para texto claro em container escuro */
   padding-left: 1.5rem;
   margin-bottom: 0.5rem;
   font-size: 1rem;
@@ -335,7 +338,7 @@ ul {
   background-color: rgba(245, 245, 245, 0.2); /* Mais transparente */
   backdrop-filter: blur(20px); /* Blur significativo */
   -webkit-backdrop-filter: blur(20px);
-  border-radius: 15px;
+  border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   color: var(--cinza-escuro);
   margin-bottom: 2rem;
@@ -352,7 +355,7 @@ ul {
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: 600;
-  border-radius: 8px;
+  border-radius: 20px;
   width: 100%;
   max-width: max-content;
   margin: 0 auto;
@@ -404,7 +407,7 @@ textarea {
   padding: 0.8rem;
   margin-bottom: 1rem;
   border: 1px solid var(--cinza-medio);
-  border-radius: 8px;
+  border-radius: 20px;
   font-size: 1rem;
   background-color: rgba(255, 255, 255, 0.1); /* Sutilmente transparente */
   color: var(--cinza-escuro); /* Cor do texto no input */
@@ -425,7 +428,7 @@ textarea {
   background-color: rgba(15, 15, 15, 0.2); /* Bem mais transparente */
   backdrop-filter: blur(30px); /* Blur super forte */
   -webkit-backdrop-filter: blur(30px);
-  border-radius: 22px; /* Mais arredondado ainda */
+  border-radius: 20px; /* Mais arredondado ainda */
   min-height: 200px;
   display: flex;
   flex-direction: column;
@@ -441,7 +444,7 @@ textarea {
 .highlight-card {
   /* Efeito de pasta iOS */
   background-color: rgba(18, 18, 18, 0.2); /* Bem mais transparente */
-  border-radius: 22px; /* Mais arredondado ainda */
+  border-radius: 20px; /* Mais arredondado ainda */
   padding: 1.5rem;
   color: var(--branco);
   box-shadow: 0 4px 40px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada e difusa */
@@ -522,7 +525,7 @@ textarea {
 .blog-img {
   width: 100%;
   height: auto;
-  border-radius: 0.5rem;
+  border-radius: 20px;
   margin-bottom: 2rem;
   object-fit: cover;
 }
@@ -541,7 +544,7 @@ textarea {
 
 .home-carousel-wrapper {
   margin-bottom: 2.5rem;
-  border-radius: 1rem;
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
 }
@@ -550,13 +553,13 @@ textarea {
   width: 100%;
   height: auto;
   object-fit: cover;
-  border-radius: 0.5rem;
+  border-radius: 20px;
 }
 
 .home-[etapa]-content {
   background-color: rgba(255, 255, 255, 0.03);
   padding: 2rem;
-  border-radius: 1rem;
+  border-radius: 20px;
   box-shadow: 0 0 20px rgba(255, 0, 0, 0.05);
 }
 
@@ -566,7 +569,7 @@ textarea {
   background-color: #e60000;
   color: #fff;
   padding: 0.8rem 1.5rem;
-  border-radius: 0.4rem;
+  border-radius: 20px;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
@@ -591,7 +594,7 @@ textarea {
   bottom: 0;
   width: 4px;
   background-color: #ff0015;
-  border-radius: 2px;
+  border-radius: 20px;
 }
 
 
@@ -604,7 +607,7 @@ textarea {
     backdrop-filter: blur(25px); /* Consistência com o aumento do blur */
     -webkit-backdrop-filter: blur(25px);
     margin: 0 auto;
-    border-radius: 18px;
+    border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
@@ -619,7 +622,7 @@ textarea {
   background-color: rgba(15, 15, 15, 0.2);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
-  border-radius: 22px;
+  border-radius: 20px;
   min-height: 200px;
   display: flex;
   flex-direction: column;
@@ -642,7 +645,7 @@ textarea {
   background-color: rgba(245, 245, 245, 0.2);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-radius: 15px;
+  border-radius: 20px;
   max-width: 1200px;
   margin: 0 auto;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -658,7 +661,7 @@ textarea {
 .faq-item {
   margin-bottom: 1rem;
   padding: 0.5rem;
-  border-radius: 12px; /* Mais arredondado */
+  border-radius: 20px; /* Mais arredondado */
   /* Fundo do item FAQ com transparência e blur */
   background-color: rgba(255, 255, 255, 0.3); /* Mais transparente */
   backdrop-filter: blur(15px); /* Blur para itens individuais */
@@ -667,10 +670,6 @@ textarea {
   cursor: pointer;
   transition: background-color 0.3s;
   border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.faq-item:hover {
-  background-color: rgba(249, 249, 249, 0.4); /* Hover também transparente */
 }
 
 .faq-question {
@@ -741,13 +740,6 @@ textarea {
     -webkit-backdrop-filter: blur(20px);
   }
 
-  /* Ajustes para a tipografia no modo escuro, se aplicarem globalmente e não apenas a .page-escuro */
-  .paragrafo-claro,
-  .subtitulo-claro,
-  .lista-claro li {
-    color: var(--cinza-claro);
-  }
-
   .section {
     /* Ajustes para modo escuro */
     background-color: rgba(30, 30, 30, 0.3); /* Transparência no modo escuro */
@@ -763,7 +755,7 @@ input,
 textarea {
   width: 100%;
   padding: 0.9rem 1rem;
-  border-radius: 8px;
+  border-radius: 20px;
   font-size: 1rem;
   border: 1px solid var(--cinza-medio);
   background-color: rgba(255, 255, 255, 0.1);
@@ -792,7 +784,7 @@ textarea:focus {
   color: var(--cinza-claro);
   background-color: var(--vermelho-principal);
   border: none;
-  border-radius: 8px;
+  border-radius: 20px;
   box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -832,7 +824,7 @@ textarea:focus {
   height: auto;
   max-height: 400px;
   object-fit: cover;
-  border-radius: 0.5rem;
+  border-radius: 20px;
   margin-bottom: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -971,7 +963,7 @@ textarea:focus {
     box-shadow: 0 2px 15px rgba(255, 0, 0, 0.1); /* Sombra mais sutil */
     backdrop-filter: blur(20px); /* Ajuste de blur para mobile */
     -webkit-backdrop-filter: blur(20px);
-    border-radius: 18px; /* Mais arredondado no mobile também */
+    border-radius: 20px; /* Mais arredondado no mobile também */
   }
 
   .highlight-card h3 {
@@ -1012,7 +1004,7 @@ textarea:focus {
   }
 
   .blog-img {
-    border-radius: 0.4rem;
+    border-radius: 20px;
     margin-bottom: 1rem;
   }
 

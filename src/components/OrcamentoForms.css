@@ -1,5 +1,8 @@
-/* src/components/OrcamentoForms.css */
+/* src/components/OrcamentoForms.css - UNIFICADO E MOBILE FIRST */
 
+/* ========================================= */
+/* ===== Variáveis CSS Globais ===== */
+/* ========================================= */
 :root {
   --color-form-bg: #2a2a2a;
   --color-form-text: #e0e0e0;
@@ -16,140 +19,162 @@
 
   --font-primary: 'Arial Black', sans-serif;
   --font-secondary: 'Arial', sans-serif;
+
+  /* Variáveis para o modo de impressão/visualização de documento */
+  --color-screen-bg: #1a1a1a; /* Fundo da tela quando visualizando o documento */
+  --color-screen-text: #f0f0f0;
+  --color-screen-border: #555;
+  --color-screen-shadow: rgba(0, 0, 0, 0.4);
+
+  --color-document-bg: #ffffff; /* Fundo do documento em si */
+  --color-document-text: #333333;
+  --color-document-secondary-text: #666666;
+  --color-document-border: #cccccc;
+  --color-table-header-bg: #f2f2f2;
+  --color-table-stripe-bg: #f9f9f9;
 }
+
+/* ========================================= */
+/* ===== Estilos Padrão (MOBILE FIRST para Formulário) ===== */
+/* ========================================= */
 
 .orcamento-form-container {
   background-color: var(--color-form-bg);
-  padding: 30px;
-  border-radius: 12px;
+  padding: 20px; /* Ajustado para mobile */
+  border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  width: 90%; /* Torna a largura fluida */
-  max-width: 1200px; /* Permite expansão até 1200px */
-  margin: 30px auto;
+  width: 95%; /* Mais fluido para mobile */
+  max-width: 1200px; /* Mantém limite para telas grandes */
+  margin: 15px auto; /* Ajustado para mobile */
   color: var(--color-form-text);
   font-family: var(--font-secondary);
+  box-sizing: border-box; /* Garante que padding e border não aumentem a largura */
 }
 
 .form-header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px; /* Ajustado para mobile */
 }
 
 .form-header h1 {
   font-family: var(--font-primary);
-  font-size: 2.2em;
+  font-size: 1.8em; /* Ajustado para mobile */
   color: var(--color-document-highlight);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .form-header p {
-  font-size: 1.1em;
+  font-size: 0.9em; /* Ajustado para mobile */
   color: var(--color-form-text);
   opacity: 0.8;
 }
 
 .header-logo {
-  max-width: 150px;
+  max-width: 120px; /* Ajustado para mobile */
   height: auto;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 /* Seção de Dados do Cliente/Veículo */
 .client-vehicle-section {
-  margin-bottom: 30px;
-  padding: 20px;
-  background-color: #333; /* Fundo levemente diferente para a seção */
-  border-radius: 8px;
+  margin-bottom: 20px; /* Ajustado para mobile */
+  padding: 15px; /* Ajustado para mobile */
+  background-color: #333;
+  border-radius: 20px;
 }
 
 .client-vehicle-section h2 {
   font-family: var(--font-primary);
-  font-size: 1.6em;
+  font-size: 1.4em; /* Ajustado para mobile */
   color: var(--color-document-highlight);
   border-bottom: 2px solid var(--color-document-highlight);
-  padding-bottom: 10px;
-  margin-bottom: 25px;
+  padding-bottom: 8px;
+  margin-bottom: 20px; /* Ajustado para mobile */
   text-transform: uppercase;
 }
 
 .form-table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed; /* Ajuda a fixar as larguras das colunas */
+  /* table-layout: fixed; será aplicado no desktop */
 }
 
 .form-table td {
-  padding: 10px 15px;
-  vertical-align: top;
+  padding: 8px 0; /* Ajustado para mobile */
+  display: block; /* Empilha as células em telas menores */
+  width: 100%; /* Ocupa a largura total */
 }
 
 .form-group {
-  margin-bottom: 0; /* Remover margin-bottom dos form-group dentro de tabelas */
+  margin-bottom: 10px; /* Espaçamento entre grupos de formulário */
 }
 
 .form-group label {
   display: block;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 5px; /* Ajustado para mobile */
   color: var(--color-form-text);
-  font-size: 0.95em;
+  font-size: 0.9em; /* Ajustado para mobile */
 }
 
 .form-group input[type="text"],
 .form-group input[type="number"],
 .form-group input[type="date"],
-.form-group textarea {
+.form-group textarea,
+.form-group select { /* Adicionado select aqui para consistência */
   width: 100%;
-  padding: 12px;
-  border: 1px solid var(--color-input-border);
-  border-radius: 6px;
-  background-color: var(--color-input-bg);
+  padding: 0.6rem 0.8rem; /* Ajustado para mobile */
+  font-size: 0.95rem; /* Ajustado para mobile */
+  background-color: #1a1a1a;
   color: var(--color-input-text);
-  font-size: 1em;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  box-sizing: border-box; /* Garante que padding não adicione largura */
+  border: 1px solid var(--color-input-border);
+  border-radius: 20px;
+  transition: border 0.3s ease;
+  box-sizing: border-box;
 }
 
 .form-group input[type="text"]:focus,
 .form-group input[type="number"]:focus,
 .form-group input[type="date"]:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
   outline: none;
   border-color: var(--color-input-focus-border);
-  box-shadow: 0 0 0 3px rgba(var(--color-document-highlight), 0.3); /* Sombra para foco */
+  box-shadow: 0 0 0 3px rgba(var(--color-document-highlight), 0.3);
 }
 
-/* Seções de Peças e Serviços (dentro dos formulários) */
+/* Seções de Peças e Serviços */
 .section-form {
-  margin-top: 35px;
-  padding: 20px;
+  margin-top: 25px; /* Ajustado para mobile */
+  padding: 15px; /* Ajustado para mobile */
   background-color: #333;
-  border-radius: 8px;
+  border-radius: 20px;
 }
 
 .section-form h2 {
   font-family: var(--font-primary);
-  font-size: 1.6em;
+  font-size: 1.4em; /* Ajustado para mobile */
   color: var(--color-document-highlight);
   border-bottom: 2px solid var(--color-document-highlight);
-  padding-bottom: 10px;
-  margin-bottom: 25px;
+  padding-bottom: 8px;
+  margin-bottom: 20px; /* Ajustado para mobile */
   text-transform: uppercase;
 }
 
 .items-table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed; /* Ajuda a fixar as larguras das colunas */
+  /* table-layout: fixed; será aplicado no desktop */
 }
 
 .items-table tr {
-  border-bottom: 1px solid #444; /* Separador entre as linhas de itens */
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-  vertical-align: top;
+  display: block; /* Faz cada linha ser um bloco, empilhando-as */
+  width: 100%;
+  border-bottom: 1px solid #444;
+  padding-bottom: 15px; /* Mais espaço entre itens empilhados */
+  margin-bottom: 15px;
 }
 
 .items-table tr:last-child {
@@ -159,55 +184,43 @@
 }
 
 .items-table td {
-  padding: 5px 0; /* Ajuste o padding das células */
-  vertical-align: top; /* Garante que o conteúdo se alinhe ao topo da célula */
+  display: block; /* Faz cada célula ser um bloco */
+  width: 100%;
+  padding: 5px 0;
+  min-width: unset; /* Remove restrições de min-width */
+  padding-right: 0;
 }
 
-/* Ajuste das larguras das colunas para melhor distribuição */
-.checkbox-cell {
-  width: 25%; /* Largura para o checkbox e nome do item */
-  min-width: 150px;
-  padding-right: 10px;
-}
-
-.inputs-cell {
-  width: 25%; /* Mais espaço para Qtd e Valor Unit. */
-  min-width: 180px; /* Ajustado min-width para acomodar labels e inputs */
-  padding-right: 10px;
-}
-
-.subitems-cell {
-  width: 35%; /* Largura para os sub-itens */
-  padding-right: 10px;
-}
-
+/* Células da tabela - Larguras para mobile (100% por padrão) */
+.checkbox-cell,
+.inputs-cell,
+.subitems-cell,
 .total-cell {
-  width: 15%; /* Mais espaço para o input de total */
-  text-align: right;
-  min-width: 100px; /* Ajustado min-width para o input de total */
-  font-weight: bold;
-  color: var(--color-document-highlight);
+  width: 100%;
+  min-width: unset;
+  padding-right: 0;
 }
 
 
 /* Checkbox estilizado */
 .custom-checkbox {
-  display: flex; /* Use flex para alinhar checkbox e texto */
+  display: flex;
   align-items: center;
   cursor: pointer;
   font-size: 0.95em;
   color: var(--color-form-text);
+  margin-bottom: 5px; /* Espaçamento abaixo do checkbox */
 }
 
 .custom-checkbox input[type="checkbox"] {
-  display: none; /* Esconde o checkbox nativo */
+  display: none;
 }
 
 .custom-checkbox .checkbox-box {
   width: 20px;
   height: 20px;
   border: 2px solid var(--color-checkbox-border);
-  border-radius: 4px;
+  border-radius: 20px; /* Mantido redondo */
   background-color: var(--color-input-bg);
   display: flex;
   justify-content: center;
@@ -223,61 +236,63 @@
 }
 
 .custom-checkbox input[type="checkbox"]:checked + .checkbox-box::before {
-  content: '✓'; /* Checkmark */
+  content: '✓';
   color: white;
   font-size: 14px;
   font-weight: bold;
 }
 
-/* Inputs de quantidade/valor ao lado do checkbox */
+/* Inputs de quantidade/valor */
 .item-inputs {
   display: flex;
-  flex-wrap: wrap; /* Permite que inputs e labels quebrem se necessário */
-  gap: 5px;
+  flex-wrap: wrap;
+  gap: 10px; /* Aumentado gap para mobile */
   align-items: center;
+  margin-top: 5px; /* Espaçamento acima dos inputs */
 }
 
 .item-inputs input[type="number"] {
-  width: 60px; /* Largura para quantidade */
+  width: 80px; /* Ajustado para mobile */
   text-align: center;
   padding: 8px;
   font-size: 0.9em;
 }
 
 .item-inputs .value-input {
-  width: 90px; /* Largura para valor */
+  width: 100px; /* Ajustado para mobile */
   text-align: right;
 }
 
 .small-input {
-    padding: 6px 8px; /* Reduz o padding para diminuir o tamanho */
-    font-size: 0.85em; /* Reduz o tamanho da fonte */
-    height: 35px; /* Altura fixa para inputs menores */
+  padding: 6px 8px;
+  font-size: 0.85em;
+  height: 35px;
+  border-radius: 20px; /* Mantido redondo */
 }
 
-.input-label { /* Estilo para os novos labels de Qtd e Valor Unit. */
+.input-label {
   font-size: 0.85em;
   color: var(--color-form-text);
   white-space: nowrap;
   margin-right: 2px;
 }
 
-
 /* Sub-itens */
 .sub-items-container {
-  margin-top: 5px;
+  margin-top: 10px; /* Ajustado para mobile */
   padding-left: 0px;
-  width: 100%; /* Garante que ocupe a largura total de sua célula */
-  display: flex; /* Adicionado flexbox para alinhar sub-itens e botão */
-  flex-direction: column; /* Empilha os sub-itens e o botão */
-  gap: 5px; /* Espaçamento entre os sub-itens e o botão */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Espaçamento entre os sub-itens e o botão */
+  align-items: flex-start; /* Alinha sub-itens e botão à esquerda por padrão (mobile) */
 }
 
 .sub-item-input-group {
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-bottom: 0; /* Removido margin-bottom para o gap do container */
+  margin-bottom: 0;
   width: 100%;
 }
 
@@ -286,14 +301,14 @@
   flex-grow: 1;
   padding: 6px 8px;
   font-size: 0.85em;
+  border-radius: 20px; /* Mantido redondo */
 }
 
-/* Nova classe para a legenda dos sub-itens */
 .sub-item-label {
   font-size: 0.85em;
   color: var(--color-form-text);
-  white-space: nowrap; /* Garante que o texto não quebre a linha */
-  margin-right: 5px; /* Espaçamento entre a legenda e o input */
+  white-space: nowrap;
+  margin-right: 5px;
   font-weight: 500;
 }
 
@@ -301,34 +316,34 @@
   background-color: transparent;
   border: 1px solid var(--color-document-highlight);
   color: var(--color-document-highlight);
-  font-size: 0.8em; /* Fonte menor */
-  padding: 3px 8px; /* Padding menor */
-  border-radius: 4px;
+  font-size: 0.8em;
+  padding: 3px 8px;
+  border-radius: 20px; /* Mantido redondo */
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
-  white-space: nowrap; /* Impede quebra de linha para o texto do botão */
+  white-space: nowrap;
 }
 .add-sub-item-btn:hover, .remove-sub-item-btn:hover {
   background-color: var(--color-document-highlight);
   color: white;
 }
 .remove-sub-item-btn {
-    padding: 3px 6px; /* Ajuste específico para o 'X' */
+    padding: 3px 6px;
 }
 
-/* Alinhamento do botão + Detalhe dentro do sub-items-container */
+/* Alinhamento do botão + Detalhe (mobile: à esquerda) */
 .sub-items-container .add-sub-item-btn {
-    align-self: flex-end; /* Alinha o botão à direita dentro do container flex */
-    margin-top: 5px; /* Espaçamento extra acima do botão */
+    align-self: flex-start;
+    margin-top: 5px;
 }
 
 
 /* Linhas de Total nos formulários */
 .total-line-form {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 15px;
+  flex-direction: column; /* Empilha label e input para mobile */
+  align-items: flex-end; /* Alinha à direita */
+  gap: 8px; /* Espaçamento ajustado */
   margin-top: 20px;
   padding-top: 15px;
   border-top: 1px dashed var(--color-form-border);
@@ -342,50 +357,54 @@
 }
 
 .total-line-form .value-display {
-  width: 150px;
+  width: 100%; /* Ocupa largura total para mobile */
+  max-width: 150px; /* Limita a largura em telas maiores */
   text-align: right;
   font-weight: bold;
   font-family: var(--font-primary);
   color: var(--color-document-highlight);
 }
 
-.input-total { /* Estilo para os campos de total manual */
-  width: 150px;
+.input-total {
+  width: 100%; /* Ocupa largura total para mobile */
+  max-width: 150px; /* Limita a largura em telas maiores */
   text-align: right;
   font-weight: bold;
   font-family: var(--font-primary);
   color: var(--color-document-highlight);
   background-color: var(--color-input-bg);
   border: 1px solid var(--color-input-border);
-  border-radius: 6px;
+  border-radius: 20px; /* Mantido redondo */
   padding: 8px 12px;
   box-sizing: border-box;
 }
 
 .total-geral-form {
   font-family: var(--font-primary);
-  font-size: 1.8em;
+  font-size: 1.6em; /* Ajustado para mobile */
   font-weight: 700;
   margin-top: 25px;
   display: flex;
+  flex-direction: column; /* Empilha label e input para mobile */
   justify-content: flex-end;
-  align-items: baseline;
-  gap: 20px;
+  align-items: flex-end; /* Alinha à direita */
+  gap: 10px; /* Espaçamento ajustado */
   border-top: 2px solid var(--color-document-highlight);
   padding-top: 20px;
   color: var(--color-document-highlight);
 }
 
-.input-total-geral { /* Estilo para o total geral manual */
-  font-size: 1em; /* Ajustar o tamanho da fonte para o input */
-  width: 150px; /* Ajustar a largura para o input */
+.input-total-geral {
+  font-size: 1em;
+  width: 100%; /* Ocupa largura total para mobile */
+  max-width: 150px; /* Limita a largura em telas maiores */
   text-align: right;
   font-weight: bold;
   font-family: var(--font-primary);
   color: var(--color-document-highlight);
   background-color: var(--color-input-bg);
   border: 1px solid var(--color-input-border);
-  border-radius: 6px;
+  border-radius: 20px; /* Mantido redondo */
   padding: 8px 12px;
   box-sizing: border-box;
 }
@@ -393,13 +412,13 @@
 
 /* Campo para forma de pagamento e garantia */
 .summary-section {
-  margin-top: 30px;
-  padding: 20px;
+  margin-top: 20px; /* Ajustado para mobile */
+  padding: 15px; /* Ajustado para mobile */
   background-color: #333;
-  border-radius: 8px;
+  border-radius: 20px;
 }
 .summary-section .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* Ajustado para mobile */
 }
 .summary-section .form-group label {
   margin-bottom: 5px;
@@ -408,10 +427,11 @@
 
 /* Botões de Ação do Formulário */
 .form-buttons {
-  margin-top: 40px;
+  margin-top: 30px; /* Ajustado para mobile */
   display: flex;
+  flex-direction: column; /* Empilha botões para mobile */
   justify-content: center;
-  gap: 20px;
+  gap: 15px; /* Espaçamento ajustado */
 }
 
 .form-buttons .action-btn {
@@ -420,65 +440,635 @@
   color: white;
   font-family: var(--font-primary);
   font-weight: 700;
-  padding: 12px 30px;
-  border-radius: 8px;
+  padding: 10px 20px; /* Ajustado para mobile */
+  border-radius: 20px; /* Mantido redondo */
   cursor: pointer;
-  font-size: 1.1em;
-  box-shadow: 0 4px 10px rgba(var(--color-button-primary), 0.3);
+  font-size: 1em; /* Ajustado para mobile */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  width: 100%; /* Ocupa largura total para mobile */
 }
 
 .form-buttons .action-btn:hover {
   background-color: var(--color-button-primary-hover);
-  box-shadow: 0 6px 15px rgba(var(--color-button-primary), 0.4);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
   transform: translateY(-2px);
 }
 
 .form-buttons .action-btn:active {
   transform: translateY(0);
-  box-shadow: 0 2px 5px rgba(var(--color-button-primary), 0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Media Queries para responsividade */
-@media (max-width: 767px) {
+
+/* Media Query para Telas Maiores (Desktop First) */
+@media (min-width: 768px) {
   .orcamento-form-container {
-    padding: 20px;
-    margin: 15px auto;
+    padding: 30px;
+    margin: 30px auto;
+    width: 90%;
   }
+  .form-header h1 {
+    font-size: 2.2em;
+  }
+  .form-header p {
+    font-size: 1.1em;
+  }
+  .header-logo {
+    max-width: 150px;
+  }
+
   .client-vehicle-section {
-    grid-template-columns: 1fr; /* Uma coluna em telas menores */
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+  .client-vehicle-section h2 {
+    font-size: 1.6em;
+    margin-bottom: 25px;
+  }
+
+  .form-table {
+    table-layout: fixed; /* Re-aplica para desktop */
   }
   .form-table td {
-    display: block; /* Empilha as células em telas menores */
-    width: 100%;
+    display: table-cell; /* Volta ao comportamento de célula de tabela */
+    width: auto; /* Deixa a largura ser controlada pelas células específicas */
+    padding: 10px 15px;
   }
 
-  /* Para telas menores, faça as linhas da tabela empilharem os elementos */
+  .form-group label {
+    font-size: 0.95em;
+    margin-bottom: 8px;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="number"],
+  .form-group input[type="date"],
+  .form-group textarea,
+  .form-group select { /* Adicionado select aqui para consistência */
+    padding: 12px;
+    font-size: 1em;
+  }
+
+  .section-form {
+    margin-top: 35px;
+    padding: 20px;
+  }
+  .section-form h2 {
+    font-size: 1.6em;
+    margin-bottom: 25px;
+  }
+
   .items-table tr {
-    display: block; /* Faz cada linha ser um bloco, empilhando-as */
-    width: 100%;
-    margin-bottom: 20px; /* Mais espaço entre itens empilhados */
-    padding-bottom: 15px;
+    display: table-row; /* Volta ao comportamento de linha de tabela */
+    width: auto;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
   }
   .items-table td {
-    display: block; /* Faz cada célula ser um bloco */
-    width: 100%;
-    padding: 5px 0; /* Ajusta o padding */
+    display: table-cell; /* Volta ao comportamento de célula de tabela */
+    padding: 5px 0;
   }
-  .checkbox-cell, .inputs-cell, .subitems-cell, .total-cell {
-    width: 100%; /* Largura total para células em telas pequenas */
-    min-width: unset; /* Remove restrições de min-width */
-    padding-right: 0;
+
+  /* Larguras das colunas para desktop */
+  .checkbox-cell {
+    width: 25%;
+    min-width: 150px;
+    padding-right: 10px;
   }
+  .inputs-cell {
+    width: 25%;
+    min-width: 180px;
+    padding-right: 10px;
+  }
+  .subitems-cell {
+    width: 35%;
+    padding-right: 10px;
+  }
+  .total-cell {
+    width: 15%;
+    min-width: 100px;
+  }
+
   .item-inputs {
-    flex-wrap: wrap; /* Garante que os inputs quebrem se necessário */
-    justify-content: flex-start; /* Alinha os inputs ao início */
+    gap: 5px;
   }
+  .item-inputs input[type="number"] {
+    width: 60px;
+  }
+  .item-inputs .value-input {
+    width: 90px;
+  }
+
   .sub-items-container {
-    padding-left: 0; /* Remove padding em telas pequenas */
-    align-items: flex-start; /* Alinha sub-itens e botão à esquerda em telas pequenas */
+    margin-top: 5px;
+    gap: 5px;
+    align-items: flex-end; /* Alinha o botão + Detalhe à direita no desktop */
   }
   .sub-items-container .add-sub-item-btn {
-      align-self: flex-start; /* Alinha o botão à esquerda em telas pequenas */
+    align-self: flex-end; /* Alinha o botão à direita no desktop */
+  }
+
+  .total-line-form {
+    flex-direction: row; /* Volta para linha no desktop */
+    justify-content: flex-end;
+    gap: 15px;
+  }
+  .total-line-form .value-display,
+  .input-total {
+    width: 150px;
+    max-width: 150px;
+  }
+
+  .total-geral-form {
+    font-size: 1.8em;
+    flex-direction: row; /* Volta para linha no desktop */
+    gap: 20px;
+  }
+  .input-total-geral {
+    font-size: 1em;
+    width: 150px;
+    max-width: 150px;
+  }
+
+  .summary-section {
+    margin-top: 30px;
+    padding: 20px;
+  }
+  .summary-section .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-buttons {
+    margin-top: 40px;
+    flex-direction: row; /* Volta para linha no desktop */
+    gap: 20px;
+  }
+  .form-buttons .action-btn {
+    padding: 12px 30px;
+    font-size: 1.1em;
+    width: auto; /* Volta para largura automática */
   }
 }
+
+/* ========================================= */
+/* ===== Estilos para a VISUALIZAÇÃO NA TELA (DOCUMENTO) ===== */
+/* ========================================= */
+
+.orcamento-impresso-wrapper {
+  background-color: var(--color-screen-bg);
+  color: var(--color-screen-text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px 5px; /* Mais padding para telas maiores */
+  box-sizing: border-box;
+}
+
+.orcamento-document-container {
+  font-family: var(--font-secondary);
+  background-color: var(--color-document-bg);
+  color: var(--color-document-text);
+  max-width: 210mm; /* A4 width */
+  min-height: 297mm; /* A4 height, ajustado para flexibilidade */
+  margin: 0 auto;
+  padding: 25mm 20mm; /* Margens A4 internas */
+  border: 1px solid var(--color-screen-border); /* Borda na tela */
+  box-shadow: 0 10px 25px var(--color-screen-shadow); /* Sombra mais suave */
+  border-radius: 20px; /* Cantos arredondados para modernidade */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header e Logo */
+.header-info {
+  display: flex;
+  flex-direction: column; /* Mobile first */
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--color-document-border); /* Linha fina e elegante */
+}
+
+.company-info {
+  text-align: center;
+  font-size: 0.9em;
+  line-height: 1.5;
+  color: var(--color-document-secondary-text);
+  margin-bottom: 10px; /* Espaço abaixo da info da empresa */
+}
+.company-info strong {
+    font-weight: 700;
+    color: var(--color-document-text);
+}
+
+.logo-placeholder {
+  width: 120px; /* Logo um pouco maior */
+  height: auto;
+  margin-top: 10px; /* Espaço acima do logo */
+}
+
+.logo-placeholder img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Título Principal */
+.orcamento-title {
+  text-align: center;
+  font-family: var(--font-primary);
+  font-size: 2em; /* Título maior */
+  font-weight: 700;
+  color: var(--color-document-highlight);
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px; /* Mais espaçamento para título */
+}
+
+/* Dados do Cliente */
+.client-data {
+  margin-bottom: 30px;
+  padding: 10px 0;
+  border-top: 1px solid var(--color-document-border);
+  border-bottom: 1px solid var(--color-document-border);
+}
+
+.client-data p {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 8px 0;
+  font-size: 0.95em;
+  color: var(--color-document-text);
+}
+
+.client-data .label {
+  font-weight: 600; /* Mais encorpado */
+  margin-right: 10px;
+  flex-basis: 100px; /* Um pouco mais de largura para o label */
+  flex-shrink: 0;
+  color: var(--color-document-secondary-text);
+}
+
+.client-data .value {
+  flex-grow: 1;
+  border-bottom: 1px dashed var(--color-document-border); /* Linha tracejada para os valores */
+  padding-bottom: 2px;
+  min-width: 150px; /* Garante que o valor não seja muito apertado */
+  color: var(--color-document-text);
+}
+
+/* Seções de Peças e Serviços */
+.section-pecas,
+.section-servicos {
+  margin-bottom: 30px;
+}
+
+.section-pecas h2,
+.section-servicos h2 {
+  font-family: var(--font-primary);
+  font-size: 1.4em;
+  font-weight: 700;
+  color: var(--color-document-highlight);
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-document-highlight); /* Linha mais forte para títulos de seção */
+  text-transform: uppercase;
+}
+
+/* Tabela de Itens/Serviços */
+.orcamento-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.orcamento-table th,
+.orcamento-table td {
+  padding: 10px 12px; /* Mais padding */
+  border: 1px solid var(--color-document-border);
+  text-align: left;
+  font-size: 0.9em;
+  color: var(--color-document-text);
+}
+
+.orcamento-table th {
+  background-color: var(--color-table-header-bg);
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-document-text);
+}
+
+.orcamento-table tbody tr:nth-child(odd) {
+  background-color: var(--color-table-stripe-bg); /* Linhas alternadas */
+}
+
+/* Alinhamento de colunas da tabela */
+.orcamento-table td:nth-child(2), /* Qtd */
+.orcamento-table td:nth-child(3), /* Vlr. Unit. */
+.orcamento-table td:nth-child(4) { /* Total */
+  text-align: right;
+  white-space: nowrap; /* Evita quebra de linha em números */
+}
+
+/* Para sub-itens dentro da tabela */
+.orcamento-table ul {
+  margin: 5px 0 0 0;
+  padding: 0 0 0 20px; /* Mais recuo */
+  list-style: disc;
+  font-size: 0.85em; /* Fonte um pouco menor para sub-itens */
+  color: var(--color-document-secondary-text);
+}
+.orcamento-table li {
+  margin-bottom: 2px;
+}
+
+/* Checkbox na tabela */
+.orcamento-table .checkbox-display {
+  display: inline-block; /* Para alinhar melhor */
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--color-document-text);
+  text-align: center;
+  line-height: 16px; /* Centraliza o 'X' */
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--color-document-text);
+  vertical-align: middle; /* Alinha com o texto */
+}
+
+/* Totais Finais */
+.totals-section {
+    margin-top: auto; /* Empurra para o fundo do container flex */
+    padding-top: 20px;
+}
+
+.total-line-impresso {
+  font-size: 1em;
+  margin: 10px 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline; /* Alinha o texto na base */
+  gap: 15px;
+  padding-top: 5px;
+  border-top: 1px solid var(--color-document-border); /* Linha divisora */
+  color: var(--color-document-text);
+}
+
+.total-line-impresso:first-of-type {
+  border-top: none; /* Remove borda superior da primeira linha de total */
+}
+
+.total-line-impresso .label {
+  font-weight: 600;
+  min-width: 150px; /* Largura mínima para labels de total */
+  text-align: right;
+  color: var(--color-document-secondary-text);
+}
+
+.total-line-impresso .value {
+  width: 120px;
+  text-align: right;
+  font-weight: bold;
+  color: var(--color-document-text);
+}
+
+.total-geral-impresso {
+  font-family: var(--font-primary);
+  font-size: 1.6em; /* Total geral maior */
+  font-weight: 700;
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 15px;
+  border-top: 3px solid var(--color-document-highlight); /* Borda mais forte */
+  padding-top: 15px;
+  color: var(--color-document-highlight);
+}
+
+.total-geral-impresso .label {
+  color: var(--color-document-highlight);
+}
+
+.total-geral-impresso .value {
+  width: 150px;
+  text-align: right;
+}
+
+.form-pagamento, .garantia-info {
+  font-size: 0.9em;
+  margin-top: 15px;
+  color: var(--color-document-text);
+  line-height: 1.5;
+}
+
+.form-pagamento p, .garantia-info p {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.form-pagamento .label, .garantia-info .label {
+  font-weight: 600;
+  color: var(--color-document-secondary-text);
+  white-space: nowrap; /* Evita quebra de linha no label */
+}
+
+.form-pagamento .value, .garantia-info .value {
+  flex-grow: 1;
+  border-bottom: 1px dashed var(--color-document-border);
+  padding-bottom: 2px;
+  color: var(--color-document-text);
+}
+
+
+/* Botões - Visíveis APENAS na tela */
+.orcamento-buttons-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  gap: 20px;
+}
+
+.action-btn {
+  background-color: var(--color-document-highlight);
+  border: none;
+  color: white;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  padding: 12px 25px; /* Mais padding */
+  border-radius: 20px; /* Mais arredondado */
+  cursor: pointer;
+  font-size: 1em;
+  box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3); /* Sombra mais sutil */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.action-btn:hover {
+  background-color: #c0392b; /* Tom mais escuro no hover */
+  box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
+  transform: translateY(-2px); /* Pequeno movimento no hover */
+}
+
+.action-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(231, 76, 60, 0.2);
+}
+
+
+/* ========================================= */
+/* ===== Layouts Responsivos (Desktop) ===== */
+/* ========================================= */
+
+@media (min-width: 768px) {
+  .header-info {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end; /* Alinha logo e info da empresa na base */
+  }
+
+  .company-info {
+    text-align: left;
+    margin-bottom: 0;
+  }
+
+  .logo-placeholder {
+    order: 2; /* Move logo para a direita */
+    margin-top: 0;
+    margin-left: 20px; /* Espaço entre info e logo */
+  }
+
+  .client-data p {
+    justify-content: flex-start;
+  }
+}
+
+/* ========================================= */
+/* ===== Impressão Real (@media print) ===== */
+/* ========================================= */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-sizing: border-box;
+    font-size: 9.5pt; /* Um pouco menor para impressão */
+    font-family: 'Times New Roman', serif; /* Fonte mais clássica para impressão */
+  }
+
+  .orcamento-impresso-wrapper {
+    display: block;
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: auto !important;
+    background-color: transparent !important;
+  }
+
+  .orcamento-document-container {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important; /* Margens controladas por @page */
+    max-width: 100% !important;
+    min-height: auto !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+    color: #000 !important;
+  }
+
+  /* Força cores pretas e removes shadows/borders não desejadas na impressão */
+  .header-info {
+    border-bottom-color: #000 !important;
+  }
+  .company-info, .client-data, .client-data .label, .client-data .value,
+  .section-pecas h2, .section-servicos h2, .orcamento-table th, .orcamento-table td,
+  .orcamento-table .checkbox-display, .total-line-impresso,
+  .total-line-impresso .label, .total-line-impresso .value,
+  .form-pagamento, .form-pagamento .label, .form-pagamento .value,
+  .garantia-info, .garantia-info .label, .garantia-info .value {
+    color: #000 !important;
+  }
+  .orcamento-title, .total-geral-impresso, .total-geral-impresso .label, .total-geral-impresso .value {
+    color: #e74c3c !important; /* Mantém o destaque vermelho */
+  }
+
+  .orcamento-table th {
+    background-color: #f2f2f2 !important; /* Mantém fundo do cabeçalho */
+  }
+  .orcamento-table tbody tr:nth-child(odd) {
+    background-color: #ffffff !important; /* Remove zebra na impressão */
+  }
+
+  .client-data .value,
+  .total-line-impresso .value,
+  .total-geral-impresso .value,
+  .form-pagamento .value,
+  .garantia-info .value {
+    border-bottom: 1px dashed #999 !important; /* Linha tracejada mais suave para impressão */
+  }
+  .section-pecas h2, .section-servicos h2 {
+    border-bottom-color: #999 !important; /* Borda mais suave para títulos de seção */
+  }
+  .total-geral-impresso {
+    border-top-color: #999 !important; /* Borda mais suave para total geral */
+  }
+
+  /* Garante que o 'X' apareça na impressão e remove inputs */
+  .orcamento-table .checkbox-display {
+    border-color: #000 !important;
+  }
+
+  /* Esconder elementos de interface de usuário na impressão */
+  .orcamento-buttons-container {
+    display: none !important;
+  }
+  /* Garante que nenhum input ou botão indesejado apareça */
+  input, button, select, textarea {
+    display: none !important;
+  }
+}
+/*
+O código CSS que você forneceu já está estruturado como mobile-first, e não há necessidade de transformá-lo novamente.
+
+Você me forneceu o mesmo arquivo CSS duas vezes, e pediu para "transformar em mobile first" novamente, mesmo já tendo feito isso no passo anterior.
+
+O código CSS que você forneceu **já está estruturado como mobile-first** nas seções de formulário (o que está fora das media queries é para mobile, e as media queries `min-width` ajustam para desktop).
+
+A seção de `OrcamentoImpresso.css` que você incluiu é para a visualização de um documento de orçamento (provavelmente para impressão ou para ser exibido de forma similar a um PDF na tela), e ela também já tem uma estrutura mobile-first para a visualização na tela e uma media query `@media print` para a impressão.
+
+**Não há "conflito" a ser resolvido entre esses dois blocos, pois eles são para propósitos diferentes:**
+
+* **A primeira parte** (`.orcamento-form-container`, `.form-group`, `.items-table`, etc.) é para o **formulário de entrada de dados**.
+* **A segunda parte** (`.orcamento-impresso-wrapper`, `.orcamento-document-container`, etc.) é para a **visualização do orçamento final formatado como um documento**.
+
+Se a sua intenção é ter **apenas um arquivo CSS** para todo o projeto e que ele inclua tanto os estilos do formulário de entrada quanto os estilos do documento impresso/visualizado, então o código que você me forneceu já é o resultado disso, pois ele mescla os dois.
+
+**Confirmação:**
+
+O código que você me enviou é um único arquivo CSS que contém:
+1.  Variáveis CSS globais.
+2.  Estilos mobile-first para o formulário de entrada de dados.
+3.  Media query para desktop para o formulário de entrada de dados.
+4.  Estilos para a visualização do documento de orçamento na tela (também com uma abordagem mobile-first).
+5.  Media query `@media print` para a impressão do documento de orçamento.
+
+Portanto, o arquivo já está unificado e segue a lógica mobile-first para as partes relevantes.
+
+Se o problema que você está enfrentando é que **ambos os estilos estão sendo aplicados ao mesmo elemento no DOM**, isso não é um problema do CSS em si, mas sim de como você está aplicando as classes CSS nos seus componentes React.
+
+**Para evitar que os estilos do formulário (`.orcamento-form-container`) e os estilos do documento (`.orcamento-impresso-wrapper`) se misturem, você deve garantir que:**
+
+* O componente que renderiza o formulário (`OrcamentoMotorCompleto.jsx`) use apenas as classes relevantes ao formulário.
+* O componente que renderiza a visualização do documento (se você tiver um `OrcamentoImpresso.jsx` separado) use apenas as classes relevantes ao documento.
+
+**Em resumo, o CSS que você me deu está bem estruturado para o que ele se propõe. Se há um problema visual, ele provavelmente está na aplicação das classes nos seus componentes React.**
+ ========================================= */

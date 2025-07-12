@@ -18,7 +18,7 @@
   color: var(--text-light);
   max-width: 800px; /* Um pouco maior que o 600px anterior para o histórico */
   margin: 1.5rem auto; /* Centraliza e adiciona margem superior/inferior */
-  border-radius: 12px; /* Bordas mais suaves */
+  border-radius: 20px; /* Bordas mais suaves */
   box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); /* Sombra vermelha mais pronunciada */
   font-family: 'Arial', sans-serif; /* Consistente com os orçamentos internos */
 }
@@ -52,7 +52,7 @@
   border: 1px solid #444; /* Borda inicial mais discreta */
   color: var(--text-light);
   padding: 0.75rem 1.25rem; /* Um pouco mais de padding */
-  border-radius: 6px;
+  border-radius: 20px;
   font-size: 1rem;
   cursor: pointer;
   width: 100%;
@@ -111,7 +111,7 @@
   color: var(--text-light);
   border: none;
   padding: 0.8rem 1.5rem;
-  border-radius: 8px;
+  border-radius: 20px;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
@@ -139,7 +139,7 @@
   margin-top: 1.5rem;
   border-collapse: collapse;
   background-color: #1e1e1e;
-  border-radius: 10px;
+  border-radius: 20px;
   overflow: hidden;
 }
 
@@ -192,7 +192,7 @@
 .form-orcamento input,
 .form-orcamento textarea {
   padding: 0.75rem;
-  border-radius: 8px;
+  border-radius: 20px;
   border: none;
   background: #1e1e1e;
   color: #fff;
@@ -204,7 +204,7 @@
   color: #fff;
   border: none;
   padding: 0.75rem;
-  border-radius: 8px;
+  border-radius: 20px;
   font-size: 1rem;
   cursor: pointer;
 }

@@ -1,6 +1,6 @@
 // src/components/OrcamentoImpresso.jsx
 import React from 'react';
-import './OrcamentoImpresso.css'; // Importa o CSS específico para impressão
+import './OrcamentoForms.css'; // Importa o CSS específico para impressão
 
 const OrcamentoImpresso = ({ orcamento, onClose }) => {
   if (!orcamento) {

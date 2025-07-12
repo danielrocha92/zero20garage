@@ -40,7 +40,7 @@ const TrocarMotor = () => {
           <p className="blog-paragrafo">
             A retífica é indicada quando o motor apresenta desgastes naturais, mas a estrutura geral ainda está em boas condições. O processo recupera peças, ajusta folgas e devolve o desempenho original.
           </p>
-          <ul className="lista-escuro">
+          <ul className="lista-claro">
             <li><strong>Vantagens:</strong> custo mais baixo que um motor novo, preservação do bloco original e menor impacto ambiental.</li>
             <li><strong>Desvantagens:</strong> qualidade depende da oficina e do maquinário utilizado, podendo não garantir a mesma durabilidade de um motor novo.</li>
           </ul>
@@ -49,7 +49,7 @@ const TrocarMotor = () => {
           <p className="blog-paragrafo">
             A troca é recomendada quando os danos são muito extensos, inviabilizando a recuperação, ou quando o custo da retífica se aproxima do de um motor novo ou recondicionado.
           </p>
-          <ul className="lista-escuro">
+          <ul className="lista-claro">
             <li><strong>Vantagens:</strong> maior confiabilidade, garantia do fabricante e possibilidade de atualização tecnológica.</li>
             <li><strong>Desvantagens:</strong> investimento inicial mais alto e necessidade de compatibilidade com o veículo.</li>
           </ul>
@@ -65,7 +65,7 @@ const TrocarMotor = () => {
           </p>
 
           <h3 className="blog-subtitulo">Conclusão</h3>
-          <p className="paragrafo-escuro">
+          <p className="blog-paragrafo">
             Retificar ou trocar depende da extensão dos danos e dos objetivos com o veículo. Ambas são soluções válidas, desde que realizadas por profissionais qualificados. Conte com a ZER0 20 GARAGE™ para garantir segurança e qualidade.
           </p>
         </section>
