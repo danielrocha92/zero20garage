@@ -32,9 +32,9 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: "Orlandison Gomes Da Silva",
-    profilePhoto: "https://lh3.googleusercontent.com/a-/ALV-UjU0idG0RZW4weoKeJSGGRUcoIwcvOdZ6WqlhXkGlQKmc4LBFCVktA=w72-h72-p-rp-mo-ba2-br100",
-    review: "Top demais",
+    name: "Juan Sanchez Gonzales",
+    profilePhoto: "https://lh3.googleusercontent.com/a/ACg8ocLkaL0Q0O2LhE5g3PV9EJn500fGbb3tJR5hAXC031LcbLht_Q=w72-h72-p-rp-mo-br100",
+    review: "Super recomendo serviço top de qualidade sempre atencioso com os clientes agilidade com os serviços precisou de retifica zero20 e o nome da melhor retifica da região Deus abençoe vcs e continue assim",
     servicePhoto: "https://lh3.googleusercontent.com/gps-cs/AIky0YWymIsXUi9UVeZYh3IkijDKd8cEh66x2tPxyzhc5Q0n4odtzbneuOOYXDS7p1p5DPSZg7503zfGniNJ-c98ZlZgk6Bzv_o2nT6HLOfMQBK76doKdrZ0HPpTfQdrKGElDiYZVNJMLnmiGGxb=w960-h1581-p-k-no",
     date: "Abril de 2025",
     rating: 5,
