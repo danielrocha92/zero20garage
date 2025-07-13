@@ -221,6 +221,14 @@ const OrcamentoCabecote = ({ onSubmit }) => {
                   </div>
                 </td>
               </tr>
+              <tr>
+                <td>
+                  <div className="form-group">
+                    <label htmlFor="ordemDeServico">Ordem de Serviço:</label>
+                    <input type="text" id="ordemDeServico" name="ordemDeServico" value={formData.ordemDeServico} onChange={handleInputChange} required />
+                  </div>
+                </td>
+              </tr>
             </tbody>
           </table>
         </section>
