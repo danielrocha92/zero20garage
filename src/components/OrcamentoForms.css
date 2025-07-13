@@ -6,7 +6,7 @@
 :root {
   --color-form-bg: #2a2a2a;
   --color-form-text: #e0e0e0;
-  --color-document-highlight: #ff6f61;
+  --color-document-highlight: #ff6f61; /* Um tom de vermelho alaranjado para destaque */
   --color-input-border: #444;
   --color-input-bg: #3b3b3b;
   --color-input-text: #e0e0e0;
@@ -21,12 +21,12 @@
   --font-secondary: 'Arial', sans-serif;
 
   /* Variáveis para o modo de impressão/visualização de documento */
-  --color-screen-bg: #1a1a1a;
+  --color-screen-bg: #1a1a1a; /* Fundo da tela quando visualizando o documento */
   --color-screen-text: #f0f0f0;
   --color-screen-border: #555;
   --color-screen-shadow: rgba(0, 0, 0, 0.4);
 
-  --color-document-bg: #ffffff;
+  --color-document-bg: #ffffff; /* Fundo do documento em si */
   --color-document-text: #333333;
   --color-document-secondary-text: #666666;
   --color-document-border: #cccccc;
@@ -39,24 +39,25 @@
 /* ========================================= */
 
 .orcamento-form-container {
-    font-family: Arial, sans-serif;
-    background-color: var(--color-form-bg);
-    color: var(--color-form-text);
-    padding: 30px;
-    border-radius: 8px;
-    max-width: 1200px;
-    margin: 40px auto;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  font-family: Arial, sans-serif;
+  background-color: var(--color-form-bg);
+  color: var(--color-form-text);
+  padding: 20px; /* Ajustado para mobile */
+  border-radius: 20px;
+  max-width: 1200px;
+  margin: 15px auto; /* Ajustado para mobile */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box; /* Garante que padding e border não aumentem a largura */
 }
 
 .form-header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Ajustado para mobile */
 }
 
 .form-header h1 {
   font-family: var(--font-primary);
-  font-size: 1.8em;
+  font-size: 1.8em; /* Ajustado para mobile */
   color: var(--color-document-highlight);
   margin-bottom: 8px;
   text-transform: uppercase;
@@ -64,32 +65,32 @@
 }
 
 .form-header p {
-  font-size: 0.9em;
+  font-size: 0.9em; /* Ajustado para mobile */
   color: var(--color-form-text);
   opacity: 0.8;
 }
 
 .header-logo {
-  max-width: 120px;
+  max-width: 120px; /* Ajustado para mobile */
   height: auto;
   margin-top: 10px;
 }
 
 /* Seção de Dados do Cliente/Veículo */
 .client-vehicle-section {
-  margin-bottom: 20px;
-  padding: 15px;
+  margin-bottom: 20px; /* Ajustado para mobile */
+  padding: 15px; /* Ajustado para mobile */
   background-color: #333;
   border-radius: 20px;
 }
 
 .client-vehicle-section h2 {
   font-family: var(--font-primary);
-  font-size: 1.4em;
+  font-size: 1.4em; /* Ajustado para mobile */
   color: var(--color-document-highlight);
   border-bottom: 2px solid var(--color-document-highlight);
   padding-bottom: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Ajustado para mobile */
   text-transform: uppercase;
 }
 
@@ -100,21 +101,21 @@
 
 /* MOBILE FIRST: Células da tabela do formulário (Dados do Cliente) */
 .form-table td {
-  padding: 8px 0;
+  padding: 8px 0; /* Ajustado para mobile */
   display: block; /* Empilha as células em telas menores */
   width: 100%; /* Ocupa a largura total */
 }
 
 .form-group {
-  margin-bottom: 10px;
+  margin-bottom: 10px; /* Espaçamento entre grupos de formulário */
 }
 
 .form-group label {
   display: block;
   font-weight: 600;
-  margin-bottom: 5px;
+  margin-bottom: 5px; /* Ajustado para mobile */
   color: var(--color-form-text);
-  font-size: 0.9em;
+  font-size: 0.9em; /* Ajustado para mobile */
 }
 
 .form-group input[type="text"],
@@ -123,9 +124,9 @@
 .form-group textarea,
 .form-group select {
   width: 100%;
-  padding: 0.6rem 0.8rem;
-  font-size: 0.95rem;
-  background-color: var(--color-input-bg); /* Usando variável */
+  padding: 0.6rem 0.8rem; /* Ajustado para mobile */
+  font-size: 0.95rem; /* Ajustado para mobile */
+  background-color: var(--color-input-bg);
   color: var(--color-input-text);
   border: 1px solid var(--color-input-border);
   border-radius: 20px;
@@ -145,19 +146,19 @@
 
 /* Seções de Peças e Serviços */
 .section-form {
-  margin-top: 25px;
-  padding: 15px;
+  margin-top: 25px; /* Ajustado para mobile */
+  padding: 15px; /* Ajustado para mobile */
   background-color: #333;
   border-radius: 20px;
 }
 
 .section-form h2 {
   font-family: var(--font-primary);
-  font-size: 1.4em;
+  font-size: 1.4em; /* Ajustado para mobile */
   color: var(--color-document-highlight);
   border-bottom: 2px solid var(--color-document-highlight);
   padding-bottom: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Ajustado para mobile */
   text-transform: uppercase;
 }
 
@@ -171,7 +172,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  border-bottom: 1px solid var(--color-input-border); /* Usando variável */
+  border-bottom: 1px solid var(--color-input-border);
   padding-bottom: 15px;
   margin-bottom: 15px;
 }
@@ -188,16 +189,21 @@
   padding: 5px 0;
   min-width: unset;
   padding-right: 0;
+  box-sizing: border-box; /* Inclui padding na largura */
 }
 
 /* MOBILE FIRST: Ordem das células */
 .checkbox-cell { order: 1; }
 .inputs-cell { order: 2; }
-.subitems-cell { order: 3; } {
+.subitems-cell { order: 3; }
+.total-cell {
   order: 4;
   margin-top: 10px;
   align-self: flex-end; /* Alinha o total à direita */
   max-width: 150px; /* Limita a largura em mobile */
+  width: auto; /* Permite que a largura seja definida pelo conteúdo ou max-width */
+  flex-grow: 0; /* Não cresce para preencher espaço */
+  flex-shrink: 0; /* Não encolhe */
 }
 
 
@@ -245,36 +251,38 @@
 .item-inputs {
   display: flex;
   flex-direction: column; /* Empilhamento em mobile */
-  flex-wrap: wrap;
   gap: 10px;
   align-items: flex-start;
   margin-top: 5px;
   width: 100%;
 }
 
-.item-inputs > div {
+.item-inputs > div { /* Para agrupar label e input de Qtd/Medida */
   display: flex;
   align-items: center;
   gap: 5px;
-  width: 100%;
+  width: 100%; /* Ocupa a largura total para cada par label-input */
 }
 
-.item-inputs input[type="number"] {
-  width: 80px;
+.item-inputs input[type="number"],
+.item-inputs input[type="text"] { /* Adicionado text aqui para inputs de Qtd/Medida */
+  flex-grow: 1; /* Permite que o input cresça */
+  width: auto; /* Deixa o flexbox controlar a largura */
+  max-width: 120px; /* Limita a largura para Qtd/Medida */
   text-align: center;
   padding: 8px;
   font-size: 0.9em;
 }
 
 .item-inputs .value-input {
-  width: 100px;
+  max-width: 150px; /* Limita a largura para Valor Unit. */
   text-align: right;
 }
 
 .small-input {
   padding: 6px 8px;
   font-size: 0.85em;
-  height: 20px;
+  height: 35px; /* Altura consistente para inputs */
   border-radius: 20px;
 }
 
@@ -316,18 +324,19 @@
 .sub-item-input-group input[type="number"] {
   flex-grow: 1;
   width: 100%;
-  max-width: 150px; /* Limita a largura para inputs de medida */
+  max-width: 200px; /* Aumenta largura para inputs de medida/texto */
   padding: 6px 8px;
   font-size: 0.85em;
   border-radius: 20px;
 }
 
+/* Ajuste para o botão de remover dentro do sub-item-input-group */
 .sub-item-input-group .remove-sub-item-btn {
-    align-self: flex-end;
-    margin-top: -30px;
-    margin-right: 5px;
-    position: relative;
-    z-index: 1;
+  align-self: flex-end; /* Alinha o botão X à direita do seu grupo */
+  margin-top: -30px; /* Ajusta a posição para sobrepor o input */
+  margin-right: 5px;
+  position: relative;
+  z-index: 1;
 }
 
 .add-sub-item-btn, .remove-sub-item-btn {
@@ -551,6 +560,15 @@
     width: 35%;
     padding-right: 10px;
   }
+  .total-cell { /* Reverte para comportamento de célula de tabela no desktop */
+    order: initial;
+    width: 15%;
+    min-width: 100px;
+    margin-top: 0;
+    align-self: auto;
+    max-width: none;
+  }
+
   .item-inputs {
     flex-direction: row; /* Volta para linha */
     align-items: center;
@@ -559,7 +577,11 @@
   }
   .item-inputs > div { width: auto; }
 
-  .item-inputs input[type="number"] { width: 60px; }
+  .item-inputs input[type="number"],
+  .item-inputs input[type="text"] { /* Ajuste para desktop */
+    width: 60px;
+    max-width: none; /* Remove max-width para desktop */
+  }
   .item-inputs .value-input { width: 90px; }
 
   .sub-items-container {
