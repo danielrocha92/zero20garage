@@ -27,8 +27,7 @@ const itensMotorCompletoData = [
     subItens: [
       { label: "cárter", type: "text" },
       { label: "suportes", type: "text" },
-      { label: "parafusos", type: "text" },
-      { label: "outros", type: "text" }
+      { label: "parafusos", type: "text" }
     ]
   },
   { nome: "Bobina", temQuantidade: false }, // Apenas checkbox
@@ -157,7 +156,7 @@ const servicosMotorCompletoData = [
   { nome: "Outros Serviços de Motor", subItens: [] },
 ].sort((a, b) => a.nome.localeCompare(b.nome)); // Garante a ordem alfabética
 
-const OrcamentoMotorCompleto = ({ onSubmit }) => {
+const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário para a prop onSubmit
   const [formData, setFormData] = useState({
     nome: '',
     telefone: '',
@@ -251,17 +250,20 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Nenhuma validação de campos obrigatórios é realizada neste componente.
+    // Todos os dados do formulário, incluindo itens não selecionados ou sub-itens vazios,
+    // serão passados para a função onSubmit do componente pai.
     const orcamentoFinal = {
       ...formData,
       tipo: 'motor completo',
       valorTotal: formData.totalGeralManual,
-      detalhesPecas: formData.pecas.filter(p => p.selecionado || (p.subItens && p.subItens.some(sub => sub.type === "checkbox" ? sub.value : sub.value.trim() !== ''))).map(p => ({
+      detalhesPecas: formData.pecas.map(p => ({
         ...p,
-        subItens: p.subItens ? p.subItens.filter(sub => sub.type === "checkbox" ? sub.value : sub.value.trim() !== '').map(sub => ({ label: sub.label, value: sub.value, type: sub.type })) : []
+        subItens: p.subItens ? p.subItens.map(sub => ({ label: sub.label, value: sub.value, type: sub.type })) : []
       })),
-      detalhesServicos: formData.servicos.filter(s => s.selecionado || (s.subItens && s.subItens.some(sub => sub.type === "checkbox" ? sub.value : sub.value.trim() !== ''))).map(s => ({
+      detalhesServicos: formData.servicos.map(s => ({
         ...s,
-        subItens: s.subItens ? s.subItens.filter(sub => sub.type === "checkbox" ? sub.value : sub.value.trim() !== '').map(sub => ({ label: sub.label, value: sub.value, type: sub.type })) : []
+        subItens: s.subItens ? s.subItens.map(sub => ({ label: sub.label, value: sub.value, type: sub.type })) : []
       })),
     };
     onSubmit(orcamentoFinal);
@@ -271,7 +273,8 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
     <div className="orcamento-form-container">
       <div className="form-header">
         <h1>ORÇAMENTO - MOTOR COMPLETO</h1>
-        <img src="/path/to/your/logo.png" alt="Logo Zero Vinte Garage" className="header-logo" /> {/* Adicione o caminho correto para o logo */}
+        {/* Usando um placeholder de imagem para o logo */}
+        <img src="https://placehold.co/120x60/3b3b3b/e0e0e0?text=LOGO" alt="Logo Zero Vinte Garage" className="header-logo" />
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -346,7 +349,7 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
                   <td className="inputs-cell">
                     {peca.selecionado && peca.temQuantidade && ( // Renderiza Qtd/Medida APENAS se temQuantidade for true
                       <div className="item-inputs">
-                        <> {/* Fragmento para agrupar label e input */}
+                        <div> {/* Fragmento para agrupar label e input */}
                           <label htmlFor={`peca-${index}-quantidade`} className="input-label">Qtd:</label>
                           <input
                             type="number"
@@ -356,8 +359,8 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
                             min="0"
                             className="quantity-input small-input"
                           />
-                        </>
-                        <> {/* Fragmento para agrupar label e input */}
+                        </div>
+                        <div> {/* Fragmento para agrupar label e input */}
                           <label htmlFor={`peca-${index}-medida`} className="input-label">Medidas:</label>
                           <input
                             type="number"
@@ -368,7 +371,7 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
                             step="0.01"
                             className="value-input small-input"
                           />
-                        </>
+                        </div>
                       </div>
                     )}
                   </td>
@@ -447,7 +450,7 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
                   <td className="inputs-cell">
                     {servico.selecionado && servico.temQuantidade && ( // Renderiza Qtd/medida Unit se temQuantidade for true
                       <div className="item-inputs">
-                        <> {/* Fragmento para agrupar label e input */}
+                        <div> {/* Fragmento para agrupar label e input */}
                           <label htmlFor={`servico-${index}-quantidade`} className="input-label">Qtd:</label>
                           <input
                             type="number"
@@ -457,8 +460,8 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
                             min="0"
                             className="quantity-input small-input"
                           />
-                        </>
-                        <> {/* Fragmento para agrupar label e input */}
+                        </div>
+                        <div> {/* Fragmento para agrupar label e input */}
                           <label htmlFor={`servico-${index}-medida`} className="input-label">Medidas:</label>
                           <input
                             type="number"
@@ -469,7 +472,7 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
                             step="0.01"
                             className="value-input small-input"
                           />
-                        </>
+                        </div>
                       </div>
                     )}
                   </td>
