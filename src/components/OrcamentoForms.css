@@ -193,8 +193,7 @@
 /* MOBILE FIRST: Ordem das células */
 .checkbox-cell { order: 1; }
 .inputs-cell { order: 2; }
-.subitems-cell { order: 3; }
-.total-cell {
+.subitems-cell { order: 3; } {
   order: 4;
   margin-top: 10px;
   align-self: flex-end; /* Alinha o total à direita */
@@ -552,15 +551,6 @@
     width: 35%;
     padding-right: 10px;
   }
-  .total-cell {
-    order: initial;
-    width: 15%;
-    min-width: 100px;
-    margin-top: 0;
-    align-self: auto;
-    max-width: none;
-  }
-
   .item-inputs {
     flex-direction: row; /* Volta para linha */
     align-items: center;
@@ -963,9 +953,9 @@
 
   /* REVERSÃO PARA DESKTOP da parte da visualização de documento */
   .item-inputs {
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 2px;
     width: auto;
   }
   .item-inputs > div { width: auto; }
