@@ -164,6 +164,7 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
     veiculo: '',
     placa: '',
     data: new Date().toISOString().slice(0, 10),
+    ordemServico: '', // Novo campo para Ordem de Serviço
     pecas: itensMotorCompletoData.map(item => ({
       ...item,
       selecionado: false,
@@ -282,13 +283,13 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
                 <td>
                   <div className="form-group">
                     <label htmlFor="nome">Cliente:</label>
-                    <input type="text" id="nome" name="nome" value={formData.nome} onChange={handleInputChange} required />
+                    <input type="text" id="nome" name="nome" value={formData.nome} onChange={handleInputChange} />
                   </div>
                 </td>
                 <td>
                   <div className="form-group">
                     <label htmlFor="data">Data:</label>
-                    <input type="date" id="data" name="data" value={formData.data} onChange={handleInputChange} required />
+                    <input type="date" id="data" name="data" value={formData.data} onChange={handleInputChange} />
                   </div>
                 </td>
               </tr>
@@ -296,21 +297,27 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
                 <td>
                   <div className="form-group">
                     <label htmlFor="veiculo">Veículo:</label>
-                    <input type="text" id="veiculo" name="veiculo" value={formData.veiculo} onChange={handleInputChange} required />
+                    <input type="text" id="veiculo" name="veiculo" value={formData.veiculo} onChange={handleInputChange} />
                   </div>
                 </td>
                 <td>
                   <div className="form-group">
                     <label htmlFor="placa">Placa:</label>
-                    <input type="text" id="placa" name="placa" value={formData.placa} onChange={handleInputChange} required />
+                    <input type="text" id="placa" name="placa" value={formData.placa} onChange={handleInputChange} />
                   </div>
                 </td>
               </tr>
               <tr>
-                <td colSpan="2">
+                <td>
                   <div className="form-group">
                     <label htmlFor="telefone">Telefone:</label>
-                    <input type="text" id="telefone" name="telefone" value={formData.telefone} onChange={handleInputChange} required />
+                    <input type="text" id="telefone" name="telefone" value={formData.telefone} onChange={handleInputChange} />
+                  </div>
+                </td>
+                <td>
+                  <div className="form-group">
+                    <label htmlFor="ordemServico">Ordem de Serviço:</label>
+                    <input type="text" id="ordemServico" name="ordemServico" value={formData.ordemServico} onChange={handleInputChange} />
                   </div>
                 </td>
               </tr>
