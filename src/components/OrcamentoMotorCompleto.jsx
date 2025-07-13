@@ -58,7 +58,18 @@ const itensMotorCompletoData = [
   },
   { nome: "Outros", temQuantidade: true, subItens: [] },
   { nome: "Parafusos cabeçote", temQuantidade: true },
-  { nome: "Pistão", temQuantidade: true },
+  {
+    nome: "Pistão",
+    temQuantidade: true,
+    subItens: [
+      { label: "Standard (STD)", type: "checkbox" }, // Opção Standard
+      { label: "Sobremedida (+0,25 mm)", type: "checkbox" }, // Opção Sobremedida
+      { label: "Sobremedida (+0,50 mm)", type: "checkbox" }, // Opção Sobremedida
+      { label: "Sobremedida (+0,75 mm)", type: "checkbox" }, // Opção Sobremedida
+      { label: "Sobremedida (+1,00 mm)", type: "checkbox" }, // Opção Sobremedida
+      { label: "Outra Medida (especifique)", type: "text" } // Para outras medidas ou observações
+    ]
+  },
   { nome: "Retentor eixo comando", temQuantidade: true },
   { nome: "Retentor traseiro virab.", temQuantidade: true },
   { nome: "Retentor válvula", temQuantidade: true },
@@ -124,20 +135,20 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
       selecionado: false,
       quantidade: item.temQuantidade ? 1 : 0,
       valorUnitario: 0,
-      total: 0, // Agora 'total' será preenchido manualmente se necessário
-      subItens: item.subItens ? item.subItens.map(sub => ({ ...sub, value: '' })) : [],
+      total: 0,
+      subItens: item.subItens ? item.subItens.map(sub => ({ ...sub, value: sub.type === "checkbox" ? false : '' })) : [], // Inicializa 'value' como false para checkboxes
     })),
     servicos: servicosMotorCompletoData.map(servico => ({
       ...servico,
       selecionado: false,
       valor: 0,
-      total: 0, // Agora 'total' será preenchido manualmente se necessário
-      subItens: servico.subItens ? servico.subItens.map(sub => ({ ...sub, value: '' })) : [],
+      total: 0,
+      subItens: servico.subItens ? servico.subItens.map(sub => ({ ...sub, value: sub.type === "checkbox" ? false : '' })) : [],
     })),
     totalPecasManual: 0,
     totalServicosManual: 0,
     totalGeralManual: 0,
-    totalMaoDeObraManual: 0, // Inicializa o novo campo para mão de obra mecânica
+    totalMaoDeObraManual: 0,
     formaPagamento: '',
     garantia: '',
   });
@@ -153,8 +164,8 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
     if (field === 'selecionado' && !value) {
       newPecas[index].quantidade = newPecas[index].temQuantidade ? 1 : 0;
       newPecas[index].valorUnitario = 0;
-      newPecas[index].total = 0; // Resetar total ao desmarcar
-      newPecas[index].subItens = newPecas[index].subItens.map(sub => ({ ...sub, value: '' }));
+      newPecas[index].total = 0;
+      newPecas[index].subItens = newPecas[index].subItens.map(sub => ({ ...sub, value: sub.type === "checkbox" ? false : '' })); // Resetar subItens também
     }
     setFormData(prev => ({ ...prev, pecas: newPecas }));
   };
@@ -164,8 +175,8 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
     newServicos[index][field] = value;
     if (field === 'selecionado' && !value) {
       newServicos[index].valor = 0;
-      newServicos[index].total = 0; // Resetar total ao desmarcar
-      newServicos[index].subItens = newServicos[index].subItens.map(sub => ({ ...sub, value: '' }));
+      newServicos[index].total = 0;
+      newServicos[index].subItens = newServicos[index].subItens.map(sub => ({ ...sub, value: sub.type === "checkbox" ? false : '' })); // Resetar subItens também
     }
     setFormData(prev => ({ ...prev, servicos: newServicos }));
   };
@@ -175,7 +186,7 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
     if (!items[itemIndex].subItens) {
       items[itemIndex].subItens = [];
     }
-    items[itemIndex].subItens.push({ label: 'Novo Detalhe', type: 'text', value: '' }); // Adiciona um novo sub-item padrão
+    items[itemIndex].subItens.push({ label: 'Novo Detalhe', type: 'text', value: '' });
     setFormData(prev => ({ ...prev, [itemType]: items }));
   };
 
@@ -185,10 +196,17 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
     setFormData(prev => ({ ...prev, [itemType]: items }));
   };
 
-  // CORREÇÃO AQUI: O parâmetro sIdx foi renomeado para subItemIndex para corresponder ao uso
   const handleSubItemTextChange = (itemType, itemIndex, subItemIndex, value) => {
     const items = [...formData[itemType]];
-    items[itemIndex].subItens[subItemIndex].value = value; // Usando subItemIndex
+    items[itemIndex].subItens[subItemIndex].value = value;
+    setFormData(prev => ({ ...prev, [itemType]: items }));
+  };
+
+  // Nova função para lidar com a mudança de checkboxes de sub-itens
+  const handleSubItemCheckboxChange = (itemType, itemIndex, subItemIndex, isChecked) => {
+    const items = [...formData[itemType]];
+    // Se for um checkbox, defina o 'value' como o booleano 'isChecked'
+    items[itemIndex].subItens[subItemIndex].value = isChecked;
     setFormData(prev => ({ ...prev, [itemType]: items }));
   };
 
@@ -202,14 +220,14 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
     const orcamentoFinal = {
       ...formData,
       tipo: 'motor completo',
-      valorTotal: formData.totalGeralManual, // Usar o valor total manual
-      detalhesPecas: formData.pecas.filter(p => p.selecionado || (p.subItens && p.subItens.some(sub => sub.value.trim() !== ''))).map(p => ({
-          ...p,
-          subItens: p.subItens ? p.subItens.filter(sub => sub.value.trim() !== '').map(sub => ({ label: sub.label, value: sub.value, type: sub.type })) : []
+      valorTotal: formData.totalGeralManual,
+      detalhesPecas: formData.pecas.filter(p => p.selecionado || (p.subItens && p.subItens.some(sub => sub.type === "checkbox" ? sub.value : sub.value.trim() !== ''))).map(p => ({ // Ajuste para filtrar checkboxes
+        ...p,
+        subItens: p.subItens ? p.subItens.filter(sub => sub.type === "checkbox" ? sub.value : sub.value.trim() !== '').map(sub => ({ label: sub.label, value: sub.value, type: sub.type })) : []
       })),
-      detalhesServicos: formData.servicos.filter(s => s.selecionado || (s.subItens && s.subItens.some(sub => sub.value.trim() !== ''))).map(s => ({
-          ...s,
-          subItens: s.subItens ? s.subItens.filter(sub => sub.value.trim() !== '').map(sub => ({ label: sub.label, value: sub.value, type: sub.type })) : []
+      detalhesServicos: formData.servicos.filter(s => s.selecionado || (s.subItens && s.subItens.some(sub => sub.type === "checkbox" ? sub.value : sub.value.trim() !== ''))).map(s => ({ // Ajuste para filtrar checkboxes
+        ...s,
+        subItens: s.subItens ? s.subItens.filter(sub => sub.type === "checkbox" ? sub.value : sub.value.trim() !== '').map(sub => ({ label: sub.label, value: sub.value, type: sub.type })) : []
       })),
     };
     onSubmit(orcamentoFinal);
@@ -293,7 +311,7 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
                             <label htmlFor={`peca-${index}-quantidade`} className="input-label">Qtd:</label>
                             <input
                               type="number"
-                              id={`peca-${index}-quantidade`} // Adicionado ID único
+                              id={`peca-${index}-quantidade`}
                               value={peca.quantidade}
                               onChange={(e) => handlePecaChange(index, 'quantidade', parseInt(e.target.value) || 0)}
                               min="0"
@@ -302,11 +320,11 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
                           </>
                         )}
                         <> {/* Fragmento para agrupar label e input */}
-                          <label htmlFor={`peca-${index}-valor`} className="input-label">Valor Unit.:</label>
+                          <label htmlFor={`peca-${index}-valor`} className="input-label">Medida.:</label>
                           <input
                             type="number"
-                            id={`peca-${index}-valor`} // Adicionado ID único
-                            placeholder="Valor Unit."
+                            id={`peca-${index}-valor`}
+                            placeholder="Medida."
                             value={peca.valorUnitario}
                             onChange={(e) => handlePecaChange(index, 'valorUnitario', parseFloat(e.target.value) || 0)}
                             step="0.01"
@@ -322,36 +340,43 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
                         {peca.subItens.map((sub, sIdx) => (
                           <div key={sIdx} className="sub-item-input-group">
                             <label className="sub-item-label">{sub.label}:</label>
-                            <input
-                              type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
-                              placeholder={
-                                sub.type === "quantity" ? `Qtd` :
-                                sub.type === "measure" ? `Medida` :
-                                ``
-                              }
-                              value={sub.value}
-                              onChange={(e) => handleSubItemTextChange('pecas', index, sIdx, e.target.value)}
-                              step={sub.type === "measure" ? "0.01" : "1"}
-                              className="small-input"
-                            />
+                            {sub.type === "checkbox" ? (
+                              <input
+                                type="checkbox"
+                                checked={sub.value}
+                                onChange={(e) => handleSubItemCheckboxChange('pecas', index, sIdx, e.target.checked)}
+                                className="small-input"
+                              />
+                            ) : (
+                              <input
+                                type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
+                                placeholder={
+                                  sub.type === "quantity" ? `Qtd` :
+                                  sub.type === "measure" ? `Medida` :
+                                  ``
+                                }
+                                value={sub.value}
+                                onChange={(e) => handleSubItemTextChange('pecas', index, sIdx, e.target.value)}
+                                step={sub.type === "measure" ? "0.01" : "1"}
+                                className="small-input"
+                              />
+                            )}
                             <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('pecas', index, sIdx)}>X</button>
                           </div>
                         ))}
-                        <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('pecas', index)}>+ Detalhe</button>
+                        {/* Removido o botão "+ Detalhe" para evitar a adição de sub-itens arbitrários
+                            quando o sub-item já é pré-definido como checkboxes.
+                            Se houver necessidade de adicionar outros detalhes para "Pistão",
+                            considere adicionar uma nova opção de sub-item "Outros Detalhes"
+                            com type="text" no itensMotorCompletoData. */}
+                        {peca.nome !== "Pistão" && (
+                            <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('pecas', index)}>+ Detalhe</button>
+                        )}
                       </div>
                     )}
                   </td>
                   <td className="total-cell">
-                    {peca.selecionado && (
-                      <input
-                        type="number"
-                        placeholder="Total Item"
-                        value={peca.total}
-                        onChange={(e) => handlePecaChange(index, 'total', parseFloat(e.target.value) || 0)}
-                        step="0.01"
-                        className="value-input small-input"
-                      />
-                    )}
+                    {peca.selecionado}
                   </td>
                 </tr>
               ))}
@@ -372,7 +397,7 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
 
         {/* Seção de Serviços */}
         <section className="section-form">
-          <h2>Serviços no Cabeçote - Retifica</h2>
+          <h2>Serviços - Retifica</h2>
           <table className="items-table">
             <tbody>
               {formData.servicos.map((servico, index) => (
@@ -395,7 +420,7 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
                           <label htmlFor={`servico-${index}-valor`} className="input-label">Valor:</label>
                           <input
                             type="number"
-                            id={`servico-${index}-valor`} // Adicionado ID único
+                            id={`servico-${index}-valor`}
                             placeholder="Valor"
                             value={servico.valor}
                             onChange={(e) => handleServicoChange(index, 'valor', parseFloat(e.target.value) || 0)}
@@ -412,18 +437,27 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
                         {servico.subItens.map((sub, sIdx) => (
                           <div key={sIdx} className="sub-item-input-group">
                             <label className="sub-item-label">{sub.label}:</label>
-                            <input
-                              type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
-                              placeholder={
-                                sub.type === "quantity" ? `Qtd` :
-                                sub.type === "measure" ? `Medida` :
-                                ``
-                              }
-                              value={sub.value}
-                              onChange={(e) => handleSubItemTextChange('servicos', index, sIdx, e.target.value)}
-                              step={sub.type === "measure" ? "0.01" : "1"}
-                              className="small-input"
-                            />
+                            {sub.type === "checkbox" ? (
+                              <input
+                                type="checkbox"
+                                checked={sub.value}
+                                onChange={(e) => handleSubItemCheckboxChange('servicos', index, sIdx, e.target.checked)}
+                                className="small-input"
+                              />
+                            ) : (
+                              <input
+                                type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
+                                placeholder={
+                                  sub.type === "quantity" ? `Qtd` :
+                                  sub.type === "measure" ? `Medida` :
+                                  ``
+                                }
+                                value={sub.value}
+                                onChange={(e) => handleSubItemTextChange('servicos', index, sIdx, e.target.value)}
+                                step={sub.type === "measure" ? "0.01" : "1"}
+                                className="small-input"
+                              />
+                            )}
                             <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('servicos', index, sIdx)}>X</button>
                           </div>
                         ))}
@@ -432,16 +466,7 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => {
                     )}
                   </td>
                   <td className="total-cell">
-                    {servico.selecionado && (
-                      <input
-                        type="number"
-                        placeholder="Total Item"
-                        value={servico.total}
-                        onChange={(e) => handleServicoChange(index, 'total', parseFloat(e.target.value) || 0)}
-                        step="0.01"
-                        className="value-input small-input"
-                      />
-                    )}
+                    {servico.selecionado}
                   </td>
                 </tr>
               ))}

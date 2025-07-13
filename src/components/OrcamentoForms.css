@@ -6,7 +6,7 @@
 :root {
   --color-form-bg: #2a2a2a;
   --color-form-text: #e0e0e0;
-  --color-document-highlight: #ff6f61; /* Um tom de vermelho alaranjado para destaque */
+  --color-document-highlight: #ff6f61;
   --color-input-border: #444;
   --color-input-bg: #3b3b3b;
   --color-input-text: #e0e0e0;
@@ -21,12 +21,12 @@
   --font-secondary: 'Arial', sans-serif;
 
   /* Variáveis para o modo de impressão/visualização de documento */
-  --color-screen-bg: #1a1a1a; /* Fundo da tela quando visualizando o documento */
+  --color-screen-bg: #1a1a1a;
   --color-screen-text: #f0f0f0;
   --color-screen-border: #555;
   --color-screen-shadow: rgba(0, 0, 0, 0.4);
 
-  --color-document-bg: #ffffff; /* Fundo do documento em si */
+  --color-document-bg: #ffffff;
   --color-document-text: #333333;
   --color-document-secondary-text: #666666;
   --color-document-border: #cccccc;
@@ -39,26 +39,24 @@
 /* ========================================= */
 
 .orcamento-form-container {
-  background-color: var(--color-form-bg);
-  padding: 20px; /* Ajustado para mobile */
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  width: 95%; /* Mais fluido para mobile */
-  max-width: 1200px; /* Mantém limite para telas grandes */
-  margin: 15px auto; /* Ajustado para mobile */
-  color: var(--color-form-text);
-  font-family: var(--font-secondary);
-  box-sizing: border-box; /* Garante que padding e border não aumentem a largura */
+    font-family: Arial, sans-serif;
+    background-color: var(--color-form-bg);
+    color: var(--color-form-text);
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 1200px;
+    margin: 40px auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .form-header {
   text-align: center;
-  margin-bottom: 20px; /* Ajustado para mobile */
+  margin-bottom: 20px;
 }
 
 .form-header h1 {
   font-family: var(--font-primary);
-  font-size: 1.8em; /* Ajustado para mobile */
+  font-size: 1.8em;
   color: var(--color-document-highlight);
   margin-bottom: 8px;
   text-transform: uppercase;
@@ -66,68 +64,68 @@
 }
 
 .form-header p {
-  font-size: 0.9em; /* Ajustado para mobile */
+  font-size: 0.9em;
   color: var(--color-form-text);
   opacity: 0.8;
 }
 
 .header-logo {
-  max-width: 120px; /* Ajustado para mobile */
+  max-width: 120px;
   height: auto;
   margin-top: 10px;
 }
 
 /* Seção de Dados do Cliente/Veículo */
 .client-vehicle-section {
-  margin-bottom: 20px; /* Ajustado para mobile */
-  padding: 15px; /* Ajustado para mobile */
+  margin-bottom: 20px;
+  padding: 15px;
   background-color: #333;
   border-radius: 20px;
 }
 
 .client-vehicle-section h2 {
   font-family: var(--font-primary);
-  font-size: 1.4em; /* Ajustado para mobile */
+  font-size: 1.4em;
   color: var(--color-document-highlight);
   border-bottom: 2px solid var(--color-document-highlight);
   padding-bottom: 8px;
-  margin-bottom: 20px; /* Ajustado para mobile */
+  margin-bottom: 20px;
   text-transform: uppercase;
 }
 
 .form-table {
   width: 100%;
   border-collapse: collapse;
-  /* table-layout: fixed; será aplicado no desktop */
 }
 
+/* MOBILE FIRST: Células da tabela do formulário (Dados do Cliente) */
 .form-table td {
-  padding: 8px 0; /* Ajustado para mobile */
+  padding: 8px 0;
   display: block; /* Empilha as células em telas menores */
   width: 100%; /* Ocupa a largura total */
 }
 
 .form-group {
-  margin-bottom: 10px; /* Espaçamento entre grupos de formulário */
+  margin-bottom: 10px;
 }
 
 .form-group label {
   display: block;
   font-weight: 600;
-  margin-bottom: 5px; /* Ajustado para mobile */
+  margin-bottom: 5px;
   color: var(--color-form-text);
-  font-size: 0.9em; /* Ajustado para mobile */
+  font-size: 0.9em;
 }
 
 .form-group input[type="text"],
 .form-group input[type="number"],
 .form-group input[type="date"],
 .form-group textarea,
-.form-group select { /* Adicionado select aqui para consistência */
+.form-group select {
   width: 100%;
-  padding: 0.6rem 0.8rem; /* Ajustado para mobile */
-  font-size: 0.95rem; /* Ajustado para mobile */
-  background-color: #1a1a1a;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.95rem;
+  background-color: var(--color-input-bg); /* Usando variável */
   color: var(--color-input-text);
   border: 1px solid var(--color-input-border);
   border-radius: 20px;
@@ -142,38 +140,39 @@
 .form-group select:focus {
   outline: none;
   border-color: var(--color-input-focus-border);
-  box-shadow: 0 0 0 3px rgba(var(--color-document-highlight), 0.3);
+  box-shadow: 0 0 0 3px rgba(255, 111, 97, 0.3); /* Valor RGB direto para shadow */
 }
 
 /* Seções de Peças e Serviços */
 .section-form {
-  margin-top: 25px; /* Ajustado para mobile */
-  padding: 15px; /* Ajustado para mobile */
+  margin-top: 25px;
+  padding: 15px;
   background-color: #333;
   border-radius: 20px;
 }
 
 .section-form h2 {
   font-family: var(--font-primary);
-  font-size: 1.4em; /* Ajustado para mobile */
+  font-size: 1.4em;
   color: var(--color-document-highlight);
   border-bottom: 2px solid var(--color-document-highlight);
   padding-bottom: 8px;
-  margin-bottom: 20px; /* Ajustado para mobile */
+  margin-bottom: 20px;
   text-transform: uppercase;
 }
 
 .items-table {
   width: 100%;
   border-collapse: collapse;
-  /* table-layout: fixed; será aplicado no desktop */
 }
 
+/* MOBILE FIRST: Ajustes na linha da tabela para mobile (itens) */
 .items-table tr {
-  display: block; /* Faz cada linha ser um bloco, empilhando-as */
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  border-bottom: 1px solid #444;
-  padding-bottom: 15px; /* Mais espaço entre itens empilhados */
+  border-bottom: 1px solid var(--color-input-border); /* Usando variável */
+  padding-bottom: 15px;
   margin-bottom: 15px;
 }
 
@@ -183,22 +182,23 @@
   padding-bottom: 0;
 }
 
+/* MOBILE FIRST: Estilos comuns para todas as células da tabela de itens */
 .items-table td {
-  display: block; /* Faz cada célula ser um bloco */
   width: 100%;
   padding: 5px 0;
-  min-width: unset; /* Remove restrições de min-width */
+  min-width: unset;
   padding-right: 0;
 }
 
-/* Células da tabela - Larguras para mobile (100% por padrão) */
-.checkbox-cell,
-.inputs-cell,
-.subitems-cell,
+/* MOBILE FIRST: Ordem das células */
+.checkbox-cell { order: 1; }
+.inputs-cell { order: 2; }
+.subitems-cell { order: 3; }
 .total-cell {
-  width: 100%;
-  min-width: unset;
-  padding-right: 0;
+  order: 4;
+  margin-top: 10px;
+  align-self: flex-end; /* Alinha o total à direita */
+  max-width: 150px; /* Limita a largura em mobile */
 }
 
 
@@ -209,7 +209,7 @@
   cursor: pointer;
   font-size: 0.95em;
   color: var(--color-form-text);
-  margin-bottom: 5px; /* Espaçamento abaixo do checkbox */
+  margin-bottom: 5px;
 }
 
 .custom-checkbox input[type="checkbox"] {
@@ -220,7 +220,7 @@
   width: 20px;
   height: 20px;
   border: 2px solid var(--color-checkbox-border);
-  border-radius: 20px; /* Mantido redondo */
+  border-radius: 20px;
   background-color: var(--color-input-bg);
   display: flex;
   justify-content: center;
@@ -245,29 +245,38 @@
 /* Inputs de quantidade/valor */
 .item-inputs {
   display: flex;
+  flex-direction: column; /* Empilhamento em mobile */
   flex-wrap: wrap;
-  gap: 10px; /* Aumentado gap para mobile */
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.item-inputs > div {
+  display: flex;
   align-items: center;
-  margin-top: 5px; /* Espaçamento acima dos inputs */
+  gap: 5px;
+  width: 100%;
 }
 
 .item-inputs input[type="number"] {
-  width: 80px; /* Ajustado para mobile */
+  width: 80px;
   text-align: center;
   padding: 8px;
   font-size: 0.9em;
 }
 
 .item-inputs .value-input {
-  width: 100px; /* Ajustado para mobile */
+  width: 100px;
   text-align: right;
 }
 
 .small-input {
   padding: 6px 8px;
   font-size: 0.85em;
-  height: 35px;
-  border-radius: 20px; /* Mantido redondo */
+  height: 20px;
+  border-radius: 20px;
 }
 
 .input-label {
@@ -277,39 +286,49 @@
   margin-right: 2px;
 }
 
-/* Sub-itens */
+/* Sub-itens (medidas de pistão, etc.) */
 .sub-items-container {
-  margin-top: 10px; /* Ajustado para mobile */
+  margin-top: 10px;
   padding-left: 0px;
   width: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 8px; /* Espaçamento entre os sub-itens e o botão */
-  align-items: flex-start; /* Alinha sub-itens e botão à esquerda por padrão (mobile) */
+  flex-direction: column; /* Empilha grupos de sub-item */
+  gap: 8px;
+  align-items: flex-start;
 }
 
 .sub-item-input-group {
   display: flex;
-  align-items: center;
+  flex-direction: column; /* Empilha label e input */
+  align-items: flex-start;
   gap: 5px;
-  margin-bottom: 0;
   width: 100%;
+}
+
+.sub-item-input-group .sub-item-label {
+  font-size: 0.85em;
+  color: var(--color-form-text);
+  white-space: nowrap;
+  font-weight: 500;
+  width: auto;
 }
 
 .sub-item-input-group input[type="text"],
 .sub-item-input-group input[type="number"] {
   flex-grow: 1;
+  width: 100%;
+  max-width: 150px; /* Limita a largura para inputs de medida */
   padding: 6px 8px;
   font-size: 0.85em;
-  border-radius: 20px; /* Mantido redondo */
+  border-radius: 20px;
 }
 
-.sub-item-label {
-  font-size: 0.85em;
-  color: var(--color-form-text);
-  white-space: nowrap;
-  margin-right: 5px;
-  font-weight: 500;
+.sub-item-input-group .remove-sub-item-btn {
+    align-self: flex-end;
+    margin-top: -30px;
+    margin-right: 5px;
+    position: relative;
+    z-index: 1;
 }
 
 .add-sub-item-btn, .remove-sub-item-btn {
@@ -318,7 +337,7 @@
   color: var(--color-document-highlight);
   font-size: 0.8em;
   padding: 3px 8px;
-  border-radius: 20px; /* Mantido redondo */
+  border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
   white-space: nowrap;
@@ -327,23 +346,19 @@
   background-color: var(--color-document-highlight);
   color: white;
 }
-.remove-sub-item-btn {
-    padding: 3px 6px;
-}
+.remove-sub-item-btn { padding: 3px 6px; }
 
-/* Alinhamento do botão + Detalhe (mobile: à esquerda) */
 .sub-items-container .add-sub-item-btn {
     align-self: flex-start;
     margin-top: 5px;
 }
 
-
 /* Linhas de Total nos formulários */
 .total-line-form {
   display: flex;
   flex-direction: column; /* Empilha label e input para mobile */
-  align-items: flex-end; /* Alinha à direita */
-  gap: 8px; /* Espaçamento ajustado */
+  align-items: flex-end;
+  gap: 8px;
   margin-top: 20px;
   padding-top: 15px;
   border-top: 1px dashed var(--color-form-border);
@@ -356,9 +371,10 @@
   color: var(--color-form-text);
 }
 
-.total-line-form .value-display {
-  width: 100%; /* Ocupa largura total para mobile */
-  max-width: 150px; /* Limita a largura em telas maiores */
+.total-line-form .value-display,
+.input-total {
+  width: 100%;
+  max-width: 150px;
   text-align: right;
   font-weight: bold;
   font-family: var(--font-primary);
@@ -366,29 +382,23 @@
 }
 
 .input-total {
-  width: 100%; /* Ocupa largura total para mobile */
-  max-width: 150px; /* Limita a largura em telas maiores */
-  text-align: right;
-  font-weight: bold;
-  font-family: var(--font-primary);
-  color: var(--color-document-highlight);
   background-color: var(--color-input-bg);
   border: 1px solid var(--color-input-border);
-  border-radius: 20px; /* Mantido redondo */
+  border-radius: 20px;
   padding: 8px 12px;
   box-sizing: border-box;
 }
 
 .total-geral-form {
   font-family: var(--font-primary);
-  font-size: 1.6em; /* Ajustado para mobile */
+  font-size: 1.6em;
   font-weight: 700;
   margin-top: 25px;
   display: flex;
-  flex-direction: column; /* Empilha label e input para mobile */
+  flex-direction: column;
   justify-content: flex-end;
-  align-items: flex-end; /* Alinha à direita */
-  gap: 10px; /* Espaçamento ajustado */
+  align-items: flex-end;
+  gap: 10px;
   border-top: 2px solid var(--color-document-highlight);
   padding-top: 20px;
   color: var(--color-document-highlight);
@@ -396,30 +406,27 @@
 
 .input-total-geral {
   font-size: 1em;
-  width: 100%; /* Ocupa largura total para mobile */
-  max-width: 150px; /* Limita a largura em telas maiores */
+  width: 100%;
+  max-width: 150px;
   text-align: right;
   font-weight: bold;
   font-family: var(--font-primary);
   color: var(--color-document-highlight);
   background-color: var(--color-input-bg);
   border: 1px solid var(--color-input-border);
-  border-radius: 20px; /* Mantido redondo */
+  border-radius: 20px;
   padding: 8px 12px;
   box-sizing: border-box;
 }
 
-
 /* Campo para forma de pagamento e garantia */
 .summary-section {
-  margin-top: 20px; /* Ajustado para mobile */
-  padding: 15px; /* Ajustado para mobile */
+  margin-top: 20px;
+  padding: 15px;
   background-color: #333;
   border-radius: 20px;
 }
-.summary-section .form-group {
-    margin-bottom: 10px; /* Ajustado para mobile */
-}
+.summary-section .form-group { margin-bottom: 10px; }
 .summary-section .form-group label {
   margin-bottom: 5px;
   font-size: 0.95em;
@@ -427,11 +434,11 @@
 
 /* Botões de Ação do Formulário */
 .form-buttons {
-  margin-top: 30px; /* Ajustado para mobile */
+  margin-top: 30px;
   display: flex;
-  flex-direction: column; /* Empilha botões para mobile */
+  flex-direction: column;
   justify-content: center;
-  gap: 15px; /* Espaçamento ajustado */
+  gap: 15px;
 }
 
 .form-buttons .action-btn {
@@ -440,13 +447,13 @@
   color: white;
   font-family: var(--font-primary);
   font-weight: 700;
-  padding: 10px 20px; /* Ajustado para mobile */
-  border-radius: 20px; /* Mantido redondo */
+  padding: 10px 20px;
+  border-radius: 20px;
   cursor: pointer;
-  font-size: 1em; /* Ajustado para mobile */
+  font-size: 1em;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-  width: 100%; /* Ocupa largura total para mobile */
+  width: 100%;
 }
 
 .form-buttons .action-btn:hover {
@@ -461,22 +468,18 @@
 }
 
 
-/* Media Query para Telas Maiores (Desktop First) */
+/* ========================================= */
+/* ===== Media Query para Telas Maiores (Desktop) ===== */
+/* ========================================= */
 @media (min-width: 768px) {
   .orcamento-form-container {
     padding: 30px;
     margin: 30px auto;
     width: 90%;
   }
-  .form-header h1 {
-    font-size: 2.2em;
-  }
-  .form-header p {
-    font-size: 1.1em;
-  }
-  .header-logo {
-    max-width: 150px;
-  }
+  .form-header h1 { font-size: 2.2em; }
+  .form-header p { font-size: 1.1em; }
+  .header-logo { max-width: 150px; }
 
   .client-vehicle-section {
     padding: 20px;
@@ -487,12 +490,11 @@
     margin-bottom: 25px;
   }
 
-  .form-table {
-    table-layout: fixed; /* Re-aplica para desktop */
-  }
+  .form-table { table-layout: fixed; }
+  /* DESKTOP: Volta ao comportamento de célula de tabela */
   .form-table td {
-    display: table-cell; /* Volta ao comportamento de célula de tabela */
-    width: auto; /* Deixa a largura ser controlada pelas células específicas */
+    display: table-cell;
+    width: auto;
     padding: 10px 15px;
   }
 
@@ -504,7 +506,7 @@
   .form-group input[type="number"],
   .form-group input[type="date"],
   .form-group textarea,
-  .form-group select { /* Adicionado select aqui para consistência */
+  .form-group select {
     padding: 12px;
     font-size: 1em;
   }
@@ -518,58 +520,88 @@
     margin-bottom: 25px;
   }
 
+  /* DESKTOP: Reverte a linha da tabela para layout de tabela */
   .items-table tr {
-    display: table-row; /* Volta ao comportamento de linha de tabela */
+    display: table-row;
+    flex-direction: initial; /* Remove flexbox direction */
     width: auto;
     margin-bottom: 10px;
     padding-bottom: 10px;
   }
+  /* DESKTOP: Reverte as células para layout de tabela */
   .items-table td {
-    display: table-cell; /* Volta ao comportamento de célula de tabela */
+    display: table-cell;
     padding: 5px 0;
   }
 
-  /* Larguras das colunas para desktop */
+  /* DESKTOP: Larguras e remove a ordem */
   .checkbox-cell {
+    order: initial;
     width: 25%;
     min-width: 150px;
     padding-right: 10px;
   }
   .inputs-cell {
+    order: initial;
     width: 25%;
     min-width: 180px;
     padding-right: 10px;
   }
   .subitems-cell {
+    order: initial;
     width: 35%;
     padding-right: 10px;
   }
   .total-cell {
+    order: initial;
     width: 15%;
     min-width: 100px;
+    margin-top: 0;
+    align-self: auto;
+    max-width: none;
   }
 
   .item-inputs {
+    flex-direction: row; /* Volta para linha */
+    align-items: center;
     gap: 5px;
+    width: auto;
   }
-  .item-inputs input[type="number"] {
-    width: 60px;
-  }
-  .item-inputs .value-input {
-    width: 90px;
-  }
+  .item-inputs > div { width: auto; }
+
+  .item-inputs input[type="number"] { width: 60px; }
+  .item-inputs .value-input { width: 90px; }
 
   .sub-items-container {
     margin-top: 5px;
     gap: 5px;
-    align-items: flex-end; /* Alinha o botão + Detalhe à direita no desktop */
+    align-items: flex-end; /* Alinha o botão + Detalhe à direita */
   }
-  .sub-items-container .add-sub-item-btn {
-    align-self: flex-end; /* Alinha o botão à direita no desktop */
+  .sub-item-input-group {
+    flex-direction: row; /* Volta para linha */
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .sub-item-input-group .sub-item-label {
+    width: auto;
+    margin-bottom: 0;
+  }
+  .sub-item-input-group input[type="text"],
+  .sub-item-input-group input[type="number"] {
+    max-width: none;
+    width: auto;
+  }
+  .sub-item-input-group .remove-sub-item-btn {
+      position: static;
+      margin-top: 0;
+      margin-right: 0;
+      align-self: auto;
   }
 
+  .sub-items-container .add-sub-item-btn { align-self: flex-end; }
+
   .total-line-form {
-    flex-direction: row; /* Volta para linha no desktop */
+    flex-direction: row;
     justify-content: flex-end;
     gap: 15px;
   }
@@ -581,7 +613,7 @@
 
   .total-geral-form {
     font-size: 1.8em;
-    flex-direction: row; /* Volta para linha no desktop */
+    flex-direction: row;
     gap: 20px;
   }
   .input-total-geral {
@@ -594,19 +626,17 @@
     margin-top: 30px;
     padding: 20px;
   }
-  .summary-section .form-group {
-    margin-bottom: 15px;
-  }
+  .summary-section .form-group { margin-bottom: 15px; }
 
   .form-buttons {
     margin-top: 40px;
-    flex-direction: row; /* Volta para linha no desktop */
+    flex-direction: row;
     gap: 20px;
   }
   .form-buttons .action-btn {
     padding: 12px 30px;
     font-size: 1.1em;
-    width: auto; /* Volta para largura automática */
+    width: auto;
   }
 }
 
@@ -621,7 +651,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 10px 5px; /* Mais padding para telas maiores */
+  padding: 10px 5px;
   box-sizing: border-box;
 }
 
@@ -630,12 +660,12 @@
   background-color: var(--color-document-bg);
   color: var(--color-document-text);
   max-width: 210mm; /* A4 width */
-  min-height: 297mm; /* A4 height, ajustado para flexibilidade */
+  min-height: 297mm; /* A4 height */
   margin: 0 auto;
   padding: 25mm 20mm; /* Margens A4 internas */
-  border: 1px solid var(--color-screen-border); /* Borda na tela */
-  box-shadow: 0 10px 25px var(--color-screen-shadow); /* Sombra mais suave */
-  border-radius: 20px; /* Cantos arredondados para modernidade */
+  border: 1px solid var(--color-screen-border);
+  box-shadow: 0 10px 25px var(--color-screen-shadow);
+  border-radius: 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -648,7 +678,7 @@
   align-items: center;
   margin-bottom: 25px;
   padding-bottom: 15px;
-  border-bottom: 1px solid var(--color-document-border); /* Linha fina e elegante */
+  border-bottom: 1px solid var(--color-document-border);
 }
 
 .company-info {
@@ -656,7 +686,7 @@
   font-size: 0.9em;
   line-height: 1.5;
   color: var(--color-document-secondary-text);
-  margin-bottom: 10px; /* Espaço abaixo da info da empresa */
+  margin-bottom: 10px;
 }
 .company-info strong {
     font-weight: 700;
@@ -664,11 +694,10 @@
 }
 
 .logo-placeholder {
-  width: 120px; /* Logo um pouco maior */
+  width: 120px;
   height: auto;
-  margin-top: 10px; /* Espaço acima do logo */
+  margin-top: 10px;
 }
-
 .logo-placeholder img {
   max-width: 100%;
   height: auto;
@@ -679,12 +708,12 @@
 .orcamento-title {
   text-align: center;
   font-family: var(--font-primary);
-  font-size: 2em; /* Título maior */
+  font-size: 2em;
   font-weight: 700;
   color: var(--color-document-highlight);
   margin-bottom: 30px;
   text-transform: uppercase;
-  letter-spacing: 1px; /* Mais espaçamento para título */
+  letter-spacing: 1px;
 }
 
 /* Dados do Cliente */
@@ -704,18 +733,18 @@
 }
 
 .client-data .label {
-  font-weight: 600; /* Mais encorpado */
+  font-weight: 600;
   margin-right: 10px;
-  flex-basis: 100px; /* Um pouco mais de largura para o label */
+  flex-basis: 100px;
   flex-shrink: 0;
   color: var(--color-document-secondary-text);
 }
 
 .client-data .value {
   flex-grow: 1;
-  border-bottom: 1px dashed var(--color-document-border); /* Linha tracejada para os valores */
+  border-bottom: 1px dashed var(--color-document-border);
   padding-bottom: 2px;
-  min-width: 150px; /* Garante que o valor não seja muito apertado */
+  min-width: 150px;
   color: var(--color-document-text);
 }
 
@@ -733,7 +762,7 @@
   color: var(--color-document-highlight);
   margin-bottom: 15px;
   padding-bottom: 8px;
-  border-bottom: 2px solid var(--color-document-highlight); /* Linha mais forte para títulos de seção */
+  border-bottom: 2px solid var(--color-document-highlight);
   text-transform: uppercase;
 }
 
@@ -746,7 +775,7 @@
 
 .orcamento-table th,
 .orcamento-table td {
-  padding: 10px 12px; /* Mais padding */
+  padding: 10px 12px;
   border: 1px solid var(--color-document-border);
   text-align: left;
   font-size: 0.9em;
@@ -761,7 +790,7 @@
 }
 
 .orcamento-table tbody tr:nth-child(odd) {
-  background-color: var(--color-table-stripe-bg); /* Linhas alternadas */
+  background-color: var(--color-table-stripe-bg);
 }
 
 /* Alinhamento de colunas da tabela */
@@ -769,38 +798,36 @@
 .orcamento-table td:nth-child(3), /* Vlr. Unit. */
 .orcamento-table td:nth-child(4) { /* Total */
   text-align: right;
-  white-space: nowrap; /* Evita quebra de linha em números */
+  white-space: nowrap;
 }
 
 /* Para sub-itens dentro da tabela */
 .orcamento-table ul {
   margin: 5px 0 0 0;
-  padding: 0 0 0 20px; /* Mais recuo */
+  padding: 0 0 0 20px;
   list-style: disc;
-  font-size: 0.85em; /* Fonte um pouco menor para sub-itens */
+  font-size: 0.85em;
   color: var(--color-document-secondary-text);
 }
-.orcamento-table li {
-  margin-bottom: 2px;
-}
+.orcamento-table li { margin-bottom: 2px; }
 
 /* Checkbox na tabela */
 .orcamento-table .checkbox-display {
-  display: inline-block; /* Para alinhar melhor */
+  display: inline-block;
   width: 16px;
   height: 16px;
   border: 1px solid var(--color-document-text);
   text-align: center;
-  line-height: 16px; /* Centraliza o 'X' */
+  line-height: 16px;
   font-size: 12px;
   font-weight: bold;
   color: var(--color-document-text);
-  vertical-align: middle; /* Alinha com o texto */
+  vertical-align: middle;
 }
 
 /* Totais Finais */
 .totals-section {
-    margin-top: auto; /* Empurra para o fundo do container flex */
+    margin-top: auto;
     padding-top: 20px;
 }
 
@@ -809,20 +836,17 @@
   margin: 10px 0;
   display: flex;
   justify-content: flex-end;
-  align-items: baseline; /* Alinha o texto na base */
+  align-items: baseline;
   gap: 15px;
   padding-top: 5px;
-  border-top: 1px solid var(--color-document-border); /* Linha divisora */
+  border-top: 1px solid var(--color-document-border);
   color: var(--color-document-text);
 }
-
-.total-line-impresso:first-of-type {
-  border-top: none; /* Remove borda superior da primeira linha de total */
-}
+.total-line-impresso:first-of-type { border-top: none; }
 
 .total-line-impresso .label {
   font-weight: 600;
-  min-width: 150px; /* Largura mínima para labels de total */
+  min-width: 150px;
   text-align: right;
   color: var(--color-document-secondary-text);
 }
@@ -836,22 +860,19 @@
 
 .total-geral-impresso {
   font-family: var(--font-primary);
-  font-size: 1.6em; /* Total geral maior */
+  font-size: 1.6em;
   font-weight: 700;
   margin-top: 20px;
   display: flex;
   justify-content: flex-end;
   align-items: baseline;
   gap: 15px;
-  border-top: 3px solid var(--color-document-highlight); /* Borda mais forte */
+  border-top: 3px solid var(--color-document-highlight);
   padding-top: 15px;
   color: var(--color-document-highlight);
 }
 
-.total-geral-impresso .label {
-  color: var(--color-document-highlight);
-}
-
+.total-geral-impresso .label { color: var(--color-document-highlight); }
 .total-geral-impresso .value {
   width: 150px;
   text-align: right;
@@ -873,7 +894,7 @@
 .form-pagamento .label, .garantia-info .label {
   font-weight: 600;
   color: var(--color-document-secondary-text);
-  white-space: nowrap; /* Evita quebra de linha no label */
+  white-space: nowrap;
 }
 
 .form-pagamento .value, .garantia-info .value {
@@ -882,7 +903,6 @@
   padding-bottom: 2px;
   color: var(--color-document-text);
 }
-
 
 /* Botões - Visíveis APENAS na tela */
 .orcamento-buttons-container {
@@ -898,20 +918,19 @@
   color: white;
   font-family: var(--font-primary);
   font-weight: 700;
-  padding: 12px 25px; /* Mais padding */
-  border-radius: 20px; /* Mais arredondado */
+  padding: 12px 25px;
+  border-radius: 20px;
   cursor: pointer;
   font-size: 1em;
-  box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3); /* Sombra mais sutil */
+  box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
   transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 
 .action-btn:hover {
-  background-color: #c0392b; /* Tom mais escuro no hover */
+  background-color: #c0392b;
   box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
-  transform: translateY(-2px); /* Pequeno movimento no hover */
+  transform: translateY(-2px);
 }
-
 .action-btn:active {
   transform: translateY(0);
   box-shadow: 0 2px 5px rgba(231, 76, 60, 0.2);
@@ -919,14 +938,14 @@
 
 
 /* ========================================= */
-/* ===== Layouts Responsivos (Desktop) ===== */
+/* ===== Layouts Responsivos (Desktop - Visualização do Documento) ===== */
 /* ========================================= */
 
 @media (min-width: 768px) {
   .header-info {
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end; /* Alinha logo e info da empresa na base */
+    align-items: flex-end;
   }
 
   .company-info {
@@ -935,13 +954,47 @@
   }
 
   .logo-placeholder {
-    order: 2; /* Move logo para a direita */
+    order: 2;
     margin-top: 0;
-    margin-left: 20px; /* Espaço entre info e logo */
+    margin-left: 20px;
   }
 
-  .client-data p {
-    justify-content: flex-start;
+  .client-data p { justify-content: flex-start; }
+
+  /* REVERSÃO PARA DESKTOP da parte da visualização de documento */
+  .item-inputs {
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    width: auto;
+  }
+  .item-inputs > div { width: auto; }
+
+  .sub-items-container { align-items: flex-end; }
+  .sub-item-input-group {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .sub-item-input-group .sub-item-label {
+    width: auto;
+    margin-bottom: 0;
+  }
+  .sub-item-input-group input[type="text"],
+  .sub-item-input-group input[type="number"] {
+    max-width: none;
+    width: auto;
+  }
+  .sub-item-input-group .remove-sub-item-btn {
+      position: static;
+      margin-top: 0;
+      margin-right: 0;
+      align-self: auto;
+  }
+  .sub-items-container .add-sub-item-btn { align-self: flex-end; }
+
+  .form-buttons {
+    flex-direction: row;
   }
 }
 
@@ -961,12 +1014,18 @@
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     box-sizing: border-box;
-    font-size: 9.5pt; /* Um pouco menor para impressão */
-    font-family: 'Times New Roman', serif; /* Fonte mais clássica para impressão */
+    font-size: 9.5pt;
+    font-family: 'Times New Roman', serif;
   }
 
+  /* Esconde o container do formulário na impressão */
+  .orcamento-form-container {
+      display: none !important;
+  }
+
+  /* Exibe o container de documento para impressão */
   .orcamento-impresso-wrapper {
-    display: block;
+    display: block !important;
     padding: 0 !important;
     margin: 0 !important;
     min-height: auto !important;
@@ -977,7 +1036,7 @@
     box-shadow: none !important;
     border: none !important;
     margin: 0 !important;
-    padding: 0 !important; /* Margens controladas por @page */
+    padding: 0 !important;
     max-width: 100% !important;
     min-height: auto !important;
     border-radius: 0 !important;
@@ -986,89 +1045,47 @@
   }
 
   /* Força cores pretas e removes shadows/borders não desejadas na impressão */
-  .header-info {
-    border-bottom-color: #000 !important;
-  }
+  .header-info { border-bottom-color: #000 !important; }
+
+  /* Grupo de elementos com cor de texto padrão preto na impressão */
   .company-info, .client-data, .client-data .label, .client-data .value,
-  .section-pecas h2, .section-servicos h2, .orcamento-table th, .orcamento-table td,
-  .orcamento-table .checkbox-display, .total-line-impresso,
-  .total-line-impresso .label, .total-line-impresso .value,
+  .orcamento-table th, .orcamento-table td, .orcamento-table .checkbox-display,
+  .total-line-impresso, .total-line-impresso .label, .total-line-impresso .value,
   .form-pagamento, .form-pagamento .label, .form-pagamento .value,
   .garantia-info, .garantia-info .label, .garantia-info .value {
     color: #000 !important;
   }
-  .orcamento-title, .total-geral-impresso, .total-geral-impresso .label, .total-geral-impresso .value {
+
+  /* Elementos que mantêm a cor de destaque */
+  .orcamento-title, .section-pecas h2, .section-servicos h2,
+  .total-geral-impresso, .total-geral-impresso .label, .total-geral-impresso .value {
     color: #e74c3c !important; /* Mantém o destaque vermelho */
   }
 
-  .orcamento-table th {
-    background-color: #f2f2f2 !important; /* Mantém fundo do cabeçalho */
-  }
-  .orcamento-table tbody tr:nth-child(odd) {
-    background-color: #ffffff !important; /* Remove zebra na impressão */
-  }
+  .orcamento-table th { background-color: #f2f2f2 !important; }
+  .orcamento-table tbody tr:nth-child(odd) { background-color: #ffffff !important; }
 
+  /* Linhas e bordas para impressão */
   .client-data .value,
-  .total-line-impresso .value,
-  .total-geral-impresso .value,
   .form-pagamento .value,
   .garantia-info .value {
-    border-bottom: 1px dashed #999 !important; /* Linha tracejada mais suave para impressão */
+    border-bottom: 1px dashed #999 !important;
+  }
+  .total-line-impresso .value,
+  .total-geral-impresso .value {
+      border-bottom: none !important; /* Remove linha em valores totais */
   }
   .section-pecas h2, .section-servicos h2 {
-    border-bottom-color: #999 !important; /* Borda mais suave para títulos de seção */
+    border-bottom-color: #999 !important;
   }
   .total-geral-impresso {
-    border-top-color: #999 !important; /* Borda mais suave para total geral */
+    border-top-color: #999 !important;
   }
-
-  /* Garante que o 'X' apareça na impressão e remove inputs */
-  .orcamento-table .checkbox-display {
-    border-color: #000 !important;
-  }
+  .orcamento-table .checkbox-display { border-color: #000 !important; }
 
   /* Esconder elementos de interface de usuário na impressão */
-  .orcamento-buttons-container {
-    display: none !important;
-  }
-  /* Garante que nenhum input ou botão indesejado apareça */
+  .orcamento-buttons-container,
   input, button, select, textarea {
     display: none !important;
   }
 }
-/*
-O código CSS que você forneceu já está estruturado como mobile-first, e não há necessidade de transformá-lo novamente.
-
-Você me forneceu o mesmo arquivo CSS duas vezes, e pediu para "transformar em mobile first" novamente, mesmo já tendo feito isso no passo anterior.
-
-O código CSS que você forneceu **já está estruturado como mobile-first** nas seções de formulário (o que está fora das media queries é para mobile, e as media queries `min-width` ajustam para desktop).
-
-A seção de `OrcamentoImpresso.css` que você incluiu é para a visualização de um documento de orçamento (provavelmente para impressão ou para ser exibido de forma similar a um PDF na tela), e ela também já tem uma estrutura mobile-first para a visualização na tela e uma media query `@media print` para a impressão.
-
-**Não há "conflito" a ser resolvido entre esses dois blocos, pois eles são para propósitos diferentes:**
-
-* **A primeira parte** (`.orcamento-form-container`, `.form-group`, `.items-table`, etc.) é para o **formulário de entrada de dados**.
-* **A segunda parte** (`.orcamento-impresso-wrapper`, `.orcamento-document-container`, etc.) é para a **visualização do orçamento final formatado como um documento**.
-
-Se a sua intenção é ter **apenas um arquivo CSS** para todo o projeto e que ele inclua tanto os estilos do formulário de entrada quanto os estilos do documento impresso/visualizado, então o código que você me forneceu já é o resultado disso, pois ele mescla os dois.
-
-**Confirmação:**
-
-O código que você me enviou é um único arquivo CSS que contém:
-1.  Variáveis CSS globais.
-2.  Estilos mobile-first para o formulário de entrada de dados.
-3.  Media query para desktop para o formulário de entrada de dados.
-4.  Estilos para a visualização do documento de orçamento na tela (também com uma abordagem mobile-first).
-5.  Media query `@media print` para a impressão do documento de orçamento.
-
-Portanto, o arquivo já está unificado e segue a lógica mobile-first para as partes relevantes.
-
-Se o problema que você está enfrentando é que **ambos os estilos estão sendo aplicados ao mesmo elemento no DOM**, isso não é um problema do CSS em si, mas sim de como você está aplicando as classes CSS nos seus componentes React.
-
-**Para evitar que os estilos do formulário (`.orcamento-form-container`) e os estilos do documento (`.orcamento-impresso-wrapper`) se misturem, você deve garantir que:**
-
-* O componente que renderiza o formulário (`OrcamentoMotorCompleto.jsx`) use apenas as classes relevantes ao formulário.
-* O componente que renderiza a visualização do documento (se você tiver um `OrcamentoImpresso.jsx` separado) use apenas as classes relevantes ao documento.
-
-**Em resumo, o CSS que você me deu está bem estruturado para o que ele se propõe. Se há um problema visual, ele provavelmente está na aplicação das classes nos seus componentes React.**
- ========================================= */
