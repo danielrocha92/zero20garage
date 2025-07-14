@@ -21,31 +21,12 @@ const itensMotorCompletoData = [
   { nome: "Anel", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }] },
   { nome: "Anti Chamas", temQuantidade: false }, // Apenas checkbox
   { nome: "Arruela encosto", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }] },
-  {
-    nome: "Banho",
-    temQuantidade: true, // Mantém Qtd/medida Unit inputs
-    subItens: [
-      { label: "cárter", type: "text" },
-      { label: "suportes", type: "text" },
-      { label: "parafusos", type: "text" }
-    ]
-  },
   { nome: "Bobina", temQuantidade: false }, // Apenas checkbox
   { nome: "Bomba d’água", temQuantidade: false }, // Apenas checkbox
   { nome: "Bomba de óleo", temQuantidade: false }, // Apenas checkbox
   { nome: "Bronzina de biela", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }] },
   { nome: "Bronzina de mancal", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }] },
   { nome: "Cabo de vela", temQuantidade: false }, // Apenas checkbox
-  {
-    nome: "Cabeçote", // Este item foi movido para cá para manter a consistência se ele for uma "peça" com subitens complexos
-    temQuantidade: true,
-    subItens: [
-      { label: "Usinagem completa", type: "text" },
-      { label: "Limpeza e Revisão", type: "text" },
-      { label: "Novo", type: "text" },
-      { label: "Recuperação altura", type: "text" }
-    ]
-  },
   { nome: "Cebolinha de óleo", temQuantidade: false }, // Apenas checkbox
   {
     nome: "Comando de Válvula",
@@ -75,7 +56,7 @@ const itensMotorCompletoData = [
   { nome: "Litros de óleo", temQuantidade: false, subItens: [{ label: "Quantidade e Tipo", type: "text" }] },
   {
     nome: "Mangueiras Radiador",
-    temQuantidade: true, // Mantém Qtd/medida Unit inputs
+    temQuantidade: false, // Mantém Qtd/medida Unit inputs
     subItens: [
       { label: "Inferior", type: "text" },
       { label: "Superior", type: "text" }
@@ -95,14 +76,6 @@ const itensMotorCompletoData = [
   { nome: "Válvulas admissão", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }] },
   { nome: "Válvulas escape", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }] },
   { nome: "Velas", temQuantidade: false }, // Apenas checkbox
-  {
-    nome: "Virabrequim",
-    temQuantidade: true, // Mantém Qtd/medida Unit inputs
-    subItens: [
-      { label: "Usinagem completa", type: "text" },
-      { label: "Novo", type: "text" }
-    ]
-  },
 ].sort((a, b) => a.nome.localeCompare(b.nome)); // Garante a ordem alfabética
 
 const servicosMotorCompletoData = [
