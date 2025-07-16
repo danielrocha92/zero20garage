@@ -62,7 +62,8 @@ const itensMotorCompletoData = [
       { label: "Superior", type: "text" }
     ]
   },
-  { nome: "Outros", temQuantidade: false, subItens: [] }, // Explicitamente subItens vazios
+  { 
+    nome: "Outros", temQuantidade: true, subItens: [] }, // Explicitamente subItens vazios
   { nome: "Parafusos cabeçote", temQuantidade: false }, // Apenas checkbox
   { nome: "Pistão", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }] },
   { nome: "Retentor eixo comando", temQuantidade: false }, // Apenas checkbox
