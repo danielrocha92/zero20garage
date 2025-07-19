@@ -108,67 +108,87 @@ const PainelOrcamentos = () => {
       return;
     }
     const doc = new jsPDF();
-    doc.setFontSize(12);
-    let y = 10;
-    historico.forEach((h, i) => {
-      doc.text(`Orçamento #${i + 1}`, 10, y);
-      y += 8;
-      doc.text(`Data: ${h.data} | Tipo: ${h.tipo}`, 10, y);
-      y += 8;
-      doc.text(`Nome: ${h.nome} | Valor Total: R$ ${parseFloat(h.valorTotal).toFixed(2)}`, 10, y);
-      y += 8;
-      if (h.detalhesPecas && h.detalhesPecas.length > 0) {
-        doc.text('Peças:', 10, y);
-        y += 7;
-        h.detalhesPecas.forEach((p) => {
-            let itemText = `- ${p.nome}`;
-            if (p.temQuantidade) {
-                itemText += ` | Qtd: ${p.quantidade} | Medida: ${p.medida}`;
-            }
-            if (p.total !== undefined && p.total !== null) {
-                itemText += ` | Total: R$ ${parseFloat(p.total).toFixed(2)}`;
-            }
-            doc.text(itemText, 12, y);
-            y += 7;
-            if (p.subItens && p.subItens.length > 0) {
-                p.subItens.forEach((sub) => {
-                    const subItemValue = sub.type === "checkbox" ? (sub.value ? 'Sim' : 'Não') : sub.value;
-                    doc.text(`    • ${sub.label}: ${subItemValue}`, 16, y);
-                    y += 6;
-                });
-            }
-        });
-      }
-      if (h.detalhesServicos && h.detalhesServicos.length > 0) {
-        doc.text('Serviços:', 10, y);
-        y += 7;
-        h.detalhesServicos.forEach((s) => {
-            let serviceText = `- ${s.nome}`;
-            if (s.temQuantidade) {
-                serviceText += ` | Qtd: ${s.quantidade} | Medida: ${s.medida}`;
-            }
-            if (s.total !== undefined && s.total !== null) {
-                serviceText += ` | Total: R$ ${parseFloat(s.total).toFixed(2)}`;
-            }
-            doc.text(serviceText, 12, y);
-            y += 7;
-            if (s.subItens && s.subItens.length > 0) {
-                s.subItens.forEach((sub) => {
-                    const subItemValue = sub.type === "checkbox" ? (sub.value ? 'Sim' : 'Não') : sub.value;
-                    doc.text(`    • ${sub.label}: ${subItemValue}`, 16, y);
-                    y += 6;
-                });
-            }
-        });
-      }
-      y += 10;
-      if (y > 270) {
-        doc.addPage();
-        y = 10;
-      }
+doc.setFontSize(12);
+let y = 15;
+
+historico.forEach((h, i) => {
+  // Cabeçalho
+  doc.setFontSize(14);
+  doc.text("ORÇAMENTO – MOTOR COMPLETO/PARCIAL", 10, y);
+  y += 10;
+  doc.setFontSize(12);
+  doc.text(`Veículo: ${h.veiculo || 'Corsa 2001'}`, 10, y);
+  y += 7;
+  doc.text(`OS: ${h.os || '143'}       Cliente: ${h.nome}       Data: ${h.data}`, 10, y);
+  y += 10;
+
+  // PEÇAS
+  doc.setFont(undefined, 'bold');
+  doc.text("Peças", 10, y);
+  y += 8;
+  doc.setFont(undefined, 'normal');
+
+  h.detalhesPecas?.forEach((p) => {
+    let itemText = `☒ ${p.nome}`;
+    if (p.temQuantidade) itemText += `: ${p.quantidade} ${p.medida || ''}`;
+    doc.text(itemText, 12, y);
+    y += 7;
+
+    p.subItens?.forEach((sub) => {
+      const subItemValue = sub.type === "checkbox" ? (sub.value ? '☒' : '☐') : sub.value;
+      doc.text(`    • ${sub.label}: ${subItemValue}`, 16, y);
+      y += 6;
     });
-    doc.save('painel-orcamentos.pdf');
-  };
+  });
+
+  // Valor total de peças
+  y += 5;
+  doc.setFont(undefined, 'bold');
+  doc.text(`Valor total de Peças: R$ ${parseFloat(h.valorTotalPecas).toFixed(2)}`, 10, y);
+  y += 10;
+
+  // SERVIÇOS
+  doc.text("Serviços", 10, y);
+  y += 8;
+  doc.setFont(undefined, 'normal');
+
+  h.detalhesServicos?.forEach((s) => {
+    let serviceText = `☒ ${s.nome}`;
+    if (s.temQuantidade) serviceText += `: ${s.quantidade} ${s.medida || ''}`;
+    doc.text(serviceText, 12, y);
+    y += 7;
+
+    s.subItens?.forEach((sub) => {
+      const subItemValue = sub.type === "checkbox" ? (sub.value ? '☒' : '☐') : sub.value;
+      doc.text(`    • ${sub.label}: ${subItemValue}`, 16, y);
+      y += 6;
+    });
+  });
+
+  // Valor total de serviços
+  y += 5;
+  doc.setFont(undefined, 'bold');
+  doc.text(`Valor total de Serviços: R$ ${parseFloat(h.valorTotalServicos).toFixed(2)}`, 10, y);
+  y += 10;
+
+  // TOTAL GERAL
+  const totalGeral = (parseFloat(h.valorTotalPecas) + parseFloat(h.valorTotalServicos)).toFixed(2);
+  doc.text(`TOTAL GERAL: R$ ${totalGeral}`, 10, y);
+  y += 10;
+
+  // Forma de pagamento
+  doc.setFont(undefined, 'normal');
+  doc.text("Forma de pagamento: Pix, Débito e Crédito em até 10 vezes sem juros", 10, y);
+  y += 15;
+
+  // Paginação
+  if (y > 270) {
+    doc.addPage();
+    y = 15;
+  }
+});
+
+doc.save('painel-orcamentos-formatado.pdf');
 
   const navigate = useNavigate();
 
