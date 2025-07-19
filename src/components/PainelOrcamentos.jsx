@@ -10,14 +10,15 @@ import { useNavigate } from 'react-router-dom';
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxIrUxPxlq0R_wYNJYBV8gTk94L_obQ_cHlwnoCPCE3/dev';
 
 const PainelOrcamentos = () => {
+  const navigate = useNavigate(); // ✅ Correto: fora de funções internas
+
   const [tipo, setTipo] = useState('motor');
   const [historico, setHistorico] = useState([]);
   const [message, setMessage] = useState('');
   const [showMessage, setShowMessage] = useState(false);
 
-  // Modal de visualização/edição/exclusão
   const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState('view'); // 'view' | 'edit'
+  const [modalType, setModalType] = useState('view');
   const [orcamentoSelecionado, setOrcamentoSelecionado] = useState(null);
 
   const showMessageBox = (msg) => {
@@ -44,54 +45,40 @@ const PainelOrcamentos = () => {
         body: JSON.stringify(envio),
       });
       const result = await res.json();
-      if (result.status === 'success') {
-        showMessageBox('Orçamento enviado com sucesso para o Google Sheets.');
-      } else {
-        showMessageBox('Erro ao enviar para o Google Sheets.');
-        console.error(result);
-      }
+      result.status === 'success'
+        ? showMessageBox('Orçamento enviado com sucesso para o Google Sheets.')
+        : showMessageBox('Erro ao enviar para o Google Sheets.');
     } catch (err) {
-      console.error('Erro na conexão com Google Sheets:', err);
+      console.error(err);
       showMessageBox('Erro ao conectar com o servidor. Tente novamente.');
     }
   };
 
   const exportarExcel = () => {
-    if (historico.length === 0) {
-      showMessageBox('Nenhum dado para exportar.');
-      return;
-    }
+    if (historico.length === 0) return showMessageBox('Nenhum dado para exportar.');
     const excelData = historico.map(h => ({
       Data: h.data,
       Tipo: h.tipo,
       Nome: h.nome,
       'Valor Total': h.valorTotal,
-      'Peças': h.detalhesPecas
-        ? h.detalhesPecas.map(p => {
-            let itemDetails = `${p.nome}`;
-            if (p.temQuantidade) {
-                itemDetails += ` (Qtd: ${p.quantidade}, Medida: ${p.medida})`;
-            }
-            if (p.subItens && p.subItens.length > 0) {
-                const subItemString = p.subItens.map(sub => `${sub.label}: ${sub.value}`).join(', ');
-                itemDetails += ` [Detalhes: ${subItemString}]`;
-            }
-            return itemDetails;
-        }).join('; ')
-        : '',
-      'Serviços': h.detalhesServicos
-        ? h.detalhesServicos.map(s => {
-            let serviceDetails = `${s.nome}`;
-            if (s.temQuantidade) {
-                serviceDetails += ` (Qtd: ${s.quantidade}, Medida: ${s.medida})`;
-            }
-            if (s.subItens && s.subItens.length > 0) {
-                const subItemString = s.subItens.map(sub => `${sub.label}: ${sub.value}`).join(', ');
-                serviceDetails += ` [Detalhes: ${subItemString}]`;
-            }
-            return serviceDetails;
-        }).join('; ')
-        : '',
+      'Peças': h.detalhesPecas?.map(p => {
+        let d = `${p.nome}`;
+        if (p.temQuantidade) d += ` (Qtd: ${p.quantidade}, Medida: ${p.medida})`;
+        if (p.subItens?.length > 0) {
+          const sub = p.subItens.map(s => `${s.label}: ${s.value}`).join(', ');
+          d += ` [Detalhes: ${sub}]`;
+        }
+        return d;
+      }).join('; ') || '',
+      'Serviços': h.detalhesServicos?.map(s => {
+        let d = `${s.nome}`;
+        if (s.temQuantidade) d += ` (Qtd: ${s.quantidade}, Medida: ${s.medida})`;
+        if (s.subItens?.length > 0) {
+          const sub = s.subItens.map(s => `${s.label}: ${s.value}`).join(', ');
+          d += ` [Detalhes: ${sub}]`;
+        }
+        return d;
+      }).join('; ') || '',
       'Forma de Pagamento': h.formaPagamento || '',
       Garantia: h.garantia || ''
     }));
@@ -103,101 +90,87 @@ const PainelOrcamentos = () => {
   };
 
   const exportarPDF = () => {
-    if (historico.length === 0) {
-      showMessageBox('Nenhum dado para exportar.');
-      return;
-    }
+    if (historico.length === 0) return showMessageBox('Nenhum dado para exportar.');
+
     const doc = new jsPDF();
-doc.setFontSize(12);
-let y = 15;
+    doc.setFontSize(12);
+    let y = 15;
 
-historico.forEach((h, i) => {
-  // Cabeçalho
-  doc.setFontSize(14);
-  doc.text("ORÇAMENTO – MOTOR COMPLETO/PARCIAL", 10, y);
-  y += 10;
-  doc.setFontSize(12);
-  doc.text(`Veículo: ${h.veiculo || 'Corsa 2001'}`, 10, y);
-  y += 7;
-  doc.text(`OS: ${h.os || '143'}       Cliente: ${h.nome}       Data: ${h.data}`, 10, y);
-  y += 10;
+    historico.forEach((h, i) => {
+      doc.setFontSize(14);
+      doc.text("ORÇAMENTO – MOTOR COMPLETO/PARCIAL", 10, y);
+      y += 10;
+      doc.setFontSize(12);
+      doc.text(`Veículo: ${h.veiculo || 'Corsa 2001'}`, 10, y);
+      y += 7;
+      doc.text(`OS: ${h.os || '143'}       Cliente: ${h.nome}       Data: ${h.data}`, 10, y);
+      y += 10;
 
-  // PEÇAS
-  doc.setFont(undefined, 'bold');
-  doc.text("Peças", 10, y);
-  y += 8;
-  doc.setFont(undefined, 'normal');
+      doc.setFont(undefined, 'bold');
+      doc.text("Peças", 10, y);
+      y += 8;
+      doc.setFont(undefined, 'normal');
 
-  h.detalhesPecas?.forEach((p) => {
-    let itemText = `☒ ${p.nome}`;
-    if (p.temQuantidade) itemText += `: ${p.quantidade} ${p.medida || ''}`;
-    doc.text(itemText, 12, y);
-    y += 7;
+      h.detalhesPecas?.forEach(p => {
+        let itemText = `☒ ${p.nome}`;
+        if (p.temQuantidade) itemText += `: ${p.quantidade} ${p.medida || ''}`;
+        doc.text(itemText, 12, y);
+        y += 7;
+        p.subItens?.forEach(sub => {
+          const val = sub.type === "checkbox" ? (sub.value ? '☒' : '☐') : sub.value;
+          doc.text(`    • ${sub.label}: ${val}`, 16, y);
+          y += 6;
+        });
+      });
 
-    p.subItens?.forEach((sub) => {
-      const subItemValue = sub.type === "checkbox" ? (sub.value ? '☒' : '☐') : sub.value;
-      doc.text(`    • ${sub.label}: ${subItemValue}`, 16, y);
-      y += 6;
+      y += 5;
+      doc.setFont(undefined, 'bold');
+      doc.text(`Valor total de Peças: R$ ${parseFloat(h.valorTotalPecas).toFixed(2)}`, 10, y);
+      y += 10;
+
+      doc.text("Serviços", 10, y);
+      y += 8;
+      doc.setFont(undefined, 'normal');
+
+      h.detalhesServicos?.forEach(s => {
+        let text = `☒ ${s.nome}`;
+        if (s.temQuantidade) text += `: ${s.quantidade} ${s.medida || ''}`;
+        doc.text(text, 12, y);
+        y += 7;
+        s.subItens?.forEach(sub => {
+          const val = sub.type === "checkbox" ? (sub.value ? '☒' : '☐') : sub.value;
+          doc.text(`    • ${sub.label}: ${val}`, 16, y);
+          y += 6;
+        });
+      });
+
+      y += 5;
+      doc.setFont(undefined, 'bold');
+      doc.text(`Valor total de Serviços: R$ ${parseFloat(h.valorTotalServicos).toFixed(2)}`, 10, y);
+      y += 10;
+
+      const total = (parseFloat(h.valorTotalPecas) + parseFloat(h.valorTotalServicos)).toFixed(2);
+      doc.text(`TOTAL GERAL: R$ ${total}`, 10, y);
+      y += 10;
+
+      doc.setFont(undefined, 'normal');
+      doc.text("Forma de pagamento: Pix, Débito e Crédito em até 10 vezes sem juros", 10, y);
+      y += 15;
+
+      if (y > 270) {
+        doc.addPage();
+        y = 15;
+      }
     });
-  });
 
-  // Valor total de peças
-  y += 5;
-  doc.setFont(undefined, 'bold');
-  doc.text(`Valor total de Peças: R$ ${parseFloat(h.valorTotalPecas).toFixed(2)}`, 10, y);
-  y += 10;
-
-  // SERVIÇOS
-  doc.text("Serviços", 10, y);
-  y += 8;
-  doc.setFont(undefined, 'normal');
-
-  h.detalhesServicos?.forEach((s) => {
-    let serviceText = `☒ ${s.nome}`;
-    if (s.temQuantidade) serviceText += `: ${s.quantidade} ${s.medida || ''}`;
-    doc.text(serviceText, 12, y);
-    y += 7;
-
-    s.subItens?.forEach((sub) => {
-      const subItemValue = sub.type === "checkbox" ? (sub.value ? '☒' : '☐') : sub.value;
-      doc.text(`    • ${sub.label}: ${subItemValue}`, 16, y);
-      y += 6;
-    });
-  });
-
-  // Valor total de serviços
-  y += 5;
-  doc.setFont(undefined, 'bold');
-  doc.text(`Valor total de Serviços: R$ ${parseFloat(h.valorTotalServicos).toFixed(2)}`, 10, y);
-  y += 10;
-
-  // TOTAL GERAL
-  const totalGeral = (parseFloat(h.valorTotalPecas) + parseFloat(h.valorTotalServicos)).toFixed(2);
-  doc.text(`TOTAL GERAL: R$ ${totalGeral}`, 10, y);
-  y += 10;
-
-  // Forma de pagamento
-  doc.setFont(undefined, 'normal');
-  doc.text("Forma de pagamento: Pix, Débito e Crédito em até 10 vezes sem juros", 10, y);
-  y += 15;
-
-  // Paginação
-  if (y > 270) {
-    doc.addPage();
-    y = 15;
-  }
-});
-
-doc.save('painel-orcamentos-formatado.pdf');
-
-  const navigate = useNavigate();
+    doc.save('painel-orcamentos-formatado.pdf');
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
     navigate('/orcamento');
   };
 
-  // Funções de ver, editar, excluir
   const openModal = (type, orc) => {
     setModalType(type);
     setOrcamentoSelecionado({ ...orc });
@@ -212,7 +185,6 @@ doc.save('painel-orcamentos-formatado.pdf');
   const handleEditar = () => {
     setHistorico(historico.map(h => h === orcamentoSelecionado.original ? orcamentoSelecionado : h));
     setShowModal(false);
-    // Redirecionamento simulado (ou use o link de cada orçamento salvo, se disponível)
     window.open('https://docs.google.com/spreadsheets/u/0/', '_blank');
   };
 
@@ -241,11 +213,10 @@ doc.save('painel-orcamentos-formatado.pdf');
       </h3>
 
       <div className='orcamento-form-wrapper'>
-        {tipo === 'motor' ? (
-          <OrcamentoMotorCompleto onSubmit={handleSalvar} />
-        ) : (
-          <OrcamentoCabecote onSubmit={handleSalvar} />
-        )}
+        {tipo === 'motor'
+          ? <OrcamentoMotorCompleto onSubmit={handleSalvar} />
+          : <OrcamentoCabecote onSubmit={handleSalvar} />
+        }
       </div>
 
       <section className='historico-section'>
@@ -254,6 +225,7 @@ doc.save('painel-orcamentos-formatado.pdf');
           <button onClick={exportarExcel} className='action-btn'>Exportar Excel</button>
           <button onClick={exportarPDF} className='action-btn'>Exportar PDF</button>
         </div>
+
         {historico.length === 0 ? (
           <p className='no-historico-message'>Nenhum orçamento salvo ainda.</p>
         ) : (
@@ -286,7 +258,6 @@ doc.save('painel-orcamentos-formatado.pdf');
         )}
       </section>
 
-      {/* MODAL */}
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -294,9 +265,9 @@ doc.save('painel-orcamentos-formatado.pdf');
               <>
                 <h3>Excluir Orçamento</h3>
                 <p>Tem certeza que deseja excluir este orçamento?</p>
-                <div style={{marginTop: 20}}>
-                  <button onClick={handleExcluir} style={{color: 'red'}}>Excluir</button>
-                  <button onClick={closeModal} style={{marginLeft: 10}}>Cancelar</button>
+                <div style={{ marginTop: 20 }}>
+                  <button onClick={handleExcluir} style={{ color: 'red' }}>Excluir</button>
+                  <button onClick={closeModal} style={{ marginLeft: 10 }}>Cancelar</button>
                 </div>
               </>
             ) : (
@@ -319,11 +290,10 @@ doc.save('painel-orcamentos-formatado.pdf');
                     type="number"
                   />
                 </label>
-                {/* Adapte para outros campos! */}
-                <div style={{marginTop: 20}}>
+                <div style={{ marginTop: 20 }}>
                   <button onClick={closeModal}>Fechar</button>
                   {modalType === 'edit' && (
-                    <button onClick={handleEditar} style={{marginLeft: 10}}>Salvar</button>
+                    <button onClick={handleEditar} style={{ marginLeft: 10 }}>Salvar</button>
                   )}
                 </div>
               </>
@@ -332,7 +302,6 @@ doc.save('painel-orcamentos-formatado.pdf');
         </div>
       )}
 
-      {/* Message Box */}
       {showMessage && (
         <div className="message-box-overlay">
           <div className="message-box">
