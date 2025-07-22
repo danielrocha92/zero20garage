@@ -305,6 +305,11 @@ const PainelOrcamentos = () => {
     ));
   };
 
+const handleExcluir = () => {
+  setHistorico(historico.filter(h => h !== orcamentoSelecionado));
+  closeModal();
+};
+
   return (
     <div className='painel-orcamentos-container'>
       {/* ... rest of code remains the same ... */}
