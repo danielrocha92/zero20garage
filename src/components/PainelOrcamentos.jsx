@@ -90,81 +90,124 @@ const PainelOrcamentos = () => {
   };
 
   const exportarPDF = () => {
-    if (historico.length === 0) return showMessageBox('Nenhum dado para exportar.');
+  if (historico.length === 0) return showMessageBox('Nenhum dado para exportar.');
 
-    const doc = new jsPDF();
+  const doc = new jsPDF();
+  const red = "#ff0000";
+  let y = 20;
+
+  historico.forEach((h, i) => {
+    doc.setFontSize(14);
+    doc.text("ORÇAMENTO – MOTOR COMPLETO/PARCIAL", 60, y);
+    y += 10;
+
     doc.setFontSize(12);
-    let y = 15;
+    doc.text(`Veículo: ${h.veiculo || 'Corsa 2001'}`, 10, y);
+    y += 7;
+    doc.text(`OS: ${h.os || '143'}    Cliente: ${h.nome}    Data: ${h.data}`, 10, y);
+    y += 10;
 
-    historico.forEach((h, i) => {
-      doc.setFontSize(14);
-      doc.text("ORÇAMENTO – MOTOR COMPLETO/PARCIAL", 10, y);
-      y += 10;
-      doc.setFontSize(12);
-      doc.text(`Veículo: ${h.veiculo || 'Corsa 2001'}`, 10, y);
-      y += 7;
-      doc.text(`OS: ${h.os || '143'}       Cliente: ${h.nome}       Data: ${h.data}`, 10, y);
-      y += 10;
+    doc.setFont(undefined, 'bold');
+    doc.text("Peças", 10, y);
+    doc.setFont(undefined, 'normal');
+    y += 7;
 
-      doc.setFont(undefined, 'bold');
-      doc.text("Peças", 10, y);
-      y += 8;
-      doc.setFont(undefined, 'normal');
+    // Ordenar peças por nome
+    const pecasOrdenadas = [...(h.detalhesPecas || [])].sort((a, b) =>
+      a.nome.localeCompare(b.nome)
+    );
 
-      h.detalhesPecas?.forEach(p => {
-        let itemText = `☒ ${p.nome}`;
-        if (p.temQuantidade) itemText += `: ${p.quantidade} ${p.medida || ''}`;
-        doc.text(itemText, 12, y);
-        y += 7;
-        p.subItens?.forEach(sub => {
-          const val = sub.type === "checkbox" ? (sub.value ? '☒' : '☐') : sub.value;
-          doc.text(`    • ${sub.label}: ${val}`, 16, y);
-          y += 6;
-        });
+    const coluna1 = pecasOrdenadas.slice(0, Math.ceil(pecasOrdenadas.length / 2));
+    const coluna2 = pecasOrdenadas.slice(Math.ceil(pecasOrdenadas.length / 2));
+
+    const renderColuna = (col, x) => {
+      let localY = y;
+      col.forEach(p => {
+        if (p.checkbox) {
+          doc.setTextColor(red);
+          doc.text(`☒ ${p.nome}`, x, localY);
+          localY += 6;
+
+          p.subItens?.forEach(sub => {
+            const valor = sub.type === 'checkbox'
+              ? (sub.value ? '☒' : '☐')
+              : sub.value;
+            if (valor && valor !== false) {
+              doc.setTextColor(red);
+              doc.text(`   • ${sub.label}: ${valor}`, x + 5, localY);
+              localY += 5;
+            }
+          });
+
+        } else {
+          doc.setTextColor(150); // cinza claro para não marcados
+          doc.text(`☐ ${p.nome}`, x, localY);
+          localY += 6;
+        }
       });
+      return localY;
+    };
 
-      y += 5;
-      doc.setFont(undefined, 'bold');
-      doc.text(`Valor total de Peças: R$ ${parseFloat(h.valorTotalPecas).toFixed(2)}`, 10, y);
-      y += 10;
+    const y1 = renderColuna(coluna1, 10);
+    const y2 = renderColuna(coluna2, 110);
+    y = Math.max(y1, y2) + 5;
 
-      doc.text("Serviços", 10, y);
-      y += 8;
-      doc.setFont(undefined, 'normal');
+    doc.setTextColor(0);
+    doc.setFont(undefined, 'bold');
+    doc.text(`Valor total de Peças: R$ ${parseFloat(h.valorTotalPecas).toFixed(2)}`, 10, y);
+    y += 10;
 
-      h.detalhesServicos?.forEach(s => {
-        let text = `☒ ${s.nome}`;
-        if (s.temQuantidade) text += `: ${s.quantidade} ${s.medida || ''}`;
-        doc.text(text, 12, y);
-        y += 7;
+    // SERVIÇOS
+    doc.setFont(undefined, 'bold');
+    doc.text("Peças", 10, y); // palavra 'Peças' no modelo refere-se aos serviços
+    doc.setFont(undefined, 'normal');
+    y += 7;
+
+    const servicosOrdenados = [...(h.detalhesServicos || [])].sort((a, b) =>
+      a.nome.localeCompare(b.nome)
+    );
+
+    servicosOrdenados.forEach(s => {
+      if (s.checkbox) {
+        doc.setTextColor(red);
+        doc.text(`☒ ${s.nome}`, 10, y);
+        y += 6;
+
         s.subItens?.forEach(sub => {
-          const val = sub.type === "checkbox" ? (sub.value ? '☒' : '☐') : sub.value;
-          doc.text(`    • ${sub.label}: ${val}`, 16, y);
-          y += 6;
+          const val = sub.type === 'checkbox' ? (sub.value ? '☒' : '☐') : sub.value;
+          if (val && val !== false) {
+            doc.text(`   • ${sub.label}: ${val}`, 15, y);
+            y += 5;
+          }
         });
-      });
-
-      y += 5;
-      doc.setFont(undefined, 'bold');
-      doc.text(`Valor total de Serviços: R$ ${parseFloat(h.valorTotalServicos).toFixed(2)}`, 10, y);
-      y += 10;
-
-      const total = (parseFloat(h.valorTotalPecas) + parseFloat(h.valorTotalServicos)).toFixed(2);
-      doc.text(`TOTAL GERAL: R$ ${total}`, 10, y);
-      y += 10;
-
-      doc.setFont(undefined, 'normal');
-      doc.text("Forma de pagamento: Pix, Débito e Crédito em até 10 vezes sem juros", 10, y);
-      y += 15;
-
-      if (y > 270) {
-        doc.addPage();
-        y = 15;
+      } else {
+        doc.setTextColor(150);
+        doc.text(`☐ ${s.nome}`, 10, y);
+        y += 6;
       }
     });
 
-    doc.save('painel-orcamentos-formatado.pdf');
-  };
+    doc.setTextColor(0);
+    doc.setFont(undefined, 'bold');
+    doc.text(`Valor total de Serviços: R$ ${parseFloat(h.valorTotalServicos).toFixed(2)}`, 10, y);
+    y += 10;
+
+    const total = (parseFloat(h.valorTotalPecas) + parseFloat(h.valorTotalServicos)).toFixed(2);
+    doc.text(`TOTAL GERAL: R$ ${total}`, 10, y);
+    y += 10;
+
+    doc.setFont(undefined, 'normal');
+    doc.text("Forma de pagamento: Pix, Débito e Crédito em até 10 vezes sem juros", 10, y);
+    y += 15;
+
+    if (y > 270) {
+      doc.addPage();
+      y = 20;
+    }
+  });
+
+  doc.save('painel-orcamentos-zero20.pdf');
+};
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
