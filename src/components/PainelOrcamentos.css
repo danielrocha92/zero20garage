@@ -265,15 +265,29 @@
 }
 
 /* Modal simples para visualização/edição */
-.modal-overlay {
-  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center;
-  z-index: 1000;
+.modal-overlay.fixed-center {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  background: rgba(0,0,0,0.2);
+  /* Modal sempre centralizado e sem rolagem */
 }
+
 .modal-content {
-  background: #fff; padding: 2rem 2.5rem; border-radius: 8px; min-width: 300px; max-width: 90vw;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.12);
+  background: #fff;
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.25);
+  min-width: 320px;
+  max-width: 98vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
 }
+
 .modal-content h3 {
   margin-top: 0;
   margin-bottom: 16px;
