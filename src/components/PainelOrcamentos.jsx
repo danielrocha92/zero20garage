@@ -62,8 +62,8 @@ const PainelOrcamentos = () => {
       Nome: h.nome,
       'Valor Total': h.valorTotal,
       'Peças': h.detalhesPecas?.map(p => {
-        let d = `${p.nome}`;
-        if (p.temQuantidade) d += ` (Qtd: ${p.quantidade}, Medida: ${p.medida})`;
+        let d = `${s.nome}`;
+        if (p.temQuantidade) d += ` (Qtd: ${s.quantidade}, Medida: ${s.medida})`;
         if (p.checkbox && p.subItens?.length > 0) {
           const sub = p.subItens.map(s => `${s.label}: ${s.value}`).join(', ');
           d += ` [Detalhes: ${sub}]`;
@@ -72,7 +72,7 @@ const PainelOrcamentos = () => {
       }).join('; ') || '',
       'Serviços': h.detalhesServicos?.map(s => {
         let d = `${s.nome}`;
-        if (s.temQuantidade) d += ` (Qtd: ${s.quantidade}, Medida: ${p.medida})`;
+        if (s.temQuantidade) d += ` (Qtd: ${s.quantidade}, Medida: ${s.medida})`;
         if (p.checkbox && p.subItens?.length > 0) {
           const sub = p.subItens.map(s => `${s.label}: ${s.value}`).join(', ');
           d += ` [Detalhes: ${sub}]`;
@@ -131,7 +131,7 @@ const PainelOrcamentos = () => {
             doc.setTextColor(red);
             doc.text(`☒`, x, localY);
             doc.setTextColor(0)
-            doc.text(`${p.nome}`, x + 5, localY)
+            doc.text(`${s.nome}`, x + 5, localY)
             localY += 6;
 
             // Exibe subitens SOMENTE para itens selecionados
