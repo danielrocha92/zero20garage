@@ -1,52 +1,56 @@
-.painel-container {
-  padding: 2rem;
-  background-color: var(--cinza-escuro);
-  color: var(--cinza-claro);
-  border-radius: 1rem;
-  box-shadow: 0 0 12px rgba(255, 0, 0, 0.2);
-  max-width: 100%;
+.tabela-historico {
   overflow-x: auto;
+  margin-top: 2rem;
+  border-radius: 10px;
+  background-color: #1c1c1c;
+  padding: 1rem;
 }
 
-.painel-titulo {
-  font-size: 1.8rem;
-  margin-bottom: 1.2rem;
-  border-bottom: 2px solid var(--vermelho);
-  padding-bottom: 0.5rem;
-}
-
-.painel-tabela {
+.tabela-light {
   width: 100%;
   border-collapse: collapse;
   color: var(--cinza-claro);
 }
 
-.painel-tabela th,
-.painel-tabela td {
+.tabela-light th,
+.tabela-light td {
   padding: 0.75rem;
-  text-align: left;
   border-bottom: 1px solid #333;
+  text-align: left;
 }
 
-.tabela-scroll {
-  overflow-x: auto;
+.tabela-light th {
+  background-color: #222;
+  font-weight: bold;
 }
 
-.status-pendente {
-  color: orange;
+.acoes-icones svg {
+  margin-right: 0.5rem;
+  cursor: pointer;
+  color: var(--vermelho);
+  transition: color 0.3s;
 }
 
-.status-aprovado {
-  color: limegreen;
+.acoes-icones svg:hover {
+  color: var(--cinza-claro);
 }
 
-.status-cancelado {
-  color: crimson;
+.status-tag {
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: #fff;
 }
 
-.painel-loading,
-.painel-vazio {
-  color: var(--cinza-medio);
-  font-style: italic;
-  margin-top: 1rem;
+.status-tag.verde {
+  background-color: #2ecc71;
+}
+
+.status-tag.vermelho {
+  background-color: #e74c3c;
+}
+
+.status-tag.amarelo {
+  background-color: #f1c40f;
+  color: #111;
 }
