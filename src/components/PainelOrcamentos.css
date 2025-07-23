@@ -24,7 +24,7 @@
 }
 
 /* Estilos para Títulos */
-.titulo-claro {
+.painel-header h1 {
   font-size: 2.5rem;
   font-weight: bold;
   color: var(--red-primary);
@@ -35,52 +35,68 @@
   text-shadow: 0 0 10px rgba(255, 0, 0, 0.7); /* Sombra mais forte no título */
 }
 
-.subtitulo-claro {
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: var(--text-light);
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column; /* Stacked for mobile */
-  align-items: flex-start;
-  gap: 0.5rem;
-}
-
-/* Seletor de Tipo de Orçamento - ESTILO ATUALIZADO */
-.tipo-orcamento-selector select {
-  background-color: #0d0d0d; /* Fundo bem escuro */
-  border: 1px solid #444; /* Borda inicial mais discreta */
-  color: var(--text-light);
-  padding: 0.75rem 1.25rem; /* Um pouco mais de padding */
+.painel-header button {
+  background-color: var(--bg-dark);
+  color: var(--red-primary);
+  border: 1px solid var(--red-primary);
+  padding: 0.75rem 1.25rem;
   border-radius: 20px;
   font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
-  width: 100%;
-  box-sizing: border-box;
-  appearance: none; /* Remove seta padrão em alguns navegadores */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg fill="%23f0f0f0" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Seta branca */
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  background-size: 1.2em;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.tipo-orcamento-selector select:hover {
-  border-color: var(--red-secondary);
+.painel-header button:hover {
+  background-color: var(--red-primary);
+  color: var(--text-light);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
 }
 
-.tipo-orcamento-selector select:focus {
-  outline: none;
-  border-color: var(--red-primary); /* Borda vermelha forte no foco */
-  /* Ajuste no box-shadow para ser um anel de foco mais visível e uma sombra forte */
-  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.3), 0 0 15px rgba(255, 0, 0, 0.7);
+
+/* Seletor de Tipo de Orçamento - ESTILO ATUALIZADO */
+.tipo-orcamento-selector {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
+
+.tipo-orcamento-selector button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.tipo-orcamento-selector button.active {
+  background-color: var(--red-primary);
+  color: var(--text-light);
+  border-color: var(--red-primary);
+}
+
+.tipo-orcamento-selector button:not(.active) {
+  background-color: var(--bg-dark);
+  color: var(--red-primary);
+  border-color: var(--red-primary);
+}
+
+.tipo-orcamento-selector button:not(.active):hover {
+  background-color: var(--red-accent);
+  color: var(--text-light);
+  border-color: var(--red-accent);
+}
+
 
 /* Wrapper para os componentes de orçamento (OrcamentoMotorCompleto/Cabecote) */
 .orcamento-form-wrapper {
   margin-top: 1.5rem;
+  background-color: #1e1e1e;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
 }
 
 /* Seção de Histórico */
@@ -223,6 +239,36 @@
   margin-bottom: 3px;
 }
 
+/* Message box */
+.message-box {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #28a745; /* Green for success */
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.message-box.error {
+  background-color: #dc3545; /* Red for error */
+}
+
+.message-box button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.25rem;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
 
 /* --- MOBILE-FIRST: Media Queries para Desktop --- */
 @media (min-width: 768px) {
@@ -230,20 +276,21 @@
     padding: 3rem;
   }
 
-  .titulo-claro {
+  .painel-header {
+    flex-direction: row;
+  }
+
+  .painel-header h1 {
     font-size: 3.5rem;
+    margin-bottom: 0;
   }
 
-  .subtitulo-claro {
-    font-size: 1.5rem;
-    flex-direction: row; /* Inline para desktop */
-    align-items: center;
-    justify-content: center; /* Centraliza no desktop */
+  .tipo-orcamento-selector {
+    gap: 2rem;
   }
 
-  .tipo-orcamento-selector select {
-    width: auto; /* Largura automática */
-    min-width: 220px;
+  .tipo-orcamento-selector button {
+    padding: 0.8rem 2rem;
   }
 
   .historico-buttons-group {
