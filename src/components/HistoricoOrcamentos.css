@@ -1,0 +1,52 @@
+.painel-container {
+  padding: 2rem;
+  background-color: var(--cinza-escuro);
+  color: var(--cinza-claro);
+  border-radius: 1rem;
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.2);
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.painel-titulo {
+  font-size: 1.8rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 2px solid var(--vermelho);
+  padding-bottom: 0.5rem;
+}
+
+.painel-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--cinza-claro);
+}
+
+.painel-tabela th,
+.painel-tabela td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #333;
+}
+
+.tabela-scroll {
+  overflow-x: auto;
+}
+
+.status-pendente {
+  color: orange;
+}
+
+.status-aprovado {
+  color: limegreen;
+}
+
+.status-cancelado {
+  color: crimson;
+}
+
+.painel-loading,
+.painel-vazio {
+  color: var(--cinza-medio);
+  font-style: italic;
+  margin-top: 1rem;
+}
