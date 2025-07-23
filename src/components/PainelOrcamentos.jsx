@@ -6,6 +6,7 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import { useNavigate } from 'react-router-dom';
+import './PainelOrcamentos.css'; // Import the CSS file
 
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxIrUxPxlq0R_wYNJYBV8gTk94L_obQ_cHlwnoCPCE3/dev';
 
@@ -18,9 +19,11 @@ const PainelOrcamentos = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [editingData, setEditingData] = useState(null); // State for editing budget data
 
-  const showMessageBox = (msg) => {
+  const showMessageBox = (msg, isError = false) => {
     setMessage(msg);
     setShowMessage(true);
+    // You could add a class for error messages here if needed
+    // For example: if (isError) setMessageBoxClass('message-box error');
   };
 
   const hideMessageBox = () => {
@@ -46,15 +49,15 @@ const PainelOrcamentos = () => {
       const result = await res.json();
       result.status === 'success'
         ? showMessageBox('Orçamento enviado com sucesso para o Google Sheets.')
-        : showMessageBox('Erro ao enviar para o Google Sheets.');
+        : showMessageBox('Erro ao enviar para o Google Sheets.', true);
     } catch (err) {
       console.error(err);
-      showMessageBox('Erro ao conectar com o servidor. Tente novamente.');
+      showMessageBox('Erro ao conectar com o servidor. Tente novamente.', true);
     }
   };
 
   const exportarExcel = () => {
-    if (historico.length === 0) return showMessageBox('Nenhum dado para exportar.');
+    if (historico.length === 0) return showMessageBox('Nenhum dado para exportar.', true);
     const excelData = historico.map(h => ({
       Data: h.data,
       Tipo: h.tipo,
@@ -77,7 +80,7 @@ const PainelOrcamentos = () => {
   };
 
   const exportarPDFCompleto = () => {
-    if (historico.length === 0) return showMessageBox('Nenhum dado para exportar.');
+    if (historico.length === 0) return showMessageBox('Nenhum dado para exportar.', true);
     const doc = new jsPDF();
     let y = 20;
     historico.forEach(h => {
@@ -103,60 +106,47 @@ const PainelOrcamentos = () => {
   };
 
   return (
-    <div className='painel-orcamentos-container bg-gray-50 min-h-screen p-8 font-sans'>
+    <div className='painel-orcamentos-container'>
       {showMessage && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 flex items-center justify-between animate-fade-in-down">
+        <div className="message-box">
           <span>{message}</span>
-          <button onClick={hideMessageBox} className="ml-4 text-white font-bold text-xl">&times;</button>
+          <button onClick={hideMessageBox}>&times;</button>
         </div>
       )}
 
-      <header className="flex flex-col sm:flex-row justify-between items-center mb-8 pb-4 border-b-2 border-gray-200">
-        <h1 className="text-4xl font-extrabold text-gray-900 mb-4 sm:mb-0">Painel de Orçamentos</h1>
-        <button
-          onClick={handleLogout}
-          className="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-5 rounded-lg shadow-md"
-        >
+      <header className="painel-header">
+        <h1>Painel de Orçamentos</h1>
+        <button onClick={handleLogout}>
           Sair
         </button>
       </header>
 
-      <nav className="mb-8 flex justify-center space-x-6">
+      <nav className="tipo-orcamento-selector">
         <button
           onClick={() => setTipo('motor')}
-          className={`py-3 px-8 rounded-full font-semibold text-lg transition ${
-            tipo === 'motor' ? 'bg-blue-600 text-white' : 'bg-white text-blue-800 border'
-          }`}
+          className={tipo === 'motor' ? 'active' : ''}
         >
           Orçamento Motor Completo
         </button>
         <button
           onClick={() => setTipo('cabecote')}
-          className={`py-3 px-8 rounded-full font-semibold text-lg transition ${
-            tipo === 'cabecote' ? 'bg-blue-600 text-white' : 'bg-white text-blue-800 border'
-          }`}
+          className={tipo === 'cabecote' ? 'active' : ''}
         >
           Orçamento Cabeçote
         </button>
       </nav>
 
-      <main className="bg-white p-8 rounded-lg shadow-xl mb-8">
+      <main className="orcamento-form-wrapper">
         {tipo === 'motor' ? (
           <OrcamentoMotorCompleto onSubmit={handleSalvar} editingData={editingData} />
         ) : (
           <OrcamentoCabecote onSubmit={handleSalvar} editingData={editingData} />
         )}
-        <div className="flex space-x-4 mt-4">
-          <button
-            onClick={exportarExcel}
-            className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-5 rounded-lg shadow-md"
-          >
+        <div className="historico-buttons-group">
+          <button onClick={exportarExcel} className="action-btn">
             Exportar Todos para Excel
           </button>
-          <button
-            onClick={exportarPDFCompleto}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-5 rounded-lg shadow-md"
-          >
+          <button onClick={exportarPDFCompleto} className="action-btn">
             Exportar Todos para PDF
           </button>
         </div>
