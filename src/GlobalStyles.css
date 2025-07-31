@@ -766,9 +766,7 @@ textarea {
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: var(--vermelho-principal);
   box-shadow: 0 0 4px rgba(255, 0, 0, 0.3);
-  background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* ===== Botões refinados ===== */

@@ -1,4 +1,3 @@
-// App.jsx
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
@@ -10,7 +9,7 @@ import ScrollToTopButton from './components/ScrollToTopButton';
 import ScrollToTop from './components/ScrollToTop';
 
 import PainelOrcamentos from './components/PainelOrcamentos';
-import Login from './components/Login'; // ✅ novo
+import Login from './components/Login';
 
 import Home from './pages/home/Home';
 import Sobre from './pages/sobre/Sobre';
@@ -27,7 +26,7 @@ import Desmontagem from './pages/home/Desmontagem';
 import Usinagem from './pages/home/Usinagem';
 import MontagemTeste from './pages/home/MontagemTeste';
 
-import Orcamento from './pages/orcamento/Orcamento'; // ✅ rota padrão para retorno após logout
+import Orcamento from './pages/orcamento/Orcamento';
 
 import Blog from './pages/blog/Blog';
 import CustoRetifica from './pages/blog/CustoRetifica';
@@ -44,23 +43,37 @@ import Faq from './pages/footer/Faq';
 import TrabalheConosco from './pages/footer/TrabalheConosco';
 import Termos from './pages/footer/Termos';
 
+// Importa o novo componente para a geração de PDF
+import GerarPdfPage from './components/GerarPdfPage';
+
 import './App.css';
 import './GlobalStyles.css';
 
-// ✅ Rota protegida
+/**
+ * Componente PrivateRoute
+ * Garante que apenas usuários autenticados possam acessar as rotas protegidas.
+ * Verifica a existência de um token de autenticação no localStorage.
+ * @param {Object} props - As propriedades do componente.
+ * @param {React.ReactNode} props.children - Os componentes filhos a serem renderizados se o usuário estiver autenticado.
+ */
 function PrivateRoute({ children }) {
   const token = localStorage.getItem("authToken");
   return token === "acesso-liberado" ? children : <Navigate to="/login" replace />;
 }
 
+/**
+ * Componente AnimatedRoutes
+ * Gerencia as rotas do aplicativo com transições de página usando Framer Motion.
+ */
 const AnimatedRoutes = () => {
-  const location = useLocation();
-  return (
-    <AnimatePresence mode="wait">
-      <Suspense fallback={<PageTransition />}>
-        <Routes location={location} key={location.pathname}>
+  const location = useLocation(); // Hook para obter o objeto de localização atual
 
-          {/* 🔐 Login e rota protegida */}
+  return (
+    <AnimatePresence mode="wait"> {/* Gerencia as animações de entrada/saída de componentes */}
+      <Suspense fallback={<PageTransition />}> {/* Exibe um fallback enquanto os componentes são carregados */}
+        <Routes location={location} key={location.pathname}> {/* Define as rotas do aplicativo */}
+
+          {/* Rotas de Autenticação e Protegidas */}
           <Route path="/login" element={<Login />} />
           <Route
             path="/painel-orcamentos"
@@ -73,6 +86,9 @@ const AnimatedRoutes = () => {
 
           {/* Rota de retorno padrão após logout */}
           <Route path="/orcamento" element={<Orcamento />} />
+
+          {/* NOVA ROTA para a página de geração de PDF */}
+          <Route path="/gerar-pdf" element={<GerarPdfPage />} />
 
           {/* Demais rotas públicas */}
           <Route path="/" element={<Home />} />
@@ -98,25 +114,30 @@ const AnimatedRoutes = () => {
           <Route path="/Blog/TrocarMotor" element={<TrocarMotor />} />
           <Route path="/Blog/ValeAPenaRetificar" element={<ValeAPenaRetificar />} />
 
+          {/* Rotas de Rodapé */}
           <Route path="/Politica" element={<Politica />} />
           <Route path="/Trocas" element={<Trocas />} />
           <Route path="/Faq" element={<Faq />} />
           <Route path="/Trabalhe-conosco" element={<TrabalheConosco />} />
           <Route path="/Termos" element={<Termos />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} /> {/* Rota curinga para páginas não encontradas */}
         </Routes>
       </Suspense>
     </AnimatePresence>
   );
 };
 
+/**
+ * Componente principal App
+ * Configura o roteamento e o layout geral do aplicativo.
+ */
 function App() {
   return (
-    <Router>
-      <Layout>
-        <AnimatedRoutes />
-        <ScrollToTop />
-        <ScrollToTopButton />
+    <Router> {/* Componente Router do React Router DOM */}
+      <Layout> {/* Componente de layout que envolve todo o conteúdo do aplicativo */}
+        <AnimatedRoutes /> {/* Componente que contém todas as rotas animadas */}
+        <ScrollToTop /> {/* Componente para rolar a página para o topo em cada mudança de rota */}
+        <ScrollToTopButton /> {/* Botão flutuante para rolar a página para o topo */}
       </Layout>
     </Router>
   );

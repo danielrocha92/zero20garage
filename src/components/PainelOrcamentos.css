@@ -14,10 +14,10 @@
 /* Base do container do Painel de Orçamentos */
 .painel-orcamentos-container {
   background-color: var(--bg-dark);
-  padding: 2rem;
+  padding: 0.5rem;
   color: var(--text-light);
   max-width: 800px; /* Um pouco maior que o 600px anterior para o histórico */
-  margin: 1.5rem auto; /* Centraliza e adiciona margem superior/inferior */
+  margin: 7.5rem auto; /* Centraliza e adiciona margem superior/inferior */
   border-radius: 20px; /* Bordas mais suaves */
   box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); /* Sombra vermelha mais pronunciada */
   font-family: 'Arial', sans-serif; /* Consistente com os orçamentos internos */
@@ -52,7 +52,6 @@
   color: var(--text-light);
   box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
 }
-
 
 /* Seletor de Tipo de Orçamento - ESTILO ATUALIZADO */
 .tipo-orcamento-selector {
@@ -94,7 +93,7 @@
 .orcamento-form-wrapper {
   margin-top: 1.5rem;
   background-color: #1e1e1e;
-  padding: 2rem;
+  padding: 0.5rem;
   border-radius: 15px;
   box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
 }

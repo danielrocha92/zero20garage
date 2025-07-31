@@ -1,6 +1,7 @@
 // src/components/OrcamentoCabecote.jsx
 import React, { useState, useEffect } from 'react';
 import './OrcamentoForms.css'; // Importa o novo CSS para formulários
+import backgroundImage from '../assets/images/background.jpg';
 
 // Dados de itens e serviços para o orçamento de Cabeçote
 const itensCabecoteData = [
@@ -177,7 +178,7 @@ const OrcamentoCabecote = ({ onSubmit }) => {
     <div className="orcamento-form-container">
       <div className="form-header">
         <h1>ORÇAMENTO - CABEÇOTE</h1>
-        <img src="/path/to/your/logo.png" alt="Logo Zero Vinte Garage" className="header-logo" /> {/* Adicione o caminho correto para o logo */}
+        <img src={backgroundImage} alt="Logo" className="logo-orcamento" />
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -186,6 +187,12 @@ const OrcamentoCabecote = ({ onSubmit }) => {
           <table className="form-table">
             <tbody>
               <tr>
+                <td>
+                  <div className="form-group">
+                    <label htmlFor="ordemServico">OS:</label> {/* Campo OS */}
+                    <input type="text" id="ordemServico" name="ordemServico" value={formData.ordemServico} onChange={handleInputChange} />
+                  </div>
+                </td>
                 <td>
                   <div className="form-group">
                     <label htmlFor="nome">Cliente:</label>
@@ -212,20 +219,10 @@ const OrcamentoCabecote = ({ onSubmit }) => {
                     <input type="text" id="placa" name="placa" value={formData.placa} onChange={handleInputChange} required />
                   </div>
                 </td>
-              </tr>
-              <tr>
-                <td colSpan="2">
-                  <div className="form-group">
-                    <label htmlFor="telefone">Telefone:</label>
-                    <input type="text" id="telefone" name="telefone" value={formData.telefone} onChange={handleInputChange} required />
-                  </div>
-                </td>
-              </tr>
-              <tr>
                 <td>
                   <div className="form-group">
-                    <label htmlFor="ordemDeServico">Ordem de Serviço:</label>
-                    <input type="text" id="ordemDeServico" name="ordemDeServico" value={formData.ordemDeServico} onChange={handleInputChange} required />
+                    <label htmlFor="telefone">Telefone:</label>
+                    <input type="text" id="telefone" name="telefone" value={formData.telefone} onChange={handleInputChange} />
                   </div>
                 </td>
               </tr>

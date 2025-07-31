@@ -1,6 +1,6 @@
-// src/components/OrcamentoMotorCompleto.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './OrcamentoForms.css'; // Certifique-se de que o CSS está acessível
+import backgroundImage from '../assets/images/background.jpg';
 
 // Lista de itens que devem ter apenas um campo de texto para especificação e não devem ter o botão "+ Detalhe"
 const itemsWithSingleTextInput = [
@@ -18,54 +18,56 @@ const itemsWithSingleTextInput = [
 // Os dados de itens e serviços completos para o motor
 const itensMotorCompletoData = [
   // ITENS COM CHECKBOX + INPUT DE TEXTO ESPECÍFICO (conforme sua lista), ordenados alfabeticamente
-  { nome: "Anel", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }] },
+  { nome: "Anel", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "0,50" }] }, // Adicionado initialValue
   { nome: "Anti Chamas", temQuantidade: false }, // Apenas checkbox
   { nome: "Arruela encosto", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }] },
   { nome: "Bobina", temQuantidade: false }, // Apenas checkbox
   { nome: "Bomba d’água", temQuantidade: false }, // Apenas checkbox
   { nome: "Bomba de óleo", temQuantidade: false }, // Apenas checkbox
-  { nome: "Bronzina de biela", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }] },
-  { nome: "Bronzina de mancal", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }] },
+  { nome: "Bronzina de biela", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "0,75" }] }, // Adicionado initialValue
+  { nome: "Bronzina de mancal", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "0,50" }] }, // Adicionado initialValue
   { nome: "Cabo de vela", temQuantidade: false }, // Apenas checkbox
   { nome: "Cebolinha de óleo", temQuantidade: false }, // Apenas checkbox
   {
     nome: "Comando de Válvula",
-    temQuantidade: true, // Mantém Qtd/medida Unit inputs
+    temQuantidade: false, // Alterado para false, pois não há "Qtd/Medidas" ao lado do checkbox na imagem, apenas sub-itens
     subItens: [
-      { label: "Admissão", type: "text" },
-      { label: "Escape", type: "text" }
+      { label: "Admissão", type: "checkbox" }, // Alterado para checkbox
+      { label: "Escape", type: "checkbox" } // Alterado para checkbox
     ]
   },
   {
     nome: "Correias",
-    temQuantidade: true, // Mantém Qtd/medida Unit inputs
+    temQuantidade: false, // Alterado para false
     subItens: [
-      { label: "Dent kit", type: "text" },
-      { label: "Capa", type: "text" },
-      { label: "Acessórios kit", type: "text" },
-      { label: "Corrente kit", type: "text" }
+      { label: "Dent kit", type: "checkbox" }, // Alterado para checkbox
+      { label: "Capa", type: "checkbox" }, // Alterado para checkbox
+      { label: "Acessórios kit", type: "checkbox" }, // Alterado para checkbox
+      { label: "Corrente kit", type: "checkbox" } // Alterado para checkbox
     ]
   },
   { nome: "Desengripante e Limpa contato", temQuantidade: false }, // Apenas checkbox
   { nome: "Embreagem", temQuantidade: false }, // Apenas checkbox
+  { nome: "Engrenagens Radiador", temQuantidade: false }, // Apenas checkbox
   { nome: "Engrenagem virab.", temQuantidade: false }, // Apenas checkbox
   { nome: "Filtro de ar", temQuantidade: false }, // Apenas checkbox
   { nome: "Filtro de combustível", temQuantidade: false }, // Apenas checkbox
   { nome: "Filtro de óleo", temQuantidade: false }, // Apenas checkbox
-  { nome: "Litros de aditivo", temQuantidade: false, subItens: [{ label: "Quantidade e Tipo", type: "text" }] },
-  { nome: "Litros de óleo", temQuantidade: false, subItens: [{ label: "Quantidade e Tipo", type: "text" }] },
+  { nome: "Litros de aditivo", temQuantidade: false, subItens: [{ label: "Quantidade e Tipo", type: "text", initialValue: "4 litros" }] }, // Ajustado para refletir imagem
+  { nome: "Litros de óleo", temQuantidade: false, subItens: [{ label: "Quantidade e Tipo", type: "text", initialValue: "4 Litros de óleo: 15w40" }] }, // Ajustado para refletir imagem
   {
     nome: "Mangueiras Radiador",
-    temQuantidade: false, // Mantém Qtd/medida Unit inputs
+    temQuantidade: false,
     subItens: [
-      { label: "Inferior", type: "text" },
-      { label: "Superior", type: "text" }
+      { label: "Inferior", type: "checkbox" }, // Alterado para checkbox
+      { label: "Superior", type: "checkbox" } // Alterado para checkbox
     ]
   },
-  { 
-    nome: "Outros", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }] },
+  {
+    nome: "Outros", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }]
+  },
   { nome: "Parafusos cabeçote", temQuantidade: false }, // Apenas checkbox
-  { nome: "Pistão", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }] },
+  { nome: "Pistão", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "0,50" }] }, // Adicionado initialValue
   { nome: "Retentor eixo comando", temQuantidade: false }, // Apenas checkbox
   { nome: "Retentor traseiro virab.", temQuantidade: false }, // Apenas checkbox
   { nome: "Retentor válvula", temQuantidade: false }, // Apenas checkbox
@@ -73,93 +75,181 @@ const itensMotorCompletoData = [
   { nome: "Silicone", temQuantidade: false }, // Apenas checkbox
   { nome: "Tuchos", temQuantidade: false }, // Apenas checkbox
   { nome: "Tubo d’água", temQuantidade: false }, // Apenas checkbox
+  { nome: "Turbina / Válv.", temQuantidade: false }, // Apenas checkbox
   { nome: "Válvula termostática", temQuantidade: false }, // Apenas checkbox
-  { nome: "Válvulas admissão", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }] },
-  { nome: "Válvulas escape", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }] },
+  { nome: "Válvulas admissão", temQuantidade: false, subItens: [{ label: "Quantidade", type: "text", initialValue: "04" }] }, // Ajustado para refletir imagem
+  { nome: "Válvulas escape", temQuantidade: false, subItens: [{ label: "Quantidade", type: "text", initialValue: "04" }] }, // Ajustado para refletir imagem
   { nome: "Velas", temQuantidade: false }, // Apenas checkbox
 ].sort((a, b) => a.nome.localeCompare(b.nome)); // Garante a ordem alfabética
 
 const servicosMotorCompletoData = [
-  // Mantido como estava, pois a solicitação era focada em "Peças"
-  // Cabeçote foi movido para itensMotorCompletoData, se for considerado uma peça.
-  // Se "Cabeçote" for um serviço, ele deve ter sua própria estrutura aqui.
-    {
+  {
     nome: "Biela",
-    temQuantidade: true, // Mantém Qtd/medida Unit inputs
+    temQuantidade: false, // Não há Qtd/Medida para serviços na imagem, apenas sub-itens
     subItens: [
-      { label: "Usinagem", type: "quantity" },
-      { label: "Nova", type: "measure" }
+      { label: "Usinagem completa", type: "checkbox" }, // Alterado para checkbox
+      { label: "Nova", type: "checkbox" } // Alterado para checkbox
     ]
   },
-
-  { nome: "Banho (cárter, suportes, parafusos etc)", subItens: [] },
-
+  { nome: "Banho (cárter, suportes, parafusos etc)", temQuantidade: false }, // Apenas checkbox, subItens vazios
   {
     nome: "Cabeçote",
-    temQuantidade: true, // Mantém Qtd/medida Unit inputs
+    temQuantidade: false, // Não há Qtd/Medida para serviços na imagem, apenas sub-itens
     subItens: [
-      { label: "Usinagem Completa", type: "text" },
-      { label: "Limpeza e Revisão", type: "text" },
-      { label: "Novo", type: "text" },
-      { label: "Recuperação Altura", type: "text" }
+      { label: "Usinagem completa", type: "checkbox" }, // Alterado para checkbox
+      { label: "Limpeza e Revisão", type: "checkbox" }, // Alterado para checkbox
+      { label: "Solda", type: "checkbox" }, // Adicionado conforme a imagem
+      { label: "Recuperação altura", type: "checkbox" } // Alterado para checkbox
     ]
   },
-
-    {
+  {
     nome: "Bloco",
-    temQuantidade: true, // Mantém Qtd/medida Unit inputs
+    temQuantidade: false, // Não há Qtd/Medida para serviços na imagem, apenas sub-itens
     subItens: [
-      { label: "Usinagem", type: "quantity" },
-      { label: "Novo", type: "measure" }
+      { label: "Usinagem completa", type: "checkbox" }, // Alterado para checkbox
+      { label: "Novo", type: "checkbox" } // Adicionado conforme a imagem
     ]
-    },
-
-  { nome: "Montagem de Motor Técnica" },
-
+  },
+  { nome: "Montagem de Motor Técnica", temQuantidade: false }, // Apenas checkbox
   {
     nome: "Virabrequim",
-    temQuantidade: true, // Mantém Qtd/medida Unit inputs
+    temQuantidade: false, // Não há Qtd/Medida para serviços na imagem, apenas sub-itens
     subItens: [
-      { label: "Usinagem", type: "quantity" },
-      { label: "Novo", type: "measure" }
+      { label: "Usinagem completa", type: "checkbox" }, // Alterado para checkbox
+      { label: "Novo", type: "checkbox" } // Alterado para checkbox
     ]
   },
-
-  { nome: "Volante Usinagem completa" },
-
-  { nome: "Outros Serviços de Motor", subItens: [] },
+  { nome: "Volante Usinagem completa", temQuantidade: false }, // Apenas checkbox
 ].sort((a, b) => a.nome.localeCompare(b.nome)); // Garante a ordem alfabética
 
-const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário para a prop onSubmit
+const OrcamentoMotorCompleto = ({ onSubmit, editingData }) => {
   const [formData, setFormData] = useState({
     nome: '',
     telefone: '',
     veiculo: '',
     placa: '',
     data: new Date().toISOString().slice(0, 10),
-    ordemServico: '', // Novo campo para Ordem de Serviço
+    ordemServico: '',
     pecas: itensMotorCompletoData.map(item => ({
       ...item,
       selecionado: false,
       quantidade: item.temQuantidade ? 1 : 0,
       medida: 0,
       total: 0,
-      subItens: item.subItens ? item.subItens.map(sub => ({ ...sub, value: sub.type === "checkbox" ? false : '' })) : [],
+      subItens: item.subItens ? item.subItens.map(sub => ({ ...sub, value: sub.initialValue || (sub.type === "checkbox" ? false : '') })) : [], // Usa initialValue se existir
     })),
     servicos: servicosMotorCompletoData.map(servico => ({
       ...servico,
       selecionado: false,
+      quantidade: servico.temQuantidade ? 1 : 0, // Adicionado quantidade para serviços, se tiver temQuantidade
       medida: 0,
       total: 0,
-      subItens: servico.subItens ? servico.subItens.map(sub => ({ ...sub, value: sub.type === "checkbox" ? false : '' })) : [],
+      subItens: servico.subItens ? servico.subItens.map(sub => ({ ...sub, value: sub.initialValue || (sub.type === "checkbox" ? false : '') })) : [],
     })),
     totalPecasManual: 0,
     totalServicosManual: 0,
+    totalMaoDeObraManual: 0, // Renomeado para seguir a imagem
     totalGeralManual: 0,
-    totalMaoDeObraManual: 0,
     formaPagamento: '',
     garantia: '',
   });
+
+  // Efeito para carregar dados de edição
+  useEffect(() => {
+    if (editingData) {
+      setFormData(prev => ({
+        ...prev,
+        nome: editingData.cliente || '', // Mapear 'cliente' para 'nome'
+        telefone: editingData.telefone || '',
+        veiculo: editingData.veiculo || '',
+        placa: editingData.placa || '',
+        data: editingData.data ? new Date(editingData.data).toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10), // Ajuste de formato
+        ordemServico: editingData.ordemServico || '', // Mapear 'OS' para 'ordemServico'
+        totalPecasManual: parseFloat(editingData.valorTotalPecas) || 0,
+        totalServicosManual: parseFloat(editingData.valorTotalServicos) || 0,
+        totalMaoDeObraManual: parseFloat(editingData.totalMaoDeObra) || 0, // Ajuste para nome do campo
+        totalGeralManual: parseFloat(editingData.valorTotal) || 0,
+        formaPagamento: editingData.formaPagamento || '',
+        garantia: editingData.garantia || '',
+        // Reconstruir o estado de pecas e servicos com base nos dados de edição
+        pecas: itensMotorCompletoData.map(item => {
+          const editedItem = editingData.pecasSelecionadas?.find(p => p.startsWith(item.nome));
+          let selecionado = !!editedItem; // True se o item principal foi encontrado
+
+          let subItensAtualizados = item.subItens ? item.subItens.map(sub => {
+            let subValue = sub.initialValue || (sub.type === "checkbox" ? false : '');
+            if (selecionado && editedItem) {
+                // Tenta encontrar o valor do subItem na string editedItem
+                const regex = new RegExp(`${sub.label}:\\s*([^;]+)`);
+                const match = editedItem.match(regex);
+                if (match && match[1]) {
+                    if (sub.type === "checkbox") {
+                        subValue = true; // Se encontrar o texto, marca como true
+                    } else {
+                        subValue = match[1].trim();
+                    }
+                } else if (sub.type === "checkbox" && editedItem.includes(sub.label)) {
+                    subValue = true; // Se for checkbox e o label estiver na string
+                }
+            }
+            return { ...sub, value: subValue };
+          }) : [];
+
+          // Para itens sem subItens mas que foram marcados com 'X' ou alguma especificação
+          if (!item.subItens && selecionado) {
+              // Se o item principal foi selecionado e não tem subItens definidos,
+              // mas a string do editedItem contém algo além do nome, tente capturar
+              const textOnlyRegex = new RegExp(`^${item.nome}\\s*:\\s*(.+)$`);
+              const textOnlyMatch = editedItem.match(textOnlyRegex);
+              if (textOnlyMatch && textOnlyMatch[1]) {
+                  // Se o item tem um valor de texto extra (ex: "Anel: 0,50"), armazene em um subItem
+                  subItensAtualizados = [{ label: "Especificação/Medida", type: "text", value: textOnlyMatch[1].trim() }];
+              }
+          }
+
+
+          return {
+            ...item,
+            selecionado,
+            quantidade: item.temQuantidade ? (editingData.pecasSelecionadas?.find(p => p.startsWith(item.nome + ' Qtd:'))?.match(/Qtd:\s*(\d+)/)?.[1] || 1) : 0,
+            medida: item.temQuantidade ? (parseFloat(editingData.pecasSelecionadas?.find(p => p.startsWith(item.nome + ' Medida:'))?.match(/Medida:\s*([\d,.]+)/)?.[1]?.replace(',', '.')) || 0) : 0,
+            subItens: subItensAtualizados,
+          };
+        }),
+        servicos: servicosMotorCompletoData.map(servico => {
+          const editedServico = editingData.servicosSelecionados?.find(s => s.startsWith(servico.nome));
+          let selecionado = !!editedServico;
+
+          let subItensAtualizados = servico.subItens ? servico.subItens.map(sub => {
+            let subValue = sub.initialValue || (sub.type === "checkbox" ? false : '');
+            if (selecionado && editedServico) {
+                const regex = new RegExp(`${sub.label}\\s*[:]?\\s*([^;]+)?`);
+                const match = editedServico.match(regex);
+                if (match) {
+                    if (sub.type === "checkbox") {
+                        subValue = true;
+                    } else if (match[1]) {
+                        subValue = match[1].trim();
+                    }
+                } else if (sub.type === "checkbox" && editedServico.includes(sub.label)) {
+                    subValue = true;
+                }
+            }
+            return { ...sub, value: subValue };
+          }) : [];
+
+          return {
+            ...servico,
+            selecionado,
+            quantidade: servico.temQuantidade ? (editingData.servicosSelecionados?.find(s => s.startsWith(servico.nome + ' Qtd:'))?.match(/Qtd:\s*(\d+)/)?.[1] || 1) : 0,
+            medida: servico.temQuantidade ? (parseFloat(editingData.servicosSelecionados?.find(s => s.startsWith(servico.nome + ' Medida:'))?.match(/Medida:\s*([\d,.]+)/)?.[1]?.replace(',', '.')) || 0) : 0,
+            subItens: subItensAtualizados,
+          };
+        }),
+      }));
+    }
+  }, [editingData]);
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -170,10 +260,8 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário par
     const newPecas = [...formData.pecas];
     newPecas[index][field] = value;
     if (field === 'selecionado' && !value) {
-      newPecas[index].quantidade = newPecas[index].temQuantidade ? 1 : 0;
-      newPecas[index].medida = 0;
-      newPecas[index].total = 0;
-      newPecas[index].subItens = newPecas[index].subItens ? newPecas[index].subItens.map(sub => ({ ...sub, value: sub.type === "checkbox" ? false : '' })) : [];
+      // Reset sub-items if deselected
+      newPecas[index].subItens = newPecas[index].subItens ? newPecas[index].subItens.map(sub => ({ ...sub, value: sub.initialValue || (sub.type === "checkbox" ? false : '') })) : [];
     }
     setFormData(prev => ({ ...prev, pecas: newPecas }));
   };
@@ -182,9 +270,8 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário par
     const newServicos = [...formData.servicos];
     newServicos[index][field] = value;
     if (field === 'selecionado' && !value) {
-      newServicos[index].medida = 0;
-      newServicos[index].total = 0;
-      newServicos[index].subItens = newServicos[index].subItens ? newServicos[index].subItens.map(sub => ({ ...sub, value: sub.type === "checkbox" ? false : '' })) : [];
+      // Reset sub-items if deselected
+      newServicos[index].subItens = newServicos[index].subItens ? newServicos[index].subItens.map(sub => ({ ...sub, value: sub.initialValue || (sub.type === "checkbox" ? false : '') })) : [];
     }
     setFormData(prev => ({ ...prev, servicos: newServicos }));
   };
@@ -194,6 +281,7 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário par
     if (!items[itemIndex].subItens) {
       items[itemIndex].subItens = [];
     }
+    // Adiciona um novo sub-item genérico (texto)
     items[itemIndex].subItens.push({ label: 'Novo Detalhe', type: 'text', value: '' });
     setFormData(prev => ({ ...prev, [itemType]: items }));
   };
@@ -210,7 +298,6 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário par
     setFormData(prev => ({ ...prev, [itemType]: items }));
   };
 
-  // Nova função para lidar com a mudança de checkboxes de sub-itens
   const handleSubItemCheckboxChange = (itemType, itemIndex, subItemIndex, isChecked) => {
     const items = [...formData[itemType]];
     items[itemIndex].subItens[subItemIndex].value = isChecked;
@@ -222,33 +309,95 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário par
     setFormData(prev => ({ ...prev, [name]: parseFloat(value) || 0 }));
   };
 
-  const handleSubmit = (e) => {
+const handleSubmit = (e) => {
     e.preventDefault();
-    // Nenhuma validação de campos obrigatórios é realizada neste componente.
-    // Todos os dados do formulário, incluindo itens não selecionados ou sub-itens vazios,
-    // serão passados para a função onSubmit do componente pai.
+
+    // Filtra apenas os itens selecionados e formata como na imagem
+    const pecasSelecionadasFormatadas = formData.pecas
+      .filter(peca => peca.selecionado)
+      .map(peca => {
+        let nomeCompleto = peca.nome;
+        // Se houver quantidade e medida, adiciona
+        if (peca.temQuantidade && peca.quantidade > 0) {
+            nomeCompleto += `: Qtd: ${peca.quantidade}`;
+        }
+        if (peca.temQuantidade && peca.medida > 0) {
+            nomeCompleto += ` Medida: ${peca.medida}`;
+        }
+        // Adiciona sub-itens formatados
+        const subItensFormatados = peca.subItens
+          .filter(sub => (sub.type === "checkbox" && sub.value) || (sub.type === "text" && sub.value))
+          .map(sub => {
+            if (sub.type === "checkbox") {
+              return sub.label; // Apenas o label se for checkbox marcado
+            } else {
+              return `${sub.label}: ${sub.value}`; // Label: Valor para texto
+            }
+          })
+          .join('; '); // Junta com ponto e vírgula para legibilidade
+
+        if (subItensFormatados) {
+          nomeCompleto += ` (${subItensFormatados})`;
+        }
+        return nomeCompleto;
+      });
+
+    // Corrected variable name: servicosSelecionadosFormatadas
+    const servicosSelecionadosFormatadas = formData.servicos
+      .filter(servico => servico.selecionado)
+      .map(servico => {
+        let nomeCompleto = servico.nome;
+        // Se houver quantidade e medida, adiciona (embora na imagem não apareça para serviços)
+        if (servico.temQuantidade && servico.quantidade > 0) {
+            nomeCompleto += `: Qtd: ${servico.quantidade}`;
+        }
+        if (servico.temQuantidade && servico.medida > 0) {
+            nomeCompleto += ` Medida: ${servico.medida}`;
+        }
+        // Adiciona sub-itens formatados
+        const subItensFormatados = servico.subItens
+          .filter(sub => (sub.type === "checkbox" && sub.value) || (sub.type === "text" && sub.value))
+          .map(sub => {
+            if (sub.type === "checkbox") {
+              return sub.label;
+            } else {
+              return `${sub.label}: ${sub.value}`;
+            }
+          })
+          .join('; ');
+
+        if (subItensFormatados) {
+          nomeCompleto += ` (${subItensFormatados})`;
+        }
+        return nomeCompleto;
+      });
+
     const orcamentoFinal = {
-      ...formData,
-      tipo: 'motor completo',
+      cliente: formData.nome,
+      telefone: formData.telefone,
+      veiculo: formData.veiculo,
+      placa: formData.placa,
+      data: formData.data,
+      ordemServico: formData.ordemServico,
+      pecasSelecionadas: pecasSelecionadasFormatadas,
+      // Use the correctly spelled variable here
+      servicosSelecionados: servicosSelecionadosFormatadas, // <--- Corrected line
+      valorTotalPecas: formData.totalPecasManual,
+      valorTotalServicos: formData.totalServicosManual,
+      totalMaoDeObra: formData.totalMaoDeObraManual,
       valorTotal: formData.totalGeralManual,
-      detalhesPecas: formData.pecas.map(p => ({
-        ...p,
-        subItens: p.subItens ? p.subItens.map(sub => ({ label: sub.label, value: sub.value, type: sub.type })) : []
-      })),
-      detalhesServicos: formData.servicos.map(s => ({
-        ...s,
-        subItens: s.subItens ? s.subItens.map(sub => ({ label: sub.label, value: sub.value, type: sub.type })) : []
-      })),
+      formaPagamento: formData.formaPagamento,
+      garantia: formData.garantia,
     };
+
     onSubmit(orcamentoFinal);
   };
 
   return (
     <div className="orcamento-form-container">
       <div className="form-header">
-        <h1>ORÇAMENTO - MOTOR COMPLETO</h1>
-        {/* Usando um placeholder de imagem para o logo */}
-        <img src="https://placehold.co/120x60/3b3b3b/e0e0e0?text=LOGO" alt="Logo Zero Vinte Garage" className="header-logo" />
+        <h1>ORÇAMENTO - COMPLETO/PARCIAL</h1> {/* Título atualizado conforme a imagem */}
+        <img src={backgroundImage} alt="Logo" className="logo-orcamento" />
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -257,6 +406,12 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário par
           <table className="form-table">
             <tbody>
               <tr>
+                <td>
+                  <div className="form-group">
+                    <label htmlFor="ordemServico">OS:</label> {/* Campo OS */}
+                    <input type="text" id="ordemServico" name="ordemServico" value={formData.ordemServico} onChange={handleInputChange} />
+                  </div>
+                </td>
                 <td>
                   <div className="form-group">
                     <label htmlFor="nome">Cliente:</label>
@@ -283,18 +438,10 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário par
                     <input type="text" id="placa" name="placa" value={formData.placa} onChange={handleInputChange} />
                   </div>
                 </td>
-              </tr>
-              <tr>
                 <td>
                   <div className="form-group">
                     <label htmlFor="telefone">Telefone:</label>
                     <input type="text" id="telefone" name="telefone" value={formData.telefone} onChange={handleInputChange} />
-                  </div>
-                </td>
-                <td>
-                  <div className="form-group">
-                    <label htmlFor="ordemServico">Ordem de Serviço:</label>
-                    <input type="text" id="ordemServico" name="ordemServico" value={formData.ordemServico} onChange={handleInputChange} />
                   </div>
                 </td>
               </tr>
@@ -323,7 +470,7 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário par
                   <td className="inputs-cell">
                     {peca.selecionado && peca.temQuantidade && ( // Renderiza Qtd/Medida APENAS se temQuantidade for true
                       <div className="item-inputs">
-                        <div> {/* Fragmento para agrupar label e input */}
+                        <div>
                           <label htmlFor={`peca-${index}-quantidade`} className="input-label">Qtd:</label>
                           <input
                             type="number"
@@ -334,7 +481,7 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário par
                             className="quantity-input small-input"
                           />
                         </div>
-                        <div> {/* Fragmento para agrupar label e input */}
+                        <div>
                           <label htmlFor={`peca-${index}-medida`} className="input-label">Medidas:</label>
                           <input
                             type="number"
@@ -367,8 +514,8 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário par
                                 type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
                                 placeholder={
                                   sub.type === "quantity" ? `Qtd` :
-                                  sub.type === "measure" ? `Medida` :
-                                  `Insira o texto` // Placeholder genérico para texto
+                                    sub.type === "measure" ? `Medida` :
+                                      `Insira o texto`
                                 }
                                 value={sub.value}
                                 onChange={(e) => handleSubItemTextChange('pecas', index, sIdx, e.target.value)}
@@ -376,12 +523,15 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário par
                                 className="small-input"
                               />
                             )}
-                            <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('pecas', index, sIdx)}>X</button>
+                            {/* O botão "X" só aparece se não for um item com input de texto único pré-definido */}
+                            {!itemsWithSingleTextInput.includes(peca.nome) && (
+                              <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('pecas', index, sIdx)}>X</button>
+                            )}
                           </div>
                         ))}
                         {/* O botão "+ Detalhe" só aparece se o item não estiver na lista de itens com input de texto único */}
                         {peca.subItens.length > 0 && !itemsWithSingleTextInput.includes(peca.nome) && (
-                            <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('pecas', index)}>+ Detalhe</button>
+                          <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('pecas', index)}>+ Detalhe</button>
                         )}
                       </div>
                     )}
@@ -405,7 +555,7 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário par
 
         {/* Seção de Serviços */}
         <section className="section-form">
-          <h2>Serviços - Retifica</h2>
+          <h2>Serviços</h2> {/* Título alterado para "Serviços" conforme a imagem */}
           <table className="items-table">
             <tbody>
               {formData.servicos.map((servico, index) => (
@@ -424,7 +574,7 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário par
                   <td className="inputs-cell">
                     {servico.selecionado && servico.temQuantidade && ( // Renderiza Qtd/medida Unit se temQuantidade for true
                       <div className="item-inputs">
-                        <div> {/* Fragmento para agrupar label e input */}
+                        <div>
                           <label htmlFor={`servico-${index}-quantidade`} className="input-label">Qtd:</label>
                           <input
                             type="number"
@@ -435,7 +585,7 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário par
                             className="quantity-input small-input"
                           />
                         </div>
-                        <div> {/* Fragmento para agrupar label e input */}
+                        <div>
                           <label htmlFor={`servico-${index}-medida`} className="input-label">Medidas:</label>
                           <input
                             type="number"
@@ -468,8 +618,8 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário par
                                 type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
                                 placeholder={
                                   sub.type === "quantity" ? `Qtd` :
-                                  sub.type === "measure" ? `Medida` :
-                                  `Insira o texto` // Placeholder genérico para texto
+                                    sub.type === "measure" ? `Medida` :
+                                      `Insira o texto`
                                 }
                                 value={sub.value}
                                 onChange={(e) => handleSubItemTextChange('servicos', index, sIdx, e.target.value)}
@@ -480,9 +630,9 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário par
                             <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('servicos', index, sIdx)}>X</button>
                           </div>
                         ))}
-                        {/* Para serviços, o botão "+ Detalhe" sempre aparece se houver subItens */}
-                        {servico.subItens.length > 0 && (
-                            <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('servicos', index)}>+ Detalhe</button>
+                        {/* Para serviços, o botão "+ Detalhe" sempre aparece se houver subItens e não for um item com input único */}
+                        {servico.subItens.length > 0 && !itemsWithSingleTextInput.includes(servico.nome) && (
+                          <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('servicos', index)}>+ Detalhe</button>
                         )}
                       </div>
                     )}
@@ -531,14 +681,14 @@ const OrcamentoMotorCompleto = ({ onSubmit }) => { // Adicionado comentário par
 
           <div className="form-row">
             <div className="form-group" style={{ width: '100%' }}>
-                <label htmlFor="formaPagamento">Forma de pagamento:</label>
-                <input type="text" id="formaPagamento" name="formaPagamento" value={formData.formaPagamento} onChange={handleInputChange} placeholder="Pix, Débito e Crédito em até xx vezes sem juros" />
+              <label htmlFor="formaPagamento">Forma de pagamento:</label>
+              <input type="text" id="formaPagamento" name="formaPagamento" value={formData.formaPagamento} onChange={handleInputChange} placeholder="Pix, Débito e Crédito em até xx vezes sem juros" />
             </div>
           </div>
           <div className="form-row">
             <div className="form-group" style={{ width: '100%' }}>
-                <label htmlFor="garantia">Garantia:</label>
-                <input type="text" id="garantia" name="garantia" value={formData.garantia} onChange={handleInputChange} />
+              <label htmlFor="garantia">Garantia:</label>
+              <input type="text" id="garantia" name="garantia" value={formData.garantia} onChange={handleInputChange} />
             </div>
           </div>
         </section>
