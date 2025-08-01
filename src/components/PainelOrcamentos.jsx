@@ -75,46 +75,45 @@ const PainelOrcamentos = () => {
    * Envia os dados para o Google Sheets via Google Apps Script.
    * @param {Object} dados - Os dados do orçamento a serem salvos.
    */
-  const handleSalvar = async (dados) => {
-    const envio = {
-      ...editingData, // Inclui dados de edição se presentes (para identificar qual orçamento atualizar)
-      ...dados, // Novos dados ou dados atualizados do formulário
-      tipo, // O tipo de orçamento (motor ou cabeçote)
-      data: new Date().toLocaleString('pt-BR'), // Data e hora do salvamento
-    };
 
-    try {
-      const res = await fetch(WEB_APP_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(envio),
-      });
-      const result = await res.json();
-      if (result.status === 'success') {
-        showMessageBox('Orçamento enviado com sucesso para o Google Sheets.');
-        // Após salvar/atualizar, re-buscamos o histórico para refletir as mudanças.
-        // Chamamos a função de busca diretamente aqui, pois ela não está mais no escopo global.
-        // Para evitar a recriação da função fetchHistorico em cada render,
-        // poderíamos usar useCallback para memoizá-la, mas para este caso simples,
-        // a chamada direta é suficiente e não causa loop infinito aqui.
-        try {
-          const response = await fetch('https://api-orcamento-n49u.onrender.com/api/orcamento');
-          const data = await response.json();
-          setHistorico(data);
-        } catch (error) {
-          console.error('Erro ao re-buscar histórico após salvar:', error);
-          showMessageBox('Erro ao atualizar histórico após salvar.', true);
-        }
-      } else {
-        showMessageBox('Erro ao enviar para o Google Sheets.', true);
-      }
-    } catch (err) {
-      console.error(err);
-      showMessageBox('Erro ao conectar com o servidor. Tente novamente.', true);
-    } finally {
-      setEditingData(null); // Limpa os dados de edição após a operação
-    }
+const handleSalvar = async (dados) => {
+  const envio = {
+    ...editingData,
+    ...dados,
+    tipo,
+    data: new Date().toLocaleString('pt-BR'),
   };
+
+  try {
+    // MUDANÇA AQUI: Use a URL da sua API no Render
+    const API_RENDER_URL = 'https://api-orcamento-n49u.onrender.com/api/orcamentos'; // <--- URL DO RENDER
+
+    const res = await fetch(API_RENDER_URL, { // Envia os dados do orçamento para a API Render
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(envio),
+    });
+
+    const result = await res.json(); // A sua API Firebase retorna o objeto salvo ou um erro
+
+    if (res.ok) { // Verifica se a resposta HTTP foi de sucesso (status 2xx)
+      showMessageBox('Orçamento salvo com sucesso na API e Firestore.');
+      // A função fetchHistorico já está a usar a URL da sua API Render, então ela buscará os dados atualizados
+      const response = await fetch('https://seu-nome-da-api.onrender.com/api/orcamentos'); // <--- USE A MESMA URL AQUI
+      const data = await response.json();
+      setHistorico(data);
+    } else {
+      // Se a API retornar um erro (ex: 400 Bad Request, 500 Internal Server Error)
+      const errorData = result.msg || 'Erro desconhecido ao salvar orçamento.';
+      showMessageBox(`Erro ao salvar orçamento: ${errorData}`, true);
+    }
+  } catch (err) {
+    console.error('Erro ao conectar com a API ou processar resposta:', err);
+    showMessageBox('Erro ao conectar com o servidor da API. Tente novamente.', true);
+  } finally {
+    setEditingData(null);
+  }
+};
 
   /**
    * Exporta todos os orçamentos do histórico para um arquivo Excel (.xlsx).
