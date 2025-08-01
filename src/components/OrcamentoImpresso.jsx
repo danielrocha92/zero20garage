@@ -1,33 +1,24 @@
 // src/components/OrcamentoImpresso.jsx
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react'; // useEffect não é mais necessário aqui
 import { useReactToPrint } from 'react-to-print';
-import './OrcamentoImpresso.css'; // CSS para o layout de impressão
-import backgroundImage from '../assets/images/background.jpg'; // Mantido conforme solicitação do usuário
+import './OrcamentoImpresso.css';
+import backgroundImage from '../assets/images/background.jpg';
 
 const OrcamentoImpresso = ({ orcamento, onClose }) => {
-  const componentRef = useRef();
+  const componentRef = useRef(null); // É uma boa prática inicializar com null
 
-  // Estilo para a imagem de fundo no lugar do logo
-  // Se a imagem 'logo.png' estiver na pasta 'public', referencie-a como '/logo.png'
-  // OU, se for importada de assets, use a variável importada diretamente.
-  // Como o usuário pediu para manter o import, usaremos backgroundImage diretamente.
   const logoBackgroundStyle = {
-    backgroundImage: `url(${backgroundImage})`, // Usando a variável importada
-    backgroundSize: 'contain', // Ajusta a imagem para caber dentro do elemento, mantendo a proporção
-    backgroundPosition: 'center', // Centraliza a imagem
-    backgroundRepeat: 'no-repeat', // Evita a repetição
-    width: '100px', // Defina a largura do "logo"
-    height: '50px', // Defina a altura do "logo"
-    // Adicione outras propriedades de estilo conforme necessário para o logo
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundSize: 'contain',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    width: '100px',
+    height: '50px',
   };
 
-  // Função para lidar com a impressão
   const handlePrint = useReactToPrint({
-    content: () => {
-      console.log("handlePrint: Conteúdo do ref NO MOMENTO DA IMPRESSÃO:", componentRef.current);
-      return componentRef.current;
-    },
-    documentTitle: `Orçamento_OS_${orcamento.ordemServico || 'SemOS'}_${orcamento.cliente || 'SemCliente'}`,
+    content: () => componentRef.current,
+    documentTitle: `Orçamento_OS_${orcamento?.ordemServico || 'SemOS'}_${orcamento?.cliente || 'SemCliente'}`,
     pageStyle: `
       @page {
         size: A4;
@@ -37,10 +28,8 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
       }
-      /* Estilo para o logo na impressão: DEVE usar um caminho público ou a URL resolvida do asset */
-      /* Usando a URL resolvida de 'backgroundImage' para a impressão */
       .logo-impresso-div {
-        background-image: url(${backgroundImage}) !important; /* Usando a variável importada */
+        background-image: url(${backgroundImage}) !important;
         background-size: contain !important;
         background-position: center !important;
         background-repeat: no-repeat !important;
@@ -48,51 +37,34 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
         height: 50px !important;
       }
     `,
-    // Callback para ser executado após a renderização do conteúdo para impressão
     onAfterPrint: () => {
       console.log("Impressão finalizada ou cancelada.");
-      // Opcional: Você pode adicionar lógica aqui após a impressão, como fechar o modal.
     }
   });
-
-  // Efeito para acionar a impressão automaticamente ao carregar (opcional)
-  // Removido o auto-print direto para evitar problemas de "nothing to print"
-  // O botão "Imprimir Orçamento" agora é a única forma de iniciar a impressão.
-  useEffect(() => {
-    // Não há chamada automática de handlePrint() aqui.
-    // A impressão será acionada apenas pelo clique do botão.
-    console.log("OrcamentoImpresso montado. Ref atual NO MOUNT:", componentRef.current);
-  }, []);
 
   if (!orcamento) {
     return <div className="orcamento-impresso-container">Nenhum orçamento selecionado para visualização.</div>;
   }
 
-  // Nova função para lidar com o clique do botão de impressão
-  const handlePrintButtonClick = () => {
-    console.log("Botão Imprimir clicado. Ref antes da verificação NO CLICK:", componentRef.current);
-    // Verifica se o componente de impressão está disponível antes de tentar imprimir
-    if (componentRef.current) {
-      console.log("Componente de impressão está pronto. Acionando impressão com atraso...");
-      // Adiciona um pequeno atraso para garantir que o DOM esteja completamente estável
-      setTimeout(() => {
-        console.log("Dentro do setTimeout. Ref antes de chamar handlePrint:", componentRef.current);
-        handlePrint();
-      }, 500); // Atraso de 500ms (ajustado para ser um pouco maior)
-    } else {
-      console.warn("Componente de impressão não está pronto. Tente novamente.");
-      // Opcional: Exibir uma mensagem amigável para o usuário
-      // showMessageBox("Conteúdo para impressão não está pronto. Tente novamente.", true);
-    }
-  };
+// Função de clique do botão corrigida e mais segura
+const handlePrintButtonClick = () => {
+  // 1. Verifica se a referência ao componente de impressão está válida
+  if (componentRef.current) {
+    // 2. Se estiver válida, chama a função de impressão
+    handlePrint();
+  } else {
+    // 3. Se não, informa o erro e, opcionalmente, o usuário
+    console.error("A referência ao conteúdo de impressão não foi encontrada. Impressão abortada.");
+    alert("Ocorreu um erro ao preparar a impressão. Por favor, tente novamente.");
+  }
+};
 
   return (
     <div className="orcamento-impresso-container">
+      {/* O conteúdo para impressão */}
       <div className="orcamento-impresso-content" ref={componentRef}>
         <div className="header-impresso">
           <h1>ORÇAMENTO - {orcamento.tipo === 'motor' ? 'MOTOR COMPLETO/PARCIAL' : 'CABEÇOTE'}</h1>
-          {/* Substituindo a tag <img> por uma <div> com o estilo de fundo */}
-          {/* Certifique-se de que o arquivo 'logo.png' está na pasta 'public' do seu projeto */}
           <div className="logo-impresso-div" style={logoBackgroundStyle} aria-label="Logo Zero20Garage"></div>
         </div>
 
@@ -164,8 +136,8 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
         </section>
       </div>
 
+      {/* Botões de ação fora da área de impressão */}
       <div className="print-buttons">
-        {/* Chama a nova função handlePrintButtonClick */}
         <button onClick={handlePrintButtonClick} className="print-btn">Imprimir Orçamento</button>
         <button onClick={onClose} className="back-btn">Voltar ao Painel</button>
       </div>

@@ -1,5 +1,4 @@
-// src/components/OrcamentoCabecote.jsx
-import React, { useState, useEffect } from 'react'; // Corrigido: '=>' para 'from'
+import React, { useState, useEffect } from 'react';
 import './OrcamentoForms.css'; // Importe o CSS para este componente
 
 // Lista de itens que devem ter apenas um campo de texto para especificação e não devem ter o botão "+ Detalhe"
@@ -101,27 +100,27 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
           let subItensAtualizados = item.subItens ? item.subItens.map(sub => {
             let subValue = sub.initialValue || (sub.type === "checkbox" ? false : '');
             if (selecionado && editedItem) {
-                const regex = new RegExp(`${sub.label}:\\s*([^;)]+)`);
-                const match = editedItem.match(regex);
-                if (match && match[1]) {
-                    if (sub.type === "checkbox") {
-                        subValue = true;
-                    } else {
-                        subValue = match[1].trim();
-                    }
-                } else if (sub.type === "checkbox" && editedItem.includes(sub.label)) {
-                    subValue = true;
+              const regex = new RegExp(`${sub.label}:\\s*([^;)]+)`);
+              const match = editedItem.match(regex);
+              if (match && match[1]) {
+                if (sub.type === "checkbox") {
+                  subValue = true;
+                } else {
+                  subValue = match[1].trim();
                 }
+              } else if (sub.type === "checkbox" && editedItem.includes(sub.label)) {
+                subValue = true;
+              }
             }
             return { ...sub, value: subValue };
           }) : [];
 
           if (!item.subItens && selecionado) {
-              const textOnlyRegex = new RegExp(`^${item.nome}\\s*:\\s*(.+)$`);
-              const textOnlyMatch = editedItem.match(textOnlyRegex);
-              if (textOnlyMatch && textOnlyMatch[1]) {
-                  subItensAtualizados = [{ label: "Especificação/Medida", type: "text", value: textOnlyMatch[1].trim() }];
-              }
+            const textOnlyRegex = new RegExp(`^${item.nome}\\s*:\\s*(.+)$`);
+            const textOnlyMatch = editedItem.match(textOnlyRegex);
+            if (textOnlyMatch && textOnlyMatch[1]) {
+              subItensAtualizados = [{ label: "Especificação/Medida", type: "text", value: textOnlyMatch[1].trim() }];
+            }
           }
 
           return {
@@ -139,17 +138,17 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
           let subItensAtualizados = servico.subItens ? servico.subItens.map(sub => {
             let subValue = sub.initialValue || (sub.type === "checkbox" ? false : '');
             if (selecionado && editedServico) {
-                const regex = new RegExp(`${sub.label}\\s*[:]?\\s*([^;)]+)?`);
-                const match = editedServico.match(regex);
-                if (match) {
-                    if (sub.type === "checkbox") {
-                        subValue = true;
-                    } else if (match[1]) {
-                        subValue = match[1].trim();
-                    }
-                } else if (sub.type === "checkbox" && editedServico.includes(sub.label)) {
-                    subValue = true;
+              const regex = new RegExp(`${sub.label}\\s*[:]?\\s*([^;)]+)?`);
+              const match = editedServico.match(regex);
+              if (match) {
+                if (sub.type === "checkbox") {
+                  subValue = true;
+                } else if (match[1]) {
+                  subValue = match[1].trim();
                 }
+              } else if (sub.type === "checkbox" && editedServico.includes(sub.label)) {
+                subValue = true;
+              }
             }
             return { ...sub, value: subValue };
           }) : [];
@@ -235,10 +234,10 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
         let nomeCompleto = peca.nome;
         // Se houver quantidade e medida, adiciona
         if (peca.temQuantidade && peca.quantidade > 0) {
-            nomeCompleto += `: Qtd: ${peca.quantidade}`;
+          nomeCompleto += `: Qtd: ${peca.quantidade}`;
         }
         if (peca.temQuantidade && peca.medida > 0) {
-            nomeCompleto += ` Medida: ${peca.medida}`;
+          nomeCompleto += ` Medida: ${peca.medida}`;
         }
         // Adiciona sub-itens formatados
         const subItensFormatados = peca.subItens
@@ -264,10 +263,10 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
         let nomeCompleto = servico.nome;
         // Se houver quantidade e medida, adiciona (embora na imagem não apareça para serviços)
         if (servico.temQuantidade && servico.quantidade > 0) {
-            nomeCompleto += `: Qtd: ${servico.quantidade}`;
+          nomeCompleto += `: Qtd: ${servico.quantidade}`;
         }
         if (servico.temQuantidade && servico.medida > 0) {
-            nomeCompleto += ` Medida: ${servico.medida}`;
+          nomeCompleto += ` Medida: ${servico.medida}`;
         }
         // Adiciona sub-itens formatados
         const subItensFormatados = servico.subItens
@@ -375,6 +374,8 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
                     <label className="custom-checkbox">
                       <input
                         type="checkbox"
+                        id={`peca-${index}-${peca.nome.replace(/\s+/g, '')}`} // Adicionado id
+                        name={`peca-${peca.nome.replace(/\s+/g, '')}`} // Adicionado name
                         checked={peca.selecionado}
                         onChange={() => handlePecaChange(index, 'selecionado', !peca.selecionado)}
                       />
@@ -390,6 +391,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
                           <input
                             type="number"
                             id={`peca-${index}-quantidade`}
+                            name={`peca-${index}-quantidade`} // Adicionado name
                             value={peca.quantidade}
                             onChange={(e) => handlePecaChange(index, 'quantidade', parseInt(e.target.value) || 0)}
                             min="0"
@@ -401,6 +403,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
                           <input
                             type="number"
                             id={`peca-${index}-medida`}
+                            name={`peca-${index}-medida`} // Adicionado name
                             placeholder="Medidas"
                             value={peca.medida}
                             onChange={(e) => handlePecaChange(index, 'medida', parseFloat(e.target.value) || 0)}
@@ -416,10 +419,14 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
                       <div className="sub-items-container">
                         {peca.subItens.map((sub, sIdx) => (
                           <div key={sIdx} className="sub-item-input-group">
-                            <label className="sub-item-label">{sub.label}:</label>
+                            <label className="sub-item-label" htmlFor={`peca-${index}-sub-${sIdx}-${sub.type}`}>
+                              {sub.label}:
+                            </label>
                             {sub.type === "checkbox" ? (
                               <input
                                 type="checkbox"
+                                id={`peca-${index}-sub-${sIdx}-${sub.type}`} // Adicionado id
+                                name={`peca-${index}-sub-${sIdx}-${sub.type}`} // Adicionado name
                                 checked={sub.value}
                                 onChange={(e) => handleSubItemCheckboxChange('pecas', index, sIdx, e.target.checked)}
                                 className="small-input"
@@ -427,6 +434,8 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
                             ) : (
                               <input
                                 type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
+                                id={`peca-${index}-sub-${sIdx}-${sub.type}`} // Adicionado id
+                                name={`peca-${index}-sub-${sIdx}-${sub.type}`} // Adicionado name
                                 placeholder={
                                   sub.type === "quantity" ? `Qtd` :
                                     sub.type === "measure" ? `Medida` :
@@ -457,6 +466,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             <span className="label">Valor total de Peças:</span>
             <input
               type="number"
+              id="totalPecasManual" // Adicionado id
               className="value-display input-total"
               name="totalPecasManual"
               value={formData.totalPecasManual}
@@ -477,6 +487,8 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
                     <label className="custom-checkbox">
                       <input
                         type="checkbox"
+                        id={`servico-${index}-${servico.nome.replace(/\s+/g, '')}`} // Adicionado id
+                        name={`servico-${servico.nome.replace(/\s+/g, '')}`} // Adicionado name
                         checked={servico.selecionado}
                         onChange={() => handleServicoChange(index, 'selecionado', !servico.selecionado)}
                       />
@@ -492,6 +504,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
                           <input
                             type="number"
                             id={`servico-${index}-quantidade`}
+                            name={`servico-${index}-quantidade`} // Adicionado name
                             value={servico.quantidade}
                             onChange={(e) => handleServicoChange(index, 'quantidade', parseInt(e.target.value) || 0)}
                             min="0"
@@ -503,6 +516,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
                           <input
                             type="number"
                             id={`servico-${index}-medida`}
+                            name={`servico-${index}-medida`} // Adicionado name
                             placeholder="Medidas"
                             value={servico.medida}
                             onChange={(e) => handleServicoChange(index, 'medida', parseFloat(e.target.value) || 0)}
@@ -518,10 +532,14 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
                       <div className="sub-items-container">
                         {servico.subItens.map((sub, sIdx) => (
                           <div key={sIdx} className="sub-item-input-group">
-                            <label className="sub-item-label">{sub.label}:</label>
+                            <label className="sub-item-label" htmlFor={`servico-${index}-sub-${sIdx}-${sub.type}`}>
+                              {sub.label}:
+                            </label>
                             {sub.type === "checkbox" ? (
                               <input
                                 type="checkbox"
+                                id={`servico-${index}-sub-${sIdx}-${sub.type}`} // Adicionado id
+                                name={`servico-${index}-sub-${sIdx}-${sub.type}`} // Adicionado name
                                 checked={sub.value}
                                 onChange={(e) => handleSubItemCheckboxChange('servicos', index, sIdx, e.target.checked)}
                                 className="small-input"
@@ -529,6 +547,8 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
                             ) : (
                               <input
                                 type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
+                                id={`servico-${index}-sub-${sIdx}-${sub.type}`} // Adicionado id
+                                name={`servico-${index}-sub-${sIdx}-${sub.type}`} // Adicionado name
                                 placeholder={
                                   sub.type === "quantity" ? `Qtd` :
                                     sub.type === "measure" ? `Medida` :
@@ -557,6 +577,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             <span className="label">Valor total de Serviços:</span>
             <input
               type="number"
+              id="totalServicosManual" // Adicionado id
               className="value-display input-total"
               name="totalServicosManual"
               value={formData.totalServicosManual}
@@ -572,6 +593,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             <span className="label">Valor total de Mão de Obra Mecânica:</span>
             <input
               type="number"
+              id="totalMaoDeObraManual" // Adicionado id
               className="value-display input-total"
               name="totalMaoDeObraManual"
               value={formData.totalMaoDeObraManual}
@@ -583,6 +605,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             <span className="label">TOTAL GERAL:</span>
             <input
               type="number"
+              id="totalGeralManual" // Adicionado id
               className="value-display input-total-geral"
               name="totalGeralManual"
               value={formData.totalGeralManual}

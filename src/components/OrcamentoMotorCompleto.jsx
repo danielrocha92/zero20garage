@@ -1,4 +1,3 @@
-// src/components/OrcamentoMotorCompleto.jsx
 import React, { useState, useEffect } from 'react';
 import './OrcamentoForms.css'; // Importe o CSS para este componente
 
@@ -175,12 +174,12 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
 
           // Para itens sem subItens mas que foram marcados com 'X' ou alguma especificação
           if (!item.subItens && selecionado && itemsWithSingleTextInput.includes(item.nome)) {
-              const textOnlyRegex = new RegExp(`^${item.nome}\\s*:\\s*(.+)$`);
-              const textOnlyMatch = editedItemString.match(textOnlyRegex);
-              if (textOnlyMatch && textOnlyMatch[1]) {
-                  // Se o item tem um valor de texto extra (ex: "Anel: 0,50"), armazene em um subItem
-                  subItensAtualizados = [{ label: "Especificação/Medida", type: "text", value: textOnlyMatch[1].trim() }];
-              }
+            const textOnlyRegex = new RegExp(`^${item.nome}\\s*:\\s*(.+)$`);
+            const textOnlyMatch = editedItemString.match(textOnlyRegex);
+            if (textOnlyMatch && textOnlyMatch[1]) {
+              // Se o item tem um valor de texto extra (ex: "Anel: 0,50"), armazene em um subItem
+              subItensAtualizados = [{ label: "Especificação/Medida", type: "text", value: textOnlyMatch[1].trim() }];
+            }
           }
 
           return {
@@ -201,15 +200,15 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
           let subItensAtualizados = servico.subItens ? servico.subItens.map(sub => {
             let subValue = sub.initialValue || (sub.type === "checkbox" ? false : '');
             if (selecionado && editedServicoString) {
-                const regex = new RegExp(`${sub.label}(?::\\s*([^;)]+))?`);
-                const match = editedServicoString.match(regex);
-                if (match) {
-                    if (sub.type === "checkbox") {
-                        subValue = true;
-                    } else if (match[1]) {
-                        subValue = match[1].trim();
-                    }
+              const regex = new RegExp(`${sub.label}(?::\\s*([^;)]+))?`);
+              const match = editedServicoString.match(regex);
+              if (match) {
+                if (sub.type === "checkbox") {
+                  subValue = true;
+                } else if (match[1]) {
+                  subValue = match[1].trim();
                 }
+              }
             }
             return { ...sub, value: subValue };
           }) : [];
@@ -315,10 +314,10 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
         let nomeCompleto = peca.nome;
         // Se houver quantidade e medida, adiciona
         if (peca.temQuantidade && peca.quantidade > 0) {
-            nomeCompleto += `: Qtd: ${peca.quantidade}`;
+          nomeCompleto += `: Qtd: ${peca.quantidade}`;
         }
         if (peca.temQuantidade && peca.medida > 0) {
-            nomeCompleto += ` Medida: ${peca.medida}`;
+          nomeCompleto += ` Medida: ${peca.medida}`;
         }
         // Adiciona sub-itens formatados
         const subItensFormatados = peca.subItens
@@ -344,10 +343,10 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
         let nomeCompleto = servico.nome;
         // Se houver quantidade e medida, adiciona (embora na imagem não apareça para serviços)
         if (servico.temQuantidade && servico.quantidade > 0) {
-            nomeCompleto += `: Qtd: ${servico.quantidade}`;
+          nomeCompleto += `: Qtd: ${servico.quantidade}`;
         }
         if (servico.temQuantidade && servico.medida > 0) {
-            nomeCompleto += ` Medida: ${servico.medida}`;
+          nomeCompleto += ` Medida: ${servico.medida}`;
         }
         // Adiciona sub-itens formatados
         const subItensFormatados = servico.subItens
@@ -375,7 +374,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
       data: formData.data,
       ordemServico: formData.ordemServico,
       pecasSelecionadas: pecasSelecionadasFormatadas,
-      servicosSelecionados: servicosSelecionadosFormatadas,
+      servicosSelecionados: servicosSelecionadosFormatadas, // Corrigido o nome da variável aqui
       valorTotalPecas: formData.totalPecasManual,
       valorTotalServicos: formData.totalServicosManual,
       totalMaoDeObra: formData.totalMaoDeObraManual,
@@ -455,6 +454,8 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
                     <label className="custom-checkbox">
                       <input
                         type="checkbox"
+                        id={`peca-${index}-${peca.nome.replace(/\s+/g, '')}`} // Adicionado id
+                        name={`peca-${index}-${peca.nome.replace(/\s+/g, '')}`} // Adicionado name
                         checked={peca.selecionado}
                         onChange={() => handlePecaChange(index, 'selecionado', !peca.selecionado)}
                       />
@@ -470,6 +471,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
                           <input
                             type="number"
                             id={`peca-${index}-quantidade`}
+                            name={`peca-${index}-quantidade`} // Adicionado name
                             value={peca.quantidade}
                             onChange={(e) => handlePecaChange(index, 'quantidade', parseInt(e.target.value) || 0)}
                             min="0"
@@ -481,6 +483,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
                           <input
                             type="number"
                             id={`peca-${index}-medida`}
+                            name={`peca-${index}-medida`} // Adicionado name
                             placeholder="Medidas"
                             value={peca.medida}
                             onChange={(e) => handlePecaChange(index, 'medida', parseFloat(e.target.value) || 0)}
@@ -496,10 +499,14 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
                       <div className="sub-items-container">
                         {peca.subItens.map((sub, sIdx) => (
                           <div key={sIdx} className="sub-item-input-group">
-                            <label className="sub-item-label">{sub.label}:</label>
+                            <label className="sub-item-label" htmlFor={`peca-${index}-sub-${sIdx}-${sub.type}`}>
+                              {sub.label}:
+                            </label>
                             {sub.type === "checkbox" ? (
                               <input
                                 type="checkbox"
+                                id={`peca-${index}-sub-${sIdx}-${sub.type}`} // Adicionado id
+                                name={`peca-${index}-sub-${sIdx}-${sub.type}`} // Adicionado name
                                 checked={sub.value}
                                 onChange={(e) => handleSubItemCheckboxChange('pecas', index, sIdx, e.target.checked)}
                                 className="small-input"
@@ -507,6 +514,8 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
                             ) : (
                               <input
                                 type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
+                                id={`peca-${index}-sub-${sIdx}-${sub.type}`} // Adicionado id
+                                name={`peca-${index}-sub-${sIdx}-${sub.type}`} // Adicionado name
                                 placeholder={
                                   sub.type === "quantity" ? `Qtd` :
                                     sub.type === "measure" ? `Medida` :
@@ -518,13 +527,11 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
                                 className="small-input"
                               />
                             )}
-                            {/* O botão "X" só aparece se não for um item com input de texto único pré-definido */}
                             {!itemsWithSingleTextInput.includes(peca.nome) && (
                               <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('pecas', index, sIdx)}>X</button>
                             )}
                           </div>
                         ))}
-                        {/* O botão "+ Detalhe" só aparece se o item não estiver na lista de itens com input de texto único */}
                         {peca.subItens.length > 0 && !itemsWithSingleTextInput.includes(peca.nome) && (
                           <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('pecas', index)}>+ Detalhe</button>
                         )}
@@ -539,6 +546,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
             <span className="label">Valor total de Peças:</span>
             <input
               type="number"
+              id="totalPecasManual" // Adicionado id
               className="value-display input-total"
               name="totalPecasManual"
               value={formData.totalPecasManual}
@@ -559,6 +567,8 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
                     <label className="custom-checkbox">
                       <input
                         type="checkbox"
+                        id={`servico-${index}-${servico.nome.replace(/\s+/g, '')}`} // Adicionado id
+                        name={`servico-${index}-${servico.nome.replace(/\s+/g, '')}`} // Adicionado name
                         checked={servico.selecionado}
                         onChange={() => handleServicoChange(index, 'selecionado', !servico.selecionado)}
                       />
@@ -574,6 +584,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
                           <input
                             type="number"
                             id={`servico-${index}-quantidade`}
+                            name={`servico-${index}-quantidade`} // Adicionado name
                             value={servico.quantidade}
                             onChange={(e) => handleServicoChange(index, 'quantidade', parseInt(e.target.value) || 0)}
                             min="0"
@@ -585,6 +596,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
                           <input
                             type="number"
                             id={`servico-${index}-medida`}
+                            name={`servico-${index}-medida`} // Adicionado name
                             placeholder="Medidas"
                             value={servico.medida}
                             onChange={(e) => handleServicoChange(index, 'medida', parseFloat(e.target.value) || 0)}
@@ -600,10 +612,14 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
                       <div className="sub-items-container">
                         {servico.subItens.map((sub, sIdx) => (
                           <div key={sIdx} className="sub-item-input-group">
-                            <label className="sub-item-label">{sub.label}:</label>
+                            <label className="sub-item-label" htmlFor={`servico-${index}-sub-${sIdx}-${sub.type}`}>
+                              {sub.label}:
+                            </label>
                             {sub.type === "checkbox" ? (
                               <input
                                 type="checkbox"
+                                id={`servico-${index}-sub-${sIdx}-${sub.type}`} // Adicionado id
+                                name={`servico-${index}-sub-${sIdx}-${sub.type}`} // Adicionado name
                                 checked={sub.value}
                                 onChange={(e) => handleSubItemCheckboxChange('servicos', index, sIdx, e.target.checked)}
                                 className="small-input"
@@ -611,6 +627,8 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
                             ) : (
                               <input
                                 type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
+                                id={`servico-${index}-sub-${sIdx}-${sub.type}`} // Adicionado id
+                                name={`servico-${index}-sub-${sIdx}-${sub.type}`} // Adicionado name
                                 placeholder={
                                   sub.type === "quantity" ? `Qtd` :
                                     sub.type === "measure" ? `Medida` :
@@ -639,6 +657,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
             <span className="label">Valor total de Serviços:</span>
             <input
               type="number"
+              id="totalServicosManual" // Adicionado id
               className="value-display input-total"
               name="totalServicosManual"
               value={formData.totalServicosManual}
@@ -654,6 +673,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
             <span className="label">Valor total de Mão de Obra Mecânica:</span>
             <input
               type="number"
+              id="totalMaoDeObraManual" // Adicionado id
               className="value-display input-total"
               name="totalMaoDeObraManual"
               value={formData.totalMaoDeObraManual}
@@ -665,6 +685,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
             <span className="label">TOTAL GERAL:</span>
             <input
               type="number"
+              id="totalGeralManual" // Adicionado id
               className="value-display input-total-geral"
               name="totalGeralManual"
               value={formData.totalGeralManual}
