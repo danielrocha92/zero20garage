@@ -4,16 +4,14 @@ import OrcamentoCabecote from './OrcamentoCabecote';
 import OrcamentoMotorCompleto from './OrcamentoMotorCompleto';
 import HistoricoOrcamentos from './HistoricoOrcamentos';
 import OrcamentoImpresso from './OrcamentoImpresso';
-import * as XLSX from 'xlsx';
+import * as XLSX from 'xlsx'; // Corrigido: '=>' para 'as'
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import { useNavigate } from 'react-router-dom';
 import './PainelOrcamentos.css';
 
 // URL BASE da sua API Node.js/Firebase no Render
-// ATENÇÃO: SUBSTITUA ESTA URL PELA URL REAL DO SEU DEPLOY NO RENDER!
-// DEVE SER APENAS O DOMÍNIO, SEM O ENDPOINT /api/orcamentos
-const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com'; // <--- CORRIGIDO AQUI!
+const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
 
 /**
  * Componente PainelOrcamentos
@@ -26,27 +24,42 @@ const PainelOrcamentos = () => {
   const [historico, setHistorico] = useState([]);
   const [message, setMessage] = useState('');
   const [showMessage, setShowMessage] = useState(false);
+  const [isErrorMessage, setIsErrorMessage] = useState(false);
+
   const [editingData, setEditingData] = useState(null);
   const [selectedBudgetForView, setSelectedBudgetForView] = useState(null);
 
-  const showMessageBox = (msg, isError = false) => {
-    setMessage(msg);
-    setShowMessage(true);
-  };
-
-  const hideMessageBox = () => {
+  /**
+   * Oculta a caixa de mensagem.
+   * Envolvido em useCallback para estabilizar a função.
+   */
+  const hideMessageBox = useCallback(() => {
     setShowMessage(false);
     setMessage('');
-  };
+    setIsErrorMessage(false);
+  }, [setShowMessage, setMessage, setIsErrorMessage]); // Dependências: setters de estado são estáveis
+
+  /**
+   * Exibe uma caixa de mensagem para o usuário.
+   * Envolvido em useCallback para estabilizar a função.
+   * @param {string} msg - A mensagem a ser exibida.
+   * @param {boolean} [isError=false] - Indica se a mensagem é um erro.
+   */
+  const showMessageBox = useCallback((msg, isError = false) => {
+    setMessage(msg);
+    setIsErrorMessage(isError);
+    setShowMessage(true);
+    setTimeout(() => {
+      hideMessageBox();
+    }, 5000);
+  }, [setMessage, setIsErrorMessage, setShowMessage, hideMessageBox]); // <--- hideMessageBox adicionado aqui
 
   /**
    * Busca o histórico de orçamentos do backend.
    * Atualiza o estado 'historico' com os dados recebidos.
-   * Envolvido em useCallback para evitar re-criação desnecessária e resolver aviso do ESLint.
    */
   const fetchHistorico = useCallback(async () => {
     try {
-      // Agora a URL será https://api-orcamento-n49u.onrender.com/api/orcamentos
       const response = await fetch(`${API_BASE_URL}/api/orcamentos`);
       const data = await response.json();
       setHistorico(data);
@@ -54,7 +67,7 @@ const PainelOrcamentos = () => {
       console.error('Erro ao buscar histórico no PainelOrcamentos:', error);
       showMessageBox('Erro ao carregar histórico de orçamentos.', true);
     }
-  }, [setHistorico]);
+  }, [setHistorico, showMessageBox]);
 
   // Efeito para buscar o histórico de orçamentos quando o componente é montado.
   useEffect(() => {
@@ -73,11 +86,11 @@ const PainelOrcamentos = () => {
       data: new Date().toLocaleString('pt-BR'),
     };
 
-    let url = `${API_BASE_URL}/api/orcamentos`; // <--- CORRIGIDO AQUI!
+    let url = `${API_BASE_URL}/api/orcamentos`;
     let method = 'POST';
 
     if (editingData && editingData.id) {
-      url = `${API_BASE_URL}/api/orcamentos/${editingData.id}`; // <--- CORRIGIDO AQUI!
+      url = `${API_BASE_URL}/api/orcamentos/${editingData.id}`;
       method = 'PUT';
       envio.id = editingData.id;
     }
@@ -158,7 +171,6 @@ const PainelOrcamentos = () => {
     console.log('Removendo authToken...');
     localStorage.removeItem('authToken');
     console.log('authToken removido. Novo valor:', localStorage.getItem('authToken'));
-    console.log('Navegando para /orcamento...');
     navigate('/orcamento');
   };
 
@@ -178,12 +190,6 @@ const PainelOrcamentos = () => {
 
   return (
     <div className='painel-orcamentos-container'>
-      {showMessage && (
-        <div className="message-box">
-          <span>{message}</span>
-          <button onClick={hideMessageBox}>&times;</button>
-        </div>
-      )}
       {selectedBudgetForView ? (
         <OrcamentoImpresso orcamento={selectedBudgetForView} onClose={handleCloseView} />
       ) : (
@@ -209,9 +215,25 @@ const PainelOrcamentos = () => {
 
           <main className="orcamento-form-wrapper">
             {tipo === 'motor' ? (
-              <OrcamentoMotorCompleto onSubmit={handleSalvar} editingData={editingData} />
+              <OrcamentoMotorCompleto
+                onSubmit={handleSalvar}
+                editingData={editingData}
+                showMessageBox={showMessageBox}
+                message={message}
+                showMessage={showMessage}
+                hideMessageBox={hideMessageBox}
+                isErrorMessage={isErrorMessage}
+              />
             ) : (
-              <OrcamentoCabecote onSubmit={handleSalvar} editingData={editingData} />
+              <OrcamentoCabecote
+                onSubmit={handleSalvar}
+                editingData={editingData}
+                showMessageBox={showMessageBox}
+                message={message}
+                showMessage={showMessage}
+                hideMessageBox={hideMessageBox}
+                isErrorMessage={isErrorMessage}
+              />
             )}
             <div className="historico-buttons-group">
               <button onClick={exportarExcel} className="action-btn">
@@ -224,8 +246,10 @@ const PainelOrcamentos = () => {
           </main>
 
           <HistoricoOrcamentos
+            historico={historico}
             onEditarOrcamento={handleEditarOrcamento}
             onViewBudget={handleViewBudget}
+            onDeleteSuccess={fetchHistorico}
           />
         </>
       )}

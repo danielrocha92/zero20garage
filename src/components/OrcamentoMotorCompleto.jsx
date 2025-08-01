@@ -1,6 +1,6 @@
+// src/components/OrcamentoMotorCompleto.jsx
 import React, { useState, useEffect } from 'react';
-import './OrcamentoForms.css'; // Certifique-se de que o CSS está acessível
-import backgroundImage from '../assets/images/background.jpg';
+import './OrcamentoForms.css'; // Importe o CSS para este componente
 
 // Lista de itens que devem ter apenas um campo de texto para especificação e não devem ter o botão "+ Detalhe"
 const itemsWithSingleTextInput = [
@@ -15,114 +15,104 @@ const itemsWithSingleTextInput = [
   "Válvulas escape",
 ];
 
-// Os dados de itens e serviços completos para o motor
+// Os dados de itens e serviços completos para o motor (ajustados para o modelo da imagem)
 const itensMotorCompletoData = [
-  // ITENS COM CHECKBOX + INPUT DE TEXTO ESPECÍFICO (conforme sua lista), ordenados alfabeticamente
-  { nome: "Anel", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "0,50" }] }, // Adicionado initialValue
-  { nome: "Anti Chamas", temQuantidade: false }, // Apenas checkbox
-  { nome: "Arruela encosto", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }] },
-  { nome: "Bobina", temQuantidade: false }, // Apenas checkbox
-  { nome: "Bomba d’água", temQuantidade: false }, // Apenas checkbox
-  { nome: "Bomba de óleo", temQuantidade: false }, // Apenas checkbox
-  { nome: "Bronzina de biela", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "0,75" }] }, // Adicionado initialValue
-  { nome: "Bronzina de mancal", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "0,50" }] }, // Adicionado initialValue
-  { nome: "Cabo de vela", temQuantidade: false }, // Apenas checkbox
-  { nome: "Cebolinha de óleo", temQuantidade: false }, // Apenas checkbox
-  {
-    nome: "Comando de Válvula",
-    temQuantidade: false, // Alterado para false, pois não há "Qtd/Medidas" ao lado do checkbox na imagem, apenas sub-itens
-    subItens: [
-      { label: "Admissão", type: "checkbox" }, // Alterado para checkbox
-      { label: "Escape", type: "checkbox" } // Alterado para checkbox
-    ]
-  },
+  { nome: "Pistão", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "" }] },
+  { nome: "Anel", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "" }] },
+  { nome: "Bronzina de biela", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "" }] },
+  { nome: "Bronzina de mancal", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "" }] },
+  { nome: "Arruela encosto", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "" }] },
+  { nome: "Bomba de óleo", temQuantidade: false },
+  { nome: "Bomba d’água", temQuantidade: false },
+  { nome: "Tubo d’água", temQuantidade: false },
+  { nome: "Filtro de óleo", temQuantidade: false },
+  { nome: "Filtro de ar", temQuantidade: false },
+  { nome: "Filtro de combustível", temQuantidade: false },
+  { nome: "Litros de óleo", temQuantidade: false, subItens: [{ label: "Quantidade e Tipo", type: "text", initialValue: "" }] },
+  { nome: "Litros de aditivo", temQuantidade: false, subItens: [{ label: "Quantidade e Tipo", type: "text", initialValue: "" }] },
   {
     nome: "Correias",
-    temQuantidade: false, // Alterado para false
+    temQuantidade: false,
     subItens: [
-      { label: "Dent kit", type: "checkbox" }, // Alterado para checkbox
-      { label: "Capa", type: "checkbox" }, // Alterado para checkbox
-      { label: "Acessórios kit", type: "checkbox" }, // Alterado para checkbox
-      { label: "Corrente kit", type: "checkbox" } // Alterado para checkbox
+      { label: "Dent kit", type: "checkbox" },
+      { label: "Capa", type: "checkbox" },
+      { label: "Acessórios kit", type: "checkbox" },
+      { label: "Corrente kit", type: "checkbox" }
     ]
   },
-  { nome: "Desengripante e Limpa contato", temQuantidade: false }, // Apenas checkbox
-  { nome: "Embreagem", temQuantidade: false }, // Apenas checkbox
-  { nome: "Engrenagens Radiador", temQuantidade: false }, // Apenas checkbox
-  { nome: "Engrenagem virab.", temQuantidade: false }, // Apenas checkbox
-  { nome: "Filtro de ar", temQuantidade: false }, // Apenas checkbox
-  { nome: "Filtro de combustível", temQuantidade: false }, // Apenas checkbox
-  { nome: "Filtro de óleo", temQuantidade: false }, // Apenas checkbox
-  { nome: "Litros de aditivo", temQuantidade: false, subItens: [{ label: "Quantidade e Tipo", type: "text", initialValue: "4 litros" }] }, // Ajustado para refletir imagem
-  { nome: "Litros de óleo", temQuantidade: false, subItens: [{ label: "Quantidade e Tipo", type: "text", initialValue: "4 Litros de óleo: 15w40" }] }, // Ajustado para refletir imagem
+  { nome: "Válvula termostática", temQuantidade: false },
+  { nome: "Kit junta motor aço", temQuantidade: false },
+  { nome: "Retentor traseiro virab.", temQuantidade: false },
+  { nome: "Engrenagem virab.", temQuantidade: false },
+  { nome: "Retentor eixo comando", temQuantidade: false },
+  { nome: "Retentor válvula", temQuantidade: false },
+  {
+    nome: "Comando de Válvula",
+    temQuantidade: false,
+    subItens: [
+      { label: "Admissão", type: "checkbox" },
+      { label: "Escape", type: "checkbox" }
+    ]
+  },
   {
     nome: "Mangueiras Radiador",
     temQuantidade: false,
     subItens: [
-      { label: "Inferior", type: "checkbox" }, // Alterado para checkbox
-      { label: "Superior", type: "checkbox" } // Alterado para checkbox
+      { label: "Inferior", type: "checkbox" },
+      { label: "Superior", type: "checkbox" }
     ]
   },
-  {
-    nome: "Outros", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text" }]
-  },
-  { nome: "Parafusos cabeçote", temQuantidade: false }, // Apenas checkbox
-  { nome: "Pistão", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "0,50" }] }, // Adicionado initialValue
-  { nome: "Retentor eixo comando", temQuantidade: false }, // Apenas checkbox
-  { nome: "Retentor traseiro virab.", temQuantidade: false }, // Apenas checkbox
-  { nome: "Retentor válvula", temQuantidade: false }, // Apenas checkbox
-  { nome: "Sensor de temperatura", temQuantidade: false }, // Apenas checkbox
-  { nome: "Silicone", temQuantidade: false }, // Apenas checkbox
-  { nome: "Tuchos", temQuantidade: false }, // Apenas checkbox
-  { nome: "Tubo d’água", temQuantidade: false }, // Apenas checkbox
-  { nome: "Turbina / Válv.", temQuantidade: false }, // Apenas checkbox
-  { nome: "Válvula termostática", temQuantidade: false }, // Apenas checkbox
-  { nome: "Válvulas admissão", temQuantidade: false, subItens: [{ label: "Quantidade", type: "text", initialValue: "04" }] }, // Ajustado para refletir imagem
-  { nome: "Válvulas escape", temQuantidade: false, subItens: [{ label: "Quantidade", type: "text", initialValue: "04" }] }, // Ajustado para refletir imagem
-  { nome: "Velas", temQuantidade: false }, // Apenas checkbox
+  { nome: "Válvulas escape", temQuantidade: false, subItens: [{ label: "Quantidade", type: "text", initialValue: "" }] },
+  { nome: "Válvulas admissão", temQuantidade: false, subItens: [{ label: "Quantidade", type: "text", initialValue: "" }] },
+  { nome: "Velas", temQuantidade: false },
+  { nome: "Anti Chamas", temQuantidade: false },
+  { nome: "Silicone", temQuantidade: false },
+  { nome: "Parafusos cabeçote", temQuantidade: false },
+  { nome: "Bobina", temQuantidade: false },
+  { nome: "Tuchos", temQuantidade: false },
+  { nome: "Cebolinha de óleo", temQuantidade: false },
+  { nome: "Sensor de temperatura", temQuantidade: false },
+  { nome: "Cabo de vela", temQuantidade: false },
+  { nome: "Biela", temQuantidade: false }, // Este é um item principal que pode ter sub-serviços
+  { nome: "Embreagem", temQuantidade: false },
+  { nome: "Desengripante e Limpa contato", temQuantidade: false },
+  { nome: "Outros", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "" }] },
 ].sort((a, b) => a.nome.localeCompare(b.nome)); // Garante a ordem alfabética
 
 const servicosMotorCompletoData = [
-  {
-    nome: "Biela",
-    temQuantidade: false, // Não há Qtd/Medida para serviços na imagem, apenas sub-itens
-    subItens: [
-      { label: "Usinagem completa", type: "checkbox" }, // Alterado para checkbox
-      { label: "Nova", type: "checkbox" } // Alterado para checkbox
-    ]
-  },
-  { nome: "Banho (cárter, suportes, parafusos etc)", temQuantidade: false }, // Apenas checkbox, subItens vazios
+  { nome: "Bloco usinagem completa", temQuantidade: false },
   {
     nome: "Cabeçote",
-    temQuantidade: false, // Não há Qtd/Medida para serviços na imagem, apenas sub-itens
+    temQuantidade: false,
     subItens: [
-      { label: "Usinagem completa", type: "checkbox" }, // Alterado para checkbox
-      { label: "Limpeza e Revisão", type: "checkbox" }, // Alterado para checkbox
-      { label: "Solda", type: "checkbox" }, // Adicionado conforme a imagem
-      { label: "Recuperação altura", type: "checkbox" } // Alterado para checkbox
+      { label: "Usinagem completa", type: "checkbox" },
+      { label: "Limpeza e Revisão", type: "checkbox" },
+      { label: "Novo", type: "checkbox" },
+      { label: "Recuperação altura", type: "checkbox" }
     ]
   },
   {
-    nome: "Bloco",
-    temQuantidade: false, // Não há Qtd/Medida para serviços na imagem, apenas sub-itens
+    nome: "Bielas",
+    temQuantidade: false,
     subItens: [
-      { label: "Usinagem completa", type: "checkbox" }, // Alterado para checkbox
-      { label: "Novo", type: "checkbox" } // Adicionado conforme a imagem
+      { label: "Usinagem completa", type: "checkbox" },
+      { label: "Nova", type: "checkbox" }
     ]
   },
-  { nome: "Montagem de Motor Técnica", temQuantidade: false }, // Apenas checkbox
   {
     nome: "Virabrequim",
-    temQuantidade: false, // Não há Qtd/Medida para serviços na imagem, apenas sub-itens
+    temQuantidade: false,
     subItens: [
-      { label: "Usinagem completa", type: "checkbox" }, // Alterado para checkbox
-      { label: "Novo", type: "checkbox" } // Alterado para checkbox
+      { label: "Usinagem completa", type: "checkbox" },
+      { label: "Novo", type: "checkbox" }
     ]
   },
-  { nome: "Volante Usinagem completa", temQuantidade: false }, // Apenas checkbox
+  { nome: "Montagem de Motor Técnica", temQuantidade: false },
+  { nome: "Volante Usinagem completa", temQuantidade: false },
+  { nome: "Banho (cárter, suportes, parafusos etc)", temQuantidade: false },
 ].sort((a, b) => a.nome.localeCompare(b.nome)); // Garante a ordem alfabética
 
-const OrcamentoMotorCompleto = ({ onSubmit, editingData }) => {
+const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message, showMessage, hideMessageBox, isErrorMessage }) => {
   const [formData, setFormData] = useState({
     nome: '',
     telefone: '',
@@ -136,22 +126,24 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData }) => {
       quantidade: item.temQuantidade ? 1 : 0,
       medida: 0,
       total: 0,
-      subItens: item.subItens ? item.subItens.map(sub => ({ ...sub, value: sub.initialValue || (sub.type === "checkbox" ? false : '') })) : [], // Usa initialValue se existir
+      subItens: item.subItens ? item.subItens.map(sub => ({ ...sub, value: sub.initialValue || (sub.type === "checkbox" ? false : '') })) : [],
     })),
     servicos: servicosMotorCompletoData.map(servico => ({
       ...servico,
       selecionado: false,
-      quantidade: servico.temQuantidade ? 1 : 0, // Adicionado quantidade para serviços, se tiver temQuantidade
+      quantidade: servico.temQuantidade ? 1 : 0,
       medida: 0,
       total: 0,
       subItens: servico.subItens ? servico.subItens.map(sub => ({ ...sub, value: sub.initialValue || (sub.type === "checkbox" ? false : '') })) : [],
     })),
     totalPecasManual: 0,
     totalServicosManual: 0,
-    totalMaoDeObraManual: 0, // Renomeado para seguir a imagem
+    totalMaoDeObraManual: 0,
     totalGeralManual: 0,
     formaPagamento: '',
     garantia: '',
+    observacoes: '',
+    status: 'Aberto',
   });
 
   // Efeito para carregar dados de edição
@@ -159,71 +151,67 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData }) => {
     if (editingData) {
       setFormData(prev => ({
         ...prev,
-        nome: editingData.cliente || '', // Mapear 'cliente' para 'nome'
+        nome: editingData.cliente || '',
         telefone: editingData.telefone || '',
         veiculo: editingData.veiculo || '',
         placa: editingData.placa || '',
-        data: editingData.data ? new Date(editingData.data).toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10), // Ajuste de formato
-        ordemServico: editingData.ordemServico || '', // Mapear 'OS' para 'ordemServico'
+        data: editingData.data ? new Date(editingData.data).toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10),
+        ordemServico: editingData.ordemServico || '',
         totalPecasManual: parseFloat(editingData.valorTotalPecas) || 0,
         totalServicosManual: parseFloat(editingData.valorTotalServicos) || 0,
-        totalMaoDeObraManual: parseFloat(editingData.totalMaoDeObra) || 0, // Ajuste para nome do campo
+        totalMaoDeObraManual: parseFloat(editingData.totalMaoDeObra) || 0,
         totalGeralManual: parseFloat(editingData.valorTotal) || 0,
         formaPagamento: editingData.formaPagamento || '',
         garantia: editingData.garantia || '',
-        // Reconstruir o estado de pecas e servicos com base nos dados de edição
+        observacoes: editingData.observacoes || '',
+        status: editingData.status || 'Aberto',
         pecas: itensMotorCompletoData.map(item => {
           const editedItem = editingData.pecasSelecionadas?.find(p => p.startsWith(item.nome));
-          let selecionado = !!editedItem; // True se o item principal foi encontrado
+          let selecionado = !!editedItem;
 
           let subItensAtualizados = item.subItens ? item.subItens.map(sub => {
             let subValue = sub.initialValue || (sub.type === "checkbox" ? false : '');
             if (selecionado && editedItem) {
                 // Tenta encontrar o valor do subItem na string editedItem
-                const regex = new RegExp(`${sub.label}:\\s*([^;]+)`);
+                const regex = new RegExp(`${sub.label}:\\s*([^;)]+)`); // Ajustado para pegar até ')' ou ';'
                 const match = editedItem.match(regex);
                 if (match && match[1]) {
                     if (sub.type === "checkbox") {
-                        subValue = true; // Se encontrar o texto, marca como true
+                        subValue = true;
                     } else {
                         subValue = match[1].trim();
                     }
                 } else if (sub.type === "checkbox" && editedItem.includes(sub.label)) {
-                    subValue = true; // Se for checkbox e o label estiver na string
+                    subValue = true;
                 }
             }
             return { ...sub, value: subValue };
           }) : [];
 
-          // Para itens sem subItens mas que foram marcados com 'X' ou alguma especificação
           if (!item.subItens && selecionado) {
-              // Se o item principal foi selecionado e não tem subItens definidos,
-              // mas a string do editedItem contém algo além do nome, tente capturar
               const textOnlyRegex = new RegExp(`^${item.nome}\\s*:\\s*(.+)$`);
               const textOnlyMatch = editedItem.match(textOnlyRegex);
               if (textOnlyMatch && textOnlyMatch[1]) {
-                  // Se o item tem um valor de texto extra (ex: "Anel: 0,50"), armazene em um subItem
                   subItensAtualizados = [{ label: "Especificação/Medida", type: "text", value: textOnlyMatch[1].trim() }];
               }
           }
 
-
           return {
             ...item,
             selecionado,
-            quantidade: item.temQuantidade ? (editingData.pecasSelecionadas?.find(p => p.startsWith(item.nome + ' Qtd:'))?.match(/Qtd:\s*(\d+)/)?.[1] || 1) : 0,
-            medida: item.temQuantidade ? (parseFloat(editingData.pecasSelecionadas?.find(p => p.startsWith(item.nome + ' Medida:'))?.match(/Medida:\s*([\d,.]+)/)?.[1]?.replace(',', '.')) || 0) : 0,
+            quantidade: item.temQuantidade ? (editedItem?.match(/Qtd:\s*(\d+)/)?.[1] || 1) : 0,
+            medida: item.temQuantidade ? (parseFloat(editedItem?.match(/Medida:\s*([\d,.]+)/)?.[1]?.replace(',', '.')) || 0) : 0,
             subItens: subItensAtualizados,
           };
         }),
         servicos: servicosMotorCompletoData.map(servico => {
-          const editedServico = editingData.servicosSelecionados?.find(s => s.startsWith(servico.nome));
+          const editedServico = editingData.servicosSelecionados?.find(s => s.startsWith(servico.nome)); // Corrigido para 'servicosSelecionados'
           let selecionado = !!editedServico;
 
           let subItensAtualizados = servico.subItens ? servico.subItens.map(sub => {
             let subValue = sub.initialValue || (sub.type === "checkbox" ? false : '');
             if (selecionado && editedServico) {
-                const regex = new RegExp(`${sub.label}\\s*[:]?\\s*([^;]+)?`);
+                const regex = new RegExp(`${sub.label}\\s*[:]?\\s*([^;)]+)?`); // Ajustado para pegar até ')' ou ';'
                 const match = editedServico.match(regex);
                 if (match) {
                     if (sub.type === "checkbox") {
@@ -241,8 +229,8 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData }) => {
           return {
             ...servico,
             selecionado,
-            quantidade: servico.temQuantidade ? (editingData.servicosSelecionados?.find(s => s.startsWith(servico.nome + ' Qtd:'))?.match(/Qtd:\s*(\d+)/)?.[1] || 1) : 0,
-            medida: servico.temQuantidade ? (parseFloat(editingData.servicosSelecionados?.find(s => s.startsWith(servico.nome + ' Medida:'))?.match(/Medida:\s*([\d,.]+)/)?.[1]?.replace(',', '.')) || 0) : 0,
+            quantidade: servico.temQuantidade ? (editedServico?.match(/Qtd:\s*(\d+)/)?.[1] || 1) : 0,
+            medida: servico.temQuantidade ? (parseFloat(editedServico?.match(/Medida:\s*([\d,.]+)/)?.[1]?.replace(',', '.')) || 0) : 0,
             subItens: subItensAtualizados,
           };
         }),
@@ -309,7 +297,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData }) => {
     setFormData(prev => ({ ...prev, [name]: parseFloat(value) || 0 }));
   };
 
-const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     // Filtra apenas os itens selecionados e formata como na imagem
@@ -342,8 +330,8 @@ const handleSubmit = (e) => {
         return nomeCompleto;
       });
 
-    // Corrected variable name: servicosSelecionadosFormatadas
-    const servicosSelecionadosFormatadas = formData.servicos
+    // Variável corrigida para 'servicosSelecionadosFormatadas'
+    const servicosSelecionadosFormatadas = formData.servicos // Linha 333
       .filter(servico => servico.selecionado)
       .map(servico => {
         let nomeCompleto = servico.nome;
@@ -380,14 +368,15 @@ const handleSubmit = (e) => {
       data: formData.data,
       ordemServico: formData.ordemServico,
       pecasSelecionadas: pecasSelecionadasFormatadas,
-      // Use the correctly spelled variable here
-      servicosSelecionados: servicosSelecionadosFormatadas, // <--- Corrected line
+      servicosSelecionados: servicosSelecionadosFormatadas, // Linha 370: Uso da variável corrigida
       valorTotalPecas: formData.totalPecasManual,
       valorTotalServicos: formData.totalServicosManual,
       totalMaoDeObra: formData.totalMaoDeObraManual,
       valorTotal: formData.totalGeralManual,
       formaPagamento: formData.formaPagamento,
       garantia: formData.garantia,
+      observacoes: formData.observacoes,
+      status: formData.status,
     };
 
     onSubmit(orcamentoFinal);
@@ -396,8 +385,9 @@ const handleSubmit = (e) => {
   return (
     <div className="orcamento-form-container">
       <div className="form-header">
-        <h1>ORÇAMENTO - COMPLETO/PARCIAL</h1> {/* Título atualizado conforme a imagem */}
-        <img src={backgroundImage} alt="Logo" className="logo-orcamento" />
+        <h1>ORÇAMENTO - MOTOR COMPLETO/PARCIAL</h1>
+        {/* Usando uma imagem placeholder para o logo */}
+        <img src="https://placehold.co/100x50/cccccc/333333?text=LOGO" alt="Logo Zero20Garage" className="logo-orcamento" />
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -408,14 +398,14 @@ const handleSubmit = (e) => {
               <tr>
                 <td>
                   <div className="form-group">
-                    <label htmlFor="ordemServico">OS:</label> {/* Campo OS */}
+                    <label htmlFor="ordemServico">OS:</label>
                     <input type="text" id="ordemServico" name="ordemServico" value={formData.ordemServico} onChange={handleInputChange} />
                   </div>
                 </td>
                 <td>
                   <div className="form-group">
                     <label htmlFor="nome">Cliente:</label>
-                    <input type="text" id="nome" name="nome" value={formData.nome} onChange={handleInputChange} />
+                    <input type="text" id="nome" name="nome" value={formData.nome} onChange={handleInputChange} required />
                   </div>
                 </td>
                 <td>
@@ -468,7 +458,7 @@ const handleSubmit = (e) => {
                     </label>
                   </td>
                   <td className="inputs-cell">
-                    {peca.selecionado && peca.temQuantidade && ( // Renderiza Qtd/Medida APENAS se temQuantidade for true
+                    {peca.selecionado && peca.temQuantidade && (
                       <div className="item-inputs">
                         <div>
                           <label htmlFor={`peca-${index}-quantidade`} className="input-label">Qtd:</label>
@@ -497,7 +487,7 @@ const handleSubmit = (e) => {
                     )}
                   </td>
                   <td className="subitems-cell">
-                    {peca.selecionado && peca.subItens && ( // Renderiza subItens APENAS se houver
+                    {peca.selecionado && peca.subItens && (
                       <div className="sub-items-container">
                         {peca.subItens.map((sub, sIdx) => (
                           <div key={sIdx} className="sub-item-input-group">
@@ -555,7 +545,7 @@ const handleSubmit = (e) => {
 
         {/* Seção de Serviços */}
         <section className="section-form">
-          <h2>Serviços</h2> {/* Título alterado para "Serviços" conforme a imagem */}
+          <h2>Serviços</h2>
           <table className="items-table">
             <tbody>
               {formData.servicos.map((servico, index) => (
@@ -572,7 +562,7 @@ const handleSubmit = (e) => {
                     </label>
                   </td>
                   <td className="inputs-cell">
-                    {servico.selecionado && servico.temQuantidade && ( // Renderiza Qtd/medida Unit se temQuantidade for true
+                    {servico.selecionado && servico.temQuantidade && (
                       <div className="item-inputs">
                         <div>
                           <label htmlFor={`servico-${index}-quantidade`} className="input-label">Qtd:</label>
@@ -601,7 +591,7 @@ const handleSubmit = (e) => {
                     )}
                   </td>
                   <td className="subitems-cell">
-                    {servico.selecionado && servico.subItens && ( // Renderiza subItens se houver
+                    {servico.selecionado && servico.subItens && (
                       <div className="sub-items-container">
                         {servico.subItens.map((sub, sIdx) => (
                           <div key={sIdx} className="sub-item-input-group">
@@ -630,7 +620,6 @@ const handleSubmit = (e) => {
                             <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('servicos', index, sIdx)}>X</button>
                           </div>
                         ))}
-                        {/* Para serviços, o botão "+ Detalhe" sempre aparece se houver subItens e não for um item com input único */}
                         {servico.subItens.length > 0 && !itemsWithSingleTextInput.includes(servico.nome) && (
                           <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('servicos', index)}>+ Detalhe</button>
                         )}
@@ -667,7 +656,7 @@ const handleSubmit = (e) => {
               step="0.01"
             />
           </div>
-          <div className="total-geral-form">
+          <div className="total-line-form total-geral">
             <span className="label">TOTAL GERAL:</span>
             <input
               type="number"
@@ -691,12 +680,32 @@ const handleSubmit = (e) => {
               <input type="text" id="garantia" name="garantia" value={formData.garantia} onChange={handleInputChange} />
             </div>
           </div>
+          <div className="form-group">
+            <label htmlFor="observacoes">Observações:</label>
+            <textarea id="observacoes" name="observacoes" value={formData.observacoes} onChange={handleInputChange} rows="3"></textarea>
+          </div>
+          <div className="form-group">
+            <label htmlFor="status">Status:</label>
+            <select id="status" name="status" value={formData.status} onChange={handleInputChange}>
+              <option value="Aberto">Aberto</option>
+              <option value="Aprovado">Aprovado</option>
+              <option value="Rejeitado">Rejeitado</option>
+              <option value="Concluído">Concluído</option>
+            </select>
+          </div>
         </section>
 
-        {/* Botões do Formulário */}
-        <div className="form-buttons">
-          <button type="submit" className="action-btn">Salvar Orçamento</button>
-        </div>
+        {/* Caixa de Mensagem - Posicionada acima do botão de salvar */}
+        {showMessage && (
+          <div className={`message-box ${isErrorMessage ? 'error' : 'success'}`}>
+            <span>{message}</span>
+            <button type="button" onClick={hideMessageBox}>&times;</button>
+          </div>
+        )}
+
+        <button type="submit" className="submit-btn">
+          {editingData ? 'Atualizar Orçamento' : 'Salvar Orçamento'}
+        </button>
       </form>
     </div>
   );

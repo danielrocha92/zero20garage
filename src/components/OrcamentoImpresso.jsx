@@ -1,202 +1,120 @@
 // src/components/OrcamentoImpresso.jsx
-import React from 'react';
-import './OrcamentoForms.css'; // Importa o CSS específico para impressão
+import React, { useRef, useEffect } from 'react';
+import { useReactToPrint } from 'react-to-print';
+import './OrcamentoImpresso.css'; // CSS para o layout de impressão
+import backgroundImage from '../assets/images/background.jpg'; // Certifique-se de que o caminho está correto
 
-/**
- * Componente OrcamentoImpresso
- *
- * Este componente é responsável por exibir um orçamento formatado para visualização
- * e impressão. Ele recebe os dados de um orçamento como propriedade e os renderiza
- * em um layout que simula um documento, pronto para ser impresso como PDF.
- *
- * @param {Object} props - As propriedades do componente.
- * @param {Object} props.orcamento - O objeto de orçamento contendo todos os detalhes
- * (cliente, veículo, peças, serviços, totais, etc.).
- * @param {Function} props.onClose - Função de callback para fechar a visualização
- * do orçamento e retornar ao painel/formulário anterior.
- */
 const OrcamentoImpresso = ({ orcamento, onClose }) => {
-  if (!orcamento) {
-    return (
-      <div className="orcamento-impresso-wrapper">
-        <div className="orcamento-document-container">
-          <p>Nenhum orçamento para exibir. Por favor, salve um orçamento primeiro.</p>
-          <div className="orcamento-buttons-container">
-            <button className="action-btn" onClick={onClose}>Voltar</button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const componentRef = useRef();
 
-  const {
-    nome, telefone, veiculo, placa, data,
-    tipo, valorTotal, detalhesPecas, detalhesServicos,
-    formaPagamento, garantia
-  } = orcamento;
+  // Função para lidar com a impressão
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    documentTitle: `Orçamento_OS_${orcamento.ordemServico || 'SemOS'}_${orcamento.cliente || 'SemCliente'}`,
+    pageStyle: `
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+      body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    `,
+  });
 
-  const empresa = {
-    nome: "ZERO20 GARAGE",
-    endereco: "R. Amador Bueno, 333 - Santo Amaro, São Paulo - SP, 04752-005",
-    telefone: "(11) 99999-9999",
-    email: "contato@zero20garage.com.br",
-    logo: "/images/zero20-background.jpg" // Exemplo de caminho de logo (ajuste se for diferente)
-    // Se o logo estiver na pasta public, o caminho é direto como '/background.jpg'
-  };
+  // Efeito para acionar a impressão automaticamente ao carregar (opcional)
+  useEffect(() => {
+    // Você pode remover esta linha se preferir que o usuário clique no botão "Imprimir"
+    // handlePrint();
+  }, []);
 
-  // Funções auxiliares para calcular totais (se os dados não vierem pré-calculados)
-  const calculateTotalPecas = (pecas) => {
-    return pecas ? pecas.reduce((sum, item) => sum + (parseFloat(item.total || 0)), 0) : 0;
-  };
+  if (!orcamento) {
+    return <div className="orcamento-impresso-container">Nenhum orçamento selecionado para visualização.</div>;
+  }
 
-  const calculateTotalServicos = (servicos) => {
-    return servicos ? servicos.reduce((sum, item) => sum + (parseFloat(item.total || item.valor || 0)), 0) : 0;
-  };
+  return (
+    <div className="orcamento-impresso-container">
+      <div className="orcamento-impresso-content" ref={componentRef}>
+        <div className="header-impresso">
+          <h1>ORÇAMENTO - {orcamento.tipo === 'motor' ? 'MOTOR COMPLETO/PARCIAL' : 'CABEÇOTE'}</h1>
+          <img src="https://placehold.co/100x50/cccccc/333333?text=LOGO" alt="Logo Zero20Garage" className="logo-impresso" />
+        </div>
 
-  const totalPecas = calculateTotalPecas(detalhesPecas);
-  const totalServicos = calculateTotalServicos(detalhesServicos);
+        <section className="info-section">
+          <h2>Informações do Cliente e Veículo</h2>
+          <table className="info-table">
+            <tbody>
+              <tr>
+                <td><strong>OS:</strong> {orcamento.ordemServico || 'N/A'}</td>
+                <td><strong>Cliente:</strong> {orcamento.cliente || 'N/A'}</td>
+                <td><strong>Data:</strong> {orcamento.data || 'N/A'}</td>
+              </tr>
+              <tr>
+                <td><strong>Veículo:</strong> {orcamento.veiculo || 'N/A'}</td>
+                <td><strong>Placa:</strong> {orcamento.placa || 'N/A'}</td>
+                <td><strong>Telefone:</strong> {orcamento.telefone || 'N/A'}</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
-  return (
-    <div className="orcamento-impresso-wrapper">
-      <div className="orcamento-document-container">
-        <header className="header-info">
-          <div className="company-info">
-            <strong>{empresa.nome}</strong><br />
-            {empresa.endereco}<br />
-            Tel: {empresa.telefone} | Email: {empresa.email}
-          </div>
-          <div className="logo-placeholder">
-            {empresa.logo ? (
-              <img src={empresa.logo} alt="Logo da Empresa" />
-            ) : (
-              <p>LOGO ZERO20 GARAGE</p>
-            )}
-          </div>
-        </header>
+        <section className="items-section">
+          <h2>Peças</h2>
+          <ul className="item-list-impresso">
+            {orcamento.pecasSelecionadas && orcamento.pecasSelecionadas.length > 0 ? (
+              orcamento.pecasSelecionadas.map((peca, index) => (
+                <li key={`peca-${index}`}>{peca}</li>
+              ))
+            ) : (
+              <li>Nenhuma peça orçada.</li>
+            )}
+          </ul>
+          <div className="total-line-impresso">
+            <span>Valor Total de Peças:</span>
+            <strong>R$ {Number(orcamento.valorTotalPecas || 0).toFixed(2).replace('.', ',')}</strong>
+          </div>
+        </section>
 
-        <h1 className="orcamento-title">ORÇAMENTO DE {tipo ? tipo.toUpperCase() : 'SERVIÇOS'}</h1>
+        <section className="items-section">
+          <h2>Serviços</h2>
+          <ul className="item-list-impresso">
+            {orcamento.servicosSelecionados && orcamento.servicosSelecionados.length > 0 ? (
+              orcamento.servicosSelecionados.map((servico, index) => (
+                <li key={`servico-${index}`}>{servico}</li>
+              ))
+            ) : (
+              <li>Nenhum serviço orçado.</li>
+            )}
+          </ul>
+          <div className="total-line-impresso">
+            <span>Valor Total de Serviços:</span>
+            <strong>R$ {Number(orcamento.valorTotalServicos || 0).toFixed(2).replace('.', ',')}</strong>
+          </div>
+        </section>
 
-        <section className="client-data">
-          <p><span className="label">Cliente:</span> <span className="value">{nome || 'Não Informado'}</span></p>
-          <p><span className="label">Telefone:</span> <span className="value">{telefone || 'Não Informado'}</span></p>
-          <p><span className="label">Veículo:</span> <span className="value">{veiculo || 'Não Informado'}</span></p>
-          <p><span className="label">Placa:</span> <span className="value">{placa || 'Não Informada'}</span></p>
-          <p><span className="label">Data:</span> <span className="value">{data || new Date().toLocaleDateString('pt-BR')}</span></p>
-        </section>
+        <section className="summary-section-impresso">
+          <div className="total-line-impresso">
+            <span>Valor Total de Mão de Obra Mecânica:</span>
+            <strong>R$ {Number(orcamento.totalMaoDeObra || 0).toFixed(2).replace('.', ',')}</strong>
+          </div>
+          <div className="total-line-impresso final-total">
+            <span>TOTAL GERAL:</span>
+            <strong>R$ {Number(orcamento.valorTotal || 0).toFixed(2).replace('.', ',')}</strong>
+          </div>
+          <p><strong>Forma de Pagamento:</strong> {orcamento.formaPagamento || 'N/A'}</p>
+          <p><strong>Garantia:</strong> {orcamento.garantia || 'N/A'}</p>
+          <p><strong>Observações:</strong> {orcamento.observacoes || 'N/A'}</p>
+          <p><strong>Status:</strong> {orcamento.status || 'N/A'}</p>
+        </section>
+      </div>
 
-        {detalhesPecas && detalhesPecas.length > 0 && (
-          <section className="section-pecas">
-            <h2>Peças</h2>
-            <table className="orcamento-table">
-              <thead>
-                <tr>
-                  <th>Item</th>
-                  <th>Qtd.</th>
-                  <th>Vlr. Unit.</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                {detalhesPecas.map((item, index) => (
-                  <React.Fragment key={index}>
-                    <tr>
-                      <td>
-                        {/* Se o item tem checkbox, mostre um indicador de selecionado */}
-                        {item.selecionado && <span className="checkbox-display">X</span>} {item.nome}
-                      </td>
-                      <td>{item.quantidade}</td>
-                      <td>R$ {parseFloat(item.valorUnitario || 0).toFixed(2)}</td>
-                      <td>R$ {parseFloat(item.total || 0).toFixed(2)}</td>
-                    </tr>
-                    {item.subItens && item.subItens.length > 0 && (
-                      <tr>
-                        <td colSpan="4">
-                          <ul>
-                            {item.subItens.map((sub, sIdx) => (
-                              <li key={sIdx}>{sub}</li>
-                            ))}
-                          </ul>
-                        </td>
-                      </tr>
-                    )}
-                  </React.Fragment>
-                ))}
-              </tbody>
-            </table>
-          </section>
-        )}
-
-        {detalhesServicos && detalhesServicos.length > 0 && (
-          <section className="section-servicos">
-            <h2>Serviços</h2>
-            <table className="orcamento-table">
-              <thead>
-                <tr>
-                  <th>Serviço</th>
-                  <th>Valor</th>
-                </tr>
-              </thead>
-              <tbody>
-                {detalhesServicos.map((servico, index) => (
-                  <React.Fragment key={index}>
-                    <tr>
-                      <td>
-                        {/* Se o serviço tem checkbox, mostre um indicador de selecionado */}
-                        {servico.selecionado && <span className="checkbox-display">X</span>} {servico.nome}
-                      </td>
-                      <td>R$ {parseFloat(servico.total || servico.valor || 0).toFixed(2)}</td>
-                    </tr>
-                    {servico.subItens && servico.subItens.length > 0 && (
-                      <tr>
-                        <td colSpan="2">
-                          <ul>
-                            {servico.subItens.map((sub, sIdx) => (
-                              <li key={sIdx}>{sub}</li>
-                            ))}
-                          </ul>
-                        </td>
-                      </tr>
-                    )}
-                  </React.Fragment>
-                ))}
-              </tbody>
-            </table>
-          </section>
-        )}
-
-        <div className="totals-section">
-            <div className="total-line-impresso">
-              <span className="label">Total Peças:</span>
-              <span className="value">R$ {totalPecas.toFixed(2)}</span>
-            </div>
-            <div className="total-line-impresso">
-              <span className="label">Total Serviços:</span>
-              <span className="value">R$ {totalServicos.toFixed(2)}</span>
-            </div>
-            <div className="total-geral-impresso">
-              <span className="label">VALOR TOTAL GERAL:</span>
-              <span className="value">R$ {parseFloat(valorTotal || 0).toFixed(2)}</span>
-            </div>
-        </div>
-
-
-        <section className="info-adicionais">
-            <div className="form-pagamento">
-              <p><span className="label">Forma de Pagamento:</span> <span className="value">{formaPagamento || 'A combinar'}</span></p>
-            </div>
-            <div className="garantia-info">
-              <p><span className="label">Garantia:</span> <span className="value">{garantia || '90 dias para serviços'}</span></p>
-            </div>
-        </section>
-
-
-        <div className="orcamento-buttons-container">
-          <button className="action-btn" onClick={() => window.print()}>Imprimir Orçamento</button>
-          <button className="action-btn" onClick={onClose}>Voltar ao Painel</button>
-        </div>
-      </div>
-    </div>
-  );
+      <div className="print-buttons">
+        <button onClick={handlePrint} className="print-btn">Imprimir Orçamento</button>
+        <button onClick={onClose} className="back-btn">Voltar ao Painel</button>
+      </div>
+    </div>
+  );
 };
 
 export default OrcamentoImpresso;
