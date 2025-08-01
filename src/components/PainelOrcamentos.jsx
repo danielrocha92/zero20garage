@@ -12,7 +12,8 @@ import './PainelOrcamentos.css';
 
 // URL BASE da sua API Node.js/Firebase no Render
 // ATENÇÃO: SUBSTITUA ESTA URL PELA URL REAL DO SEU DEPLOY NO RENDER!
-const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com/api/orcamentos'; // Use a URL do seu deploy da API
+// DEVE SER APENAS O DOMÍNIO, SEM O ENDPOINT /api/orcamentos
+const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com'; // <--- CORRIGIDO AQUI!
 
 /**
  * Componente PainelOrcamentos
@@ -45,6 +46,7 @@ const PainelOrcamentos = () => {
    */
   const fetchHistorico = useCallback(async () => {
     try {
+      // Agora a URL será https://api-orcamento-n49u.onrender.com/api/orcamentos
       const response = await fetch(`${API_BASE_URL}/api/orcamentos`);
       const data = await response.json();
       setHistorico(data);
@@ -52,7 +54,7 @@ const PainelOrcamentos = () => {
       console.error('Erro ao buscar histórico no PainelOrcamentos:', error);
       showMessageBox('Erro ao carregar histórico de orçamentos.', true);
     }
-  }, [setHistorico]); // <--- REMOVIDO API_BASE_URL daqui
+  }, [setHistorico]);
 
   // Efeito para buscar o histórico de orçamentos quando o componente é montado.
   useEffect(() => {
@@ -71,11 +73,11 @@ const PainelOrcamentos = () => {
       data: new Date().toLocaleString('pt-BR'),
     };
 
-    let url = `${API_BASE_URL}/api/orcamentos`;
+    let url = `${API_BASE_URL}/api/orcamentos`; // <--- CORRIGIDO AQUI!
     let method = 'POST';
 
     if (editingData && editingData.id) {
-      url = `${API_BASE_URL}/api/orcamentos/${editingData.id}`;
+      url = `${API_BASE_URL}/api/orcamentos/${editingData.id}`; // <--- CORRIGIDO AQUI!
       method = 'PUT';
       envio.id = editingData.id;
     }
