@@ -73,11 +73,11 @@ const itensMotorCompletoData = [
   { nome: "Cebolinha de óleo", temQuantidade: false },
   { nome: "Sensor de temperatura", temQuantidade: false },
   { nome: "Cabo de vela", temQuantidade: false },
-  { nome: "Biela", temQuantidade: false }, // Este é um item principal que pode ter sub-serviços
+  { nome: "Biela", temQuantidade: false },
   { nome: "Embreagem", temQuantidade: false },
   { nome: "Desengripante e Limpa contato", temQuantidade: false },
   { nome: "Outros", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "" }] },
-].sort((a, b) => a.nome.localeCompare(b.nome)); // Garante a ordem alfabética
+].sort((a, b) => a.nome.localeCompare(b.nome));
 
 const servicosMotorCompletoData = [
   { nome: "Bloco usinagem completa", temQuantidade: false },
@@ -110,7 +110,7 @@ const servicosMotorCompletoData = [
   { nome: "Montagem de Motor Técnica", temQuantidade: false },
   { nome: "Volante Usinagem completa", temQuantidade: false },
   { nome: "Banho (cárter, suportes, parafusos etc)", temQuantidade: false },
-].sort((a, b) => a.nome.localeCompare(b.nome)); // Garante a ordem alfabética
+].sort((a, b) => a.nome.localeCompare(b.nome));
 
 const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message, showMessage, hideMessageBox, isErrorMessage }) => {
   const [formData, setFormData] = useState({
@@ -149,49 +149,36 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
   // Efeito para carregar dados de edição
   useEffect(() => {
     if (editingData) {
-      setFormData(prev => ({
-        ...prev,
-        nome: editingData.cliente || '',
-        telefone: editingData.telefone || '',
-        veiculo: editingData.veiculo || '',
-        placa: editingData.placa || '',
-        data: editingData.data ? new Date(editingData.data).toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10),
-        ordemServico: editingData.ordemServico || '',
-        totalPecasManual: parseFloat(editingData.valorTotalPecas) || 0,
-        totalServicosManual: parseFloat(editingData.valorTotalServicos) || 0,
-        totalMaoDeObraManual: parseFloat(editingData.totalMaoDeObra) || 0,
-        totalGeralManual: parseFloat(editingData.valorTotal) || 0,
-        formaPagamento: editingData.formaPagamento || '',
-        garantia: editingData.garantia || '',
-        observacoes: editingData.observacoes || '',
-        status: editingData.status || 'Aberto',
-        pecas: itensMotorCompletoData.map(item => {
-          const editedItem = editingData.pecasSelecionadas?.find(p => p.startsWith(item.nome));
-          let selecionado = !!editedItem;
+      setFormData(prev => {
+        const newPecas = itensMotorCompletoData.map(item => {
+          const editedItemString = editingData.pecasSelecionadas?.find(p => p.startsWith(item.nome));
+          let selecionado = !!editedItemString;
+          let quantidade = item.temQuantidade ? (editedItemString?.match(/Qtd:\s*(\d+)/)?.[1] || 1) : 0;
+          let medida = item.temQuantidade ? (parseFloat(editedItemString?.match(/Medida:\s*([\d,.]+)/)?.[1]?.replace(',', '.')) || 0) : 0;
 
           let subItensAtualizados = item.subItens ? item.subItens.map(sub => {
             let subValue = sub.initialValue || (sub.type === "checkbox" ? false : '');
-            if (selecionado && editedItem) {
-                // Tenta encontrar o valor do subItem na string editedItem
-                const regex = new RegExp(`${sub.label}:\\s*([^;)]+)`); // Ajustado para pegar até ')' ou ';'
-                const match = editedItem.match(regex);
-                if (match && match[1]) {
-                    if (sub.type === "checkbox") {
-                        subValue = true;
-                    } else {
-                        subValue = match[1].trim();
-                    }
-                } else if (sub.type === "checkbox" && editedItem.includes(sub.label)) {
-                    subValue = true;
+            if (selecionado && editedItemString) {
+              // Tenta encontrar o valor do subItem na string editedItemString
+              const regex = new RegExp(`${sub.label}(?::\\s*([^;)]+))?`); // Regex mais flexível para ": valor" ou apenas "label"
+              const match = editedItemString.match(regex);
+              if (match) {
+                if (sub.type === "checkbox") {
+                  subValue = true; // Se o label do checkbox for encontrado, marca como true
+                } else if (match[1]) {
+                  subValue = match[1].trim(); // Pega o valor se existir
                 }
+              }
             }
             return { ...sub, value: subValue };
           }) : [];
 
-          if (!item.subItens && selecionado) {
+          // Para itens sem subItens mas que foram marcados com 'X' ou alguma especificação
+          if (!item.subItens && selecionado && itemsWithSingleTextInput.includes(item.nome)) {
               const textOnlyRegex = new RegExp(`^${item.nome}\\s*:\\s*(.+)$`);
-              const textOnlyMatch = editedItem.match(textOnlyRegex);
+              const textOnlyMatch = editedItemString.match(textOnlyRegex);
               if (textOnlyMatch && textOnlyMatch[1]) {
+                  // Se o item tem um valor de texto extra (ex: "Anel: 0,50"), armazene em um subItem
                   subItensAtualizados = [{ label: "Especificação/Medida", type: "text", value: textOnlyMatch[1].trim() }];
               }
           }
@@ -199,28 +186,29 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
           return {
             ...item,
             selecionado,
-            quantidade: item.temQuantidade ? (editedItem?.match(/Qtd:\s*(\d+)/)?.[1] || 1) : 0,
-            medida: item.temQuantidade ? (parseFloat(editedItem?.match(/Medida:\s*([\d,.]+)/)?.[1]?.replace(',', '.')) || 0) : 0,
+            quantidade,
+            medida,
             subItens: subItensAtualizados,
           };
-        }),
-        servicos: servicosMotorCompletoData.map(servico => {
-          const editedServico = editingData.servicosSelecionados?.find(s => s.startsWith(servico.nome)); // Corrigido para 'servicosSelecionados'
-          let selecionado = !!editedServico;
+        });
+
+        const newServicos = servicosMotorCompletoData.map(servico => {
+          const editedServicoString = editingData.servicosSelecionados?.find(s => s.startsWith(servico.nome));
+          let selecionado = !!editedServicoString;
+          let quantidade = servico.temQuantidade ? (editedServicoString?.match(/Qtd:\s*(\d+)/)?.[1] || 1) : 0;
+          let medida = servico.temQuantidade ? (parseFloat(editedServicoString?.match(/Medida:\s*([\d,.]+)/)?.[1]?.replace(',', '.')) || 0) : 0;
 
           let subItensAtualizados = servico.subItens ? servico.subItens.map(sub => {
             let subValue = sub.initialValue || (sub.type === "checkbox" ? false : '');
-            if (selecionado && editedServico) {
-                const regex = new RegExp(`${sub.label}\\s*[:]?\\s*([^;)]+)?`); // Ajustado para pegar até ')' ou ';'
-                const match = editedServico.match(regex);
+            if (selecionado && editedServicoString) {
+                const regex = new RegExp(`${sub.label}(?::\\s*([^;)]+))?`);
+                const match = editedServicoString.match(regex);
                 if (match) {
                     if (sub.type === "checkbox") {
                         subValue = true;
                     } else if (match[1]) {
                         subValue = match[1].trim();
                     }
-                } else if (sub.type === "checkbox" && editedServico.includes(sub.label)) {
-                    subValue = true;
                 }
             }
             return { ...sub, value: subValue };
@@ -229,12 +217,32 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
           return {
             ...servico,
             selecionado,
-            quantidade: servico.temQuantidade ? (editedServico?.match(/Qtd:\s*(\d+)/)?.[1] || 1) : 0,
-            medida: servico.temQuantidade ? (parseFloat(editedServico?.match(/Medida:\s*([\d,.]+)/)?.[1]?.replace(',', '.')) || 0) : 0,
+            quantidade,
+            medida,
             subItens: subItensAtualizados,
           };
-        }),
-      }));
+        });
+
+        return {
+          ...prev,
+          nome: editingData.cliente || '',
+          telefone: editingData.telefone || '',
+          veiculo: editingData.veiculo || '',
+          placa: editingData.placa || '',
+          data: editingData.data ? new Date(editingData.data).toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10),
+          ordemServico: editingData.ordemServico || '',
+          totalPecasManual: parseFloat(editingData.valorTotalPecas) || 0,
+          totalServicosManual: parseFloat(editingData.valorTotalServicos) || 0,
+          totalMaoDeObraManual: parseFloat(editingData.totalMaoDeObra) || 0,
+          totalGeralManual: parseFloat(editingData.valorTotal) || 0,
+          formaPagamento: editingData.formaPagamento || '',
+          garantia: editingData.garantia || '',
+          observacoes: editingData.observacoes || '',
+          status: editingData.status || 'Aberto',
+          pecas: newPecas,
+          servicos: newServicos,
+        };
+      });
     }
   }, [editingData]);
 
@@ -330,8 +338,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
         return nomeCompleto;
       });
 
-    // Variável corrigida para 'servicosSelecionadosFormatadas'
-    const servicosSelecionadosFormatadas = formData.servicos // Linha 333
+    const servicosSelecionadosFormatadas = formData.servicos
       .filter(servico => servico.selecionado)
       .map(servico => {
         let nomeCompleto = servico.nome;
@@ -368,7 +375,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
       data: formData.data,
       ordemServico: formData.ordemServico,
       pecasSelecionadas: pecasSelecionadasFormatadas,
-      servicosSelecionados: servicosSelecionadosFormatadas, // Linha 370: Uso da variável corrigida
+      servicosSelecionados: servicosSelecionadosFormatadas,
       valorTotalPecas: formData.totalPecasManual,
       valorTotalServicos: formData.totalServicosManual,
       totalMaoDeObra: formData.totalMaoDeObraManual,
@@ -386,8 +393,6 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
     <div className="orcamento-form-container">
       <div className="form-header">
         <h1>ORÇAMENTO - MOTOR COMPLETO/PARCIAL</h1>
-        {/* Usando uma imagem placeholder para o logo */}
-        <img src="https://placehold.co/100x50/cccccc/333333?text=LOGO" alt="Logo Zero20Garage" className="logo-orcamento" />
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -695,7 +700,6 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
           </div>
         </section>
 
-        {/* Caixa de Mensagem - Posicionada acima do botão de salvar */}
         {showMessage && (
           <div className={`message-box ${isErrorMessage ? 'error' : 'success'}`}>
             <span>{message}</span>
@@ -703,7 +707,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
           </div>
         )}
 
-        <button type="submit" className="submit-btn">
+        <button type="submit" className="action-btn">
           {editingData ? 'Atualizar Orçamento' : 'Salvar Orçamento'}
         </button>
       </form>

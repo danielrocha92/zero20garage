@@ -313,8 +313,6 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
     <div className="orcamento-form-container">
       <div className="form-header">
         <h1>ORÇAMENTO - CABEÇOTE</h1> {/* Título específico para cabeçote */}
-        {/* Usando uma imagem placeholder para o logo */}
-        <img src="https://placehold.co/100x50/cccccc/333333?text=LOGO" alt="Logo Zero20Garage" className="logo-orcamento" />
       </div>
 
       <form onSubmit={handleSubmit}>
