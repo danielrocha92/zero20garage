@@ -12,7 +12,7 @@ import './PainelOrcamentos.css';
 
 // URL BASE da sua API Node.js/Firebase no Render
 // ATENÇÃO: SUBSTITUA ESTA URL PELA URL REAL DO SEU DEPLOY NO RENDER!
-const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com'; // Use a URL do seu deploy da API
+const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com/api/orcamentos'; // Use a URL do seu deploy da API
 
 /**
  * Componente PainelOrcamentos
@@ -232,4 +232,3 @@ const PainelOrcamentos = () => {
 };
 
 export default PainelOrcamentos;
- 

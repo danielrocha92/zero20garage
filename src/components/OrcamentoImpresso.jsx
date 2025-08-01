@@ -40,8 +40,8 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     endereco: "R. Amador Bueno, 333 - Santo Amaro, São Paulo - SP, 04752-005",
     telefone: "(11) 99999-9999",
     email: "contato@zero20garage.com.br",
-    logo: "/images/zero20-logo.png" // Exemplo de caminho de logo (ajuste se for diferente)
-    // Se o logo estiver na pasta public, o caminho é direto como '/logo.png'
+    logo: "/images/zero20-background.jpg" // Exemplo de caminho de logo (ajuste se for diferente)
+    // Se o logo estiver na pasta public, o caminho é direto como '/background.jpg'
   };
 
   // Funções auxiliares para calcular totais (se os dados não vierem pré-calculados)
