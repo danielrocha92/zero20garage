@@ -1,352 +1,318 @@
-/* src/PainelOrcamentos.css */
+/* src/components/PainelOrcamentos.css */
 
-/* Definições de Cores e Fontes (podem ser globais ou repetidas aqui para auto-suficiência) */
-:root {
-  --bg-dark: #121212;
-  --text-light: #f0f0f0;
-  --red-primary: #ff0000;
-  --red-secondary: #ff3b3b;
-  --red-light: #ff9999;
-  --red-accent: #cc0000;
-  --border-color: #ff0000; /* Para elementos interativos */
-}
-
-/* Base do container do Painel de Orçamentos */
+/* Estilos gerais do painel */
 .painel-orcamentos-container {
-  background-color: var(--bg-dark);
-  padding: 0.5rem;
-  color: var(--text-light);
-  max-width: 800px; /* Um pouco maior que o 600px anterior para o histórico */
-  margin: 7.5rem auto; /* Centraliza e adiciona margem superior/inferior */
-  border-radius: 20px; /* Bordas mais suaves */
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); /* Sombra vermelha mais pronunciada */
-  font-family: 'Arial', sans-serif; /* Consistente com os orçamentos internos */
+    background-color: #1a1a1a; /* Fundo escuro */
+    color: #e0e0e0; /* Cor do texto padrão */
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Estilos para Títulos */
-.painel-header h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: var(--red-primary);
-  text-align: center;
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15rem;
-  text-shadow: 0 0 10px rgba(255, 0, 0, 0.7); /* Sombra mais forte no título */
+.titulo-escuro {
+    color: #c50404; /* Vermelho da marca */
+    font-family: 'Arial Black', sans-serif;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
-.painel-header button {
-  background-color: var(--bg-dark);
-  color: var(--red-primary);
-  border: 1px solid var(--red-primary);
-  padding: 0.75rem 1.25rem;
-  border-radius: 20px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.painel-header button:hover {
-  background-color: var(--red-primary);
-  color: var(--text-light);
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
-}
-
-/* Seletor de Tipo de Orçamento - ESTILO ATUALIZADO */
+/* Seletor de tipo de orçamento (botões) */
 .tipo-orcamento-selector {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap; /* Permite que os botões quebrem a linha em telas menores */
+    justify-content: center;
 }
 
 .tipo-orcamento-selector button {
-  padding: 0.75rem 1.5rem;
-  border-radius: 20px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-  border: 1px solid transparent;
+    background-color: #333;
+    color: #e0e0e0;
+    border: 1px solid #555;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.tipo-orcamento-selector button:hover {
+    background-color: #444;
+    border-color: #c50404;
+    color: #c50404;
 }
 
 .tipo-orcamento-selector button.active {
-  background-color: var(--red-primary);
-  color: var(--text-light);
-  border-color: var(--red-primary);
+    background-color: #c50404;
+    color: white;
+    border-color: #c50404;
+    box-shadow: 0 4px 10px rgba(197, 4, 4, 0.3);
 }
 
-.tipo-orcamento-selector button:not(.active) {
-  background-color: var(--bg-dark);
-  color: var(--red-primary);
-  border-color: var(--red-primary);
-}
-
-.tipo-orcamento-selector button:not(.active):hover {
-  background-color: var(--red-accent);
-  color: var(--text-light);
-  border-color: var(--red-accent);
-}
-
-
-/* Wrapper para os componentes de orçamento (OrcamentoMotorCompleto/Cabecote) */
+/* Área principal do formulário de orçamento */
 .orcamento-form-wrapper {
-  margin-top: 1.5rem;
-  background-color: #1e1e1e;
-  padding: 0.5rem;
-  border-radius: 15px;
-  box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+    width: 100%;
+    max-width: 900px; /* Limita a largura do formulário principal */
+    background-color: #2a2a2a; /* Fundo do container do formulário */
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    margin-bottom: 40px; /* Espaço antes do histórico */
 }
 
-/* Seção de Histórico */
-.historico-section {
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px dashed #444;
-}
-
-.historico-section h2 {
-  font-size: 1.8rem;
-  color: var(--red-primary);
-  margin-bottom: 1rem;
-  border-bottom: 2px solid var(--red-primary);
-  padding-bottom: 0.5rem;
-}
-
+/* Grupo de botões de histórico (exportar) */
 .historico-buttons-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-/* Botões de Ação (Exportar) */
+/* Botões de ação (gerais, como exportar, imprimir, salvar) */
 .action-btn {
-  background-color: var(--red-primary);
-  color: var(--text-light);
-  border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 20px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  width: 100%;
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+    background-color: #c50404; /* Vermelho da marca */
+    border: none;
+    color: white;
+    font-family: 'Arial Black', sans-serif;
+    font-weight: 700;
+    padding: 12px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1em;
+    box-shadow: 0 4px 10px rgba(197, 4, 4, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 
 .action-btn:hover {
-  background-color: var(--red-accent);
-  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+    background-color: #9e0303; /* Vermelho escuro para hover */
+    box-shadow: 0 6px 15px rgba(197, 4, 4, 0.4);
+    transform: translateY(-2px);
+}
+.action-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(197, 4, 4, 0.2);
 }
 
-.no-historico-message {
-  margin-top: 1.5rem;
-  color: var(--red-light);
-  text-align: center;
-  font-style: italic;
-  font-size: 1.1rem;
+/* Botões de ação pequenos (Visualizar, Editar) - Estilização aprimorada */
+.action-btn-small {
+    padding: 8px 15px; /* Aumentado o padding */
+    border-radius: 8px; /* Cantos mais arredondados */
+    cursor: pointer;
+    font-size: 0.9em; /* Ligeiramente maior */
+    margin: 0 5px;
+    transition: all 0.3s ease; /* Transição para todas as propriedades */
+    font-weight: bold; /* Negrito para os botões */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    border: none; /* Remove borda padrão */
 }
 
-/* Tabela de Histórico */
-.historico-table {
-  width: 100%;
-  margin-top: 1.5rem;
-  border-collapse: collapse;
-  background-color: #1e1e1e;
-  border-radius: 20px;
-  overflow: hidden;
+.action-btn-small.view-btn {
+    background-color: #007bff; /* Azul para visualizar */
+    color: white;
+}
+.action-btn-small.view-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.historico-table th,
-.historico-table td {
-  padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid #333;
-  color: var(--text-light);
-  font-size: 0.95rem;
+.action-btn-small.edit-btn {
+    background-color: #ffc107; /* Amarelo para editar */
+    color: #333;
+}
+.action-btn-small.edit-btn:hover {
+    background-color: #e0a800;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.historico-table th {
-  background-color: #2a2a2a;
-  color: var(--red-light);
-  font-weight: bold;
-  text-transform: uppercase;
+.action-btn-small.delete-btn { /* Estilo para o botão de excluir */
+    background-color: #dc3545; /* Vermelho para excluir */
+    color: white;
+}
+.action-btn-small.delete-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.historico-table tr:last-child td {
-  border-bottom: none;
+
+/* Estilos para o histórico de orçamentos (container geral e itens) */
+.historico-orcamentos-container { /* Renomeado para ser mais específico */
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 40px;
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
-.historico-table tbody tr:nth-child(odd) {
-  background-color: #1a1a1a;
+.historico-orcamentos-container h2 {
+    color: #c50404;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-.historico-table tbody tr:hover {
-  background-color: #282828;
+.loading-message, .error-message, .no-data-message {
+    text-align: center;
+    color: #bbb;
+    font-size: 1.1em;
+    padding: 20px;
 }
 
-/* Classes de status */
-.sucesso {
-  color: #4caf50;
-  font-weight: bold;
+/* Estilo para a lista de itens do orçamento (substitui a tabela anterior) */
+.historico-list {
+    display: grid; /* Usa grid para layout responsivo */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Colunas flexíveis */
+    gap: 20px; /* Espaçamento entre os itens */
+    padding: 0;
+    list-style: none;
 }
 
-.erro {
-  color: #ff5252;
-  font-weight: bold;
+.orcamento-item {
+    background-color: #3a3a3a; /* Fundo mais claro para cada item */
+    border: 1px solid #555;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espaça conteúdo e botões */
 }
 
-/* Classes que podem vir de outros componentes (ajustadas para este contexto) */
-.form-orcamento {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.orcamento-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
-.form-orcamento input,
-.form-orcamento textarea {
-  padding: 0.75rem;
-  border-radius: 20px;
-  border: none;
-  background: #1e1e1e;
-  color: #fff;
-  font-size: 1rem;
+.orcamento-item p {
+    margin: 5px 0; /* Espaçamento entre os parágrafos de informação */
+    font-size: 0.95em;
+    color: #e0e0e0;
 }
 
-.form-orcamento button {
-  background-color: #ff0000;
-  color: #fff;
-  border: none;
-  padding: 0.75rem;
-  border-radius: 20px;
-  font-size: 1rem;
-  cursor: pointer;
+.orcamento-item p strong {
+    color: #c50404; /* Cor para os rótulos em negrito */
+    margin-right: 5px;
 }
 
-.form-orcamento button:hover {
-  background-color: #cc0000;
+.orcamento-actions {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os botões quebrem a linha */
+    gap: 10px; /* Espaçamento entre os botões */
+    margin-top: 15px; /* Espaço acima dos botões */
+    justify-content: center; /* Centraliza os botões */
 }
 
-.sub-items-list {
-  padding-left: 25px;
-  margin-top: 5px;
-}
 
-.sub-items-list .sub-item-label {
-  font-size: 0.9em;
-  margin-bottom: 3px;
-}
+/* Estilos de status */
+.status-aberto { color: #007bff; } /* Azul */
+.status-aprovado { color: #28a745; } /* Verde */
+.status-rejeitado { color: #dc3545; } /* Vermelho */
+.status-concluido { color: #6f42c1; } /* Roxo */
 
-/* Message box */
+/* Message Box (para feedback de sucesso/erro) */
 .message-box {
-  position: fixed;
-  top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #28a745; /* Green for success */
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745; /* Cor de sucesso padrão */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .message-box.error {
-  background-color: #dc3545; /* Red for error */
+    background-color: #dc3545; /* Cor de erro */
 }
 
 .message-box button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.25rem;
-  margin-left: 1rem;
-  cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    line-height: 1;
 }
 
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    .painel-orcamentos-container, .historico-orcamentos-container {
+        padding: 10px;
+    }
 
-/* --- MOBILE-FIRST: Media Queries para Desktop --- */
-@media (min-width: 768px) {
-  .painel-orcamentos-container {
-    padding: 3rem;
-  }
+    .titulo-escuro {
+        font-size: 1.8em;
+    }
 
-  .painel-header {
-    flex-direction: row;
-  }
+    .tipo-orcamento-selector {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
 
-  .painel-header h1 {
-    font-size: 3.5rem;
-    margin-bottom: 0;
-  }
+    .tipo-orcamento-selector button {
+        width: 100%;
+        max-width: 250px;
+    }
 
-  .tipo-orcamento-selector {
-    gap: 2rem;
-  }
+    .orcamento-form-wrapper {
+        padding: 15px;
+    }
 
-  .tipo-orcamento-selector button {
-    padding: 0.8rem 2rem;
-  }
+    .historico-buttons-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
 
-  .historico-buttons-group {
-    flex-direction: row;
-    justify-content: center;
-    gap: 1.5rem;
-  }
+    .action-btn {
+        width: 100%;
+        max-width: 250px;
+    }
 
-  .action-btn {
-    width: auto;
-    min-width: 180px;
-  }
+    /* Ajustes para o layout de grid em telas menores */
+    .historico-list {
+        grid-template-columns: 1fr; /* Uma coluna em telas pequenas */
+        gap: 15px;
+    }
 
-  .historico-table th,
-  .historico-table td {
-    padding: 1.2rem;
-    font-size: 1rem;
-  }
+    .orcamento-item {
+        padding: 12px;
+    }
+
+    .orcamento-item p {
+        font-size: 0.9em;
+    }
+
+    .orcamento-actions {
+        flex-direction: column; /* Empilha botões de ação em telas muito pequenas */
+        gap: 8px;
+    }
+
+    .action-btn-small {
+        width: 100%; /* Botões pequenos ocupam a largura total */
+        max-width: 180px; /* Limita a largura em telas maiores que mobile */
+        margin: 0 auto; /* Centraliza */
+    }
 }
 
-/* Modal simples para visualização/edição */
-.modal-overlay.fixed-center {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  background: rgba(0,0,0,0.2);
-  /* Modal sempre centralizado e sem rolagem */
-}
-
-.modal-content {
-  background: #fff;
-  border-radius: 8px;
-  padding: 32px;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.25);
-  min-width: 320px;
-  max-width: 98vw;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-}
-
-.modal-content h3 {
-  margin-top: 0;
-  margin-bottom: 16px;
-}
-.modal-content label {
-  display: block;
-  margin-bottom: 10px;
-}
-.modal-content input {
-  width: 100%;
-  padding: 6px 8px;
-  margin-top: 3px;
-  margin-bottom: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+@media (max-width: 480px) {
+    .action-btn-small {
+        max-width: 150px; /* Ajuste para telas muito pequenas */
+    }
 }
