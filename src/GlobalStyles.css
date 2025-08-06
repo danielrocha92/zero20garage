@@ -45,30 +45,29 @@ body {
   max-width: 1200px;
   padding: 0.5rem;
   /* Blur significativo para o efeito iOS */
-  backdrop-filter: blur(25px); /* Aumento para um desfoque mais evidente */
+  backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   margin: 0 auto;
-  border-radius: 20px; /* Mais arredondado, como os elementos do iOS */
+  border-radius: 20px;
   /* Efeito de vidro na borda com box-shadow */
-  box-shadow:
-    0 0 6px rgba(255, 255, 255, 0.1), /* Brilho externo sutil */
-    inset 0 0 1px rgba(255, 255, 255, 0.2), /* Brilho interno na borda */
-    inset 0 0 5px rgba(255, 255, 255, 0.05), /* Gradiente de brilho interno */
-    0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra para profundidade */
-  border: none; /* Remove a borda sólida */
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.1),
+    inset 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 0 5px rgba(255, 255, 255, 0.05),
+    0 4px 20px rgba(0, 0, 0, 0.1);
+  border: none;
 }
 
 .container-claro {
   color: var(--branco);
   /* Opacidade bem baixa para a translucidez */
-  background-color: rgba(247, 247, 247, 0.15); /* Mais transparente */
+  background-color: rgba(247, 247, 247, 0.15);
 }
 
 .container-escuro {
   /* Opacidade bem baixa para a translucidez */
-  background-color: rgba(18, 18, 18, 0.3); /* Mais transparente */
-  color: var(--cinza-claro); /* Mantido claro para contraste */
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  background-color: rgba(18, 18, 18, 0.3);
+  color: var(--cinza-claro);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 /* ===== Estilos .page-claro ===== */
@@ -110,10 +109,10 @@ body {
 .page-claro .section {
   padding: 0.5rem;
   /* Ajuste para seção clara com blur e transparência */
-  background-color: rgba(245, 245, 245, 0.2); /* Mais transparente */
-  backdrop-filter: blur(20px); /* Blur significativo para seções */
+  background-color: rgba(245, 245, 245, 0.2);
+  backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-radius: 20px; /* Bordas mais arredondadas */
+  border-radius: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -181,12 +180,12 @@ body {
   font-size: 1rem;
   margin-bottom: 1rem;
   padding: 0.5rem;
-  color: var(--cinza-claro); /* Ajustado para melhor contraste */
+  color: var(--cinza-claro);
   font-family: 'Ubuntu', sans-serif;
   font-weight: 600;
   letter-spacing: 0.03rem;
   text-align: center;
-  word-break: break-all; /* Corrigido de 'all' para 'break-all' */
+  word-break: break-all;
   hyphens: auto;
   letter-spacing: 0.2px;
 }
@@ -197,11 +196,10 @@ body {
   margin: 2rem 0 1rem;
   text-align: center;
   align-items: center;
-  color: var(--cinza-claro); /* Ajustado para melhor contraste */
+  color: var(--cinza-claro);
   font-family: 'Ubuntu', sans-serif;
   letter-spacing: 0.05rem;
-  text-shadow:
-    1px 1px 2px rgba(0, 0, 0, 0.2),
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2),
     0 0 5px rgba(0, 0, 0, 0.1);
   word-break: break-word;
   hyphens: auto;
@@ -251,9 +249,9 @@ body {
 }
 
 .page-escuro .container-escuro {
-  background-color: rgba(28, 28, 30, 0.25); /* Fundo mais escuro e translúcido */
+  background-color: rgba(28, 28, 30, 0.25);
   color: var(--cinza-claro);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25); /* Sombra suave porém mais intensa */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
   max-width: 1200px;
   padding: 1rem;
   margin: 0 auto;
@@ -262,7 +260,7 @@ body {
   backdrop-filter: blur(30px) saturate(180%) contrast(110%);
   -webkit-backdrop-filter: blur(30px) saturate(180%) contrast(110%);
 
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Bordas mais destacadas */
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease-in-out;
 }
 
@@ -274,11 +272,11 @@ body {
   line-height: 1.2;
   margin-bottom: 0.5rem;
   padding: 0.1rem;
-  color: var(--cinza-escuro); /* Ajustado para texto claro em container escuro */
+  color: var(--cinza-escuro);
   font-family: 'Ubuntu', sans-serif;
   font-weight: 550;
   text-align: center;
-  word-break: break-all; /* Corrigido de 'auto-phrase' */
+  word-break: break-all;
   hyphens: auto;
   letter-spacing: 0.2px;
 }
@@ -286,7 +284,7 @@ body {
 .lista-escuro li {
   list-style-type: none;
   padding-left: 0;
-  color: var(--cinza-escuro); /* Ajustado para texto claro em container escuro */
+  color: var(--cinza-escuro);
   padding-left: 1.5rem;
   margin-bottom: 0.5rem;
   font-size: 1rem;
@@ -295,7 +293,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.05rem;
   text-align: justify;
-  word-break: break-all; /* Corrigido de 'auto-phrase' */
+  word-break: break-all;
   word-spacing: normal;
 }
 
@@ -315,10 +313,9 @@ body {
   font-family: 'Ubuntu', sans-serif;
   letter-spacing: 0.03rem;
   color: var(--cinza-claro);
-  text-shadow:
-    1px 1px 2px rgba(0, 0, 0, 0.4),
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4),
     0 0 10px rgba(0, 0, 0, 0.3);
-  word-break: break-all; /* Corrigido de 'auto-phrase' */
+  word-break: break-all;
   hyphens: auto;
 }
 
@@ -332,16 +329,15 @@ body {
   margin-bottom: 1rem;
   margin-top: 1rem;
   letter-spacing: 0.05rem;
-  text-shadow:
-    1px 1px 2px rgba(0, 0, 0, 0.4),
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4),
     0 0 10px rgba(255, 0, 0, 0.2);
 }
 
 /* ===== Seções (sem alteração significativa para mobile-first aqui, pois já são fluidas) ===== */
 .section {
   padding: 0.5rem;
-  background-color: rgba(245, 245, 245, 0.2); /* Mais transparente */
-  backdrop-filter: blur(20px); /* Blur significativo */
+  background-color: rgba(245, 245, 245, 0.2);
+  backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -414,14 +410,14 @@ textarea {
   border: 1px solid var(--cinza-medio);
   border-radius: 20px;
   font-size: 1rem;
-  background-color: rgba(255, 255, 255, 0.1); /* Sutilmente transparente */
-  color: var(--cinza-escuro); /* Cor do texto no input */
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--cinza-escuro);
 }
 
 /* ===== Destaques (já mobile-first, com ajuste para desktop no media query) ===== */
 .highlights-grid {
   display: grid;
-  grid-template-columns: 1fr; /* Mobile: uma coluna */
+  grid-template-columns: 1fr;
   gap: 1.5rem;
   margin-top: 2rem;
   padding: 0.5rem;
@@ -429,44 +425,35 @@ textarea {
 
 .highlight-item,
 .principio-item {
-  /* Efeito de pasta iOS */
-  background-color: rgba(15, 15, 15, 0.2); /* Bem mais transparente */
-  backdrop-filter: blur(30px); /* Blur super forte */
-  -webkit-backdrop-filter: blur(30px);
-  border-radius: 20px; /* Mais arredondado ainda */
+  /* Efeito de vidro aprimorado com mais transparência e sombra vermelha */
+  background-color: rgba(255, 255, 255, 0.08); /* Mais transparência */
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Borda mais transparente */
+  box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2); /* Sombra vermelha e mais suave */
+  border-radius: 20px;
   min-height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 0.5rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  /* Sombra para o efeito de vidro nas bordas */
-  box-shadow:
-    0 0 6px rgba(255, 255, 255, 0.1),
-    inset 0 0 1px rgba(255, 255, 255, 0.2),
-    inset 0 0 5px rgba(255, 255, 255, 0.05),
-    0 4px 40px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
   margin: 1rem;
-  /* Remove a borda sólida */
-  border: none;
-  color: var(--branco); /* Garante texto claro para contraste */
+  color: var(--branco);
+  overflow: hidden;
 }
 
 .highlight-card {
-  /* Efeito de pasta iOS */
-  background-color: rgba(18, 18, 18, 0.2); /* Bem mais transparente */
-  border-radius: 20px; /* Mais arredondado ainda */
+  /* Efeito de vidro aprimorado com mais transparência e sombra vermelha */
+  background-color: rgba(255, 255, 255, 0.08); /* Mais transparência */
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Borda mais transparente */
+  box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2); /* Sombra vermelha e mais suave */
+  border-radius: 20px;
   padding: 1.5rem;
   color: var(--branco);
-  /* Sombra para o efeito de vidro nas bordas */
-  box-shadow:
-    0 0 6px rgba(255, 255, 255, 0.15),
-    inset 0 0 1px rgba(255, 255, 255, 0.25),
-    inset 0 0 5px rgba(255, 255, 255, 0.08),
-    0 4px 40px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  backdrop-filter: blur(30px); /* Blur super forte */
-  -webkit-backdrop-filter: blur(30px);
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -474,28 +461,18 @@ textarea {
   gap: 1rem;
   position: relative;
   overflow: hidden;
-  /* Remove a borda sólida */
-  border: none;
 }
 
 .highlight-card:hover {
-  transform: translateY(-5px);
-  /* Sombra no hover para destacar mais */
-  box-shadow:
-    0 0 10px rgba(255, 255, 255, 0.25),
-    inset 0 0 2px rgba(255, 255, 255, 0.35),
-    inset 0 0 8px rgba(255, 255, 255, 0.15),
-    0 4px 20px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px) scale(1.01); /* Movimento e escala mais sutis */
+  box-shadow: 0 10px 40px 0 rgba(255, 0, 0, 0.4); /* Sombra mais intensa no hover */
+  background-color: rgba(255, 255, 255, 0.1); /* Fundo um pouco mais opaco no hover */
 }
 
 .highlight-item:hover {
-  transform: translateY(-5px);
-  /* Sombra no hover para destacar mais */
-  box-shadow:
-    0 0 10px rgba(255, 255, 255, 0.2),
-    inset 0 0 2px rgba(255, 255, 255, 0.3),
-    inset 0 0 8px rgba(255, 255, 255, 0.1),
-    0 10px 30px rgba(0, 0, 0, 0.388);
+  transform: translateY(-2px) scale(1.01); /* Movimento e escala mais sutis */
+  box-shadow: 0 10px 40px 0 rgba(255, 0, 0, 0.4); /* Sombra mais intensa no hover */
+  background-color: rgba(255, 255, 255, 0.1); /* Fundo um pouco mais opaco no hover */
 }
 
 .highlight-card h3 {
@@ -588,7 +565,7 @@ textarea {
   border-radius: 20px;
 }
 
-.home-\[etapa\]-content { /* Corrigido o seletor para evitar erro de parseamento */
+.home-\[etapa\]-content {
   background-color: rgba(255, 255, 255, 0.03);
   padding: 2rem;
   border-radius: 20px;
@@ -636,7 +613,7 @@ textarea {
   .container-escuro {
     max-width: 1200px;
     padding: 0.5rem;
-    backdrop-filter: blur(25px); /* Consistência com o aumento do blur */
+    backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     margin: 0 auto;
     border-radius: 20px;
@@ -650,33 +627,27 @@ textarea {
   .highlight-item,
   .principio-item {
     /* Consistência com os novos valores para destaques */
-    background-color: rgba(15, 15, 15, 0.2);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
+    background-color: rgba(255, 255, 255, 0.08); /* Mais transparência */
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borda mais transparente */
+    box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2); /* Sombra vermelha e mais suave */
     border-radius: 20px;
     min-height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 0.5rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* Sombra para o efeito de vidro nas bordas */
-    box-shadow:
-      0 0 6px rgba(255, 255, 255, 0.1),
-      inset 0 0 1px rgba(255, 255, 255, 0.2),
-      inset 0 0 5px rgba(255, 255, 255, 0.05),
-      0 4px 40px rgba(0, 0, 0, 0.2);
-    border: none;
+    transition: all 0.3s ease;
+    margin: 1rem;
+    color: var(--branco);
+    overflow: hidden;
   }
 
   .highlight-item:hover {
-    transform: translateY(-5px);
-    /* Sombra no hover para destacar mais */
-    box-shadow:
-      0 0 10px rgba(255, 255, 255, 0.2),
-      inset 0 0 2px rgba(255, 255, 255, 0.3),
-      inset 0 0 8px rgba(255, 255, 255, 0.1),
-      0 10px 30px rgba(0, 0, 0, 0.388);
+    transform: translateY(-2px) scale(1.01); /* Movimento e escala mais sutis */
+    box-shadow: 0 10px 40px 0 rgba(255, 0, 0, 0.4); /* Sombra mais intensa no hover */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo um pouco mais opaco no hover */
   }
 }
 
@@ -703,12 +674,12 @@ textarea {
 .faq-item {
   margin-bottom: 1rem;
   padding: 0.5rem;
-  border-radius: 20px; /* Mais arredondado */
+  border-radius: 20px;
   /* Fundo do item FAQ com transparência e blur */
-  background-color: rgba(255, 255, 255, 0.3); /* Mais transparente */
-  backdrop-filter: blur(15px); /* Blur para itens individuais */
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: background-color 0.3s;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -752,7 +723,7 @@ textarea {
   .page-escuro .container-escuro,
   .section.dark {
     /* Ajustes para modo escuro */
-    background-color: rgba(18, 18, 18, 0.4); /* Transparência no modo escuro */
+    background-color: rgba(18, 18, 18, 0.4);
     color: var(--cinza-claro);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -765,29 +736,29 @@ textarea {
 
   .highlight-item {
     /* Ajustes para modo escuro com blur forte */
-    background-color: rgba(18, 18, 18, 0.3); /* Mais transparente */
+    background-color: rgba(18, 18, 18, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 4px 40px rgba(0, 0, 0, 0.3);
     color: var(--cinza-claro);
-    backdrop-filter: blur(30px); /* Blur super forte */
+    backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
   }
 
   .faq-section.dark {
     /* Ajustes para modo escuro */
-    background-color: rgba(30, 30, 30, 0.3); /* Transparência no modo escuro */
+    background-color: rgba(30, 30, 30, 0.3);
     color: var(--cinza-claro);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px); /* Blur significativo */
+    backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
   }
 
   .section {
     /* Ajustes para modo escuro */
-    background-color: rgba(30, 30, 30, 0.3); /* Transparência no modo escuro */
+    background-color: rgba(30, 30, 30, 0.3);
     color: var(--cinza-claro);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px); /* Blur significativo */
+    backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
   }
 }
@@ -897,7 +868,7 @@ textarea:focus {
   .container-escuro {
     padding: 1rem;
     max-width: 90%;
-    backdrop-filter: blur(20px); /* Ajuste de blur para telas menores */
+    backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
   }
 
@@ -908,13 +879,12 @@ textarea:focus {
     min-height: unset;
     margin: 0.5rem;
     /* Sombra para o efeito de vidro nas bordas */
-    box-shadow:
-      0 0 4px rgba(255, 255, 255, 0.1),
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.1),
       inset 0 0 1px rgba(255, 255, 255, 0.2),
       inset 0 0 3px rgba(255, 255, 255, 0.05),
       0 4px 20px rgba(0, 0, 0, 0.1);
     border: none;
-    backdrop-filter: blur(25px); /* Ajuste de blur para telas menores */
+    backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
   }
 
@@ -922,8 +892,7 @@ textarea:focus {
   .highlight-item:hover,
   .principio-item:hover {
     /* Sombra no hover para destacar mais */
-    box-shadow:
-      0 0 8px rgba(255, 255, 255, 0.2),
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2),
       inset 0 0 2px rgba(255, 255, 255, 0.3),
       inset 0 0 6px rgba(255, 255, 255, 0.1),
       0 8px 25px rgba(0, 0, 0, 0.25);
@@ -967,7 +936,7 @@ textarea:focus {
 
   .section {
     padding: 1rem;
-    backdrop-filter: blur(15px); /* Ajuste de blur para telas menores */
+    backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
   }
 
@@ -988,7 +957,7 @@ textarea:focus {
     max-width: 95%;
     padding: 0.75rem;
     margin: 0 auto;
-    backdrop-filter: blur(15px); /* Ajuste de blur para mobile */
+    backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
   }
 
@@ -996,7 +965,7 @@ textarea:focus {
     padding: 0.75rem;
     margin-bottom: 1rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(10px); /* Ajuste de blur para mobile */
+    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
 
@@ -1018,23 +987,21 @@ textarea:focus {
     padding: 0.75rem;
     margin: 0.5rem 0;
     /* Sombra para o efeito de vidro nas bordas */
-    box-shadow:
-      0 0 4px rgba(255, 255, 255, 0.1),
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.1),
       inset 0 0 1px rgba(255, 255, 255, 0.2),
       inset 0 0 3px rgba(255, 255, 255, 0.05),
       0 2px 15px rgba(0, 0, 0, 0.1);
     border: none;
-    backdrop-filter: blur(20px); /* Ajuste de blur para mobile */
+    backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-radius: 20px; /* Mais arredondado no mobile também */
+    border-radius: 20px;
   }
 
   .highlight-card:hover,
   .highlight-item:hover,
   .principio-item:hover {
     /* Sombra no hover para destacar mais */
-    box-shadow:
-      0 0 8px rgba(255, 255, 255, 0.2),
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2),
       inset 0 0 2px rgba(255, 255, 255, 0.3),
       inset 0 0 6px rgba(255, 255, 255, 0.1),
       0 5px 20px rgba(0, 0, 0, 0.2);
@@ -1056,7 +1023,7 @@ textarea:focus {
 
   .faq-section {
     padding: 0.75rem;
-    backdrop-filter: blur(15px); /* Ajuste de blur para mobile */
+    backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
   }
 
