@@ -86,6 +86,18 @@ const TestimonialsCarousel = () => {
         ))}
       </Swiper>
 
+      {/* Bloco adicionado com o botão para avaliação */}
+      <div className="review-cta-container">
+        <a
+          href="https://search.google.com/local/writereview?placeid=ChIJyRLKdePtzpQRRUd0f9JzIaI"
+          className="button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Deixe sua Avaliação no Google
+        </a>
+      </div>
+
       {selectedTestimonial && (
         <div className="testimonial-modal" onClick={() => setSelectedTestimonial(null)}>
           <div className="testimonial-modal-content" onClick={e => e.stopPropagation()}>
