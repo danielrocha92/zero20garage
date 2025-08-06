@@ -49,7 +49,13 @@ body {
   -webkit-backdrop-filter: blur(25px);
   margin: 0 auto;
   border-radius: 20px; /* Mais arredondado, como os elementos do iOS */
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
+  /* Efeito de vidro na borda com box-shadow */
+  box-shadow:
+    0 0 6px rgba(255, 255, 255, 0.1), /* Brilho externo sutil */
+    inset 0 0 1px rgba(255, 255, 255, 0.2), /* Brilho interno na borda */
+    inset 0 0 5px rgba(255, 255, 255, 0.05), /* Gradiente de brilho interno */
+    0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra para profundidade */
+  border: none; /* Remove a borda sólida */
 }
 
 .container-claro {
@@ -180,7 +186,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.03rem;
   text-align: center;
-  word-break: all;
+  word-break: break-all; /* Corrigido de 'all' para 'break-all' */
   hyphens: auto;
   letter-spacing: 0.2px;
 }
@@ -203,8 +209,7 @@ body {
   word-spacing: 0.5px;
 }
 
-.lista-claro li,
-ul {
+.lista-claro li {
   list-style-type: none;
   position: relative;
   padding-left: 1.25rem;
@@ -273,7 +278,7 @@ ul {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 550;
   text-align: center;
-  word-break: auto-phrase;
+  word-break: break-all; /* Corrigido de 'auto-phrase' */
   hyphens: auto;
   letter-spacing: 0.2px;
 }
@@ -290,7 +295,7 @@ ul {
   font-weight: 600;
   letter-spacing: 0.05rem;
   text-align: justify;
-  word-break: auto-phrase;
+  word-break: break-all; /* Corrigido de 'auto-phrase' */
   word-spacing: normal;
 }
 
@@ -313,7 +318,7 @@ ul {
   text-shadow:
     1px 1px 2px rgba(0, 0, 0, 0.4),
     0 0 10px rgba(0, 0, 0, 0.3);
-  word-break: auto-phrase;
+  word-break: break-all; /* Corrigido de 'auto-phrase' */
   hyphens: auto;
 }
 
@@ -435,9 +440,15 @@ textarea {
   justify-content: center;
   padding: 0.5rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada e difusa */
+  /* Sombra para o efeito de vidro nas bordas */
+  box-shadow:
+    0 0 6px rgba(255, 255, 255, 0.1),
+    inset 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 0 5px rgba(255, 255, 255, 0.05),
+    0 4px 40px rgba(0, 0, 0, 0.2);
   margin: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Borda muito sutil */
+  /* Remove a borda sólida */
+  border: none;
   color: var(--branco); /* Garante texto claro para contraste */
 }
 
@@ -447,7 +458,12 @@ textarea {
   border-radius: 20px; /* Mais arredondado ainda */
   padding: 1.5rem;
   color: var(--branco);
-  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada e difusa */
+  /* Sombra para o efeito de vidro nas bordas */
+  box-shadow:
+    0 0 6px rgba(255, 255, 255, 0.15),
+    inset 0 0 1px rgba(255, 255, 255, 0.25),
+    inset 0 0 5px rgba(255, 255, 255, 0.08),
+    0 4px 40px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   backdrop-filter: blur(30px); /* Blur super forte */
   -webkit-backdrop-filter: blur(30px);
@@ -458,12 +474,28 @@ textarea {
   gap: 1rem;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Borda muito sutil */
+  /* Remove a borda sólida */
+  border: none;
 }
 
 .highlight-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 24px rgba(255, 0, 0, 0.4);
+  /* Sombra no hover para destacar mais */
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.25),
+    inset 0 0 2px rgba(255, 255, 255, 0.35),
+    inset 0 0 8px rgba(255, 255, 255, 0.15),
+    0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.highlight-item:hover {
+  transform: translateY(-5px);
+  /* Sombra no hover para destacar mais */
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.2),
+    inset 0 0 2px rgba(255, 255, 255, 0.3),
+    inset 0 0 8px rgba(255, 255, 255, 0.1),
+    0 10px 30px rgba(0, 0, 0, 0.388);
 }
 
 .highlight-card h3 {
@@ -556,7 +588,7 @@ textarea {
   border-radius: 20px;
 }
 
-.home-[etapa]-content {
+.home-\[etapa\]-content { /* Corrigido o seletor para evitar erro de parseamento */
   background-color: rgba(255, 255, 255, 0.03);
   padding: 2rem;
   border-radius: 20px;
@@ -614,28 +646,38 @@ textarea {
   .highlights-grid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
-}
 
-.highlight-item,
-.principio-item {
-  /* Consistência com os novos valores para destaques */
-  background-color: rgba(15, 15, 15, 0.2);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border-radius: 20px;
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0.5rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
+  .highlight-item,
+  .principio-item {
+    /* Consistência com os novos valores para destaques */
+    background-color: rgba(15, 15, 15, 0.2);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-radius: 20px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Sombra para o efeito de vidro nas bordas */
+    box-shadow:
+      0 0 6px rgba(255, 255, 255, 0.1),
+      inset 0 0 1px rgba(255, 255, 255, 0.2),
+      inset 0 0 5px rgba(255, 255, 255, 0.05),
+      0 4px 40px rgba(0, 0, 0, 0.2);
+    border: none;
+  }
 
-.highlight-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.388); /* Sombra mais intensa no hover */
+  .highlight-item:hover {
+    transform: translateY(-5px);
+    /* Sombra no hover para destacar mais */
+    box-shadow:
+      0 0 10px rgba(255, 255, 255, 0.2),
+      inset 0 0 2px rgba(255, 255, 255, 0.3),
+      inset 0 0 8px rgba(255, 255, 255, 0.1),
+      0 10px 30px rgba(0, 0, 0, 0.388);
+  }
 }
 
 /* ===== FAQ (já mobile-first, com container-escuro dentro do media query para telas maiores) ===== */
@@ -865,9 +907,26 @@ textarea:focus {
     padding: 1rem;
     min-height: unset;
     margin: 0.5rem;
-    box-shadow: 0 4px 20px rgba(255, 0, 0, 0.1); /* Sombra mais sutil */
+    /* Sombra para o efeito de vidro nas bordas */
+    box-shadow:
+      0 0 4px rgba(255, 255, 255, 0.1),
+      inset 0 0 1px rgba(255, 255, 255, 0.2),
+      inset 0 0 3px rgba(255, 255, 255, 0.05),
+      0 4px 20px rgba(0, 0, 0, 0.1);
+    border: none;
     backdrop-filter: blur(25px); /* Ajuste de blur para telas menores */
     -webkit-backdrop-filter: blur(25px);
+  }
+
+  .highlight-card:hover,
+  .highlight-item:hover,
+  .principio-item:hover {
+    /* Sombra no hover para destacar mais */
+    box-shadow:
+      0 0 8px rgba(255, 255, 255, 0.2),
+      inset 0 0 2px rgba(255, 255, 255, 0.3),
+      inset 0 0 6px rgba(255, 255, 255, 0.1),
+      0 8px 25px rgba(0, 0, 0, 0.25);
   }
 
   .highlight-card h3 {
@@ -958,10 +1017,27 @@ textarea:focus {
   .principio-item {
     padding: 0.75rem;
     margin: 0.5rem 0;
-    box-shadow: 0 2px 15px rgba(255, 0, 0, 0.1); /* Sombra mais sutil */
+    /* Sombra para o efeito de vidro nas bordas */
+    box-shadow:
+      0 0 4px rgba(255, 255, 255, 0.1),
+      inset 0 0 1px rgba(255, 255, 255, 0.2),
+      inset 0 0 3px rgba(255, 255, 255, 0.05),
+      0 2px 15px rgba(0, 0, 0, 0.1);
+    border: none;
     backdrop-filter: blur(20px); /* Ajuste de blur para mobile */
     -webkit-backdrop-filter: blur(20px);
     border-radius: 20px; /* Mais arredondado no mobile também */
+  }
+
+  .highlight-card:hover,
+  .highlight-item:hover,
+  .principio-item:hover {
+    /* Sombra no hover para destacar mais */
+    box-shadow:
+      0 0 8px rgba(255, 255, 255, 0.2),
+      inset 0 0 2px rgba(255, 255, 255, 0.3),
+      inset 0 0 6px rgba(255, 255, 255, 0.1),
+      0 5px 20px rgba(0, 0, 0, 0.2);
   }
 
   .highlight-card h3 {

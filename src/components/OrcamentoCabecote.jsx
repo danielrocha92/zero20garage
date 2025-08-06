@@ -648,7 +648,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
           </div>
         )}
 
-        <button type="submit" className="submit-btn">
+        <button type="submit" className="action-btn">
           {editingData ? 'Atualizar Orçamento' : 'Salvar Orçamento'}
         </button>
       </form>

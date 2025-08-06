@@ -2,30 +2,30 @@
 
 /* Estilos gerais do painel */
 .painel-orcamentos-container {
-    background-color: #1a1a1a; /* Fundo escuro */
-    color: #e0e0e0; /* Cor do texto padrão */
+    background-color: #1a1a1a;
+    color: #e0e0e0;
     min-height: 100vh;
-    padding: 20px;
+    padding: 10px; /* Estilo padrão para mobile */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .titulo-escuro {
-    color: #c50404; /* Vermelho da marca */
+    color: #c50404;
     font-family: 'Arial Black', sans-serif;
-    font-size: 2.5em;
-    margin-bottom: 30px;
+    font-size: 1.8em; /* Estilo padrão para mobile */
+    margin-bottom: 20px;
     text-align: center;
 }
 
 /* Seletor de tipo de orçamento (botões) */
 .tipo-orcamento-selector {
     display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-    flex-wrap: wrap; /* Permite que os botões quebrem a linha em telas menores */
-    justify-content: center;
+    flex-direction: column; /* Estilo padrão para mobile */
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
 }
 
 .tipo-orcamento-selector button {
@@ -37,6 +37,8 @@
     cursor: pointer;
     font-size: 1em;
     transition: all 0.3s ease;
+    width: 100%; /* Ocupa a largura total para mobile */
+    max-width: 250px;
 }
 
 .tipo-orcamento-selector button:hover {
@@ -55,26 +57,25 @@
 /* Área principal do formulário de orçamento */
 .orcamento-form-wrapper {
     width: 100%;
-    max-width: 900px; /* Limita a largura do formulário principal */
-    background-color: #2a2a2a; /* Fundo do container do formulário */
-    padding: 20px;
+    padding: 15px; /* Estilo padrão para mobile */
+    background-color: #2a2a2a;
     border-radius: 20px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-    margin-bottom: 40px; /* Espaço antes do histórico */
+    margin-bottom: 30px;
 }
 
 /* Grupo de botões de histórico (exportar) */
 .historico-buttons-group {
     display: flex;
-    gap: 15px;
+    flex-direction: column; /* Estilo padrão para mobile */
+    gap: 10px;
     margin-top: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
 }
 
 /* Botões de ação (gerais, como exportar, imprimir, salvar) */
 .action-btn {
-    background-color: #c50404; /* Vermelho da marca */
+    background-color: #c50404;
     border: none;
     color: white;
     font-family: 'Arial Black', sans-serif;
@@ -85,10 +86,12 @@
     font-size: 1em;
     box-shadow: 0 4px 10px rgba(197, 4, 4, 0.3);
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    max-width: 250px;
 }
 
 .action-btn:hover {
-    background-color: #9e0303; /* Vermelho escuro para hover */
+    background-color: #9e0303;
     box-shadow: 0 6px 15px rgba(197, 4, 4, 0.4);
     transform: translateY(-2px);
 }
@@ -99,19 +102,21 @@
 
 /* Botões de ação pequenos (Visualizar, Editar) - Estilização aprimorada */
 .action-btn-small {
-    padding: 8px 15px; /* Aumentado o padding */
-    border-radius: 8px; /* Cantos mais arredondados */
+    padding: 8px 15px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 0.9em; /* Ligeiramente maior */
+    font-size: 0.9em;
     margin: 0 5px;
-    transition: all 0.3s ease; /* Transição para todas as propriedades */
-    font-weight: bold; /* Negrito para os botões */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
-    border: none; /* Remove borda padrão */
+    transition: all 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: none;
+    width: 100%;
+    max-width: 180px;
 }
 
 .action-btn-small.view-btn {
-    background-color: #007bff; /* Azul para visualizar */
+    background-color: #007bff;
     color: white;
 }
 .action-btn-small.view-btn:hover {
@@ -121,7 +126,7 @@
 }
 
 .action-btn-small.edit-btn {
-    background-color: #ffc107; /* Amarelo para editar */
+    background-color: #ffc107;
     color: #333;
 }
 .action-btn-small.edit-btn:hover {
@@ -130,8 +135,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.action-btn-small.delete-btn { /* Estilo para o botão de excluir */
-    background-color: #dc3545; /* Vermelho para excluir */
+.action-btn-small.delete-btn {
+    background-color: #dc3545;
     color: white;
 }
 .action-btn-small.delete-btn:hover {
@@ -140,14 +145,11 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-
 /* Estilos para o histórico de orçamentos (container geral e itens) */
-.historico-orcamentos-container { /* Renomeado para ser mais específico */
+.historico-orcamentos-container {
     width: 100%;
-    max-width: 1200px;
-    margin-top: 40px;
-    background-color: #2a2a2a;
     padding: 20px;
+    background-color: #2a2a2a;
     border-radius: 20px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
@@ -167,17 +169,17 @@
     padding: 20px;
 }
 
-/* Estilo para a lista de itens do orçamento (substitui a tabela anterior) */
+/* ESTILO MOBILE FIRST: Padrão é uma coluna */
 .historico-list {
-    display: grid; /* Usa grid para layout responsivo */
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Colunas flexíveis */
-    gap: 20px; /* Espaçamento entre os itens */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     padding: 0;
     list-style: none;
 }
 
 .orcamento-item {
-    background-color: #3a3a3a; /* Fundo mais claro para cada item */
+    background-color: #3a3a3a;
     border: 1px solid #555;
     border-radius: 10px;
     padding: 15px;
@@ -185,7 +187,7 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Espaça conteúdo e botões */
+    justify-content: space-between;
 }
 
 .orcamento-item:hover {
@@ -194,30 +196,31 @@
 }
 
 .orcamento-item p {
-    margin: 5px 0; /* Espaçamento entre os parágrafos de informação */
+    margin: 5px 0;
     font-size: 0.95em;
     color: #e0e0e0;
 }
 
 .orcamento-item p strong {
-    color: #c50404; /* Cor para os rótulos em negrito */
+    color: #c50404;
     margin-right: 5px;
 }
 
 .orcamento-actions {
     display: flex;
-    flex-wrap: wrap; /* Permite que os botões quebrem a linha */
-    gap: 10px; /* Espaçamento entre os botões */
-    margin-top: 15px; /* Espaço acima dos botões */
-    justify-content: center; /* Centraliza os botões */
+    flex-direction: column; /* Estilo padrão para mobile */
+    gap: 8px;
+    margin-top: 15px;
+    justify-content: center;
+    align-items: center;
 }
 
 
 /* Estilos de status */
-.status-aberto { color: #007bff; } /* Azul */
-.status-aprovado { color: #28a745; } /* Verde */
-.status-rejeitado { color: #dc3545; } /* Vermelho */
-.status-concluido { color: #6f42c1; } /* Roxo */
+.status-aberto { color: #007bff; }
+.status-aprovado { color: #28a745; }
+.status-rejeitado { color: #dc3545; }
+.status-concluido { color: #6f42c1; }
 
 /* Message Box (para feedback de sucesso/erro) */
 .message-box {
@@ -225,7 +228,7 @@
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #28a745; /* Cor de sucesso padrão */
+    background-color: #28a745;
     color: white;
     padding: 15px 30px;
     border-radius: 8px;
@@ -237,7 +240,7 @@
 }
 
 .message-box.error {
-    background-color: #dc3545; /* Cor de erro */
+    background-color: #dc3545;
 }
 
 .message-box button {
@@ -249,70 +252,58 @@
     line-height: 1;
 }
 
-/* Media Queries para responsividade */
-@media (max-width: 768px) {
-    .painel-orcamentos-container, .historico-orcamentos-container {
-        padding: 10px;
+/* MEDIA QUERY PARA DESKTOP */
+@media (min-width: 768px) {
+    .painel-orcamentos-container {
+        padding: 20px;
     }
 
     .titulo-escuro {
-        font-size: 1.8em;
+        font-size: 2.5em;
+        margin-bottom: 30px;
     }
 
     .tipo-orcamento-selector {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
+        flex-direction: row; /* Muda para layout horizontal */
+        gap: 15px;
+        margin-bottom: 30px;
     }
 
     .tipo-orcamento-selector button {
-        width: 100%;
-        max-width: 250px;
+        width: auto;
     }
 
     .orcamento-form-wrapper {
-        padding: 15px;
+        padding: 20px;
+        max-width: 900px;
+        margin-bottom: 40px;
     }
 
     .historico-buttons-group {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .action-btn {
-        width: 100%;
-        max-width: 250px;
-    }
-
-    /* Ajustes para o layout de grid em telas menores */
-    .historico-list {
-        grid-template-columns: 1fr; /* Uma coluna em telas pequenas */
+        flex-direction: row; /* Muda para layout horizontal */
         gap: 15px;
     }
 
-    .orcamento-item {
-        padding: 12px;
+    .action-btn {
+        width: auto;
     }
 
-    .orcamento-item p {
-        font-size: 0.9em;
+    .action-btn-small {
+        width: auto;
+    }
+
+    .historico-list {
+        display: grid; /* Layout de grid para desktop */
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
     }
 
     .orcamento-actions {
-        flex-direction: column; /* Empilha botões de ação em telas muito pequenas */
-        gap: 8px;
+        flex-direction: row; /* Muda para layout horizontal */
     }
 
-    .action-btn-small {
-        width: 100%; /* Botões pequenos ocupam a largura total */
-        max-width: 180px; /* Limita a largura em telas maiores que mobile */
-        margin: 0 auto; /* Centraliza */
-    }
-}
-
-@media (max-width: 480px) {
-    .action-btn-small {
-        max-width: 150px; /* Ajuste para telas muito pequenas */
+    .historico-orcamentos-container {
+        max-width: 1200px;
+        margin-top: 40px;
     }
 }

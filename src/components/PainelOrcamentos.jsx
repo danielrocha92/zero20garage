@@ -1,5 +1,5 @@
 // src/components/PainelOrcamentos.jsx
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import OrcamentoCabecote from './OrcamentoCabecote';
 import OrcamentoMotorCompleto from './OrcamentoMotorCompleto';
 import HistoricoOrcamentos from './HistoricoOrcamentos';
@@ -22,6 +22,8 @@ const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com'; // Use a URL do 
  */
 const PainelOrcamentos = () => {
   const navigate = useNavigate();
+  // 1. Reintroduza o useRef para criar a referência
+  const historicoRef = useRef(null);
 
   const [tipo, setTipo] = useState('motor');
   const [historico, setHistorico] = useState([]);
@@ -305,6 +307,13 @@ const PainelOrcamentos = () => {
     setSelectedBudgetForView(null);
   };
 
+  // 2. Reintroduza a função para rolar para a seção do histórico
+  const scrollToHistorico = () => {
+    if (historicoRef.current) {
+      historicoRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className='painel-orcamentos-container'>
       {showMessage && (
@@ -331,6 +340,10 @@ const PainelOrcamentos = () => {
             >
               Orçamento Cabeçote
             </button>
+            {/* 3. Reintroduza o botão para a rolagem */}
+            <button onClick={scrollToHistorico}>
+              Histórico de Orçamentos
+            </button>
             <button onClick={handleLogout}>
               Sair
             </button>
@@ -352,10 +365,13 @@ const PainelOrcamentos = () => {
             </div>
           </main>
 
-          <HistoricoOrcamentos
-            onEditarOrcamento={handleEditarOrcamento}
-            onViewBudget={handleViewBudget}
-          />
+          {/* 4. Envolva o componente `HistoricoOrcamentos` com a ref */}
+          <div ref={historicoRef}>
+            <HistoricoOrcamentos
+              onEditarOrcamento={handleEditarOrcamento}
+              onViewBudget={handleViewBudget}
+            />
+          </div>
         </>
       )}
     </div>

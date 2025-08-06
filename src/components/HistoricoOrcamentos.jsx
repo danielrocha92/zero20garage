@@ -60,11 +60,12 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget }) => {
       <div className="historico-list">
         {historico.map((orcamento) => (
           <div key={orcamento.id} className="orcamento-item">
+            <p><strong>OS.:</strong> {orcamento.ordemServico}</p>
             <p><strong>Cliente:</strong> {orcamento.cliente}</p>
             <p><strong>Veículo:</strong> {orcamento.veiculo}</p>
             <p><strong>Tipo:</strong> {orcamento.tipo}</p>
             <p><strong>Valor Total:</strong> R$ {Number(orcamento.valorTotal).toFixed(2)}</p>
-            <p><strong>Data:</strong> {orcamento.data}</p>
+            <p><strong>Data/Hora:</strong> {orcamento.data}</p>
             <div className="orcamento-actions">
               <button onClick={() => onViewBudget(orcamento)} className="action-btn view-btn">Visualizar</button>
               <button onClick={() => onEditarOrcamento(orcamento)} className="action-btn edit-btn">Editar</button>
