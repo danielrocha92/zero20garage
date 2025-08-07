@@ -1,745 +1,805 @@
 /* src/components/OrcamentoForms.css - UNIFICADO E MOBILE FIRST */
 
 /* ========================================= */
-/* ===== Variáveis CSS Globais ===== */
+/* ===== Reset e Variáveis CSS Globais ===== */
 /* ========================================= */
+/* Aplicando box-sizing globalmente para um layout consistente */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 :root {
-  /* Cores base para o fundo escuro e texto */
-  --color-page-bg: #1a1a1a; /* Fundo da página (como no .page-escuro) */
-  --color-form-bg: #2a2a2a; /* Fundo do container principal do formulário */
-  --color-form-group-bg: #2a2a2a; /* Fundo dos grupos de input */
-  --color-form-text: #e0e0e0; /* Texto padrão nos formulários */
-  --color-label-text: #fff; /* Texto dos labels */
+    /* Cores base para o fundo escuro e texto */
+    --color-page-bg: #1a1a1a;
+    --color-form-bg: #2a2a2a;
+    --color-form-group-bg: #2a2a2a;
+    --color-form-text: #e0e0e0;
+    --color-label-text: #fff;
 
-  /* Cores de destaque (o vermelho da sua marca) */
-  --color-brand-red: #c50404; /* Vermelho principal da marca */
-  --color-brand-red-hover: #9e0303; /* Vermelho mais escuro para hover */
+    /* Cores de destaque (o vermelho da sua marca) */
+    --color-brand-red: #c50404;
+    --color-brand-red-hover: #9e0303;
 
-  /* Cores dos inputs */
-  --color-input-bg: #1a1a1a; /* Fundo dos inputs, textarea, select */
-  --color-input-text: #c50404; /* Cor do texto digitado nos inputs (era vermelho claro) */
-  --color-input-border: #444; /* Borda dos inputs */
-  --color-input-focus-border: #c50404; /* Borda ao focar no input (vermelho da marca) */
-  --color-input-shadow: rgba(0, 0, 0, 0.3); /* Sombra dos inputs */
+    /* Cores dos inputs */
+    --color-input-bg: #1a1a1a;
+    --color-input-text: #e0e0e0;
+    --color-input-border: #444;
+    --color-input-focus-border: #c50404;
 
-  /* Cores para feedback (sucesso/erro) */
-  --color-feedback-success-bg: #4caf50;
-  --color-feedback-success-text: #fff;
-  --color-feedback-error-bg: #f44336;
-  --color-feedback-error-text: #fff;
+    /* Cores para feedback (sucesso/erro) */
+    --color-feedback-success-bg: #4caf50;
+    --color-feedback-success-text: #fff;
+    --color-feedback-error-bg: #f44336;
+    --color-feedback-error-text: #fff;
 
-  /* Cores para checkboxes */
-  --color-checkbox-border: #777;
-  --color-checkbox-checked: var(--color-brand-red);
+    /* Cores para checkboxes */
+    --color-checkbox-border: #777;
+    --color-checkbox-checked: var(--color-brand-red);
 
-  /* Bordas e divisores */
-  --color-border-light: #555;
-  --color-border-dark: #333; /* Usado para bordas ou divisores mais escuros */
+    /* Bordas e divisores */
+    --color-border-light: #555;
+    --color-border-dark: #333;
 
-  /* Sombras */
-  --shadow-light: rgba(0, 0, 0, 0.3);
-  --shadow-medium: rgba(0, 0, 0, 0.4);
-  --shadow-strong: rgba(0, 0, 0, 0.6);
+    /* Sombras */
+    --shadow-light: rgba(0, 0, 0, 0.3);
+    --shadow-medium: rgba(0, 0, 0, 0.4);
+    --shadow-strong: rgba(0, 0, 0, 0.6);
 
-  /* Variáveis para o modo de impressão/visualização de documento (mantidas) */
-  --color-screen-bg: #1a1a1a;
-  --color-screen-text: #f0f0f0;
-  --color-screen-border: #555;
-  --color-screen-shadow: rgba(0, 0, 0, 0.4);
+    /* Variáveis para o modo de impressão/visualização de documento */
+    --color-screen-bg: #1a1a1a;
+    --color-screen-text: #f0f0f0;
+    --color-screen-border: #555;
+    --color-screen-shadow: rgba(0, 0, 0, 0.4);
 
-  --color-document-bg: #ffffff;
-  --color-document-text: #333333;
-  --color-document-secondary-text: #666666;
-  --color-document-border: #cccccc;
-  --color-table-header-bg: #f2f2f2;
-  --color-table-stripe-bg: #f9f9f9;
+    --color-document-bg: #ffffff;
+    --color-document-text: #333333;
+    --color-document-secondary-text: #666666;
+    --color-document-border: #cccccc;
+    --color-table-header-bg: #f2f2f2;
+    --color-table-stripe-bg: #f9f9f9;
 
-  /* Fontes (mantidas, mas ajustadas para 'Arial' se preferir) */
-  --font-primary: 'Arial Black', sans-serif;
-  --font-secondary: 'Arial', sans-serif;
+    /* Fontes */
+    --font-primary: 'Arial Black', sans-serif;
+    --font-secondary: 'Arial', sans-serif;
 }
 
 /* ========================================= */
-/* ===== Estilos Padrão (MOBILE FIRST para Formulário) ===== */
+/* ===== Estilos Padrão (MOBILE FIRST) ===== */
 /* ========================================= */
 
 .orcamento-form-container {
-  font-family: var(--font-secondary); /* Arial */
-  background-color: var(--color-form-bg);
-  color: var(--color-form-text);
-  padding: 1rem; /* Ajustado para mobile, como no primeiro código */
-  border-radius: 20px;
-  max-width: 1200px;
-  margin: 15px auto; /* Ajustado para mobile */
-  box-shadow: 0 8px 20px var(--shadow-strong); /* Sombra mais forte */
-  box-sizing: border-box;
+    font-family: var(--font-secondary);
+    background-color: var(--color-form-bg);
+    color: var(--color-form-text);
+    padding: 1rem;
+    border-radius: 20px;
+    max-width: 1200px;
+    margin: 15px auto;
+    box-shadow: 0 8px 20px var(--shadow-strong);
 }
 
 .form-header {
-  text-align: center;
-  margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .form-header h1 {
-  font-family: var(--font-primary);
-  font-size: 1.8em;
-  color: var(--color-brand-red); /* Vermelho da marca */
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+    font-family: var(--font-primary);
+    font-size: 1.8em;
+    color: var(--color-brand-red);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .form-header p {
-  font-size: 0.9em;
-  color: var(--color-form-text);
-  opacity: 0.8;
+    font-size: 0.9em;
+    color: var(--color-form-text);
+    opacity: 0.8;
 }
 
-/* Estilos para a imagem do logo dentro do formulário de orçamento */
 .logo-orcamento {
-    width: 150px; /* Largura desejada para a imagem */
-    height: auto; /* Mantém a proporção da imagem */
-    max-width: 100%; /* Garante que a imagem não ultrapasse o contêiner */
-    /* Se quiser arredondar as bordas */
+    width: 150px;
+    height: auto;
+    max-width: 100%;
     border-radius: 8px;
-    /* Se quiser uma sombra sutil */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* Margem para separar do título, se necessário */
-    margin-left: 20px; /* Adiciona um espaço à esquerda da imagem */
+    margin-left: 20px;
 }
 
-/* Estilos para o título dentro do formulário (opcional, para combinar) */
-.orcamento-form-container .form-header h1 {
-    color: #ff0000; /* Cor vermelha para o título "ORÇAMENTO - MOTOR COMPLETO/PARCIAL" */
-    font-size: 2em; /* Ajuste o tamanho da fonte conforme necessário */
-    margin: 0; /* Remove margem padrão para melhor alinhamento com a imagem */
-}
-
-/* NOVO: Estilo para o formulário simples (como em Orcamento.jsx) */
-/* Este bloco é a unificação direta das regras do primeiro código */
 .orcamento-form {
-  width: 100%;
-  padding: 0; /* O container principal já tem padding */
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 2rem;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
 }
 
-/* Seção de Dados do Cliente/Veículo */
-.client-vehicle-section {
-  margin-bottom: 20px;
-  padding: 1rem; /* Ajustado para mobile */
-  background-color: var(--color-form-group-bg); /* Fundo do grupo de input */
-  border-radius: 20px;
-  box-shadow: 0 2px 6px var(--shadow-light); /* Sombra mais suave */
+.client-vehicle-section, .section-form, .summary-section {
+    padding: 1rem;
+    background-color: var(--color-form-group-bg);
+    border-radius: 20px;
+    box-shadow: 0 2px 6px var(--shadow-light);
+    margin-bottom: 20px; /* Consolidado para evitar repetição */
 }
 
-.client-vehicle-section h2 {
-  font-family: var(--font-primary);
-  font-size: 1.4em;
-  color: var(--color-brand-red); /* Vermelho da marca */
-  border-bottom: 2px solid var(--color-brand-red); /* Vermelho da marca */
-  padding-bottom: 8px;
-  margin-bottom: 20px;
-  text-transform: uppercase;
+.client-vehicle-section h2, .section-form h2 {
+    font-family: var(--font-primary);
+    font-size: 1.4em;
+    color: var(--color-brand-red);
+    border-bottom: 2px solid var(--color-brand-red);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
 }
 
 .form-table {
-  width: 100%;
-  border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 }
 
-/* MOBILE FIRST: Células da tabela do formulário (Dados do Cliente) */
 .form-table td {
-  padding: 4px 0;
-  display: block;
-  width: 100%;
+    padding: 4px 0;
+    display: block;
+    width: 100%;
 }
 
 .form-group {
-  display: flex; /* Adicionado do primeiro código */
-  flex-direction: column; /* Adicionado do primeiro código */
-  gap: 0.5rem; /* Adicionado do primeiro código */
-  margin-bottom: 1rem; /* Ajustado do primeiro código */
-  background-color: var(--color-form-group-bg); /* Fundo dos grupos de input */
-  border-radius: 20px;
-  padding: 1rem; /* Preenchimento interno dos grupos de input */
-  box-shadow: 0 2px 6px var(--shadow-light); /* Sombra dos grupos de input */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: var(--color-form-group-bg);
+    border-radius: 20px;
+    padding: 1rem;
+    box-shadow: 0 2px 6px var(--shadow-light);
 }
 
 .form-group label {
-  display: block; /* Garante que o label esteja em sua própria linha */
-  font-weight: 600; /* Um pouco mais de peso */
-  margin-bottom: 0.5rem; /* Espaçamento com o input */
-  color: var(--color-label-text); /* Cor do label */
-  font-size: 1rem; /* Tamanho da fonte dos labels */
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color-label-text);
+    font-size: 1rem;
 }
 
-.form-group input[type="text"],
-.form-group input[type="number"],
-.form-group input,
+.form-group input:not([type="checkbox"]),
 .form-group textarea,
 .form-group select {
-  width: 100%;
-  padding: 0.75rem 1rem; /* Ajustado para o primeiro código */
-  font-size: 1rem; /* Ajustado para o primeiro código */
-  background-color: var(--color-input-bg);
-  color: var(--color-input-text); /* Cor do texto digitado */
-  border: 1px solid var(--color-input-border);
-  border-radius: 20px;
-  transition: border 0.3s ease;
-  box-sizing: border-box;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    background-color: var(--color-input-bg);
+    color: var(--color-input-text);
+    border: 1px solid var(--color-input-border);
+    border-radius: 20px;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Seções de Peças e Serviços */
+.form-group input:not([type="checkbox"]):focus,
+.form-group textarea:focus,
+.form-group select:focus,
+.form-group input:not([type="checkbox"]):focus-visible,
+.form-group textarea:focus-visible,
+.form-group select:focus-visible {
+    border-color: var(--color-input-focus-border);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(197, 4, 4, 0.5);
+}
+
 .section-form {
-  margin-top: 25px;
-  padding: 1rem; /* Ajustado para mobile */
-  background-color: var(--color-form-group-bg); /* Fundo do grupo de input */
-  border-radius: 20px;
-  box-shadow: 0 2px 6px var(--shadow-light); /* Sombra mais suave */
-}
-
-.section-form h2 {
-  font-family: var(--font-primary);
-  font-size: 1.4em;
-  color: var(--color-brand-red); /* Vermelho da marca */
-  border-bottom: 2px solid var(--color-brand-red); /* Vermelho da marca */
-  padding-bottom: 8px;
-  margin-bottom: 20px;
-  text-transform: uppercase;
+    margin-top: 25px;
 }
 
 .items-table {
-  width: 100%;
-  border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 }
 
-/* MOBILE FIRST: Ajustes na linha da tabela para mobile (itens) */
 .items-table tr {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  border-bottom: 1px solid var(--color-input-border);
-  padding-bottom: 15px;
-  margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: 1px solid var(--color-input-border);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .items-table tr:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
-/* MOBILE FIRST: Estilos comuns para todas as células da tabela de itens */
 .items-table td {
-  width: 100%;
-  padding: 5px 0;
-  min-width: unset;
-  padding-right: 0;
-  box-sizing: border-box;
+    width: 100%;
+    padding: 5px 0;
+    min-width: unset;
+    padding-right: 0;
 }
 
-/* MOBILE FIRST: Ordem das células */
-.checkbox-cell { order: 1; }
-.inputs-cell { order: 2; }
-.subitems-cell { order: 3; }
+.checkbox-cell {
+    order: 1;
+}
+
+.inputs-cell {
+    order: 2;
+}
+
+.subitems-cell {
+    order: 3;
+}
+
 .total-cell {
-  order: 4;
-  margin-top: 10px;
-  align-self: flex-end;
-  max-width: 150px;
-  width: auto;
-  flex-grow: 0;
-  flex-shrink: 0;
+    order: 4;
+    margin-top: 10px;
+    align-self: flex-end;
+    max-width: 150px;
+    width: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 
-/* Checkbox estilizado (Mantido e ajustado para variáveis) */
+/* Estilo unificado para o checkbox e o rótulo */
 .custom-checkbox {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  font-size: 0.95em;
-  color: var(--color-form-text);
-  margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.95em;
+    color: var(--color-form-text);
+    margin-bottom: 5px;
+    text-align: left;
 }
 
+/* Esconde o checkbox nativo */
 .custom-checkbox input[type="checkbox"] {
-  display: none;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
 }
 
+/* Cria o quadrado visual do checkbox */
 .custom-checkbox .checkbox-box {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--color-checkbox-border);
-  border-radius: 20px; /* Borda arredondada */
-  background-color: var(--color-input-bg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  margin-right: 10px;
-  transition: all 0.2s ease-in-out;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-checkbox-border);
+    border-radius: 20px;
+    background-color: var(--color-input-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    margin-right: 10px;
+    transition: all 0.2s ease-in-out;
+    position: relative;
 }
 
+/* Estilo do checkmark (o '✓') */
+.custom-checkbox .checkbox-box::before {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* Estilo quando o checkbox está marcado */
 .custom-checkbox input[type="checkbox"]:checked + .checkbox-box {
-  background-color: var(--color-checkbox-checked);
-  border-color: var(--color-checkbox-checked);
+    background-color: var(--color-checkbox-checked);
+    border-color: var(--color-checkbox-checked);
 }
 
 .custom-checkbox input[type="checkbox"]:checked + .checkbox-box::before {
-  content: '✓';
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
+    opacity: 1;
 }
 
 /* Inputs de quantidade/valor */
 .item-inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: flex-start;
-  margin-top: 5px;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    margin-top: 5px;
+    width: 100%;
 }
 
 .item-inputs > div {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
 }
 
 .item-inputs input[type="number"],
 .item-inputs input[type="text"] {
-  flex-grow: 1;
-  width: auto;
-  max-width: 120px;
-  text-align: center;
-  padding: 8px;
-  font-size: 0.9em;
-  border-radius: 20px; /* Borda arredondada */
+    flex-grow: 1;
+    width: auto;
+    max-width: 120px;
+    text-align: center;
+    padding: 8px;
+    font-size: 0.9em;
+    border-radius: 20px;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
 .item-inputs .value-input {
-  max-width: 150px;
-  text-align: right;
+    max-width: 150px;
+    text-align: right;
 }
 
 .small-input {
-  padding: 6px 8px;
-  font-size: 0.85em;
-  height: 35px;
-  border-radius: 20px; /* Borda arredondada */
+    padding: 6px 8px;
+    font-size: 0.85em;
+    height: 35px;
+    border-radius: 20px;
+    align-items: left;
 }
 
 .input-label {
-  font-size: 0.85em;
-  color: var(--color-form-text);
-  white-space: nowrap;
-  margin-right: 2px;
+    font-size: 0.85em;
+    color: var(--color-form-text);
+    white-space: nowrap;
+    margin-right: 2px;
 }
 
 /* Sub-itens (medidas de pistão, etc.) */
 .sub-items-container {
-  margin-top: 10px;
-  padding-left: 0px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: flex-start;
+    margin-top: 10px;
+    padding-left: 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
 }
 
 .sub-item-input-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 5px;
-  width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    border: 1px solid var(--color-border-dark);
+    padding: 8px;
+    border-radius: 10px;
 }
 
 .sub-item-input-group .sub-item-label {
-  font-size: 0.85em;
-  color: var(--color-form-text);
-  white-space: nowrap;
-  font-weight: 500;
-  width: auto;
+    font-size: 0.85em;
+    color: var(--color-form-text);
+    white-space: nowrap;
+    font-weight: 500;
+    width: auto;
 }
 
 .sub-item-input-group input[type="text"],
 .sub-item-input-group input[type="number"] {
-  flex-grow: 1;
-  width: 100%;
-  max-width: 200px;
-  padding: 6px 8px;
-  font-size: 0.85em;
-  border-radius: 20px; /* Borda arredondada */
+    flex-grow: 1;
+    width: 100%;
+    max-width: 200px;
+    padding: 6px 8px;
+    font-size: 0.85em;
+    border-radius: 20px;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Ajuste para o botão de remover dentro do sub-item-input-group */
+.sub-item-label.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: normal;
+    font-style: normal;
+    margin: 0;
+    font-size: 0.95em;
+    color: var(--color-form-text);
+}
+
+.sub-item-label.checkbox-label input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.items-table .custom-checkbox {
+    margin-bottom: 0;
+}
+
 .sub-item-input-group .remove-sub-item-btn {
-  align-self: flex-end;
-  margin-top: -30px;
-  margin-right: 5px;
-  position: relative;
-  z-index: 1;
+    align-self: flex-end;
+    margin-top: -30px;
+    margin-right: 5px;
+    position: relative;
+    z-index: 1;
 }
 
-.add-sub-item-btn, .remove-sub-item-btn {
-  background-color: transparent;
-  border: 1px solid var(--color-brand-red); /* Vermelho da marca */
-  color: var(--color-brand-red); /* Vermelho da marca */
-  font-size: 0.8em;
-  padding: 3px 8px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
-  white-space: nowrap;
+/* Unificando estilos de botão base para reutilização */
+.base-btn,
+.submit-button,
+.form-buttons .action-btn {
+    background-color: var(--color-brand-red);
+    border: none;
+    color: white;
+    font-family: var(--font-primary);
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 10px var(--shadow-medium);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    width: 100%;
 }
-.add-sub-item-btn:hover, .remove-sub-item-btn:hover {
-  background-color: var(--color-brand-red); /* Vermelho da marca */
-  color: white;
+
+.base-btn:hover,
+.submit-button:hover,
+.form-buttons .action-btn:hover {
+    background-color: var(--color-brand-red-hover);
+    /* Corrigida a sombra para um efeito vertical */
+    box-shadow: 0 6px 15px var(--shadow-strong);
+    transform: translateY(-2px);
 }
-.remove-sub-item-btn { padding: 3px 6px; }
+
+.base-btn:active,
+.submit-button:active,
+.form-buttons .action-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px var(--shadow-light);
+}
+
+.base-btn:focus-visible,
+.submit-button:focus-visible,
+.form-buttons .action-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(197, 4, 4, 0.5), 0 4px 10px var(--shadow-medium);
+}
+
+
+.add-sub-item-btn,
+.remove-sub-item-btn {
+    background-color: transparent;
+    border: 1px solid var(--color-brand-red);
+    color: var(--color-brand-red);
+    font-size: 0.8em;
+    padding: 3px 8px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+}
+
+.add-sub-item-btn:hover,
+.remove-sub-item-btn:hover {
+    background-color: var(--color-brand-red);
+    color: white;
+}
+
+.remove-sub-item-btn {
+    padding: 3px 6px;
+}
 
 .sub-items-container .add-sub-item-btn {
-  align-self: flex-start;
-  margin-top: 5px;
+    align-self: flex-start;
+    margin-top: 5px;
 }
 
 /* Linhas de Total nos formulários */
 .total-line-form {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-  margin-top: 20px;
-  padding-top: 15px;
-  border-top: 1px dashed var(--color-border-dark); /* Borda mais escura */
-  font-size: 1.1em;
-  color: var(--color-form-text);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed var(--color-border-dark);
+    font-size: 1.1em;
+    color: var(--color-form-text);
 }
 
 .total-line-form .label {
-  font-weight: 600;
-  color: var(--color-form-text);
+    font-weight: 600;
+    color: var(--color-form-text);
 }
 
 .total-line-form .value-display,
 .input-total {
-  width: 100%;
-  max-width: 150px;
-  text-align: right;
-  font-weight: bold;
-  font-family: var(--font-primary);
-  color: var(--color-brand-red); /* Vermelho da marca */
+    width: 100%;
+    max-width: 150px;
+    text-align: right;
+    font-weight: bold;
+    font-family: var(--font-primary);
+    color: var(--color-brand-red);
 }
 
 .input-total {
-  background-color: var(--color-input-bg);
-  border: 1px solid var(--color-input-border);
-  border-radius: 20px; /* Borda arredondada */
-  padding: 8px 12px;
-  box-sizing: border-box;
+    background-color: var(--color-input-bg);
+    border: 1px solid var(--color-input-border);
+    border-radius: 20px;
+    padding: 8px 12px;
 }
 
 .total-geral-form {
-  font-family: var(--font-primary);
-  font-size: 1.6em;
-  font-weight: 700;
-  margin-top: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
-  gap: 10px;
-  border-top: 2px solid var(--color-brand-red); /* Vermelho da marca */
-  padding-top: 20px;
-  color: var(--color-brand-red); /* Vermelho da marca */
+    font-family: var(--font-primary);
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 10px;
+    border-top: 2px solid var(--color-brand-red);
+    padding-top: 20px;
+    color: var(--color-brand-red);
 }
 
 .input-total-geral {
-  font-size: 1em;
-  width: 100%;
-  max-width: 150px;
-  text-align: right;
-  font-weight: bold;
-  font-family: var(--font-primary);
-  color: var(--color-brand-red); /* Vermelho da marca */
-  background-color: var(--color-input-bg);
-  border: 1px solid var(--color-input-border);
-  border-radius: 20px; /* Borda arredondada */
-  padding: 8px 12px;
-  box-sizing: border-box;
+    font-size: 1em;
+    width: 100%;
+    max-width: 150px;
+    text-align: right;
+    font-weight: bold;
+    font-family: var(--font-primary);
+    color: var(--color-brand-red);
+    background-color: var(--color-input-bg);
+    border: 1px solid var(--color-input-border);
+    border-radius: 20px;
+    padding: 8px 12px;
 }
 
-/* Campo para forma de pagamento e garantia */
 .summary-section {
-  margin-top: 20px;
-  padding: 1rem; /* Ajustado para mobile */
-  background-color: var(--color-form-group-bg); /* Fundo do grupo de input */
-  border-radius: 20px;
-  box-shadow: 0 2px 6px var(--shadow-light); /* Sombra mais suave */
+    margin-top: 20px;
 }
-.summary-section .form-group { margin-bottom: 10px; }
+
+.summary-section .form-group {
+    margin-bottom: 10px;
+}
+
 .summary-section .form-group label {
-  margin-bottom: 5px;
-  font-size: 0.95em;
+    margin-bottom: 5px;
+    font-size: 0.95em;
 }
 
-/* Botões de Ação do Formulário (UNIFICADOS) */
 .form-buttons {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 15px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
 }
 
-.form-buttons .action-btn,
-.submit-button { /* APLICANDO ESTILOS TAMBÉM AO .submit-button */
-  background-color: var(--color-brand-red); /* Vermelho da marca */
-  border: none;
-  color: white;
-  font-family: var(--font-primary);
-  font-weight: 700;
-  padding: 10px 20px; /* Ajustado para um meio termo */
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 1.1rem; /* Ajustado */
-  box-shadow: 0 4px 10px var(--shadow-medium); /* Sombra mais consistente */
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-  width: 100%;
-}
-
-.form-buttons .action-btn:hover,
-.submit-button:hover { /* APLICANDO ESTILOS TAMBÉM AO .submit-button */
-  background-color: var(--color-brand-red-hover); /* Vermelho escuro para hover */
-  box-shadow: 0 6px 15px var(--shadow-strong);
-  transform: translateY(-2px);
-}
-
-.form-buttons .action-btn:active,
-.submit-button:active { /* APLICANDO ESTILOS TAMBÉM AO .submit-button */
-  transform: translateY(0);
-  box-shadow: 0 2px 5px var(--shadow-light);
-}
-
-
-/* Feedback (UNIFICADO) */
 .feedback {
-  text-align: center;
-  padding: 0.75rem;
-  border-radius: 20px; /* Borda arredondada */
-  font-weight: bold;
-  font-size: 0.95rem;
-  margin-top: 1rem; /* Adicionado para espaçamento */
+    text-align: center;
+    padding: 0.75rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin-top: 1rem;
 }
 
 .feedback-success {
-  background-color: var(--color-feedback-success-bg);
-  color: var(--color-feedback-success-text);
+    background-color: var(--color-feedback-success-bg);
+    color: var(--color-feedback-success-text);
 }
 
 .feedback-error {
-  background-color: var(--color-feedback-error-bg);
-  color: var(--color-feedback-error-text);
+    background-color: var(--color-feedback-error-bg);
+    color: var(--color-feedback-error-text);
 }
-
 
 /* ========================================= */
 /* ===== Media Query para Telas Maiores (Desktop) ===== */
 /* ========================================= */
 @media (min-width: 768px) {
-  .orcamento-form-container {
-    padding: 30px;
-    margin: 30px auto;
-    width: 90%;
-  }
-  .form-header h1 { font-size: 2.2em; }
-  .form-header p { font-size: 1.1em; }
-  .header-logo { max-width: 150px; }
+    .orcamento-form-container {
+        padding: 30px;
+        margin: 30px auto;
+        width: 90%;
+    }
 
-  .client-vehicle-section {
-    padding: 20px;
-    margin-bottom: 30px;
-  }
-  .client-vehicle-section h2 {
-    font-size: 1.6em;
-    margin-bottom: 25px;
-  }
+    .form-header h1 {
+        font-size: 2.2em;
+    }
 
-  /* NOVO: Ajuste para o formulário simples em desktop */
-  .orcamento-form {
-    max-width: 600px;
-    margin: 2rem auto;
-  }
-  .orcamento-form .form-group label {
-    font-size: 1.1rem;
-  }
-  .orcamento-form .form-group input,
-  .orcamento-form .form-group textarea,
-  .orcamento-form .form-group select {
-    font-size: 1.1rem;
-  }
-  .submit-button {
-    font-size: 1.2rem;
-  }
+    .form-header p {
+        font-size: 1.1em;
+    }
 
+    .header-logo {
+        max-width: 150px;
+    }
 
-  .form-table { table-layout: fixed; }
-  /* DESKTOP: Volta ao comportamento de célula de tabela */
-  .form-table td {
-    display: table-cell;
-    width: auto;
-    padding: 10px 15px;
-  }
+    .client-vehicle-section, .section-form, .summary-section {
+        padding: 20px;
+        margin-bottom: 30px;
+    }
 
-  .form-group label {
-    font-size: 0.95em;
-    margin-bottom: 8px;
-  }
-  .form-group input[type="text"],
-  .form-group input[type="number"],
-  .form-group input[type="date"],
-  .form-group textarea,
-  .form-group select {
-    padding: 12px;
-    font-size: 1em;
-  }
+    .client-vehicle-section h2, .section-form h2 {
+        font-size: 1.6em;
+        margin-bottom: 25px;
+    }
 
-  .section-form {
-    margin-top: 35px;
-    padding: 20px;
-  }
-  .section-form h2 {
-    font-size: 1.6em;
-    margin-bottom: 25px;
-  }
+    .orcamento-form {
+        max-width: 600px;
+        margin: 2rem auto;
+    }
 
-  /* DESKTOP: Reverte a linha da tabela para layout de tabela */
-  .items-table tr {
-    display: table-row;
-    flex-direction: initial;
-    width: auto;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-  }
-  /* DESKTOP: Reverte as células para layout de tabela */
-  .items-table td {
-    display: table-cell;
-    padding: 5px 0;
-  }
+    .orcamento-form .form-group label {
+        font-size: 1.1rem;
+    }
 
-  /* DESKTOP: Larguras e remove a ordem */
-  .checkbox-cell {
-    order: initial;
-    width: 25%;
-    min-width: 150px;
-    padding-right: 10px;
-  }
-  .inputs-cell {
-    order: initial;
-    width: 25%;
-    min-width: 180px;
-    padding-right: 10px;
-  }
-  .subitems-cell {
-    order: initial;
-    width: 35%;
-    padding-right: 10px;
-  }
-  .total-cell {
-    order: initial;
-    width: 15%;
-    min-width: 100px;
-    margin-top: 0;
-    align-self: auto;
-    max-width: none;
-  }
+    .orcamento-form .form-group input:not([type="checkbox"]),
+    .orcamento-form .form-group textarea,
+    .orcamento-form .form-group select {
+        padding: 12px;
+        font-size: 1em;
+    }
 
-  .item-inputs {
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-    width: auto;
-  }
-  .item-inputs > div { width: auto; }
+    .form-table {
+        table-layout: fixed;
+    }
 
-  .item-inputs input[type="number"],
-  .item-inputs input[type="text"] {
-    width: 60px;
-    max-width: none;
-  }
-  .item-inputs .value-input { width: 90px; }
+    .form-table td {
+        display: table-cell;
+        width: auto;
+        padding: 10px 15px;
+    }
 
-  .sub-items-container {
-    margin-top: 5px;
-    gap: 5px;
-    align-items: flex-end;
-  }
-  .sub-item-input-group {
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-  }
-  .sub-item-input-group .sub-item-label {
-    width: auto;
-    margin-bottom: 0;
-  }
-  .sub-item-input-group input[type="text"],
-  .sub-item-input-group input[type="number"] {
-    max-width: none;
-    width: auto;
-  }
-  .sub-item-input-group .remove-sub-item-btn {
-      position: static;
-      margin-top: 0;
-      margin-right: 0;
-      align-self: auto;
-  }
-  .sub-items-container .add-sub-item-btn { align-self: flex-end; }
+    .form-group label {
+        font-size: 0.95em;
+        margin-bottom: 8px;
+    }
 
-  .total-line-form {
-    flex-direction: row;
-    justify-content: flex-end;
-    gap: 15px;
-  }
-  .total-line-form .value-display,
-  .input-total {
-    width: 150px;
-    max-width: 150px;
-  }
+    .form-group input:not([type="checkbox"]),
+    .form-group textarea,
+    .form-group select {
+        padding: 12px;
+        font-size: 1em;
+    }
 
-  .total-geral-form {
-    font-size: 1.8em;
-    flex-direction: row;
-    gap: 20px;
-  }
-  .input-total-geral {
-    font-size: 1em;
-    width: 150px;
-    max-width: 150px;
-  }
+    .section-form {
+        margin-top: 35px;
+    }
 
-  .summary-section {
-    margin-top: 30px;
-    padding: 20px;
-  }
-  .summary-section .form-group { margin-bottom: 15px; }
+    .items-table tr {
+        display: table-row;
+        flex-direction: initial;
+        width: auto;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }
 
-  .form-buttons {
-    margin-top: 40px;
-    flex-direction: row;
-    gap: 20px;
-  }
-  .form-buttons .action-btn {
-    padding: 12px 30px;
-    font-size: 1.1em;
-    width: auto;
-  }
+    .items-table td {
+        display: table-cell;
+        padding: 5px 0;
+    }
+
+    .checkbox-cell {
+        order: initial;
+        width: 25%;
+        min-width: 150px;
+        padding-right: 10px;
+    }
+
+    .inputs-cell {
+        order: initial;
+        width: 25%;
+        min-width: 180px;
+        padding-right: 10px;
+    }
+
+    .subitems-cell {
+        order: initial;
+        width: 35%;
+        padding-right: 10px;
+    }
+
+    .total-cell {
+        order: initial;
+        width: 15%;
+        min-width: 100px;
+        margin-top: 0;
+        align-self: auto;
+        max-width: none;
+    }
+
+    .item-inputs {
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+        width: auto;
+    }
+
+    .item-inputs > div {
+        width: auto;
+    }
+
+    .item-inputs input[type="number"],
+    .item-inputs input[type="text"] {
+        width: 60px;
+        max-width: none;
+    }
+
+    .item-inputs .value-input {
+        width: 90px;
+    }
+
+    .sub-items-container {
+        margin-top: 5px;
+        gap: 5px;
+        align-items: flex-start;
+    }
+
+    .sub-item-input-group {
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 6px;
+    }
+
+    .sub-item-input-group .sub-item-label {
+        width: auto;
+        margin-bottom: 0;
+        margin-right: 0;
+    }
+
+    .sub-item-input-group input[type="text"],
+    .sub-item-input-group input[type="number"] {
+        max-width: 100px;
+        width: auto;
+    }
+
+    .sub-item-input-group .remove-sub-item-btn {
+        position: static;
+        margin-top: 0;
+        margin-right: 0;
+        align-self: auto;
+    }
+
+    .sub-items-container .add-sub-item-btn {
+        align-self: flex-start;
+    }
+
+    .total-line-form {
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 15px;
+    }
+
+    .total-line-form .value-display,
+    .input-total {
+        width: 150px;
+        max-width: 150px;
+    }
+
+    .total-geral-form {
+        font-size: 1.8em;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .input-total-geral {
+        font-size: 1em;
+        width: 150px;
+        max-width: 150px;
+    }
+
+    .summary-section {
+        margin-top: 30px;
+    }
+
+    .summary-section .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-buttons {
+        margin-top: 40px;
+        flex-direction: row;
+        gap: 20px;
+    }
 }
-

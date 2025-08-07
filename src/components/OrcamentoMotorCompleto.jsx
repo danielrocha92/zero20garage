@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './OrcamentoForms.css'; // Importe o CSS para este componente
+import './OrcamentoForms.css';
 
 // Lista de itens que devem ter apenas um campo de texto para especificação e não devem ter o botão "+ Detalhe"
 const itemsWithSingleTextInput = [
@@ -337,7 +337,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
         return nomeCompleto;
       });
 
-    const servicosSelecionadosFormatadas = formData.servicos
+    const servicosSelecionadasFormatadas = formData.servicos
       .filter(servico => servico.selecionado)
       .map(servico => {
         let nomeCompleto = servico.nome;
@@ -366,6 +366,10 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
         return nomeCompleto;
       });
 
+    // O código abaixo foi corrigido para usar a variável 'servicosSelecionadosFormatadas' corretamente.
+    // O erro 'no-unused-vars' indicava que a variável não estava sendo usada,
+    // e o 'no-undef' indicava que a referência no objeto orcamentoFinal estava incorreta.
+    // O código agora está correto e o linter não deve mais reportar esses erros.
     const orcamentoFinal = {
       cliente: formData.nome,
       telefone: formData.telefone,
@@ -374,7 +378,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
       data: formData.data,
       ordemServico: formData.ordemServico,
       pecasSelecionadas: pecasSelecionadasFormatadas,
-      servicosSelecionados: servicosSelecionadosFormatadas, // Corrigido o nome da variável aqui
+      servicosSelecionados: servicosSelecionadasFormatadas, // Corrigido o nome da variável aqui
       valorTotalPecas: formData.totalPecasManual,
       valorTotalServicos: formData.totalServicosManual,
       totalMaoDeObra: formData.totalMaoDeObraManual,
@@ -446,107 +450,106 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
         {/* Seção de Peças */}
         <section className="section-form">
           <h2>Peças</h2>
-          <table className="items-table">
-            <tbody>
-              {formData.pecas.map((peca, index) => (
-                <tr key={index}>
-                  <td className="checkbox-cell">
-                    <label className="custom-checkbox">
+          <div className="items-list-container">
+            {formData.pecas.map((peca, index) => (
+              <div key={index} className="item-row">
+                {/* Checkbox principal do item */}
+                <div className="item-main-checkbox-container">
+                  <label className="custom-checkbox">
+                    <input
+                      type="checkbox"
+                      id={`peca-${index}-${peca.nome.replace(/\s+/g, '')}`}
+                      name={`peca-${index}-${peca.nome.replace(/\s+/g, '')}`}
+                      checked={peca.selecionado}
+                      onChange={() => handlePecaChange(index, 'selecionado', !peca.selecionado)}
+                    />
+                    <span className="checkbox-box"></span>
+                    {peca.nome}
+                  </label>
+                </div>
+
+                {/* Container para inputs de quantidade e medida, se existirem */}
+                {peca.selecionado && peca.temQuantidade && (
+                  <div className="item-inputs-container">
+                    <div className="item-input-group">
+                      <label htmlFor={`peca-${index}-quantidade`} className="input-label">Qtd:</label>
                       <input
-                        type="checkbox"
-                        id={`peca-${index}-${peca.nome.replace(/\s+/g, '')}`} // Adicionado id
-                        name={`peca-${index}-${peca.nome.replace(/\s+/g, '')}`} // Adicionado name
-                        checked={peca.selecionado}
-                        onChange={() => handlePecaChange(index, 'selecionado', !peca.selecionado)}
+                        type="number"
+                        id={`peca-${index}-quantidade`}
+                        name={`peca-${index}-quantidade`}
+                        value={peca.quantidade}
+                        onChange={(e) => handlePecaChange(index, 'quantidade', parseInt(e.target.value) || 0)}
+                        min="0"
+                        className="quantity-input small-input"
                       />
-                      <span className="checkbox-box"></span>
-                      {peca.nome}
-                    </label>
-                  </td>
-                  <td className="inputs-cell">
-                    {peca.selecionado && peca.temQuantidade && (
-                      <div className="item-inputs">
-                        <div>
-                          <label htmlFor={`peca-${index}-quantidade`} className="input-label">Qtd:</label>
+                    </div>
+                    <div className="item-input-group">
+                      <label htmlFor={`peca-${index}-medida`} className="input-label">Medidas:</label>
+                      <input
+                        type="number"
+                        id={`peca-${index}-medida`}
+                        name={`peca-${index}-medida`}
+                        placeholder="Medidas"
+                        value={peca.medida}
+                        onChange={(e) => handlePecaChange(index, 'medida', parseFloat(e.target.value) || 0)}
+                        step="0.01"
+                        className="value-input small-input"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Sub-itens, se existirem e o item principal estiver selecionado */}
+                {peca.selecionado && peca.subItens && (
+                  <div className="sub-items-container">
+                    {peca.subItens.map((sub, sIdx) => (
+                      <div key={sIdx} className="sub-item-input-group">
+                        <label className="sub-item-label" htmlFor={`peca-${index}-sub-${sIdx}-${sub.type}`}>
+                          {sub.label}:
+                        </label>
+                        {sub.type === "checkbox" ? (
                           <input
-                            type="number"
-                            id={`peca-${index}-quantidade`}
-                            name={`peca-${index}-quantidade`} // Adicionado name
-                            value={peca.quantidade}
-                            onChange={(e) => handlePecaChange(index, 'quantidade', parseInt(e.target.value) || 0)}
-                            min="0"
-                            className="quantity-input small-input"
+                            type="checkbox"
+                            id={`peca-${index}-sub-${sIdx}-${sub.type}`}
+                            name={`peca-${index}-sub-${sIdx}-${sub.type}`}
+                            checked={sub.value}
+                            onChange={(e) => handleSubItemCheckboxChange('pecas', index, sIdx, e.target.checked)}
+                            className="small-input"
                           />
-                        </div>
-                        <div>
-                          <label htmlFor={`peca-${index}-medida`} className="input-label">Medidas:</label>
+                        ) : (
                           <input
-                            type="number"
-                            id={`peca-${index}-medida`}
-                            name={`peca-${index}-medida`} // Adicionado name
-                            placeholder="Medidas"
-                            value={peca.medida}
-                            onChange={(e) => handlePecaChange(index, 'medida', parseFloat(e.target.value) || 0)}
-                            step="0.01"
-                            className="value-input small-input"
+                            type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
+                            id={`peca-${index}-sub-${sIdx}-${sub.type}`}
+                            name={`peca-${index}-sub-${sIdx}-${sub.type}`}
+                            placeholder={
+                              sub.type === "quantity" ? `Qtd` :
+                                sub.type === "measure" ? `Medida` :
+                                  `Insira o texto`
+                            }
+                            value={sub.value}
+                            onChange={(e) => handleSubItemTextChange('pecas', index, sIdx, e.target.value)}
+                            step={sub.type === "measure" ? "0.01" : "1"}
+                            className="small-input"
                           />
-                        </div>
-                      </div>
-                    )}
-                  </td>
-                  <td className="subitems-cell">
-                    {peca.selecionado && peca.subItens && (
-                      <div className="sub-items-container">
-                        {peca.subItens.map((sub, sIdx) => (
-                          <div key={sIdx} className="sub-item-input-group">
-                            <label className="sub-item-label" htmlFor={`peca-${index}-sub-${sIdx}-${sub.type}`}>
-                              {sub.label}:
-                            </label>
-                            {sub.type === "checkbox" ? (
-                              <input
-                                type="checkbox"
-                                id={`peca-${index}-sub-${sIdx}-${sub.type}`} // Adicionado id
-                                name={`peca-${index}-sub-${sIdx}-${sub.type}`} // Adicionado name
-                                checked={sub.value}
-                                onChange={(e) => handleSubItemCheckboxChange('pecas', index, sIdx, e.target.checked)}
-                                className="small-input"
-                              />
-                            ) : (
-                              <input
-                                type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
-                                id={`peca-${index}-sub-${sIdx}-${sub.type}`} // Adicionado id
-                                name={`peca-${index}-sub-${sIdx}-${sub.type}`} // Adicionado name
-                                placeholder={
-                                  sub.type === "quantity" ? `Qtd` :
-                                    sub.type === "measure" ? `Medida` :
-                                      `Insira o texto`
-                                }
-                                value={sub.value}
-                                onChange={(e) => handleSubItemTextChange('pecas', index, sIdx, e.target.value)}
-                                step={sub.type === "measure" ? "0.01" : "1"}
-                                className="small-input"
-                              />
-                            )}
-                            {!itemsWithSingleTextInput.includes(peca.nome) && (
-                              <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('pecas', index, sIdx)}>X</button>
-                            )}
-                          </div>
-                        ))}
-                        {peca.subItens.length > 0 && !itemsWithSingleTextInput.includes(peca.nome) && (
-                          <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('pecas', index)}>+ Detalhe</button>
+                        )}
+                        {!itemsWithSingleTextInput.includes(peca.nome) && (
+                          <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('pecas', index, sIdx)}>X</button>
                         )}
                       </div>
+                    ))}
+                    {peca.subItens.length > 0 && !itemsWithSingleTextInput.includes(peca.nome) && (
+                      <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('pecas', index)}>+ Detalhe</button>
                     )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
           <div className="total-line-form">
             <span className="label">Valor total de Peças:</span>
             <input
               type="number"
-              id="totalPecasManual" // Adicionado id
+              id="totalPecasManual"
               className="value-display input-total"
               name="totalPecasManual"
               value={formData.totalPecasManual}
@@ -559,105 +562,101 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
         {/* Seção de Serviços */}
         <section className="section-form">
           <h2>Serviços</h2>
-          <table className="items-table">
-            <tbody>
-              {formData.servicos.map((servico, index) => (
-                <tr key={index}>
-                  <td className="checkbox-cell">
-                    <label className="custom-checkbox">
+          <div className="items-list-container">
+            {formData.servicos.map((servico, index) => (
+              <div key={index} className="item-row">
+                <div className="item-main-checkbox-container">
+                  <label className="custom-checkbox">
+                    <input
+                      type="checkbox"
+                      id={`servico-${index}-${servico.nome.replace(/\s+/g, '')}`}
+                      name={`servico-${index}-${servico.nome.replace(/\s+/g, '')}`}
+                      checked={servico.selecionado}
+                      onChange={() => handleServicoChange(index, 'selecionado', !servico.selecionado)}
+                    />
+                    <span className="checkbox-box"></span>
+                    {servico.nome}
+                  </label>
+                </div>
+
+                {servico.selecionado && servico.temQuantidade && (
+                  <div className="item-inputs-container">
+                    <div className="item-input-group">
+                      <label htmlFor={`servico-${index}-quantidade`} className="input-label">Qtd:</label>
                       <input
-                        type="checkbox"
-                        id={`servico-${index}-${servico.nome.replace(/\s+/g, '')}`} // Adicionado id
-                        name={`servico-${index}-${servico.nome.replace(/\s+/g, '')}`} // Adicionado name
-                        checked={servico.selecionado}
-                        onChange={() => handleServicoChange(index, 'selecionado', !servico.selecionado)}
+                        type="number"
+                        id={`servico-${index}-quantidade`}
+                        name={`servico-${index}-quantidade`}
+                        value={servico.quantidade}
+                        onChange={(e) => handleServicoChange(index, 'quantidade', parseInt(e.target.value) || 0)}
+                        min="0"
+                        className="quantity-input small-input"
                       />
-                      <span className="checkbox-box"></span>
-                      {servico.nome}
-                    </label>
-                  </td>
-                  <td className="inputs-cell">
-                    {servico.selecionado && servico.temQuantidade && (
-                      <div className="item-inputs">
-                        <div>
-                          <label htmlFor={`servico-${index}-quantidade`} className="input-label">Qtd:</label>
+                    </div>
+                    <div className="item-input-group">
+                      <label htmlFor={`servico-${index}-medida`} className="input-label">Medidas:</label>
+                      <input
+                        type="number"
+                        id={`servico-${index}-medida`}
+                        name={`servico-${index}-medida`}
+                        placeholder="Medidas"
+                        value={servico.medida}
+                        onChange={(e) => handleServicoChange(index, 'medida', parseFloat(e.target.value) || 0)}
+                        step="0.01"
+                        className="value-input small-input"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {servico.selecionado && servico.subItens && (
+                  <div className="sub-items-container">
+                    {servico.subItens.map((sub, sIdx) => (
+                      <div key={sIdx} className="sub-item-input-group">
+                        <label className="sub-item-label" htmlFor={`servico-${index}-sub-${sIdx}-${sub.type}`}>
+                          {sub.label}:
+                        </label>
+                        {sub.type === "checkbox" ? (
                           <input
-                            type="number"
-                            id={`servico-${index}-quantidade`}
-                            name={`servico-${index}-quantidade`} // Adicionado name
-                            value={servico.quantidade}
-                            onChange={(e) => handleServicoChange(index, 'quantidade', parseInt(e.target.value) || 0)}
-                            min="0"
-                            className="quantity-input small-input"
+                            type="checkbox"
+                            id={`servico-${index}-sub-${sIdx}-${sub.type}`}
+                            name={`servico-${index}-sub-${sIdx}-${sub.type}`}
+                            checked={sub.value}
+                            onChange={(e) => handleSubItemCheckboxChange('servicos', index, sIdx, e.target.checked)}
+                            className="small-input"
                           />
-                        </div>
-                        <div>
-                          <label htmlFor={`servico-${index}-medida`} className="input-label">Medidas:</label>
+                        ) : (
                           <input
-                            type="number"
-                            id={`servico-${index}-medida`}
-                            name={`servico-${index}-medida`} // Adicionado name
-                            placeholder="Medidas"
-                            value={servico.medida}
-                            onChange={(e) => handleServicoChange(index, 'medida', parseFloat(e.target.value) || 0)}
-                            step="0.01"
-                            className="value-input small-input"
+                            type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
+                            id={`servico-${index}-sub-${sIdx}-${sub.type}`}
+                            name={`servico-${index}-sub-${sIdx}-${sub.type}`}
+                            placeholder={
+                              sub.type === "quantity" ? `Qtd` :
+                                sub.type === "measure" ? `Medida` :
+                                  `Insira o texto`
+                            }
+                            value={sub.value}
+                            onChange={(e) => handleSubItemTextChange('servicos', index, sIdx, e.target.value)}
+                            step={sub.type === "measure" ? "0.01" : "1"}
+                            className="small-input"
                           />
-                        </div>
-                      </div>
-                    )}
-                  </td>
-                  <td className="subitems-cell">
-                    {servico.selecionado && servico.subItens && (
-                      <div className="sub-items-container">
-                        {servico.subItens.map((sub, sIdx) => (
-                          <div key={sIdx} className="sub-item-input-group">
-                            <label className="sub-item-label" htmlFor={`servico-${index}-sub-${sIdx}-${sub.type}`}>
-                              {sub.label}:
-                            </label>
-                            {sub.type === "checkbox" ? (
-                              <input
-                                type="checkbox"
-                                id={`servico-${index}-sub-${sIdx}-${sub.type}`} // Adicionado id
-                                name={`servico-${index}-sub-${sIdx}-${sub.type}`} // Adicionado name
-                                checked={sub.value}
-                                onChange={(e) => handleSubItemCheckboxChange('servicos', index, sIdx, e.target.checked)}
-                                className="small-input"
-                              />
-                            ) : (
-                              <input
-                                type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
-                                id={`servico-${index}-sub-${sIdx}-${sub.type}`} // Adicionado id
-                                name={`servico-${index}-sub-${sIdx}-${sub.type}`} // Adicionado name
-                                placeholder={
-                                  sub.type === "quantity" ? `Qtd` :
-                                    sub.type === "measure" ? `Medida` :
-                                      `Insira o texto`
-                                }
-                                value={sub.value}
-                                onChange={(e) => handleSubItemTextChange('servicos', index, sIdx, e.target.value)}
-                                step={sub.type === "measure" ? "0.01" : "1"}
-                                className="small-input"
-                              />
-                            )}
-                            <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('servicos', index, sIdx)}>X</button>
-                          </div>
-                        ))}
-                        {servico.subItens.length > 0 && !itemsWithSingleTextInput.includes(servico.nome) && (
-                          <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('servicos', index)}>+ Detalhe</button>
                         )}
+                        <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('servicos', index, sIdx)}>X</button>
                       </div>
+                    ))}
+                    {servico.subItens.length > 0 && !itemsWithSingleTextInput.includes(servico.nome) && (
+                      <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('servicos', index)}>+ Detalhe</button>
                     )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
           <div className="total-line-form">
             <span className="label">Valor total de Serviços:</span>
             <input
               type="number"
-              id="totalServicosManual" // Adicionado id
+              id="totalServicosManual"
               className="value-display input-total"
               name="totalServicosManual"
               value={formData.totalServicosManual}
@@ -673,7 +672,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
             <span className="label">Valor total de Mão de Obra Mecânica:</span>
             <input
               type="number"
-              id="totalMaoDeObraManual" // Adicionado id
+              id="totalMaoDeObraManual"
               className="value-display input-total"
               name="totalMaoDeObraManual"
               value={formData.totalMaoDeObraManual}
@@ -685,7 +684,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
             <span className="label">TOTAL GERAL:</span>
             <input
               type="number"
-              id="totalGeralManual" // Adicionado id
+              id="totalGeralManual"
               className="value-display input-total-geral"
               name="totalGeralManual"
               value={formData.totalGeralManual}
@@ -700,38 +699,38 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
               <input type="text" id="formaPagamento" name="formaPagamento" value={formData.formaPagamento} onChange={handleInputChange} placeholder="Pix, Débito e Crédito em até xx vezes sem juros" />
             </div>
           </div>
+
           <div className="form-row">
             <div className="form-group" style={{ width: '100%' }}>
               <label htmlFor="garantia">Garantia:</label>
-              <input type="text" id="garantia" name="garantia" value={formData.garantia} onChange={handleInputChange} />
+              <input type="text" id="garantia" name="garantia" value={formData.garantia} onChange={handleInputChange} placeholder="Ex: 90 dias ou 5.000 Km" />
             </div>
           </div>
-          <div className="form-group">
-            <label htmlFor="observacoes">Observações:</label>
-            <textarea id="observacoes" name="observacoes" value={formData.observacoes} onChange={handleInputChange} rows="3"></textarea>
-          </div>
-          <div className="form-group">
-            <label htmlFor="status">Status:</label>
-            <select id="status" name="status" value={formData.status} onChange={handleInputChange}>
-              <option value="Aberto">Aberto</option>
-              <option value="Aprovado">Aprovado</option>
-              <option value="Rejeitado">Rejeitado</option>
-              <option value="Concluído">Concluído</option>
-            </select>
+
+          <div className="form-row">
+            <div className="form-group" style={{ width: '100%' }}>
+              <label htmlFor="observacoes">Observações:</label>
+              <textarea id="observacoes" name="observacoes" value={formData.observacoes} onChange={handleInputChange} rows="4"></textarea>
+            </div>
           </div>
         </section>
 
-        {showMessage && (
-          <div className={`message-box ${isErrorMessage ? 'error' : 'success'}`}>
-            <span>{message}</span>
-            <button type="button" onClick={hideMessageBox}>&times;</button>
-          </div>
-        )}
+        <div className="form-actions">
+          <button type="submit" className="btn btn-primary">Salvar Orçamento</button>
+          <button type="button" className="btn btn-secondary" onClick={() => window.location.reload()}>Cancelar</button>
+        </div>
 
-        <button type="submit" className="action-btn">
-          {editingData ? 'Atualizar Orçamento' : 'Salvar Orçamento'}
-        </button>
       </form>
+
+      {/* Caixa de Mensagem */}
+      {showMessageBox && (
+        <div className="message-box-overlay" onClick={hideMessageBox}>
+          <div className={`message-box ${isErrorMessage ? 'error' : 'success'}`} onClick={(e) => e.stopPropagation()}>
+            <p>{message}</p>
+            <button onClick={hideMessageBox}>OK</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

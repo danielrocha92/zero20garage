@@ -1,43 +1,63 @@
 import React, { useState, useEffect } from 'react';
 import './OrcamentoForms.css'; // Importe o CSS para este componente
 
-// Lista de itens que devem ter apenas um campo de texto para especificação e não devem ter o botão "+ Detalhe"
-const itemsWithSingleTextInput = [
-  "Válvula de Admissão",
-  "Válvula de Escape",
-  "Guia de Válvula",
-  "Sede de Válvula",
-];
-
-// Os dados de itens e serviços completos para o cabeçote
+// Os dados de itens e serviços completos, conforme a imagem fornecida
 const itensCabecoteData = [
-  { nome: "Válvula de Admissão", temQuantidade: false, subItens: [{ label: "Quantidade", type: "text", initialValue: "" }] },
-  { nome: "Válvula de Escape", temQuantidade: false, subItens: [{ label: "Quantidade", type: "text", initialValue: "" }] },
-  { nome: "Retentor de Válvula", temQuantidade: false },
-  { nome: "Guia de Válvula", temQuantidade: false, subItens: [{ label: "Quantidade", type: "text", initialValue: "" }] },
-  { nome: "Sede de Válvula", temQuantidade: false, subItens: [{ label: "Quantidade", type: "text", initialValue: "" }] },
-  { nome: "Tucho Hidráulico", temQuantidade: false },
-  { nome: "Junta do Cabeçote", temQuantidade: false },
-  { nome: "Parafuso do Cabeçote", temQuantidade: false },
-  { nome: "Comando de Válvulas", temQuantidade: false },
-  { nome: "Molas de Válvula", temQuantidade: false },
-  { nome: "Balanceiro", temQuantidade: false },
-  { nome: "Prisioneiros", temQuantidade: false },
+  { nome: "Bomba d'água", temQuantidade: true },
+  { nome: "Tubo d'água", temQuantidade: true },
+  { nome: "Filtro de óleo", temQuantidade: true },
+  { nome: "Filtro de ar", temQuantidade: true },
+  { nome: "Filtro de combustível", temQuantidade: true },
+  { nome: "Litros de óleo", temQuantidade: true, subItens: [{ label: "Qtd", type: "text", initialValue: "" }] },
+  { nome: "Litros de aditivo", temQuantidade: true, subItens: [{ label: "Qtd", type: "text", initialValue: "" }] },
+  {
+    nome: "Correias", temQuantidade: false,
+    subItens: [
+      { label: "Dent kit", type: "checkbox", initialValue: false },
+      { label: "Capa", type: "checkbox", initialValue: false },
+      { label: "Acessórios kit", type: "checkbox", initialValue: false },
+      { label: "Corrente kit", type: "checkbox", initialValue: false },
+    ]
+  },
+  { nome: "Válvula termostática", temQuantidade: true },
+  { nome: "Kit junta motor aço", temQuantidade: true },
+  { nome: "Retentor eixo comando", temQuantidade: true },
+  { nome: "Retentor válvula", temQuantidade: true },
+  {
+    nome: "Comando de Válvula", temQuantidade: false,
+    subItens: [
+      { label: "Admin", type: "checkbox", initialValue: false },
+      { label: "Escape", type: "checkbox", initialValue: false },
+    ]
+  },
+  {
+    nome: "Mangueiras Radiador", temQuantidade: false,
+    subItens: [
+      { label: "Inferior", type: "checkbox", initialValue: false },
+      { label: "Superior", type: "checkbox", initialValue: false },
+    ]
+  },
+  { nome: "Válvulas escape", temQuantidade: true },
+  { nome: "Válvulas admissão", temQuantidade: true },
+  { nome: "Velas", temQuantidade: true },
+  { nome: "Anti Chamas", temQuantidade: true },
+  { nome: "Silicone", temQuantidade: true },
+  { nome: "Parafusos cabeçote", temQuantidade: true },
+  { nome: "Bobina", temQuantidade: true },
+  { nome: "Tuchos", temQuantidade: true },
+  { nome: "Cebolinha de óleo", temQuantidade: true },
+  { nome: "Sensor de temperatura", temQuantidade: true },
+  { nome: "Cabo de vela", temQuantidade: true },
+  { nome: "Biela", temQuantidade: true },
+  { nome: "Embreagem", temQuantidade: true },
   { nome: "Outros", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "" }] },
 ].sort((a, b) => a.nome.localeCompare(b.nome));
 
 const servicosCabecoteData = [
-  { nome: "Plainar Cabeçote", temQuantidade: false },
-  { nome: "Teste de Trinca (Hidráulico/Magnaflux)", temQuantidade: false },
-  { nome: "Retífica de Sedes e Válvulas", temQuantidade: false },
-  { nome: "Troca de Guias de Válvula", temQuantidade: false },
-  { nome: "Troca de Retentores de Válvula", temQuantidade: false },
-  { nome: "Banho Químico (Limpeza)", temQuantidade: false },
-  { nome: "Esmerilhamento de Válvulas", temQuantidade: false },
-  { nome: "Montagem do Cabeçote", temQuantidade: false },
-  { nome: "Regulagem de Válvulas", temQuantidade: false },
-  { nome: "Solda (se necessário)", temQuantidade: false },
-  { nome: "Recuperação de Rosca", temQuantidade: false },
+  { nome: "Usinagem Completa", temQuantidade: false },
+  { nome: "Limpeza e Revisão", temQuantidade: false },
+  { nome: "Novo", temQuantidade: false },
+  { nome: "Recuperação de Altura", temQuantidade: false },
 ].sort((a, b) => a.nome.localeCompare(b.nome));
 
 const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, showMessage, hideMessageBox, isErrorMessage }) => {
@@ -74,7 +94,6 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
     status: 'Aberto',
   });
 
-  // Efeito para carregar dados de edição
   useEffect(() => {
     if (editingData) {
       setFormData(prev => ({
@@ -191,22 +210,6 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
     setFormData(prev => ({ ...prev, servicos: newServicos }));
   };
 
-  const handleAddSubItem = (itemType, itemIndex) => {
-    const items = [...formData[itemType]];
-    if (!items[itemIndex].subItens) {
-      items[itemIndex].subItens = [];
-    }
-    // Adiciona um novo sub-item genérico (texto)
-    items[itemIndex].subItens.push({ label: 'Novo Detalhe', type: 'text', value: '' });
-    setFormData(prev => ({ ...prev, [itemType]: items }));
-  };
-
-  const handleRemoveSubItem = (itemType, itemIndex, subItemIndex) => {
-    const items = [...formData[itemType]];
-    items[itemIndex].subItens.splice(subItemIndex, 1);
-    setFormData(prev => ({ ...prev, [itemType]: items }));
-  };
-
   const handleSubItemTextChange = (itemType, itemIndex, subItemIndex, value) => {
     const items = [...formData[itemType]];
     items[itemIndex].subItens[subItemIndex].value = value;
@@ -232,24 +235,22 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
       .filter(peca => peca.selecionado)
       .map(peca => {
         let nomeCompleto = peca.nome;
-        // Se houver quantidade e medida, adiciona
         if (peca.temQuantidade && peca.quantidade > 0) {
           nomeCompleto += `: Qtd: ${peca.quantidade}`;
         }
         if (peca.temQuantidade && peca.medida > 0) {
           nomeCompleto += ` Medida: ${peca.medida}`;
         }
-        // Adiciona sub-itens formatados
         const subItensFormatados = peca.subItens
           .filter(sub => (sub.type === "checkbox" && sub.value) || (sub.type === "text" && sub.value))
           .map(sub => {
             if (sub.type === "checkbox") {
-              return sub.label; // Apenas o label se for checkbox marcado
+              return sub.label;
             } else {
-              return `${sub.label}: ${sub.value}`; // Label: Valor para texto
+              return `${sub.label}: ${sub.value}`;
             }
           })
-          .join('; '); // Junta com ponto e vírgula para legibilidade
+          .join('; ');
 
         if (subItensFormatados) {
           nomeCompleto += ` (${subItensFormatados})`;
@@ -257,18 +258,16 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
         return nomeCompleto;
       });
 
-    const servicosSelecionadosFormatadas = formData.servicos
+    const servicosSelecionadasFormatadas = formData.servicos
       .filter(servico => servico.selecionado)
       .map(servico => {
         let nomeCompleto = servico.nome;
-        // Se houver quantidade e medida, adiciona (embora na imagem não apareça para serviços)
         if (servico.temQuantidade && servico.quantidade > 0) {
           nomeCompleto += `: Qtd: ${servico.quantidade}`;
         }
         if (servico.temQuantidade && servico.medida > 0) {
           nomeCompleto += ` Medida: ${servico.medida}`;
         }
-        // Adiciona sub-itens formatados
         const subItensFormatados = servico.subItens
           .filter(sub => (sub.type === "checkbox" && sub.value) || (sub.type === "text" && sub.value))
           .map(sub => {
@@ -294,7 +293,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
       data: formData.data,
       ordemServico: formData.ordemServico,
       pecasSelecionadas: pecasSelecionadasFormatadas,
-      servicosSelecionados: servicosSelecionadosFormatadas,
+      servicosSelecionados: servicosSelecionadasFormatadas,
       valorTotalPecas: formData.totalPecasManual,
       valorTotalServicos: formData.totalServicosManual,
       totalMaoDeObra: formData.totalMaoDeObraManual,
@@ -311,9 +310,8 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
   return (
     <div className="orcamento-form-container">
       <div className="form-header">
-        <h1>ORÇAMENTO - CABEÇOTE</h1> {/* Título específico para cabeçote */}
+        <h1>ORÇAMENTO - GERAL</h1>
       </div>
-
       <form onSubmit={handleSubmit}>
         <section className="client-vehicle-section">
           <h2>Informações do Cliente e Veículo</h2>
@@ -362,8 +360,6 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             </tbody>
           </table>
         </section>
-
-        {/* Seção de Peças */}
         <section className="section-form">
           <h2>Peças</h2>
           <table className="items-table">
@@ -374,87 +370,52 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
                     <label className="custom-checkbox">
                       <input
                         type="checkbox"
-                        id={`peca-${index}-${peca.nome.replace(/\s+/g, '')}`} // Adicionado id
-                        name={`peca-${peca.nome.replace(/\s+/g, '')}`} // Adicionado name
+                        id={`peca-${index}-${peca.nome.replace(/\s+/g, '')}`}
+                        name={`peca-${peca.nome.replace(/\s+/g, '')}`}
                         checked={peca.selecionado}
                         onChange={() => handlePecaChange(index, 'selecionado', !peca.selecionado)}
                       />
                       <span className="checkbox-box"></span>
-                      {peca.nome}
+                      {peca.nome}:
                     </label>
                   </td>
-                  <td className="inputs-cell">
-                    {peca.selecionado && peca.temQuantidade && (
-                      <div className="item-inputs">
-                        <div>
-                          <label htmlFor={`peca-${index}-quantidade`} className="input-label">Qtd:</label>
-                          <input
-                            type="number"
-                            id={`peca-${index}-quantidade`}
-                            name={`peca-${index}-quantidade`} // Adicionado name
-                            value={peca.quantidade}
-                            onChange={(e) => handlePecaChange(index, 'quantidade', parseInt(e.target.value) || 0)}
-                            min="0"
-                            className="quantity-input small-input"
-                          />
-                        </div>
-                        <div>
-                          <label htmlFor={`peca-${index}-medida`} className="input-label">Medidas:</label>
-                          <input
-                            type="number"
-                            id={`peca-${index}-medida`}
-                            name={`peca-${index}-medida`} // Adicionado name
-                            placeholder="Medidas"
-                            value={peca.medida}
-                            onChange={(e) => handlePecaChange(index, 'medida', parseFloat(e.target.value) || 0)}
-                            step="0.01"
-                            className="value-input small-input"
-                          />
-                        </div>
-                      </div>
-                    )}
-                  </td>
-                  <td className="subitems-cell">
+                  <td className="subitems-cell" colSpan="2">
                     {peca.selecionado && peca.subItens && (
                       <div className="sub-items-container">
                         {peca.subItens.map((sub, sIdx) => (
                           <div key={sIdx} className="sub-item-input-group">
-                            <label className="sub-item-label" htmlFor={`peca-${index}-sub-${sIdx}-${sub.type}`}>
-                              {sub.label}:
-                            </label>
                             {sub.type === "checkbox" ? (
-                              <input
-                                type="checkbox"
-                                id={`peca-${index}-sub-${sIdx}-${sub.type}`} // Adicionado id
-                                name={`peca-${index}-sub-${sIdx}-${sub.type}`} // Adicionado name
-                                checked={sub.value}
-                                onChange={(e) => handleSubItemCheckboxChange('pecas', index, sIdx, e.target.checked)}
-                                className="small-input"
-                              />
+                              // Sub-item com a classe custom-checkbox
+                              <label className="custom-checkbox">
+                                <input
+                                  type="checkbox"
+                                  id={`peca-${index}-sub-${sIdx}-${sub.type}`}
+                                  name={`peca-${index}-sub-${sIdx}-${sub.type}`}
+                                  checked={sub.value}
+                                  onChange={(e) => handleSubItemCheckboxChange('pecas', index, sIdx, e.target.checked)}
+                                />
+                                <span className="checkbox-box"></span>
+                                {sub.label}
+                              </label>
                             ) : (
-                              <input
-                                type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
-                                id={`peca-${index}-sub-${sIdx}-${sub.type}`} // Adicionado id
-                                name={`peca-${index}-sub-${sIdx}-${sub.type}`} // Adicionado name
-                                placeholder={
-                                  sub.type === "quantity" ? `Qtd` :
-                                    sub.type === "measure" ? `Medida` :
-                                      `Insira o texto`
-                                }
-                                value={sub.value}
-                                onChange={(e) => handleSubItemTextChange('pecas', index, sIdx, e.target.value)}
-                                step={sub.type === "measure" ? "0.01" : "1"}
-                                className="small-input"
-                              />
-                            )}
-                            {!itemsWithSingleTextInput.includes(peca.nome) && (
-                              <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('pecas', index, sIdx)}>X</button>
+                              <>
+                                <label className="sub-item-label" htmlFor={`peca-${index}-sub-${sIdx}-${sub.type}`}>
+                                  {sub.label}:
+                                </label>
+                                <input
+                                  type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
+                                  id={`peca-${index}-sub-${sIdx}-${sub.type}`}
+                                  name={`peca-${index}-sub-${sIdx}-${sub.type}`}
+                                  placeholder={sub.label}
+                                  value={sub.value}
+                                  onChange={(e) => handleSubItemTextChange('pecas', index, sIdx, e.target.value)}
+                                  step={sub.type === "measure" ? "0.01" : "1"}
+                                  className="small-input"
+                                />
+                              </>
                             )}
                           </div>
                         ))}
-                        {peca.subItens.length > 0 && !itemsWithSingleTextInput.includes(peca.nome) && (
-                          <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('pecas', index)}>+ Detalhe</button>
-                        )}
                       </div>
                     )}
                   </td>
@@ -466,7 +427,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             <span className="label">Valor total de Peças:</span>
             <input
               type="number"
-              id="totalPecasManual" // Adicionado id
+              id="totalPecasManual"
               className="value-display input-total"
               name="totalPecasManual"
               value={formData.totalPecasManual}
@@ -475,10 +436,8 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             />
           </div>
         </section>
-
-        {/* Seção de Serviços */}
         <section className="section-form">
-          <h2>Serviços</h2>
+          <h2>Serviços no Cabeçote - Retifica</h2>
           <table className="items-table">
             <tbody>
               {formData.servicos.map((servico, index) => (
@@ -487,8 +446,8 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
                     <label className="custom-checkbox">
                       <input
                         type="checkbox"
-                        id={`servico-${index}-${servico.nome.replace(/\s+/g, '')}`} // Adicionado id
-                        name={`servico-${servico.nome.replace(/\s+/g, '')}`} // Adicionado name
+                        id={`servico-${index}-${servico.nome.replace(/\s+/g, '')}`}
+                        name={`servico-${servico.nome.replace(/\s+/g, '')}`}
                         checked={servico.selecionado}
                         onChange={() => handleServicoChange(index, 'selecionado', !servico.selecionado)}
                       />
@@ -496,76 +455,43 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
                       {servico.nome}
                     </label>
                   </td>
-                  <td className="inputs-cell">
-                    {servico.selecionado && servico.temQuantidade && (
-                      <div className="item-inputs">
-                        <div>
-                          <label htmlFor={`servico-${index}-quantidade`} className="input-label">Qtd:</label>
-                          <input
-                            type="number"
-                            id={`servico-${index}-quantidade`}
-                            name={`servico-${index}-quantidade`} // Adicionado name
-                            value={servico.quantidade}
-                            onChange={(e) => handleServicoChange(index, 'quantidade', parseInt(e.target.value) || 0)}
-                            min="0"
-                            className="quantity-input small-input"
-                          />
-                        </div>
-                        <div>
-                          <label htmlFor={`servico-${index}-medida`} className="input-label">Medidas:</label>
-                          <input
-                            type="number"
-                            id={`servico-${index}-medida`}
-                            name={`servico-${index}-medida`} // Adicionado name
-                            placeholder="Medidas"
-                            value={servico.medida}
-                            onChange={(e) => handleServicoChange(index, 'medida', parseFloat(e.target.value) || 0)}
-                            step="0.01"
-                            className="value-input small-input"
-                          />
-                        </div>
-                      </div>
-                    )}
-                  </td>
-                  <td className="subitems-cell">
+                  <td className="subitems-cell" colSpan="2">
                     {servico.selecionado && servico.subItens && (
                       <div className="sub-items-container">
                         {servico.subItens.map((sub, sIdx) => (
                           <div key={sIdx} className="sub-item-input-group">
-                            <label className="sub-item-label" htmlFor={`servico-${index}-sub-${sIdx}-${sub.type}`}>
-                              {sub.label}:
-                            </label>
                             {sub.type === "checkbox" ? (
-                              <input
-                                type="checkbox"
-                                id={`servico-${index}-sub-${sIdx}-${sub.type}`} // Adicionado id
-                                name={`servico-${index}-sub-${sIdx}-${sub.type}`} // Adicionado name
-                                checked={sub.value}
-                                onChange={(e) => handleSubItemCheckboxChange('servicos', index, sIdx, e.target.checked)}
-                                className="small-input"
-                              />
+                              // Sub-item com a classe custom-checkbox
+                              <label className="custom-checkbox">
+                                <input
+                                  type="checkbox"
+                                  id={`servico-${index}-sub-${sIdx}-${sub.type}`}
+                                  name={`servico-${index}-sub-${sIdx}-${sub.type}`}
+                                  checked={sub.value}
+                                  onChange={(e) => handleSubItemCheckboxChange('servicos', index, sIdx, e.target.checked)}
+                                />
+                                <span className="checkbox-box"></span>
+                                {sub.label}
+                              </label>
                             ) : (
-                              <input
-                                type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
-                                id={`servico-${index}-sub-${sIdx}-${sub.type}`} // Adicionado id
-                                name={`servico-${index}-sub-${sIdx}-${sub.type}`} // Adicionado name
-                                placeholder={
-                                  sub.type === "quantity" ? `Qtd` :
-                                    sub.type === "measure" ? `Medida` :
-                                      `Insira o texto`
-                                }
-                                value={sub.value}
-                                onChange={(e) => handleSubItemTextChange('servicos', index, sIdx, e.target.value)}
-                                step={sub.type === "measure" ? "0.01" : "1"}
-                                className="small-input"
-                              />
+                              <>
+                                <label className="sub-item-label" htmlFor={`servico-${index}-sub-${sIdx}-${sub.type}`}>
+                                  {sub.label}:
+                                </label>
+                                <input
+                                  type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
+                                  id={`servico-${index}-sub-${sIdx}-${sub.type}`}
+                                  name={`servico-${index}-sub-${sIdx}-${sub.type}`}
+                                  placeholder={sub.label}
+                                  value={sub.value}
+                                  onChange={(e) => handleSubItemTextChange('servicos', index, sIdx, e.target.value)}
+                                  step={sub.type === "measure" ? "0.01" : "1"}
+                                  className="small-input"
+                                />
+                              </>
                             )}
-                            <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('servicos', index, sIdx)}>X</button>
                           </div>
                         ))}
-                        {servico.subItens.length > 0 && !itemsWithSingleTextInput.includes(servico.nome) && (
-                          <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('servicos', index)}>+ Detalhe</button>
-                        )}
                       </div>
                     )}
                   </td>
@@ -577,7 +503,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             <span className="label">Valor total de Serviços:</span>
             <input
               type="number"
-              id="totalServicosManual" // Adicionado id
+              id="totalServicosManual"
               className="value-display input-total"
               name="totalServicosManual"
               value={formData.totalServicosManual}
@@ -586,14 +512,12 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             />
           </div>
         </section>
-
-        {/* Totais e Pagamento */}
         <section className="summary-section">
           <div className="total-line-form">
             <span className="label">Valor total de Mão de Obra Mecânica:</span>
             <input
               type="number"
-              id="totalMaoDeObraManual" // Adicionado id
+              id="totalMaoDeObraManual"
               className="value-display input-total"
               name="totalMaoDeObraManual"
               value={formData.totalMaoDeObraManual}
@@ -605,7 +529,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             <span className="label">TOTAL GERAL:</span>
             <input
               type="number"
-              id="totalGeralManual" // Adicionado id
+              id="totalGeralManual"
               className="value-display input-total-geral"
               name="totalGeralManual"
               value={formData.totalGeralManual}
@@ -613,7 +537,6 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
               step="0.01"
             />
           </div>
-
           <div className="form-row">
             <div className="form-group" style={{ width: '100%' }}>
               <label htmlFor="formaPagamento">Forma de pagamento:</label>
@@ -627,7 +550,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             </div>
           </div>
           <div className="form-group">
-            <label htmlFor="observacoes">Observações:</label>
+            <label htmlFor="observacoes">Observacoes:</label>
             <textarea id="observacoes" name="observacoes" value={formData.observacoes} onChange={handleInputChange} rows="3"></textarea>
           </div>
           <div className="form-group">
@@ -636,18 +559,16 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
               <option value="Aberto">Aberto</option>
               <option value="Aprovado">Aprovado</option>
               <option value="Rejeitado">Rejeitado</option>
-              <option value="Concluído">Concluído</option>
+              <option value="Concluido">Concluido</option>
             </select>
           </div>
         </section>
-
         {showMessage && (
           <div className={`message-box ${isErrorMessage ? 'error' : 'success'}`}>
             <span>{message}</span>
             <button type="button" onClick={hideMessageBox}>&times;</button>
           </div>
         )}
-
         <button type="submit" className="action-btn">
           {editingData ? 'Atualizar Orçamento' : 'Salvar Orçamento'}
         </button>
