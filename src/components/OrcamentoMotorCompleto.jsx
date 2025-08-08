@@ -12,6 +12,7 @@ const itemsWithSingleTextInput = [
   "Pistão",
   "Válvulas admissão",
   "Válvulas escape",
+  "Outros",
 ];
 
 // Os dados de itens e serviços completos para o motor (ajustados para o modelo da imagem)
@@ -158,14 +159,13 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
           let subItensAtualizados = item.subItens ? item.subItens.map(sub => {
             let subValue = sub.initialValue || (sub.type === "checkbox" ? false : '');
             if (selecionado && editedItemString) {
-              // Tenta encontrar o valor do subItem na string editedItemString
-              const regex = new RegExp(`${sub.label}(?::\\s*([^;)]+))?`); // Regex mais flexível para ": valor" ou apenas "label"
+              const regex = new RegExp(`${sub.label}(?::\\s*([^;)]+))?`);
               const match = editedItemString.match(regex);
               if (match) {
                 if (sub.type === "checkbox") {
-                  subValue = true; // Se o label do checkbox for encontrado, marca como true
+                  subValue = true;
                 } else if (match[1]) {
-                  subValue = match[1].trim(); // Pega o valor se existir
+                  subValue = match[1].trim();
                 }
               }
             }
@@ -177,7 +177,6 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
             const textOnlyRegex = new RegExp(`^${item.nome}\\s*:\\s*(.+)$`);
             const textOnlyMatch = editedItemString.match(textOnlyRegex);
             if (textOnlyMatch && textOnlyMatch[1]) {
-              // Se o item tem um valor de texto extra (ex: "Anel: 0,50"), armazene em um subItem
               subItensAtualizados = [{ label: "Especificação/Medida", type: "text", value: textOnlyMatch[1].trim() }];
             }
           }
@@ -366,10 +365,6 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
         return nomeCompleto;
       });
 
-    // O código abaixo foi corrigido para usar a variável 'servicosSelecionadosFormatadas' corretamente.
-    // O erro 'no-unused-vars' indicava que a variável não estava sendo usada,
-    // e o 'no-undef' indicava que a referência no objeto orcamentoFinal estava incorreta.
-    // O código agora está correto e o linter não deve mais reportar esses erros.
     const orcamentoFinal = {
       cliente: formData.nome,
       telefone: formData.telefone,
@@ -378,7 +373,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
       data: formData.data,
       ordemServico: formData.ordemServico,
       pecasSelecionadas: pecasSelecionadasFormatadas,
-      servicosSelecionados: servicosSelecionadasFormatadas, // Corrigido o nome da variável aqui
+      servicosSelecionados: servicosSelecionadasFormatadas,
       valorTotalPecas: formData.totalPecasManual,
       valorTotalServicos: formData.totalServicosManual,
       totalMaoDeObra: formData.totalMaoDeObraManual,
@@ -503,9 +498,9 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
                 {peca.selecionado && peca.subItens && (
                   <div className="sub-items-container">
                     {peca.subItens.map((sub, sIdx) => (
-                      <div key={sIdx} className="sub-item-input-group">
+                      <div key={sIdx} className="sub-item-box">
                         <label className="sub-item-label" htmlFor={`peca-${index}-sub-${sIdx}-${sub.type}`}>
-                          {sub.label}:
+                          {sub.label}
                         </label>
                         {sub.type === "checkbox" ? (
                           <input
@@ -514,7 +509,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
                             name={`peca-${index}-sub-${sIdx}-${sub.type}`}
                             checked={sub.value}
                             onChange={(e) => handleSubItemCheckboxChange('pecas', index, sIdx, e.target.checked)}
-                            className="small-input"
+                            className="sub-item-checkbox"
                           />
                         ) : (
                           <input
@@ -612,9 +607,9 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
                 {servico.selecionado && servico.subItens && (
                   <div className="sub-items-container">
                     {servico.subItens.map((sub, sIdx) => (
-                      <div key={sIdx} className="sub-item-input-group">
+                      <div key={sIdx} className="sub-item-box">
                         <label className="sub-item-label" htmlFor={`servico-${index}-sub-${sIdx}-${sub.type}`}>
-                          {sub.label}:
+                          {sub.label}
                         </label>
                         {sub.type === "checkbox" ? (
                           <input
@@ -623,7 +618,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
                             name={`servico-${index}-sub-${sIdx}-${sub.type}`}
                             checked={sub.value}
                             onChange={(e) => handleSubItemCheckboxChange('servicos', index, sIdx, e.target.checked)}
-                            className="small-input"
+                            className="sub-item-checkbox"
                           />
                         ) : (
                           <input
@@ -644,7 +639,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
                         <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('servicos', index, sIdx)}>X</button>
                       </div>
                     ))}
-                    {servico.subItens.length > 0 && !itemsWithSingleTextInput.includes(servico.nome) && (
+                    {servico.subItens.length > 0 && (
                       <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('servicos', index)}>+ Detalhe</button>
                     )}
                   </div>
