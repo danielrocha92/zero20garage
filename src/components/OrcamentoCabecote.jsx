@@ -50,7 +50,7 @@ const itensCabecoteData = [
   { nome: "Cabo de vela", temQuantidade: true },
   { nome: "Biela", temQuantidade: true },
   { nome: "Embreagem", temQuantidade: true },
-  { nome: "Outros", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "" }] },
+  { nome: "Outros", temQuantidade: false, subItens: [{ label: "Quantidade/Medida/Marca", type: "text", initialValue: "" }] },
 ].sort((a, b) => a.nome.localeCompare(b.nome));
 
 const servicosCabecoteData = [
@@ -138,7 +138,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             const textOnlyRegex = new RegExp(`^${item.nome}\\s*:\\s*(.+)$`);
             const textOnlyMatch = editedItem.match(textOnlyRegex);
             if (textOnlyMatch && textOnlyMatch[1]) {
-              subItensAtualizados = [{ label: "Especificação/Medida", type: "text", value: textOnlyMatch[1].trim() }];
+              subItensAtualizados = [{ label: "Quantidade/Medida/Marca", type: "text", value: textOnlyMatch[1].trim() }];
             }
           }
 
@@ -360,12 +360,15 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             </tbody>
           </table>
         </section>
+
+        {/* Seção de Peças */}
         <section className="section-form">
           <h2>Peças</h2>
           <table className="items-table">
             <tbody>
               {formData.pecas.map((peca, index) => (
                 <tr key={index}>
+                  {/* Checkbox principal do item */}
                   <td className="checkbox-cell">
                     <label className="custom-checkbox">
                       <input
@@ -379,6 +382,8 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
                       {peca.nome}:
                     </label>
                   </td>
+
+                {/* Container para inputs de quantidade e medida, se existirem */}
                   <td className="subitems-cell" colSpan="2">
                     {peca.selecionado && peca.subItens && (
                       <div className="sub-items-container">

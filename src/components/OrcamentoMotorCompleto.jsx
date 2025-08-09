@@ -3,7 +3,6 @@ import './OrcamentoForms.css';
 
 // Lista de itens que devem ter apenas um campo de texto para especificação e não devem ter o botão "+ Detalhe"
 const itemsWithSingleTextInput = [
-  "Anel",
   "Arruela encosto",
   "Bronzina de biela",
   "Bronzina de mancal",
@@ -17,11 +16,11 @@ const itemsWithSingleTextInput = [
 
 // Os dados de itens e serviços completos para o motor (ajustados para o modelo da imagem)
 const itensMotorCompletoData = [
-  { nome: "Pistão", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "" }] },
-  { nome: "Anel", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "" }] },
-  { nome: "Bronzina de biela", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "" }] },
-  { nome: "Bronzina de mancal", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "" }] },
-  { nome: "Arruela encosto", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "" }] },
+  { nome: "Pistão", temQuantidade: false, subItens: [{ label: "Quantidade/Medida/Marca", type: "text", initialValue: "" }] },
+  { nome: "Anel", temQuantidade: false, subItens: [{ label: "Quantidade/Medida/Marca", type: "text", initialValue: "" }] },
+  { nome: "Bronzina de biela", temQuantidade: false, subItens: [{ label: "Quantidade/Medida/Marca", type: "text", initialValue: "" }] },
+  { nome: "Bronzina de mancal", temQuantidade: false, subItens: [{ label: "Quantidade/Medida/Marca", type: "text", initialValue: "" }] },
+  { nome: "Arruela encosto", temQuantidade: false, subItens: [{ label: "Quantidade/Medida/Marca", type: "text", initialValue: "" }] },
   { nome: "Bomba de óleo", temQuantidade: false },
   { nome: "Bomba d’água", temQuantidade: false },
   { nome: "Tubo d’água", temQuantidade: false },
@@ -76,7 +75,7 @@ const itensMotorCompletoData = [
   { nome: "Biela", temQuantidade: false },
   { nome: "Embreagem", temQuantidade: false },
   { nome: "Desengripante e Limpa contato", temQuantidade: false },
-  { nome: "Outros", temQuantidade: false, subItens: [{ label: "Especificação/Medida", type: "text", initialValue: "" }] },
+  { nome: "Outros", temQuantidade: false, subItens: [{ label: "Quantidade/Medida/Marca", type: "text", initialValue: "" }] },
 ].sort((a, b) => a.nome.localeCompare(b.nome));
 
 const servicosMotorCompletoData = [
@@ -177,7 +176,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
             const textOnlyRegex = new RegExp(`^${item.nome}\\s*:\\s*(.+)$`);
             const textOnlyMatch = editedItemString.match(textOnlyRegex);
             if (textOnlyMatch && textOnlyMatch[1]) {
-              subItensAtualizados = [{ label: "Especificação/Medida", type: "text", value: textOnlyMatch[1].trim() }];
+              subItensAtualizados = [{ label: "Quantidade/Medida/Marca", type: "text", value: textOnlyMatch[1].trim() }];
             }
           }
 
@@ -306,7 +305,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Filtra apenas os itens selecionados e formata como na imagem
+    // Filtra apenas os itens selecionados e formata
     const pecasSelecionadasFormatadas = formData.pecas
       .filter(peca => peca.selecionado)
       .map(peca => {
@@ -445,101 +444,70 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
         {/* Seção de Peças */}
         <section className="section-form">
           <h2>Peças</h2>
-          <div className="items-list-container">
-            {formData.pecas.map((peca, index) => (
-              <div key={index} className="item-row">
-                {/* Checkbox principal do item */}
-                <div className="item-main-checkbox-container">
-                  <label className="custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id={`peca-${index}-${peca.nome.replace(/\s+/g, '')}`}
-                      name={`peca-${index}-${peca.nome.replace(/\s+/g, '')}`}
-                      checked={peca.selecionado}
-                      onChange={() => handlePecaChange(index, 'selecionado', !peca.selecionado)}
-                    />
-                    <span className="checkbox-box"></span>
-                    {peca.nome}
-                  </label>
-                </div>
+          <table className="items-table">
+            <tbody>
+              {formData.pecas.map((peca, index) => (
+                <tr key={index}>
+                  {/* Checkbox principal do item */}
+                  <td className="checkbox-cell">
+                    <label className="custom-checkbox">
+                      <input
+                        type="checkbox"
+                        id={`peca-${index}-${peca.nome.replace(/\s+/g, '')}`}
+                        name={`peca-${peca.nome.replace(/\s+/g, '')}`}
+                        checked={peca.selecionado}
+                        onChange={() => handlePecaChange(index, 'selecionado', !peca.selecionado)}
+                      />
+                      <span className="checkbox-box"></span>
+                      {peca.nome}:
+                    </label>
+                  </td>
 
                 {/* Container para inputs de quantidade e medida, se existirem */}
-                {peca.selecionado && peca.temQuantidade && (
-                  <div className="item-inputs-container">
-                    <div className="item-input-group">
-                      <label htmlFor={`peca-${index}-quantidade`} className="input-label">Qtd:</label>
-                      <input
-                        type="number"
-                        id={`peca-${index}-quantidade`}
-                        name={`peca-${index}-quantidade`}
-                        value={peca.quantidade}
-                        onChange={(e) => handlePecaChange(index, 'quantidade', parseInt(e.target.value) || 0)}
-                        min="0"
-                        className="quantity-input small-input"
-                      />
-                    </div>
-                    <div className="item-input-group">
-                      <label htmlFor={`peca-${index}-medida`} className="input-label">Medidas:</label>
-                      <input
-                        type="number"
-                        id={`peca-${index}-medida`}
-                        name={`peca-${index}-medida`}
-                        placeholder="Medidas"
-                        value={peca.medida}
-                        onChange={(e) => handlePecaChange(index, 'medida', parseFloat(e.target.value) || 0)}
-                        step="0.01"
-                        className="value-input small-input"
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {/* Sub-itens, se existirem e o item principal estiver selecionado */}
-                {peca.selecionado && peca.subItens && (
-                  <div className="sub-items-container">
-                    {peca.subItens.map((sub, sIdx) => (
-                      <div key={sIdx} className="sub-item-box">
-                        <label className="sub-item-label" htmlFor={`peca-${index}-sub-${sIdx}-${sub.type}`}>
-                          {sub.label}
-                        </label>
-                        {sub.type === "checkbox" ? (
-                          <input
-                            type="checkbox"
-                            id={`peca-${index}-sub-${sIdx}-${sub.type}`}
-                            name={`peca-${index}-sub-${sIdx}-${sub.type}`}
-                            checked={sub.value}
-                            onChange={(e) => handleSubItemCheckboxChange('pecas', index, sIdx, e.target.checked)}
-                            className="sub-item-checkbox"
-                          />
-                        ) : (
-                          <input
-                            type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
-                            id={`peca-${index}-sub-${sIdx}-${sub.type}`}
-                            name={`peca-${index}-sub-${sIdx}-${sub.type}`}
-                            placeholder={
-                              sub.type === "quantity" ? `Qtd` :
-                                sub.type === "measure" ? `Medida` :
-                                  `Insira o texto`
-                            }
-                            value={sub.value}
-                            onChange={(e) => handleSubItemTextChange('pecas', index, sIdx, e.target.value)}
-                            step={sub.type === "measure" ? "0.01" : "1"}
-                            className="small-input"
-                          />
-                        )}
-                        {!itemsWithSingleTextInput.includes(peca.nome) && (
-                          <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('pecas', index, sIdx)}>X</button>
-                        )}
+                  <td className="subitems-cell" colSpan="2">
+                    {peca.selecionado && peca.subItens && (
+                      <div className="sub-items-container">
+                        {peca.subItens.map((sub, sIdx) => (
+                          <div key={sIdx} className="sub-item-input-group">
+                            {sub.type === "checkbox" ? (
+                              // Sub-item com a classe custom-checkbox
+                              <label className="custom-checkbox">
+                                <input
+                                  type="checkbox"
+                                  id={`peca-${index}-sub-${sIdx}-${sub.type}`}
+                                  name={`peca-${index}-sub-${sIdx}-${sub.type}`}
+                                  checked={sub.value}
+                                  onChange={(e) => handleSubItemCheckboxChange('pecas', index, sIdx, e.target.checked)}
+                                />
+                                <span className="checkbox-box"></span>
+                                {sub.label}
+                              </label>
+                            ) : (
+                              <>
+                                <label className="sub-item-label" htmlFor={`peca-${index}-sub-${sIdx}-${sub.type}`}>
+                                  {sub.label}:
+                                </label>
+                                <input
+                                  type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
+                                  id={`peca-${index}-sub-${sIdx}-${sub.type}`}
+                                  name={`peca-${index}-sub-${sIdx}-${sub.type}`}
+                                  placeholder={sub.label}
+                                  value={sub.value}
+                                  onChange={(e) => handleSubItemTextChange('pecas', index, sIdx, e.target.value)}
+                                  step={sub.type === "measure" ? "0.01" : "1"}
+                                  className="small-input"
+                                />
+                              </>
+                            )}
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                    {peca.subItens.length > 0 && !itemsWithSingleTextInput.includes(peca.nome) && (
-                      <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('pecas', index)}>+ Detalhe</button>
                     )}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
           <div className="total-line-form">
             <span className="label">Valor total de Peças:</span>
             <input
@@ -628,7 +596,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
                             placeholder={
                               sub.type === "quantity" ? `Qtd` :
                                 sub.type === "measure" ? `Medida` :
-                                  `Insira o texto`
+                                  `Quantidade/Medida/Marca`
                             }
                             value={sub.value}
                             onChange={(e) => handleSubItemTextChange('servicos', index, sIdx, e.target.value)}

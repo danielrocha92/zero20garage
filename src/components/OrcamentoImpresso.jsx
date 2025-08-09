@@ -1,15 +1,18 @@
 // src/components/OrcamentoImpresso.jsx
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import SignatureCanvas from 'react-signature-canvas';
 import './OrcamentoImpresso.css';
-import backgroundImage from '../assets/images/background.jpg'; // Mantido conforme solicitação do usuário
+import backgroundImage from '../assets/images/background.jpg';
 
 const OrcamentoImpresso = ({ orcamento, onClose }) => {
   const componentRef = useRef(null);
+  const sigCanvasRef = useRef(null);
+  const [isAgreed, setIsAgreed] = useState(false); // Novo estado para a checkbox
 
   const logoBackgroundStyle = {
-    backgroundImage: `url(${backgroundImage})`, // Usando a variável importada
+    backgroundImage: `url(${backgroundImage})`,
     backgroundSize: 'contain',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -17,7 +20,12 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     height: '50px',
   };
 
-  // Função para gerar e compartilhar o PDF
+  const clearSignature = () => {
+    if (sigCanvasRef.current) {
+      sigCanvasRef.current.clear();
+    }
+  };
+
   const handleSharePdf = async () => {
     if (!componentRef.current) {
       console.error("A referência ao conteúdo do orçamento não foi encontrada. Geração do PDF abortada.");
@@ -28,34 +36,20 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       try {
         console.log("Iniciando a captura do conteúdo para PDF...");
         const canvas = await html2canvas(componentRef.current, {
-          scale: 2, // Aumenta a escala para melhor qualidade do PDF
-          useCORS: true, // Importante se tiver imagens de outras origens
-          logging: true, // Habilita logs para depuração
+          scale: 2,
+          useCORS: true,
+          logging: true,
         });
 
         const imgData = canvas.toDataURL('image/png');
         const pdf = new jsPDF('p', 'mm', 'a4');
 
         const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = pdf.internal.pageSize.getHeight();
-
         const margin = 10; // mm
         const contentWidth = pdfWidth - (margin * 2);
-        const contentHeight = pdfHeight - (margin * 2);
-
         const imgHeight = (canvas.height * contentWidth) / canvas.width;
-        let heightLeft = imgHeight;
-        let position = margin;
 
-        pdf.addImage(imgData, 'PNG', margin, position, contentWidth, imgHeight);
-        heightLeft -= contentHeight;
-
-        while (heightLeft > -1 * contentHeight) {
-          position = heightLeft - imgHeight + margin;
-          pdf.addPage();
-          pdf.addImage(imgData, 'PNG', margin, position, contentWidth, imgHeight);
-          heightLeft -= contentHeight;
-        }
+        pdf.addImage(imgData, 'PNG', margin, margin, contentWidth, imgHeight);
 
         const filename = `Orçamento_OS_${orcamento?.ordemServico || 'SemOS'}_${orcamento?.cliente || 'SemCliente'}.pdf`;
         pdf.save(filename);
@@ -71,36 +65,15 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     return <div className="orcamento-impresso-container">Nenhum orçamento selecionado para visualização.</div>;
   }
 
-  // Dados de peças e serviços do modelo para simular o layout
-  // Estes são exemplos estáticos baseados na imagem para preencher as colunas
-  const pecasModeloColuna1 = [
-    "Pistão", "Anel", "Bronzina de mancal", "Bronzina de biela",
-    "Arruela encosto", "Bomba de óleo", "Bomba d'água", "Tubo d'água",
-    "Filtro de óleo", "Filtro de ar", "Filtro de combustível",
-    "Litros de óleo", "Litros de aditivo", "Correias",
-    "Dent kit | Capa | Acessórios kit | Corrente kit", "Válvula term",
-    "Kit junta motor aço", "Retentor traseiro virab.", "Engrenagem virab."
-  ];
+  const pecas = orcamento.pecasSelecionadas || [];
+  const servicos = orcamento.servicosSelecionados || [];
+  const pecasMidPoint = Math.ceil(pecas.length / 2);
+  const pecasColuna1 = pecas.slice(0, pecasMidPoint);
+  const pecasColuna2 = pecas.slice(pecasMidPoint);
 
-  const pecasModeloColuna2 = [
-    "Retentor eixo comando", "Retentor válvula", "Comando de Válvula: Admis | Escape",
-    "Mangueiras Radiador: Inferior | Superior", "Válvulas escape",
-    "Válvulas admissão", "Velas", "Anti Chamas", "Silicone",
-    "Parafusos cabeçote", "Bobina", "Tuchos", "Cebolinha de óleo",
-    "Sensor de temperatura", "Retentor eixo comando", "Retentor traseiro virab.",
-    "Retentor válvula", "Silicone", "Tubo d'água", "Biela", "Embreagem",
-    "Desengripante e Limpa contato", "Outros"
-  ];
-
-  const servicosModeloColuna1 = [
-    "Bloco usinagem completa", "Cabeçote: Usinagem completa | Limpeza e Revisão | Novo | Recuperação altura",
-    "Bielas: Usinagem | Nova", "Volante Usinagem completa",
-    "Banho (cárter, suportes, parafusos etc)"
-  ];
-
-  const servicosModeloColuna2 = [
-    "Viraquim: Usinagem completa | Novo", "Montagem de motor Técnica"
-  ];
+  const servicosMidPoint = Math.ceil(servicos.length / 2);
+  const servicosColuna1 = servicos.slice(0, servicosMidPoint);
+  const servicosColuna2 = servicos.slice(servicosMidPoint);
 
   return (
     <div className="orcamento-impresso-container">
@@ -127,20 +100,18 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           <h2>Peças</h2>
           <div className="items-columns">
             <ul className="item-list-impresso">
-              {pecasModeloColuna1.map((item, index) => (
+              {pecasColuna1.map((item, index) => (
                 <li key={`peca1-${index}`}>
-                  <span className="checkbox-box"></span>
+                  <span className="checkbox-box checkbox-filled"></span>
                   <span className="item-text">{item}</span>
-                  <span className="input-line-small"></span> {/* Linha para preenchimento */}
                 </li>
               ))}
             </ul>
             <ul className="item-list-impresso">
-              {pecasModeloColuna2.map((item, index) => (
+              {pecasColuna2.map((item, index) => (
                 <li key={`peca2-${index}`}>
-                  <span className="checkbox-box"></span>
+                  <span className="checkbox-box checkbox-filled"></span>
                   <span className="item-text">{item}</span>
-                  <span className="input-line-small"></span> {/* Linha para preenchimento */}
                 </li>
               ))}
             </ul>
@@ -155,20 +126,18 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           <h2>Serviços - Retífica</h2>
           <div className="items-columns">
             <ul className="item-list-impresso">
-              {servicosModeloColuna1.map((item, index) => (
+              {servicosColuna1.map((item, index) => (
                 <li key={`servico1-${index}`}>
-                  <span className="checkbox-box"></span>
+                  <span className="checkbox-box checkbox-filled"></span>
                   <span className="item-text">{item}</span>
-                  <span className="input-line-small"></span> {/* Linha para preenchimento */}
                 </li>
               ))}
             </ul>
             <ul className="item-list-impresso">
-              {servicosModeloColuna2.map((item, index) => (
+              {servicosColuna2.map((item, index) => (
                 <li key={`servico2-${index}`}>
-                  <span className="checkbox-box"></span>
+                  <span className="checkbox-box checkbox-filled"></span>
                   <span className="item-text">{item}</span>
-                  <span className="input-line-small"></span> {/* Linha para preenchimento */}
                 </li>
               ))}
             </ul>
@@ -188,15 +157,52 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
             <span>TOTAL GERAL:</span>
             <strong>R$ {Number(orcamento?.valorTotal || 0).toFixed(2).replace('.', ',')}</strong>
           </div>
-          {/* Removidos campos que não aparecem no modelo original para manter fidelidade */}
-          {/* <p><strong>Forma de Pagamento:</strong> {orcamento?.formaPagamento || 'N/A'}</p>
-          <p><strong>Garantia:</strong> {orcamento?.garantia || 'N/A'}</p>
-          <p><strong>Observações:</strong> {orcamento?.observacoes || 'N/A'}</p>
-          <p><strong>Status:</strong> {orcamento?.status || 'N/A'}</p> */}
+        </section>
+
+        <section className="policy-footer">
+          <div className="policy-box">
+            <h4>Política de Garantia, Troca e Devolução</h4>
+            <p className="policy-text">
+              (INSERIR POLÍTICA AQUI) - A garantia cobre defeitos de fabricação e de montagem. Não cobre danos causados por mau uso, negligência ou acidentes. Peças eletrônicas não possuem garantia após a instalação. Devoluções e trocas devem ser solicitadas em até 7 dias após o serviço, mediante apresentação do orçamento e nota fiscal.
+            </p>
+          </div>
+          <div className="signature-area">
+            <div className="signature-line-group">
+              <div className="signature-line">
+                <span className="signature-label">Cliente:</span>
+                <span className="signature-input-line">{orcamento?.cliente || ''}</span>
+              </div>
+              <div className="signature-line">
+                <span className="signature-label">RG / CPF:</span>
+                <span className="signature-input-line"></span>
+              </div>
+            </div>
+            <div className="policy-consent">
+              {/* Checkbox real */}
+              <input
+                type="checkbox"
+                id="policy-consent"
+                checked={isAgreed}
+                onChange={(e) => setIsAgreed(e.target.checked)}
+                className='checkbox-box-impresso'
+              />
+              <label htmlFor="policy-consent">
+                Li e concordo com os termos e condições de garantia, troca e devolução.
+              </label>
+            </div>
+            <div className="signature-block">
+              <span className="signature-label">Assinatura Eletrônica (Cliente):</span>
+              <SignatureCanvas
+                ref={sigCanvasRef}
+                penColor="black"
+                canvasProps={{ className: 'sig-canvas' }}
+              />
+              <button onClick={clearSignature} className="clear-sig-btn">Limpar Assinatura</button>
+            </div>
+          </div>
         </section>
       </div>
 
-      {/* Botões de ação fora da área de impressão */}
       <div className="print-buttons">
         <button onClick={handleSharePdf} className="print-btn">Compartilhar PDF</button>
         <button onClick={onClose} className="back-btn">Voltar ao Painel</button>

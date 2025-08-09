@@ -1,44 +1,44 @@
 /* src/components/OrcamentoImpresso.css */
 
-/* Base para Mobile First */
+/* --- Base para Mobile First --- */
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #2a2a2a; /* Fundo escuro para visualização na tela */
-    color: #e0e0e0; /* Texto claro para visualização na tela */
+    background-color: #2a2a2a;
+    color: #e0e0e0;
 }
 
 .orcamento-impresso-container {
-    background-color: #2a2a2a; /* Fundo escuro para visualização na tela */
-    padding: 1rem; /* Ajustado para rem */
-    border-radius: 0.5rem; /* Ajustado para rem */
-    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.5); /* Ajustado para rem */
-    max-width: 100%; /* Garante que não exceda a largura da tela */
-    margin: 1rem auto; /* Ajustado para rem, centraliza */
-    overflow: hidden; /* Mantido para conter o container principal */
+    background-color: #2a2a2a;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.5);
+    max-width: 100%;
+    margin: 1rem auto;
+    overflow: hidden;
     position: relative;
-    box-sizing: border-box; /* Inclui padding na largura/altura total */
+    box-sizing: border-box;
 }
 
 .orcamento-impresso-content {
-    background-color: white; /* Fundo branco para o conteúdo a ser impresso */
-    color: #333; /* Texto escuro para o conteúdo a ser impresso */
-    padding: 1.5rem; /* Ajustado para rem */
-    border-radius: 0.5rem; /* Ajustado para rem */
-    box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,0.1); /* Ajustado para rem */
-    min-height: auto; /* Remove altura mínima para flexibilidade */
+    background-color: white;
+    color: #333;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,0.1);
+    min-height: auto;
     box-sizing: border-box;
-    font-size: 0.8rem; /* Reduzido ainda mais para tentar caber em uma página */
-    line-height: 1.15; /* Ligeiramente reduzido para compactar verticalmente */
-    overflow-x: hidden; /* Garante que o conteúdo interno não cause rolagem horizontal */
+    font-size: 0.8rem;
+    line-height: 1.15;
+    overflow-x: hidden;
 }
 
 .header-impresso {
     display: flex;
-    flex-direction: column; /* Empilha em telas pequenas */
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 1rem; /* Reduzido */
+    margin-bottom: 1rem;
     border-bottom: none;
     padding-bottom: 0;
     text-align: center;
@@ -47,74 +47,74 @@ body {
 .header-impresso h1 {
     color: #000;
     font-family: 'Arial Black', sans-serif;
-    font-size: 1rem; /* Reduzido */
-    margin: 0 0 0.3rem 0; /* Reduzido */
+    font-size: 1rem;
+    margin: 0 0 0.3rem 0;
     text-align: center;
     width: 100%;
 }
 
 .logo-impresso-div {
-    max-width: 65px; /* Reduzido */
-    height: 32px; /* Reduzido */
+    max-width: 65px;
+    height: 32px;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    margin-top: 0.3rem; /* Reduzido */
+    margin-top: 0.3rem;
 }
 
 .info-section {
-    margin-bottom: 1rem; /* Reduzido */
+    margin-bottom: 1rem;
     border-bottom: 1px solid black;
-    padding-bottom: 0.15rem; /* Reduzido */
+    padding-bottom: 0.15rem;
 }
 
 .info-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.85em; /* Reduzido */
+    font-size: 0.85em;
 }
 
 .info-table td {
     padding: 0.05rem 0;
     vertical-align: bottom;
-    font-size: 0.5em; /* Reduzido */
-    width: 50%; /* 2 colunas em mobile */
+    font-size: 0.85rem;
+    width: 50%;
     color: #9e0000;
-    font-weight: bold; /* Mantido para destaque */
-    word-wrap: break-word; /* Quebra de linha para textos longos */
-    overflow-wrap: break-word; /* Quebra de linha para textos longos */
-    white-space: nowrap; /* Impede quebra de linha automática */
-    min-width: 45px; /* Reduzido */
-    padding-left: 0.2rem; /* Reduzido */
-    padding-right: 0.2rem; /* Reduzido */
-    box-sizing: border-box; /* Inclui padding na largura/altura total */
-    text-align: center; /* Centraliza o texto */
-    word-break: break-all; /* Quebra palavras longas */
+    font-weight: bold;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: nowrap;
+    min-width: 45px;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+    box-sizing: border-box;
+    text-align: center;
+    word-break: break-all;
 }
 
 .input-line {
     display: inline-block;
     border-bottom: 1px solid black;
-    min-width: 45px; /* Reduzido */
+    min-width: 45px;
     padding-left: 0.2rem;
     box-sizing: border-box;
     font-weight: normal;
     color: #333;
-    width: calc(100% - 45px); /* Ajustado */
+    width: calc(100% - 45px);
     vertical-align: bottom;
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
 
 .items-section {
-    margin-bottom: 1rem; /* Reduzido */
+    margin-bottom: 1rem;
 }
 
 .items-section h2 {
     color: #000;
     font-family: 'Arial Black', sans-serif;
-    font-size: 1rem; /* Reduzido */
-    margin-bottom: 0.6rem; /* Reduzido */
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
     border-bottom: 1px solid black;
     padding-bottom: 0.2rem;
     text-align: left;
@@ -122,8 +122,8 @@ body {
 
 .items-columns {
     display: flex;
-    flex-direction: column; /* Empilha colunas em mobile */
-    gap: 0.3rem; /* Reduzido */
+    flex-direction: column;
+    gap: 0.3rem;
 }
 
 .item-list-impresso {
@@ -136,22 +136,22 @@ body {
 .item-list-impresso li {
     display: flex;
     align-items: center;
-    margin-bottom: 0.1rem; /* Reduzido */
-    line-height: 1.1; /* Reduzido */
+    margin-bottom: 0.1rem;
+    line-height: 1.1;
     flex-wrap: wrap;
 }
 
 .checkbox-box {
     display: inline-block;
-    width: 0.65rem; /* Reduzido */
-    height: 0.65rem; /* Reduzido */
+    width: 0.65rem;
+    height: 0.65rem;
     border: 1px solid black;
-    margin-right: 0.2rem; /* Reduzido */
+    margin-right: 0.2rem;
     flex-shrink: 0;
 }
 
 .item-text {
-    margin-right: 0.2rem; /* Reduzido */
+    margin-right: 0.2rem;
     flex-shrink: 1;
     flex-grow: 1;
     word-wrap: break-word;
@@ -163,7 +163,7 @@ body {
     display: inline-block;
     border-bottom: 1px solid black;
     flex-grow: 1;
-    min-width: 0.7rem; /* Reduzido */
+    min-width: 0.7rem;
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
@@ -172,31 +172,31 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-top: 0.7rem; /* Reduzido */
-    padding: 0.3rem 0; /* Reduzido */
+    margin-top: 0.7rem;
+    padding: 0.3rem 0;
     border-top: 1px solid black;
 }
 
 .total-line-impresso span {
     font-weight: normal;
-    margin-right: 0.3rem; /* Reduzido */
+    margin-right: 0.3rem;
     color: #333;
-    font-size: 0.9em; /* Reduzido */
+    font-size: 0.9em;
 }
 
 .total-line-impresso strong {
     color: #000;
-    font-size: 0.95em; /* Reduzido */
+    font-size: 0.95em;
     font-weight: bold;
 }
 
 .summary-section-impresso {
-    margin-top: 1rem; /* Reduzido */
+    margin-top: 1rem;
 }
 
 .summary-section-impresso p {
-    margin-bottom: 0.2rem; /* Reduzido */
-    font-size: 0.85em; /* Reduzido */
+    margin-bottom: 0.2rem;
+    font-size: 0.85em;
 }
 
 .summary-section-impresso p strong {
@@ -205,12 +205,12 @@ body {
 
 .final-total {
     border-top: 2px solid black;
-    padding-top: 0.4rem; /* Reduzido */
-    margin-top: 0.8rem; /* Reduzido */
+    padding-top: 0.4rem;
+    margin-top: 0.8rem;
 }
 
 .final-total strong {
-    font-size: 1.1em; /* Reduzido */
+    font-size: 1.1em;
     color: #000;
 }
 
@@ -219,9 +219,9 @@ body {
     text-align: center;
     margin-top: 1rem;
     display: flex;
-    flex-direction: column; /* Empilha botões em mobile */
+    flex-direction: column;
     gap: 0.8rem;
-    padding: 0 1rem; /* Padding para os botões */
+    padding: 0 1rem;
 }
 
 .print-btn, .back-btn {
@@ -233,118 +233,223 @@ body {
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s ease;
-    width: 100%; /* Ocupa a largura total em mobile */
+    width: 100%;
 }
 
 .print-btn:hover, .back-btn:hover {
     background-color: #9e0303;
 }
 
-/* Media Queries para Desktop/Telas Maiores */
+/* --- Estilos do rodapé com política e assinatura --- */
+.policy-footer {
+    margin-top: 30px;
+    font-family: 'Arial', sans-serif;
+}
+
+.policy-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.policy-box h4 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.policy-text {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #555;
+    margin: 0;
+}
+
+.signature-area {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.signature-line-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.signature-line {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.signature-label {
+    font-weight: bold;
+    font-size: 12px;
+    white-space: nowrap;
+    margin-right: 5px;
+}
+
+.signature-input-line {
+    flex-grow: 1;
+    border-bottom: 1px solid #000;
+    padding-bottom: 2px;
+    font-size: 12px;
+    color: #333;
+}
+
+.policy-consent {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #555;
+}
+
+/* --- Novos estilos para o campo de assinatura --- */
+.signature-block {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    position: relative;
+}
+
+.sig-canvas {
+    width: 100%;
+    height: 100px;
+    border: 1px dashed #ccc;
+    background-color: #f9f9f9;
+    touch-action: none;
+}
+
+.clear-sig-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 2px 8px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.checkbox-box-impresso {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #000;
+  display: inline-block;
+  flex-shrink: 0; /* Impede o encolhimento */
+  cursor: pointer;
+}
+
+/* --- Media Queries para Desktop/Telas Maiores --- */
 @media (min-width: 768px) {
     .orcamento-impresso-container {
         padding: 2rem;
-        max-width: 800px; /* Largura máxima para desktop */
+        max-width: 800px;
     }
 
     .orcamento-impresso-content {
-        padding: 20mm; /* Mantém 20mm para o PDF em A4 */
-        font-size: 10pt; /* Reduzido ainda mais para PDF em desktop */
-        line-height: 1.1; /* Ligeiramente reduzido */
+        padding: 20mm;
+        font-size: 10pt;
+        line-height: 1.1;
     }
 
     .header-impresso {
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-end;
-        margin-bottom: 20px; /* Ajustado */
+        margin-bottom: 20px;
         text-align: left;
     }
 
     .header-impresso h1 {
-        font-size: 0.85rem; /* Reduzido */
+        font-size: 0.85rem;
         margin: 0;
         text-align: center;
     }
 
     .logo-impresso-div {
-        max-width: 80px; /* Ajustado */
-        height: 40px; /* Ajustado */
+        max-width: 80px;
+        height: 40px;
         margin-left: 20px;
         margin-top: 0;
     }
 
     .info-section {
-        margin-bottom: 18px; /* Ajustado */
+        margin-bottom: 18px;
     }
 
     .info-table td {
-        width: 25%; /* 4 colunas em desktop */
-        font-size: 0.85em; /* Reduzido */
+        width: 25%;
+        font-size: 0.95em;
         margin: 0;
         text-align: center;
     }
 
     .input-line {
-        min-width: 60px; /* Ajustado */
+        min-width: 60px;
         width: auto;
     }
 
     .items-section {
-        margin-bottom: 18px; /* Ajustado */
+        margin-bottom: 18px;
     }
 
     .items-section h2 {
-        font-size: 1.05em; /* Reduzido */
+        font-size: 1.05em;
     }
 
     .items-columns {
         flex-direction: row;
-        gap: 12px; /* Reduzido */
+        gap: 12px;
     }
 
     .item-list-impresso li {
-        margin-bottom: 1.5px; /* Reduzido */
+        margin-bottom: 1.5px;
     }
 
     .checkbox-box {
-        width: 10px; /* Reduzido */
-        height: 10px; /* Reduzido */
-        margin-right: 3px; /* Reduzido */
+        width: 10px;
+        height: 10px;
+        margin-right: 3px;
     }
 
     .item-text {
-        margin-right: 3px; /* Reduzido */
+        margin-right: 3px;
     }
 
     .total-line-impresso {
-        margin-top: 7px; /* Reduzido */
-        padding: 3px 0; /* Reduzido */
+        margin-top: 7px;
+        padding: 3px 0;
     }
 
     .total-line-impresso span {
-        font-size: 0.85em; /* Reduzido */
+        font-size: 0.85em;
     }
 
     .total-line-impresso strong {
-        font-size: 0.95em; /* Reduzido */
+        font-size: 0.95em;
     }
 
     .summary-section-impresso {
-        margin-top: 12px; /* Reduzido */
+        margin-top: 12px;
     }
 
     .summary-section-impresso p {
-        font-size: 0.8em; /* Reduzido */
+        font-size: 0.8em;
     }
 
     .final-total {
-        padding-top: 7px; /* Reduzido */
-        margin-top: 12px; /* Reduzido */
+        padding-top: 7px;
+        margin-top: 12px;
     }
 
     .final-total strong {
-        font-size: 1.2em; /* Reduzido */
+        font-size: 1.2em;
     }
 
     .print-buttons {
@@ -360,12 +465,13 @@ body {
     }
 }
 
-/* Estilos específicos para impressão (media print) */
+/* --- Estilos específicos para impressão (media print) --- */
 @media print {
     body {
         margin: 0;
         padding: 0;
     }
+
     .orcamento-impresso-container {
         box-shadow: none;
         margin: 0;
@@ -373,46 +479,48 @@ body {
         padding: 0;
         background-color: white;
     }
+
     .orcamento-impresso-content {
         box-shadow: none;
         border-radius: 0;
         min-height: auto;
-        padding: 10mm; /* Margem da página para impressão */
-        font-size: 8.5pt; /* Reduzido para garantir que caiba na impressão final */
-        line-height: 1.05; /* Mais compacto para impressão */
+        padding: 10mm;
+        font-size: 8.5pt;
+        line-height: 1.05;
     }
+
     .print-buttons {
-        display: none; /* Esconde os botões na impressão */
+        display: none;
     }
+
     * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
-    /* Ajustes finos para impressão para garantir que caiba */
     .header-impresso h1 {
-        font-size: 1rem; /* Ajuste para impressão */
+        font-size: 1rem;
     }
     .logo-impresso-div {
-        max-width: 70px; /* Ajuste para impressão */
-        height: 35px; /* Ajuste para impressão */
+        max-width: 50px;
+        height: 30px;
     }
     .info-table td {
-        font-size: 0.8em; /* Ajuste para impressão */
+        font-size: 0.8em;
     }
     .items-section h2 {
-        font-size: 0.95em; /* Ajuste para impressão */
+        font-size: 0.95em;
     }
     .item-list-impresso li {
-        font-size: 0.8em; /* Ajuste para impressão */
+        font-size: 0.8em;
     }
     .total-line-impresso span, .total-line-impresso strong {
-        font-size: 0.85em; /* Ajuste para impressão */
+        font-size: 0.85em;
     }
     .final-total strong {
-        font-size: 1.1em; /* Ajuste para impressão */
+        font-size: 1.1em;
     }
     .summary-section-impresso p {
-        font-size: 0.8em; /* Ajuste para impressão */
+        font-size: 0.8em;
     }
 }
