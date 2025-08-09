@@ -9,7 +9,7 @@ import backgroundImage from '../assets/images/background.jpg';
 const OrcamentoImpresso = ({ orcamento, onClose }) => {
   const componentRef = useRef(null);
   const sigCanvasRef = useRef(null);
-  const [isAgreed, setIsAgreed] = useState(false); // Novo estado para a checkbox
+  const [isAgreed, setIsAgreed] = useState(false);
 
   const logoBackgroundStyle = {
     backgroundImage: `url(${backgroundImage})`,
@@ -45,7 +45,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
         const pdf = new jsPDF('p', 'mm', 'a4');
 
         const pdfWidth = pdf.internal.pageSize.getWidth();
-        const margin = 10; // mm
+        const margin = 10;
         const contentWidth = pdfWidth - (margin * 2);
         const imgHeight = (canvas.height * contentWidth) / canvas.width;
 
@@ -118,7 +118,9 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           </div>
           <div className="total-line-impresso">
             <span>Valor total de Peças:</span>
-            <strong>R$ {Number(orcamento?.valorTotalPecas || 0).toFixed(2).replace('.', ',')}</strong>
+            {orcamento?.valorTotalPecas
+              ? <strong>R$ {Number(orcamento.valorTotalPecas).toFixed(2).replace('.', ',')}</strong>
+              : <strong>___________</strong>}
           </div>
         </section>
 
@@ -144,18 +146,24 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           </div>
           <div className="total-line-impresso">
             <span>Valor total de Serviços:</span>
-            <strong>R$ {Number(orcamento?.valorTotalServicos || 0).toFixed(2).replace('.', ',')}</strong>
+            {orcamento?.valorTotalServicos
+              ? <strong>R$ {Number(orcamento.valorTotalServicos).toFixed(2).replace('.', ',')}</strong>
+              : <strong>___________</strong>}
           </div>
         </section>
 
         <section className="summary-section-impresso">
           <div className="total-line-impresso">
             <span>Valor total de mão de Obra:</span>
-            <strong>R$ {Number(orcamento?.totalMaoDeObra || 0).toFixed(2).replace('.', ',')}</strong>
+            {orcamento?.totalMaoDeObra
+              ? <strong>R$ {Number(orcamento.totalMaoDeObra).toFixed(2).replace('.', ',')}</strong>
+              : <strong>___________</strong>}
           </div>
           <div className="total-line-impresso final-total">
             <span>TOTAL GERAL:</span>
-            <strong>R$ {Number(orcamento?.valorTotal || 0).toFixed(2).replace('.', ',')}</strong>
+            {orcamento?.valorTotal
+              ? <strong>R$ {Number(orcamento.valorTotal).toFixed(2).replace('.', ',')}</strong>
+              : <strong>___________</strong>}
           </div>
         </section>
 
@@ -178,7 +186,6 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
               </div>
             </div>
             <div className="policy-consent">
-              {/* Checkbox real */}
               <input
                 type="checkbox"
                 id="policy-consent"
@@ -205,7 +212,11 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
 
       <div className="print-buttons">
         <button onClick={handleSharePdf} className="print-btn">Compartilhar PDF</button>
-        <button onClick={onClose} className="back-btn">Voltar ao Painel</button>
+
+        {/* Alterado para enviar o ID do orçamento ao fechar */}
+        <button onClick={() => onClose(orcamento.id || orcamento._id)} className="back-btn">
+          Voltar ao Painel
+        </button>
       </div>
     </div>
   );

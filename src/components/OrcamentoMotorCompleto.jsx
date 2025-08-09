@@ -269,22 +269,6 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
     setFormData(prev => ({ ...prev, servicos: newServicos }));
   };
 
-  const handleAddSubItem = (itemType, itemIndex) => {
-    const items = [...formData[itemType]];
-    if (!items[itemIndex].subItens) {
-      items[itemIndex].subItens = [];
-    }
-    // Adiciona um novo sub-item genérico (texto)
-    items[itemIndex].subItens.push({ label: 'Novo Detalhe', type: 'text', value: '' });
-    setFormData(prev => ({ ...prev, [itemType]: items }));
-  };
-
-  const handleRemoveSubItem = (itemType, itemIndex, subItemIndex) => {
-    const items = [...formData[itemType]];
-    items[itemIndex].subItens.splice(subItemIndex, 1);
-    setFormData(prev => ({ ...prev, [itemType]: items }));
-  };
-
   const handleSubItemTextChange = (itemType, itemIndex, subItemIndex, value) => {
     const items = [...formData[itemType]];
     items[itemIndex].subItens[subItemIndex].value = value;
@@ -524,97 +508,68 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
 
         {/* Seção de Serviços */}
         <section className="section-form">
-          <h2>Serviços</h2>
-          <div className="items-list-container">
-            {formData.servicos.map((servico, index) => (
-              <div key={index} className="item-row">
-                <div className="item-main-checkbox-container">
-                  <label className="custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id={`servico-${index}-${servico.nome.replace(/\s+/g, '')}`}
-                      name={`servico-${index}-${servico.nome.replace(/\s+/g, '')}`}
-                      checked={servico.selecionado}
-                      onChange={() => handleServicoChange(index, 'selecionado', !servico.selecionado)}
-                    />
-                    <span className="checkbox-box"></span>
-                    {servico.nome}
-                  </label>
-                </div>
-
-                {servico.selecionado && servico.temQuantidade && (
-                  <div className="item-inputs-container">
-                    <div className="item-input-group">
-                      <label htmlFor={`servico-${index}-quantidade`} className="input-label">Qtd:</label>
+          <h2>Serviços no Cabeçote - Retifica</h2>
+          <table className="items-table">
+            <tbody>
+              {formData.servicos.map((servico, index) => (
+                <tr key={index}>
+                  <td className="checkbox-cell">
+                    <label className="custom-checkbox">
                       <input
-                        type="number"
-                        id={`servico-${index}-quantidade`}
-                        name={`servico-${index}-quantidade`}
-                        value={servico.quantidade}
-                        onChange={(e) => handleServicoChange(index, 'quantidade', parseInt(e.target.value) || 0)}
-                        min="0"
-                        className="quantity-input small-input"
+                        type="checkbox"
+                        id={`servico-${index}-${servico.nome.replace(/\s+/g, '')}`}
+                        name={`servico-${servico.nome.replace(/\s+/g, '')}`}
+                        checked={servico.selecionado}
+                        onChange={() => handleServicoChange(index, 'selecionado', !servico.selecionado)}
                       />
-                    </div>
-                    <div className="item-input-group">
-                      <label htmlFor={`servico-${index}-medida`} className="input-label">Medidas:</label>
-                      <input
-                        type="number"
-                        id={`servico-${index}-medida`}
-                        name={`servico-${index}-medida`}
-                        placeholder="Medidas"
-                        value={servico.medida}
-                        onChange={(e) => handleServicoChange(index, 'medida', parseFloat(e.target.value) || 0)}
-                        step="0.01"
-                        className="value-input small-input"
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {servico.selecionado && servico.subItens && (
-                  <div className="sub-items-container">
-                    {servico.subItens.map((sub, sIdx) => (
-                      <div key={sIdx} className="sub-item-box">
-                        <label className="sub-item-label" htmlFor={`servico-${index}-sub-${sIdx}-${sub.type}`}>
-                          {sub.label}
-                        </label>
-                        {sub.type === "checkbox" ? (
-                          <input
-                            type="checkbox"
-                            id={`servico-${index}-sub-${sIdx}-${sub.type}`}
-                            name={`servico-${index}-sub-${sIdx}-${sub.type}`}
-                            checked={sub.value}
-                            onChange={(e) => handleSubItemCheckboxChange('servicos', index, sIdx, e.target.checked)}
-                            className="sub-item-checkbox"
-                          />
-                        ) : (
-                          <input
-                            type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
-                            id={`servico-${index}-sub-${sIdx}-${sub.type}`}
-                            name={`servico-${index}-sub-${sIdx}-${sub.type}`}
-                            placeholder={
-                              sub.type === "quantity" ? `Qtd` :
-                                sub.type === "measure" ? `Medida` :
-                                  `Quantidade/Medida/Marca`
-                            }
-                            value={sub.value}
-                            onChange={(e) => handleSubItemTextChange('servicos', index, sIdx, e.target.value)}
-                            step={sub.type === "measure" ? "0.01" : "1"}
-                            className="small-input"
-                          />
-                        )}
-                        <button type="button" className="remove-sub-item-btn" onClick={() => handleRemoveSubItem('servicos', index, sIdx)}>X</button>
+                      <span className="checkbox-box"></span>
+                      {servico.nome}
+                    </label>
+                  </td>
+                  <td className="subitems-cell" colSpan="2">
+                    {servico.selecionado && servico.subItens && (
+                      <div className="sub-items-container">
+                        {servico.subItens.map((sub, sIdx) => (
+                          <div key={sIdx} className="sub-item-input-group">
+                            {sub.type === "checkbox" ? (
+                              // Sub-item com a classe custom-checkbox
+                              <label className="custom-checkbox">
+                                <input
+                                  type="checkbox"
+                                  id={`servico-${index}-sub-${sIdx}-${sub.type}`}
+                                  name={`servico-${index}-sub-${sIdx}-${sub.type}`}
+                                  checked={sub.value}
+                                  onChange={(e) => handleSubItemCheckboxChange('servicos', index, sIdx, e.target.checked)}
+                                />
+                                <span className="checkbox-box"></span>
+                                {sub.label}
+                              </label>
+                            ) : (
+                              <>
+                                <label className="sub-item-label" htmlFor={`servico-${index}-sub-${sIdx}-${sub.type}`}>
+                                  {sub.label}:
+                                </label>
+                                <input
+                                  type={sub.type === "quantity" || sub.type === "measure" ? "number" : "text"}
+                                  id={`servico-${index}-sub-${sIdx}-${sub.type}`}
+                                  name={`servico-${index}-sub-${sIdx}-${sub.type}`}
+                                  placeholder={sub.label}
+                                  value={sub.value}
+                                  onChange={(e) => handleSubItemTextChange('servicos', index, sIdx, e.target.value)}
+                                  step={sub.type === "measure" ? "0.01" : "1"}
+                                  className="small-input"
+                                />
+                              </>
+                            )}
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                    {servico.subItens.length > 0 && (
-                      <button type="button" className="add-sub-item-btn" onClick={() => handleAddSubItem('servicos', index)}>+ Detalhe</button>
                     )}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
           <div className="total-line-form">
             <span className="label">Valor total de Serviços:</span>
             <input

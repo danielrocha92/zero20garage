@@ -441,6 +441,8 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             />
           </div>
         </section>
+
+        {/* Seção de Serviços */}
         <section className="section-form">
           <h2>Serviços no Cabeçote - Retifica</h2>
           <table className="items-table">
