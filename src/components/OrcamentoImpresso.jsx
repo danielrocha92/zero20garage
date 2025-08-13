@@ -30,6 +30,8 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           scale: 2,
           useCORS: true,
           logging: true,
+          width: 794,
+          windowWidth: 794
         });
 
         const imgData = canvas.toDataURL('image/png');
@@ -93,7 +95,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
             <ul className="item-list-impresso">
               {pecasColuna1.map((item, index) => (
                 <li key={`peca1-${index}`}>
-                  <span className="checkbox-box checkbox-filled"></span>
+                  <input type="checkbox" className="checkbox-box" checked readOnly />
                   <span className="item-text">{item}</span>
                 </li>
               ))}
@@ -101,7 +103,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
             <ul className="item-list-impresso">
               {pecasColuna2.map((item, index) => (
                 <li key={`peca2-${index}`}>
-                  <span className="checkbox-box checkbox-filled"></span>
+                  <input type="checkbox" className="checkbox-box" checked readOnly />
                   <span className="item-text">{item}</span>
                 </li>
               ))}
@@ -121,7 +123,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
             <ul className="item-list-impresso">
               {servicosColuna1.map((item, index) => (
                 <li key={`servico1-${index}`}>
-                  <span className="checkbox-box checkbox-filled"></span>
+                  <input type="checkbox" className="checkbox-box" checked readOnly />
                   <span className="item-text">{item}</span>
                 </li>
               ))}
@@ -129,7 +131,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
             <ul className="item-list-impresso">
               {servicosColuna2.map((item, index) => (
                 <li key={`servico2-${index}`}>
-                  <span className="checkbox-box checkbox-filled"></span>
+                  <input type="checkbox" className="checkbox-box" checked readOnly />
                   <span className="item-text">{item}</span>
                 </li>
               ))}

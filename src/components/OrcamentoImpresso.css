@@ -141,13 +141,46 @@ body {
     flex-wrap: wrap;
 }
 
+/* * Estilo do checkbox para exibir apenas o ícone de check.
+ * A caixa do input é tornada invisível e o ícone é renderizado no seu lugar.
+ */
 .checkbox-box {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+
+    /* A caixa do input fica pequena e invisível */
+    width: 0.1px;
+    height: 0.1px;
+    border: none;
+    background-color: transparent;
+    overflow: hidden;
+
+    /* Configura o container para o pseudo-elemento */
     display: inline-block;
-    width: 0.65rem;
-    height: 0.65rem;
-    border: 1px solid black;
+    position: relative;
     margin-right: 0.2rem;
-    flex-shrink: 0;
+}
+
+/*
+ * Adiciona um ícone de check (✔️) visível quando o checkbox está marcado.
+ */
+.checkbox-box:checked::after {
+    content: '✔️';
+    display: block;
+    font-size: 0.7rem; /* Tamanho do ícone de check */
+    line-height: 1;
+    color: #c50404; /* Cor vermelha para o ícone */
+
+    /* Posiciona o ícone no espaço do checkbox */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /* Define o tamanho do espaço ocupado pelo ícone */
+    width: 0.7rem;
+    height: 0.7rem;
 }
 
 .item-text {
@@ -342,8 +375,8 @@ body {
     }
 
     .checkbox-box {
-        width: 10px;
-        height: 10px;
+        width: 0.1px; /* Oculta a caixa em desktop */
+        height: 0.1px;
         margin-right: 3px;
     }
 
