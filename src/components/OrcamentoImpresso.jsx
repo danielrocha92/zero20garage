@@ -1,15 +1,12 @@
 // src/components/OrcamentoImpresso.jsx
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import SignatureCanvas from 'react-signature-canvas';
 import './OrcamentoImpresso.css';
 import backgroundImage from '../assets/images/background.jpg';
 
 const OrcamentoImpresso = ({ orcamento, onClose }) => {
   const componentRef = useRef(null);
-  const sigCanvasRef = useRef(null);
-  const [isAgreed, setIsAgreed] = useState(false);
 
   const logoBackgroundStyle = {
     backgroundImage: `url(${backgroundImage})`,
@@ -18,12 +15,6 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     backgroundRepeat: 'no-repeat',
     width: '100px',
     height: '50px',
-  };
-
-  const clearSignature = () => {
-    if (sigCanvasRef.current) {
-      sigCanvasRef.current.clear();
-    }
   };
 
   const handleSharePdf = async () => {
@@ -173,39 +164,9 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
             <p className="policy-text">
               (INSERIR POLÍTICA AQUI) - A garantia cobre defeitos de fabricação e de montagem. Não cobre danos causados por mau uso, negligência ou acidentes. Peças eletrônicas não possuem garantia após a instalação. Devoluções e trocas devem ser solicitadas em até 7 dias após o serviço, mediante apresentação do orçamento e nota fiscal.
             </p>
-          </div>
-          <div className="signature-area">
-            <div className="signature-line-group">
-              <div className="signature-line">
-                <span className="signature-label">Cliente:</span>
-                <span className="signature-input-line">{orcamento?.cliente || ''}</span>
-              </div>
-              <div className="signature-line">
-                <span className="signature-label">RG / CPF:</span>
-                <span className="signature-input-line"></span>
-              </div>
-            </div>
-            <div className="policy-consent">
-              <input
-                type="checkbox"
-                id="policy-consent"
-                checked={isAgreed}
-                onChange={(e) => setIsAgreed(e.target.checked)}
-                className='checkbox-box-impresso'
-              />
-              <label htmlFor="policy-consent">
-                Li e concordo com os termos e condições de garantia, troca e devolução.
-              </label>
-            </div>
-            <div className="signature-block">
-              <span className="signature-label">Assinatura Eletrônica (Cliente):</span>
-              <SignatureCanvas
-                ref={sigCanvasRef}
-                penColor="black"
-                canvasProps={{ className: 'sig-canvas' }}
-              />
-              <button onClick={clearSignature} className="clear-sig-btn">Limpar Assinatura</button>
-            </div>
+            <p className="consent-text">
+              Ao dar "OK" a este documento, o cliente declara estar ciente e de acordo com os termos e condições da política de garantia, troca e devolução aqui descritos.
+            </p>
           </div>
         </section>
       </div>
@@ -213,7 +174,6 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       <div className="print-buttons">
         <button onClick={handleSharePdf} className="print-btn">Compartilhar PDF</button>
 
-        {/* Alterado para enviar o ID do orçamento ao fechar */}
         <button onClick={() => onClose(orcamento.id || orcamento._id)} className="back-btn">
           Voltar ao Painel
         </button>

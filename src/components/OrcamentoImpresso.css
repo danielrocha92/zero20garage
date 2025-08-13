@@ -265,84 +265,13 @@ body {
     margin: 0;
 }
 
-.signature-area {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.signature-line-group {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.signature-line {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-}
-
-.signature-label {
-    font-weight: bold;
+.consent-text {
     font-size: 12px;
-    white-space: nowrap;
-    margin-right: 5px;
-}
-
-.signature-input-line {
-    flex-grow: 1;
-    border-bottom: 1px solid #000;
-    padding-bottom: 2px;
-    font-size: 12px;
-    color: #333;
-}
-
-.policy-consent {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
+    line-height: 1.4;
     color: #555;
-}
-
-/* --- Novos estilos para o campo de assinatura --- */
-.signature-block {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
     margin-top: 10px;
-    border: 1px solid #ccc;
-    padding: 5px;
-    position: relative;
-}
-
-.sig-canvas {
-    width: 100%;
-    height: 100px;
-    border: 1px dashed #ccc;
-    background-color: #f9f9f9;
-    touch-action: none;
-}
-
-.clear-sig-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #f4f4f4;
-    border: 1px solid #ccc;
-    padding: 2px 8px;
-    font-size: 10px;
-    cursor: pointer;
-}
-
-.checkbox-box-impresso {
-  width: 15px;
-  height: 15px;
-  border: 1px solid #000;
-  display: inline-block;
-  flex-shrink: 0; /* Impede o encolhimento */
-  cursor: pointer;
+    font-style: italic;
+    text-align: center;
 }
 
 /* --- Media Queries para Desktop/Telas Maiores --- */
