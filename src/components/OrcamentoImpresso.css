@@ -139,6 +139,7 @@ body {
     margin-bottom: 0.1rem;
     line-height: 1.1;
     flex-wrap: wrap;
+    gap: 5px; /* Adicionado um gap para espaçamento consistente */
 }
 
 /* * Estilo do checkbox para exibir apenas o ícone de check.
@@ -148,18 +149,14 @@ body {
     -webkit-appearance: none;
     appearance: none;
     margin: 0;
-
-    /* A caixa do input fica pequena e invisível */
     width: 0.1px;
     height: 0.1px;
     border: none;
     background-color: transparent;
     overflow: hidden;
 
-    /* Configura o container para o pseudo-elemento */
     display: inline-block;
-    position: relative;
-    margin-right: 0.2rem;
+    position: static; /* Alterado para static */
 }
 
 /*
@@ -168,15 +165,13 @@ body {
 .checkbox-box:checked::after {
     content: '✔️';
     display: block;
-    font-size: 0.7rem; /* Tamanho do ícone de check */
+    font-size: 0.7rem;
     line-height: 1;
-    color: #c50404; /* Cor vermelha para o ícone */
+    color: #c50404;
 
-    /* Posiciona o ícone no espaço do checkbox */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    /* Removido o posicionamento absoluto e a transformação */
+    position: static;
+    transform: none;
 
     /* Define o tamanho do espaço ocupado pelo ícone */
     width: 0.7rem;
@@ -184,7 +179,8 @@ body {
 }
 
 .item-text {
-    margin-right: 0.2rem;
+    /* Removido margin-right: 0.2rem; para usar o gap do 'li' */
+    margin-right: 0;
     flex-shrink: 1;
     flex-grow: 1;
     word-wrap: break-word;
@@ -367,7 +363,7 @@ body {
 
     .items-columns {
         flex-direction: row;
-        gap: 20px; /* Ajustado para um espaçamento mais claro entre as colunas */
+        gap: 20px;
     }
 
     .item-list-impresso {
@@ -379,34 +375,35 @@ body {
         /* Garantir que o ícone e o texto se alinhem corretamente */
         display: flex;
         align-items: center;
+        gap: 5px; /* Adicionado um gap para espaçamento consistente */
     }
 
     .checkbox-box {
-        width: auto; /* Permite que o checkbox ocupe o espaço necessário */
-        height: auto;
         -webkit-appearance: none;
         appearance: none;
         margin: 0;
-        position: static; /* Remove o posicionamento absoluto para um alinhamento flexbox consistente */
-        display: inline-flex; /* Use inline-flex para um controle mais preciso */
-        align-items: center;
+        width: 0.1px;
+        height: 0.1px;
+        border: none;
+        background-color: transparent;
+        overflow: hidden;
+        position: static; /* Alterado para static */
     }
 
     .checkbox-box:checked::after {
         content: '✔️';
         display: block;
-        font-size: 0.7rem;
+        font-size: 0.8rem;
         color: #c50404;
-        position: static; /* Remove o posicionamento absoluto */
-        transform: none; /* Remove a transformação */
+        position: static; /* Alterado para static */
+        transform: none; /* Removido a transformação */
         width: auto;
         height: auto;
-        margin-right: 5px; /* Adiciona espaçamento entre o ícone e o texto */
     }
 
     .item-text {
-        margin-right: 0; /* Remove a margem para evitar espaçamento duplo */
-        flex-grow: 1; /* Permite que o texto se expanda */
+        margin-right: 0; /* Removido a margem para evitar espaçamento duplo */
+        flex-grow: 1;
         font-size: 0.85rem;
     }
 
