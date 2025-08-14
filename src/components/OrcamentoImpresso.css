@@ -1,5 +1,3 @@
-/* src/components/OrcamentoImpresso.css */
-
 /* --- Base para Mobile First --- */
 body {
     margin: 0;
@@ -24,6 +22,7 @@ body {
     box-sizing: border-box;
 }
 
+/* Conteúdo impresso: limita largura (prioridade mobile), mas permite altura livre */
 .orcamento-impresso-content {
     background-color: white;
     color: #333;
@@ -35,6 +34,10 @@ body {
     font-size: 0.8rem;
     line-height: 1.15;
     overflow-x: hidden;
+    overflow-y: visible;
+    width: 100%;
+    max-width: 794px; /* largura máxima capturada/respeitada */
+    margin: 0 auto; /* centraliza quando maior tela */
 }
 
 .header-impresso {
@@ -77,6 +80,7 @@ body {
     font-size: 0.85em;
 }
 
+/* Permitir quebra de texto para evitar overflow/corte em telas estreitas */
 .info-table td {
     padding: 0.05rem 0;
     vertical-align: bottom;
@@ -86,7 +90,7 @@ body {
     font-weight: bold;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    white-space: nowrap;
+    white-space: normal; /* alterado para normal para permitir quebra */
     min-width: 45px;
     padding-left: 0.2rem;
     padding-right: 0.2rem;
@@ -309,7 +313,7 @@ body {
 /* --- Media Queries para Desktop/Telas Maiores --- */
 @media (min-width: 768px) {
     .orcamento-impresso-container {
-        max-width: 100%;
+        max-width: 800px;
         padding: 0.8rem;
     }
 
@@ -349,6 +353,7 @@ body {
         font-size: 0.95em;
         margin: 0;
         text-align: center;
+        white-space: normal;
     }
 
     .input-line {
@@ -455,9 +460,21 @@ body {
 
 /* --- Estilos específicos para impressão (media print) --- */
 @media print {
-    body {
-        margin: 0;
-        padding: 0;
+    /* evitar que o navegador force paginação desnecessária */
+    html, body {
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .orcamento-impresso-container,
+    .orcamento-impresso-content,
+    .items-section,
+    .summary-section-impresso,
+    .policy-box {
+        page-break-inside: avoid !important;
+        page-break-before: auto !important;
+        page-break-after: auto !important;
+        break-inside: avoid !important;
     }
 
     .orcamento-impresso-container {
@@ -475,6 +492,7 @@ body {
         padding: 10mm;
         font-size: 8.5pt;
         line-height: 1.05;
+        overflow: visible;
     }
 
     .print-buttons {
@@ -510,5 +528,18 @@ body {
     }
     .summary-section-impresso p {
         font-size: 0.8em;
+    }
+}
+
+/* pequena regra extra para telas muito estreitas */
+@media (max-width: 420px) {
+    .orcamento-impresso-content {
+        padding: 12px;
+        font-size: 0.78rem;
+    }
+
+    .logo-impresso-div {
+        max-width: 55px;
+        height: 28px;
     }
 }

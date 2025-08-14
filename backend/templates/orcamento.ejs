@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Orçamento <%= orcamento.ordemServico %></title>
+  <style>
+    /* Aqui cole seu CSS de impressão (OrcamentoImpresso.css) ou apenas trechos essenciais */
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fff; color:#000; }
+    .container { padding: 12mm; box-sizing: border-box; width: 100%; }
+    h1 { text-align:center; font-size:18px; margin-bottom:8px; }
+    .logo { text-align:center; margin-bottom:8px; }
+    table { width:100%; border-collapse: collapse; margin-bottom:8px; }
+    td { vertical-align: top; padding:4px; }
+    ul { padding-left:18px; margin:4px 0; }
+    .policy { margin-top:12px; font-size:11px; color:#333; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header" style="text-align:center;">
+      <h1>ORÇAMENTO - <%= orcamento.tipo === 'motor' ? 'MOTOR' : 'CABEÇOTE' %></h1>
+      <div class="logo">
+        <img src="<%= orcamento.logoUrl || '/assets/images/logo.png' %>" alt="logo" style="max-width:120px"/>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <td><strong>Veículo:</strong> <%= orcamento.veiculo || '' %></td>
+        <td><strong>OS:</strong> <%= orcamento.ordemServico || '' %></td>
+      </tr>
+      <tr>
+        <td><strong>Cliente:</strong> <%= orcamento.cliente || '' %></td>
+        <td><strong>Data:</strong> <%= orcamento.data || '' %></td>
+      </tr>
+    </table>
+
+    <h3>Peças</h3>
+    <ul>
+      <% (orcamento.pecasSelecionadas || []).forEach(function(item){ %>
+        <li><%= item %></li>
+      <% }) %>
+    </ul>
+
+    <h3>Serviços</h3>
+    <ul>
+      <% (orcamento.servicosSelecionados || []).forEach(function(item){ %>
+        <li><%= item %></li>
+      <% }) %>
+    </ul>
+
+    <div style="margin-top:12px; text-align:right;">
+      <strong>TOTAL: R$ <%= orcamento.valorTotal || '0,00' %></strong>
+    </div>
+
+    <div class="policy">
+      <h4>Política de Garantia, Troca e Devolução</h4>
+      <p>A garantia dos serviços realizados pela Zero 20 Garage é válida ... (cole o texto completo)</p>
+    </div>
+  </div>
+</body>
+</html>
