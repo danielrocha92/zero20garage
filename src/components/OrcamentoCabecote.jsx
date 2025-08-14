@@ -8,8 +8,8 @@ const itensCabecoteData = [
   { nome: "Filtro de óleo", temQuantidade: true },
   { nome: "Filtro de ar", temQuantidade: true },
   { nome: "Filtro de combustível", temQuantidade: true },
-  { nome: "Litros de óleo", temQuantidade: true, subItens: [{ label: "Qtd", type: "text", initialValue: "" }] },
-  { nome: "Litros de aditivo", temQuantidade: true, subItens: [{ label: "Qtd", type: "text", initialValue: "" }] },
+  { nome: "Litros de óleo", temQuantidade: true, subItens: [{ label: "", type: "text", initialValue: "" }] },
+  { nome: "Litros de aditivo", temQuantidade: true, subItens: [{ label: "", type: "text", initialValue: "" }] },
   {
     nome: "Correias", temQuantidade: false,
     subItens: [
@@ -50,7 +50,7 @@ const itensCabecoteData = [
   { nome: "Cabo de vela", temQuantidade: true },
   { nome: "Biela", temQuantidade: true },
   { nome: "Embreagem", temQuantidade: true },
-  { nome: "Outros", temQuantidade: false, subItens: [{ label: "Quantidade/Medida/Marca", type: "text", initialValue: "" }] },
+  { nome: "Outros", temQuantidade: false, subItens: [{ label: " ", type: "text", initialValue: "" }] },
 ].sort((a, b) => a.nome.localeCompare(b.nome));
 
 const servicosCabecoteData = [
@@ -138,14 +138,14 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             const textOnlyRegex = new RegExp(`^${item.nome}\\s*:\\s*(.+)$`);
             const textOnlyMatch = editedItem.match(textOnlyRegex);
             if (textOnlyMatch && textOnlyMatch[1]) {
-              subItensAtualizados = [{ label: "Quantidade/Medida/Marca", type: "text", value: textOnlyMatch[1].trim() }];
+              subItensAtualizados = [{ label: " ", type: "text", value: textOnlyMatch[1].trim() }];
             }
           }
 
           return {
             ...item,
             selecionado,
-            quantidade: item.temQuantidade ? (editedItem?.match(/Qtd:\s*(\d+)/)?.[1] || 1) : 0,
+            quantidade: item.temQuantidade ? (editedItem?.match(/:\s*(\d+)/)?.[1] || 1) : 0,
             medida: item.temQuantidade ? (parseFloat(editedItem?.match(/Medida:\s*([\d,.]+)/)?.[1]?.replace(',', '.')) || 0) : 0,
             subItens: subItensAtualizados,
           };
@@ -175,7 +175,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
           return {
             ...servico,
             selecionado,
-            quantidade: servico.temQuantidade ? (editedServico?.match(/Qtd:\s*(\d+)/)?.[1] || 1) : 0,
+            quantidade: servico.temQuantidade ? (editedServico?.match(/:\s*(\d+)/)?.[1] || 1) : 0,
             medida: servico.temQuantidade ? (parseFloat(editedServico?.match(/Medida:\s*([\d,.]+)/)?.[1]?.replace(',', '.')) || 0) : 0,
             subItens: subItensAtualizados,
           };
@@ -236,7 +236,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
       .map(peca => {
         let nomeCompleto = peca.nome;
         if (peca.temQuantidade && peca.quantidade > 0) {
-          nomeCompleto += `: Qtd: ${peca.quantidade}`;
+          nomeCompleto += `: : ${peca.quantidade}`;
         }
         if (peca.temQuantidade && peca.medida > 0) {
           nomeCompleto += ` Medida: ${peca.medida}`;
@@ -263,7 +263,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
       .map(servico => {
         let nomeCompleto = servico.nome;
         if (servico.temQuantidade && servico.quantidade > 0) {
-          nomeCompleto += `: Qtd: ${servico.quantidade}`;
+          nomeCompleto += `: : ${servico.quantidade}`;
         }
         if (servico.temQuantidade && servico.medida > 0) {
           nomeCompleto += ` Medida: ${servico.medida}`;

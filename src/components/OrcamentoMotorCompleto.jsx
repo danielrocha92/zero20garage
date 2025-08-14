@@ -16,11 +16,11 @@ const itemsWithSingleTextInput = [
 
 // Os dados de itens e serviços completos para o motor (ajustados para o modelo da imagem)
 const itensMotorCompletoData = [
-  { nome: "Pistão", temQuantidade: false, subItens: [{ label: "Quantidade/Medida/Marca", type: "text", initialValue: "" }] },
-  { nome: "Anel", temQuantidade: false, subItens: [{ label: "Quantidade/Medida/Marca", type: "text", initialValue: "" }] },
-  { nome: "Bronzina de biela", temQuantidade: false, subItens: [{ label: "Quantidade/Medida/Marca", type: "text", initialValue: "" }] },
-  { nome: "Bronzina de mancal", temQuantidade: false, subItens: [{ label: "Quantidade/Medida/Marca", type: "text", initialValue: "" }] },
-  { nome: "Arruela encosto", temQuantidade: false, subItens: [{ label: "Quantidade/Medida/Marca", type: "text", initialValue: "" }] },
+  { nome: "Pistão", temQuantidade: false, subItens: [{ label: " ", type: "text", initialValue: "" }] },
+  { nome: "Anel", temQuantidade: false, subItens: [{ label: " ", type: "text", initialValue: "" }] },
+  { nome: "Bronzina de biela", temQuantidade: false, subItens: [{ label: " ", type: "text", initialValue: "" }] },
+  { nome: "Bronzina de mancal", temQuantidade: false, subItens: [{ label: " ", type: "text", initialValue: "" }] },
+  { nome: "Arruela encosto", temQuantidade: false, subItens: [{ label: " ", type: "text", initialValue: "" }] },
   { nome: "Bomba de óleo", temQuantidade: false },
   { nome: "Bomba d’água", temQuantidade: false },
   { nome: "Tubo d’água", temQuantidade: false },
@@ -75,7 +75,7 @@ const itensMotorCompletoData = [
   { nome: "Biela", temQuantidade: false },
   { nome: "Embreagem", temQuantidade: false },
   { nome: "Desengripante e Limpa contato", temQuantidade: false },
-  { nome: "Outros", temQuantidade: false, subItens: [{ label: "Quantidade/Medida/Marca", type: "text", initialValue: "" }] },
+  { nome: "Outros", temQuantidade: false, subItens: [{ label: " ", type: "text", initialValue: "" }] },
 ].sort((a, b) => a.nome.localeCompare(b.nome));
 
 const servicosMotorCompletoData = [
@@ -152,7 +152,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
         const newPecas = itensMotorCompletoData.map(item => {
           const editedItemString = editingData.pecasSelecionadas?.find(p => p.startsWith(item.nome));
           let selecionado = !!editedItemString;
-          let quantidade = item.temQuantidade ? (editedItemString?.match(/Qtd:\s*(\d+)/)?.[1] || 1) : 0;
+          let quantidade = item.temQuantidade ? (editedItemString?.match(/:\s*(\d+)/)?.[1] || 1) : 0;
           let medida = item.temQuantidade ? (parseFloat(editedItemString?.match(/Medida:\s*([\d,.]+)/)?.[1]?.replace(',', '.')) || 0) : 0;
 
           let subItensAtualizados = item.subItens ? item.subItens.map(sub => {
@@ -176,7 +176,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
             const textOnlyRegex = new RegExp(`^${item.nome}\\s*:\\s*(.+)$`);
             const textOnlyMatch = editedItemString.match(textOnlyRegex);
             if (textOnlyMatch && textOnlyMatch[1]) {
-              subItensAtualizados = [{ label: "Quantidade/Medida/Marca", type: "text", value: textOnlyMatch[1].trim() }];
+              subItensAtualizados = [{ label: " ", type: "text", value: textOnlyMatch[1].trim() }];
             }
           }
 
@@ -192,7 +192,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
         const newServicos = servicosMotorCompletoData.map(servico => {
           const editedServicoString = editingData.servicosSelecionados?.find(s => s.startsWith(servico.nome));
           let selecionado = !!editedServicoString;
-          let quantidade = servico.temQuantidade ? (editedServicoString?.match(/Qtd:\s*(\d+)/)?.[1] || 1) : 0;
+          let quantidade = servico.temQuantidade ? (editedServicoString?.match(/:\s*(\d+)/)?.[1] || 1) : 0;
           let medida = servico.temQuantidade ? (parseFloat(editedServicoString?.match(/Medida:\s*([\d,.]+)/)?.[1]?.replace(',', '.')) || 0) : 0;
 
           let subItensAtualizados = servico.subItens ? servico.subItens.map(sub => {
@@ -296,7 +296,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
         let nomeCompleto = peca.nome;
         // Se houver quantidade e medida, adiciona
         if (peca.temQuantidade && peca.quantidade > 0) {
-          nomeCompleto += `: Qtd: ${peca.quantidade}`;
+          nomeCompleto += `: : ${peca.quantidade}`;
         }
         if (peca.temQuantidade && peca.medida > 0) {
           nomeCompleto += ` Medida: ${peca.medida}`;
@@ -325,7 +325,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
         let nomeCompleto = servico.nome;
         // Se houver quantidade e medida, adiciona (embora na imagem não apareça para serviços)
         if (servico.temQuantidade && servico.quantidade > 0) {
-          nomeCompleto += `: Qtd: ${servico.quantidade}`;
+          nomeCompleto += `: : ${servico.quantidade}`;
         }
         if (servico.temQuantidade && servico.medida > 0) {
           nomeCompleto += ` Medida: ${servico.medida}`;
