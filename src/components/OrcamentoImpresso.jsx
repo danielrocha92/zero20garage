@@ -271,7 +271,7 @@ const handleSharePdf = async () => {
               ))}
             </ul>
           </div>
-          <div className="extra-info-section-impresso">
+          <div className="total-line-impresso">
             <span>Valor total de Serviços:</span>
             {orcamento?.valorTotalServicos
               ? <strong>R$ {Number(orcamento.valorTotalServicos).toFixed(2).replace('.', ',')}</strong>
@@ -279,15 +279,15 @@ const handleSharePdf = async () => {
           </div>
         </section>
 
-        <section className="extra-info-section-impresso">
-          <div className="info-line">
+        <section className="summary-section-impresso">
+          <div className="total-line-impresso">
             <span>Valor total de mão de Obra:</span>
             <span>{orcamento?.totalMaoDeObra
               ? <strong>R$ {Number(orcamento.totalMaoDeObra).toFixed(2).replace('.', ',')}</strong>
               : <strong>___________</strong>}
               </span>
           </div>
-          <div className="extra-info-section-impresso final-total">
+          <div className="total-line-impresso final-total">
             <span>TOTAL GERAL:</span>
             {orcamento?.valorTotal
               ? <strong>R$ {Number(orcamento.valorTotal).toFixed(2).replace('.', ',')}</strong>
