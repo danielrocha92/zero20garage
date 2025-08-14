@@ -164,10 +164,11 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           <div className="policy-box">
             <h4>Política de Garantia, Troca e Devolução</h4>
             <p className="policy-text">
-              (INSERIR POLÍTICA AQUI) - A garantia cobre defeitos de fabricação e de montagem. Não cobre danos causados por mau uso, negligência ou acidentes. Peças eletrônicas não possuem garantia após a instalação. Devoluções e trocas devem ser solicitadas em até 7 dias após o serviço, mediante apresentação do orçamento e nota fiscal.
+              A garantia dos serviços realizados pela Zero 20 Garage é válida apenas se o veículo for utilizado conforme as orientações da oficina, incluindo manutenção em dia, uso adequado de combustíveis e respeito aos prazos de revisão. Clientes com pagamentos pendentes não terão direito à garantia, sendo necessário regularizar quaisquer débitos antes de acioná-la. O prazo para solicitar garantia é de 3 meses para serviços de cabeçote e 6 meses para motor completo, mediante contato com a oficina para análise do problema.
+              Quanto à devolução de valores, o cliente poderá solicitar a devolução parcial referente à mão de obra, caso o serviço não atinja o resultado esperado sem culpa do cliente, desde que o pedido seja feito em até 30 dias após a conclusão. O valor das peças não será reembolsado em nenhuma hipótese, mesmo que haja devolução da mão de obra.
             </p>
             <p className="consent-text">
-              Ao dar "OK" a este documento, o cliente declara estar ciente e de acordo com os termos e condições da política de garantia, troca e devolução aqui descritos.
+              Ao aceitar o orçamento e iniciar o serviço com a Zero 20 Garage, o cliente declara estar ciente e de acordo com os termos descritos acima.
             </p>
           </div>
         </section>
