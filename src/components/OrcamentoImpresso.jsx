@@ -187,6 +187,7 @@ const handleSharePdf = async () => {
 };
 
 
+
   if (!orcamento) {
     return <div className="orcamento-impresso-container">Nenhum orçamento selecionado para visualização.</div>;
   }
