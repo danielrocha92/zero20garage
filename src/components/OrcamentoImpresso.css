@@ -310,6 +310,23 @@ body {
     text-align: center;
 }
 
+.extra-info-section-impresso {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 14px;
+  border-top: 1px solid #ccc;
+}
+
+.extra-info-section-impresso .info-line {
+  margin-bottom: 8px;
+}
+
+.extra-info-section-impresso strong {
+  display: inline-block;
+  width: 160px;
+}
+
+
 /* --- Media Queries para Desktop/Telas Maiores --- */
 @media (min-width: 768px) {
     .orcamento-impresso-container {
@@ -542,4 +559,10 @@ body {
         max-width: 55px;
         height: 28px;
     }
+}
+
+.force-print-layout {
+  width: 794px !important;
+  max-width: 794px !important;
+  min-width: 794px !important;
 }

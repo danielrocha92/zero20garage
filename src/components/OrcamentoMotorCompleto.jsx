@@ -220,13 +220,17 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessageBox, message
           };
         });
 
+        const dataValida = editingData.data && editingData.data.toString().trim() !== '';
+        const dataFormatada = dataValida ? new Date(editingData.data).toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10);
+
+
         return {
           ...prev,
           nome: editingData.cliente || '',
           telefone: editingData.telefone || '',
           veiculo: editingData.veiculo || '',
           placa: editingData.placa || '',
-          data: editingData.data ? new Date(editingData.data).toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10),
+          data: dataFormatada,
           ordemServico: editingData.ordemServico || '',
           totalPecasManual: parseFloat(editingData.valorTotalPecas) || 0,
           totalServicosManual: parseFloat(editingData.valorTotalServicos) || 0,
