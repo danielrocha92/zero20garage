@@ -14,9 +14,12 @@ body {
     padding: 1rem;
     border-radius: 0.5rem;
     box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.5);
-    max-width: 100%;
+    width: 100%;
+    max-width: 1200px; /* controla largura no desktop */
     margin: 1rem auto;
-    overflow: hidden;
+    overflow-x: hidden; /* impede rolagem horizontal */
+    overflow-y: visible; /* altura segue o conteúdo */
+    height: auto; /* altura automática */
     position: relative;
     box-sizing: border-box;
 }
@@ -306,8 +309,8 @@ body {
 /* --- Media Queries para Desktop/Telas Maiores --- */
 @media (min-width: 768px) {
     .orcamento-impresso-container {
-        padding: 2rem;
-        max-width: 800px;
+        max-width: 100%;
+        padding: 0.8rem;
     }
 
     .orcamento-impresso-content {
