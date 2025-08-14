@@ -367,21 +367,47 @@ body {
 
     .items-columns {
         flex-direction: row;
-        gap: 12px;
+        gap: 20px; /* Ajustado para um espaçamento mais claro entre as colunas */
+    }
+
+    .item-list-impresso {
+        width: 48%;
     }
 
     .item-list-impresso li {
         margin-bottom: 1.5px;
+        /* Garantir que o ícone e o texto se alinhem corretamente */
+        display: flex;
+        align-items: center;
     }
 
     .checkbox-box {
-        width: 0.1px; /* Oculta a caixa em desktop */
-        height: 0.1px;
-        margin-right: 3px;
+        width: auto; /* Permite que o checkbox ocupe o espaço necessário */
+        height: auto;
+        -webkit-appearance: none;
+        appearance: none;
+        margin: 0;
+        position: static; /* Remove o posicionamento absoluto para um alinhamento flexbox consistente */
+        display: inline-flex; /* Use inline-flex para um controle mais preciso */
+        align-items: center;
+    }
+
+    .checkbox-box:checked::after {
+        content: '✔️';
+        display: block;
+        font-size: 0.7rem;
+        color: #c50404;
+        position: static; /* Remove o posicionamento absoluto */
+        transform: none; /* Remove a transformação */
+        width: auto;
+        height: auto;
+        margin-right: 5px; /* Adiciona espaçamento entre o ícone e o texto */
     }
 
     .item-text {
-        margin-right: 3px;
+        margin-right: 0; /* Remove a margem para evitar espaçamento duplo */
+        flex-grow: 1; /* Permite que o texto se expanda */
+        font-size: 0.85rem;
     }
 
     .total-line-impresso {
