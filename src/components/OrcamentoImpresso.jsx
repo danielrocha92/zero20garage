@@ -1,5 +1,6 @@
 // src/components/OrcamentoImpresso.jsx
 import React, { useRef } from 'react';
+import dayjs from 'dayjs';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import './OrcamentoImpresso.css';
@@ -220,11 +221,12 @@ const handleSharePdf = async () => {
                 <td>
                   Data:
                   <span className="input-line">
-                    {orcamento?.data
-                      ? new Date(orcamento.data).toLocaleDateString('pt-BR')
+                    {orcamento?.data && dayjs(orcamento.data).isValid()
+                      ? dayjs(orcamento.data).format('DD/MM/YYYY')
                       : '___________'}
                   </span>
                 </td>
+
               </tr>
             </tbody>
           </table>
