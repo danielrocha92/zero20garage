@@ -217,7 +217,14 @@ const handleSharePdf = async () => {
                 <td>Veículo: <span className="input-line">{orcamento?.veiculo || ''}</span></td>
                 <td>OS: <span className="input-line">{orcamento?.ordemServico || ''}</span></td>
                 <td>Cliente: <span className="input-line">{orcamento?.cliente || ''}</span></td>
-                <td>Data: <span className="input-line">{orcamento?.data || ''}</span></td>
+                <td>
+                  Data:
+                  <span className="input-line">
+                    {orcamento?.data
+                      ? new Date(orcamento.data).toLocaleDateString('pt-BR')
+                      : '___________'}
+                  </span>
+                </td>
               </tr>
             </tbody>
           </table>

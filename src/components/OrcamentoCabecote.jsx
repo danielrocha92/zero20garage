@@ -383,7 +383,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
                     </label>
                   </td>
 
-                {/* Container para inputs de quantidade e medida, se existirem */}
+                  {/* Container para inputs de quantidade e medida, se existirem */}
                   <td className="subitems-cell" colSpan="2">
                     {peca.selecionado && peca.subItens && (
                       <div className="sub-items-container">
@@ -519,6 +519,8 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             />
           </div>
         </section>
+
+        {/* Seção de Totais, Pagamento e Observações */}
         <section className="summary-section">
           <div className="total-line-form">
             <span className="label">Valor total de Mão de Obra Mecânica:</span>
@@ -570,12 +572,17 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             </select>
           </div>
         </section>
-        {showMessage && (
-          <div className={`message-box ${isErrorMessage ? 'error' : 'success'}`}>
-            <span>{message}</span>
-            <button type="button" onClick={hideMessageBox}>&times;</button>
+
+        {/* Caixa de Mensagem */}
+        {message && (
+          <div className="message-box-overlay" onClick={hideMessageBox}>
+            <div className={`message-box ${isErrorMessage ? 'error' : 'success'}`} onClick={(e) => e.stopPropagation()}>
+              <p>{message}</p>
+              <button onClick={hideMessageBox}>OK</button>
+            </div>
           </div>
         )}
+
         <button type="submit" className="action-btn">
           {editingData ? 'Atualizar Orçamento' : 'Salvar Orçamento'}
         </button>
