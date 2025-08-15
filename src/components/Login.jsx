@@ -30,7 +30,7 @@ const Login = () => {
 
       if (data.status === "ok") {
         localStorage.setItem("authToken", data.token);
-        navigate("/painel-orcamentos"); // Redireciona após login bem-sucedido
+        navigate("/orcamento"); // Redireciona para a página Orçamento
       } else {
         setErro("E-mail ou senha inválidos");
       }

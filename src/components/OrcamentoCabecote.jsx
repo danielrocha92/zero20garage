@@ -8,7 +8,15 @@ const itensCabecoteData = [
   { nome: "Filtro de óleo", temQuantidade: true },
   { nome: "Filtro de ar", temQuantidade: true },
   { nome: "Filtro de combustível", temQuantidade: true },
-  { nome: "Litros de óleo", temQuantidade: true, subItens: [{ label: "", type: "text", initialValue: "" }] },
+  {
+    nome: "Litros de Óleo",
+    temQuantidade: false,
+    subItens: [
+      { label: "20w50", type: "checkbox", initialValue: false },
+      { label: "10W40", type: "checkbox", initialValue: false },
+      { label: "5W30", type: "checkbox", initialValue: false },
+    ]
+  },
   { nome: "Litros de aditivo", temQuantidade: true, subItens: [{ label: "", type: "text", initialValue: "" }] },
   {
     nome: "Correias", temQuantidade: false,
@@ -50,7 +58,7 @@ const itensCabecoteData = [
   { nome: "Cabo de vela", temQuantidade: true },
   { nome: "Biela", temQuantidade: true },
   { nome: "Embreagem", temQuantidade: true },
-  { nome: "Outros", temQuantidade: false, subItens: [{ label: " ", type: "text", initialValue: "" }] },
+  { nome: "Outros", temQuantidade: false, subItens: [{ label:"", type: "text", initialValue: "" }] },
 ].sort((a, b) => a.nome.localeCompare(b.nome));
 
 const servicosCabecoteData = [
@@ -138,7 +146,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             const textOnlyRegex = new RegExp(`^${item.nome}\\s*:\\s*(.+)$`);
             const textOnlyMatch = editedItem.match(textOnlyRegex);
             if (textOnlyMatch && textOnlyMatch[1]) {
-              subItensAtualizados = [{ label: " ", type: "text", value: textOnlyMatch[1].trim() }];
+              subItensAtualizados = [{ label:"", type: "text", value: textOnlyMatch[1].trim() }];
             }
           }
 

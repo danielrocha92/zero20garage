@@ -224,32 +224,38 @@
 
 /* Message Box (para feedback de sucesso/erro) */
 .message-box {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #28a745;
-    color: white;
-    padding: 15px 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.message-box.error {
-    background-color: #dc3545;
+  position: fixed;
+  top: 32px; /* ou 16px para mais próximo do topo */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  background: #fff;
+  color: #222;
+  border: 2px solid #ff0015;
+  border-radius: 8px;
+  padding: 1rem 2.5rem 1rem 1rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  font-size: 1.1rem;
+  min-width: 280px;
+  max-width: 90vw;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  animation: fadeInDown 0.3s;
 }
 
 .message-box button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5em;
-    cursor: pointer;
-    line-height: 1;
+  background: none;
+  border: none;
+  color: #ff0015;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translate(-50%, -30px);}
+  to   { opacity: 1; transform: translate(-50%, 0);}
 }
 
 /* MEDIA QUERY PARA DESKTOP */

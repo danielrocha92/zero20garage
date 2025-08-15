@@ -230,7 +230,7 @@ const PainelOrcamentos = () => {
 
           <section class="summary-section-impresso">
             <div class="total-line-impresso">
-              <span>Valor total de mão de Obra:</span>
+              <span>Valor total de mão de Obra Mecânica:</span>
               <strong>R$ ${Number(orcamento?.totalMaoDeObra || 0).toFixed(2).replace('.', ',')}</strong>
             </div>
             <div class="total-line-impresso final-total">

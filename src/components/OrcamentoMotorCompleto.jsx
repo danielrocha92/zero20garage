@@ -4,19 +4,27 @@ import './OrcamentoForms.css';
 
 // Dados das peças e serviços
 const itensMotorCompletoData = [
-  { nome: "Pistão", temQuantidade: false, subItens: [{ label: " ", type: "text", initialValue: "" }] },
-  { nome: "Anel", temQuantidade: false, subItens: [{ label: " ", type: "text", initialValue: "" }] },
-  { nome: "Bronzina de biela", temQuantidade: false, subItens: [{ label: " ", type: "text", initialValue: "" }] },
-  { nome: "Bronzina de mancal", temQuantidade: false, subItens: [{ label: " ", type: "text", initialValue: "" }] },
-  { nome: "Arruela encosto", temQuantidade: false, subItens: [{ label: " ", type: "text", initialValue: "" }] },
+  { nome: "Pistão", temQuantidade: false, subItens: [{ label:"", type: "text", initialValue: "" }] },
+  { nome: "Anel", temQuantidade: false, subItens: [{ label:"", type: "text", initialValue: "" }] },
+  { nome: "Bronzina de biela", temQuantidade: false, subItens: [{ label:"", type: "text", initialValue: "" }] },
+  { nome: "Bronzina de mancal", temQuantidade: false, subItens: [{ label:"", type: "text", initialValue: "" }] },
+  { nome: "Arruela encosto", temQuantidade: false, subItens: [{ label:"", type: "text", initialValue: "" }] },
   { nome: "Bomba de óleo", temQuantidade: false },
   { nome: "Bomba d’água", temQuantidade: false },
   { nome: "Tubo d’água", temQuantidade: false },
   { nome: "Filtro de óleo", temQuantidade: false },
   { nome: "Filtro de ar", temQuantidade: false },
   { nome: "Filtro de combustível", temQuantidade: false },
-  { nome: "Litros de óleo", temQuantidade: false, subItens: [{ label: "Quantidade e Tipo", type: "text", initialValue: "" }] },
-  { nome: "Litros de aditivo", temQuantidade: false, subItens: [{ label: "Quantidade e Tipo", type: "text", initialValue: "" }] },
+  {
+    nome: "Litros de Óleo",
+    temQuantidade: false,
+    subItens: [
+      { label: "20w50", type: "checkbox", initialValue: false },
+      { label: "10W40", type: "checkbox", initialValue: false },
+      { label: "5W30", type: "checkbox", initialValue: false },
+    ]
+  },
+  { nome: "Litros de aditivo", temQuantidade: false, subItens: [{ label: "", type: "text", initialValue: "" }] },
   {
     nome: "Correias",
     temQuantidade: false,
@@ -63,7 +71,7 @@ const itensMotorCompletoData = [
   { nome: "Biela", temQuantidade: false },
   { nome: "Embreagem", temQuantidade: false },
   { nome: "Desengripante e Limpa contato", temQuantidade: false },
-  { nome: "Outros", temQuantidade: false, subItens: [{ label: " ", type: "text", initialValue: "" }] },
+  { nome: "Outros", temQuantidade: false, subItens: [{ label:"", type: "text", initialValue: "" }] },
 ].sort((a, b) => a.nome.localeCompare(b.nome));
 
 const servicosMotorCompletoData = [
@@ -258,7 +266,83 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
       showMessage('Cliente é obrigatório!', true);
       return;
     }
-    onSubmit(formData);
+
+    // Filtra e formata as peças selecionadas
+    const pecasSelecionadasFormatadas = formData.pecas
+      .filter(peca => peca.selecionado)
+      .map(peca => {
+        let nomeCompleto = peca.nome;
+        if (peca.temQuantidade && peca.quantidade > 0) {
+          nomeCompleto += `: : ${peca.quantidade}`;
+        }
+        if (peca.temQuantidade && peca.medida > 0) {
+          nomeCompleto += ` Medida: ${peca.medida}`;
+        }
+        const subItensFormatados = peca.subItens
+          .filter(sub => (sub.type === "checkbox" && sub.value) || (sub.type === "text" && sub.value))
+          .map(sub => {
+            if (sub.type === "checkbox") {
+              return sub.label;
+            } else {
+              return `${sub.label}: ${sub.value}`;
+            }
+          })
+          .join('; ');
+
+        if (subItensFormatados) {
+          nomeCompleto += ` (${subItensFormatados})`;
+        }
+        return nomeCompleto;
+      });
+
+    // Filtra e formata os serviços selecionados
+    const servicosSelecionadasFormatadas = formData.servicos
+      .filter(servico => servico.selecionado)
+      .map(servico => {
+        let nomeCompleto = servico.nome;
+        if (servico.temQuantidade && servico.quantidade > 0) {
+          nomeCompleto += `: : ${servico.quantidade}`;
+        }
+        if (servico.temQuantidade && servico.medida > 0) {
+          nomeCompleto += ` Medida: ${servico.medida}`;
+        }
+        const subItensFormatados = servico.subItens
+          .filter(sub => (sub.type === "checkbox" && sub.value) || (sub.type === "text" && sub.value))
+          .map(sub => {
+            if (sub.type === "checkbox") {
+              return sub.label;
+            } else {
+              return `${sub.label}: ${sub.value}`;
+            }
+          })
+          .join('; ');
+
+        if (subItensFormatados) {
+          nomeCompleto += ` (${subItensFormatados})`;
+        }
+        return nomeCompleto;
+      });
+
+    const orcamentoFinal = {
+      cliente: formData.nome,
+      telefone: formData.telefone,
+      veiculo: formData.veiculo,
+      placa: formData.placa,
+      data: formData.data,
+      ordemServico: formData.ordemServico,
+      pecasSelecionadas: pecasSelecionadasFormatadas,
+      servicosSelecionados: servicosSelecionadasFormatadas,
+      valorTotalPecas: formData.totalPecasManual,
+      valorTotalServicos: formData.totalServicosManual,
+      totalMaoDeObra: formData.totalMaoDeObraManual,
+      valorTotal: formData.totalGeralManual,
+      formaPagamento: formData.formaPagamento,
+      garantia: formData.garantia,
+      observacoes: formData.observacoes,
+      status: formData.status,
+    };
+
+    onSubmit(orcamentoFinal);
   };
 
   return (
@@ -495,8 +579,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
 
         {/* Ações */}
         <div className="form-actions">
-          <button type="submit" className="btn btn-primary">Salvar Orçamento</button>
-          <button type="button" className="btn btn-secondary" onClick={() => window.location.reload()}>Cancelar</button>
+          <button type="submit" className="action-btn">Salvar Orçamento</button>
         </div>
       </form>
 

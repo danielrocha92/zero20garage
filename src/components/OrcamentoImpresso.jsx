@@ -189,6 +189,14 @@ const handleSharePdf = async () => {
 
 
 
+  const handleVoltarPainel = () => {
+    if (onClose) onClose(orcamento.id || orcamento._id);
+    setTimeout(() => {
+      const el = document.getElementById('ancora-historico-orcamentos');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  };
+
   if (!orcamento) {
     return <div className="orcamento-impresso-container">Nenhum orçamento selecionado para visualização.</div>;
   }
@@ -218,15 +226,20 @@ const handleSharePdf = async () => {
                 <td>Veículo: <span className="input-line">{orcamento?.veiculo || ''}</span></td>
                 <td>OS: <span className="input-line">{orcamento?.ordemServico || ''}</span></td>
                 <td>Cliente: <span className="input-line">{orcamento?.cliente || ''}</span></td>
-                <td>
-                  Data:
-                  <span className="input-line">
-                    {orcamento?.data && dayjs(orcamento.data).isValid()
-                      ? dayjs(orcamento.data).format('DD/MM/YYYY')
-                      : '___________'}
-                  </span>
-                </td>
-
+                  <td>
+                    Data:
+                    <span className="input-line">
+                      {orcamento?.data
+                        ? (
+                            typeof orcamento.data === 'object' && orcamento.data._seconds
+                              ? dayjs(orcamento.data._seconds * 1000).format('DD/MM/YYYY HH:mm')
+                              : dayjs(orcamento.data).isValid()
+                                ? dayjs(orcamento.data).format('DD/MM/YYYY HH:mm')
+                                : '___________'
+                          )
+                        : '___________'}
+                    </span>
+                  </td>
               </tr>
             </tbody>
           </table>
@@ -290,7 +303,7 @@ const handleSharePdf = async () => {
 
         <section className="summary-section-impresso">
           <div className="total-line-impresso">
-            <span>Valor total de mão de Obra:</span>
+            <span>Valor total de mão de Obra Mecânica:</span>
             <span>{orcamento?.totalMaoDeObra
               ? <strong>R$ {Number(orcamento.totalMaoDeObra).toFixed(2).replace('.', ',')}</strong>
               : <strong>___________</strong>}
@@ -336,7 +349,7 @@ const handleSharePdf = async () => {
 
       <div className="print-buttons">
         <button onClick={handleSharePdf} className="print-btn">Compartilhar PDF</button>
-        <button onClick={() => onClose(orcamento.id || orcamento._id)} className="back-btn">
+        <button onClick={handleVoltarPainel} className="back-btn">
           Voltar ao Painel
         </button>
       </div>

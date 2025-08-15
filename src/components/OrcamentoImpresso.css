@@ -295,7 +295,7 @@ body {
 }
 
 .policy-text {
-    font-size: 12px;
+    font-size: 0.6rem;
     line-height: 1.4;
     color: #555;
     margin: 0;
@@ -367,7 +367,7 @@ body {
 
     .info-table td {
         width: 25%;
-        font-size: 0.95em;
+        font-size: 1rem;
         margin: 0;
         text-align: center;
         white-space: normal;
@@ -376,6 +376,7 @@ body {
     .input-line {
         min-width: 60px;
         width: auto;
+        font-weight: bold;
     }
 
     .items-section {
@@ -565,4 +566,34 @@ body {
   width: 794px !important;
   max-width: 794px !important;
   min-width: 794px !important;
+}
+
+/* --- Estilos específicos para a data no orçamento --- */
+.data-orcamento {
+    display: inline-block;
+    border-bottom: 1px solid black;
+    min-width: 45px;
+    padding-left: 0.2rem;
+    box-sizing: border-box;
+    font-weight: normal;
+    color: #333;
+    width: calc(100% - 45px);
+    vertical-align: bottom;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: center;
+}
+
+.data-orcamento span {
+    display: inline-block;
+    min-width: 100px;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.data-orcamento .data-formatada {
+    font-weight: bold;
+    color: #000;
 }
