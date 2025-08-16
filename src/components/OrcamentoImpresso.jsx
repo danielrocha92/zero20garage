@@ -323,10 +323,6 @@ const handleSharePdf = async () => {
             <span>{orcamento?.formaPagamento || '___________'}</span>
           </div>
           <div className="info-line">
-            <strong>Garantia:</strong>
-            <span>{orcamento?.garantia || '___________'}</span>
-          </div>
-          <div className="info-line">
             <strong>Observações:</strong>
             <span>{orcamento?.observacoes || '___________'}</span>
           </div>

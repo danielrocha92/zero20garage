@@ -129,7 +129,6 @@ const PainelOrcamentos = () => {
             'Serviços': h.servicosSelecionados?.join('; ') || '',
             Observações: h.observacoes || '',
             'Forma de Pagamento': h.formaPagamento || '',
-            Garantia: h.garantia || '',
         }));
 
         const ws = XLSX.utils.json_to_sheet(excelData);
@@ -238,7 +237,6 @@ const PainelOrcamentos = () => {
               <strong>R$ ${Number(orcamento?.valorTotal || 0).toFixed(2).replace('.', ',')}</strong>
             </div>
             <p><strong>Forma de Pagamento:</strong> ${orcamento?.formaPagamento || 'N/A'}</p>
-            <p><strong>Garantia:</strong> ${orcamento?.garantia || 'N/A'}</p>
             <p><strong>Observações:</strong> ${orcamento?.observacoes || 'N/A'}</p>
             <p><strong>Status:</strong> ${orcamento?.status || 'N/A'}</p>
           </section>

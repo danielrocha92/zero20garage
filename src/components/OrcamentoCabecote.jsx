@@ -97,7 +97,6 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
     totalMaoDeObraManual: 0,
     totalGeralManual: 0,
     formaPagamento: '',
-    garantia: '',
     observacoes: '',
     status: 'Aberto',
   });
@@ -117,7 +116,6 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
         totalMaoDeObraManual: parseFloat(editingData.totalMaoDeObra) || 0,
         totalGeralManual: parseFloat(editingData.valorTotal) || 0,
         formaPagamento: editingData.formaPagamento || '',
-        garantia: editingData.garantia || '',
         observacoes: editingData.observacoes || '',
         status: editingData.status || 'Aberto',
         pecas: itensCabecoteData.map(item => {
@@ -307,7 +305,6 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
       totalMaoDeObra: formData.totalMaoDeObraManual,
       valorTotal: formData.totalGeralManual,
       formaPagamento: formData.formaPagamento,
-      garantia: formData.garantia,
       observacoes: formData.observacoes,
       status: formData.status,
     };
@@ -558,12 +555,6 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessageBox, message, sho
             <div className="form-group" style={{ width: '100%' }}>
               <label htmlFor="formaPagamento">Forma de pagamento:</label>
               <input type="text" id="formaPagamento" name="formaPagamento" value={formData.formaPagamento} onChange={handleInputChange} placeholder="Pix, Débito e Crédito em até xx vezes sem juros" />
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="form-group" style={{ width: '100%' }}>
-              <label htmlFor="garantia">Garantia:</label>
-              <input type="text" id="garantia" name="garantia" value={formData.garantia} onChange={handleInputChange} />
             </div>
           </div>
           <div className="form-group">

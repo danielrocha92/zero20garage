@@ -75,7 +75,14 @@ const itensMotorCompletoData = [
 ].sort((a, b) => a.nome.localeCompare(b.nome));
 
 const servicosMotorCompletoData = [
-  { nome: "Bloco usinagem completa", temQuantidade: false },
+  {
+    nome: "Bloco",
+    temQuantidade: false,
+    subItens: [
+      { label: "Usinagem completa", type: "checkbox", initialValue: false },
+      { label: "Limpeza e Revisão", type: "checkbox", initialValue: false }
+    ]
+  },
   {
     nome: "Cabeçote",
     temQuantidade: false,
@@ -134,7 +141,6 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
     totalMaoDeObraManual: 0,
     totalGeralManual: 0,
     formaPagamento: '',
-    garantia: '',
     observacoes: '',
     status: 'Aberto',
   });
@@ -158,7 +164,6 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
         totalMaoDeObraManual: parseFloat(editingData.totalMaoDeObra) || 0,
         totalGeralManual: parseFloat(editingData.valorTotal) || 0,
         formaPagamento: editingData.formaPagamento || '',
-        garantia: editingData.garantia || '',
         observacoes: editingData.observacoes || '',
         status: editingData.status || 'Aberto',
         pecas: itensMotorCompletoData.map(pecaData => {
@@ -211,7 +216,6 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
         totalMaoDeObraManual: 0,
         totalGeralManual: 0,
         formaPagamento: '',
-        garantia: '',
         observacoes: '',
         status: 'Aberto',
       });
@@ -337,7 +341,6 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
       totalMaoDeObra: formData.totalMaoDeObraManual,
       valorTotal: formData.totalGeralManual,
       formaPagamento: formData.formaPagamento,
-      garantia: formData.garantia,
       observacoes: formData.observacoes,
       status: formData.status,
     };
@@ -564,11 +567,6 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
           <div className="form-group">
             <label>Forma de pagamento:</label>
             <input type="text" name="formaPagamento" value={formData.formaPagamento} onChange={handleInputChange} placeholder="Pix, Débito e Crédito em até xx vezes sem juros" />
-          </div>
-
-          <div className="form-group">
-            <label>Garantia:</label>
-            <input type="text" name="garantia" value={formData.garantia} onChange={handleInputChange} placeholder="Ex: 90 dias ou 5.000 Km" />
           </div>
 
           <div className="form-group">
