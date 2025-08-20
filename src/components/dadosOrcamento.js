@@ -31,8 +31,8 @@ export const itensCabecoteData = [
   { nome: "Filtro de combustível", temQuantidade: false },
   { nome: "Filtro de óleo", temQuantidade: false },
   { nome: "Kit junta motor", temQuantidade: false },
-  { nome: "Litros de aditivo", temQuantidade: true, subItens: [{ label: "", type: "text", initialValue: "" }] },
-  { nome: "Litros de Óleo", temQuantidade: true, subItens: [{ label: "", type: "text", initialValue: "" }] },
+  { nome: "Litros de aditivo", temQuantidade: false, subItens: [{ label: "", type: "text", initialValue: "" }] },
+  { nome: "Litros de Óleo", temQuantidade: false, subItens: [{ label: "", type: "text", initialValue: "" }] },
   {
     nome: "Mangueiras Radiador", temQuantidade: false,
     subItens: [
