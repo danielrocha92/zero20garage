@@ -5,8 +5,8 @@
 // ==========================
 export const itensCabecoteData = [
   { nome: "Anti Chamas", temQuantidade: false },
-  { nome: "Biela", temQuantidade: true },
-  { nome: "Bobina", temQuantidade: true },
+  { nome: "Biela", temQuantidade: false },
+  { nome: "Bobina", temQuantidade: false },
   { nome: "Bomba d'água", temQuantidade: false },
   { nome: "Cabo de vela", temQuantidade: false },
   {
