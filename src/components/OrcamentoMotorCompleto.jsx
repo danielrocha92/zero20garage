@@ -458,6 +458,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
               <option value="Concluido">Concluido</option>
             </select>
           </div>
+        </section>
 
         {/* Ações */}
         <div className="form-actions">
