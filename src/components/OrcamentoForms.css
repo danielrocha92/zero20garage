@@ -3,49 +3,41 @@
 /* ========================================= */
 /* ===== Reset e Variáveis CSS Globais ===== */
 /* ========================================= */
-/* Aplicando box-sizing globalmente para um layout consistente */
 *, *::before, *::after {
     box-sizing: border-box;
 }
 
 :root {
-    /* Cores base para o fundo escuro e texto */
     --color-page-bg: #1a1a1a;
     --color-form-bg: #2a2a2a;
     --color-form-group-bg: #2a2a2a;
     --color-form-text: #e0e0e0;
     --color-label-text: #fff;
 
-    /* Cores de destaque (o vermelho da sua marca) */
     --color-brand-red: #c50404;
     --color-brand-red-hover: #9e0303;
 
-    /* Cores dos inputs */
     --color-input-bg: #1a1a1a;
     --color-input-text: #e0e0e0;
     --color-input-border: #444;
     --color-input-focus-border: #c50404;
 
-    /* Cores para feedback (sucesso/erro) */
     --color-feedback-success-bg: #4caf50;
     --color-feedback-success-text: #fff;
     --color-feedback-error-bg: #f44336;
     --color-feedback-error-text: #fff;
 
-    /* Cores para checkboxes */
     --color-checkbox-border: #777;
     --color-checkbox-checked: var(--color-brand-red);
 
-    /* Bordas e divisores */
     --color-border-light: #555;
     --color-border-dark: #333;
+    --color-parent-child-divider: rgba(255, 255, 255, 0.1);
 
-    /* Sombras */
     --shadow-light: rgba(0, 0, 0, 0.3);
     --shadow-medium: rgba(0, 0, 0, 0.4);
     --shadow-strong: rgba(0, 0, 0, 0.6);
 
-    /* Variáveis para o modo de impressão/visualização de documento */
     --color-screen-bg: #1a1a1a;
     --color-screen-text: #f0f0f0;
     --color-screen-border: #555;
@@ -58,7 +50,6 @@
     --color-table-header-bg: #f2f2f2;
     --color-table-stripe-bg: #f9f9f9;
 
-    /* Fontes */
     --font-primary: 'Arial Black', sans-serif;
     --font-secondary: 'Arial', sans-serif;
 }
@@ -66,7 +57,6 @@
 /* ========================================= */
 /* ===== Estilos Padrão (MOBILE FIRST) ===== */
 /* ========================================= */
-
 .orcamento-form-container {
     font-family: var(--font-secondary);
     background-color: var(--color-form-bg);
@@ -85,7 +75,7 @@
 
 .form-header h1 {
     font-family: var(--font-primary);
-    font-size: 1.8em;
+    font-size: 1.4em;
     color: var(--color-brand-red);
     margin-bottom: 8px;
     text-transform: uppercase;
@@ -121,7 +111,7 @@
     background-color: var(--color-form-group-bg);
     border-radius: 20px;
     box-shadow: 0 2px 6px var(--shadow-light);
-    margin-bottom: 20px; /* Consolidado para evitar repetição */
+    margin-bottom: 20px;
 }
 
 .client-vehicle-section h2, .section-form h2 {
@@ -175,6 +165,14 @@
     border: 1px solid var(--color-input-border);
     border-radius: 20px;
     transition: border 0.3s ease, box-shadow 0.3s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e0e0e0'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    cursor: pointer;
 }
 
 .form-group input:not([type="checkbox"]):focus,
@@ -188,6 +186,10 @@
     box-shadow: 0 0 0 3px rgba(197, 4, 4, 0.5);
 }
 
+.form-group select option[disabled] {
+    color: #666;
+}
+
 .section-form {
     margin-top: 25px;
 }
@@ -197,62 +199,56 @@
     border-collapse: collapse;
 }
 
-.items-table tr {
+/* ========================================= */
+/* ===== Itens e Sub-itens com Separadores ===== */
+/* ========================================= */
+.items-table tr.parent-item-row {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
     width: 100%;
-    border-bottom: 1px solid var(--color-input-border);
-    padding-bottom: 15px;
+    border-bottom: 1px solid var(--color-parent-child-divider);
+    padding: 15px 0;
     margin-bottom: 15px;
 }
 
-.items-table tr:last-child {
+.items-table tr.parent-item-row:last-child {
     border-bottom: none;
     margin-bottom: 0;
     padding-bottom: 0;
 }
 
 .items-table td {
-    width: 100%;
     padding: 5px 0;
-    min-width: unset;
-    padding-right: 0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-grow: unset;
 }
 
-.checkbox-cell {
-    order: 1;
-}
-
-.inputs-cell {
-    order: 2;
-}
-
-.subitems-cell {
-    order: 3;
-}
-
+.checkbox-cell,
+.inputs-cell,
+.subitems-cell,
 .total-cell {
-    order: 4;
-    margin-top: 10px;
-    align-self: flex-end;
-    max-width: 150px;
-    width: auto;
-    flex-grow: 0;
-    flex-shrink: 0;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 10px;
 }
 
-/* Estilo unificado para o checkbox e o rótulo */
+/* Checkboxes personalizados */
 .custom-checkbox {
     display: flex;
     align-items: center;
     cursor: pointer;
     font-size: 0.95em;
     color: var(--color-form-text);
-    margin-bottom: 5px;
+    margin-bottom: 0;
     text-align: left;
+    flex-direction: row;
+    justify-content: flex-start;
 }
 
-/* Esconde o checkbox nativo */
 .custom-checkbox input[type="checkbox"] {
     position: absolute;
     opacity: 0;
@@ -261,7 +257,6 @@
     width: 0;
 }
 
-/* Cria o quadrado visual do checkbox */
 .custom-checkbox .checkbox-box {
     width: 20px;
     height: 20px;
@@ -273,11 +268,11 @@
     align-items: center;
     flex-shrink: 0;
     margin-right: 10px;
+    margin-left: 0;
     transition: all 0.2s ease-in-out;
     position: relative;
 }
 
-/* Estilo do checkmark (o '✓') */
 .custom-checkbox .checkbox-box::before {
     content: '✓';
     position: absolute;
@@ -288,7 +283,6 @@
     transition: opacity 0.2s ease-in-out;
 }
 
-/* Estilo quando o checkbox está marcado */
 .custom-checkbox input[type="checkbox"]:checked + .checkbox-box {
     background-color: var(--color-checkbox-checked);
     border-color: var(--color-checkbox-checked);
@@ -298,13 +292,12 @@
     opacity: 1;
 }
 
-/* Inputs de quantidade/valor */
 .item-inputs {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    align-items: flex-start;
-    margin-top: 5px;
+    align-items: flex-end;
+    margin-top: 0;
     width: 100%;
 }
 
@@ -313,6 +306,7 @@
     align-items: center;
     gap: 5px;
     width: 100%;
+    justify-content: flex-end;
 }
 
 .item-inputs input[type="number"],
@@ -347,14 +341,15 @@
     margin-right: 2px;
 }
 
-/* Sub-itens (medidas de pistão, etc.) */
+/* Sub-itens */
 .sub-items-container {
     margin-top: 10px;
-    padding-left: 0px;
+    padding-left: 20px;
+    border-left: 2px solid var(--color-brand-red);
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     align-items: flex-start;
 }
 
@@ -366,6 +361,18 @@
     border: 1px solid var(--color-border-dark);
     padding: 8px;
     border-radius: 10px;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.sub-item-input-group:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    height: 1px;
+    background-color: var(--color-border-light);
 }
 
 .sub-item-input-group .sub-item-label {
@@ -397,6 +404,7 @@
     margin: 0;
     font-size: 0.95em;
     color: var(--color-form-text);
+    flex-direction: row;
 }
 
 .sub-item-label.checkbox-label input[type="checkbox"] {
@@ -419,7 +427,7 @@
     z-index: 1;
 }
 
-/* Unificando estilos de botão base para reutilização */
+/* Botões */
 .base-btn,
 .submit-button,
 .form-buttons .action-btn {
@@ -441,7 +449,6 @@
 .submit-button:hover,
 .form-buttons .action-btn:hover {
     background-color: var(--color-brand-red-hover);
-    /* Corrigida a sombra para um efeito vertical */
     box-shadow: 0 6px 15px var(--shadow-strong);
     transform: translateY(-2px);
 }
@@ -459,7 +466,6 @@
     outline: none;
     box-shadow: 0 0 0 3px rgba(197, 4, 4, 0.5), 0 4px 10px var(--shadow-medium);
 }
-
 
 .add-sub-item-btn,
 .remove-sub-item-btn {
@@ -485,11 +491,10 @@
 }
 
 .sub-items-container .add-sub-item-btn {
-    align-self: flex-start;
+    align-self: flex-end;
     margin-top: 5px;
 }
 
-/* Linhas de Total nos formulários */
 .total-line-form {
     display: flex;
     flex-direction: column;
@@ -621,185 +626,31 @@
     }
 
     .client-vehicle-section h2, .section-form h2 {
-        font-size: 1.6em;
-        margin-bottom: 25px;
+        font-size: 1.8em;
     }
 
-    .orcamento-form {
-        max-width: 600px;
-        margin: 2rem auto;
-    }
-
-    .orcamento-form .form-group label {
-        font-size: 1.1rem;
-    }
-
-    .orcamento-form .form-group input:not([type="checkbox"]),
-    .orcamento-form .form-group textarea,
-    .orcamento-form .form-group select {
-        padding: 12px;
-        font-size: 1em;
-    }
-
-    .form-table {
-        table-layout: fixed;
-    }
-
-    .form-table td {
-        display: table-cell;
-        width: auto;
-        padding: 10px 15px;
-    }
-
-    .form-group label {
-        font-size: 0.95em;
-        margin-bottom: 8px;
-    }
-
-    .form-group input:not([type="checkbox"]),
-    .form-group textarea,
-    .form-group select {
-        padding: 12px;
-        font-size: 1em;
-    }
-
-    .section-form {
-        margin-top: 35px;
-    }
-
-    .items-table tr {
-        display: table-row;
-        flex-direction: initial;
-        width: auto;
-        margin-bottom: 10px;
-        padding-bottom: 10px;
-    }
-
-    .items-table td {
-        display: table-cell;
-        padding: 5px 0;
-    }
-
-    .checkbox-cell {
-        order: initial;
-        width: 25%;
-        min-width: 150px;
-        padding-right: 10px;
-    }
-
-    .inputs-cell {
-        order: initial;
-        width: 25%;
-        min-width: 180px;
-        padding-right: 10px;
-    }
-
-    .subitems-cell {
-        order: initial;
-        width: 35%;
-        padding-right: 10px;
-    }
-
-    .total-cell {
-        order: initial;
-        width: 15%;
-        min-width: 100px;
-        margin-top: 0;
-        align-self: auto;
-        max-width: none;
-    }
-
-    .item-inputs {
+    .items-table tr.parent-item-row {
         flex-direction: row;
+        justify-content: space-between;
         align-items: center;
-        gap: 5px;
-        width: auto;
-    }
-
-    .item-inputs > div {
-        width: auto;
-    }
-
-    .item-inputs input[type="number"],
-    .item-inputs input[type="text"] {
-        width: 60px;
-        max-width: none;
-    }
-
-    .item-inputs .value-input {
-        width: 90px;
+        padding: 15px 10px;
     }
 
     .sub-items-container {
-        margin-top: 5px;
-        gap: 5px;
-        align-items: flex-start;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+        border-left: none;
+        padding-left: 0;
     }
 
     .sub-item-input-group {
-        flex-direction: row;
-        justify-content: flex-start;
-        padding: 6px;
-    }
-
-    .sub-item-input-group .sub-item-label {
-        width: auto;
-        margin-bottom: 0;
-        margin-right: 0;
-    }
-
-    .sub-item-input-group input[type="text"],
-    .sub-item-input-group input[type="number"] {
-        max-width: 100px;
-        width: auto;
-    }
-
-    .sub-item-input-group .remove-sub-item-btn {
-        position: static;
-        margin-top: 0;
-        margin-right: 0;
-        align-self: auto;
-    }
-
-    .sub-items-container .add-sub-item-btn {
-        align-self: flex-start;
-    }
-
-    .total-line-form {
-        flex-direction: row;
-        justify-content: flex-end;
-        gap: 15px;
-    }
-
-    .total-line-form .value-display,
-    .input-total {
-        width: 150px;
-        max-width: 150px;
-    }
-
-    .total-geral-form {
-        font-size: 1.8em;
-        flex-direction: row;
-        gap: 20px;
-    }
-
-    .input-total-geral {
-        font-size: 1em;
-        width: 150px;
-        max-width: 150px;
-    }
-
-    .summary-section {
-        margin-top: 30px;
-    }
-
-    .summary-section .form-group {
-        margin-bottom: 15px;
+        flex: 1 1 calc(50% - 10px);
     }
 
     .form-buttons {
-        margin-top: 40px;
         flex-direction: row;
+        justify-content: flex-end;
         gap: 20px;
     }
 }

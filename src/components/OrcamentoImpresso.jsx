@@ -21,173 +21,171 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
   // utilitário sleep
   const sleep = (ms) => new Promise(res => setTimeout(res, ms));
 
-const handleSharePdf = async () => {
-  if (!componentRef.current) {
-    console.error("A referência ao conteúdo do orçamento não foi encontrada. Geração do PDF abortada.");
-    return;
-  }
+  const handleSharePdf = async () => {
+    if (!componentRef.current) {
+      console.error("A referência ao conteúdo do orçamento não foi encontrada. Geração do PDF abortada.");
+      return;
+    }
 
-  setTimeout(async () => {
-    const element = componentRef.current;
+    setTimeout(async () => {
+      const element = componentRef.current;
 
-    const prevInlineWidth = element.style.width || '';
-    const prevMaxWidth = element.style.maxWidth || '';
-    const prevBodyOverflow = document.body.style.overflow || '';
-
-    try {
-      // 🔒 Forçar largura e estabilidade
-      element.style.width = '794px';
-      element.style.maxWidth = 'none';
-      document.body.style.overflow = 'visible';
-      element.classList.add('force-print-layout');
-
-      console.log("Iniciando a captura do conteúdo para PDF...");
-
-      const MAX_CAPTURE_WIDTH_PX = 794;
-      const SCALE = 1.5;
-      const SLICE_HEIGHT_PX = 2000;
-
-      const contentWidthPx = Math.min(element.scrollWidth || element.offsetWidth || MAX_CAPTURE_WIDTH_PX, MAX_CAPTURE_WIDTH_PX);
-      const contentHeightPx = Math.ceil(element.scrollHeight || element.offsetHeight || SLICE_HEIGHT_PX);
-
-      console.log(`Dimensões do conteúdo: largura ${contentWidthPx}px x altura ${contentHeightPx}px`);
+      const prevInlineWidth = element.style.width || '';
+      const prevMaxWidth = element.style.maxWidth || '';
+      const prevBodyOverflow = document.body.style.overflow || '';
 
       try {
-        const singleCanvas = await html2canvas(element, {
-          scale: SCALE,
-          useCORS: true,
-          logging: false,
-          width: contentWidthPx,
-          height: contentHeightPx,
-          windowWidth: contentWidthPx,
-          windowHeight: contentHeightPx
-        });
+        // 🔒 Forçar largura e estabilidade
+        element.style.width = '794px';
+        element.style.maxWidth = 'none';
+        document.body.style.overflow = 'visible';
+        element.classList.add('force-print-layout');
 
-        const coveredHeightPx = Math.round(singleCanvas.height / SCALE);
-        console.log(`Canvas único: altura coberta ${coveredHeightPx}px (esperado ${contentHeightPx}px)`);
-        if (coveredHeightPx >= contentHeightPx) {
-          const imgData = singleCanvas.toDataURL('image/png');
-          const PX_TO_MM = 25.4 / 96;
-          const pdfWidthMm = contentWidthPx * PX_TO_MM;
-          const pdfHeightMm = contentHeightPx * PX_TO_MM;
+        console.log("Iniciando a captura do conteúdo para PDF...");
 
-          const pdf = new jsPDF({
-            orientation: 'portrait',
-            unit: 'mm',
-            format: [Number(pdfWidthMm.toFixed(2)), Number(pdfHeightMm.toFixed(2))]
-          });
+        const MAX_CAPTURE_WIDTH_PX = 794;
+        const SCALE = 1.5;
+        const SLICE_HEIGHT_PX = 2000;
 
-          pdf.addImage(imgData, 'PNG', 0, 0, pdfWidthMm, pdfHeightMm);
+        const contentWidthPx = Math.min(element.scrollWidth || element.offsetWidth || MAX_CAPTURE_WIDTH_PX, MAX_CAPTURE_WIDTH_PX);
+        const contentHeightPx = Math.ceil(element.scrollHeight || element.offsetHeight || SLICE_HEIGHT_PX);
 
-          const filename = `Orçamento_OS_${orcamento?.ordemServico || 'SemOS'}_${orcamento?.cliente || 'SemCliente'}.pdf`;
-          pdf.save(filename);
-          console.log('PDF gerado com captura única.');
-          return;
-        } else {
-          console.warn('Captura única incompleta — entrando em modo fatias.');
-        }
-      } catch (errSingle) {
-        console.warn('Falha ao tentar captura única (proceder com fatias):', errSingle);
-      }
-
-      // --- Fallback: captura por fatias ---
-      const slices = [];
-      for (let offset = 0; offset < contentHeightPx; offset += SLICE_HEIGHT_PX) {
-        const sliceHeightPx = Math.min(SLICE_HEIGHT_PX, contentHeightPx - offset);
-
-        const wrapper = document.createElement('div');
-        wrapper.style.position = 'absolute';
-        wrapper.style.left = '-9999px';
-        wrapper.style.top = '0';
-        wrapper.style.width = `${contentWidthPx}px`;
-        wrapper.style.height = `${sliceHeightPx}px`;
-        wrapper.style.overflow = 'hidden';
-        wrapper.style.background = '#ffffff';
-        wrapper.style.boxSizing = 'border-box';
-
-        const clone = element.cloneNode(true);
-        clone.style.boxSizing = 'border-box';
-        clone.style.width = `${contentWidthPx}px`;
-        clone.style.maxWidth = `${contentWidthPx}px`;
-        clone.style.position = 'relative';
-        clone.style.left = '0';
-        clone.style.top = `-${offset}px`;
-        clone.style.margin = '0';
-
-        wrapper.appendChild(clone);
-        document.body.appendChild(wrapper);
-
-        await sleep(220);
+        console.log(`Dimensões do conteúdo: largura ${contentWidthPx}px x altura ${contentHeightPx}px`);
 
         try {
-          const canvasSlice = await html2canvas(wrapper, {
+          const singleCanvas = await html2canvas(element, {
             scale: SCALE,
             useCORS: true,
             logging: false,
             width: contentWidthPx,
-            height: sliceHeightPx,
+            height: contentHeightPx,
             windowWidth: contentWidthPx,
-            windowHeight: sliceHeightPx
+            windowHeight: contentHeightPx
           });
 
-          if (Math.round(canvasSlice.height / SCALE) < 1) {
-            throw new Error('Canvas da fatia ficou vazio.');
+          const coveredHeightPx = Math.round(singleCanvas.height / SCALE);
+          console.log(`Canvas único: altura coberta ${coveredHeightPx}px (esperado ${contentHeightPx}px)`);
+          if (coveredHeightPx >= contentHeightPx) {
+            const imgData = singleCanvas.toDataURL('image/png');
+            const PX_TO_MM = 25.4 / 96;
+            const pdfWidthMm = contentWidthPx * PX_TO_MM;
+            const pdfHeightMm = contentHeightPx * PX_TO_MM;
+
+            const pdf = new jsPDF({
+              orientation: 'portrait',
+              unit: 'mm',
+              format: [Number(pdfWidthMm.toFixed(2)), Number(pdfHeightMm.toFixed(2))]
+            });
+
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidthMm, pdfHeightMm);
+
+            const filename = `Orçamento_OS_${orcamento?.ordemServico || 'SemOS'}_${orcamento?.cliente || 'SemCliente'}.pdf`;
+            pdf.save(filename);
+            console.log('PDF gerado com captura única.');
+            return;
+          } else {
+            console.warn('Captura única incompleta — entrando em modo fatias.');
           }
-
-          slices.push({
-            canvas: canvasSlice,
-            heightPx: sliceHeightPx
-          });
-
-          console.log(`Fatia capturada: offset ${offset}px, altura ${sliceHeightPx}px`);
-        } catch (errSlice) {
-          console.error('Erro na captura da fatia (offset', offset, '):', errSlice);
-          if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
-          throw errSlice;
-        } finally {
-          if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
+        } catch (errSingle) {
+          console.warn('Falha ao tentar captura única (proceder com fatias):', errSingle);
         }
+
+        // --- Fallback: captura por fatias ---
+        const slices = [];
+        for (let offset = 0; offset < contentHeightPx; offset += SLICE_HEIGHT_PX) {
+          const sliceHeightPx = Math.min(SLICE_HEIGHT_PX, contentHeightPx - offset);
+
+          const wrapper = document.createElement('div');
+          wrapper.style.position = 'absolute';
+          wrapper.style.left = '-9999px';
+          wrapper.style.top = '0';
+          wrapper.style.width = `${contentWidthPx}px`;
+          wrapper.style.height = `${sliceHeightPx}px`;
+          wrapper.style.overflow = 'hidden';
+          wrapper.style.background = '#ffffff';
+          wrapper.style.boxSizing = 'border-box';
+
+          const clone = element.cloneNode(true);
+          clone.style.boxSizing = 'border-box';
+          clone.style.width = `${contentWidthPx}px`;
+          clone.style.maxWidth = `${contentWidthPx}px`;
+          clone.style.position = 'relative';
+          clone.style.left = '0';
+          clone.style.top = `-${offset}px`;
+          clone.style.margin = '0';
+
+          wrapper.appendChild(clone);
+          document.body.appendChild(wrapper);
+
+          await sleep(220);
+
+          try {
+            const canvasSlice = await html2canvas(wrapper, {
+              scale: SCALE,
+              useCORS: true,
+              logging: false,
+              width: contentWidthPx,
+              height: sliceHeightPx,
+              windowWidth: contentWidthPx,
+              windowHeight: sliceHeightPx
+            });
+
+            if (Math.round(canvasSlice.height / SCALE) < 1) {
+              throw new Error('Canvas da fatia ficou vazio.');
+            }
+
+            slices.push({
+              canvas: canvasSlice,
+              heightPx: sliceHeightPx
+            });
+
+            console.log(`Fatia capturada: offset ${offset}px, altura ${sliceHeightPx}px`);
+          } catch (errSlice) {
+            console.error('Erro na captura da fatia (offset', offset, '):', errSlice);
+            if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
+            throw errSlice;
+          } finally {
+            if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
+          }
+        }
+
+        // Montar PDF com fatias
+        const PX_TO_MM = 25.4 / 96;
+        const pdfWidthMm = contentWidthPx * PX_TO_MM;
+        const pdfHeightMm = contentHeightPx * PX_TO_MM;
+
+        const pdf = new jsPDF({
+          orientation: 'portrait',
+          unit: 'mm',
+          format: [Number(pdfWidthMm.toFixed(2)), Number(pdfHeightMm.toFixed(2))]
+        });
+
+        let cursorYmm = 0;
+        for (let i = 0; i < slices.length; i++) {
+          const { canvas: sliceCanvas, heightPx } = slices[i];
+          const imgData = sliceCanvas.toDataURL('image/png');
+          const sliceHeightMm = heightPx * PX_TO_MM;
+
+          pdf.addImage(imgData, 'PNG', 0, cursorYmm, pdfWidthMm, sliceHeightMm);
+          cursorYmm += sliceHeightMm;
+        }
+
+        const filename = `Orçamento_OS_${orcamento?.ordemServico || 'SemOS'}_${orcamento?.cliente || 'SemCliente'}.pdf`;
+        pdf.save(filename);
+
+        console.log(`PDF contínuo gerado com ${slices.length} fatias. Largura ${contentWidthPx}px, Altura total ${contentHeightPx}px.`);
+      } catch (error) {
+        console.error("Erro ao gerar o PDF definitivo:", error);
+        alert('Erro ao gerar PDF. Veja o console para detalhes.');
+      } finally {
+        // 🧹 Reverter alterações temporárias
+        element.style.width = prevInlineWidth;
+        element.style.maxWidth = prevMaxWidth;
+        document.body.style.overflow = prevBodyOverflow;
+        element.classList.remove('force-print-layout');
       }
-
-      // Montar PDF com fatias
-      const PX_TO_MM = 25.4 / 96;
-      const pdfWidthMm = contentWidthPx * PX_TO_MM;
-      const pdfHeightMm = contentHeightPx * PX_TO_MM;
-
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'mm',
-        format: [Number(pdfWidthMm.toFixed(2)), Number(pdfHeightMm.toFixed(2))]
-      });
-
-      let cursorYmm = 0;
-      for (let i = 0; i < slices.length; i++) {
-        const { canvas: sliceCanvas, heightPx } = slices[i];
-        const imgData = sliceCanvas.toDataURL('image/png');
-        const sliceHeightMm = heightPx * PX_TO_MM;
-
-        pdf.addImage(imgData, 'PNG', 0, cursorYmm, pdfWidthMm, sliceHeightMm);
-        cursorYmm += sliceHeightMm;
-      }
-
-      const filename = `Orçamento_OS_${orcamento?.ordemServico || 'SemOS'}_${orcamento?.cliente || 'SemCliente'}.pdf`;
-      pdf.save(filename);
-
-      console.log(`PDF contínuo gerado com ${slices.length} fatias. Largura ${contentWidthPx}px, Altura total ${contentHeightPx}px.`);
-    } catch (error) {
-      console.error("Erro ao gerar o PDF definitivo:", error);
-      alert('Erro ao gerar PDF. Veja o console para detalhes.');
-    } finally {
-      // 🧹 Reverter alterações temporárias
-      element.style.width = prevInlineWidth;
-      element.style.maxWidth = prevMaxWidth;
-      document.body.style.overflow = prevBodyOverflow;
-      element.classList.remove('force-print-layout');
-    }
-  }, 100);
-};
-
-
+    }, 100);
+  };
 
   const handleVoltarPainel = () => {
     if (onClose) onClose(orcamento.id || orcamento._id);
@@ -211,6 +209,12 @@ const handleSharePdf = async () => {
   const servicosColuna1 = servicos.slice(0, servicosMidPoint);
   const servicosColuna2 = servicos.slice(servicosMidPoint);
 
+  // Lógica para renderização condicional
+  const mostrarServicos =
+    (servicos.length > 0) ||
+    (orcamento.valorTotalServicos && orcamento.valorTotalServicos > 0) ||
+    (orcamento.totalMaoDeObra && orcamento.totalMaoDeObra > 0);
+
   return (
     <div className="orcamento-impresso-container">
       <div className="orcamento-impresso-content" ref={componentRef}>
@@ -226,20 +230,20 @@ const handleSharePdf = async () => {
                 <td>Veículo: <span className="input-line">{orcamento?.veiculo || ''}</span></td>
                 <td>OS: <span className="input-line">{orcamento?.ordemServico || ''}</span></td>
                 <td>Cliente: <span className="input-line">{orcamento?.cliente || ''}</span></td>
-                  <td>
-                    Data:
-                    <span className="input-line">
-                      {orcamento?.data
-                        ? (
-                            typeof orcamento.data === 'object' && orcamento.data._seconds
-                              ? dayjs(orcamento.data._seconds * 1000).format('DD/MM/YYYY HH:mm')
-                              : dayjs(orcamento.data).isValid()
-                                ? dayjs(orcamento.data).format('DD/MM/YYYY HH:mm')
-                                : '___________'
-                          )
-                        : '___________'}
-                    </span>
-                  </td>
+                <td>
+                  Data:
+                  <span className="input-line">
+                    {orcamento?.data
+                      ? (
+                        typeof orcamento.data === 'object' && orcamento.data._seconds
+                          ? dayjs(orcamento.data._seconds * 1000).format('DD/MM/YYYY HH:mm')
+                          : dayjs(orcamento.data).isValid()
+                            ? dayjs(orcamento.data).format('DD/MM/YYYY HH:mm')
+                            : '___________'
+                      )
+                      : '___________'}
+                  </span>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -273,42 +277,49 @@ const handleSharePdf = async () => {
           </div>
         </section>
 
-        <section className="items-section">
-          <h2>Serviços - Retífica</h2>
-          <div className="items-columns">
-            <ul className="item-list-impresso">
-              {servicosColuna1.map((item, index) => (
-                <li key={`servico1-${index}`}>
-                  <input type="checkbox" className="checkbox-box" checked readOnly />
-                  <span className="item-text">{item}</span>
-                </li>
-              ))}
-            </ul>
-            <ul className="item-list-impresso">
-              {servicosColuna2.map((item, index) => (
-                <li key={`servico2-${index}`}>
-                  <input type="checkbox" className="checkbox-box" checked readOnly />
-                  <span className="item-text">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="total-line-impresso">
-            <span>Valor total de Serviços:</span>
-            {orcamento?.valorTotalServicos
-              ? <strong>R$ {Number(orcamento.valorTotalServicos).toFixed(2).replace('.', ',')}</strong>
-              : <strong>___________</strong>}
-          </div>
-        </section>
+        {mostrarServicos && (
+          <>
+            <section className="items-section">
+              <h2>Serviços - Retífica</h2>
+              <div className="items-columns">
+                <ul className="item-list-impresso">
+                  {servicosColuna1.map((item, index) => (
+                    <li key={`servico1-${index}`}>
+                      <input type="checkbox" className="checkbox-box" checked readOnly />
+                      <span className="item-text">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <ul className="item-list-impresso">
+                  {servicosColuna2.map((item, index) => (
+                    <li key={`servico2-${index}`}>
+                      <input type="checkbox" className="checkbox-box" checked readOnly />
+                      <span className="item-text">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="total-line-impresso">
+                <span>Valor total de Serviços:</span>
+                {orcamento?.valorTotalServicos
+                  ? <strong>R$ {Number(orcamento.valorTotalServicos).toFixed(2).replace('.', ',')}</strong>
+                  : <strong>___________</strong>}
+              </div>
+            </section>
+
+            <section className="summary-section-impresso">
+              <div className="total-line-impresso">
+                <span>Valor total de mão de Obra Mecânica:</span>
+                <span>{orcamento?.totalMaoDeObra
+                  ? <strong>R$ {Number(orcamento.totalMaoDeObra).toFixed(2).replace('.', ',')}</strong>
+                  : <strong>___________</strong>}
+                </span>
+              </div>
+            </section>
+          </>
+        )}
 
         <section className="summary-section-impresso">
-          <div className="total-line-impresso">
-            <span>Valor total de mão de Obra Mecânica:</span>
-            <span>{orcamento?.totalMaoDeObra
-              ? <strong>R$ {Number(orcamento.totalMaoDeObra).toFixed(2).replace('.', ',')}</strong>
-              : <strong>___________</strong>}
-              </span>
-          </div>
           <div className="total-line-impresso final-total">
             <span>TOTAL GERAL:</span>
             {orcamento?.valorTotal

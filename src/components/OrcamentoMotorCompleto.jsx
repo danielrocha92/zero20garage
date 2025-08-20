@@ -1,120 +1,12 @@
 // src/components/OrcamentoMotorCompleto.jsx
 import React, { useState, useEffect } from 'react';
 import './OrcamentoForms.css';
-
-// Dados das peças e serviços
-const itensMotorCompletoData = [
-  { nome: "Pistão", temQuantidade: false, subItens: [{ label:"", type: "text", initialValue: "" }] },
-  { nome: "Anel", temQuantidade: false, subItens: [{ label:"", type: "text", initialValue: "" }] },
-  { nome: "Bronzina de biela", temQuantidade: false, subItens: [{ label:"", type: "text", initialValue: "" }] },
-  { nome: "Bronzina de mancal", temQuantidade: false, subItens: [{ label:"", type: "text", initialValue: "" }] },
-  { nome: "Arruela encosto", temQuantidade: false, subItens: [{ label:"", type: "text", initialValue: "" }] },
-  { nome: "Bomba de óleo", temQuantidade: false },
-  { nome: "Bomba d’água", temQuantidade: false },
-  { nome: "Tubo d’água", temQuantidade: false },
-  { nome: "Filtro de óleo", temQuantidade: false },
-  { nome: "Filtro de ar", temQuantidade: false },
-  { nome: "Filtro de combustível", temQuantidade: false },
-  {
-    nome: "Litros de Óleo",
-    temQuantidade: false,
-    subItens: [
-      { label: "20w50", type: "checkbox", initialValue: false },
-      { label: "10W40", type: "checkbox", initialValue: false },
-      { label: "5W30", type: "checkbox", initialValue: false },
-    ]
-  },
-  { nome: "Litros de aditivo", temQuantidade: false, subItens: [{ label: "", type: "text", initialValue: "" }] },
-  {
-    nome: "Correias",
-    temQuantidade: false,
-    subItens: [
-      { label: "Dent kit", type: "checkbox", initialValue: false },
-      { label: "Capa", type: "checkbox", initialValue: false },
-      { label: "Acessórios kit", type: "checkbox", initialValue: false },
-      { label: "Corrente kit", type: "checkbox", initialValue: false }
-    ]
-  },
-  { nome: "Válvula termostática", temQuantidade: false },
-  { nome: "Kit junta motor aço", temQuantidade: false },
-  { nome: "Retentor traseiro virab.", temQuantidade: false },
-  { nome: "Engrenagem virab.", temQuantidade: false },
-  { nome: "Retentor eixo comando", temQuantidade: false },
-  { nome: "Retentor válvula", temQuantidade: false },
-  {
-    nome: "Comando de Válvula",
-    temQuantidade: false,
-    subItens: [
-      { label: "Admissão", type: "checkbox", initialValue: false },
-      { label: "Escape", type: "checkbox", initialValue: false }
-    ]
-  },
-  {
-    nome: "Mangueiras Radiador",
-    temQuantidade: false,
-    subItens: [
-      { label: "Inferior", type: "checkbox", initialValue: false },
-      { label: "Superior", type: "checkbox", initialValue: false }
-    ]
-  },
-  { nome: "Válvulas escape", temQuantidade: false, subItens: [{ label: "Quantidade", type: "text", initialValue: "" }] },
-  { nome: "Válvulas admissão", temQuantidade: false, subItens: [{ label: "Quantidade", type: "text", initialValue: "" }] },
-  { nome: "Velas", temQuantidade: false },
-  { nome: "Anti Chamas", temQuantidade: false },
-  { nome: "Silicone", temQuantidade: false },
-  { nome: "Parafusos cabeçote", temQuantidade: false },
-  { nome: "Bobina", temQuantidade: false },
-  { nome: "Tuchos", temQuantidade: false },
-  { nome: "Cebolinha de óleo", temQuantidade: false },
-  { nome: "Sensor de temperatura", temQuantidade: false },
-  { nome: "Cabo de vela", temQuantidade: false },
-  { nome: "Biela", temQuantidade: false },
-  { nome: "Embreagem", temQuantidade: false },
-  { nome: "Desengripante e Limpa contato", temQuantidade: false },
-  { nome: "Outros", temQuantidade: false, subItens: [{ label:"", type: "text", initialValue: "" }] },
-].sort((a, b) => a.nome.localeCompare(b.nome));
-
-const servicosMotorCompletoData = [
-  {
-    nome: "Bloco",
-    temQuantidade: false,
-    subItens: [
-      { label: "Usinagem completa", type: "checkbox", initialValue: false },
-      { label: "Limpeza e Revisão", type: "checkbox", initialValue: false }
-    ]
-  },
-  {
-    nome: "Cabeçote",
-    temQuantidade: false,
-    subItens: [
-      { label: "Usinagem completa", type: "checkbox", initialValue: false },
-      { label: "Limpeza e Revisão", type: "checkbox", initialValue: false },
-      { label: "Novo", type: "checkbox", initialValue: false },
-      { label: "Recuperação altura", type: "checkbox", initialValue: false }
-    ]
-  },
-  {
-    nome: "Bielas",
-    temQuantidade: false,
-    subItens: [
-      { label: "Usinagem completa", type: "checkbox", initialValue: false },
-      { label: "Nova", type: "checkbox", initialValue: false }
-    ]
-  },
-  {
-    nome: "Virabrequim",
-    temQuantidade: false,
-    subItens: [
-      { label: "Usinagem completa", type: "checkbox", initialValue: false },
-      { label: "Novo", type: "checkbox", initialValue: false }
-    ]
-  },
-  { nome: "Montagem de Motor Técnica", temQuantidade: false },
-  { nome: "Volante Usinagem completa", temQuantidade: false },
-  { nome: "Banho (cárter, suportes, parafusos etc)", temQuantidade: false },
-].sort((a, b) => a.nome.localeCompare(b.nome));
+import { dadosOrcamento } from '../components/dadosOrcamento';
 
 const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessageBox, message, isErrorMessage }) => {
+  const itensMotorCompletoData = dadosOrcamento.motorCompleto.itens;
+  const servicosMotorCompletoData = dadosOrcamento.motorCompleto.servicos;
+
   const [formData, setFormData] = useState({
     nome: '',
     telefone: '',
@@ -152,7 +44,8 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
         ? parsedDate.toISOString().slice(0, 10)
         : new Date().toISOString().slice(0, 10);
 
-      setFormData({
+      setFormData(prev => ({
+        ...prev,
         nome: editingData.cliente || '',
         telefone: editingData.telefone || '',
         veiculo: editingData.veiculo || '',
@@ -168,9 +61,13 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
         status: editingData.status || 'Aberto',
         pecas: itensMotorCompletoData.map(pecaData => {
           const pecaEdit = editingData.pecasSelecionadas.find(p => p.includes(pecaData.nome));
+          const quantidadeMatch = pecaEdit ? pecaEdit.match(/::\s*(\d+)/) : null;
+          const quantidade = quantidadeMatch ? parseInt(quantidadeMatch[1], 10) : (pecaData.temQuantidade ? 1 : 0);
+
           return {
             ...pecaData,
             selecionado: !!pecaEdit,
+            quantidade: quantidade,
             subItens: pecaData.subItens ? pecaData.subItens.map(sub => ({
               ...sub,
               value: !!pecaEdit && pecaEdit.includes(sub.label) ? true : sub.initialValue
@@ -178,49 +75,23 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
           };
         }),
         servicos: servicosMotorCompletoData.map(servicoData => {
-          const servicoEdit = editingData.servicosSelecionados.find(s => s.includes(servicoData.nome));
+          const servicoEdit = editingData.servicosSelecionadas.find(s => s.includes(servicoData.nome));
+          const quantidadeMatch = servicoEdit ? servicoEdit.match(/::\s*(\d+)/) : null;
+          const quantidade = quantidadeMatch ? parseInt(quantidadeMatch[1], 10) : (servicoData.temQuantidade ? 1 : 0);
+
           return {
             ...servicoData,
             selecionado: !!servicoEdit,
+            quantidade: quantidade,
             subItens: servicoData.subItens ? servicoData.subItens.map(sub => ({
               ...sub,
               value: !!servicoEdit && servicoEdit.includes(sub.label) ? true : sub.initialValue
             })) : []
           };
         }),
-      });
-    } else {
-      setFormData({
-        nome: '',
-        telefone: '',
-        veiculo: '',
-        placa: '',
-        data: new Date().toISOString().slice(0, 10),
-        ordemServico: '',
-        pecas: itensMotorCompletoData.map(item => ({
-          ...item,
-          selecionado: false,
-          quantidade: item.temQuantidade ? 1 : 0,
-          medida: 0,
-          subItens: item.subItens ? item.subItens.map(sub => ({ ...sub, value: sub.initialValue || (sub.type === "checkbox" ? false : '') })) : [],
-        })),
-        servicos: servicosMotorCompletoData.map(servico => ({
-          ...servico,
-          selecionado: false,
-          quantidade: servico.temQuantidade ? 1 : 0,
-          medida: 0,
-          subItens: servico.subItens ? servico.subItens.map(sub => ({ ...sub, value: sub.initialValue || (sub.type === "checkbox" ? false : '') })) : [],
-        })),
-        totalPecasManual: 0,
-        totalServicosManual: 0,
-        totalMaoDeObraManual: 0,
-        totalGeralManual: 0,
-        formaPagamento: '',
-        observacoes: '',
-        status: 'Aberto',
-      });
+      }));
     }
-  }, [editingData]);
+  }, [editingData, itensMotorCompletoData, servicosMotorCompletoData]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -271,63 +142,35 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
       return;
     }
 
-    // Filtra e formata as peças selecionadas
     const pecasSelecionadasFormatadas = formData.pecas
-      .filter(peca => peca.selecionado)
+      .filter(p => p.selecionado)
       .map(peca => {
         let nomeCompleto = peca.nome;
-        if (peca.temQuantidade && peca.quantidade > 0) {
-          nomeCompleto += `: : ${peca.quantidade}`;
-        }
-        if (peca.temQuantidade && peca.medida > 0) {
-          nomeCompleto += ` Medida: ${peca.medida}`;
-        }
+        if (peca.temQuantidade && peca.quantidade > 0) nomeCompleto += `:: ${peca.quantidade}`;
+        if (peca.temQuantidade && peca.medida > 0) nomeCompleto += ` Medida: ${peca.medida}`;
         const subItensFormatados = peca.subItens
           .filter(sub => (sub.type === "checkbox" && sub.value) || (sub.type === "text" && sub.value))
-          .map(sub => {
-            if (sub.type === "checkbox") {
-              return sub.label;
-            } else {
-              return `${sub.label}: ${sub.value}`;
-            }
-          })
+          .map(sub => sub.type === "checkbox" ? sub.label : `${sub.label}: ${sub.value}`)
           .join('; ');
-
-        if (subItensFormatados) {
-          nomeCompleto += ` (${subItensFormatados})`;
-        }
+        if (subItensFormatados) nomeCompleto += ` (${subItensFormatados})`;
         return nomeCompleto;
       });
 
-    // Filtra e formata os serviços selecionados
     const servicosSelecionadasFormatadas = formData.servicos
-      .filter(servico => servico.selecionado)
+      .filter(s => s.selecionado)
       .map(servico => {
         let nomeCompleto = servico.nome;
-        if (servico.temQuantidade && servico.quantidade > 0) {
-          nomeCompleto += `: : ${servico.quantidade}`;
-        }
-        if (servico.temQuantidade && servico.medida > 0) {
-          nomeCompleto += ` Medida: ${servico.medida}`;
-        }
+        if (servico.temQuantidade && servico.quantidade > 0) nomeCompleto += `:: ${servico.quantidade}`;
+        if (servico.temQuantidade && servico.medida > 0) nomeCompleto += ` Medida: ${servico.medida}`;
         const subItensFormatados = servico.subItens
           .filter(sub => (sub.type === "checkbox" && sub.value) || (sub.type === "text" && sub.value))
-          .map(sub => {
-            if (sub.type === "checkbox") {
-              return sub.label;
-            } else {
-              return `${sub.label}: ${sub.value}`;
-            }
-          })
+          .map(sub => sub.type === "checkbox" ? sub.label : `${sub.label}: ${sub.value}`)
           .join('; ');
-
-        if (subItensFormatados) {
-          nomeCompleto += ` (${subItensFormatados})`;
-        }
+        if (subItensFormatados) nomeCompleto += ` (${subItensFormatados})`;
         return nomeCompleto;
       });
 
-    const orcamentoFinal = {
+    onSubmit({
       cliente: formData.nome,
       telefone: formData.telefone,
       veiculo: formData.veiculo,
@@ -343,17 +186,19 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
       formaPagamento: formData.formaPagamento,
       observacoes: formData.observacoes,
       status: formData.status,
-    };
+    });
+  };
 
-    onSubmit(orcamentoFinal);
+  const gerarOpcoesQuantidade = () => {
+    const opcoes = [];
+    for (let i = 1; i <= 100; i++) opcoes.push(<option key={i} value={i}>{i}</option>);
+    return opcoes;
   };
 
   return (
-    <div className="orcamento-form-container">
       <div className="form-header">
         <h1>ORÇAMENTO - MOTOR COMPLETO/PARCIAL</h1>
-      </div>
-
+        
       <form onSubmit={handleSubmit}>
         {/* Informações do Cliente e Veículo */}
         <section className="client-vehicle-section">
@@ -422,8 +267,8 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
                       {peca.nome}
                     </label>
                   </td>
-                  <td className="subitems-cell" colSpan="2">
-                    {peca.selecionado && peca.subItens && (
+                  <td className="subitems-cell">
+                    {peca.selecionado && peca.subItens && peca.subItens.length > 0 && (
                       <div className="sub-items-container">
                         {peca.subItens.map((sub, sIdx) => (
                           <div key={sIdx} className="sub-item-input-group">
@@ -451,6 +296,21 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
                           </div>
                         ))}
                       </div>
+                    )}
+                  </td>
+                  <td className="quantidade-cell">
+                    {peca.selecionado && peca.temQuantidade && (
+                      <>
+                        <label className="quantidade-label">Qtd:</label>
+                        <select
+                          name="quantidade"
+                          value={peca.quantidade}
+                          onChange={(e) => handlePecaChange(index, 'quantidade', parseInt(e.target.value))}
+                          className="quantidade-select"
+                        >
+                          {gerarOpcoesQuantidade()}
+                        </select>
+                      </>
                     )}
                   </td>
                 </tr>
@@ -489,8 +349,8 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
                       {servico.nome}
                     </label>
                   </td>
-                  <td className="subitems-cell" colSpan="2">
-                    {servico.selecionado && servico.subItens && (
+                  <td className="subitems-cell">
+                    {servico.selecionado && servico.subItens && servico.subItens.length > 0 && (
                       <div className="sub-items-container">
                         {servico.subItens.map((sub, sIdx) => (
                           <div key={sIdx} className="sub-item-input-group">
@@ -518,6 +378,21 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
                           </div>
                         ))}
                       </div>
+                    )}
+                  </td>
+                  <td className="quantidade-cell">
+                    {servico.selecionado && servico.temQuantidade && (
+                      <>
+                        <label className="quantidade-label">Qtd:</label>
+                        <select
+                          name="quantidade"
+                          value={servico.quantidade}
+                          onChange={(e) => handleServicoChange(index, 'quantidade', parseInt(e.target.value))}
+                          className="quantidade-select"
+                        >
+                          {gerarOpcoesQuantidade()}
+                        </select>
+                      </>
                     )}
                   </td>
                 </tr>
@@ -581,12 +456,10 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
         </div>
       </form>
 
-      {/* Caixa de Mensagem */}
       {message && (
         <div className="message-box-overlay" onClick={hideMessageBox}>
-          <div className={`message-box ${isErrorMessage ? 'error' : 'success'}`} onClick={(e) => e.stopPropagation()}>
-            <p>{message}</p>
-            <button onClick={hideMessageBox}>OK</button>
+          <div className={`message-box ${isErrorMessage ? 'error' : 'success'}`}>
+            {message}
           </div>
         </div>
       )}
