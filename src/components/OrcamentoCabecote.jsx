@@ -297,6 +297,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessage, hideMessageBox,
               value={formData.totalPecasManual}
               onChange={handleManualTotalChange}
               step="0.01"
+              className="input-total"
             />
           </div>
         </section>
@@ -371,12 +372,13 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessage, hideMessageBox,
               value={formData.totalServicosManual}
               onChange={handleManualTotalChange}
               step="0.01"
+              className="input-total"
             />
           </div>
         </section>
 
         {/* Totais, Pagamento e Observações */}
-        <section className="summary-section">
+<section className="summary-section">
           <div className="total-line-form">
             <span className="label">Valor total de Mão de Obra Mecânica:</span>
             <input
@@ -385,8 +387,10 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessage, hideMessageBox,
               value={formData.totalMaoDeObraManual}
               onChange={handleManualTotalChange}
               step="0.01"
+              className="input-total"
             />
           </div>
+
           <div className="total-line-form total-geral">
             <span className="label">TOTAL GERAL:</span>
             <input
@@ -395,22 +399,20 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessage, hideMessageBox,
               value={formData.totalGeralManual}
               onChange={handleManualTotalChange}
               step="0.01"
+              className="input-total-geral"
             />
           </div>
+
           <div className="form-group">
             <label>Forma de pagamento:</label>
-            <input
-              type="text"
-              name="formaPagamento"
-              value={formData.formaPagamento}
-              onChange={handleInputChange}
-              placeholder="Pix, Débito e Crédito em até xx vezes sem juros"
-            />
+            <input type="text" name="formaPagamento" value={formData.formaPagamento} onChange={handleInputChange} placeholder="Pix, Débito e Crédito em até xx vezes sem juros" />
           </div>
+          
           <div className="form-group">
             <label>Observações:</label>
             <textarea name="observacoes" value={formData.observacoes} onChange={handleInputChange} rows="3" />
           </div>
+          
           <div className="form-group">
             <label>Status:</label>
             <select name="status" value={formData.status} onChange={handleInputChange}>
@@ -422,20 +424,19 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessage, hideMessageBox,
           </div>
         </section>
 
-        {/* Mensagem */}
-        {message && (
-          <div className="message-box-overlay" onClick={hideMessageBox}>
-            <div className={`message-box ${isErrorMessage ? 'error' : 'success'}`} onClick={e => e.stopPropagation()}>
-              <p>{message}</p>
-              <button onClick={hideMessageBox}>OK</button>
-            </div>
-          </div>
-        )}
-
-        <button type="submit" className="action-btn">
-          {editingData ? 'Atualizar Orçamento' : 'Salvar Orçamento'}
-        </button>
+        {/* Ações */}
+        <div className="form-actions">
+          <button type="submit" className="action-btn">Salvar Orçamento</button>
+        </div>
       </form>
+
+      {message && (
+        <div className="message-box-overlay" onClick={hideMessageBox}>
+          <div className={`message-box ${isErrorMessage ? 'error' : 'success'}`}>
+            {message}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -443,10 +443,20 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
             <label>Forma de pagamento:</label>
             <input type="text" name="formaPagamento" value={formData.formaPagamento} onChange={handleInputChange} placeholder="Pix, Débito e Crédito em até xx vezes sem juros" />
           </div>
-
+          
           <div className="form-group">
             <label>Observações:</label>
-            <textarea name="observacoes" value={formData.observacoes} onChange={handleInputChange} rows="4"></textarea>
+            <textarea name="observacoes" value={formData.observacoes} onChange={handleInputChange} rows="3" />
+          </div>
+          
+          <div className="form-group">
+            <label>Status:</label>
+            <select name="status" value={formData.status} onChange={handleInputChange}>
+              <option value="Aberto">Aberto</option>
+              <option value="Aprovado">Aprovado</option>
+              <option value="Rejeitado">Rejeitado</option>
+              <option value="Concluido">Concluido</option>
+            </select>
           </div>
         </section>
 
