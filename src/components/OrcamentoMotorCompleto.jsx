@@ -35,6 +35,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
     formaPagamento: '',
     observacoes: '',
     status: 'Aberto',
+    imagens: [],
   });
 
   useEffect(() => {
@@ -135,6 +136,14 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
     setFormData(prev => ({ ...prev, [name]: parseFloat(value) || 0 }));
   };
 
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    setFormData(prev => ({
+      ...prev,
+      imagens: [...prev.imagens, ...files],
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.nome) {
@@ -196,9 +205,9 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
   };
 
   return (
-      <div className="form-header">
+      <div className="client-vehicle-section">
         <h1>ORÇAMENTO - MOTOR COMPLETO/PARCIAL</h1>
-        
+
       <form onSubmit={handleSubmit}>
         {/* Informações do Cliente e Veículo */}
         <section className="client-vehicle-section">
@@ -299,7 +308,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
                     )}
                   </td>
                   <td className="quantidade-cell">
-                    {peca.selecionado && peca.temQuantidade && (
+                    {peca.selecionado && peca.temQuantidade ? (
                       <>
                         <label className="quantidade-label">Qtd:</label>
                         <select
@@ -311,7 +320,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
                           {gerarOpcoesQuantidade()}
                         </select>
                       </>
-                    )}
+                    ) : null}
                   </td>
                 </tr>
               ))}
@@ -333,7 +342,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
 
         {/* Serviços */}
         <section className="section-form">
-          <h2>Serviços</h2>
+          <h2>Serviços Retífica</h2>
           <table className="items-table">
             <tbody>
               {formData.servicos.map((servico, index) => (
@@ -443,12 +452,12 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
             <label>Forma de pagamento:</label>
             <input type="text" name="formaPagamento" value={formData.formaPagamento} onChange={handleInputChange} placeholder="Pix, Débito e Crédito em até xx vezes sem juros" />
           </div>
-          
+
           <div className="form-group">
             <label>Observações:</label>
             <textarea name="observacoes" value={formData.observacoes} onChange={handleInputChange} rows="3" />
           </div>
-          
+
           <div className="form-group">
             <label>Status:</label>
             <select name="status" value={formData.status} onChange={handleInputChange}>
@@ -457,6 +466,27 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
               <option value="Rejeitado">Rejeitado</option>
               <option value="Concluido">Concluido</option>
             </select>
+          </div>
+
+          <div className="form-group">
+            <label>Fotos do serviço:</label>
+            <input
+              type="file"
+              accept="image/*"
+              capture="environment"
+              multiple
+              onChange={handleImageChange}
+            />
+            <div className="preview-imagens">
+              {formData.imagens && formData.imagens.map((img, idx) => (
+                <img
+                  key={idx}
+                  src={typeof img === 'string' ? img : URL.createObjectURL(img)}
+                  alt={`Foto ${idx + 1}`}
+                  style={{ maxWidth: 120, margin: 4, borderRadius: 8 }}
+                />
+              ))}
+            </div>
           </div>
         </section>
 

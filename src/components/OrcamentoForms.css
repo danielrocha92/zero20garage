@@ -110,7 +110,6 @@
 .main-form-content {
     display: grid;
     gap: 20px;
-    /* Por padrão, mobile first, as colunas se empilham */
     grid-template-columns: 1fr;
 }
 
@@ -123,9 +122,17 @@
     margin-bottom: 20px;
 }
 
+.client-vehicle-section h1, .section-form h1 {
+    font-family: var(--font-primary);
+    font-size: 1.2em;
+    color: var(--color-brand-red);
+    border-bottom: 2px solid var(--color-brand-red);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
 .client-vehicle-section h2, .section-form h2 {
     font-family: var(--font-primary);
-    font-size: 1.4em;
+    font-size: 1em;
     color: var(--color-brand-red);
     border-bottom: 2px solid var(--color-brand-red);
     padding-bottom: 8px;
@@ -138,13 +145,15 @@
     border-collapse: collapse;
 }
 
+/* Na visão mobile, as células da tabela devem ser dispostas em coluna. */
+.form-table tr {
+    display: flex;
+    flex-direction: column;
+}
+
 .form-table td {
     padding: 4px 0;
     width: 100%;
-}
-
-.form-table tr {
-    display: flex;
 }
 
 .form-group {
@@ -206,12 +215,14 @@
     margin-top: 25px;
 }
 
-/* O layout de duas colunas é aplicado à tabela de itens para mobile e desktop */
+/* * Layout para telas de celular (padrão mobile-first)
+ * A tabela de itens aparece em uma única coluna.
+ */
 .items-table {
     width: 100%;
     border-collapse: collapse;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 20px;
 }
 
@@ -645,7 +656,7 @@
         max-width: 150px;
     }
 
-    /* Layout principal de duas colunas */
+    /* Layout principal de duas colunas para desktop */
     .main-form-content {
         grid-template-columns: 1fr 1fr;
     }
@@ -655,8 +666,29 @@
         margin-bottom: 30px;
     }
 
+    .client-vehicle-section h1, .section-form h1 {
+        font-size: 1.4em;
+    }
+
     .client-vehicle-section h2, .section-form h2 {
-        font-size: 1.8em;
+        font-size: 1.2em;
+    }
+
+    /* CORREÇÃO APLICADA AQUI: Restaura o layout de duas colunas para o formulário de cliente e veículo */
+    .form-table tr {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .form-table td {
+        padding: 4px 0;
+        width: 50%; /* Define largura para layout de duas colunas */
+    }
+
+    /* Tabela de itens em duas colunas para telas maiores. */
+    .items-table {
+        grid-template-columns: 1fr 1fr;
     }
 
     .items-table tr.parent-item-row {
@@ -690,4 +722,54 @@
         justify-content: flex-end;
         gap: 20px;
     }
+}
+
+/* Adicione ao seu arquivo de estilos do orçamento */
+.item-list-impresso li,
+.item-list li,
+.peca-item, /* caso use divs para cada item */
+.servico-item {
+  margin-bottom: 18px; /* ajuste conforme preferir */
+  padding-bottom: 8px;
+  border-bottom: 1px solid #333; /* opcional: linha discreta para separar */
+}
+
+.quantidade-label {
+    font-size: 0.9em;
+    color: var(--color-form-text);
+    margin-right: 10px;
+}
+.quantidade-select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    background-color: var(--color-input-bg);
+    color: var(--color-input-text);
+    border: 1px solid var(--color-input-border);
+    border-radius: 20px;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e0e0e0'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    cursor: pointer;
+}
+
+/* Se quiser ainda mais destaque, pode adicionar um espaçamento maior */
+
+/* Espaçamento visual entre itens da tabela de peças e serviços */
+.items-table tr.parent-item-row,
+.items-table tr {
+  margin-bottom: 24px !important;
+  padding-bottom: 16px !important;
+  border-bottom: 1.5px dashed #444 !important;
+}
+
+.items-table tr:last-child {
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }

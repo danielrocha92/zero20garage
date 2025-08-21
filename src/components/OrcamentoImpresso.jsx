@@ -352,6 +352,20 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
             </p>
           </div>
         </section>
+
+        <section className="imagens-section">
+          <h2>Imagens do Veículo</h2>
+          <div className="imagens-container">
+            {orcamento.imagens && orcamento.imagens.map((img, idx) => (
+              <img
+                key={idx}
+                src={typeof img === 'string' ? img : URL.createObjectURL(img)}
+                alt={`Foto ${idx + 1}`}
+                style={{ maxWidth: 120, margin: 4, borderRadius: 8 }}
+              />
+            ))}
+          </div>
+        </section>
       </div>
 
       <div className="print-buttons">

@@ -35,6 +35,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessage, hideMessageBox,
     formaPagamento: '',
     observacoes: '',
     status: 'Aberto',
+    imagens: [],
   });
 
   useEffect(() => {
@@ -90,6 +91,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessage, hideMessageBox,
           })) : []
         };
       }),
+      imagens: editingData.imagens || [],
     }));
   }, [editingData, itensCabecoteData, servicosCabecoteData]);
 
@@ -173,8 +175,16 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessage, hideMessageBox,
     onSubmit({ ...formData, pecasSelecionadas, servicosSelecionados });
   };
 
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    setFormData(prev => ({
+      ...prev,
+      imagens: [...prev.imagens, ...files]
+    }));
+  };
+
   return (
-    <div className="form-header">
+    <div className="client-vehicle-section">
       <h1>ORÇAMENTO - CABEÇOTE</h1>
 
       <form onSubmit={handleSubmit}>
@@ -304,7 +314,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessage, hideMessageBox,
 
         {/* Serviços */}
         <section className="section-form">
-          <h2>Serviços no Cabeçote - Retifica</h2>
+          <h2>Serviços Retífica</h2>
           <table className="items-table">
             <tbody>
               {formData.servicos.map((servico, index) => (
@@ -378,7 +388,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessage, hideMessageBox,
         </section>
 
         {/* Totais, Pagamento e Observações */}
-<section className="summary-section">
+        <section className="summary-section">
           <div className="total-line-form">
             <span className="label">Valor total de Mão de Obra Mecânica:</span>
             <input
@@ -407,12 +417,12 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessage, hideMessageBox,
             <label>Forma de pagamento:</label>
             <input type="text" name="formaPagamento" value={formData.formaPagamento} onChange={handleInputChange} placeholder="Pix, Débito e Crédito em até xx vezes sem juros" />
           </div>
-          
+
           <div className="form-group">
             <label>Observações:</label>
             <textarea name="observacoes" value={formData.observacoes} onChange={handleInputChange} rows="3" />
           </div>
-          
+
           <div className="form-group">
             <label>Status:</label>
             <select name="status" value={formData.status} onChange={handleInputChange}>
@@ -421,6 +431,27 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessage, hideMessageBox,
               <option value="Rejeitado">Rejeitado</option>
               <option value="Concluido">Concluido</option>
             </select>
+          </div>
+
+          <div className="form-group">
+            <label>Fotos do serviço:</label>
+            <input
+              type="file"
+              accept="image/*"
+              capture="environment"
+              multiple
+              onChange={handleImageChange}
+            />
+            <div className="preview-imagens">
+              {formData.imagens && formData.imagens.map((img, idx) => (
+                <img
+                  key={idx}
+                  src={typeof img === 'string' ? img : URL.createObjectURL(img)}
+                  alt={`Foto ${idx + 1}`}
+                  style={{ maxWidth: 120, margin: 4, borderRadius: 8 }}
+                />
+              ))}
+            </div>
           </div>
         </section>
 
