@@ -106,6 +106,15 @@
     margin-top: 2rem;
 }
 
+/* Novo container para o layout de duas colunas */
+.main-form-content {
+    display: grid;
+    gap: 20px;
+    /* Por padrão, mobile first, as colunas se empilham */
+    grid-template-columns: 1fr;
+}
+
+/* Seções do formulário (agora filhos do novo container) */
 .client-vehicle-section, .section-form, .summary-section {
     padding: 1rem;
     background-color: var(--color-form-group-bg);
@@ -131,8 +140,11 @@
 
 .form-table td {
     padding: 4px 0;
-    display: block;
     width: 100%;
+}
+
+.form-table tr {
+    display: flex;
 }
 
 .form-group {
@@ -194,14 +206,16 @@
     margin-top: 25px;
 }
 
+/* O layout de duas colunas é aplicado à tabela de itens para mobile e desktop */
 .items-table {
     width: 100%;
     border-collapse: collapse;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
-/* ========================================= */
-/* ===== Itens e Sub-itens com Separadores ===== */
-/* ========================================= */
+/* Ajusta o espaçamento interno de cada item */
 .items-table tr.parent-item-row {
     display: flex;
     flex-direction: column;
@@ -219,6 +233,7 @@
     padding-bottom: 0;
 }
 
+/* Remove a exibição de bloco para as células da tabela de itens */
 .items-table td {
     padding: 5px 0;
     display: flex;
@@ -457,7 +472,7 @@
 .submit-button:active,
 .form-buttons .action-btn:active {
     transform: translateY(0);
-    box-shadow: 0 2px 5px var(--shadow-light);
+    box-shadow: 2px 5px var(--shadow-light);
 }
 
 .base-btn:focus-visible,
@@ -608,16 +623,31 @@
         width: 90%;
     }
 
+    .form-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+    }
+
     .form-header h1 {
         font-size: 2.2em;
+        margin: 0;
     }
 
     .form-header p {
         font-size: 1.1em;
+        margin-top: 5px;
+        opacity: 0.9;
     }
 
     .header-logo {
         max-width: 150px;
+    }
+
+    /* Layout principal de duas colunas */
+    .main-form-content {
+        grid-template-columns: 1fr 1fr;
     }
 
     .client-vehicle-section, .section-form, .summary-section {
@@ -634,6 +664,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 15px 10px;
+        gap: 20px;
     }
 
     .sub-items-container {
@@ -646,6 +677,12 @@
 
     .sub-item-input-group {
         flex: 1 1 calc(50% - 10px);
+        justify-content: space-between;
+    }
+
+    .sub-item-input-group input[type="text"],
+    .sub-item-input-group input[type="number"] {
+        max-width: 150px;
     }
 
     .form-buttons {
