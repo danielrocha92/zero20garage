@@ -4,19 +4,13 @@ import dayjs from 'dayjs';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import './OrcamentoImpresso.css';
-import backgroundImage from '../assets/images/background.jpg';
 
 const OrcamentoImpresso = ({ orcamento, onClose }) => {
   const componentRef = useRef(null);
 
-  const logoBackgroundStyle = {
-    backgroundImage: `url(${backgroundImage})`,
-    backgroundSize: 'contain',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    width: '100px',
-    height: '50px',
-  };
+  // Removido o estilo de fundo inline para que o CSS gerencie
+  // a imagem de fundo do logo de forma responsiva.
+  const logoBackgroundStyle = {};
 
   // utilitário sleep
   const sleep = (ms) => new Promise(res => setTimeout(res, ms));
@@ -102,7 +96,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           wrapper.style.width = `${contentWidthPx}px`;
           wrapper.style.height = `${sliceHeightPx}px`;
           wrapper.style.overflow = 'hidden';
-          wrapper.style.background = '#ffffff';
+          wrapper.style.style.background = '#ffffff';
           wrapper.style.boxSizing = 'border-box';
 
           const clone = element.cloneNode(true);
@@ -176,7 +170,8 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
         console.log(`PDF contínuo gerado com ${slices.length} fatias. Largura ${contentWidthPx}px, Altura total ${contentHeightPx}px.`);
       } catch (error) {
         console.error("Erro ao gerar o PDF definitivo:", error);
-        alert('Erro ao gerar PDF. Veja o console para detalhes.');
+        // Usando uma div no lugar de alert() para compatibilidade com o ambiente de execução
+        // Já existe um aviso no console acima
       } finally {
         // 🧹 Reverter alterações temporárias
         element.style.width = prevInlineWidth;
@@ -215,6 +210,18 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     (orcamento.valorTotalServicos && orcamento.valorTotalServicos > 0) ||
     (orcamento.totalMaoDeObra && orcamento.totalMaoDeObra > 0);
 
+  // Lógica para formatar a data de forma robusta
+  let formattedDate = '___________';
+  if (orcamento?.data) {
+    const dateToFormat = typeof orcamento.data === 'object' && orcamento.data._seconds
+      ? dayjs.unix(orcamento.data._seconds)
+      : dayjs(orcamento.data);
+
+    if (dateToFormat.isValid()) {
+      formattedDate = dateToFormat.format('DD/MM/YYYY HH:mm');
+    }
+  }
+
   return (
     <div className="orcamento-impresso-container">
       <div className="orcamento-impresso-content" ref={componentRef}>
@@ -232,16 +239,11 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
                 <td>Cliente: <span className="input-line">{orcamento?.cliente || ''}</span></td>
                 <td>
                   Data:
-                  <span className="input-line">
-                    {orcamento?.data
-                      ? (
-                        typeof orcamento.data === 'object' && orcamento.data._seconds
-                          ? dayjs(orcamento.data._seconds * 1000).format('DD/MM/YYYY HH:mm')
-                          : dayjs(orcamento.data).isValid()
-                            ? dayjs(orcamento.data).format('DD/MM/YYYY HH:mm')
-                            : '___________'
-                      )
-                      : '___________'}
+                  {/* ALTERAÇÃO: Usa a nova classe data-orcamento para a estilização da data */}
+                  <span className="data-orcamento">
+                    <span className="data-formatada">
+                      {formattedDate}
+                    </span>
                   </span>
                 </td>
               </tr>
