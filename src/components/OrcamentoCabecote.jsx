@@ -143,7 +143,7 @@ const OrcamentoCabecote = ({ onSubmit, editingData, showMessage, hideMessageBox,
     return opcoes;
   };
 
-  const handleSubmit = e => {
+    const handleSubmit = (e) => {
     e.preventDefault();
 
     const pecasSelecionadas = formData.pecas

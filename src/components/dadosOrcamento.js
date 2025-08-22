@@ -9,6 +9,7 @@ export const itensCabecoteData = [
   { nome: "Bobina", temQuantidade: false },
   { nome: "Bomba d'água", temQuantidade: false },
   { nome: "Cabo de vela", temQuantidade: false },
+  { nome: "Cebolinha de óleo", temQuantidade: false },
   {
     nome: "Comando de Válvula", temQuantidade: false,
     subItens: [
@@ -25,7 +26,6 @@ export const itensCabecoteData = [
       { label: "Dent kit", type: "checkbox", initialValue: false },
     ]
   },
-  { nome: "Cebolinha de óleo", temQuantidade: false },
   { nome: "Embreagem", temQuantidade: false },
   { nome: "Filtro de ar", temQuantidade: false },
   { nome: "Filtro de combustível", temQuantidade: false },
@@ -40,7 +40,6 @@ export const itensCabecoteData = [
       { label: "Superior", type: "checkbox", initialValue: false },
     ]
   },
-  { nome: "Outros", temQuantidade: false},
   { nome: "Parafusos cabeçote", temQuantidade: false },
   { nome: "Retentor eixo comando", temQuantidade: false },
   { nome: "Retentor válvula", temQuantidade: false },
@@ -49,9 +48,9 @@ export const itensCabecoteData = [
   { nome: "Tubo d'água", temQuantidade: false },
   { nome: "Tuchos", temQuantidade: false },
   { nome: "Velas", temQuantidade: false },
+  { nome: "Válvulas admissão", temQuantidade: true, subItens: [{ label: "", type: "text", initialValue: "" }] },
+  { nome: "Válvulas escape", temQuantidade: true, subItens: [{ label: "", type: "text", initialValue: "" }] },
   { nome: "Válvula termostática", temQuantidade: false },
-  { nome: "Válvulas admissão", temQuantidade: false },
-  { nome: "Válvulas escape", temQuantidade: false },
 ].sort((a, b) => a.nome.localeCompare(b.nome));
 
 export const servicosCabecoteData = [
@@ -59,26 +58,33 @@ export const servicosCabecoteData = [
   { nome: "Novo", temQuantidade: false },
   { nome: "Recuperação de Altura", temQuantidade: false },
   { nome: "Usinagem Completa", temQuantidade: false },
+  { nome: "Outros", temQuantidade: false, subItens: [{ label: "", type: "text", initialValue: "" }] },
 ].sort((a, b) => a.nome.localeCompare(b.nome));
 
 // ================================
-// Dados do Orcamento Motor Completo
+// Dados de Peças Motor Completo
 // ================================
 export const itensMotorCompletoData = [
-  { nome: "Anel", temQuantidade: false },
+  { nome: "Anel", temQuantidade: false, subItens: [{ label: "", type: "text", initialValue: "" }]  },
   { nome: "Anti Chamas", temQuantidade: false },
+  { nome: "Arruela de encosto", temQuantidade: false, subItens: [{ label: "", type: "text", initialValue: "" }] },
   { nome: "Balancinhos", temQuantidade: false },
   { nome: "Bico Injetor", temQuantidade: true },
   { nome: "Biela", temQuantidade: true },
-  { nome: "Bloco do Motor", temQuantidade: false },
   { nome: "Bomba d'água", temQuantidade: false },
   { nome: "Bomba de óleo", temQuantidade: false },
   { nome: "Bobina", temQuantidade: true },
-  { nome: "Bronzina de biela", temQuantidade: false },
-  { nome: "Bronzina de mancal", temQuantidade: false },
-  { nome: "Cabeçote", temQuantidade: false },
-  { nome: "Carter", temQuantidade: false },
-  { nome: "Comando de válvula", temQuantidade: false },
+  { nome: "Bronzina de biela", temQuantidade: false, subItens: [{ label: "", type: "text", initialValue: "" }]  },
+  { nome: "Bronzina de mancal", temQuantidade: false, subItens: [{ label: "", type: "text", initialValue: "" }]  },
+  { nome: "Cabo de vela", temQuantidade: false },
+  { nome: "Cebolinha de óleo", temQuantidade: false },
+  {
+    nome: "Comando de Válvula", temQuantidade: false,
+    subItens: [
+      { label: "Admin", type: "checkbox", initialValue: false },
+      { label: "Escape", type: "checkbox", initialValue: false },
+    ]
+  },
   {
     nome: "Correias", temQuantidade: false, subItens: [
       { label: "Acessórios kit", type: "checkbox", initialValue: false },
@@ -87,6 +93,9 @@ export const itensMotorCompletoData = [
       { label: "Dent kit", type: "checkbox", initialValue: false },
     ]
   },
+  { nome: "Desengripante e Limpa contato ", temQuantidade: false },
+  { nome: "Embreagem", temQuantidade: false },
+  { nome: "Engrenagem virabrequim", temQuantidade: false },
   { nome: "Escoras", temQuantidade: false },
   { nome: "Filtro de ar", temQuantidade: false },
   { nome: "Filtro de combustível", temQuantidade: false },
@@ -94,16 +103,31 @@ export const itensMotorCompletoData = [
   { nome: "Kit junta motor", temQuantidade: false },
   { nome: "Litros de aditivo", temQuantidade: true, subItens: [{ label: "", type: "text", initialValue: "" }] },
   { nome: "Litros de Óleo", temQuantidade: true, subItens: [{ label: "", type: "text", initialValue: "" }] },
-  { nome: "Pistão", temQuantidade: false },
+  {
+    nome: "Mangueiras Radiador:", temQuantidade: false, subItens: [
+      { label: "Inferior", type: "checkbox", initialValue: false },
+      { label: "Superior", type: "checkbox", initialValue: false },
+    ]
+  },
+  { nome: "Parafusos cabeçote", temQuantidade: false },
+  { nome: "Pistão", temQuantidade: true, subItens: [{ label: "", type: "text", initialValue: "" }] },
   { nome: "Retentor eixo comando", temQuantidade: false },
+  { nome: "Retentor traseiro virab.", temQuantidade: false },
   { nome: "Retentor válvula", temQuantidade: false },
+  { nome: "Sensor de temperatura", temQuantidade: false },
+  { nome: "Silicone", temQuantidade: false },
+  { nome: "Tubo d'água", temQuantidade: false },
   { nome: "Tucho", temQuantidade: false },
   { nome: "Velas", temQuantidade: false },
-  { nome: "Válvulas admissão", temQuantidade: false },
-  { nome: "Válvulas escape", temQuantidade: false },
-  { nome: "Virabrequim", temQuantidade: false },
+  { nome: "Válvulas admissão", temQuantidade: true, subItens: [{ label: "", type: "text", initialValue: "" }] },
+  { nome: "Válvulas escape", temQuantidade: true, subItens: [{ label: "", type: "text", initialValue: "" }] },
+  { nome: "Válvula termostática", temQuantidade: false },
   { nome: "Outros", temQuantidade: false, subItens: [{ label: "", type: "text", initialValue: "" }] },
 ].sort((a, b) => a.nome.localeCompare(b.nome));
+
+// ================================
+// Dados do Serviços Motor Completo
+// ================================
 
 export const servicosMotorCompletoData = [
   { nome: "Banho (cárter, suportes, parafusos etc)", temQuantidade: false },

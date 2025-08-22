@@ -136,14 +136,6 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
     setFormData(prev => ({ ...prev, [name]: parseFloat(value) || 0 }));
   };
 
-  const handleImageChange = (e) => {
-    const files = Array.from(e.target.files);
-    setFormData(prev => ({
-      ...prev,
-      imagens: [...prev.imagens, ...files],
-    }));
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.nome) {
@@ -179,7 +171,7 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
         return nomeCompleto;
       });
 
-    onSubmit({
+    const orcamentoFinal = {
       cliente: formData.nome,
       telefone: formData.telefone,
       veiculo: formData.veiculo,
@@ -195,13 +187,24 @@ const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessag
       formaPagamento: formData.formaPagamento,
       observacoes: formData.observacoes,
       status: formData.status,
-    });
+      imagens: formData.imagens,
+    };
+
+    onSubmit(orcamentoFinal);
   };
 
   const gerarOpcoesQuantidade = () => {
     const opcoes = [];
     for (let i = 1; i <= 100; i++) opcoes.push(<option key={i} value={i}>{i}</option>);
     return opcoes;
+  };
+
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    setFormData(prev => ({
+      ...prev,
+      imagens: [...prev.imagens, ...files],
+    }));
   };
 
   return (
