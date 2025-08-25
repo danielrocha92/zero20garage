@@ -5,19 +5,135 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import './OrcamentoImpresso.css';
 
+// importe o arquivo do logo (ajuste o caminho conforme sua estrutura)
+import logo from '../assets/images/background.jpg';
+
 const OrcamentoImpresso = ({ orcamento, onClose }) => {
   const componentRef = useRef(null);
 
-  // Removido o estilo de fundo inline para que o CSS gerencie
-  // a imagem de fundo do logo de forma responsiva.
-  const logoBackgroundStyle = {};
-
   // utilitário sleep
-  const sleep = (ms) => new Promise(res => setTimeout(res, ms));
+  const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
+
+  // ---------- Utilitários para Cloudinary & Imagens ----------
+  const isCloudinaryUrl = (url) => typeof url === 'string' && url.includes('/upload/');
+
+  // cria uma miniatura eficiente para a UI (sem alterar o arquivo original)
+  const getCloudinaryThumb = (url) => {
+    if (!isCloudinaryUrl(url)) return url;
+    const base = url.split('/upload/')[0] + '/upload/';
+    const after = url.split('/upload/')[1] || '';
+    const [firstSeg, ...rest] = after.split('/');
+    // se já começar com versão (v123...), não tem transformações
+    if (/^v\d+$/i.test(firstSeg)) {
+      return base + 'w_240,c_limit,q_auto,f_auto/' + after;
+    }
+    // já tem transformações, prefixa as nossas
+    return base + 'w_240,c_limit,q_auto,f_auto,' + firstSeg + '/' + rest.join('/');
+  };
+
+  // retorna URL "original" (remove transformações entre /upload/ e /v123/ se houver)
+  const getCloudinaryOriginal = (url) => {
+    if (!isCloudinaryUrl(url)) return url;
+    const base = url.split('/upload/')[0] + '/upload/';
+    const after = url.split('/upload/')[1] || '';
+    const parts = after.split('/');
+    if (parts.length === 0) return url;
+    // se o primeiro segmento já é versão, está "original"
+    if (/^v\d+$/i.test(parts[0])) return url;
+    // remove o primeiro segmento (transformações) e mantém o restante
+    return base + parts.slice(1).join('/');
+  };
+
+  // carrega uma imagem (URL ou objectURL) e retorna um dataURL PNG "seguro" para o jsPDF
+  const toPngDataUrlFromSrc = async (src) => {
+    const img = await new Promise((resolve, reject) => {
+      const i = new Image();
+      i.crossOrigin = 'anonymous';
+      i.onload = () => resolve(i);
+      i.onerror = reject;
+      i.src = src;
+    });
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth || img.width;
+    canvas.height = img.naturalHeight || img.height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    return canvas.toDataURL('image/png');
+  };
+
+  // devolve dataURL PNG da imagem original (Cloudinary ou File)
+  const getOriginalImageAsDataUrl = async (img) => {
+    try {
+      if (typeof img === 'string') {
+        const originalUrl = getCloudinaryOriginal(img);
+        return await toPngDataUrlFromSrc(originalUrl);
+      }
+      if (img instanceof File || (img && img.type && img.size)) {
+        const objectUrl = URL.createObjectURL(img);
+        const dataUrl = await toPngDataUrlFromSrc(objectUrl);
+        URL.revokeObjectURL(objectUrl);
+        return dataUrl;
+      }
+    } catch (e) {
+      console.warn('Falha ao preparar imagem para PDF:', e);
+    }
+    return null;
+  };
+
+  // anexa páginas com as imagens originais em alta ao PDF
+  const appendOriginalImagesToPdf = async (pdf, imagens) => {
+    if (!imagens || imagens.length === 0) return;
+
+    // prepara todos os dataURLs primeiro (sequencialmente para reduzir pico de memória)
+    const dataUrls = [];
+    for (const it of imagens) {
+      const dataUrl = await getOriginalImageAsDataUrl(it);
+      if (dataUrl) dataUrls.push(dataUrl);
+    }
+    if (dataUrls.length === 0) return;
+
+    const pageW = pdf.internal.pageSize.getWidth();
+    const pageH = pdf.internal.pageSize.getHeight();
+    const margin = 10;
+
+    // primeira página de imagens
+    pdf.addPage();
+    pdf.setFontSize(14);
+    pdf.text('Imagens originais (alta resolução)', margin, margin + 2);
+
+    let first = true;
+    for (let idx = 0; idx < dataUrls.length; idx++) {
+      const dataUrl = dataUrls[idx];
+
+      // cria <img> para obter dimensões
+      const img = await new Promise((resolve, reject) => {
+        const i = new Image();
+        i.onload = () => resolve(i);
+        i.onerror = reject;
+        i.src = dataUrl;
+      });
+
+      // cálculo de escala para caber dentro da página
+      const maxW = pageW - margin * 2;
+      const maxH = pageH - margin * 2 - (first ? 10 : 0); // deixa espaço para o título na primeira
+      const ratio = Math.min(maxW / img.width, maxH / img.height, 1);
+      const drawW = img.width * ratio;
+      const drawH = img.height * ratio;
+
+      const startY = first ? margin + 10 : margin;
+      pdf.addImage(dataUrl, 'PNG', margin, startY, drawW, drawH);
+
+      // para múltiplas imagens, abre nova página para a próxima
+      if (idx < dataUrls.length - 1) {
+        pdf.addPage();
+        first = false;
+      }
+    }
+  };
 
   const handleSharePdf = async () => {
     if (!componentRef.current) {
-      console.error("A referência ao conteúdo do orçamento não foi encontrada. Geração do PDF abortada.");
+      console.error('A referência ao conteúdo do orçamento não foi encontrada. Geração do PDF abortada.');
       return;
     }
 
@@ -35,17 +151,21 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
         document.body.style.overflow = 'visible';
         element.classList.add('force-print-layout');
 
-        console.log("Iniciando a captura do conteúdo para PDF...");
-
         const MAX_CAPTURE_WIDTH_PX = 794;
         const SCALE = 1.5;
         const SLICE_HEIGHT_PX = 2000;
 
-        const contentWidthPx = Math.min(element.scrollWidth || element.offsetWidth || MAX_CAPTURE_WIDTH_PX, MAX_CAPTURE_WIDTH_PX);
-        const contentHeightPx = Math.ceil(element.scrollHeight || element.offsetHeight || SLICE_HEIGHT_PX);
+        const contentWidthPx = Math.min(
+          element.scrollWidth || element.offsetWidth || MAX_CAPTURE_WIDTH_PX,
+          MAX_CAPTURE_WIDTH_PX
+        );
+        const contentHeightPx = Math.ceil(
+          element.scrollHeight || element.offsetHeight || SLICE_HEIGHT_PX
+        );
 
-        console.log(`Dimensões do conteúdo: largura ${contentWidthPx}px x altura ${contentHeightPx}px`);
+        let pdf = null;
 
+        // --- Tentativa de captura única ---
         try {
           const singleCanvas = await html2canvas(element, {
             scale: SCALE,
@@ -54,124 +174,108 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
             width: contentWidthPx,
             height: contentHeightPx,
             windowWidth: contentWidthPx,
-            windowHeight: contentHeightPx
+            windowHeight: contentHeightPx,
           });
 
           const coveredHeightPx = Math.round(singleCanvas.height / SCALE);
-          console.log(`Canvas único: altura coberta ${coveredHeightPx}px (esperado ${contentHeightPx}px)`);
+
           if (coveredHeightPx >= contentHeightPx) {
             const imgData = singleCanvas.toDataURL('image/png');
             const PX_TO_MM = 25.4 / 96;
             const pdfWidthMm = contentWidthPx * PX_TO_MM;
             const pdfHeightMm = contentHeightPx * PX_TO_MM;
 
-            const pdf = new jsPDF({
+            pdf = new jsPDF({
               orientation: 'portrait',
               unit: 'mm',
-              format: [Number(pdfWidthMm.toFixed(2)), Number(pdfHeightMm.toFixed(2))]
+              format: [Number(pdfWidthMm.toFixed(2)), Number(pdfHeightMm.toFixed(2))],
             });
 
             pdf.addImage(imgData, 'PNG', 0, 0, pdfWidthMm, pdfHeightMm);
-
-            const filename = `Orçamento_OS_${orcamento?.ordemServico || 'SemOS'}_${orcamento?.cliente || 'SemCliente'}.pdf`;
-            pdf.save(filename);
-            console.log('PDF gerado com captura única.');
-            return;
-          } else {
-            console.warn('Captura única incompleta — entrando em modo fatias.');
           }
         } catch (errSingle) {
-          console.warn('Falha ao tentar captura única (proceder com fatias):', errSingle);
+          console.warn('Falha ao tentar captura única:', errSingle);
         }
 
         // --- Fallback: captura por fatias ---
-        const slices = [];
-        for (let offset = 0; offset < contentHeightPx; offset += SLICE_HEIGHT_PX) {
-          const sliceHeightPx = Math.min(SLICE_HEIGHT_PX, contentHeightPx - offset);
+        if (!pdf) {
+          const slices = [];
+          for (let offset = 0; offset < contentHeightPx; offset += SLICE_HEIGHT_PX) {
+            const sliceHeightPx = Math.min(SLICE_HEIGHT_PX, contentHeightPx - offset);
 
-          const wrapper = document.createElement('div');
-          wrapper.style.position = 'absolute';
-          wrapper.style.left = '-9999px';
-          wrapper.style.top = '0';
-          wrapper.style.width = `${contentWidthPx}px`;
-          wrapper.style.height = `${sliceHeightPx}px`;
-          wrapper.style.overflow = 'hidden';
-          wrapper.style.style.background = '#ffffff';
-          wrapper.style.boxSizing = 'border-box';
+            const wrapper = document.createElement('div');
+            wrapper.style.position = 'absolute';
+            wrapper.style.left = '-9999px';
+            wrapper.style.top = '0';
+            wrapper.style.width = `${contentWidthPx}px`;
+            wrapper.style.height = `${sliceHeightPx}px`;
+            wrapper.style.overflow = 'hidden';
+            wrapper.style.background = '#ffffff';
+            wrapper.style.boxSizing = 'border-box';
 
-          const clone = element.cloneNode(true);
-          clone.style.boxSizing = 'border-box';
-          clone.style.width = `${contentWidthPx}px`;
-          clone.style.maxWidth = `${contentWidthPx}px`;
-          clone.style.position = 'relative';
-          clone.style.left = '0';
-          clone.style.top = `-${offset}px`;
-          clone.style.margin = '0';
+            const clone = element.cloneNode(true);
+            clone.style.boxSizing = 'border-box';
+            clone.style.width = `${contentWidthPx}px`;
+            clone.style.maxWidth = `${contentWidthPx}px`;
+            clone.style.position = 'relative';
+            clone.style.left = '0';
+            clone.style.top = `-${offset}px`;
+            clone.style.margin = '0';
 
-          wrapper.appendChild(clone);
-          document.body.appendChild(wrapper);
+            wrapper.appendChild(clone);
+            document.body.appendChild(wrapper);
 
-          await sleep(220);
+            await sleep(220);
 
-          try {
-            const canvasSlice = await html2canvas(wrapper, {
-              scale: SCALE,
-              useCORS: true,
-              logging: false,
-              width: contentWidthPx,
-              height: sliceHeightPx,
-              windowWidth: contentWidthPx,
-              windowHeight: sliceHeightPx
-            });
+            try {
+              const canvasSlice = await html2canvas(wrapper, {
+                scale: SCALE,
+                useCORS: true,
+                logging: false,
+                width: contentWidthPx,
+                height: sliceHeightPx,
+                windowWidth: contentWidthPx,
+                windowHeight: sliceHeightPx,
+              });
 
-            if (Math.round(canvasSlice.height / SCALE) < 1) {
-              throw new Error('Canvas da fatia ficou vazio.');
+              slices.push({
+                canvas: canvasSlice,
+                heightPx: sliceHeightPx,
+              });
+            } finally {
+              if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
             }
+          }
 
-            slices.push({
-              canvas: canvasSlice,
-              heightPx: sliceHeightPx
-            });
+          // Montar PDF com fatias
+          const PX_TO_MM = 25.4 / 96;
+          const pdfWidthMm = contentWidthPx * PX_TO_MM;
+          const pdfHeightMm = contentHeightPx * PX_TO_MM;
 
-            console.log(`Fatia capturada: offset ${offset}px, altura ${sliceHeightPx}px`);
-          } catch (errSlice) {
-            console.error('Erro na captura da fatia (offset', offset, '):', errSlice);
-            if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
-            throw errSlice;
-          } finally {
-            if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
+          pdf = new jsPDF({
+            orientation: 'portrait',
+            unit: 'mm',
+            format: [Number(pdfWidthMm.toFixed(2)), Number(pdfHeightMm.toFixed(2))],
+          });
+
+          let cursorYmm = 0;
+          for (let i = 0; i < slices.length; i++) {
+            const { canvas: sliceCanvas, heightPx } = slices[i];
+            const imgData = sliceCanvas.toDataURL('image/png');
+            const sliceHeightMm = heightPx * PX_TO_MM;
+
+            pdf.addImage(imgData, 'PNG', 0, cursorYmm, pdfWidthMm, sliceHeightMm);
+            cursorYmm += sliceHeightMm;
           }
         }
 
-        // Montar PDF com fatias
-        const PX_TO_MM = 25.4 / 96;
-        const pdfWidthMm = contentWidthPx * PX_TO_MM;
-        const pdfHeightMm = contentHeightPx * PX_TO_MM;
-
-        const pdf = new jsPDF({
-          orientation: 'portrait',
-          unit: 'mm',
-          format: [Number(pdfWidthMm.toFixed(2)), Number(pdfHeightMm.toFixed(2))]
-        });
-
-        let cursorYmm = 0;
-        for (let i = 0; i < slices.length; i++) {
-          const { canvas: sliceCanvas, heightPx } = slices[i];
-          const imgData = sliceCanvas.toDataURL('image/png');
-          const sliceHeightMm = heightPx * PX_TO_MM;
-
-          pdf.addImage(imgData, 'PNG', 0, cursorYmm, pdfWidthMm, sliceHeightMm);
-          cursorYmm += sliceHeightMm;
-        }
+        // 👉 Anexa as imagens originais em páginas próprias (alta resolução)
+        await appendOriginalImagesToPdf(pdf, orcamento?.imagens || []);
 
         const filename = `Orçamento_OS_${orcamento?.ordemServico || 'SemOS'}_${orcamento?.cliente || 'SemCliente'}.pdf`;
         pdf.save(filename);
-
-        console.log(`PDF contínuo gerado com ${slices.length} fatias. Largura ${contentWidthPx}px, Altura total ${contentHeightPx}px.`);
       } catch (error) {
-        console.error("Erro ao gerar o PDF definitivo:", error);
-        // Usando uma div no lugar de alert() para compatibilidade com o ambiente de execução
-        // Já existe um aviso no console acima
+        console.error('Erro ao gerar o PDF definitivo:', error);
       } finally {
         // 🧹 Reverter alterações temporárias
         element.style.width = prevInlineWidth;
@@ -206,17 +310,17 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
 
   // Lógica para renderização condicional
   const mostrarServicos =
-    (servicos.length > 0) ||
+    servicos.length > 0 ||
     (orcamento.valorTotalServicos && orcamento.valorTotalServicos > 0) ||
     (orcamento.totalMaoDeObra && orcamento.totalMaoDeObra > 0);
 
-  // Lógica para formatar a data de forma robusta
+  // Lógica para formatar a data
   let formattedDate = '___________';
   if (orcamento?.data) {
-    const dateToFormat = typeof orcamento.data === 'object' && orcamento.data._seconds
-      ? dayjs.unix(orcamento.data._seconds)
-      : dayjs(orcamento.data);
-
+    const dateToFormat =
+      typeof orcamento.data === 'object' && orcamento.data._seconds
+        ? dayjs.unix(orcamento.data._seconds)
+        : dayjs(orcamento.data);
     if (dateToFormat.isValid()) {
       formattedDate = dateToFormat.format('DD/MM/YYYY HH:mm');
     }
@@ -225,25 +329,44 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
   return (
     <div className="orcamento-impresso-container">
       <div className="orcamento-impresso-content" ref={componentRef}>
-        <div className="header-impresso">
-          <h1>ORÇAMENTO - {orcamento.tipo === 'motor' ? 'MOTOR COMPLETO/PARCIAL' : 'CABEÇOTE'}</h1>
-          <div className="logo-impresso-div" style={logoBackgroundStyle} aria-label="Logo Zero20Garage"></div>
+        {/* Cabeçalho com logo alinhado à direita */}
+        <div
+          className="header-impresso"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 12,
+          }}
+        >
+          <h1 style={{ margin: 0 }}>
+            ORÇAMENTO - {orcamento.tipo === 'motor' ? 'MOTOR COMPLETO/PARCIAL' : 'CABEÇOTE'}
+          </h1>
+          <img
+            src={logo}
+            alt="Logo Zero20Garage"
+            className="logo-impresso"
+            style={{ maxWidth: 70, height: 'auto', marginLeft: 'auto' }}
+          />
         </div>
 
         <section className="info-section">
           <table className="info-table">
             <tbody>
               <tr>
-                <td>Veículo: <span className="input-line">{orcamento?.veiculo || ''}</span></td>
-                <td>OS: <span className="input-line">{orcamento?.ordemServico || ''}</span></td>
-                <td>Cliente: <span className="input-line">{orcamento?.cliente || ''}</span></td>
+                <td>
+                  Veículo: <span className="input-line">{orcamento?.veiculo || ''}</span>
+                </td>
+                <td>
+                  OS: <span className="input-line">{orcamento?.ordemServico || ''}</span>
+                </td>
+                <td>
+                  Cliente: <span className="input-line">{orcamento?.cliente || ''}</span>
+                </td>
                 <td>
                   Data:
-                  {/* ALTERAÇÃO: Usa a nova classe data-orcamento para a estilização da data */}
                   <span className="data-orcamento">
-                    <span className="data-formatada">
-                      {formattedDate}
-                    </span>
+                    <span className="data-formatada">{formattedDate}</span>
                   </span>
                 </td>
               </tr>
@@ -273,9 +396,11 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           </div>
           <div className="total-line-impresso">
             <span>Valor total de Peças:</span>
-            {orcamento?.valorTotalPecas
-              ? <strong>R$ {Number(orcamento.valorTotalPecas).toFixed(2).replace('.', ',')}</strong>
-              : <strong>___________</strong>}
+            {orcamento?.valorTotalPecas ? (
+              <strong>R$ {Number(orcamento.valorTotalPecas).toFixed(2).replace('.', ',')}</strong>
+            ) : (
+              <strong>___________</strong>
+            )}
           </div>
         </section>
 
@@ -303,18 +428,25 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
               </div>
               <div className="total-line-impresso">
                 <span>Valor total de Serviços:</span>
-                {orcamento?.valorTotalServicos
-                  ? <strong>R$ {Number(orcamento.valorTotalServicos).toFixed(2).replace('.', ',')}</strong>
-                  : <strong>___________</strong>}
+                {orcamento?.valorTotalServicos ? (
+                  <strong>
+                    R$ {Number(orcamento.valorTotalServicos).toFixed(2).replace('.', ',')}
+                  </strong>
+                ) : (
+                  <strong>___________</strong>
+                )}
               </div>
             </section>
 
             <section className="summary-section-impresso">
               <div className="total-line-impresso">
                 <span>Valor total de mão de Obra Mecânica:</span>
-                <span>{orcamento?.totalMaoDeObra
-                  ? <strong>R$ {Number(orcamento.totalMaoDeObra).toFixed(2).replace('.', ',')}</strong>
-                  : <strong>___________</strong>}
+                <span>
+                  {orcamento?.totalMaoDeObra ? (
+                    <strong>R$ {Number(orcamento.totalMaoDeObra).toFixed(2).replace('.', ',')}</strong>
+                  ) : (
+                    <strong>___________</strong>
+                  )}
                 </span>
               </div>
             </section>
@@ -324,9 +456,11 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
         <section className="summary-section-impresso">
           <div className="total-line-impresso final-total">
             <span>TOTAL GERAL:</span>
-            {orcamento?.valorTotal
-              ? <strong>R$ {Number(orcamento.valorTotal).toFixed(2).replace('.', ',')}</strong>
-              : <strong>___________</strong>}
+            {orcamento?.valorTotal ? (
+              <strong>R$ {Number(orcamento.valorTotal).toFixed(2).replace('.', ',')}</strong>
+            ) : (
+              <strong>___________</strong>
+            )}
           </div>
         </section>
 
@@ -345,33 +479,59 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           <div className="policy-box">
             <h4>Política de Garantia, Troca e Devolução</h4>
             <p className="policy-text">
-              A garantia dos serviços realizados pela Zero 20 Garage é válida apenas se o veículo for utilizado conforme as orientações da oficina, incluindo manutenção em dia, uso adequado de combustíveis e respeito aos prazos de revisão. Clientes com pagamentos pendentes não terão direito à garantia, sendo necessário regularizar quaisquer débitos antes de acioná-la. O prazo para solicitar garantia é de 3 meses para serviços de cabeçote e 6 meses para motor completo, mediante contato com a oficina para análise do problema.
-              A Zero 20 Garage preza pela qualidade dos serviços prestados e realiza todos os procedimentos com base em diagnósticos técnicos e profissionais qualificados. Em casos excepcionais, se o veículo apresentar falhas recorrentes relacionadas exclusivamente à execução da mão de obra e sem qualquer vínculo com mau uso, falta de manutenção ou desgaste natural de componentes, o cliente poderá solicitar a análise do caso.
-              Não haverá reembolso de peças já instaladas no veículo, sob nenhuma circunstância.
+              A garantia dos serviços realizados pela Zero 20 Garage é válida apenas se o veículo for
+              utilizado conforme as orientações da oficina, incluindo manutenção em dia, uso adequado de
+              combustíveis e respeito aos prazos de revisão. Clientes com pagamentos pendentes não terão
+              direito à garantia, sendo necessário regularizar quaisquer débitos antes de acioná-la. O
+              prazo para solicitar garantia é de 3 meses para serviços de cabeçote e 6 meses para motor
+              completo, mediante contato com a oficina para análise do problema. A Zero 20 Garage preza
+              pela qualidade dos serviços prestados e realiza todos os procedimentos com base em
+              diagnósticos técnicos e profissionais qualificados. Em casos excepcionais, se o veículo
+              apresentar falhas recorrentes relacionadas exclusivamente à execução da mão de obra e sem
+              qualquer vínculo com mau uso, falta de manutenção ou desgaste natural de componentes, o
+              cliente poderá solicitar a análise do caso. Não haverá reembolso de peças já instaladas no
+              veículo, sob nenhuma circunstância.
             </p>
             <p className="consent-text">
-              Ao aceitar o orçamento e iniciar o serviço com a Zero 20 Garage, o cliente declara estar ciente e de acordo com os termos descritos acima.
+              Ao aceitar o orçamento e iniciar o serviço com a Zero 20 Garage, o cliente declara estar
+              ciente e de acordo com os termos descritos acima.
             </p>
           </div>
         </section>
 
+        {/* Miniaturas (rápidas) na tela; PDF terá as originais em páginas extras */}
         <section className="imagens-section">
           <h2>Imagens do Veículo</h2>
           <div className="imagens-container">
-            {orcamento.imagens && orcamento.imagens.map((img, idx) => (
-              <img
-                key={idx}
-                src={typeof img === 'string' ? img : URL.createObjectURL(img)}
-                alt={`Foto ${idx + 1}`}
-                style={{ maxWidth: 120, margin: 4, borderRadius: 8 }}
-              />
-            ))}
+            {orcamento.imagens &&
+              orcamento.imagens.map((img, idx) => {
+                const thumbSrc =
+                  typeof img === 'string'
+                    ? getCloudinaryThumb(img)
+                    : URL.createObjectURL(img);
+                return (
+                  <img
+                    key={idx}
+                    src={thumbSrc}
+                    alt={`Foto ${idx + 1}`}
+                    crossOrigin="anonymous"
+                    loading="lazy"
+                    style={{ maxWidth: 120, margin: 4, borderRadius: 8 }}
+                    onLoad={(e) => {
+                      // revoga objectURL gerado para File após carregar
+                      if (typeof img !== 'string') URL.revokeObjectURL(thumbSrc);
+                    }}
+                  />
+                );
+              })}
           </div>
         </section>
       </div>
 
       <div className="print-buttons">
-        <button onClick={handleSharePdf} className="print-btn">Compartilhar PDF</button>
+        <button onClick={handleSharePdf} className="print-btn">
+          Compartilhar PDF
+        </button>
         <button onClick={handleVoltarPainel} className="back-btn">
           Voltar ao Painel
         </button>
