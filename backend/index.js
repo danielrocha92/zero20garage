@@ -14,7 +14,7 @@ app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
   if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-    return res.json({ status: "ok", token: "acesso-liberado" });
+    return res.json({ status: "ok", token: "Acesso-liberado" });
   }
 
   return res.status(401).json({ status: "erro", message: "Credenciais inválidas" });
