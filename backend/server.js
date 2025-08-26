@@ -1,88 +1,75 @@
-// backend/server.js
-const express = require("express");
-const cors = require("cors");
-const multer = require("multer");
-const cloudinary = require("cloudinary").v2;
-const admin = require("firebase-admin");
-const dotenv = require("dotenv");
+const express = require('express');
+const cors = require('cors');
+const axios = require('axios');
+const admin = require('firebase-admin');
+require('dotenv').config();
 
-dotenv.config(); // Carrega variáveis do .env
-
-// -------------------- Firebase Admin --------------------
-if (!admin.apps.length) {
-  try {
-    const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
-    admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
-      databaseURL: process.env.FIREBASE_DATABASE_URL,
-      storageBucket: process.env.FIREBASE_STORAGE_BUCKET
-    });
-    console.log("Firebase Admin inicializado!");
-  } catch (err) {
-    console.error("Erro ao inicializar Firebase Admin:", err.message);
-    process.exit(1);
-  }
-}
-
-// -------------------- Cloudinary --------------------
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
-// -------------------- Express --------------------
 const app = express();
-const PORT = process.env.PORT || 1000;
 
-app.use(cors());
+// ------------------- CORS -------------------
+const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) callback(null, true);
+    else callback(new Error('Origem não permitida por CORS'));
+  },
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type']
+}));
+
 app.use(express.json());
 
-// -------------------- Multer --------------------
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
+// ------------------- FIREBASE ADMIN -------------------
+try {
+  const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
 
-// -------------------- Login Admin --------------------
-const ADMIN_EMAIL = "admin@zero20garage.com";
-const ADMIN_PASSWORD = "zeroadmin2024";
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: process.env.FIREBASE_DATABASE_URL
+  });
 
-app.post("/login", (req, res) => {
-  const { email, password } = req.body;
+  console.log('Firebase Admin inicializado!');
+} catch (err) {
+  console.error('Erro ao inicializar Firebase Admin:', err.message);
+}
 
-  if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-    return res.json({ status: "ok", token: "Acesso-liberado" });
+// ------------------- ENDPOINT LOGIN -------------------
+app.post('/api/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) return res.status(400).json({ error: 'Email e senha são obrigatórios' });
+
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.FIREBASE_API_KEY}`;
+
+    const response = await axios.post(url, { email, password, returnSecureToken: true });
+    const data = response.data;
+
+    res.json({
+      uid: data.localId,
+      token: data.idToken,
+      email: data.email
+    });
+  } catch (err) {
+    console.error('Erro no login:', err.response?.data || err.message);
+    res.status(401).json({ error: 'Falha na autenticação' });
   }
-
-  return res.status(401).json({ status: "erro", message: "Credenciais inválidas" });
 });
 
-// -------------------- Upload de Imagens Cloudinary --------------------
-app.post("/api/upload-imagens", upload.array("imagens", 10), async (req, res) => {
+// ------------------- ENDPOINT ENVIO ORÇAMENTO -------------------
+app.post('/enviar-orcamento', async (req, res) => {
   try {
-    if (!req.files || req.files.length === 0) {
-      return res.status(400).json({ msg: "Nenhum arquivo enviado." });
-    }
-
-    const uploadPromises = req.files.map(file => {
-      const dataUri = `data:${file.mimetype};base64,${file.buffer.toString("base64")}`;
-      return cloudinary.uploader.upload(dataUri, { folder: "zero20garage" });
+    const formData = req.body;
+    const response = await axios.post(process.env.GOOGLE_SCRIPT_URL, formData, {
+      headers: { 'Content-Type': 'application/json' }
     });
 
-    const results = await Promise.all(uploadPromises);
-    const urls = results.map(result => result.secure_url);
-
-    res.status(200).json({ urls });
+    res.json({ status: 'ok', scriptResponse: response.data });
   } catch (error) {
-    console.error("Erro no upload de imagens:", error);
-    res.status(500).json({ msg: "Erro interno do servidor ao fazer upload de imagens." });
+    console.error('Erro ao enviar para o Google Script:', error.message);
+    res.status(500).json({ error: 'Erro ao enviar orçamento' });
   }
 });
 
-// -------------------- Rota de Teste --------------------
-app.get("/", (_, res) => res.send("Backend Zero20 Garage rodando 🚀"));
-
-// -------------------- Inicia Servidor --------------------
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
-
+// ------------------- START SERVER -------------------
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`✅ Servidor rodando em http://localhost:${PORT}`));
