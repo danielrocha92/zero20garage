@@ -2,19 +2,19 @@
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
-const admin = require("firebase-admin");
 const cloudinary = require("cloudinary").v2;
+const admin = require("firebase-admin");
 const dotenv = require("dotenv");
 
-// Carrega variáveis de ambiente
-dotenv.config();
+dotenv.config(); // Carrega variáveis do .env
 
-// Inicializa Firebase Admin
+// -------------------- Firebase Admin --------------------
 if (!admin.apps.length) {
   try {
     const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
+      databaseURL: process.env.FIREBASE_DATABASE_URL,
       storageBucket: process.env.FIREBASE_STORAGE_BUCKET
     });
     console.log("Firebase Admin inicializado!");
@@ -24,58 +24,65 @@ if (!admin.apps.length) {
   }
 }
 
-// Configura Cloudinary
+// -------------------- Cloudinary --------------------
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Inicializa Express
+// -------------------- Express --------------------
 const app = express();
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Configuração Multer para uploads em memória
+// -------------------- Multer --------------------
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-// Rotas de teste
-app.get("/", (req, res) => {
-  res.send("Backend da Zero20 Garage rodando!");
+// -------------------- Login Admin --------------------
+const ADMIN_EMAIL = "admin@zero20garage.com";
+const ADMIN_PASSWORD = "zeroadmin2024";
+
+app.post("/login", (req, res) => {
+  const { email, password } = req.body;
+
+  if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+    return res.json({ status: "ok", token: "Acesso-liberado" });
+  }
+
+  return res.status(401).json({ status: "erro", message: "Credenciais inválidas" });
 });
 
-// Upload de arquivo para Cloudinary
-app.post("/upload", upload.single("file"), async (req, res) => {
+// -------------------- Upload de Imagens Cloudinary --------------------
+app.post("/api/upload-imagens", upload.array("imagens", 10), async (req, res) => {
   try {
-    if (!req.file) {
-      return res.status(400).json({ error: "Arquivo não enviado" });
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ msg: "Nenhum arquivo enviado." });
     }
 
-    // Converte buffer para Base64
-    const fileBase64 = req.file.buffer.toString("base64");
-    const fileData = `data:${req.file.mimetype};base64,${fileBase64}`;
-
-    // Faz upload para Cloudinary
-    const result = await cloudinary.uploader.upload(fileData, {
-      folder: "zero20garage",
-      resource_type: "auto"
+    const uploadPromises = req.files.map(file => {
+      const dataUri = `data:${file.mimetype};base64,${file.buffer.toString("base64")}`;
+      return cloudinary.uploader.upload(dataUri, { folder: "zero20garage" });
     });
 
-    res.json({
-      message: "Upload realizado com sucesso!",
-      url: result.secure_url
-    });
-  } catch (err) {
-    console.error("Erro no upload:", err);
-    res.status(500).json({ error: err.message });
+    const results = await Promise.all(uploadPromises);
+    const urls = results.map(result => result.secure_url);
+
+    res.status(200).json({ urls });
+  } catch (error) {
+    console.error("Erro no upload de imagens:", error);
+    res.status(500).json({ msg: "Erro interno do servidor ao fazer upload de imagens." });
   }
 });
 
-// Start do servidor
-app.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}`);
+// -------------------- Rota de Teste --------------------
+app.get("/", (_, res) => res.send("Backend Zero20 Garage rodando 🚀"));
+
+// -------------------- Inicia Servidor --------------------
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
+
