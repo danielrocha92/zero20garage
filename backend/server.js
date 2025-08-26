@@ -1,21 +1,37 @@
 // backend/server.js
-import express from "express";
-import cors from "cors";
-import multer from "multer";
-import admin from "firebase-admin";
-import dotenv from "dotenv";
-import path from "path";
+const express = require("express");
+const cors = require("cors");
+const multer = require("multer");
+const admin = require("firebase-admin");
+const cloudinary = require("cloudinary").v2;
+const dotenv = require("dotenv");
 
-// Configura variáveis de ambiente
+// Carrega variáveis de ambiente
 dotenv.config();
 
 // Inicializa Firebase Admin
 if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT))
-  });
+  try {
+    const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+      storageBucket: process.env.FIREBASE_STORAGE_BUCKET
+    });
+    console.log("Firebase Admin inicializado!");
+  } catch (err) {
+    console.error("Erro ao inicializar Firebase Admin:", err.message);
+    process.exit(1);
+  }
 }
 
+// Configura Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+// Inicializa Express
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -23,26 +39,39 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Configuração Multer para uploads
+// Configuração Multer para uploads em memória
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-// Rota de teste
+// Rotas de teste
 app.get("/", (req, res) => {
   res.send("Backend da Zero20 Garage rodando!");
 });
 
-// Rota de upload de arquivo (exemplo)
+// Upload de arquivo para Cloudinary
 app.post("/upload", upload.single("file"), async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).send({ error: "Arquivo não enviado" });
+      return res.status(400).json({ error: "Arquivo não enviado" });
     }
 
-    // Aqui você pode integrar com Cloudinary ou Firebase Storage
-    res.send({ message: "Upload recebido com sucesso!", filename: req.file.originalname });
+    // Converte buffer para Base64
+    const fileBase64 = req.file.buffer.toString("base64");
+    const fileData = `data:${req.file.mimetype};base64,${fileBase64}`;
+
+    // Faz upload para Cloudinary
+    const result = await cloudinary.uploader.upload(fileData, {
+      folder: "zero20garage",
+      resource_type: "auto"
+    });
+
+    res.json({
+      message: "Upload realizado com sucesso!",
+      url: result.secure_url
+    });
   } catch (err) {
-    res.status(500).send({ error: err.message });
+    console.error("Erro no upload:", err);
+    res.status(500).json({ error: err.message });
   }
 });
 
