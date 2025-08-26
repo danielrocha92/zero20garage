@@ -5,9 +5,13 @@ const admin = require('firebase-admin');
 require('dotenv').config();
 
 const app = express();
+const scriptURL = 'https://script.google.com/macros/s/AKfycbwQmnhIM2KFkQ4xawDq_SyhzYb-ME2Vxa9zTaWMw1gF3Q1pSq9jWLfGOBf5j3CVBmaH/exec';
 
-// ------------------- CORS -------------------
-const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
+const allowedOrigins = [
+  'https://zero20garage.vercel.app',
+  'http://localhost:3000'
+];
+
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) callback(null, true);
@@ -19,50 +23,36 @@ app.use(cors({
 
 app.use(express.json());
 
-// ------------------- FIREBASE ADMIN -------------------
+// Inicializa Firebase Admin
 try {
   const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
-
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: process.env.FIREBASE_DATABASE_URL
-  });
-
+  admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
   console.log('Firebase Admin inicializado!');
 } catch (err) {
   console.error('Erro ao inicializar Firebase Admin:', err.message);
 }
 
-// ------------------- ENDPOINT LOGIN -------------------
+// Login via Firebase Auth REST API
 app.post('/api/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) return res.status(400).json({ error: 'Email e senha são obrigatórios' });
 
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.FIREBASE_API_KEY}`;
-
     const response = await axios.post(url, { email, password, returnSecureToken: true });
     const data = response.data;
 
-    res.json({
-      uid: data.localId,
-      token: data.idToken,
-      email: data.email
-    });
+    res.json({ uid: data.localId, token: data.idToken, email: data.email });
   } catch (err) {
     console.error('Erro no login:', err.response?.data || err.message);
     res.status(401).json({ error: 'Falha na autenticação' });
   }
 });
 
-// ------------------- ENDPOINT ENVIO ORÇAMENTO -------------------
+// Enviar orçamento para Google Script
 app.post('/enviar-orcamento', async (req, res) => {
   try {
-    const formData = req.body;
-    const response = await axios.post(process.env.GOOGLE_SCRIPT_URL, formData, {
-      headers: { 'Content-Type': 'application/json' }
-    });
-
+    const response = await axios.post(scriptURL, req.body, { headers: { 'Content-Type': 'application/json' } });
     res.json({ status: 'ok', scriptResponse: response.data });
   } catch (error) {
     console.error('Erro ao enviar para o Google Script:', error.message);
@@ -70,6 +60,5 @@ app.post('/enviar-orcamento', async (req, res) => {
   }
 });
 
-// ------------------- START SERVER -------------------
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`✅ Servidor rodando em http://localhost:${PORT}`));
