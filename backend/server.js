@@ -26,11 +26,15 @@ if (!admin.apps.length) {
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+// ✅ Configuração de CORS para permitir a origem do seu frontend
+const corsOptions = {
+    origin: 'http://localhost:3000'
+};
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 // -------------------- Login Admin --------------------
-// ✅ As credenciais agora vêm das variáveis de ambiente!
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
