@@ -1,0 +1,27 @@
+# Ignorar as pastas de dependências
+/node_modules
+/backend-login/node_modules
+
+# Ignorar arquivos de ambiente com dados sensíveis
+.env
+/backend-login/.env
+
+# Ignorar logs e caches
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.eslintcache
+.vscode/
+
+# Ignorar o build do React
+/build
+
+# Ignorar arquivos de dados gerados
+*.log
+*.zip
+*.rar
+*.gz
+
+# Ignorar arquivos de IDEs
+.idea/
+.DS_Store
