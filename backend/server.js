@@ -26,9 +26,22 @@ if (!admin.apps.length) {
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Configuração de CORS para permitir a origem do seu frontend
+// ✅ Configuração de CORS para permitir múltiplas origens
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://zero20garage.vercel.app'
+];
+
 const corsOptions = {
-    origin: 'http://localhost:3000'
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Origem não permitida por CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 };
 app.use(cors(corsOptions));
 
