@@ -1,7 +1,6 @@
 // backend/server.js
 const express = require("express");
 const cors = require("cors");
-const multer = require("multer");
 const admin = require("firebase-admin");
 const dotenv = require("dotenv");
 
@@ -29,10 +28,6 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-
-// -------------------- Multer --------------------
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
 
 // -------------------- Login Admin --------------------
 const ADMIN_EMAIL = "admin@zero20garage.com";
