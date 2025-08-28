@@ -1,15 +1,15 @@
 // src/components/PainelOrcamentos.jsx
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, Suspense } from 'react';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import { useNavigate } from 'react-router-dom';
+
 import OrcamentoCabecote from './OrcamentoCabecote';
 import OrcamentoMotorCompleto from './OrcamentoMotorCompleto';
 import HistoricoOrcamentos from './HistoricoOrcamentos';
 import OrcamentoImpresso from './OrcamentoImpresso';
-import UploadImagemOrcamento from './UploadImagemOrcamento'; // <-- novo componente
-import * as XLSX from 'xlsx';
-import { saveAs } from 'file-saver';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas'; // Importa html2canvas
-import { useNavigate } from 'react-router-dom';
 import './PainelOrcamentos.css';
 
 // URL BASE da sua API Node.js/Firebase no Render
@@ -377,6 +377,8 @@ const PainelOrcamentos = () => {
         }
     };
 
+    const UploadImagemOrcamento = React.lazy(() => import('./UploadImagemOrcamento'));
+
     return (
         <div className='painel-orcamentos-container'>
             {showMessage && (
@@ -418,19 +420,23 @@ const PainelOrcamentos = () => {
                             <OrcamentoCabecote onSubmit={handleSalvar} editingData={editingData} />
                         )}
 
-                        {/* ===== Adicionado: Se estiver editando um orçamento, permite anexar/substituir imagem ===== */}
-                        {editingData?.id && (
+                        {/* ===== Alteração: UploadImagemOrcamento agora aparece sempre (não apenas em editar) ===== */}
+                        <Suspense fallback={<div>Carregando upload de imagem...</div>}>
                             <div className="upload-imagem-wrapper" style={{ marginTop: 12 }}>
                                 <label style={{ display: 'block', marginBottom: 6 }}>Imagem do Orçamento (arquivo ou câmera):</label>
 
                                 {/* Componente moderno: upload assinado para Cloudinary (captura + assinatura + notificação ao backend) */}
+                                {/* Passamos editingData?.id: se estiver editando, o componente atualizará esse orçamento; se não estiver, ele permitirá upload (sem atualizar Firestore) e chamará onChange/onUploaded. */}
                                 <UploadImagemOrcamento
-                                    orcamentoId={editingData.id}
+                                    orcamentoId={editingData?.id}
                                     authToken={authToken}
-                                    imagemAtual={editingData.imagem || (editingData.imageUrl ? { url: editingData.imageUrl, public_id: editingData.public_id } : null)}
-                                    onChange={async (img) => {
-                                        // Atualiza o editingData local imediatamente e recarrega histórico
-                                        setEditingData(prev => prev ? { ...prev, imagem: { url: img.url || img.url, public_id: img.public_id } } : prev);
+                                    imagemAtual={editingData?.imagem || (editingData?.imageUrl ? [{ url: editingData.imageUrl, public_id: editingData.public_id }] : [])}
+                                    onUploaded={async (imgs) => {
+                                        // Atualiza o editingData local (se houver)
+                                        if (editingData) {
+                                            setEditingData(prev => prev ? { ...prev, imagem: imgs } : prev);
+                                        }
+                                        // Recarrega histórico para garantir sincronização
                                         await fetchHistorico();
                                     }}
                                 />
@@ -446,7 +452,42 @@ const PainelOrcamentos = () => {
                                         capture="environment"
                                         onChange={(e) => {
                                             const file = e.target.files?.[0];
-                                            if (file) handleUploadImagem(editingData.id, file);
+                                            // Se não há editingData.id, avisamos o usuário que a imagem será enviada sem associação ao orçamento
+                                            if (!file) return;
+                                            if (!editingData?.id) {
+                                                if (!window.confirm('Nenhum orçamento está em edição. Enviar para o servidor sem vínculo a um orçamento?')) return;
+                                                // Você pode chamar um endpoint geral ou simplesmente ignorar; aqui chamamos handleUploadImagem apenas se editingData.id existir
+                                            }
+                                            if (file && editingData?.id) handleUploadImagem(editingData.id, file);
+                                            else if (file && !editingData?.id) {
+                                                // Envio sem vínculo: chamar seu endpoint genérico (se tiver) ou exibir aviso
+                                                // Exemplo: enviar para endpoint genérico (ajuste conforme necessário)
+                                                (async () => {
+                                                    setUploading(true);
+                                                    try {
+                                                        const form = new FormData();
+                                                        form.append('imagem', file);
+                                                        const res = await fetch(`${API_BASE_URL}/api/orcamentos/imagem-avulsa`, {
+                                                            method: 'POST',
+                                                            body: form,
+                                                            headers: authToken ? { Authorization: `Bearer ${authToken}` } : undefined,
+                                                        });
+                                                        const data = await res.json();
+                                                        if (res.ok) {
+                                                            showMessageBox('Imagem enviada com sucesso (avulsa).');
+                                                            await fetchHistorico();
+                                                        } else {
+                                                            console.error('Erro envio avulso:', data);
+                                                            showMessageBox(`Erro no envio: ${data?.msg || data?.error || 'Erro desconhecido'}`, true);
+                                                        }
+                                                    } catch (err) {
+                                                        console.error('Erro no envio avulso:', err);
+                                                        showMessageBox('Erro no envio avulso. Veja console.', true);
+                                                    } finally {
+                                                        setUploading(false);
+                                                    }
+                                                })();
+                                            }
                                         }}
                                         disabled={uploading}
                                         style={{ display: 'block', marginTop: 6 }}
@@ -472,8 +513,9 @@ const PainelOrcamentos = () => {
                                         </div>
                                     </div>
                                 )}
+                                {/* Observação: se o usuário não estiver editando, UploadImagemOrcamento permitirá upload sem associação — e acionará onUploaded */}
                             </div>
-                        )}
+                        </Suspense>
 
                         <div className="historico-buttons-group">
                             <button onClick={exportarExcel} className="action-btn">

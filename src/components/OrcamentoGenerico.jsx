@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import './OrcamentoForms.css';
 
-const OrcamentoGenerico = ({ onSubmit, editingData, showMessage, hideMessageBox, message, isErrorMessage, orcamentoData, titulo }) => {
+const OrcamentoGenerico = ({
+  onSubmit,
+  editingData,
+  showMessage,
+  hideMessageBox,
+  message,
+  isErrorMessage,
+  orcamentoData,
+  titulo,
+  imagens,
+  setImagens
+}) => {
   const itensData = orcamentoData.itens;
   const servicosData = orcamentoData.servicos;
 
@@ -33,7 +44,6 @@ const OrcamentoGenerico = ({ onSubmit, editingData, showMessage, hideMessageBox,
     formaPagamento: '',
     observacoes: '',
     status: 'Aberto',
-    imagens: [],
   });
 
   useEffect(() => {
@@ -89,7 +99,6 @@ const OrcamentoGenerico = ({ onSubmit, editingData, showMessage, hideMessageBox,
           })) : []
         };
       }),
-      imagens: editingData.imagens || [],
     }));
   }, [editingData, itensData, servicosData]);
 
@@ -133,14 +142,6 @@ const OrcamentoGenerico = ({ onSubmit, editingData, showMessage, hideMessageBox,
   const handleManualTotalChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: parseFloat(value) || 0 }));
-  };
-
-  const handleImageChange = (e) => {
-    const files = Array.from(e.target.files);
-    setFormData(prev => ({
-      ...prev,
-      imagens: [...prev.imagens, ...files],
-    }));
   };
 
   const handleSubmit = (e) => {
@@ -467,26 +468,7 @@ const OrcamentoGenerico = ({ onSubmit, editingData, showMessage, hideMessageBox,
             </select>
           </div>
 
-          <div className="form-group">
-            <label>Fotos do serviço:</label>
-            <input
-              type="file"
-              accept="image/*"
-              capture="environment"
-              multiple
-              onChange={handleImageChange}
-            />
-            <div className="preview-imagens">
-              {formData.imagens && formData.imagens.map((img, idx) => (
-                <img
-                  key={idx}
-                  src={typeof img === 'string' ? img : URL.createObjectURL(img)}
-                  alt={`Foto ${idx + 1}`}
-                  style={{ maxWidth: 120, margin: 4, borderRadius: 8 }}
-                />
-              ))}
-            </div>
-          </div>
+          {/* Não é mais necessário o bloco de imagens aqui */}
         </section>
 
         {/* Ações */}
