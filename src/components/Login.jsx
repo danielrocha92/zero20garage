@@ -8,7 +8,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
   const [erro, setErro] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false); // Novo estado para controlar o envio
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -17,10 +17,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErro(null);
-    setIsSubmitting(true); // Define como true ao iniciar o envio
+    setIsSubmitting(true);
 
     try {
-      const res = await fetch("https://zero20garage-login.onrender.com/login", {
+      // 🚨 Alteração na URL para o novo microserviço
+      const res = await fetch("https://zero20-login-api.onrender.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -30,22 +31,22 @@ const Login = () => {
 
       if (data.status === "ok") {
         localStorage.setItem("authToken", data.token);
-        navigate("/orcamento"); // Redireciona para a página Orçamento
+        navigate("/orcamento");
       } else {
         setErro("E-mail ou senha inválidos");
       }
     } catch (err) {
       setErro("Erro ao conectar ao servidor");
     } finally {
-      setIsSubmitting(false); // Define como false, independentemente do sucesso ou falha
+      setIsSubmitting(false);
     }
   };
 
   const messages = [
     {
-      title: 'Login de Administrador',
-      subtitle: 'Acesse o painel de gerenciamento de orçamentos',
-    }
+      title: "Login de Administrador",
+      subtitle: "Acesse o painel de gerenciamento de orçamentos",
+    },
   ];
 
   return (
@@ -73,10 +74,10 @@ const Login = () => {
           />
           <button
             type="submit"
-            className={isSubmitting ? "loading" : ""} // Aplica a classe 'loading' quando isSubmitting é true
-            disabled={isSubmitting} // Desabilita o botão enquanto está enviando
+            className={isSubmitting ? "loading" : ""}
+            disabled={isSubmitting}
           >
-            {isSubmitting ? "Entrando..." : "Entrar"} {/* Altera o texto do botão */}
+            {isSubmitting ? "Entrando..." : "Entrar"}
           </button>
           {erro && <p className="erro">{erro}</p>}
         </form>
