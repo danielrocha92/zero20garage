@@ -57,8 +57,9 @@ import './GlobalStyles.css';
  * @param {React.ReactNode} props.children - Os componentes filhos a serem renderizados se o usuário estiver autenticado.
  */
 function PrivateRoute({ children }) {
+  // Apenas verifica se o token existe, não o seu valor
   const token = localStorage.getItem("authToken");
-  return token === "acesso-liberado" ? children : <Navigate to="/login" replace />;
+  return token ? children : <Navigate to="/login" replace />;
 }
 
 /**
@@ -66,12 +67,12 @@ function PrivateRoute({ children }) {
  * Gerencia as rotas do aplicativo com transições de página usando Framer Motion.
  */
 const AnimatedRoutes = () => {
-  const location = useLocation(); // Hook para obter o objeto de localização atual
+  const location = useLocation();
 
   return (
-    <AnimatePresence mode="wait"> {/* Gerencia as animações de entrada/saída de componentes */}
-      <Suspense fallback={<PageTransition />}> {/* Exibe um fallback enquanto os componentes são carregados */}
-        <Routes location={location} key={location.pathname}> {/* Define as rotas do aplicativo */}
+    <AnimatePresence mode="wait">
+      <Suspense fallback={<PageTransition />}>
+        <Routes location={location} key={location.pathname}>
 
           {/* Rotas de Autenticação e Protegidas */}
           <Route path="/login" element={<Login />} />
@@ -84,7 +85,7 @@ const AnimatedRoutes = () => {
             }
           />
 
-          {/* Rota de retorno padrão após logout */}
+          {/* Rota para o formulário de orçamento público */}
           <Route path="/orcamento" element={<Orcamento />} />
 
           {/* NOVA ROTA para a página de geração de PDF */}
@@ -120,7 +121,7 @@ const AnimatedRoutes = () => {
           <Route path="/Faq" element={<Faq />} />
           <Route path="/Trabalhe-conosco" element={<TrabalheConosco />} />
           <Route path="/Termos" element={<Termos />} />
-          <Route path="*" element={<NotFound />} /> {/* Rota curinga para páginas não encontradas */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </AnimatePresence>
@@ -133,11 +134,11 @@ const AnimatedRoutes = () => {
  */
 function App() {
   return (
-    <Router> {/* Componente Router do React Router DOM */}
-      <Layout> {/* Componente de layout que envolve todo o conteúdo do aplicativo */}
-        <AnimatedRoutes /> {/* Componente que contém todas as rotas animadas */}
-        <ScrollToTop /> {/* Componente para rolar a página para o topo em cada mudança de rota */}
-        <ScrollToTopButton /> {/* Botão flutuante para rolar a página para o topo */}
+    <Router>
+      <Layout>
+        <AnimatedRoutes />
+        <ScrollToTop />
+        <ScrollToTopButton />
       </Layout>
     </Router>
   );
