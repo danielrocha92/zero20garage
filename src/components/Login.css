@@ -6,7 +6,8 @@
   border-radius: 20px;
   box-shadow: 0 0 10px #ff0000cc;
   color: #eee;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', sans-serif;
+  border: 1px solid #ff0000;
 }
 
 .form-login {
@@ -17,9 +18,18 @@
 
 .form-login input {
   padding: 0.8rem;
-  border: none;
+  border: 1px solid #444;
   border-radius: 20px;
   font-size: 1rem;
+  background-color: #222;
+  color: #eee;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-login input:focus {
+  outline: none;
+  border-color: #ff0000;
+  box-shadow: 0 0 8px #ff0000aa;
 }
 
 .form-login button {
@@ -30,11 +40,17 @@
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.1s ease; /* Adicionada transição para o transform */
+  transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
 }
 
 .form-login button:hover {
   background-color: #cc0000;
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+}
+
+.form-login button:active {
+  transform: scale(0.98);
 }
 
 .erro {
@@ -47,6 +63,8 @@
 .titulo-claro {
   text-align: center;
   margin-bottom: 1.5rem;
+  color: white;
+  font-weight: bold;
 }
 
 .painel-header {
@@ -72,7 +90,7 @@
 
 /* Novas regras para a animação */
 .loading {
-  animation: pulse 0.5s infinite alternate; /* Aplica a animação 'pulse' */
+  animation: pulse 0.5s infinite alternate;
 }
 
 @keyframes pulse {
@@ -81,7 +99,7 @@
     opacity: 1;
   }
   to {
-    transform: scale(1.05); /* Aumenta ligeiramente o tamanho */
-    opacity: 0.8; /* Diminui a opacidade */
+    transform: scale(1.05);
+    opacity: 0.8;
   }
 }

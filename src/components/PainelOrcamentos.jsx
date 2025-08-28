@@ -4,6 +4,7 @@ import OrcamentoCabecote from './OrcamentoCabecote';
 import OrcamentoMotorCompleto from './OrcamentoMotorCompleto';
 import HistoricoOrcamentos from './HistoricoOrcamentos';
 import OrcamentoImpresso from './OrcamentoImpresso';
+import UploadImagemOrcamento from './UploadImagemOrcamento'; // <-- novo componente
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
@@ -31,6 +32,12 @@ const PainelOrcamentos = () => {
     const [showMessage, setShowMessage] = useState(false);
     const [editingData, setEditingData] = useState(null);
     const [selectedBudgetForView, setSelectedBudgetForView] = useState(null);
+
+    // novo estado para controlar upload
+    const [uploading, setUploading] = useState(false);
+
+    // auth token (se você usa)
+    const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
 
     const showMessageBox = (msg, isError = false) => {
         setMessage(msg);
@@ -168,6 +175,9 @@ const PainelOrcamentos = () => {
             tempDiv.style.backgroundColor = 'white'; // Fundo branco para a captura
             document.body.appendChild(tempDiv);
 
+            // Decide a URL da imagem (compatível com diferentes formatos de campo)
+            const imagemUrl = (orcamento && (orcamento.imagem?.url || orcamento.imageUrl || orcamento.imagemUrl)) || null;
+
             // Constrói o HTML para o orçamento atual, replicando a estrutura do OrcamentoImpresso
             tempDiv.innerHTML = `
         <div class="orcamento-impresso-content">
@@ -188,6 +198,8 @@ const PainelOrcamentos = () => {
               </tbody>
             </table>
           </section>
+
+          ${imagemUrl ? `<section class="imagem-section"><img src="${imagemUrl}" crossorigin="anonymous" alt="Imagem do orçamento" style="max-width:100%; max-height:400px; object-fit:contain; border-radius:6px; margin-top:12px;" /></section>` : ''}
 
           <section class="items-section">
             <h2>Peças</h2>
@@ -286,6 +298,42 @@ const PainelOrcamentos = () => {
         showMessageBox('PDF do histórico gerado com sucesso!');
     };
 
+    // ===== Função para upload de imagem (arquivo / câmera) =====
+    // Observação: envia multipart/form-data para o endpoint de imagem do orçamento.
+    const handleUploadImagem = async (orcamentoId, file) => {
+        if (!file || !orcamentoId) return;
+        setUploading(true);
+
+        try {
+            const form = new FormData();
+            // campo 'imagem' — ajuste conforme seu backend (pode ser 'file' ou outro)
+            form.append('imagem', file);
+
+            const res = await fetch(`${API_BASE_URL}/api/orcamentos/${orcamentoId}/imagem`, {
+                method: 'POST',
+                body: form,
+                // Caso sua API exija token, adicione headers Authorization aqui
+                headers: authToken ? { Authorization: `Bearer ${authToken}` } : undefined,
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                showMessageBox('Imagem anexada com sucesso ao orçamento.');
+                // Recarrega histórico para trazer a url atualizada
+                await fetchHistorico();
+            } else {
+                console.error('Resposta inválida do upload:', data);
+                showMessageBox(`Erro no upload: ${data?.msg || data?.error || 'Erro desconhecido'}`, true);
+            }
+        } catch (err) {
+            console.error('Erro no upload da imagem:', err);
+            showMessageBox('Falha no upload da imagem. Veja console.', true);
+        } finally {
+            setUploading(false);
+        }
+    };
+
     const handleLogout = () => {
         console.log('Removendo authToken...');
         localStorage.removeItem('authToken');
@@ -369,6 +417,64 @@ const PainelOrcamentos = () => {
                         ) : (
                             <OrcamentoCabecote onSubmit={handleSalvar} editingData={editingData} />
                         )}
+
+                        {/* ===== Adicionado: Se estiver editando um orçamento, permite anexar/substituir imagem ===== */}
+                        {editingData?.id && (
+                            <div className="upload-imagem-wrapper" style={{ marginTop: 12 }}>
+                                <label style={{ display: 'block', marginBottom: 6 }}>Imagem do Orçamento (arquivo ou câmera):</label>
+
+                                {/* Componente moderno: upload assinado para Cloudinary (captura + assinatura + notificação ao backend) */}
+                                <UploadImagemOrcamento
+                                    orcamentoId={editingData.id}
+                                    authToken={authToken}
+                                    imagemAtual={editingData.imagem || (editingData.imageUrl ? { url: editingData.imageUrl, public_id: editingData.public_id } : null)}
+                                    onChange={async (img) => {
+                                        // Atualiza o editingData local imediatamente e recarrega histórico
+                                        setEditingData(prev => prev ? { ...prev, imagem: { url: img.url || img.url, public_id: img.public_id } } : prev);
+                                        await fetchHistorico();
+                                    }}
+                                />
+
+                                <hr style={{ margin: '12px 0' }} />
+
+                                {/* Alternativa: input tradicional que envia multipart/form-data direto ao seu endpoint */}
+                                <label style={{ display: 'block', marginTop: 8 }}>
+                                    Ou envie direto para o servidor (multipart/form-data):
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        capture="environment"
+                                        onChange={(e) => {
+                                            const file = e.target.files?.[0];
+                                            if (file) handleUploadImagem(editingData.id, file);
+                                        }}
+                                        disabled={uploading}
+                                        style={{ display: 'block', marginTop: 6 }}
+                                    />
+                                </label>
+                                {uploading && <p>Enviando imagem...</p>}
+
+                                {/* Preview da imagem atual (se houver) */}
+                                {editingData?.imagem?.url && (
+                                    <div style={{ marginTop: 8 }}>
+                                        <strong>Imagem atual:</strong>
+                                        <div style={{ marginTop: 6 }}>
+                                            <img src={editingData.imagem.url} alt="Preview" style={{ maxWidth: 240, borderRadius: 6 }} crossOrigin="anonymous" />
+                                        </div>
+                                    </div>
+                                )}
+                                {/* Compatibilidade com outros nomes de campo */}
+                                {(!editingData?.imagem?.url && editingData?.imageUrl) && (
+                                    <div style={{ marginTop: 8 }}>
+                                        <strong>Imagem atual:</strong>
+                                        <div style={{ marginTop: 6 }}>
+                                            <img src={editingData.imageUrl} alt="Preview" style={{ maxWidth: 240, borderRadius: 6 }} crossOrigin="anonymous" />
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
                         <div className="historico-buttons-group">
                             <button onClick={exportarExcel} className="action-btn">
                                 Exportar Todos para Excel

@@ -2,6 +2,7 @@
 
 /* Estilos gerais do painel */
 .painel-orcamentos-container {
+    margin-top: 60px;
     background-color: #1a1a1a;
     color: #e0e0e0;
     min-height: 100vh;
@@ -261,6 +262,7 @@
 /* MEDIA QUERY PARA DESKTOP */
 @media (min-width: 768px) {
     .painel-orcamentos-container {
+        margin-top: 70px;
         padding: 20px;
     }
 
