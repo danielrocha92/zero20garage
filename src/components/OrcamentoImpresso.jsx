@@ -506,9 +506,14 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
             {orcamento.imagens &&
               orcamento.imagens.map((img, idx) => {
                 const thumbSrc =
+                  // Verificação para lidar com URLs de strings e objetos de imagem.
                   typeof img === 'string'
                     ? getCloudinaryThumb(img)
-                    : URL.createObjectURL(img);
+                    : (img && img.data && typeof img.data.data === 'string')
+                    ? `data:image/jpeg;base64,${img.data.data}` // Assume base64
+                    : (img instanceof File || (img && img.type && img.size))
+                    ? URL.createObjectURL(img)
+                    : '';
                 return (
                   <img
                     key={idx}
