@@ -57,9 +57,9 @@ import './GlobalStyles.css';
  * @param {React.ReactNode} props.children - Os componentes filhos a serem renderizados se o usuário estiver autenticado.
  */
 function PrivateRoute({ children }) {
-  // Apenas verifica se o token existe, não o seu valor
-  const token = localStorage.getItem("authToken");
-  return token ? children : <Navigate to="/login" replace />;
+  // Apenas verifica se o token existe, não o seu valor
+  const token = localStorage.getItem("authToken");
+  return token ? children : <Navigate to="/login" replace />;
 }
 
 /**
@@ -67,65 +67,65 @@ function PrivateRoute({ children }) {
  * Gerencia as rotas do aplicativo com transições de página usando Framer Motion.
  */
 const AnimatedRoutes = () => {
-  const location = useLocation();
+  const location = useLocation();
 
-  return (
-    <AnimatePresence mode="wait">
-      <Suspense fallback={<PageTransition />}>
-        <Routes location={location} key={location.pathname}>
+  return (
+    <AnimatePresence mode="wait">
+      <Suspense fallback={<PageTransition />}>
+        <Routes location={location} key={location.pathname}>
 
-          {/* Rotas de Autenticação e Protegidas */}
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/painel-orcamentos"
-            element={
-              <PrivateRoute>
-                <PainelOrcamentos />
-              </PrivateRoute>
-            }
-          />
+          {/* Rotas de Autenticação e Protegidas */}
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/painel-orcamentos"
+            element={
+              <PrivateRoute>
+                <PainelOrcamentos />
+              </PrivateRoute>
+            }
+          />
 
-          {/* Rota para o formulário de orçamento público */}
-          <Route path="/orcamento" element={<Orcamento />} />
+          {/* Rota para o formulário de orçamento público */}
+          <Route path="/orcamento" element={<Orcamento />} />
 
-          {/* NOVA ROTA para a página de geração de PDF */}
-          <Route path="/gerar-pdf" element={<GerarPdfPage />} />
+          {/* NOVA ROTA para a página de geração de PDF */}
+          <Route path="/gerar-pdf" element={<GerarPdfPage />} />
 
-          {/* Demais rotas públicas */}
-          <Route path="/" element={<Home />} />
-          <Route path="/Sobre" element={<Sobre />} />
-          <Route path="/Contato" element={<Contato />} />
-          <Route path="/Servicos" element={<Servicos />} />
-          <Route path="/Servicos/Mp" element={<Mp />} />
-          <Route path="/Servicos/Dp" element={<Dp />} />
-          <Route path="/Servicos/Tp" element={<Tp />} />
-          <Route path="/Servicos/Td" element={<Td />} />
-          <Route path="/Servicos/Cp" element={<Cp />} />
+          {/* Demais rotas públicas */}
+          <Route path="/" element={<Home />} />
+          <Route path="/Sobre" element={<Sobre />} />
+          <Route path="/Contato" element={<Contato />} />
+          <Route path="/Servicos" element={<Servicos />} />
+          <Route path="/Servicos/Mp" element={<Mp />} />
+          <Route path="/Servicos/Dp" element={<Dp />} />
+          <Route path="/Servicos/Tp" element={<Tp />} />
+          <Route path="/Servicos/Td" element={<Td />} />
+          <Route path="/Servicos/Cp" element={<Cp />} />
 
-          <Route path="/Home/Diagnostico" element={<Diagnostico />} />
-          <Route path="/Home/Desmontagem" element={<Desmontagem />} />
-          <Route path="/Home/Usinagem" element={<Usinagem />} />
-          <Route path="/Home/MontagemTeste" element={<MontagemTeste />} />
+          <Route path="/Home/Diagnostico" element={<Diagnostico />} />
+          <Route path="/Home/Desmontagem" element={<Desmontagem />} />
+          <Route path="/Home/Usinagem" element={<Usinagem />} />
+          <Route path="/Home/MontagemTeste" element={<MontagemTeste />} />
 
-          <Route path="/Blog" element={<Blog />} />
-          <Route path="/Blog/SinaisRetifica" element={<SinaisRetifica />} />
-          <Route path="/Blog/CustoRetifica" element={<CustoRetifica />} />
-          <Route path="/Blog/ManutencaoDeMotores" element={<ManutencaoDeMotores />} />
-          <Route path="/Blog/RetificaParcialOuCompleta" element={<RetificaParcialOuCompleta />} />
-          <Route path="/Blog/TrocarMotor" element={<TrocarMotor />} />
-          <Route path="/Blog/ValeAPenaRetificar" element={<ValeAPenaRetificar />} />
+          <Route path="/Blog" element={<Blog />} />
+          <Route path="/Blog/SinaisRetifica" element={<SinaisRetifica />} />
+          <Route path="/Blog/CustoRetifica" element={<CustoRetifica />} />
+          <Route path="/Blog/ManutencaoDeMotores" element={<ManutencaoDeMotores />} />
+          <Route path="/Blog/RetificaParcialOuCompleta" element={<RetificaParcialOuCompleta />} />
+          <Route path="/Blog/TrocarMotor" element={<TrocarMotor />} />
+          <Route path="/Blog/ValeAPenaRetificar" element={<ValeAPenaRetificar />} />
 
-          {/* Rotas de Rodapé */}
-          <Route path="/Politica" element={<Politica />} />
-          <Route path="/Trocas" element={<Trocas />} />
-          <Route path="/Faq" element={<Faq />} />
-          <Route path="/Trabalhe-conosco" element={<TrabalheConosco />} />
-          <Route path="/Termos" element={<Termos />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
-    </AnimatePresence>
-  );
+          {/* Rotas de Rodapé */}
+          <Route path="/Politica" element={<Politica />} />
+          <Route path="/Trocas" element={<Trocas />} />
+          <Route path="/Faq" element={<Faq />} />
+          <Route path="/Trabalhe-conosco" element={<TrabalheConosco />} />
+          <Route path="/Termos" element={<Termos />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+    </AnimatePresence>
+  );
 };
 
 /**
@@ -133,15 +133,15 @@ const AnimatedRoutes = () => {
  * Configura o roteamento e o layout geral do aplicativo.
  */
 function App() {
-  return (
-    <Router>
-      <Layout>
-        <AnimatedRoutes />
-        <ScrollToTop />
-        <ScrollToTopButton />
-      </Layout>
-    </Router>
-  );
+  return (
+    <Router>
+      <Layout>
+        <AnimatedRoutes />
+        <ScrollToTop />
+        <ScrollToTopButton />
+      </Layout>
+    </Router>
+  );
 }
 
 export default App;
