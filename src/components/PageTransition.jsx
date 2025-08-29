@@ -117,8 +117,8 @@ const PainelOrcamentos = () => {
       <section className="historico-section">
         <h2>Histórico</h2>
         <div className="historico-buttons">
-          <button onClick={exportarExcel} className="btn-export">Exportar Excel</button>
-          <button onClick={exportarPDF} className="btn-export">Exportar PDF</button>
+          <button onClick={exportarExcel} className="button">Exportar Excel</button>
+          <button onClick={exportarPDF} className="button">Exportar PDF</button>
         </div>
 
         {historico.length === 0 ? (

@@ -473,7 +473,7 @@ const OrcamentoGenerico = ({
 
         {/* Ações */}
         <div className="form-actions">
-          <button type="submit" className="action-btn">Salvar Orçamento</button>
+          <button type="submit" className="button">Salvar Orçamento</button>
         </div>
       </form>
 

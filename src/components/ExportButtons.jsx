@@ -77,8 +77,8 @@ const ExportButtons = ({ historico, currentOrcamentoData }) => {
   return (
     <div className="export-buttons-container">
       {/* Botões para exportar e salvar */}
-      <button onClick={() => exportarExcel(historico)} className="action-btn">Exportar Excel</button>
-      <button onClick={() => exportarPDF(historico)} className="action-btn">Exportar PDF</button>
+      <button onClick={() => exportarExcel(historico)} className="button">Exportar Excel</button>
+      <button onClick={() => exportarPDF(historico)} className="button">Exportar PDF</button>
       {/* O botão "Salvar no Google Sheets" provavelmente deve salvar o orçamento atual, não o histórico inteiro */}
       <button onClick={() => salvarNoGoogleSheets(currentOrcamentoData)} className="action-btn">Salvar no Google Sheets</button>
     </div>
