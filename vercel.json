@@ -1,15 +1,11 @@
 {
-  "rewrites": [
+  "source": "/(.*)",
+  "destination": "/index.html",
+  "has": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html",
-      "has": [
-        {
-          "type": "header",
-          "key": "accept",
-          "value": "text/html"
-        }
-      ]
+      "type": "header",
+      "key": "accept",
+      "value": "text/html"
     }
   ]
 }
