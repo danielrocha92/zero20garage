@@ -25,7 +25,17 @@ const Login = () => {
         body: JSON.stringify(form),
       });
 
+      console.log("🔎 Resposta bruta:", res);
+
+      if (!res.ok) {
+        const text = await res.text();
+        console.error("❌ Erro HTTP:", res.status, text);
+        setErro(`Erro ${res.status}: ${text}`);
+        return;
+      }
+
       const data = await res.json();
+      console.log("✅ Resposta JSON:", data);
 
       if (data.status === "ok") {
         localStorage.setItem("authToken", data.token);
@@ -34,7 +44,8 @@ const Login = () => {
         setErro("E-mail ou senha inválidos");
       }
     } catch (err) {
-      setErro("Erro ao conectar ao servidor");
+      console.error("🔥 Erro de conexão:", err.message);
+      setErro(`Erro ao conectar ao servidor: ${err.message}`);
     } finally {
       setIsSubmitting(false);
     }
