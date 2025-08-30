@@ -144,12 +144,12 @@ const FormularioOrcamento = ({
         {/* Informações do cliente e veículo */}
         <section className="client-vehicle-section">
           <h2>Informações do Cliente e Veículo</h2>
-          <input type="text" name="ordemServico" placeholder="OS" value={formData.ordemServico} onChange={handleInputChange} />
-          <input type="text" name="nome" placeholder="Cliente" value={formData.nome} onChange={handleInputChange} />
-          <input type="text" name="veiculo" placeholder="Veículo" value={formData.veiculo} onChange={handleInputChange} />
-          <input type="text" name="placa" placeholder="Placa" value={formData.placa} onChange={handleInputChange} />
-          <input type="text" name="telefone" placeholder="Telefone" value={formData.telefone} onChange={handleInputChange} />
-          <input type="date" name="data" value={formData.data} onChange={handleInputChange} />
+          <input type="text" name="ordemServico" placeholder="OS" value={formData.ordemServico} onChange={handleInputChange} autoComplete="off" />
+          <input type="text" name="nome" placeholder="Cliente" value={formData.nome} onChange={handleInputChange} autoComplete="name" />
+          <input type="text" name="veiculo" placeholder="Veículo" value={formData.veiculo} onChange={handleInputChange} autoComplete="off" />
+          <input type="text" name="placa" placeholder="Placa" value={formData.placa} onChange={handleInputChange} autoComplete="off" />
+          <input type="text" name="telefone" placeholder="Telefone" value={formData.telefone} onChange={handleInputChange} autoComplete="tel" />
+          <input type="date" name="data" value={formData.data} onChange={handleInputChange} autoComplete="bday" />
         </section>
 
         {/* Peças */}
@@ -169,13 +169,13 @@ const FormularioOrcamento = ({
                       {sub.label}
                     </label>
                   ) : (
-                    <input type="text" placeholder={sub.label} value={sub.value} onChange={e => handleSubItemChange('pecas', i, sIdx, e.target.value)} />
+                    <input type="text" placeholder={sub.label} value={sub.value} onChange={e => handleSubItemChange('pecas', i, sIdx, e.target.value)} autoComplete="off" />
                   )}
                 </div>
               ))}
             </div>
           ))}
-          <input type="number" name="totalPecasManual" value={formData.totalPecasManual} onChange={handleManualTotalChange} placeholder="Total Peças" />
+          <input type="number" name="totalPecasManual" value={formData.totalPecasManual} onChange={handleManualTotalChange} placeholder="Total Peças" autoComplete="off" />
         </section>
 
         {/* Serviços */}
@@ -195,22 +195,22 @@ const FormularioOrcamento = ({
                       {sub.label}
                     </label>
                   ) : (
-                    <input type="text" placeholder={sub.label} value={sub.value} onChange={e => handleSubItemChange('servicos', i, sIdx, e.target.value)} />
+                    <input type="text" placeholder={sub.label} value={sub.value} onChange={e => handleSubItemChange('servicos', i, sIdx, e.target.value)} autoComplete="off" />
                   )}
                 </div>
               ))}
             </div>
           ))}
-          <input type="number" name="totalServicosManual" value={formData.totalServicosManual} onChange={handleManualTotalChange} placeholder="Total Serviços" />
+          <input type="number" name="totalServicosManual" value={formData.totalServicosManual} onChange={handleManualTotalChange} placeholder="Total Serviços" autoComplete="off" />
         </section>
 
         {/* Totais e Observações */}
         <section className="summary-section">
-          <input type="number" name="totalMaoDeObraManual" value={formData.totalMaoDeObraManual} onChange={handleManualTotalChange} placeholder="Total Mão de Obra" />
-          <input type="number" name="totalGeralManual" value={formData.totalGeralManual} onChange={handleManualTotalChange} placeholder="TOTAL GERAL" />
-          <input type="text" name="formaPagamento" value={formData.formaPagamento} onChange={handleInputChange} placeholder="Forma de pagamento" />
-          <textarea name="observacoes" value={formData.observacoes} onChange={handleInputChange} placeholder="Observações" />
-          <select name="status" value={formData.status} onChange={handleInputChange}>
+          <input type="number" name="totalMaoDeObraManual" value={formData.totalMaoDeObraManual} onChange={handleManualTotalChange} placeholder="Total Mão de Obra" autoComplete="off" />
+          <input type="number" name="totalGeralManual" value={formData.totalGeralManual} onChange={handleManualTotalChange} placeholder="TOTAL GERAL" autoComplete="off" />
+          <input type="text" name="formaPagamento" value={formData.formaPagamento} onChange={handleInputChange} placeholder="Forma de pagamento" autoComplete="off" />
+          <textarea name="observacoes" value={formData.observacoes} onChange={handleInputChange} placeholder="Observações" autoComplete="off" />
+          <select name="status" value={formData.status} onChange={handleInputChange} autoComplete="off">
             <option value="Aberto">Aberto</option>
             <option value="Aprovado">Aprovado</option>
             <option value="Rejeitado">Rejeitado</option>
