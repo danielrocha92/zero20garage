@@ -1,4 +1,3 @@
-// src/components/HistoricoOrcamentos.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './HistoricoOrcamentos.css';
@@ -92,8 +91,8 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
 
   // ✅ Extraído em função reutilizável
   const getImagemUrl = (orcamento) => {
-    if (Array.isArray(orcamento.imagens) && orcamento.imagens.length > 0 && orcamento.imagens[0]?.url) {
-      return orcamento.imagens[0].url;
+    if (Array.isArray(orcamento.imagens) && orcamento.imagens.length > 0 && typeof orcamento.imagens[0]?.secure_url === 'string') {
+      return orcamento.imagens[0].secure_url;
     }
     return orcamento.imagem?.url || orcamento.imageUrl || null;
   };
@@ -272,3 +271,4 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
 };
 
 export default HistoricoOrcamentos;
+```eof
