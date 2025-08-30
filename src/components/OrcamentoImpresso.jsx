@@ -37,19 +37,27 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
   };
 
   const toPngDataUrlFromSrc = async (src) => {
-    const img = await new Promise((resolve, reject) => {
-      const i = new Image();
-      i.crossOrigin = 'anonymous';
-      i.onload = () => resolve(i);
-      i.onerror = reject;
-      i.src = src;
-    });
-    const canvas = document.createElement('canvas');
-    canvas.width = img.naturalWidth || img.width;
-    canvas.height = img.naturalHeight || img.height;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0);
-    return canvas.toDataURL('image/png');
+    try {
+      const img = await new Promise((resolve, reject) => {
+        const i = new Image();
+        i.crossOrigin = 'anonymous'; // Essencial para evitar problemas de CORS
+        i.onload = () => resolve(i);
+        i.onerror = () => {
+          console.error(`Erro ao carregar a imagem de origem: ${src}`);
+          reject(new Error('Failed to load image'));
+        };
+        i.src = src;
+      });
+      const canvas = document.createElement('canvas');
+      canvas.width = img.naturalWidth || img.width;
+      canvas.height = img.naturalHeight || img.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      return canvas.toDataURL('image/png');
+    } catch (e) {
+      console.error('Erro na conversão da imagem para Data URL:', e);
+      return null;
+    }
   };
 
   const getOriginalImageAsDataUrl = async (img) => {
@@ -248,6 +256,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           }
         }
 
+        // Adiciona as imagens originais em uma nova página
         await appendOriginalImagesToPdf(pdf, orcamento?.imagens || []);
 
         const filename = `Orçamento_OS_${orcamento?.ordemServico || 'SemOS'}_${orcamento?.cliente || 'SemCliente'}.pdf`;
