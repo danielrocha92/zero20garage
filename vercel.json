@@ -16,8 +16,7 @@
     {
       "source": "/(.*).(js|css|html|json|xml|txt|svg|ico|png|jpg|jpeg|gif|webp)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" },
-        { "key": "Content-Encoding", "value": "br" }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     },
     {
