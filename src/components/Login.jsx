@@ -45,27 +45,34 @@ const Login = () => {
       <div className="login-container">
         <h2 className="titulo-claro">Login Admin</h2>
         <form onSubmit={handleSubmit} className="form-login" autoComplete="on">
+          <label htmlFor="email">E-mail</label>
           <input
             type="email"
+            id="email"
             name="email"
-            placeholder="E-mail"
+            placeholder="Digite seu e-mail"
             value={form.email}
             onChange={handleChange}
             required
             autoComplete="username"
           />
+
+          <label htmlFor="password">Senha</label>
           <input
             type="password"
+            id="password"
             name="password"
-            placeholder="Senha"
+            placeholder="Digite sua senha"
             value={form.password}
             onChange={handleChange}
             required
             autoComplete="current-password"
           />
+
           <button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Entrando..." : "Entrar"}
           </button>
+
           {erro && <p className="erro">{erro}</p>}
         </form>
       </div>
