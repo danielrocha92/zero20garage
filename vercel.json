@@ -1,11 +1,16 @@
 {
-  "source": "/(.*)",
-  "destination": "/index.html",
-  "has": [
+  "rewrites": [
+    { "source": "/manifest.json", "destination": "/manifest.json" },
+    { "source": "/favicon.ico", "destination": "/favicon.ico" },
+    { "source": "/logo.png", "destination": "/logo.png" },
+    { "source": "/logo512.png", "destination": "/logo512.png" },
+    { "source": "/testimonials/(.*)", "destination": "/testimonials/$1" },
     {
-      "type": "header",
-      "key": "accept",
-      "value": "text/html"
+      "source": "/(.*)",
+      "destination": "/index.html",
+      "has": [
+        { "type": "header", "key": "accept", "value": "text/html" }
+      ]
     }
   ]
 }
