@@ -104,7 +104,16 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       const drawW = img.width * ratio;
       const drawH = img.height * ratio;
       const startY = first ? margin + 10 : margin;
-      pdf.addImage(dataUrl, 'PNG', margin, startY, drawW, drawH);
+      
+      let imgX = margin;
+      let imgY = startY;
+
+      // Centraliza a imagem horizontalmente
+      if (drawW < maxW) {
+        imgX = (pageW - drawW) / 2;
+      }
+
+      pdf.addImage(dataUrl, 'PNG', imgX, imgY, drawW, drawH);
 
       if (idx < dataUrls.length - 1) {
         pdf.addPage();
