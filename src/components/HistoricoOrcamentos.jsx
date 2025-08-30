@@ -197,6 +197,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
           <details key={orcamento.id} className="orcamento-card">
             <summary className="card-header">
               <h3>OS.: {orcamento.ordemServico || '-'}</h3>
+              {/* CORREÇÃO: Colocando a crase de fechamento no lugar correto */}
               <span className={`status-tag ${getStatusTagClass(orcamento.status)}`}>
                 {orcamento.status || 'Aberto'}
               </span>
@@ -271,4 +272,3 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
 };
 
 export default HistoricoOrcamentos;
-```eof
