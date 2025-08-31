@@ -94,6 +94,7 @@ const AnimatedRoutes = () => {
           <Route path="/Termos" element={<Termos />} />
           <Route path="/orcamento" element={<Orcamento />} />
           <Route path="/gerar-pdf" element={<GerarPdfPage />} />
+          <Route path="/login" element={<Login />} />
 
           {/* Rotas protegidas */}
           <Route
@@ -104,7 +105,6 @@ const AnimatedRoutes = () => {
               </PrivateRoute>
             }
           />
-          <Route path="/login" element={<Login />} />
 
           {/* Fallback para rotas não encontradas */}
           <Route path="*" element={<NotFound />} />
