@@ -13,17 +13,17 @@ const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUpl
     const files = Array.from(e.target.files || []);
     if (!files.length) return;
 
-    // Cria preview local
+    // Cria URLs locais para preview
     const filesWithPreview = files.map((f) => ({
       file: f,
       preview: URL.createObjectURL(f),
-      key: f.name + "-" + Date.now() + "-" + Math.random(),
+      key: f.name + "-" + Date.now() + "-" + Math.random(), // key única
     }));
     setSelectedFiles((prev) => [...prev, ...filesWithPreview]);
 
-    if (!orcamentoId) return; // apenas preview se não houver ID de orçamento
-    setUploading(true);
+    if (!orcamentoId) return; // apenas preview se não houver ID
 
+    setUploading(true);
     try {
       const form = new FormData();
       files.forEach((f) => form.append("file", f));
@@ -35,15 +35,19 @@ const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUpl
       });
 
       const text = await res.text();
+      let data;
       try {
-        const parsed = JSON.parse(text);
-        if (res.ok) {
-          onUploaded?.(parsed);
-        } else {
-          console.error("Erro no upload:", parsed);
-        }
+        data = JSON.parse(text);
       } catch {
         console.error("Resposta inválida do servidor:", text);
+        setUploading(false);
+        return;
+      }
+
+      if (res.ok) {
+        onUploaded?.([...(imagemAtual || []), data.image]); // adiciona imagem nova
+      } else {
+        console.error("Erro no upload:", data);
       }
     } catch (err) {
       console.error("Falha no upload:", err);
@@ -55,36 +59,27 @@ const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUpl
   // --- Excluir imagens selecionadas antes do upload ---
   const handleDeleteSelected = (key) => {
     setSelectedFiles((prev) => {
-      prev.forEach((f) => {
-        if (f.key === key) URL.revokeObjectURL(f.preview);
-      });
-      return prev.filter((f) => f.key !== key);
+      const updated = prev.filter((f) => f.key !== key);
+      prev.forEach((f) => f.key === key && URL.revokeObjectURL(f.preview));
+      return updated;
     });
   };
 
   // --- Excluir imagens já enviadas ---
   const handleDeleteUploaded = async (img) => {
-    if (!orcamentoId || !img.public_id) return;
+    if (!orcamentoId || !img.id) return;
 
     try {
-      const res = await fetch(
-        `${API_BASE_URL}/api/orcamentos/${orcamentoId}/imagens/${img.public_id}`,
-        {
-          method: "DELETE",
-          headers: authToken ? { Authorization: `Bearer ${authToken}` } : undefined,
-        }
-      );
+      const res = await fetch(`${API_BASE_URL}/api/orcamentos/${orcamentoId}/imagens/${img.id}`, {
+        method: "DELETE",
+        headers: authToken ? { Authorization: `Bearer ${authToken}` } : undefined,
+      });
 
-      const text = await res.text();
-      try {
-        const parsed = JSON.parse(text);
-        if (res.ok) {
-          onUploaded?.(parsed);
-        } else {
-          console.error("Erro ao excluir imagem:", parsed);
-        }
-      } catch {
-        console.error("Resposta inválida ao excluir imagem:", text);
+      if (res.ok) {
+        onUploaded?.((imagemAtual || []).filter((i) => i.id !== img.id));
+      } else {
+        const text = await res.text();
+        console.error("Erro ao excluir imagem:", text);
       }
     } catch (err) {
       console.error("Falha na exclusão:", err);
@@ -125,8 +120,8 @@ const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUpl
           <h4>Imagens já enviadas:</h4>
           <div className="image-list">
             {imagemAtual.map((img) => (
-              <div key={img.public_id || img.url} className="image-item">
-                <img src={img.url || img.uri || img} alt={`Imagem ${img.nome || img.public_id}`} className="image-preview" />
+              <div key={img.id} className="image-item">
+                <img src={img.url} alt={`Imagem ${img.id}`} className="image-preview" />
                 <button type="button" className="btn-delete" onClick={() => handleDeleteUploaded(img)}>
                   Excluir
                 </button>
