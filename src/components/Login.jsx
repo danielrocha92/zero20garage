@@ -6,7 +6,7 @@ import "./Login.css";
 const Login = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
-  const [erro, setErro] = useState(null);
+  const [message, setMessage] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
@@ -15,37 +15,33 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErro(null);
+    setMessage(null);
     setIsSubmitting(true);
 
     try {
-      const res = await fetch("https://zero20garage-login.onrender.com/login", {
+      const res = await fetch("https://zero20-login-api.onrender.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
 
-      console.log("🔎 Resposta bruta:", res);
-
       if (!res.ok) {
         const text = await res.text();
-        console.error("❌ Erro HTTP:", res.status, text);
-        setErro(`Erro ${res.status}: ${text}`);
+        setMessage(`Erro ${res.status}: ${text}`);
         return;
       }
 
       const data = await res.json();
-      console.log("✅ Resposta JSON:", data);
 
-      if (data.status === "ok") {
-        localStorage.setItem("authToken", data.token);
-        navigate("/painel-orcamentos");
+      if (data.token) {
+        localStorage.setItem("authToken", data.token); // 🔑 salva token
+        setMessage("Login bem-sucedido! Redirecionando...");
+        navigate("/painel-orcamentos"); // 🔒 redireciona
       } else {
-        setErro("E-mail ou senha inválidos");
+        setMessage("E-mail ou senha inválidos.");
       }
     } catch (err) {
-      console.error("🔥 Erro de conexão:", err.message);
-      setErro(`Erro ao conectar ao servidor: ${err.message}`);
+      setMessage(`Erro de conexão: ${err.message}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -84,7 +80,7 @@ const Login = () => {
             {isSubmitting ? "Entrando..." : "Entrar"}
           </button>
 
-          {erro && <p className="erro">{erro}</p>}
+          {message && <p className="erro">{message}</p>}
         </form>
       </div>
     </div>
