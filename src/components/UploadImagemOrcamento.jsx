@@ -1,8 +1,7 @@
-// src/components/UploadImagemOrcamento.jsx
 import React, { useState } from "react";
 import "./UploadImagemOrcamento.css";
 
-const API_BASE_URL = "https://api-orcamento-n49u.onrender.com";
+const API_BASE_URL = "https://api-orcamento-n49u.onrender.com/api/orcamentos";
 
 const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUploaded }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -17,7 +16,7 @@ const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUpl
     const filesWithPreview = files.map((f) => ({
       file: f,
       preview: URL.createObjectURL(f),
-      key: f.name + "-" + Date.now() + "-" + Math.random(), // key única
+      key: f.name + "-" + Date.now() + "-" + Math.random(),
     }));
     setSelectedFiles((prev) => [...prev, ...filesWithPreview]);
 
@@ -26,28 +25,21 @@ const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUpl
     setUploading(true);
     try {
       const form = new FormData();
-      files.forEach((f) => form.append("file", f));
+      files.forEach((f) => form.append("files", f)); // plural "files"
 
-      const res = await fetch(`${API_BASE_URL}/api/orcamentos/${orcamentoId}/imagens`, {
+      const res = await fetch(`${API_BASE_URL}/${orcamentoId}/imagens`, {
         method: "POST",
         body: form,
         headers: authToken ? { Authorization: `Bearer ${authToken}` } : undefined,
       });
 
-      const text = await res.text();
-      let data;
-      try {
-        data = JSON.parse(text);
-      } catch {
-        console.error("Resposta inválida do servidor:", text);
-        setUploading(false);
-        return;
-      }
+      const data = await res.json().catch(() => null);
 
-      if (res.ok) {
-        onUploaded?.([...(imagemAtual || []), data.image]); // adiciona imagem nova
+      if (res.ok && data?.images) {
+        // Adiciona as novas imagens ao array existente
+        onUploaded?.([...(imagemAtual || []), ...data.images]);
       } else {
-        console.error("Erro no upload:", data);
+        console.error("Erro no upload:", data || "Resposta inválida do servidor");
       }
     } catch (err) {
       console.error("Falha no upload:", err);
@@ -67,16 +59,16 @@ const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUpl
 
   // --- Excluir imagens já enviadas ---
   const handleDeleteUploaded = async (img) => {
-    if (!orcamentoId || !img.id) return;
+    if (!orcamentoId || !img.public_id) return;
 
     try {
-      const res = await fetch(`${API_BASE_URL}/api/orcamentos/${orcamentoId}/imagens/${img.id}`, {
+      const res = await fetch(`${API_BASE_URL}/${orcamentoId}/imagens/${img.public_id}`, {
         method: "DELETE",
         headers: authToken ? { Authorization: `Bearer ${authToken}` } : undefined,
       });
 
       if (res.ok) {
-        onUploaded?.((imagemAtual || []).filter((i) => i.id !== img.id));
+        onUploaded?.((imagemAtual || []).filter((i) => i.public_id !== img.public_id));
       } else {
         const text = await res.text();
         console.error("Erro ao excluir imagem:", text);
@@ -120,8 +112,8 @@ const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUpl
           <h4>Imagens já enviadas:</h4>
           <div className="image-list">
             {imagemAtual.map((img) => (
-              <div key={img.id} className="image-item">
-                <img src={img.url} alt={`Imagem ${img.id}`} className="image-preview" />
+              <div key={img.public_id} className="image-item">
+                <img src={img.url} alt={`Imagem ${img.public_id}`} className="image-preview" />
                 <button type="button" className="btn-delete" onClick={() => handleDeleteUploaded(img)}>
                   Excluir
                 </button>
