@@ -25,7 +25,7 @@ const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUpl
     setUploading(true);
     try {
       const form = new FormData();
-      files.forEach((f) => form.append("files", f)); // plural "files"
+      files.forEach((f) => form.append("files", f));
 
       const res = await fetch(`${API_BASE_URL}/${orcamentoId}/imagens`, {
         method: "POST",
@@ -36,8 +36,8 @@ const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUpl
       const data = await res.json().catch(() => null);
 
       if (res.ok && data?.images) {
-        // Adiciona as novas imagens ao array existente
-        onUploaded?.([...(imagemAtual || []), ...data.images]);
+        // Adiciona as novas imagens de forma segura
+        onUploaded?.((prev) => [...(prev || []), ...data.images]);
       } else {
         console.error("Erro no upload:", data || "Resposta inválida do servidor");
       }
@@ -51,8 +51,10 @@ const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUpl
   // --- Excluir imagens selecionadas antes do upload ---
   const handleDeleteSelected = (key) => {
     setSelectedFiles((prev) => {
-      const updated = prev.filter((f) => f.key !== key);
-      prev.forEach((f) => f.key === key && URL.revokeObjectURL(f.preview));
+      const updated = prev.filter((f) => {
+        if (f.key === key) URL.revokeObjectURL(f.preview);
+        return f.key !== key;
+      });
       return updated;
     });
   };
@@ -68,7 +70,7 @@ const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUpl
       });
 
       if (res.ok) {
-        onUploaded?.((imagemAtual || []).filter((i) => i.public_id !== img.public_id));
+        onUploaded?.((prev) => (prev || []).filter((i) => i.public_id !== img.public_id));
       } else {
         const text = await res.text();
         console.error("Erro ao excluir imagem:", text);
