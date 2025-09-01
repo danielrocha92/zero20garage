@@ -6,7 +6,7 @@ import TestimonialsCarousel from '../../components/TestimonialsCarousel';
 import {FaCogs, FaTools, FaCheckCircle, FaCreditCard } from 'react-icons/fa';
 import { MdEngineering } from 'react-icons/md';
 import { TbTruckDelivery, TbSettingsSearch } from 'react-icons/tb';import FAQSection from '../../components/FAQSection';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import ContatoCta from '../../components/ContatoCta';
 
 

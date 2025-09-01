@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import '../../styles/Blog.css';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import AnimatedPage from '../../components/AnimatedPage';
 
 // ✅ Import das imagens

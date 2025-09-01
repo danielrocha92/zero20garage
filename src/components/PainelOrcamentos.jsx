@@ -216,7 +216,13 @@ const PainelOrcamentos = () => {
             <button onClick={handleLogout}>Sair</button>
           </nav>
 
-          <main className="orcamento-form-wrapper" id="orcamento-form">
+          {/* --- Barra fixa de exportação --- */}
+          <div className="export-buttons-fixed top-0 left-0 w-full bg-white shadow-md z-50 p-4 flex justify-center gap-4">
+            <button onClick={exportarExcel} className="button">Exportar Todos para Excel</button>
+            <button onClick={exportarPDFCompleto} className="button">Exportar Todos para PDF</button>
+          </div>
+
+          <main className="orcamento-form-wrapper mt-24" id="orcamento-form">
             {tipo === 'motor'
               ? <OrcamentoMotorCompleto onSubmit={handleSalvar} editingData={editingData} />
               : <OrcamentoCabecote onSubmit={handleSalvar} editingData={editingData} />
@@ -233,11 +239,6 @@ const PainelOrcamentos = () => {
                 }}
               />
             </Suspense>
-
-            <div className="historico-buttons-group">
-              <button onClick={exportarExcel} className="button">Exportar Todos para Excel</button>
-              <button onClick={exportarPDFCompleto} className="button">Exportar Todos para PDF</button>
-            </div>
           </main>
 
           <div ref={historicoRef}>
