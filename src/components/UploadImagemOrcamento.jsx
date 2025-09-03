@@ -1,10 +1,15 @@
 import { useState, useEffect, useCallback } from "react";
 
-// ✅ Ajuste automático da URL do backend conforme ambiente
-const API_BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://zero20-upload-api.onrender.com" // Render em produção
-    : "http://localhost:8080";                 // localhost para desenvolvimento
+// ✅ API base pega da variável de ambiente injetada pelo React
+// Use .env.local com REACT_APP_API_BASE
+const API_BASE_URL = (() => {
+  // fallback seguro
+  try {
+    return process.env.REACT_APP_API_BASE || "http://localhost:8080";
+  } catch {
+    return "http://localhost:8080";
+  }
+})();
 
 const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -47,7 +52,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
 
     for (let i = 0; i < updatedFiles.length; i++) {
       const f = updatedFiles[i];
-      if (f.uploaded) continue; // pular já enviados
+      if (f.uploaded) continue;
 
       const formData = new FormData();
       formData.append("files", f.file);
@@ -55,7 +60,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
       try {
         const res = await fetch(`${API_BASE_URL}/upload/${orcamentoId}`, {
           method: "POST",
-          body: formData
+          body: formData,
         });
 
         if (!res.ok) {
