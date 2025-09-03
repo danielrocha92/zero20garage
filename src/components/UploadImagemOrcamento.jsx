@@ -1,18 +1,23 @@
 import { useState, useEffect, useCallback } from "react";
 
-const API_BASE_URL = "https://api-orcamento-n49u.onrender.com/api/orcamentos";
+// ✅ Ajuste automático da URL do backend conforme ambiente
+const API_BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://zero20-upload-api.onrender.com" // Render em produção
+    : "http://localhost:8080";                 // localhost para desenvolvimento
 
 const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Limpar URLs de preview quando o componente desmontar
   useEffect(() => {
     return () => selectedFiles.forEach(f => URL.revokeObjectURL(f.preview));
   }, [selectedFiles]);
 
-  // Upload
-  const handleFileChange = useCallback(async (event) => {
+  // Selecionar arquivos
+  const handleFileChange = (event) => {
     const files = Array.from(event.target.files || []);
     if (!files.length) return;
 
@@ -20,9 +25,16 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
       file: f,
       preview: URL.createObjectURL(f),
       key: f.name + "-" + Date.now() + "-" + Math.random(),
+      progress: 0,
+      uploaded: false,
+      error: null
     }));
-    setSelectedFiles(prev => [...prev, ...filesWithPreview]);
 
+    setSelectedFiles(prev => [...prev, ...filesWithPreview]);
+  };
+
+  // Upload de todos os arquivos selecionados
+  const handleUploadAll = useCallback(async () => {
     if (!orcamentoId) {
       setError("Crie o orçamento antes de enviar imagens.");
       return;
@@ -31,31 +43,47 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
     setUploading(true);
     setError(null);
 
-    try {
+    const updatedFiles = [...selectedFiles];
+
+    for (let i = 0; i < updatedFiles.length; i++) {
+      const f = updatedFiles[i];
+      if (f.uploaded) continue; // pular já enviados
+
       const formData = new FormData();
-      files.forEach(f => formData.append("files", f));
+      formData.append("files", f.file);
 
-      const res = await fetch(`${API_BASE_URL}/${orcamentoId}/imagens`, {
-        method: "POST",
-        body: formData,
-      });
+      try {
+        const res = await fetch(`${API_BASE_URL}/upload/${orcamentoId}`, {
+          method: "POST",
+          body: formData
+        });
 
-      const data = await res.json();
+        if (!res.ok) {
+          const text = await res.text();
+          throw new Error(text || "Erro no servidor");
+        }
 
-      if (res.ok && data?.images) {
-        onUploaded?.(prev => [...(prev || []), ...data.images]);
-      } else {
-        setError(data.message || "Erro ao enviar imagens");
+        const data = await res.json();
+
+        if (data?.images && data.images.length > 0) {
+          f.uploaded = true;
+          f.progress = 100;
+          onUploaded?.(prev => [...(prev || []), ...data.images]);
+        } else {
+          f.error = data.message || "Erro ao enviar imagem";
+        }
+      } catch (err) {
+        console.error("Falha no upload:", err);
+        f.error = "Falha ao enviar imagem. Verifique sua conexão.";
       }
-    } catch (err) {
-      console.error("Falha no upload:", err);
-      setError("Falha ao enviar imagens. Verifique sua conexão.");
-    } finally {
-      setUploading(false);
-    }
-  }, [orcamentoId, onUploaded]);
 
-  // Excluir pré-visualização
+      setSelectedFiles([...updatedFiles]);
+    }
+
+    setUploading(false);
+  }, [orcamentoId, onUploaded, selectedFiles]);
+
+  // Excluir arquivo selecionado antes do envio
   const handleDeleteSelected = key => {
     setSelectedFiles(prev => prev.filter(f => {
       if (f.key === key) URL.revokeObjectURL(f.preview);
@@ -68,7 +96,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
     if (!orcamentoId || !img.public_id) return;
 
     try {
-      const res = await fetch(`${API_BASE_URL}/${orcamentoId}/imagens/${img.public_id}`, {
+      const res = await fetch(`${API_BASE_URL}/upload/${orcamentoId}/${img.public_id}`, {
         method: "DELETE",
       });
 
@@ -87,18 +115,27 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
   return (
     <div className="upload-imagem-orcamento">
       <input type="file" multiple accept="image/*" onChange={handleFileChange} disabled={uploading} />
-      {uploading && <p>Enviando...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
 
       {selectedFiles.length > 0 && (
         <div>
           <h4>Pré-visualização:</h4>
           {selectedFiles.map(f => (
-            <div key={f.key}>
-              <img src={f.preview} alt={f.file.name} width={100} />
-              <button onClick={() => handleDeleteSelected(f.key)}>Excluir</button>
+            <div key={f.key} style={{ marginBottom: '10px' }}>
+              <img src={f.preview} alt={f.file.name} width={100} style={{ marginRight: '10px' }} />
+              {f.uploaded ? (
+                <span style={{ color: 'green' }}>Enviado ✅</span>
+              ) : f.error ? (
+                <span style={{ color: 'red' }}>{f.error}</span>
+              ) : (
+                <span>Pronto para enviar</span>
+              )}
+              <button onClick={() => handleDeleteSelected(f.key)} disabled={uploading} style={{ marginLeft: '10px' }}>Excluir</button>
             </div>
           ))}
+
+          <button onClick={handleUploadAll} disabled={uploading} style={{ marginTop: '10px' }}>
+            {uploading ? 'Enviando...' : 'Enviar todas as imagens'}
+          </button>
         </div>
       )}
 
@@ -106,13 +143,15 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
         <div>
           <h4>Imagens enviadas:</h4>
           {imagemAtual.map(img => (
-            <div key={img.public_id}>
-              <img src={img.url} alt={img.public_id} width={100} />
+            <div key={img.public_id} style={{ marginBottom: '10px' }}>
+              <img src={img.url} alt={img.public_id} width={100} style={{ marginRight: '10px' }} />
               <button onClick={() => handleDeleteUploaded(img)}>Excluir</button>
             </div>
           ))}
         </div>
       )}
+
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 };
