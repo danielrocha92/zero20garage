@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, useEffect, useCallback } from "react";
 
 // ✅ API base pega da variável de ambiente injetada pelo React
@@ -39,54 +40,61 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
   };
 
   // Upload de todos os arquivos selecionados
-  const handleUploadAll = useCallback(async () => {
+const handleUploadAll = useCallback(async () => {
+    if (!selectedFiles.length) {
+      setError('Nenhum arquivo selecionado.');
+      return;
+    }
+
+    // ✅ Adiciona a verificação do orcamentoId
     if (!orcamentoId) {
-      setError("Crie o orçamento antes de enviar imagens.");
+      setError('O ID do orçamento não foi fornecido.');
       return;
     }
 
     setUploading(true);
     setError(null);
+    let uploadedUrls = [...imagemAtual];
 
-    const updatedFiles = [...selectedFiles];
-
-    for (let i = 0; i < updatedFiles.length; i++) {
-      const f = updatedFiles[i];
-      if (f.uploaded) continue;
-
+    for (const fileItem of selectedFiles) {
       const formData = new FormData();
-      formData.append("files", f.file);
+      formData.append('file', fileItem.file);
+      // ✅ Adiciona o orcamentoId no FormData
+      formData.append('orcamentoId', orcamentoId);
 
       try {
-        const res = await fetch(`${API_BASE_URL}/upload/${orcamentoId}`, {
-          method: "POST",
-          body: formData,
+        const response = await axios.post(`${API_BASE_URL}/api/upload-image`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
         });
 
-        if (!res.ok) {
-          const text = await res.text();
-          throw new Error(text || "Erro no servidor");
-        }
+        // Atualiza a lista de URLs com a nova URL
+        uploadedUrls.push({ url: response.data.url });
 
-        const data = await res.json();
+        setSelectedFiles(prev =>
+          prev.map(f =>
+            f.key === fileItem.key ? { ...f, uploaded: true, error: null } : f
+          )
+        );
 
-        if (data?.images && data.images.length > 0) {
-          f.uploaded = true;
-          f.progress = 100;
-          onUploaded?.(prev => [...(prev || []), ...data.images]);
-        } else {
-          f.error = data.message || "Erro ao enviar imagem";
-        }
+        console.log(`✅ Upload bem-sucedido para o arquivo ${fileItem.file.name}`);
+
       } catch (err) {
-        console.error("Falha no upload:", err);
-        f.error = "Falha ao enviar imagem. Verifique sua conexão.";
+        console.error(`❌ Erro no upload de ${fileItem.file.name}:`, err);
+        setError(`Erro ao enviar ${fileItem.file.name}.`);
+        setSelectedFiles(prev =>
+          prev.map(f =>
+            f.key === fileItem.key ? { ...f, uploaded: false, error: 'Falha no envio' } : f
+          )
+        );
       }
-
-      setSelectedFiles([...updatedFiles]);
     }
 
     setUploading(false);
-  }, [orcamentoId, onUploaded, selectedFiles]);
+    // Chama a função onUploaded para atualizar o estado no componente pai
+    onUploaded(uploadedUrls);
+  }, [selectedFiles, orcamentoId, imagemAtual, onUploaded]);
 
   // Excluir arquivo selecionado antes do envio
   const handleDeleteSelected = key => {
