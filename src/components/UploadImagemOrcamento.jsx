@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect, useCallback, useRef } from "react";
 
 // API base pega da variável de ambiente
-const API_BASE_URL = process.env.REACT_APP_API_BASE || "http://localhost:8080";
+const API_BASE_URL = "https://zero20-upload-api.onrender.com" || "http://localhost:8080";
 
 const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
