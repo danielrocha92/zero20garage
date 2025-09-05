@@ -11,11 +11,28 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
   const [uploading, setUploading] = useState(false);
   const dropRef = useRef(null);
 
+  // --- Revoke object URLs quando desmonta ---
   useEffect(() => {
     return () => selectedFiles.forEach(f => URL.revokeObjectURL(f.preview));
   }, [selectedFiles]);
 
-  // Drag & Drop
+  // --- Carregar imagens existentes ao editar ---
+  useEffect(() => {
+    if (!orcamentoId) return;
+    const fetchImagens = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/upload/${orcamentoId}`);
+        if (!res.ok) throw new Error("Erro ao buscar imagens");
+        const data = await res.json();
+        onUploaded(data); // Atualiza imagemAtual
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchImagens();
+  }, [orcamentoId, onUploaded]);
+
+  // --- Drag & Drop ---
   useEffect(() => {
     const dropArea = dropRef.current;
     const handleDragOver = e => { e.preventDefault(); dropArea.classList.add("drag-over"); };
@@ -52,7 +69,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
 
   const handleFileChange = (event) => handleFiles(Array.from(event.target.files || []));
 
-  // Upload
+  // --- Upload ---
   const handleUploadAll = useCallback(async () => {
     if (!selectedFiles.length || !orcamentoId) return;
     setUploading(true);
