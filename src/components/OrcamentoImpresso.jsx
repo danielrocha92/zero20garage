@@ -112,7 +112,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       const drawW = img.width * ratio;
       const drawH = img.height * ratio;
       const startY = first ? margin + 10 : margin;
-      
+
       let imgX = margin;
       let imgY = startY;
 
