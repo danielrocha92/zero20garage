@@ -1,6 +1,6 @@
 // src/components/ModalAlerta.jsx
 import React from "react";
-import "./Modal.css";
+import "./ModalConfirmacao.css";
 
 const ModalAlerta = ({ 
   titulo = "Atenção", 
