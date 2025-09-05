@@ -1,5 +1,7 @@
-/* Geral e Mobile-first */
+/* Importação de fontes */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap');
+
+/* --- Estilos Gerais (Mobile-first) --- */
 
 .orcamento-impresso-container {
   display: flex;
@@ -16,51 +18,59 @@
   background: white;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 24px;
+  padding: 16px; /* Padding reduzido para mobile */
   box-sizing: border-box;
 }
 
 .header-impresso {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 24px;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
   position: relative;
+  text-align: center;
 }
 
 .header-impresso h1 {
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: 18px;
+  font-size: 16px; /* Fonte reduzida para mobile */
   color: #333;
   text-transform: uppercase;
   font-weight: 700;
-  margin: 0;
-  max-width: 60%;
+  margin: 0 0 10px 0;
 }
 
 .logo-impresso {
-  width: 100px;
+  width: 80px; /* Tamanho do logo reduzido para mobile */
   height: auto;
   position: absolute;
   top: 0;
   right: 0;
 }
 
+/* --- Seção de Informações (Cabeçalho) --- */
 .info-section {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
-/* Alteração para uso de grid em mobile */
 .info-table {
   width: 100%;
-  border-collapse: collapse;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Espaço entre os itens */
+  justify-content: space-between;
 }
 
 .info-table td {
-  font-size: 14px;
-  padding: 4px 0;
-  vertical-align: top;
-  word-break: break-word; /* Permite a quebra de linha */
+  font-size: 13px; /* Fonte reduzida para mobile */
+  padding: 0;
+  flex: 1 1 45%; /* Cada item ocupa quase metade da linha, quebrando quando necessário */
+  white-space: normal; /* Permite a quebra de linha */
+  word-break: break-word; /* Força a quebra de palavras longas */
+}
+
+.info-table td:nth-child(2n) {
+  text-align: right;
 }
 
 .info-table td span {
@@ -69,13 +79,14 @@
   display: block;
 }
 
+/* --- Seções de Itens (Peças e Serviços) --- */
 .items-section {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .items-section h2 {
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: 16px;
+  font-size: 15px; /* Fonte reduzida */
   color: #444;
   border-bottom: 2px solid #ddd;
   padding-bottom: 4px;
@@ -90,15 +101,15 @@
 .items-columns ul {
   list-style: none;
   padding: 0;
-  margin: 0 0 16px 0;
+  margin: 0;
   flex: 1;
 }
 
 .items-columns li {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 4px;
-  font-size: 12px;
+  margin-bottom: 3px;
+  font-size: 11px; /* Fonte reduzida */
   color: #555;
 }
 
@@ -108,15 +119,12 @@
   margin-top: 2px;
 }
 
-.item-text {
-  word-break: break-word;
-}
-
+/* --- Totais e Observações --- */
 .total-line-impresso {
   display: flex;
   justify-content: flex-end;
-  font-size: 14px;
-  margin-top: 8px;
+  font-size: 13px;
+  margin-top: 6px;
   padding-top: 4px;
   border-top: 1px solid #eee;
 }
@@ -126,47 +134,42 @@
   margin-right: 8px;
 }
 
-.total-line-impresso strong {
-  font-weight: 700;
-  color: #333;
-}
-
 .final-total {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
-  color: #000;
   border-top: 2px solid #ccc;
   padding-top: 8px;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .extra-info-section-impresso {
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .extra-info-section-impresso p {
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.4;
   margin-bottom: 8px;
 }
 
+/* --- Política de Garantia --- */
 .policy-footer {
-  margin-top: 20px;
+  margin-top: 15px;
   border-top: 1px dashed #ccc;
-  padding-top: 16px;
+  padding-top: 12px;
 }
 
 .policy-footer h4 {
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: 16px;
+  font-size: 14px; /* Fonte reduzida */
   text-align: center;
   margin-bottom: 8px;
 }
 
 .policy-footer p {
-  font-size: 12px;
-  line-height: 1.5;
-  margin-bottom: 12px;
+  font-size: 11px; /* Fonte reduzida */
+  line-height: 1.4;
+  margin-bottom: 10px;
   color: #666;
   text-align: justify;
 }
@@ -177,13 +180,14 @@
   color: #333 !important;
 }
 
+/* --- Seção de Imagens --- */
 .imagens-section {
-  margin-top: 24px;
+  margin-top: 20px;
 }
 
 .imagens-section h2 {
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   border-bottom: 2px solid #ddd;
   padding-bottom: 4px;
   margin-bottom: 8px;
@@ -198,13 +202,14 @@
 
 .thumb-img {
   width: 100%;
-  max-width: 120px;
+  max-width: 100px; /* Reduzido para mobile */
   height: auto;
   border: 1px solid #ccc;
   border-radius: 4px;
   object-fit: contain;
 }
 
+/* --- Botões de Ação --- */
 .orcamento-impresso-actions {
   display: flex;
   gap: 12px;
@@ -228,7 +233,7 @@
   cursor: not-allowed;
 }
 
-/* Forcing print layout */
+/* --- Layout para impressão (PDF) e Desktop --- */
 .force-print-layout {
   border: none !important;
   box-shadow: none !important;
@@ -237,27 +242,45 @@
   box-sizing: content-box !important;
 }
 
-/* Desktop Styles */
 @media (min-width: 768px) {
+  /* Retorno para layout desktop com mais espaço */
   .orcamento-impresso-content {
     padding: 40px;
   }
 
+  .header-impresso {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
   .header-impresso h1 {
     font-size: 24px;
+    max-width: 60%;
+    margin-bottom: 0;
   }
 
   .logo-impresso {
     width: 150px;
+    position: static;
   }
 
-  /* Voltar ao comportamento de tabela para desktop */
+  .info-table {
+    display: table;
+  }
+
   .info-table td {
     font-size: 16px;
     padding: 8px 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    flex: none;
+    text-align: left;
+  }
+
+  .info-table td:nth-child(2n) {
+    text-align: left;
   }
 
   .info-table td span {
@@ -304,6 +327,10 @@
 
   .imagens-section h2 {
     font-size: 20px;
+  }
+
+  .imagens-container {
+    justify-content: flex-start;
   }
 
   .thumb-img {
