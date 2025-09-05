@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './HistoricoOrcamentos.css';
 import { FaEye, FaEdit, FaTrash } from 'react-icons/fa';
+import ModalConfirmacao from './ModalConfirmacao';
+import ModalAlerta from './ModalAlerta';
 
 const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
 
@@ -9,6 +11,10 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
   const [historico, setHistorico] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Estados para modais
+  const [orcamentoSelecionado, setOrcamentoSelecionado] = useState(null); // para confirmar exclusão
+  const [alerta, setAlerta] = useState(null); // para mensagens de sucesso/erro
 
   const buscarHistorico = async () => {
     setLoading(true);
@@ -28,25 +34,31 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     buscarHistorico();
   }, []);
 
-  const handleExcluirOrcamento = async (orcamento) => {
-    // 🚨 Troca de window.confirm() por um modal customizado para evitar alertas do navegador em iframes
-    const confirmar = window.confirm(
-      `Tem certeza que deseja excluir o orçamento de ${orcamento.cliente || 'cliente desconhecido'} (OS: ${
-        orcamento.ordemServico || '-'
-      })?`
-    );
-    if (confirmar) {
-      try {
-        await axios.delete(`${API_BASE_URL}/api/orcamentos/${orcamento.id}`);
-        // 🚨 Troca de alert() por um modal customizado
-        alert('Orçamento excluído com sucesso!');
-        buscarHistorico();
-      } catch (err) {
-        console.error('Erro ao excluir orçamento:', err);
-        // 🚨 Troca de alert() por um modal customizado
-        alert('Erro ao excluir orçamento. Tente novamente.');
-      }
+  const handleExcluirOrcamento = (orcamento) => {
+    // Abre modal de confirmação
+    setOrcamentoSelecionado(orcamento);
+  };
+
+  const confirmarExclusao = async () => {
+    if (!orcamentoSelecionado) return;
+    try {
+      await axios.delete(`${API_BASE_URL}/api/orcamentos/${orcamentoSelecionado.id}`);
+      setAlerta({ tipo: 'sucesso', mensagem: 'Orçamento excluído com sucesso!' });
+      buscarHistorico();
+    } catch (err) {
+      console.error('Erro ao excluir orçamento:', err);
+      setAlerta({ tipo: 'erro', mensagem: 'Erro ao excluir orçamento. Tente novamente.' });
+    } finally {
+      setOrcamentoSelecionado(null); // fecha modal de confirmação
     }
+  };
+
+  const cancelarExclusao = () => {
+    setOrcamentoSelecionado(null);
+  };
+
+  const fecharAlerta = () => {
+    setAlerta(null);
   };
 
   const getStatusTagClass = (status) => {
@@ -62,11 +74,6 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     }
   };
 
-  /**
-   * Função para formatar a data, lidando com diferentes formatos (string ISO, objeto Date, timestamp Firestore).
-   * @param {string | object} data - A data a ser formatada. Pode ser uma string ISO ou um objeto Date/Timestamp do Firestore.
-   * @returns {string} A data e hora formatada ou uma mensagem de erro.
-   */
   const formatarData = (data) => {
     if (!data) return 'Data não disponível';
     let d = null;
@@ -74,12 +81,10 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     if (typeof data === 'string') {
       d = new Date(data);
     } else if (data && typeof data.toDate === 'function') {
-      // Caso seja um objeto Timestamp do Firestore
       d = data.toDate();
     } else if (data instanceof Date) {
       d = data;
     } else if (data && typeof data._seconds === 'number' && typeof data._nanoseconds === 'number') {
-      // Caso seja um objeto de timestamp do Firestore retornado como JSON
       d = new Date(data._seconds * 1000 + data._nanoseconds / 1000000);
     }
 
@@ -89,7 +94,6 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     return 'Data inválida';
   };
 
-  // ✅ Extraído em função reutilizável
   const getImagemUrl = (orcamento) => {
     if (Array.isArray(orcamento.imagens) && orcamento.imagens.length > 0 && typeof orcamento.imagens[0]?.secure_url === 'string') {
       return orcamento.imagens[0].secure_url;
@@ -97,7 +101,6 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     return orcamento.imagem?.url || orcamento.imageUrl || null;
   };
 
-  // ✅ Ordenação por data (mais recentes primeiro)
   const historicoOrdenado = [...historico].sort((a, b) => {
     const dataA = new Date(a.data);
     const dataB = new Date(b.data);
@@ -197,7 +200,6 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
           <details key={orcamento.id} className="orcamento-card">
             <summary className="card-header">
               <h3>OS.: {orcamento.ordemServico || '-'}</h3>
-              {/* CORREÇÃO: Colocando a crase de fechamento no lugar correto */}
               <span className={`status-tag ${getStatusTagClass(orcamento.status)}`}>
                 {orcamento.status || 'Aberto'}
               </span>
@@ -267,6 +269,25 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
           </details>
         ))}
       </div>
+
+      {/* Modal de confirmação */}
+      {orcamentoSelecionado && (
+        <ModalConfirmacao
+          titulo="Excluir Orçamento"
+          mensagem={`Deseja realmente excluir o orçamento de ${orcamentoSelecionado.cliente} (OS: ${orcamentoSelecionado.ordemServico || '-'})?`}
+          onConfirmar={confirmarExclusao}
+          onCancelar={cancelarExclusao}
+        />
+      )}
+
+      {/* Modal de alerta */}
+      {alerta && (
+        <ModalAlerta
+          tipo={alerta.tipo}
+          mensagem={alerta.mensagem}
+          onFechar={fecharAlerta}
+        />
+      )}
     </div>
   );
 };
