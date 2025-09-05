@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './OrcamentoForms.css';
 
 const OrcamentoGenerico = ({
@@ -13,8 +13,9 @@ const OrcamentoGenerico = ({
   imagens,
   setImagens
 }) => {
-  const itensData = orcamentoData.itens;
-  const servicosData = orcamentoData.servicos;
+  // === Memoizando itens e serviços ===
+  const itensData = useMemo(() => orcamentoData.itens || [], [orcamentoData.itens]);
+  const servicosData = useMemo(() => orcamentoData.servicos || [], [orcamentoData.servicos]);
 
   const [formData, setFormData] = useState({
     nome: '',
@@ -23,31 +24,60 @@ const OrcamentoGenerico = ({
     placa: '',
     data: new Date().toISOString().slice(0, 10),
     ordemServico: '',
-    pecas: itensData.map(item => ({
-      ...item,
-      selecionado: false,
-      quantidade: item.temQuantidade ? 1 : 0,
-      medida: 0,
-      subItens: item.subItens ? item.subItens.map(sub => ({ ...sub, value: sub.initialValue || (sub.type === "checkbox" ? false : '') })) : [],
-    })),
-    servicos: servicosData.map(servico => ({
-      ...servico,
-      selecionado: false,
-      quantidade: servico.temQuantidade ? 1 : 0,
-      medida: 0,
-      subItens: servico.subItens ? servico.subItens.map(sub => ({ ...sub, value: sub.initialValue || (sub.type === "checkbox" ? false : '') })) : [],
-    })),
-    totalPecasManual: 0,
-    totalServicosManual: 0,
-    totalMaoDeObraManual: 0,
-    totalGeralManual: 0,
+    pecas: [],
+    servicos: [],
+    totalPecasManual: '',
+    totalServicosManual: '',
+    totalMaoDeObraManual: '',
+    totalGeralManual: '',
     formaPagamento: '',
     observacoes: '',
     status: 'Aberto',
   });
 
+  // === Máscara monetária inteligente que mantém o cursor ===
+  const formatCurrencySmart = (value, selectionStart, oldValue) => {
+    if (!value) return { value: '', selectionStart: 0 };
+    const numericValue = value.replace(/\D/g, '');
+    const number = parseFloat(numericValue || 0) / 100;
+    const formatted = number.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+    // Calcula ajuste de cursor
+    let newSelection = selectionStart + (formatted.length - (oldValue?.length || 0));
+    if (newSelection < 0) newSelection = 0;
+    if (newSelection > formatted.length) newSelection = formatted.length;
+
+    return { value: formatted, selectionStart: newSelection };
+  };
+
+  const parseCurrencyToNumber = (value) => {
+    if (!value) return 0;
+    return Number(value.replace(/\D/g, '')) / 100;
+  };
+
+  // === Popula formulário com dados de edição ===
   useEffect(() => {
-    if (!editingData) return;
+    if (!editingData) {
+      // inicializa pecas e servicos com default
+      setFormData(prev => ({
+        ...prev,
+        pecas: itensData.map(item => ({
+          ...item,
+          selecionado: false,
+          quantidade: item.temQuantidade ? 1 : 0,
+          medida: 0,
+          subItens: item.subItens ? item.subItens.map(sub => ({ ...sub, value: sub.initialValue || (sub.type === "checkbox" ? false : '') })) : [],
+        })),
+        servicos: servicosData.map(servico => ({
+          ...servico,
+          selecionado: false,
+          quantidade: servico.temQuantidade ? 1 : 0,
+          medida: 0,
+          subItens: servico.subItens ? servico.subItens.map(sub => ({ ...sub, value: sub.initialValue || (sub.type === "checkbox" ? false : '') })) : [],
+        })),
+      }));
+      return;
+    }
 
     const parsedDate = new Date(editingData.data);
     const validDate = !isNaN(parsedDate.getTime())
@@ -62,10 +92,10 @@ const OrcamentoGenerico = ({
       placa: editingData.placa || '',
       data: validDate,
       ordemServico: editingData.ordemServico || '',
-      totalPecasManual: parseFloat(editingData.valorTotalPecas) || 0,
-      totalServicosManual: parseFloat(editingData.valorTotalServicos) || 0,
-      totalMaoDeObraManual: parseFloat(editingData.totalMaoDeObra) || 0,
-      totalGeralManual: parseFloat(editingData.valorTotal) || 0,
+      totalPecasManual: editingData.valorTotalPecas ? formatCurrencySmart(editingData.valorTotalPecas.toString()).value : '',
+      totalServicosManual: editingData.valorTotalServicos ? formatCurrencySmart(editingData.valorTotalServicos.toString()).value : '',
+      totalMaoDeObraManual: editingData.totalMaoDeObra ? formatCurrencySmart(editingData.totalMaoDeObra.toString()).value : '',
+      totalGeralManual: editingData.valorTotal ? formatCurrencySmart(editingData.valorTotal.toString()).value : '',
       formaPagamento: editingData.formaPagamento || '',
       observacoes: editingData.observacoes || '',
       status: editingData.status || 'Aberto',
@@ -73,11 +103,10 @@ const OrcamentoGenerico = ({
         const pecaEdit = editingData.pecasSelecionadas.find(p => p.includes(pecaData.nome));
         const quantidadeMatch = pecaEdit ? pecaEdit.match(/::\s*(\d+)/) : null;
         const quantidade = quantidadeMatch ? parseInt(quantidadeMatch[1], 10) : (pecaData.temQuantidade ? 1 : 0);
-
         return {
           ...pecaData,
           selecionado: !!pecaEdit,
-          quantidade: quantidade,
+          quantidade,
           subItens: pecaData.subItens ? pecaData.subItens.map(sub => ({
             ...sub,
             value: !!pecaEdit && pecaEdit.includes(sub.label) ? true : sub.initialValue
@@ -88,11 +117,10 @@ const OrcamentoGenerico = ({
         const servicoEdit = editingData.servicosSelecionados.find(s => s.includes(servicoData.nome));
         const quantidadeMatch = servicoEdit ? servicoEdit.match(/::\s*(\d+)/) : null;
         const quantidade = quantidadeMatch ? parseInt(quantidadeMatch[1], 10) : (servicoData.temQuantidade ? 1 : 0);
-
         return {
           ...servicoData,
           selecionado: !!servicoEdit,
-          quantidade: quantidade,
+          quantidade,
           subItens: servicoData.subItens ? servicoData.subItens.map(sub => ({
             ...sub,
             value: !!servicoEdit && servicoEdit.includes(sub.label) ? true : sub.initialValue
@@ -102,9 +130,19 @@ const OrcamentoGenerico = ({
     }));
   }, [editingData, itensData, servicosData]);
 
+  // === Manipulação de inputs ===
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleMonetaryChange = (e) => {
+    const { name, value, selectionStart } = e.target;
+    setFormData(prev => {
+      const { value: formatted, selectionStart: newCursor } = formatCurrencySmart(value, selectionStart, prev[name]);
+      setTimeout(() => e.target.setSelectionRange(newCursor, newCursor), 0);
+      return { ...prev, [name]: formatted };
+    });
   };
 
   const handlePecaChange = (index, field, value) => {
@@ -139,11 +177,7 @@ const OrcamentoGenerico = ({
     });
   };
 
-  const handleManualTotalChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: parseFloat(value) || 0 }));
-  };
-
+  // === Submit ===
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.nome) {
@@ -188,10 +222,10 @@ const OrcamentoGenerico = ({
       ordemServico: formData.ordemServico,
       pecasSelecionadas: pecasSelecionadasFormatadas,
       servicosSelecionados: servicosSelecionadasFormatadas,
-      valorTotalPecas: formData.totalPecasManual,
-      valorTotalServicos: formData.totalServicosManual,
-      totalMaoDeObra: formData.totalMaoDeObraManual,
-      valorTotal: formData.totalGeralManual,
+      valorTotalPecas: parseCurrencyToNumber(formData.totalPecasManual),
+      valorTotalServicos: parseCurrencyToNumber(formData.totalServicosManual),
+      totalMaoDeObra: parseCurrencyToNumber(formData.totalMaoDeObraManual),
+      valorTotal: parseCurrencyToNumber(formData.totalGeralManual),
       formaPagamento: formData.formaPagamento,
       observacoes: formData.observacoes,
       status: formData.status,
@@ -207,231 +241,182 @@ const OrcamentoGenerico = ({
   return (
     <div className="client-vehicle-section">
       <h1>{titulo}</h1>
-
       <form onSubmit={handleSubmit}>
-        {/* Informações do Cliente e Veículo */}
-        <section className="client-vehicle-section">
-          <h2>Informações do Cliente e Veículo</h2>
-          <table className="form-table">
-            <tbody>
-              <tr>
-                <td>
-                  <div className="form-group">
-                    <label htmlFor="ordemServico">OS:</label>
-                    <input type="text" id="ordemServico" name="ordemServico" value={formData.ordemServico} onChange={handleInputChange} />
-                  </div>
-                </td>
-                <td>
-                  <div className="form-group">
-                    <label htmlFor="nome">Cliente:</label>
-                    <input type="text" id="nome" name="nome" value={formData.nome} onChange={handleInputChange} required />
-                  </div>
-                </td>
-                <td>
-                  <div className="form-group">
-                    <label htmlFor="data">Data:</label>
-                    <input type="date" id="data" name="data" value={formData.data} onChange={handleInputChange} />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div className="form-group">
-                    <label htmlFor="veiculo">Veículo:</label>
-                    <input type="text" id="veiculo" name="veiculo" value={formData.veiculo} onChange={handleInputChange} />
-                  </div>
-                </td>
-                <td>
-                  <div className="form-group">
-                    <label htmlFor="placa">Placa:</label>
-                    <input type="text" id="placa" name="placa" value={formData.placa} onChange={handleInputChange} />
-                  </div>
-                </td>
-                <td>
-                  <div className="form-group">
-                    <label htmlFor="telefone">Telefone:</label>
-                    <input type="text" id="telefone" name="telefone" value={formData.telefone} onChange={handleInputChange} />
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
+        {/* Layout 50/50 Peças e Serviços */}
+        <div style={{ display: 'flex', gap: '2rem' }}>
+          {/* Peças */}
+          <section className="section-form" style={{ flex: 1 }}>
+            <h2>Peças</h2>
+            <table className="items-table">
+              <tbody>
+                {formData.pecas.map((peca, index) => (
+                  <tr key={index}>
+                    <td className="checkbox-cell">
+                      <label className="custom-checkbox">
+                        <input
+                          type="checkbox"
+                          checked={peca.selecionado}
+                          onChange={() => handlePecaChange(index, 'selecionado', !peca.selecionado)}
+                        />
+                        <span className="checkbox-box"></span>
+                        {peca.nome}
+                      </label>
+                    </td>
+                    <td className="subitems-cell">
+                      {peca.selecionado && peca.subItens && peca.subItens.length > 0 && (
+                        <div className="sub-items-container">
+                          {peca.subItens.map((sub, sIdx) => (
+                            <div key={sIdx} className="sub-item-input-group">
+                              {sub.type === "checkbox" ? (
+                                <label className="custom-checkbox">
+                                  <input
+                                    type="checkbox"
+                                    checked={sub.value}
+                                    onChange={(e) => handleSubItemCheckboxChange('pecas', index, sIdx, e.target.checked)}
+                                  />
+                                  <span className="checkbox-box"></span>
+                                  {sub.label}
+                                </label>
+                              ) : (
+                                <>
+                                  <label className="sub-item-label">{sub.label}:</label>
+                                  <input
+                                    type="text"
+                                    value={sub.value}
+                                    onChange={(e) => handleSubItemTextChange('pecas', index, sIdx, e.target.value)}
+                                    className="small-input"
+                                  />
+                                </>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </td>
+                    <td className="quantidade-cell">
+                      {peca.selecionado && peca.temQuantidade && (
+                        <>
+                          <label className="quantidade-label">Qtd:</label>
+                          <select
+                            name="quantidade"
+                            value={peca.quantidade}
+                            onChange={(e) => handlePecaChange(index, 'quantidade', parseInt(e.target.value))}
+                            className="quantidade-select"
+                          >
+                            {gerarOpcoesQuantidade()}
+                          </select>
+                        </>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="total-line-form">
+              <span className="label">Valor total de Peças:</span>
+              <input
+                type="text"
+                name="totalPecasManual"
+                value={formData.totalPecasManual}
+                onChange={handleMonetaryChange}
+                placeholder="R$ 0,00"
+                className="input-total"
+              />
+            </div>
+          </section>
 
-        {/* Peças */}
-        <section className="section-form">
-          <h2>Peças</h2>
-          <table className="items-table">
-            <tbody>
-              {formData.pecas.map((peca, index) => (
-                <tr key={index}>
-                  <td className="checkbox-cell">
-                    <label className="custom-checkbox">
-                      <input
-                        type="checkbox"
-                        checked={peca.selecionado}
-                        onChange={() => handlePecaChange(index, 'selecionado', !peca.selecionado)}
-                      />
-                      <span className="checkbox-box"></span>
-                      {peca.nome}
-                    </label>
-                  </td>
-                  <td className="subitems-cell">
-                    {peca.selecionado && peca.subItens && peca.subItens.length > 0 && (
-                      <div className="sub-items-container">
-                        {peca.subItens.map((sub, sIdx) => (
-                          <div key={sIdx} className="sub-item-input-group">
-                            {sub.type === "checkbox" ? (
-                              <label className="custom-checkbox">
-                                <input
-                                  type="checkbox"
-                                  checked={sub.value}
-                                  onChange={(e) => handleSubItemCheckboxChange('pecas', index, sIdx, e.target.checked)}
-                                />
-                                <span className="checkbox-box"></span>
-                                {sub.label}
-                              </label>
-                            ) : (
-                              <>
-                                <label className="sub-item-label">{sub.label}:</label>
-                                <input
-                                  type="text"
-                                  value={sub.value}
-                                  onChange={(e) => handleSubItemTextChange('pecas', index, sIdx, e.target.value)}
-                                  className="small-input"
-                                />
-                              </>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </td>
-                  <td className="quantidade-cell">
-                    {peca.selecionado && peca.temQuantidade ? (
-                      <>
-                        <label className="quantidade-label">Qtd:</label>
-                        <select
-                          name="quantidade"
-                          value={peca.quantidade}
-                          onChange={(e) => handlePecaChange(index, 'quantidade', parseInt(e.target.value))}
-                          className="quantidade-select"
-                        >
-                          {gerarOpcoesQuantidade()}
-                        </select>
-                      </>
-                    ) : null}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          <div className="total-line-form">
-            <span className="label">Valor total de Peças:</span>
-            <input
-              type="number"
-              name="totalPecasManual"
-              value={formData.totalPecasManual}
-              onChange={handleManualTotalChange}
-              step="0.01"
-              className="input-total"
-            />
-          </div>
-        </section>
-
-        {/* Serviços */}
-        <section className="section-form">
-          <h2>Serviços Retífica</h2>
-          <table className="items-table">
-            <tbody>
-              {formData.servicos.map((servico, index) => (
-                <tr key={index}>
-                  <td className="checkbox-cell">
-                    <label className="custom-checkbox">
-                      <input
-                        type="checkbox"
-                        checked={servico.selecionado}
-                        onChange={() => handleServicoChange(index, 'selecionado', !servico.selecionado)}
-                      />
-                      <span className="checkbox-box"></span>
-                      {servico.nome}
-                    </label>
-                  </td>
-                  <td className="subitems-cell">
-                    {servico.selecionado && servico.subItens && servico.subItens.length > 0 && (
-                      <div className="sub-items-container">
-                        {servico.subItens.map((sub, sIdx) => (
-                          <div key={sIdx} className="sub-item-input-group">
-                            {sub.type === "checkbox" ? (
-                              <label className="custom-checkbox">
-                                <input
-                                  type="checkbox"
-                                  checked={sub.value}
-                                  onChange={(e) => handleSubItemCheckboxChange('servicos', index, sIdx, e.target.checked)}
-                                />
-                                <span className="checkbox-box"></span>
-                                {sub.label}
-                              </label>
-                            ) : (
-                              <>
-                                <label className="sub-item-label">{sub.label}:</label>
-                                <input
-                                  type="text"
-                                  value={sub.value}
-                                  onChange={(e) => handleSubItemTextChange('servicos', index, sIdx, e.target.value)}
-                                  className="small-input"
-                                />
-                              </>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </td>
-                  <td className="quantidade-cell">
-                    {servico.selecionado && servico.temQuantidade && (
-                      <>
-                        <label className="quantidade-label">Qtd:</label>
-                        <select
-                          name="quantidade"
-                          value={servico.quantidade}
-                          onChange={(e) => handleServicoChange(index, 'quantidade', parseInt(e.target.value))}
-                          className="quantidade-select"
-                        >
-                          {gerarOpcoesQuantidade()}
-                        </select>
-                      </>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          <div className="total-line-form">
-            <span className="label">Valor total de Serviços:</span>
-            <input
-              type="number"
-              name="totalServicosManual"
-              value={formData.totalServicosManual}
-              onChange={handleManualTotalChange}
-              step="0.01"
-              className="input-total"
-            />
-          </div>
-        </section>
+          {/* Serviços */}
+          <section className="section-form" style={{ flex: 1 }}>
+            <h2>Serviços Retífica</h2>
+            <table className="items-table">
+              <tbody>
+                {formData.servicos.map((servico, index) => (
+                  <tr key={index}>
+                    <td className="checkbox-cell">
+                      <label className="custom-checkbox">
+                        <input
+                          type="checkbox"
+                          checked={servico.selecionado}
+                          onChange={() => handleServicoChange(index, 'selecionado', !servico.selecionado)}
+                        />
+                        <span className="checkbox-box"></span>
+                        {servico.nome}
+                      </label>
+                    </td>
+                    <td className="subitems-cell">
+                      {servico.selecionado && servico.subItens && servico.subItens.length > 0 && (
+                        <div className="sub-items-container">
+                          {servico.subItens.map((sub, sIdx) => (
+                            <div key={sIdx} className="sub-item-input-group">
+                              {sub.type === "checkbox" ? (
+                                <label className="custom-checkbox">
+                                  <input
+                                    type="checkbox"
+                                    checked={sub.value}
+                                    onChange={(e) => handleSubItemCheckboxChange('servicos', index, sIdx, e.target.checked)}
+                                  />
+                                  <span className="checkbox-box"></span>
+                                  {sub.label}
+                                </label>
+                              ) : (
+                                <>
+                                  <label className="sub-item-label">{sub.label}:</label>
+                                  <input
+                                    type="text"
+                                    value={sub.value}
+                                    onChange={(e) => handleSubItemTextChange('servicos', index, sIdx, e.target.value)}
+                                    className="small-input"
+                                  />
+                                </>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </td>
+                    <td className="quantidade-cell">
+                      {servico.selecionado && servico.temQuantidade && (
+                        <>
+                          <label className="quantidade-label">Qtd:</label>
+                          <select
+                            name="quantidade"
+                            value={servico.quantidade}
+                            onChange={(e) => handleServicoChange(index, 'quantidade', parseInt(e.target.value))}
+                            className="quantidade-select"
+                          >
+                            {gerarOpcoesQuantidade()}
+                          </select>
+                        </>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="total-line-form">
+              <span className="label">Valor total de Serviços:</span>
+              <input
+                type="text"
+                name="totalServicosManual"
+                value={formData.totalServicosManual}
+                onChange={handleMonetaryChange}
+                placeholder="R$ 0,00"
+                className="input-total"
+              />
+            </div>
+          </section>
+        </div>
 
         {/* Totais e Pagamento */}
         <section className="summary-section">
           <div className="total-line-form">
             <span className="label">Valor total de Mão de Obra Mecânica:</span>
             <input
-              type="number"
+              type="text"
               name="totalMaoDeObraManual"
               value={formData.totalMaoDeObraManual}
-              onChange={handleManualTotalChange}
-              step="0.01"
+              onChange={handleMonetaryChange}
+              placeholder="R$ 0,00"
               className="input-total"
             />
           </div>
@@ -439,24 +424,38 @@ const OrcamentoGenerico = ({
           <div className="total-line-form total-geral">
             <span className="label">TOTAL GERAL:</span>
             <input
-              type="number"
+              type="text"
               name="totalGeralManual"
               value={formData.totalGeralManual}
-              onChange={handleManualTotalChange}
-              step="0.01"
+              onChange={handleMonetaryChange}
+              placeholder="R$ 0,00"
               className="input-total-geral"
             />
           </div>
 
           <div className="form-group">
             <label>Forma de pagamento:</label>
-            <input type="text" name="formaPagamento" value={formData.formaPagamento} onChange={handleInputChange} placeholder="Pix, Débito e Crédito em até xx vezes sem juros" />
+            <input
+              type="text"
+              name="formaPagamento"
+              value={formData.formaPagamento}
+              onChange={handleInputChange}
+              placeholder="Pix, Débito ou Crédito"
+              style={{ fontSize: '0.9em' }}
+            />
           </div>
 
-          <div className="form-group">
-            <label>Observações:</label>
-            <textarea name="observacoes" value={formData.observacoes} onChange={handleInputChange} rows="3" />
-          </div>
+          {formData.observacoes && (
+            <div className="form-group">
+              <label>Observações:</label>
+              <textarea
+                name="observacoes"
+                value={formData.observacoes}
+                onChange={handleInputChange}
+                rows="3"
+              />
+            </div>
+          )}
 
           <div className="form-group">
             <label>Status:</label>
@@ -467,11 +466,8 @@ const OrcamentoGenerico = ({
               <option value="Concluido">Concluido</option>
             </select>
           </div>
-
-          {/* Não é mais necessário o bloco de imagens aqui */}
         </section>
 
-        {/* Ações */}
         <div className="form-actions">
           <button type="submit" className="button">Salvar Orçamento</button>
         </div>

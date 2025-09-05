@@ -1,4 +1,3 @@
-// src/components/OrcamentoImpresso.jsx
 import React, { useRef } from 'react';
 import dayjs from 'dayjs';
 import jsPDF from 'jspdf';
@@ -12,6 +11,15 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
   const componentRef = useRef(null);
 
   const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
+
+  // Função para formatar valores para R$ X.XXX,XX ou "__________"
+  const formatValue = (value) => {
+    const num = Number(value);
+    if (isNaN(num) || num === 0) {
+      return '___________';
+    }
+    return `R$ ${num.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
+  };
 
   // === Cloudinary Helpers ===
   const isCloudinaryUrl = (url) => typeof url === 'string' && url.includes('/upload/');
@@ -144,6 +152,9 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
         let pdf;
 
         try {
+          // 🔹 Aguarda um pequeno delay antes de capturar
+          await sleep(300);
+
           const canvas = await html2canvas(element, { scale: SCALE, useCORS: true });
           const imgData = canvas.toDataURL('image/png');
           const PX_TO_MM = 25.4 / 96;
@@ -195,8 +206,9 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
   const pecasMid = Math.ceil(pecas.length / 2);
   const servicosMid = Math.ceil(servicos.length / 2);
 
-  const mostrarServicos =
-    servicos.length > 0 || orcamento.valorTotalServicos > 0 || orcamento.totalMaoDeObra > 0;
+  const showServices = (servicos.length > 0) || (Number(orcamento.valorTotalServicos) > 0) || (Number(orcamento.totalMaoDeObra) > 0);
+  const showImages = orcamento.imagens && orcamento.imagens.length > 0;
+  const showObservacoes = orcamento.observacoes && orcamento.observacoes.trim() !== '';
 
   let formattedDate = '___________';
   if (orcamento?.data) {
@@ -223,9 +235,9 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           <table className="info-table">
             <tbody>
               <tr>
-                <td>Veículo: <span>{orcamento?.veiculo || ''}</span></td>
-                <td>OS: <span>{orcamento?.ordemServico || ''}</span></td>
-                <td>Cliente: <span>{orcamento?.cliente || ''}</span></td>
+                <td>Veículo: <span>{orcamento?.veiculo || '___________'}</span></td>
+                <td>OS: <span>{orcamento?.ordemServico || '___________'}</span></td>
+                <td>Cliente: <span>{orcamento?.cliente || '___________'}</span></td>
                 <td>Data: <span>{formattedDate}</span></td>
               </tr>
             </tbody>
@@ -240,12 +252,12 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
             <ul>{pecas.slice(pecasMid).map((item, i) => <li key={i}>{item}</li>)}</ul>
           </div>
           <div className="total-line-impresso">
-            Valor total de Peças: <strong>{orcamento.valorTotalPecas ? `R$ ${Number(orcamento.valorTotalPecas).toFixed(2).replace('.', ',')}` : '___________'}</strong>
+            Valor total de Peças: <strong>{formatValue(orcamento.valorTotalPecas)}</strong>
           </div>
         </section>
 
         {/* Serviços */}
-        {mostrarServicos && (
+        {showServices && (
           <>
             <section className="items-section">
               <h2>Serviços - Retífica</h2>
@@ -254,51 +266,60 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
                 <ul>{servicos.slice(servicosMid).map((item, i) => <li key={i}>{item}</li>)}</ul>
               </div>
               <div className="total-line-impresso">
-                Valor total de Serviços: <strong>{orcamento.valorTotalServicos ? `R$ ${Number(orcamento.valorTotalServicos).toFixed(2).replace('.', ',')}` : '___________'}</strong>
+                Valor total de Serviços: <strong>{formatValue(orcamento.valorTotalServicos)}</strong>
               </div>
             </section>
             <div className="total-line-impresso">
-              Valor total de mão de obra: <strong>{orcamento.totalMaoDeObra ? `R$ ${Number(orcamento.totalMaoDeObra).toFixed(2).replace('.', ',')}` : '___________'}</strong>
+              Valor total de mão de obra: <strong>{formatValue(orcamento.totalMaoDeObra)}</strong>
             </div>
           </>
         )}
 
         {/* Total Geral */}
         <div className="total-line-impresso final-total">
-          TOTAL GERAL: <strong>{orcamento.valorTotal ? `R$ ${Number(orcamento.valorTotal).toFixed(2).replace('.', ',')}` : '___________'}</strong>
+          TOTAL GERAL: <strong>{formatValue(orcamento.valorTotal)}</strong>
         </div>
 
-        {/* Observações */}
+        {/* Informações Extras */}
         <div className="extra-info-section-impresso">
-          <p><strong>Forma de Pagamento:</strong> {orcamento.formaPagamento || '___________'}</p>
-          <p><strong>Observações:</strong> {orcamento.observacoes || '___________'}</p>
+          <p className="payment-method"><strong>Forma de Pagamento:</strong> {orcamento.formaPagamento || '___________'}</p>
+          {showObservacoes && (
+            <p className="observations"><strong>Observações:</strong> {orcamento.observacoes}</p>
+          )}
         </div>
 
         {/* Política */}
         <section className="policy-footer">
           <h4>Política de Garantia, Troca e Devolução</h4>
-          <p>A garantia dos serviços realizados pela Zero 20 Garage é válida apenas se o veículo for utilizado conforme as orientações...</p>
+          <p>
+            A garantia dos serviços realizados pela Zero 20 Garage é válida apenas se o veículo for utilizado conforme as orientações da oficina, incluindo manutenções em dia, uso adequado de combustíveis e respeito aos prazos de revisão. Clientes com pagamentos pendentes não terão direito à garantia, sendo que a mesma só pode ser ativada mediante apresentação do orçamento. O documento comprova a realização dos serviços e/ou compra das peças para o motor completo, mediante contato com a oficina para análise do problema. A Zero 20 Garage preza pela qualidade dos serviços prestados e realiza todos os procedimentos com base em diagnósticos técnicos e profissionais qualificados. Em casos de avariações, se o veículo apresentar danos ou acidentes ocasionados por fenômenos da natureza ou da ação de terceiros, a garantia não será válida. Em caso de uso incorreto ou desgaste natural de componentes, o cliente poderá solicitar a análise do caso. Não haverá reembolso de peças já instaladas no veículo, sob nenhuma circunstância.
+          </p>
+          <p className="policy-acceptance">
+            Ao aceitar o orçamento e iniciar o serviço com a Zero 20 Garage, o cliente declara estar ciente e de acordo com os termos descritos acima.
+          </p>
         </section>
 
         {/* Imagens */}
-        <section className="imagens-section">
-          <h2>Imagens do Veículo</h2>
-          <div className="imagens-container">
-            {orcamento.imagens && orcamento.imagens.map((img, idx) => {
-              let thumbSrc = '';
-              if (typeof img === 'string') thumbSrc = getCloudinaryThumb(img);
-              else if (img instanceof File) thumbSrc = URL.createObjectURL(img);
-              else if (img?.data?.data) thumbSrc = `data:image/jpeg;base64,${img.data.data}`;
-              return <img key={idx} src={thumbSrc} alt={`Foto ${idx + 1}`} className="thumb-img" />;
-            })}
-          </div>
-        </section>
+        {showImages && (
+          <section className="imagens-section">
+            <h2>Imagens do Veículo</h2>
+            <div className="imagens-container">
+              {orcamento.imagens.map((img, idx) => {
+                let thumbSrc = '';
+                if (typeof img === 'string') thumbSrc = getCloudinaryThumb(img);
+                else if (img instanceof File) thumbSrc = URL.createObjectURL(img);
+                else if (img?.data?.data) thumbSrc = `data:image/jpeg;base64,${img.data.data}`;
+                return <img key={idx} src={thumbSrc} alt={`Foto ${idx + 1}`} className="thumb-img" />;
+              })}
+            </div>
+          </section>
+        )}
       </div>
 
       {/* Ações */}
       <div className="orcamento-impresso-actions">
-        <button onClick={handleSharePdf}>Gerar PDF</button>
-        <button onClick={handleVoltarPainel}>Voltar</button>
+        <button className='button' onClick={handleSharePdf}>Gerar PDF</button>
+        <button className='button' onClick={handleVoltarPainel}>Voltar</button>
       </div>
     </div>
   );
