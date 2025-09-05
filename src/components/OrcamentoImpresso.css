@@ -87,7 +87,7 @@ body {
     width: 50%;
     color: #9e0000;
     font-weight: bold;
-    word-break: break-word; /* Melhor que break-all para textos grandes */
+    word-break: break-word;
     white-space: normal;
     min-width: 45px;
     padding-left: 0.2rem;
@@ -126,20 +126,21 @@ body {
 
 .items-columns {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Colunas empilhadas no mobile */
     gap: 0.3rem;
 }
 
-.item-list-impresso {
-    list-style: none;
+/* Alterado para `ul` diretamente, pois `item-list-impresso` não é usado na estrutura HTML fornecida */
+.items-columns ul {
+    list-style: none; /* Remove o ponto */
     padding: 0;
     margin: 0;
     flex: 1;
 }
 
-.item-list-impresso li {
+.items-columns li {
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* Alinha o checkbox/seta ao topo do texto */
     margin-bottom: 0.1rem;
     line-height: 1.1;
     flex-wrap: wrap;
@@ -160,7 +161,7 @@ body {
 }
 
 .checkbox-box:checked::after {
-    content: '✔️';
+    content: '✔️'; /* Mantém apenas a seta */
     display: block;
     font-size: 0.7rem;
     line-height: 1;
@@ -169,6 +170,7 @@ body {
     transform: none;
     width: 0.7rem;
     height: 0.7rem;
+    flex-shrink: 0; /* Impede que a seta diminua */
 }
 
 .item-text {
@@ -384,18 +386,20 @@ body {
     }
 
     .items-columns {
-        flex-direction: row;
+        flex-direction: row; /* Colunas lado a lado no desktop */
         gap: 20px;
+        justify-content: space-between; /* Melhor distribuição do espaço */
     }
 
-    .item-list-impresso {
-        width: 48%;
+    .items-columns ul {
+        width: 48%; /* Cada coluna ocupa quase metade da largura */
+        box-sizing: border-box; /* Garante que padding/border não aumentem a largura */
     }
 
-    .item-list-impresso li {
+    .items-columns li {
         margin-bottom: 1.5px;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         gap: 5px;
     }
 
@@ -420,6 +424,7 @@ body {
         transform: none;
         width: auto;
         height: auto;
+        flex-shrink: 0;
     }
 
     .item-text {
@@ -528,7 +533,10 @@ body {
     .items-section h2 {
         font-size: 0.95em;
     }
-    .item-list-impresso li {
+    .items-columns ul { /* Garante que o list-style-type é none para impressão também */
+        list-style-type: none;
+    }
+    .items-columns li {
         font-size: 0.8em;
     }
     .total-line-impresso span, .total-line-impresso strong {
