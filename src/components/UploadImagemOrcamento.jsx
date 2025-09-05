@@ -1,16 +1,16 @@
+// src/components/UploadImagemOrcamento.jsx
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
-import { useState, useEffect, useCallback, useRef } from "react";
+import "./UploadImagemOrcamento.css";
 
-// API base pega da variável de ambiente
-const API_BASE_URL = "https://zero20-upload-api.onrender.com" || "http://localhost:8080";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8080";
 
 const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
-  const [error, setError] = useState(null);
   const dropRef = useRef(null);
 
-  // Limpa URLs de preview quando o componente desmonta
   useEffect(() => {
     return () => selectedFiles.forEach(f => URL.revokeObjectURL(f.preview));
   }, [selectedFiles]);
@@ -18,11 +18,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
   // Drag & Drop
   useEffect(() => {
     const dropArea = dropRef.current;
-
-    const handleDragOver = e => {
-      e.preventDefault();
-      dropArea.classList.add("drag-over");
-    };
+    const handleDragOver = e => { e.preventDefault(); dropArea.classList.add("drag-over"); };
     const handleDragLeave = () => dropArea.classList.remove("drag-over");
     const handleDrop = e => {
       e.preventDefault();
@@ -56,22 +52,18 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
 
   const handleFileChange = (event) => handleFiles(Array.from(event.target.files || []));
 
+  // Upload
   const handleUploadAll = useCallback(async () => {
-    if (!selectedFiles.length) return setError("Nenhum arquivo selecionado.");
-    if (!orcamentoId) return setError("O ID do orçamento não foi fornecido.");
-
+    if (!selectedFiles.length || !orcamentoId) return;
     setUploading(true);
-    setError(null);
     let uploadedUrls = [...imagemAtual];
 
     for (const fileItem of selectedFiles) {
       const formData = new FormData();
-      formData.append("file", fileItem.file);
-      formData.append("orcamentoId", orcamentoId);
+      formData.append("files", fileItem.file);
 
       try {
-        const response = await axios.post(`${API_BASE_URL}/api/upload`, formData, {
-          headers: { "Content-Type": "multipart/form-data" },
+        const response = await axios.post(`${API_BASE_URL}/api/upload/${orcamentoId}`, formData, {
           onUploadProgress: progressEvent => {
             const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
             setSelectedFiles(prev =>
@@ -80,27 +72,21 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
           }
         });
 
-        const uploadedImage = {
-          url: response.data.url,
-          public_id: response.data.public_id
-        };
-        uploadedUrls.push(uploadedImage);
+        uploadedUrls = [...uploadedUrls, ...response.data.files];
 
         setSelectedFiles(prev =>
           prev.map(f => f.key === fileItem.key ? { ...f, uploaded: true, progress: 100, error: null } : f)
         );
 
-      } catch (err) {
-        console.error(err);
-        setError(`Erro ao enviar ${fileItem.file.name}`);
+      } catch {
         setSelectedFiles(prev =>
           prev.map(f => f.key === fileItem.key ? { ...f, uploaded: false, error: "Falha" } : f)
         );
       }
     }
 
-    setUploading(false);
     onUploaded(uploadedUrls);
+    setUploading(false);
   }, [selectedFiles, orcamentoId, imagemAtual, onUploaded]);
 
   const handleDeleteSelected = key => {
@@ -115,78 +101,63 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
     try {
       const res = await fetch(`${API_BASE_URL}/api/upload/${orcamentoId}/${img.public_id}`, { method: "DELETE" });
       if (res.ok) onUploaded(prev => prev.filter(i => i.public_id !== img.public_id));
-      else setError("Falha ao excluir imagem");
-    } catch {
-      setError("Falha ao excluir imagem");
-    }
+    } catch {}
   };
 
   return (
-    <div>
-      {/* Área de drag & drop e clique */}
+    <div className="upload-imagem-orcamento">
+      {/* Dropzone */}
       <div
         ref={dropRef}
+        className="dropzone"
         onClick={() => dropRef.current.querySelector('input').click()}
-        style={{
-          border: "2px dashed #ccc",
-          padding: "20px",
-          textAlign: "center",
-          marginBottom: "20px",
-          cursor: "pointer"
-        }}
       >
-        Arraste e solte imagens aqui ou clique para selecionar
+        <AiOutlinePlus size={32} />
+        <span>Arraste e solte imagens ou clique aqui</span>
         <input
           type="file"
           multiple
           accept="image/*"
           onChange={handleFileChange}
-          disabled={uploading}
           style={{ display: "none" }}
+          disabled={uploading}
         />
       </div>
 
       {/* Pré-visualização */}
       {selectedFiles.length > 0 && (
-        <div>
-          <h4>Pré-visualização:</h4>
+        <div className="image-list">
           {selectedFiles.map(f => (
-            <div key={f.key} style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-              <img src={f.preview} alt={f.file.name || "Pré-visualização"} width={100} style={{ marginRight: "10px" }} />
-              <div style={{ width: "200px", marginRight: "10px" }}>
-                <div style={{ width: "100%", height: "10px", background: "#eee", marginBottom: "5px" }}>
-                  <div style={{
-                    width: `${f.progress}%`,
-                    height: "100%",
-                    background: f.uploaded ? "green" : "blue",
-                    transition: "width 0.2s"
-                  }} />
-                </div>
-                <div>{f.uploaded ? "Enviado ✅" : f.error ? f.error : `${f.progress}%`}</div>
+            <div key={f.key} className="image-item">
+              <img src={f.preview} alt={f.file.name || "Pré-visualização"} />
+              <div className="progress-bar">
+                <div style={{ width: `${f.progress}%` }} />
               </div>
-              <button onClick={() => handleDeleteSelected(f.key)} disabled={uploading}>Excluir</button>
+              {!f.uploaded && !f.error && (
+                <button className="btn-delete" onClick={() => handleDeleteSelected(f.key)}>Cancelar</button>
+              )}
             </div>
           ))}
-          <button onClick={handleUploadAll} disabled={uploading} style={{ marginTop: "10px" }}>
-            {uploading ? "Enviando..." : "Enviar todas as imagens"}
+          <button
+            onClick={handleUploadAll}
+            disabled={uploading || selectedFiles.every(f => f.uploaded || f.error)}
+          >
+            {uploading ? "Enviando..." : "Enviar todas"}
           </button>
         </div>
       )}
 
       {/* Imagens já enviadas */}
       {imagemAtual.length > 0 && (
-        <div style={{ marginTop: "20px" }}>
-          <h4>Imagens enviadas:</h4>
+        <div className="existing-images">
           {imagemAtual.map(img => (
-            <div key={img.public_id} style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
-              <img src={img.url} alt={`Imagem enviada do orçamento ${img.public_id}`} width={100} style={{ marginRight: "10px" }} />
-              <button onClick={() => handleDeleteUploaded(img)}>Excluir</button>
+            <div key={img.public_id} className="image-item">
+              <img src={img.url} alt={`Imagem enviada`} />
+              <button className="btn-delete" onClick={() => handleDeleteUploaded(img)}>Excluir</button>
             </div>
           ))}
         </div>
       )}
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 };
