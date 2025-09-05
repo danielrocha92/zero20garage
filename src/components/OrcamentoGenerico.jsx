@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import './OrcamentoForms.css';
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import "./OrcamentoForms.css";
 
 const OrcamentoGenerico = ({
   onSubmit,
@@ -10,74 +10,78 @@ const OrcamentoGenerico = ({
   isErrorMessage,
   orcamentoData,
   titulo,
-  imagens,
-  setImagens
 }) => {
-  // === Memoizando itens e serviços ===
+  // useMemo para evitar warning de deps no useEffect
   const itensData = useMemo(() => orcamentoData.itens || [], [orcamentoData.itens]);
   const servicosData = useMemo(() => orcamentoData.servicos || [], [orcamentoData.servicos]);
 
   const [formData, setFormData] = useState({
-    nome: '',
-    telefone: '',
-    veiculo: '',
-    placa: '',
+    nome: "",
+    telefone: "",
+    veiculo: "",
+    placa: "",
     data: new Date().toISOString().slice(0, 10),
-    ordemServico: '',
-    pecas: [],
-    servicos: [],
-    totalPecasManual: '',
-    totalServicosManual: '',
-    totalMaoDeObraManual: '',
-    totalGeralManual: '',
-    formaPagamento: '',
-    observacoes: '',
-    status: 'Aberto',
+    ordemServico: "",
+    pecas: itensData.map(item => ({
+      ...item,
+      selecionado: false,
+      quantidade: item.temQuantidade ? 1 : 0,
+      medida: 0,
+      subItens: item.subItens
+        ? item.subItens.map(sub => ({
+            ...sub,
+            value: sub.initialValue || (sub.type === "checkbox" ? false : ""),
+          }))
+        : [],
+    })),
+    servicos: servicosData.map(servico => ({
+      ...servico,
+      selecionado: false,
+      quantidade: servico.temQuantidade ? 1 : 0,
+      medida: 0,
+      subItens: servico.subItens
+        ? servico.subItens.map(sub => ({
+            ...sub,
+            value: sub.initialValue || (sub.type === "checkbox" ? false : ""),
+          }))
+        : [],
+    })),
+    totalPecasManual: "",
+    totalServicosManual: "",
+    totalMaoDeObraManual: "",
+    totalGeralManual: "",
+    formaPagamento: "",
+    observacoes: "",
+    status: "Aberto",
   });
 
-  // === Máscara monetária inteligente que mantém o cursor ===
-  const formatCurrencySmart = (value, selectionStart, oldValue) => {
-    if (!value) return { value: '', selectionStart: 0 };
-    const numericValue = value.replace(/\D/g, '');
-    const number = parseFloat(numericValue || 0) / 100;
-    const formatted = number.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  // ======== Máscara monetária com cursor estável ========
+  const formatCurrencySmart = useCallback((value, selectionStart) => {
+    if (!value) return { formatted: "", newCursor: 0 };
 
-    // Calcula ajuste de cursor
-    let newSelection = selectionStart + (formatted.length - (oldValue?.length || 0));
-    if (newSelection < 0) newSelection = 0;
-    if (newSelection > formatted.length) newSelection = formatted.length;
+    const onlyNumbers = value.replace(/\D/g, "");
+    const number = (parseFloat(onlyNumbers) / 100).toFixed(2);
 
-    return { value: formatted, selectionStart: newSelection };
-  };
+    const formatted = Number(number).toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
 
-  const parseCurrencyToNumber = (value) => {
+    // mantém posição do cursor
+    const diff = formatted.length - value.length;
+    const newCursor = (selectionStart || formatted.length) + diff;
+
+    return { formatted, newCursor: Math.max(0, newCursor) };
+  }, []);
+
+  const parseCurrencyToNumber = value => {
     if (!value) return 0;
-    return Number(value.replace(/\D/g, '')) / 100;
+    return Number(value.replace(/\D/g, "")) / 100;
   };
 
-  // === Popula formulário com dados de edição ===
+  // Preenche formData ao editar
   useEffect(() => {
-    if (!editingData) {
-      // inicializa pecas e servicos com default
-      setFormData(prev => ({
-        ...prev,
-        pecas: itensData.map(item => ({
-          ...item,
-          selecionado: false,
-          quantidade: item.temQuantidade ? 1 : 0,
-          medida: 0,
-          subItens: item.subItens ? item.subItens.map(sub => ({ ...sub, value: sub.initialValue || (sub.type === "checkbox" ? false : '') })) : [],
-        })),
-        servicos: servicosData.map(servico => ({
-          ...servico,
-          selecionado: false,
-          quantidade: servico.temQuantidade ? 1 : 0,
-          medida: 0,
-          subItens: servico.subItens ? servico.subItens.map(sub => ({ ...sub, value: sub.initialValue || (sub.type === "checkbox" ? false : '') })) : [],
-        })),
-      }));
-      return;
-    }
+    if (!editingData) return;
 
     const parsedDate = new Date(editingData.data);
     const validDate = !isNaN(parsedDate.getTime())
@@ -86,132 +90,156 @@ const OrcamentoGenerico = ({
 
     setFormData(prev => ({
       ...prev,
-      nome: editingData.cliente || '',
-      telefone: editingData.telefone || '',
-      veiculo: editingData.veiculo || '',
-      placa: editingData.placa || '',
+      nome: editingData.cliente || "",
+      telefone: editingData.telefone || "",
+      veiculo: editingData.veiculo || "",
+      placa: editingData.placa || "",
       data: validDate,
-      ordemServico: editingData.ordemServico || '',
-      totalPecasManual: editingData.valorTotalPecas ? formatCurrencySmart(editingData.valorTotalPecas.toString()).value : '',
-      totalServicosManual: editingData.valorTotalServicos ? formatCurrencySmart(editingData.valorTotalServicos.toString()).value : '',
-      totalMaoDeObraManual: editingData.totalMaoDeObra ? formatCurrencySmart(editingData.totalMaoDeObra.toString()).value : '',
-      totalGeralManual: editingData.valorTotal ? formatCurrencySmart(editingData.valorTotal.toString()).value : '',
-      formaPagamento: editingData.formaPagamento || '',
-      observacoes: editingData.observacoes || '',
-      status: editingData.status || 'Aberto',
+      ordemServico: editingData.ordemServico || "",
+      totalPecasManual: editingData.valorTotalPecas
+        ? formatCurrencySmart(editingData.valorTotalPecas, 0).formatted
+        : "",
+      totalServicosManual: editingData.valorTotalServicos
+        ? formatCurrencySmart(editingData.valorTotalServicos, 0).formatted
+        : "",
+      totalMaoDeObraManual: editingData.totalMaoDeObra
+        ? formatCurrencySmart(editingData.totalMaoDeObra, 0).formatted
+        : "",
+      totalGeralManual: editingData.valorTotal
+        ? formatCurrencySmart(editingData.valorTotal, 0).formatted
+        : "",
+      formaPagamento: editingData.formaPagamento || "",
+      observacoes: editingData.observacoes || "",
+      status: editingData.status || "Aberto",
       pecas: itensData.map(pecaData => {
-        const pecaEdit = editingData.pecasSelecionadas.find(p => p.includes(pecaData.nome));
+        const pecaEdit = editingData.pecasSelecionadas?.find(p =>
+          p.includes(pecaData.nome)
+        );
         const quantidadeMatch = pecaEdit ? pecaEdit.match(/::\s*(\d+)/) : null;
-        const quantidade = quantidadeMatch ? parseInt(quantidadeMatch[1], 10) : (pecaData.temQuantidade ? 1 : 0);
+        const quantidade = quantidadeMatch
+          ? parseInt(quantidadeMatch[1], 10)
+          : pecaData.temQuantidade
+          ? 1
+          : 0;
+
         return {
           ...pecaData,
           selecionado: !!pecaEdit,
           quantidade,
-          subItens: pecaData.subItens ? pecaData.subItens.map(sub => ({
-            ...sub,
-            value: !!pecaEdit && pecaEdit.includes(sub.label) ? true : sub.initialValue
-          })) : []
+          subItens: pecaData.subItens
+            ? pecaData.subItens.map(sub => ({
+                ...sub,
+                value:
+                  !!pecaEdit && pecaEdit.includes(sub.label)
+                    ? true
+                    : sub.initialValue,
+              }))
+            : [],
         };
       }),
       servicos: servicosData.map(servicoData => {
-        const servicoEdit = editingData.servicosSelecionados.find(s => s.includes(servicoData.nome));
-        const quantidadeMatch = servicoEdit ? servicoEdit.match(/::\s*(\d+)/) : null;
-        const quantidade = quantidadeMatch ? parseInt(quantidadeMatch[1], 10) : (servicoData.temQuantidade ? 1 : 0);
+        const servicoEdit = editingData.servicosSelecionados?.find(s =>
+          s.includes(servicoData.nome)
+        );
+        const quantidadeMatch = servicoEdit
+          ? servicoEdit.match(/::\s*(\d+)/)
+          : null;
+        const quantidade = quantidadeMatch
+          ? parseInt(quantidadeMatch[1], 10)
+          : servicoData.temQuantidade
+          ? 1
+          : 0;
+
         return {
           ...servicoData,
           selecionado: !!servicoEdit,
           quantidade,
-          subItens: servicoData.subItens ? servicoData.subItens.map(sub => ({
-            ...sub,
-            value: !!servicoEdit && servicoEdit.includes(sub.label) ? true : sub.initialValue
-          })) : []
+          subItens: servicoData.subItens
+            ? servicoData.subItens.map(sub => ({
+                ...sub,
+                value:
+                  !!servicoEdit && servicoEdit.includes(sub.label)
+                    ? true
+                    : sub.initialValue,
+              }))
+            : [],
         };
       }),
     }));
-  }, [editingData, itensData, servicosData]);
+  }, [editingData, itensData, servicosData, formatCurrencySmart]);
 
-  // === Manipulação de inputs ===
-  const handleInputChange = (e) => {
+  // ======== Handlers ========
+  const handleInputChange = e => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleMonetaryChange = (e) => {
+  const handleMonetaryChange = e => {
     const { name, value, selectionStart } = e.target;
-    setFormData(prev => {
-      const { value: formatted, selectionStart: newCursor } = formatCurrencySmart(value, selectionStart, prev[name]);
-      setTimeout(() => e.target.setSelectionRange(newCursor, newCursor), 0);
-      return { ...prev, [name]: formatted };
+    const { formatted, newCursor } = formatCurrencySmart(value, selectionStart);
+
+    setFormData(prev => ({ ...prev, [name]: formatted }));
+
+    requestAnimationFrame(() => {
+      e.target.setSelectionRange(newCursor, newCursor);
     });
   };
 
-  const handlePecaChange = (index, field, value) => {
+  const handleToggleSelecionado = (tipo, index) => {
     setFormData(prev => {
-      const pecasAtualizadas = [...prev.pecas];
-      pecasAtualizadas[index][field] = value;
-      return { ...prev, pecas: pecasAtualizadas };
+      const list = [...prev[tipo]];
+      list[index].selecionado = !list[index].selecionado;
+      return { ...prev, [tipo]: list };
     });
   };
 
-  const handleServicoChange = (index, field, value) => {
+  const handleQuantidadeChange = (tipo, index, quantidade) => {
     setFormData(prev => {
-      const servicosAtualizados = [...prev.servicos];
-      servicosAtualizados[index][field] = value;
-      return { ...prev, servicos: servicosAtualizados };
+      const list = [...prev[tipo]];
+      list[index].quantidade = quantidade;
+      return { ...prev, [tipo]: list };
     });
   };
 
-  const handleSubItemCheckboxChange = (tipo, index, subIndex, checked) => {
+  const handleSubItemChange = (tipo, index, subIndex, value) => {
     setFormData(prev => {
-      const itemsAtualizados = [...prev[tipo]];
-      itemsAtualizados[index].subItens[subIndex].value = checked;
-      return { ...prev, [tipo]: itemsAtualizados };
+      const list = [...prev[tipo]];
+      list[index].subItens[subIndex].value = value;
+      return { ...prev, [tipo]: list };
     });
   };
 
-  const handleSubItemTextChange = (tipo, index, subIndex, value) => {
-    setFormData(prev => {
-      const itemsAtualizados = [...prev[tipo]];
-      itemsAtualizados[index].subItens[subIndex].value = value;
-      return { ...prev, [tipo]: itemsAtualizados };
-    });
-  };
-
-  // === Submit ===
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     if (!formData.nome) {
-      showMessage('Cliente é obrigatório!', true);
+      showMessage("Cliente é obrigatório!", true);
       return;
     }
 
-    const pecasSelecionadasFormatadas = formData.pecas
-      .filter(p => p.selecionado)
-      .map(peca => {
-        let nomeCompleto = peca.nome;
-        if (peca.temQuantidade && peca.quantidade > 0) nomeCompleto += `:: ${peca.quantidade}`;
-        if (peca.temQuantidade && peca.medida > 0) nomeCompleto += ` Medida: ${peca.medida}`;
-        const subItensFormatados = peca.subItens
-          .filter(sub => (sub.type === "checkbox" && sub.value) || (sub.type === "text" && sub.value))
-          .map(sub => sub.type === "checkbox" ? sub.label : `${sub.label}: ${sub.value}`)
-          .join('; ');
-        if (subItensFormatados) nomeCompleto += ` (${subItensFormatados})`;
-        return nomeCompleto;
-      });
-
-    const servicosSelecionadasFormatadas = formData.servicos
-      .filter(s => s.selecionado)
-      .map(servico => {
-        let nomeCompleto = servico.nome;
-        if (servico.temQuantidade && servico.quantidade > 0) nomeCompleto += `:: ${servico.quantidade}`;
-        if (servico.temQuantidade && servico.medida > 0) nomeCompleto += ` Medida: ${servico.medida}`;
-        const subItensFormatados = servico.subItens
-          .filter(sub => (sub.type === "checkbox" && sub.value) || (sub.type === "text" && sub.value))
-          .map(sub => sub.type === "checkbox" ? sub.label : `${sub.label}: ${sub.value}`)
-          .join('; ');
-        if (subItensFormatados) nomeCompleto += ` (${subItensFormatados})`;
-        return nomeCompleto;
-      });
+    const formatarItens = (lista, tipo) =>
+      lista
+        .filter(i => i.selecionado)
+        .map(item => {
+          let nomeCompleto = item.nome;
+          if (item.temQuantidade && item.quantidade > 0)
+            nomeCompleto += `:: ${item.quantidade}`;
+          if (item.temQuantidade && item.medida > 0)
+            nomeCompleto += ` Medida: ${item.medida}`;
+          const subItensFormatados = item.subItens
+            .filter(
+              sub =>
+                (sub.type === "checkbox" && sub.value) ||
+                (sub.type === "text" && sub.value)
+            )
+            .map(sub =>
+              sub.type === "checkbox"
+                ? sub.label
+                : `${sub.label}: ${sub.value}`
+            )
+            .join("; ");
+          if (subItensFormatados) nomeCompleto += ` (${subItensFormatados})`;
+          return nomeCompleto;
+        });
 
     onSubmit({
       cliente: formData.nome,
@@ -220,8 +248,8 @@ const OrcamentoGenerico = ({
       placa: formData.placa,
       data: formData.data,
       ordemServico: formData.ordemServico,
-      pecasSelecionadas: pecasSelecionadasFormatadas,
-      servicosSelecionados: servicosSelecionadasFormatadas,
+      pecasSelecionadas: formatarItens(formData.pecas, "pecas"),
+      servicosSelecionados: formatarItens(formData.servicos, "servicos"),
       valorTotalPecas: parseCurrencyToNumber(formData.totalPecasManual),
       valorTotalServicos: parseCurrencyToNumber(formData.totalServicosManual),
       totalMaoDeObra: parseCurrencyToNumber(formData.totalMaoDeObraManual),
@@ -232,20 +260,103 @@ const OrcamentoGenerico = ({
     });
   };
 
-  const gerarOpcoesQuantidade = () => {
-    const opcoes = [];
-    for (let i = 1; i <= 100; i++) opcoes.push(<option key={i} value={i}>{i}</option>);
-    return opcoes;
-  };
+  const gerarOpcoesQuantidade = () =>
+    Array.from({ length: 100 }, (_, i) => (
+      <option key={i + 1} value={i + 1}>
+        {i + 1}
+      </option>
+    ));
 
+  // ======== Render ========
   return (
     <div className="client-vehicle-section">
       <h1>{titulo}</h1>
+
       <form onSubmit={handleSubmit}>
-        {/* Layout 50/50 Peças e Serviços */}
-        <div style={{ display: 'flex', gap: '2rem' }}>
+        {/* Cliente */}
+        <section className="client-vehicle-section">
+          <h2>Informações do Cliente e Veículo</h2>
+          <table className="form-table">
+            <tbody>
+              <tr>
+                <td>
+                  <div className="form-group">
+                    <label>OS:</label>
+                    <input
+                      type="text"
+                      name="ordemServico"
+                      value={formData.ordemServico}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div className="form-group">
+                    <label>Cliente:</label>
+                    <input
+                      type="text"
+                      name="nome"
+                      value={formData.nome}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div className="form-group">
+                    <label>Data:</label>
+                    <input
+                      type="date"
+                      name="data"
+                      value={formData.data}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div className="form-group">
+                    <label>Veículo:</label>
+                    <input
+                      type="text"
+                      name="veiculo"
+                      value={formData.veiculo}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div className="form-group">
+                    <label>Placa:</label>
+                    <input
+                      type="text"
+                      name="placa"
+                      value={formData.placa}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div className="form-group">
+                    <label>Telefone:</label>
+                    <input
+                      type="text"
+                      name="telefone"
+                      value={formData.telefone}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        {/* Peças + Serviços lado a lado */}
+        <div className="grid-50-50">
           {/* Peças */}
-          <section className="section-form" style={{ flex: 1 }}>
+          <section className="section-form">
             <h2>Peças</h2>
             <table className="items-table">
               <tbody>
@@ -256,15 +367,15 @@ const OrcamentoGenerico = ({
                         <input
                           type="checkbox"
                           checked={peca.selecionado}
-                          onChange={() => handlePecaChange(index, 'selecionado', !peca.selecionado)}
+                          onChange={() => handleToggleSelecionado("pecas", index)}
                         />
                         <span className="checkbox-box"></span>
                         {peca.nome}
                       </label>
                     </td>
                     <td className="subitems-cell">
-                      {peca.selecionado && peca.subItens && peca.subItens.length > 0 && (
-                        <div className="sub-items-container">
+                      {peca.selecionado && peca.subItens?.length > 0 && (
+                        <div>
                           {peca.subItens.map((sub, sIdx) => (
                             <div key={sIdx} className="sub-item-input-group">
                               {sub.type === "checkbox" ? (
@@ -272,18 +383,34 @@ const OrcamentoGenerico = ({
                                   <input
                                     type="checkbox"
                                     checked={sub.value}
-                                    onChange={(e) => handleSubItemCheckboxChange('pecas', index, sIdx, e.target.checked)}
+                                    onChange={e =>
+                                      handleSubItemChange(
+                                        "pecas",
+                                        index,
+                                        sIdx,
+                                        e.target.checked
+                                      )
+                                    }
                                   />
                                   <span className="checkbox-box"></span>
                                   {sub.label}
                                 </label>
                               ) : (
                                 <>
-                                  <label className="sub-item-label">{sub.label}:</label>
+                                  <label className="sub-item-label">
+                                    {sub.label}:
+                                  </label>
                                   <input
                                     type="text"
                                     value={sub.value}
-                                    onChange={(e) => handleSubItemTextChange('pecas', index, sIdx, e.target.value)}
+                                    onChange={e =>
+                                      handleSubItemChange(
+                                        "pecas",
+                                        index,
+                                        sIdx,
+                                        e.target.value
+                                      )
+                                    }
                                     className="small-input"
                                   />
                                 </>
@@ -298,9 +425,14 @@ const OrcamentoGenerico = ({
                         <>
                           <label className="quantidade-label">Qtd:</label>
                           <select
-                            name="quantidade"
                             value={peca.quantidade}
-                            onChange={(e) => handlePecaChange(index, 'quantidade', parseInt(e.target.value))}
+                            onChange={e =>
+                              handleQuantidadeChange(
+                                "pecas",
+                                index,
+                                parseInt(e.target.value)
+                              )
+                            }
                             className="quantidade-select"
                           >
                             {gerarOpcoesQuantidade()}
@@ -312,6 +444,7 @@ const OrcamentoGenerico = ({
                 ))}
               </tbody>
             </table>
+
             <div className="total-line-form">
               <span className="label">Valor total de Peças:</span>
               <input
@@ -326,8 +459,8 @@ const OrcamentoGenerico = ({
           </section>
 
           {/* Serviços */}
-          <section className="section-form" style={{ flex: 1 }}>
-            <h2>Serviços Retífica</h2>
+          <section className="section-form">
+            <h2>Serviços</h2>
             <table className="items-table">
               <tbody>
                 {formData.servicos.map((servico, index) => (
@@ -337,15 +470,17 @@ const OrcamentoGenerico = ({
                         <input
                           type="checkbox"
                           checked={servico.selecionado}
-                          onChange={() => handleServicoChange(index, 'selecionado', !servico.selecionado)}
+                          onChange={() =>
+                            handleToggleSelecionado("servicos", index)
+                          }
                         />
                         <span className="checkbox-box"></span>
                         {servico.nome}
                       </label>
                     </td>
                     <td className="subitems-cell">
-                      {servico.selecionado && servico.subItens && servico.subItens.length > 0 && (
-                        <div className="sub-items-container">
+                      {servico.selecionado && servico.subItens?.length > 0 && (
+                        <div>
                           {servico.subItens.map((sub, sIdx) => (
                             <div key={sIdx} className="sub-item-input-group">
                               {sub.type === "checkbox" ? (
@@ -353,18 +488,34 @@ const OrcamentoGenerico = ({
                                   <input
                                     type="checkbox"
                                     checked={sub.value}
-                                    onChange={(e) => handleSubItemCheckboxChange('servicos', index, sIdx, e.target.checked)}
+                                    onChange={e =>
+                                      handleSubItemChange(
+                                        "servicos",
+                                        index,
+                                        sIdx,
+                                        e.target.checked
+                                      )
+                                    }
                                   />
                                   <span className="checkbox-box"></span>
                                   {sub.label}
                                 </label>
                               ) : (
                                 <>
-                                  <label className="sub-item-label">{sub.label}:</label>
+                                  <label className="sub-item-label">
+                                    {sub.label}:
+                                  </label>
                                   <input
                                     type="text"
                                     value={sub.value}
-                                    onChange={(e) => handleSubItemTextChange('servicos', index, sIdx, e.target.value)}
+                                    onChange={e =>
+                                      handleSubItemChange(
+                                        "servicos",
+                                        index,
+                                        sIdx,
+                                        e.target.value
+                                      )
+                                    }
                                     className="small-input"
                                   />
                                 </>
@@ -379,9 +530,14 @@ const OrcamentoGenerico = ({
                         <>
                           <label className="quantidade-label">Qtd:</label>
                           <select
-                            name="quantidade"
                             value={servico.quantidade}
-                            onChange={(e) => handleServicoChange(index, 'quantidade', parseInt(e.target.value))}
+                            onChange={e =>
+                              handleQuantidadeChange(
+                                "servicos",
+                                index,
+                                parseInt(e.target.value)
+                              )
+                            }
                             className="quantidade-select"
                           >
                             {gerarOpcoesQuantidade()}
@@ -393,6 +549,7 @@ const OrcamentoGenerico = ({
                 ))}
               </tbody>
             </table>
+
             <div className="total-line-form">
               <span className="label">Valor total de Serviços:</span>
               <input
@@ -407,7 +564,7 @@ const OrcamentoGenerico = ({
           </section>
         </div>
 
-        {/* Totais e Pagamento */}
+        {/* Totais */}
         <section className="summary-section">
           <div className="total-line-form">
             <span className="label">Valor total de Mão de Obra Mecânica:</span>
@@ -432,52 +589,59 @@ const OrcamentoGenerico = ({
               className="input-total-geral"
             />
           </div>
+        </section>
 
+        {/* Observações */}
+        <section className="section-form">
+          <h2>Observações</h2>
+          <textarea
+            name="observacoes"
+            value={formData.observacoes}
+            onChange={handleInputChange}
+            rows="3"
+            className="observacoes-textarea"
+          />
+        </section>
+
+        {/* Pagamento + Status */}
+        <section className="section-form">
           <div className="form-group">
-            <label>Forma de pagamento:</label>
+            <label>Forma de Pagamento:</label>
             <input
               type="text"
               name="formaPagamento"
               value={formData.formaPagamento}
               onChange={handleInputChange}
-              placeholder="Pix, Débito ou Crédito"
-              style={{ fontSize: '0.9em' }}
             />
           </div>
-
-          {formData.observacoes && (
-            <div className="form-group">
-              <label>Observações:</label>
-              <textarea
-                name="observacoes"
-                value={formData.observacoes}
-                onChange={handleInputChange}
-                rows="3"
-              />
-            </div>
-          )}
-
           <div className="form-group">
             <label>Status:</label>
-            <select name="status" value={formData.status} onChange={handleInputChange}>
+            <select
+              name="status"
+              value={formData.status}
+              onChange={handleInputChange}
+            >
               <option value="Aberto">Aberto</option>
               <option value="Aprovado">Aprovado</option>
-              <option value="Rejeitado">Rejeitado</option>
-              <option value="Concluido">Concluido</option>
+              <option value="Concluído">Concluído</option>
             </select>
           </div>
         </section>
 
+        {/* Botões */}
         <div className="form-actions">
-          <button type="submit" className="button">Salvar Orçamento</button>
+          <button type="submit" className="button">
+            Salvar
+          </button>
+          <button type="button" className="button" onClick={hideMessageBox}>
+            Cancelar
+          </button>
         </div>
       </form>
 
       {message && (
-        <div className="message-box-overlay" onClick={hideMessageBox}>
-          <div className={`message-box ${isErrorMessage ? 'error' : 'success'}`}>
-            {message}
-          </div>
+        <div className={`message-box ${isErrorMessage ? "error" : "success"}`}>
+          {message}
         </div>
       )}
     </div>

@@ -1,18 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import dayjs from 'dayjs';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import './OrcamentoImpresso.css';
-
-// Logo da Zero20Garage (ajuste o caminho se necessário)
 import logo from '../assets/images/background.jpg';
 
 const OrcamentoImpresso = ({ orcamento, onClose }) => {
   const componentRef = useRef(null);
+  const [isPdfGenerating, setIsPdfGenerating] = useState(false);
 
   const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
-  // Função para formatar valores para R$ X.XXX,XX ou "__________"
   const formatValue = (value) => {
     const num = Number(value);
     if (isNaN(num) || num === 0) {
@@ -35,7 +33,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     return base + 'w_240,c_limit,q_auto,f_auto,' + firstSeg + '/' + rest.join('/');
   };
 
-  const getCloudinaryOriginal = (url) => {
+  const getCloudinaryOriginal = useCallback((url) => {
     if (!isCloudinaryUrl(url)) return url;
     const base = url.split('/upload/')[0] + '/upload/';
     const after = url.split('/upload/')[1] || '';
@@ -43,10 +41,10 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     if (parts.length === 0) return url;
     if (/^v\d+$/i.test(parts[0])) return url;
     return base + parts.slice(1).join('/');
-  };
+  }, []);
 
   // === Conversão de imagem para DataURL ===
-  const toPngDataUrlFromSrc = async (src) => {
+  const toPngDataUrlFromSrc = useCallback(async (src) => {
     try {
       const img = await new Promise((resolve, reject) => {
         const i = new Image();
@@ -65,9 +63,9 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       console.error('Erro na conversão da imagem para DataURL:', e);
       return null;
     }
-  };
+  }, []);
 
-  const getOriginalImageAsDataUrl = async (img) => {
+  const getOriginalImageAsDataUrl = useCallback(async (img) => {
     try {
       if (typeof img === 'string') {
         return await toPngDataUrlFromSrc(getCloudinaryOriginal(img));
@@ -85,7 +83,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       console.warn('Falha ao preparar imagem para PDF:', e);
     }
     return null;
-  };
+  }, [toPngDataUrlFromSrc, getCloudinaryOriginal]);
 
   const appendOriginalImagesToPdf = async (pdf, imagens) => {
     if (!imagens || imagens.length === 0) return;
@@ -130,7 +128,9 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
 
   // === Geração do PDF ===
   const handleSharePdf = async () => {
-    if (!componentRef.current) return;
+    if (!componentRef.current || isPdfGenerating) return;
+
+    setIsPdfGenerating(true);
 
     setTimeout(async () => {
       const element = componentRef.current;
@@ -152,7 +152,6 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
         let pdf;
 
         try {
-          // 🔹 Aguarda um pequeno delay antes de capturar
           await sleep(300);
 
           const canvas = await html2canvas(element, { scale: SCALE, useCORS: true });
@@ -172,11 +171,11 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           console.warn('Erro na captura única:', errSingle);
         }
 
-        // Adiciona imagens originais em nova página
         await appendOriginalImagesToPdf(pdf, orcamento?.imagens || []);
 
         const filename = `Orçamento_OS_${orcamento?.ordemServico || 'SemOS'}_${orcamento?.cliente || 'SemCliente'}.pdf`;
         pdf.save(filename);
+
       } catch (error) {
         console.error('Erro ao gerar PDF:', error);
       } finally {
@@ -184,6 +183,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
         element.style.maxWidth = prevMaxWidth;
         document.body.style.overflow = prevBodyOverflow;
         element.classList.remove('force-print-layout');
+        setIsPdfGenerating(false);
       }
     }, 100);
   };
@@ -248,11 +248,11 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
         <section className="items-section">
           <h2>Peças</h2>
           <div className="items-columns">
-            <ul>{pecas.slice(0, pecasMid).map((item, i) => <li key={i}>{item}</li>)}</ul>
-            <ul>{pecas.slice(pecasMid).map((item, i) => <li key={i}>{item}</li>)}</ul>
+            <ul>{pecas.slice(0, pecasMid).map((item, i) => <li key={i}><input type="checkbox" checked={true} readOnly className="checkbox-box" /><span className="item-text">{item}</span></li>)}</ul>
+            <ul>{pecas.slice(pecasMid).map((item, i) => <li key={i}><input type="checkbox" checked={true} readOnly className="checkbox-box" /><span className="item-text">{item}</span></li>)}</ul>
           </div>
           <div className="total-line-impresso">
-            Valor total de Peças: <strong>{formatValue(orcamento.valorTotalPecas)}</strong>
+            <span>Valor total de Peças:</span> <strong>{formatValue(orcamento.valorTotalPecas)}</strong>
           </div>
         </section>
 
@@ -262,22 +262,22 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
             <section className="items-section">
               <h2>Serviços - Retífica</h2>
               <div className="items-columns">
-                <ul>{servicos.slice(0, servicosMid).map((item, i) => <li key={i}>{item}</li>)}</ul>
-                <ul>{servicos.slice(servicosMid).map((item, i) => <li key={i}>{item}</li>)}</ul>
+                <ul>{servicos.slice(0, servicosMid).map((item, i) => <li key={i}><input type="checkbox" checked={true} readOnly className="checkbox-box" /><span className="item-text">{item}</span></li>)}</ul>
+                <ul>{servicos.slice(servicosMid).map((item, i) => <li key={i}><input type="checkbox" checked={true} readOnly className="checkbox-box" /><span className="item-text">{item}</span></li>)}</ul>
               </div>
               <div className="total-line-impresso">
-                Valor total de Serviços: <strong>{formatValue(orcamento.valorTotalServicos)}</strong>
+                <span>Valor total de Serviços:</span> <strong>{formatValue(orcamento.valorTotalServicos)}</strong>
               </div>
             </section>
             <div className="total-line-impresso">
-              Valor total de mão de obra: <strong>{formatValue(orcamento.totalMaoDeObra)}</strong>
+              <span>Valor total de mão de obra:</span> <strong>{formatValue(orcamento.totalMaoDeObra)}</strong>
             </div>
           </>
         )}
 
         {/* Total Geral */}
         <div className="total-line-impresso final-total">
-          TOTAL GERAL: <strong>{formatValue(orcamento.valorTotal)}</strong>
+          <span>TOTAL GERAL:</span> <strong>{formatValue(orcamento.valorTotal)}</strong>
         </div>
 
         {/* Informações Extras */}
@@ -288,11 +288,23 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           )}
         </div>
 
-        {/* Política */}
+        {/* Política de Garantia, Troca e Devolução */}
         <section className="policy-footer">
           <h4>Política de Garantia, Troca e Devolução</h4>
           <p>
-            A garantia dos serviços realizados pela Zero 20 Garage é válida apenas se o veículo for utilizado conforme as orientações da oficina, incluindo manutenções em dia, uso adequado de combustíveis e respeito aos prazos de revisão. Clientes com pagamentos pendentes não terão direito à garantia, sendo que a mesma só pode ser ativada mediante apresentação do orçamento. O documento comprova a realização dos serviços e/ou compra das peças para o motor completo, mediante contato com a oficina para análise do problema. A Zero 20 Garage preza pela qualidade dos serviços prestados e realiza todos os procedimentos com base em diagnósticos técnicos e profissionais qualificados. Em casos de avariações, se o veículo apresentar danos ou acidentes ocasionados por fenômenos da natureza ou da ação de terceiros, a garantia não será válida. Em caso de uso incorreto ou desgaste natural de componentes, o cliente poderá solicitar a análise do caso. Não haverá reembolso de peças já instaladas no veículo, sob nenhuma circunstância.
+            A garantia dos serviços realizados pela Zero 20 Garage é válida apenas se o veículo for utilizado conforme as orientações da oficina, incluindo manutenções em dia, uso adequado de combustíveis e respeito aos prazos de revisão. Clientes com pagamentos pendentes não terão direito à garantia, sendo que a mesma só pode ser ativada mediante apresentação do orçamento.
+          </p>
+          <p>
+            O documento comprova a realização dos serviços e/ou compra das peças para o motor completo, mediante contato com a oficina para análise do problema. A Zero 20 Garage preza pela qualidade dos serviços prestados e realiza todos os procedimentos com base em diagnósticos técnicos e profissionais qualificados.
+          </p>
+          <p>
+            Em casos de avariações, se o veículo apresentar danos ou acidentes ocasionados por fenômenos da natureza ou da ação de terceiros, a garantia não será válida.
+          </p>
+          <p>
+            Em caso de uso incorreto ou desgaste natural de componentes, o cliente poderá solicitar a análise do caso.
+          </p>
+          <p>
+            Não haverá reembolso de peças já instaladas no veículo, sob nenhuma circunstância.
           </p>
           <p className="policy-acceptance">
             Ao aceitar o orçamento e iniciar o serviço com a Zero 20 Garage, o cliente declara estar ciente e de acordo com os termos descritos acima.
@@ -318,8 +330,10 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
 
       {/* Ações */}
       <div className="orcamento-impresso-actions">
-        <button className='button' onClick={handleSharePdf}>Gerar PDF</button>
-        <button className='button' onClick={handleVoltarPainel}>Voltar</button>
+        <button className='button' onClick={handleSharePdf} disabled={isPdfGenerating}>
+          {isPdfGenerating ? 'Gerando PDF...' : 'Gerar PDF'}
+        </button>
+        <button className='button' onClick={handleVoltarPainel} disabled={isPdfGenerating}>Voltar</button>
       </div>
     </div>
   );

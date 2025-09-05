@@ -13,11 +13,11 @@ body {
     border-radius: 0.5rem;
     box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.5);
     width: 100%;
-    max-width: 1200px; /* controla largura no desktop */
+    max-width: 1200px;
     margin: 1rem auto;
-    overflow-x: hidden; /* impede rolagem horizontal */
-    overflow-y: visible; /* altura segue o conteúdo */
-    height: auto; /* altura automática */
+    overflow-x: hidden;
+    overflow-y: visible;
+    height: auto;
     position: relative;
     box-sizing: border-box;
 }
@@ -28,7 +28,7 @@ body {
     color: #333;
     padding: 1.5rem;
     border-radius: 0.5rem;
-    box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,0.1);
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
     min-height: auto;
     box-sizing: border-box;
     font-size: 0.8rem;
@@ -36,8 +36,8 @@ body {
     overflow-x: hidden;
     overflow-y: visible;
     width: 100%;
-    max-width: 794px; /* largura máxima capturada/respeitada */
-    margin: 0 auto; /* centraliza quando maior tela */
+    max-width: 794px;
+    margin: 0 auto;
 }
 
 .header-impresso {
@@ -80,7 +80,6 @@ body {
     font-size: 0.85em;
 }
 
-/* Permitir quebra de texto para evitar overflow/corte em telas estreitas */
 .info-table td {
     padding: 0.05rem 0;
     vertical-align: bottom;
@@ -88,15 +87,13 @@ body {
     width: 50%;
     color: #9e0000;
     font-weight: bold;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal; /* alterado para normal para permitir quebra */
+    word-break: break-word; /* Melhor que break-all para textos grandes */
+    white-space: normal;
     min-width: 45px;
     padding-left: 0.2rem;
     padding-right: 0.2rem;
     box-sizing: border-box;
     text-align: center;
-    word-break: break-all;
 }
 
 .input-line {
@@ -146,12 +143,9 @@ body {
     margin-bottom: 0.1rem;
     line-height: 1.1;
     flex-wrap: wrap;
-    gap: 5px; /* Adicionado um gap para espaçamento consistente */
+    gap: 5px;
 }
 
-/* * Estilo do checkbox para exibir apenas o ícone de check.
- * A caixa do input é tornada invisível e o ícone é renderizado no seu lugar.
- */
 .checkbox-box {
     -webkit-appearance: none;
     appearance: none;
@@ -161,33 +155,23 @@ body {
     border: none;
     background-color: transparent;
     overflow: hidden;
-
     display: inline-block;
-    position: static; /* Alterado para static */
+    position: static;
 }
 
-/*
- * Adiciona um ícone de check (✔️) visível quando o checkbox está marcado.
- */
 .checkbox-box:checked::after {
     content: '✔️';
     display: block;
     font-size: 0.7rem;
     line-height: 1;
     color: #c50404;
-
-    /* Removido o posicionamento absoluto e a transformação */
     position: static;
     transform: none;
-
-    /* Define o tamanho do espaço ocupado pelo ícone */
     width: 0.7rem;
     height: 0.7rem;
 }
 
 .item-text {
-    /* Removido margin-right: 0.2rem; para usar o gap do 'li' */
-    margin-right: 0;
     flex-shrink: 1;
     flex-grow: 1;
     word-wrap: break-word;
@@ -251,7 +235,7 @@ body {
 }
 
 /* Botões de ação fora da área de impressão */
-.print-buttons {
+.orcamento-impresso-actions {
     text-align: center;
     margin-top: 1rem;
     display: flex;
@@ -260,7 +244,7 @@ body {
     padding: 0 1rem;
 }
 
-.print-btn, .back-btn {
+.orcamento-impresso-actions .button {
     background-color: #c50404;
     color: white;
     border: none;
@@ -272,8 +256,21 @@ body {
     width: 100%;
 }
 
-.print-btn:hover, .back-btn:hover {
+.orcamento-impresso-actions .button:hover {
     background-color: #9e0303;
+}
+
+.orcamento-impresso-actions .button:last-child {
+    background-color: #6c757d;
+}
+
+.orcamento-impresso-actions .button:last-child:hover {
+    background-color: #5a6268;
+}
+
+.orcamento-impresso-actions .button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
 }
 
 /* --- Estilos do rodapé com política e assinatura --- */
@@ -311,21 +308,20 @@ body {
 }
 
 .extra-info-section-impresso {
-  margin-top: 20px;
-  padding: 10px;
-  font-size: 14px;
-  border-top: 1px solid #ccc;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 14px;
+    border-top: 1px solid #ccc;
 }
 
 .extra-info-section-impresso .info-line {
-  margin-bottom: 8px;
+    margin-bottom: 8px;
 }
 
 .extra-info-section-impresso strong {
-  display: inline-block;
-  width: 160px;
+    display: inline-block;
+    width: 160px;
 }
-
 
 /* --- Media Queries para Desktop/Telas Maiores --- */
 @media (min-width: 768px) {
@@ -398,10 +394,9 @@ body {
 
     .item-list-impresso li {
         margin-bottom: 1.5px;
-        /* Garantir que o ícone e o texto se alinhem corretamente */
         display: flex;
         align-items: center;
-        gap: 5px; /* Adicionado um gap para espaçamento consistente */
+        gap: 5px;
     }
 
     .checkbox-box {
@@ -413,7 +408,7 @@ body {
         border: none;
         background-color: transparent;
         overflow: hidden;
-        position: static; /* Alterado para static */
+        position: static;
     }
 
     .checkbox-box:checked::after {
@@ -421,14 +416,13 @@ body {
         display: block;
         font-size: 0.8rem;
         color: #c50404;
-        position: static; /* Alterado para static */
-        transform: none; /* Removido a transformação */
+        position: static;
+        transform: none;
         width: auto;
         height: auto;
     }
 
     .item-text {
-        margin-right: 0; /* Removido a margem para evitar espaçamento duplo */
         flex-grow: 1;
         font-size: 0.85rem;
     }
@@ -460,17 +454,17 @@ body {
     }
 
     .final-total strong {
-        font-size: 1.2em;
+        font-size: 1.1em;
     }
 
-    .print-buttons {
+    .orcamento-impresso-actions {
         flex-direction: row;
         margin-top: 20px;
         gap: 15px;
         padding: 0;
     }
 
-    .print-btn, .back-btn {
+    .orcamento-impresso-actions .button {
         width: auto;
         padding: 10px 20px;
     }
@@ -478,7 +472,6 @@ body {
 
 /* --- Estilos específicos para impressão (media print) --- */
 @media print {
-    /* evitar que o navegador force paginação desnecessária */
     html, body {
         height: auto !important;
         overflow: visible !important;
@@ -513,7 +506,7 @@ body {
         overflow: visible;
     }
 
-    .print-buttons {
+    .orcamento-impresso-actions {
         display: none;
     }
 
@@ -563,9 +556,9 @@ body {
 }
 
 .force-print-layout {
-  width: 794px !important;
-  max-width: 794px !important;
-  min-width: 794px !important;
+    width: 794px !important;
+    max-width: 794px !important;
+    min-width: 794px !important;
 }
 
 /* --- Estilos específicos para a data no orçamento --- */
@@ -596,18 +589,4 @@ body {
 .data-orcamento .data-formatada {
     font-weight: bold;
     color: #000;
-}
-
-
-.btn-old {
-  background-color: #333;
-  color: #fff;
-  padding: 10px 18px;
-  border-radius: 5px;
-  border:
-    none;
-  cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-    width: 100%;
 }
