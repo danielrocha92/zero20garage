@@ -50,6 +50,7 @@
   margin-bottom: 20px;
 }
 
+/* Alteração para uso de grid em mobile */
 .info-table {
   width: 100%;
   border-collapse: collapse;
@@ -58,10 +59,8 @@
 .info-table td {
   font-size: 14px;
   padding: 4px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   vertical-align: top;
+  word-break: break-word; /* Permite a quebra de linha */
 }
 
 .info-table td span {
@@ -252,9 +251,13 @@
     width: 150px;
   }
 
+  /* Voltar ao comportamento de tabela para desktop */
   .info-table td {
     font-size: 16px;
     padding: 8px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .info-table td span {
