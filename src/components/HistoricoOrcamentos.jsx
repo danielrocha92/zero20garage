@@ -64,6 +64,9 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     setModalConfig({ ...modalConfig, isOpen: false });
   };
 
+  /** =======================
+   *  Busca histórico de orçamentos
+   * ======================= */
   const buscarHistorico = async () => {
     setLoading(true);
     setError(null);
@@ -72,7 +75,15 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
       setHistorico(response.data);
     } catch (err) {
       console.error('Erro ao buscar histórico:', err);
-      setError('Erro ao carregar histórico de orçamentos.');
+
+      let mensagemErro = 'Erro ao carregar histórico de orçamentos.';
+      if (err.response?.data?.erro) {
+        mensagemErro += ` Detalhes: ${err.response.data.erro}`;
+      } else if (err.message) {
+        mensagemErro += ` (${err.message})`;
+      }
+
+      setError(mensagemErro);
     } finally {
       setLoading(false);
     }
@@ -82,12 +93,13 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     buscarHistorico();
   }, []);
 
+  /** =======================
+   *  Excluir orçamento
+   * ======================= */
   const handleExcluirOrcamento = (orcamento) => {
     abrirModal({
       title: 'Confirmar Exclusão',
-      message: `Tem certeza que deseja excluir o orçamento de ${orcamento.cliente || 'cliente desconhecido'} (OS: ${
-        orcamento.ordemServico || '-'
-      })?`,
+      message: `Tem certeza que deseja excluir o orçamento de ${orcamento.cliente || 'cliente desconhecido'} (OS: ${orcamento.ordemServico || '-'})?`,
       confirmText: 'Sim, excluir',
       cancelText: 'Cancelar',
       showCancel: true,
@@ -105,9 +117,17 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
           buscarHistorico();
         } catch (err) {
           console.error('Erro ao excluir orçamento:', err);
+
+          let mensagemErro = 'Erro ao excluir orçamento.';
+          if (err.response?.data?.erro) {
+            mensagemErro += ` Detalhes: ${err.response.data.erro}`;
+          } else if (err.message) {
+            mensagemErro += ` (${err.message})`;
+          }
+
           abrirModal({
             title: 'Erro',
-            message: 'Erro ao excluir orçamento. Tente novamente.',
+            message: mensagemErro,
             confirmText: 'Fechar',
             showCancel: false,
             onConfirm: () => fecharModal(),
