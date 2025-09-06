@@ -1,339 +1,408 @@
 /* Importação de fontes */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap');
 
-/* --- Estilos Gerais (Mobile-first) --- */
+/* Estilos para a versão de impressão ou visualização final do orçamento */
+.item-list-impresso li,
+.item-list li,
+.peca-item,
+.servico-item {
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #333;
+}
 
+.quantidade-label {
+    font-size: 0.9em;
+    color: var(--color-form-text);
+    margin-right: 10px;
+}
+
+.quantidade-select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    background-color: var(--color-input-bg);
+    color: var(--color-input-text);
+    border: 1px solid var(--color-input-border);
+    border-radius: 20px;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e0e0e0'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    cursor: pointer;
+}
+
+/* Tabela */
+.items-table tr.parent-item-row,
+.items-table tr {
+    margin-bottom: 24px !important;
+    padding-bottom: 16px !important;
+    border-bottom: 1.5px dashed #444 !important;
+}
+
+.items-table tr:last-child {
+    border-bottom: none !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* --- Estilos Gerais --- */
 .orcamento-impresso-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 16px;
-  background-color: #f4f4f4;
-  font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+    background-color: #f4f4f4;
+    font-family: 'Roboto', sans-serif;
 }
 
 .orcamento-impresso-content {
-  width: 100%;
-  max-width: 794px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 16px; /* Padding reduzido para mobile */
-  box-sizing: border-box;
+    width: 100%;
+    max-width: 794px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    box-sizing: border-box;
 }
 
 .header-impresso {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-  position: relative;
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    text-align: center;
 }
 
 .header-impresso h1 {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 16px; /* Fonte reduzida para mobile */
-  color: #333;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin: 0 0 10px 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+    color: #333;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 0 10px 0;
 }
 
 .logo-impresso {
-  width: 80px; /* Tamanho do logo reduzido para mobile */
-  height: auto;
-  position: absolute;
-  top: 0;
-  right: 0;
+    width: 80px;
+    height: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
-/* --- Seção de Informações (Cabeçalho) --- */
+/* Info */
 .info-section {
-  margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .info-table {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px; /* Espaço entre os itens */
-  justify-content: space-between;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
 }
 
 .info-table td {
-  font-size: 13px; /* Fonte reduzida para mobile */
-  padding: 0;
-  flex: 1 1 45%; /* Cada item ocupa quase metade da linha, quebrando quando necessário */
-  white-space: normal; /* Permite a quebra de linha */
-  word-break: break-word; /* Força a quebra de palavras longas */
+    font-size: 13px;
+    padding: 0;
+    flex: 1 1 45%;
+    white-space: normal;
+    word-break: break-word;
 }
 
 .info-table td:nth-child(2n) {
-  text-align: right;
+    text-align: right;
 }
 
 .info-table td span {
-  font-weight: 700;
-  color: #555;
-  display: block;
+    font-weight: 700;
+    color: #555;
+    display: block;
 }
 
-/* --- Seções de Itens (Peças e Serviços) --- */
+/* --- Itens (Peças e Serviços) --- */
 .items-section {
-  margin-bottom: 12px;
+    margin-bottom: 20px;
 }
 
 .items-section h2 {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 15px; /* Fonte reduzida */
-  color: #444;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 4px;
-  margin-bottom: 8px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+    color: #222;
+    font-weight: 700;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 4px;
+    margin-bottom: 12px;
 }
 
 .items-columns {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0;
 }
 
 .items-columns ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  flex: 1;
+    width: 50%;
+    padding: 0 10px;
+    list-style: none;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 .items-columns li {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 3px;
-  font-size: 11px; /* Fonte reduzida */
-  color: #555;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    font-size: 11px;
+    color: #555;
 }
 
 .checkbox-box {
-  margin-right: 6px;
-  transform: scale(0.8);
-  margin-top: 2px;
+    margin-right: 6px;
+    transform: scale(0.8);
+    margin-top: 2px;
 }
 
-/* --- Totais e Observações --- */
+/* --- Totais --- */
 .total-line-impresso {
-  display: flex;
-  justify-content: flex-end;
-  font-size: 13px;
-  margin-top: 6px;
-  padding-top: 4px;
-  border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 14px;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
 }
 
 .total-line-impresso span {
-  font-weight: 400;
-  margin-right: 8px;
+    font-weight: 400;
+    margin-right: 8px;
 }
 
 .final-total {
-  font-size: 15px;
-  font-weight: 700;
-  border-top: 2px solid #ccc;
-  padding-top: 8px;
-  margin-top: 15px;
+    font-size: 18px;
+    font-weight: 700;
+    border-top: 2px solid #ccc;
+    padding-top: 12px;
+    margin-top: 25px;
 }
 
+/* Extras */
 .extra-info-section-impresso {
-  margin-top: 15px;
+    margin-top: 25px;
 }
 
 .extra-info-section-impresso p {
-  font-size: 13px;
-  line-height: 1.4;
-  margin-bottom: 8px;
+    font-size: 13px;
+    line-height: 1.4;
+    margin-bottom: 8px;
 }
 
 /* --- Política de Garantia --- */
 .policy-footer {
-  margin-top: 15px;
-  border-top: 1px dashed #ccc;
-  padding-top: 12px;
+    margin-top: 25px;
+    border-top: 1px dashed #ccc;
+    padding-top: 16px;
 }
 
 .policy-footer h4 {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 14px; /* Fonte reduzida */
-  text-align: center;
-  margin-bottom: 8px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 12px;
+    color: #222;
+    font-weight: 700;
 }
 
 .policy-footer p {
-  font-size: 11px; /* Fonte reduzida */
-  line-height: 1.4;
-  margin-bottom: 10px;
-  color: #666;
-  text-align: justify;
+    font-size: 12px;
+    line-height: 1.4;
+    margin-bottom: 6px;
+    color: #666;
+    text-align: justify;
 }
 
 .policy-acceptance {
-  font-weight: 700;
-  text-align: center !important;
-  color: #333 !important;
+    font-weight: 700;
+    text-align: center !important;
+    color: #333 !important;
 }
 
-/* --- Seção de Imagens --- */
+/* --- Imagens --- */
 .imagens-section {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .imagens-section h2 {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 15px;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 4px;
-  margin-bottom: 8px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 4px;
+    margin-bottom: 12px;
+    color: #222;
+    font-weight: 700;
 }
 
 .imagens-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
 }
 
 .thumb-img {
-  width: 100%;
-  max-width: 100px; /* Reduzido para mobile */
-  height: auto;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  object-fit: contain;
+    width: 100%;
+    max-width: 100px;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    object-fit: contain;
 }
 
-/* --- Botões de Ação --- */
+/* --- Botões --- */
 .orcamento-impresso-actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
 }
 
 .button {
-  padding: 10px 18px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 700;
-  transition: background-color 0.3s;
-  color: white;
-  background-color: #3f51b5;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    transition: background-color 0.3s;
+    color: white;
+    background-color: #3f51b5;
 }
 
 .button:disabled {
-  background-color: #9fa8da;
-  cursor: not-allowed;
+    background-color: #9fa8da;
+    cursor: not-allowed;
 }
 
-/* --- Layout para impressão (PDF) e Desktop --- */
+/* --- Layout Desktop e Impressão --- */
 .force-print-layout {
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  max-width: 794px;
-  box-sizing: content-box !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    max-width: 794px;
+    box-sizing: content-box !important;
 }
 
 @media (min-width: 768px) {
-  /* Retorno para layout desktop com mais espaço */
-  .orcamento-impresso-content {
-    padding: 40px;
-  }
+    .orcamento-impresso-content {
+        padding: 40px;
+    }
 
-  .header-impresso {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
+    .header-impresso {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
 
-  .header-impresso h1 {
-    font-size: 24px;
-    max-width: 60%;
-    margin-bottom: 0;
-  }
+    .header-impresso h1 {
+        font-size: 24px;
+        max-width: 60%;
+        margin-bottom: 0;
+    }
 
-  .logo-impresso {
-    width: 150px;
-    position: static;
-  }
+    .logo-impresso {
+        width: 150px;
+        position: static;
+    }
 
-  .info-table {
-    display: table;
-  }
+    .info-table {
+        display: table;
+    }
 
-  .info-table td {
-    font-size: 16px;
-    padding: 8px 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex: none;
-    text-align: left;
-  }
+    .info-table td {
+        font-size: 16px;
+        padding: 8px 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex: none;
+        text-align: left;
+    }
 
-  .info-table td:nth-child(2n) {
-    text-align: left;
-  }
+    .info-table td:nth-child(2n) {
+        text-align: left;
+    }
 
-  .info-table td span {
-    display: inline-block;
-    margin-left: 4px;
-  }
+    .info-table td span {
+        display: inline-block;
+        margin-left: 4px;
+    }
 
-  .items-section h2 {
-    font-size: 20px;
-  }
+    .items-section h2 {
+        font-size: 20px;
+    }
 
-  .items-columns {
-    flex-direction: row;
-    justify-content: space-between;
-  }
+    .items-columns {
+        flex-direction: row;
+        justify-content: space-between;
+    }
 
-  .items-columns ul {
-    width: 48%;
-  }
+    .items-columns ul {
+        width: 48%;
+    }
 
-  .items-columns li {
-    font-size: 14px;
-  }
+    .items-columns li {
+        font-size: 14px;
+    }
 
-  .total-line-impresso {
-    font-size: 16px;
-  }
+    .total-line-impresso {
+        font-size: 16px;
+    }
 
-  .final-total {
-    font-size: 20px;
-  }
+    .final-total {
+        font-size: 20px;
+    }
 
-  .extra-info-section-impresso p {
-    font-size: 16px;
-  }
+    .extra-info-section-impresso p {
+        font-size: 16px;
+    }
 
-  .policy-footer h4 {
-    font-size: 18px;
-  }
+    .policy-footer h4 {
+        font-size: 18px;
+    }
 
-  .policy-footer p {
-    font-size: 14px;
-  }
+    .policy-footer p {
+        font-size: 14px;
+    }
 
-  .imagens-section h2 {
-    font-size: 20px;
-  }
+    .imagens-section h2 {
+        font-size: 20px;
+    }
 
-  .imagens-container {
-    justify-content: flex-start;
-  }
+    .imagens-container {
+        justify-content: flex-start;
+    }
 
-  .thumb-img {
-    max-width: 200px;
-  }
+    .thumb-img {
+        max-width: 200px;
+    }
+}
+
+/* Responsivo */
+@media (max-width: 767px) {
+    .items-columns {
+        flex-direction: column;
+    }
+
+    .items-columns ul {
+        width: 100%;
+        padding: 0;
+    }
 }

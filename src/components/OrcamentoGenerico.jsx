@@ -11,9 +11,12 @@ const OrcamentoGenerico = ({
   orcamentoData,
   titulo,
 }) => {
-  // useMemo para evitar warning de deps no useEffect
-  const itensData = useMemo(() => orcamentoData.itens || [], [orcamentoData.itens]);
-  const servicosData = useMemo(() => orcamentoData.servicos || [], [orcamentoData.servicos]);
+  const itensData = useMemo(() => orcamentoData.itens || [], [
+    orcamentoData.itens,
+  ]);
+  const servicosData = useMemo(() => orcamentoData.servicos || [], [
+    orcamentoData.servicos,
+  ]);
 
   const [formData, setFormData] = useState({
     nome: "",
@@ -22,25 +25,25 @@ const OrcamentoGenerico = ({
     placa: "",
     data: new Date().toISOString().slice(0, 10),
     ordemServico: "",
-    pecas: itensData.map(item => ({
+    pecas: itensData.map((item) => ({
       ...item,
       selecionado: false,
       quantidade: item.temQuantidade ? 1 : 0,
       medida: 0,
       subItens: item.subItens
-        ? item.subItens.map(sub => ({
+        ? item.subItens.map((sub) => ({
             ...sub,
             value: sub.initialValue || (sub.type === "checkbox" ? false : ""),
           }))
         : [],
     })),
-    servicos: servicosData.map(servico => ({
+    servicos: servicosData.map((servico) => ({
       ...servico,
       selecionado: false,
       quantidade: servico.temQuantidade ? 1 : 0,
       medida: 0,
       subItens: servico.subItens
-        ? servico.subItens.map(sub => ({
+        ? servico.subItens.map((sub) => ({
             ...sub,
             value: sub.initialValue || (sub.type === "checkbox" ? false : ""),
           }))
@@ -55,7 +58,6 @@ const OrcamentoGenerico = ({
     status: "Aberto",
   });
 
-  // ======== Máscara monetária com cursor estável ========
   const formatCurrencySmart = useCallback((value, selectionStart) => {
     if (!value) return { formatted: "", newCursor: 0 };
 
@@ -67,14 +69,13 @@ const OrcamentoGenerico = ({
       currency: "BRL",
     });
 
-    // mantém posição do cursor
     const diff = formatted.length - value.length;
     const newCursor = (selectionStart || formatted.length) + diff;
 
     return { formatted, newCursor: Math.max(0, newCursor) };
   }, []);
 
-  const parseCurrencyToNumber = value => {
+  const parseCurrencyToNumber = (value) => {
     if (!value) return 0;
     return Number(value.replace(/\D/g, "")) / 100;
   };
@@ -96,17 +97,21 @@ const OrcamentoGenerico = ({
       placa: editingData.placa || "",
       data: validDate,
       ordemServico: editingData.ordemServico || "",
+      // CORREÇÃO: Converte o valor para string antes de formatar
       totalPecasManual: editingData.valorTotalPecas
-        ? formatCurrencySmart(editingData.valorTotalPecas, 0).formatted
+        ? formatCurrencySmart(String(editingData.valorTotalPecas), 0).formatted
         : "",
+      // CORREÇÃO: Converte o valor para string antes de formatar
       totalServicosManual: editingData.valorTotalServicos
-        ? formatCurrencySmart(editingData.valorTotalServicos, 0).formatted
+        ? formatCurrencySmart(String(editingData.valorTotalServicos), 0).formatted
         : "",
+      // CORREÇÃO: Converte o valor para string antes de formatar
       totalMaoDeObraManual: editingData.totalMaoDeObra
-        ? formatCurrencySmart(editingData.totalMaoDeObra, 0).formatted
+        ? formatCurrencySmart(String(editingData.totalMaoDeObra), 0).formatted
         : "",
+      // CORREÇÃO: Converte o valor para string antes de formatar
       totalGeralManual: editingData.valorTotal
-        ? formatCurrencySmart(editingData.valorTotal, 0).formatted
+        ? formatCurrencySmart(String(editingData.valorTotal), 0).formatted
         : "",
       formaPagamento: editingData.formaPagamento || "",
       observacoes: editingData.observacoes || "",
@@ -168,48 +173,80 @@ const OrcamentoGenerico = ({
     }));
   }, [editingData, itensData, servicosData, formatCurrencySmart]);
 
-  // ======== Handlers ========
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleMonetaryChange = e => {
+  const handleMonetaryChange = (e) => {
     const { name, value, selectionStart } = e.target;
     const { formatted, newCursor } = formatCurrencySmart(value, selectionStart);
 
-    setFormData(prev => ({ ...prev, [name]: formatted }));
+    setFormData((prev) => ({ ...prev, [name]: formatted }));
 
     requestAnimationFrame(() => {
       e.target.setSelectionRange(newCursor, newCursor);
     });
   };
 
+  // CORREÇÃO APLICADA AQUI:
   const handleToggleSelecionado = (tipo, index) => {
-    setFormData(prev => {
-      const list = [...prev[tipo]];
-      list[index].selecionado = !list[index].selecionado;
+    setFormData((prev) => {
+      const list = prev[tipo].map((item, idx) => {
+        if (idx === index) {
+          return {
+            ...item,
+            selecionado: !item.selecionado,
+          };
+        }
+        return item;
+      });
       return { ...prev, [tipo]: list };
     });
   };
 
+  // CORREÇÃO APLICADA AQUI:
   const handleQuantidadeChange = (tipo, index, quantidade) => {
-    setFormData(prev => {
-      const list = [...prev[tipo]];
-      list[index].quantidade = quantidade;
+    setFormData((prev) => {
+      const list = prev[tipo].map((item, idx) => {
+        if (idx === index) {
+          return {
+            ...item,
+            quantidade,
+          };
+        }
+        return item;
+      });
       return { ...prev, [tipo]: list };
     });
   };
 
+  // CORREÇÃO APLICADA AQUI:
   const handleSubItemChange = (tipo, index, subIndex, value) => {
-    setFormData(prev => {
-      const list = [...prev[tipo]];
-      list[index].subItens[subIndex].value = value;
+    setFormData((prev) => {
+      const list = prev[tipo].map((item, idx) => {
+        if (idx === index) {
+          const newSubItens = item.subItens.map((sub, sIdx) => {
+            if (sIdx === subIndex) {
+              return {
+                ...sub,
+                value,
+              };
+            }
+            return sub;
+          });
+          return {
+            ...item,
+            subItens: newSubItens,
+          };
+        }
+        return item;
+      });
       return { ...prev, [tipo]: list };
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.nome) {
       showMessage("Cliente é obrigatório!", true);
@@ -218,8 +255,8 @@ const OrcamentoGenerico = ({
 
     const formatarItens = (lista, tipo) =>
       lista
-        .filter(i => i.selecionado)
-        .map(item => {
+        .filter((i) => i.selecionado)
+        .map((item) => {
           let nomeCompleto = item.nome;
           if (item.temQuantidade && item.quantidade > 0)
             nomeCompleto += `:: ${item.quantidade}`;
@@ -227,11 +264,11 @@ const OrcamentoGenerico = ({
             nomeCompleto += ` Medida: ${item.medida}`;
           const subItensFormatados = item.subItens
             .filter(
-              sub =>
+              (sub) =>
                 (sub.type === "checkbox" && sub.value) ||
                 (sub.type === "text" && sub.value)
             )
-            .map(sub =>
+            .map((sub) =>
               sub.type === "checkbox"
                 ? sub.label
                 : `${sub.label}: ${sub.value}`
@@ -267,13 +304,11 @@ const OrcamentoGenerico = ({
       </option>
     ));
 
-  // ======== Render ========
   return (
     <div className="client-vehicle-section">
       <h1>{titulo}</h1>
 
       <form onSubmit={handleSubmit}>
-        {/* Cliente */}
         <section className="client-vehicle-section">
           <h2>Informações do Cliente e Veículo</h2>
           <table className="form-table">
@@ -353,9 +388,7 @@ const OrcamentoGenerico = ({
           </table>
         </section>
 
-        {/* Peças + Serviços lado a lado */}
         <div className="grid-50-50">
-          {/* Peças */}
           <section className="section-form">
             <h2>Peças</h2>
             <table className="items-table">
@@ -383,7 +416,7 @@ const OrcamentoGenerico = ({
                                   <input
                                     type="checkbox"
                                     checked={sub.value}
-                                    onChange={e =>
+                                    onChange={(e) =>
                                       handleSubItemChange(
                                         "pecas",
                                         index,
@@ -403,7 +436,7 @@ const OrcamentoGenerico = ({
                                   <input
                                     type="text"
                                     value={sub.value}
-                                    onChange={e =>
+                                    onChange={(e) =>
                                       handleSubItemChange(
                                         "pecas",
                                         index,
@@ -426,7 +459,7 @@ const OrcamentoGenerico = ({
                           <label className="quantidade-label">Qtd:</label>
                           <select
                             value={peca.quantidade}
-                            onChange={e =>
+                            onChange={(e) =>
                               handleQuantidadeChange(
                                 "pecas",
                                 index,
@@ -458,7 +491,6 @@ const OrcamentoGenerico = ({
             </div>
           </section>
 
-          {/* Serviços */}
           <section className="section-form">
             <h2>Serviços</h2>
             <table className="items-table">
@@ -488,7 +520,7 @@ const OrcamentoGenerico = ({
                                   <input
                                     type="checkbox"
                                     checked={sub.value}
-                                    onChange={e =>
+                                    onChange={(e) =>
                                       handleSubItemChange(
                                         "servicos",
                                         index,
@@ -508,7 +540,7 @@ const OrcamentoGenerico = ({
                                   <input
                                     type="text"
                                     value={sub.value}
-                                    onChange={e =>
+                                    onChange={(e) =>
                                       handleSubItemChange(
                                         "servicos",
                                         index,
@@ -531,7 +563,7 @@ const OrcamentoGenerico = ({
                           <label className="quantidade-label">Qtd:</label>
                           <select
                             value={servico.quantidade}
-                            onChange={e =>
+                            onChange={(e) =>
                               handleQuantidadeChange(
                                 "servicos",
                                 index,
@@ -564,7 +596,6 @@ const OrcamentoGenerico = ({
           </section>
         </div>
 
-        {/* Totais */}
         <section className="summary-section">
           <div className="total-line-form">
             <span className="label">Valor total de Mão de Obra Mecânica:</span>
@@ -591,7 +622,6 @@ const OrcamentoGenerico = ({
           </div>
         </section>
 
-        {/* Observações */}
         <section className="section-form">
           <h2>Observações</h2>
           <textarea
@@ -603,7 +633,6 @@ const OrcamentoGenerico = ({
           />
         </section>
 
-        {/* Pagamento + Status */}
         <section className="section-form">
           <div className="form-group">
             <label>Forma de Pagamento:</label>
@@ -628,7 +657,6 @@ const OrcamentoGenerico = ({
           </div>
         </section>
 
-        {/* Botões */}
         <div className="form-actions">
           <button type="submit" className="button">
             Salvar

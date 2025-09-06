@@ -1,0 +1,140 @@
+/* src/components/OrcamentoGenerico.css */
+
+:root {
+  --color-bg: #1a1a1a;
+  --color-card: #2a2a2a;
+  --color-text: #e0e0e0;
+  --color-brand-red: #c50404;
+  --color-brand-red-hover: #9e0303;
+  --color-input-bg: #1a1a1a;
+  --color-input-text: #e0e0e0;
+  --color-input-border: #444;
+  --color-input-focus-border: #c50404;
+  --shadow-strong: rgba(0, 0, 0, 0.6);
+  --shadow-medium: rgba(0, 0, 0, 0.4);
+}
+
+.orcamento-container {
+  font-family: Arial, sans-serif;
+  background-color: var(--color-card);
+  color: var(--color-text);
+  padding: 1rem;
+  border-radius: 20px;
+  max-width: 1000px;
+  margin: 20px auto;
+  box-shadow: 0 8px 20px var(--shadow-strong);
+}
+
+.orcamento-container h2 {
+  text-align: center;
+  color: var(--color-brand-red);
+  font-size: 1.5em;
+  margin-bottom: 1.5rem;
+}
+
+.orcamento-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.orcamento-form input {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--color-input-border);
+  background-color: var(--color-input-bg);
+  color: var(--color-input-text);
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.orcamento-form input:focus {
+  border-color: var(--color-input-focus-border);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(197, 4, 4, 0.5);
+}
+
+.orcamento-form button {
+  background-color: var(--color-brand-red);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.orcamento-form button:hover {
+  background-color: var(--color-brand-red-hover);
+  transform: translateY(-2px);
+}
+
+.orcamento-tabela {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.orcamento-tabela th,
+.orcamento-tabela td {
+  border-bottom: 1px solid #444;
+  padding: 10px;
+  text-align: center;
+}
+
+.orcamento-tabela th {
+  background-color: #333;
+  color: var(--color-brand-red);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.orcamento-tabela input {
+  width: 100%;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid var(--color-input-border);
+  background-color: var(--color-input-bg);
+  color: var(--color-input-text);
+  text-align: center;
+}
+
+.orcamento-tabela button {
+  background-color: transparent;
+  border: 1px solid var(--color-brand-red);
+  color: var(--color-brand-red);
+  padding: 4px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.orcamento-tabela button:hover {
+  background-color: var(--color-brand-red);
+  color: white;
+}
+
+.orcamento-total {
+  margin-top: 20px;
+  text-align: right;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: var(--color-brand-red);
+}
+
+@media (min-width: 768px) {
+  .orcamento-form {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .orcamento-form input {
+    flex: 1;
+  }
+
+  .orcamento-form button {
+    width: auto;
+  }
+}

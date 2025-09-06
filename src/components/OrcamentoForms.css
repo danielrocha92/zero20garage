@@ -724,56 +724,6 @@
     }
 }
 
-/* Adicione ao seu arquivo de estilos do orçamento */
-.item-list-impresso li,
-.item-list li,
-.peca-item, /* caso use divs para cada item */
-.servico-item {
-  margin-bottom: 18px; /* ajuste conforme preferir */
-  padding-bottom: 8px;
-  border-bottom: 1px solid #333; /* opcional: linha discreta para separar */
-}
-
-.quantidade-label {
-    font-size: 0.9em;
-    color: var(--color-form-text);
-    margin-right: 10px;
-}
-.quantidade-select {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    background-color: var(--color-input-bg);
-    color: var(--color-input-text);
-    border: 1px solid var(--color-input-border);
-    border-radius: 20px;
-    transition: border 0.3s ease, box-shadow 0.3s ease;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e0e0e0'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 1em;
-    cursor: pointer;
-}
-
-/* Se quiser ainda mais destaque, pode adicionar um espaçamento maior */
-
-/* Espaçamento visual entre itens da tabela de peças e serviços */
-.items-table tr.parent-item-row,
-.items-table tr {
-  margin-bottom: 24px !important;
-  padding-bottom: 16px !important;
-  border-bottom: 1.5px dashed #444 !important;
-}
-
-.items-table tr:last-child {
-  border-bottom: none !important;
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-}
-
 /* ========================================= */
 /* ===== Upload de Imagens e Pré-Visualização ===== */
 /* ========================================= */
