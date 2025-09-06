@@ -1,80 +1,32 @@
 /* Importação de fontes */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap');
 
-/* Estilos para a versão de impressão ou visualização final do orçamento */
-.item-list-impresso li,
-.item-list li,
-.peca-item,
-.servico-item {
-    margin-bottom: 18px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #333;
-}
-
-.quantidade-label {
-    font-size: 0.9em;
-    color: var(--color-form-text);
-    margin-right: 10px;
-}
-
-.quantidade-select {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    background-color: var(--color-input-bg);
-    color: var(--color-input-text);
-    border: 1px solid var(--color-input-border);
-    border-radius: 20px;
-    transition: border 0.3s ease, box-shadow 0.3s ease;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e0e0e0'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 1em;
-    cursor: pointer;
-}
-
-/* Tabela */
-.items-table tr.parent-item-row,
-.items-table tr {
-    margin-bottom: 24px !important;
-    padding-bottom: 16px !important;
-    border-bottom: 1.5px dashed #444 !important;
-}
-
-.items-table tr:last-child {
-    border-bottom: none !important;
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-/* --- Estilos Gerais --- */
+/* --- Estilos Gerais (Mobile First) --- */
 .orcamento-impresso-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 24px;
+    padding: 16px;
     background-color: #f4f4f4;
     font-family: 'Roboto', sans-serif;
 }
 
 .orcamento-impresso-content {
     width: 100%;
-    max-width: 794px;
     background: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 24px;
+    padding: 16px;
     box-sizing: border-box;
+    color: #333;
 }
 
+/* Cabeçalho */
 .header-impresso {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     position: relative;
     text-align: center;
 }
@@ -82,171 +34,173 @@
 .header-impresso h1 {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 16px;
-    color: #333;
+    color: #222;
     text-transform: uppercase;
     font-weight: 700;
-    margin: 0 0 10px 0;
+    margin: 0 0 8px 0;
 }
 
 .logo-impresso {
     width: 80px;
     height: auto;
-    position: absolute;
-    top: 0;
-    right: 0;
+    margin-top: 8px;
 }
 
-/* Info */
+/* --- Info: Alinhamento e cor corrigidos --- */
 .info-section {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .info-table {
-    width: 100%;
     display: flex;
+    justify-content: center; /* Alterado para centralizar o conteúdo em mobile */
+    width: 100%;
     flex-wrap: wrap;
-    gap: 10px;
-    justify-content: space-between;
+    gap: 8px 16px;
+    font-size: 12px;
 }
 
 .info-table td {
-    font-size: 13px;
-    padding: 0;
-    flex: 1 1 45%;
-    white-space: normal;
-    word-break: break-word;
-}
-
-.info-table td:nth-child(2n) {
-    text-align: right;
+    white-space: nowrap;
+    font-size: 12px;
+    color: #333;
 }
 
 .info-table td span {
     font-weight: 700;
-    color: #555;
-    display: block;
+    color: #222;
 }
 
-/* --- Itens (Peças e Serviços) --- */
+/* --- Itens (Peças e Serviços): Estrutura com proporção fixa 50/50 --- */
 .items-section {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .items-section h2 {
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     color: #222;
     font-weight: 700;
     border-bottom: 2px solid #ddd;
     padding-bottom: 4px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
 .items-columns {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0;
-}
-
-.items-columns ul {
-    width: 50%;
-    padding: 0 10px;
+    display: grid;
+    /* A chave: Força uma única coluna em telas menores para empilhamento */
+    grid-template-columns: 1fr;
+    gap: 8px;
     list-style: none;
     margin: 0;
-    box-sizing: border-box;
+    padding: 0;
 }
 
+/* Cada item da lista é um flexbox */
 .items-columns li {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 8px;
-    font-size: 11px;
-    color: #555;
+    display: flex; /* Adicionado para alinhar o checkbox e o texto na mesma linha */
+    align-items: center; /* Adicionado para alinhar verticalmente */
+    font-size: 12px;
+    color: #222;
+    line-height: 1.4;
+    padding: 4px 0;
+    white-space: nowrap; /* Impede a quebra de texto */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .checkbox-box {
-    margin-right: 6px;
-    transform: scale(0.8);
-    margin-top: 2px;
+    margin-right: 8px;
+    flex-shrink: 0;
+    transform: scale(1.2); /* Reduzido para um tamanho menor */
+    position: relative;
+    top: 2px;
+    max-width: 16px;
+    color: brown;
 }
 
 /* --- Totais --- */
+.total-section {
+    text-align: right;
+    margin-top: 16px;
+}
+
 .total-line-impresso {
-    display: flex;
-    justify-content: flex-end;
-    font-size: 14px;
-    margin-top: 20px;
-    padding-top: 10px;
-    border-top: 1px solid #eee;
+    display: block;
+    font-size: 13px;
+    margin-top: 4px;
+    padding-top: 0;
+    border-top: none;
+    color: #333;
 }
 
 .total-line-impresso span {
     font-weight: 400;
-    margin-right: 8px;
+    margin-right: 6px;
 }
 
 .final-total {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     border-top: 2px solid #ccc;
-    padding-top: 12px;
-    margin-top: 25px;
+    padding-top: 10px;
+    margin-top: 20px;
+    color: #222;
 }
 
-/* Extras */
+/* --- Extras --- */
 .extra-info-section-impresso {
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 .extra-info-section-impresso p {
-    font-size: 13px;
+    font-size: 12px;
     line-height: 1.4;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    color: #333;
 }
 
 /* --- Política de Garantia --- */
 .policy-footer {
-    margin-top: 25px;
+    margin-top: 20px;
     border-top: 1px dashed #ccc;
-    padding-top: 16px;
+    padding-top: 12px;
 }
 
 .policy-footer h4 {
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     color: #222;
     font-weight: 700;
 }
 
 .policy-footer p {
-    font-size: 12px;
+    font-size: 11px;
     line-height: 1.4;
     margin-bottom: 6px;
-    color: #666;
+    color: #333;
     text-align: justify;
 }
 
 .policy-acceptance {
     font-weight: 700;
     text-align: center !important;
-    color: #333 !important;
+    color: #222 !important;
 }
 
 /* --- Imagens --- */
 .imagens-section {
-    margin-top: 20px;
+    margin-top: 16px;
 }
 
 .imagens-section h2 {
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     border-bottom: 2px solid #ddd;
     padding-bottom: 4px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     color: #222;
     font-weight: 700;
 }
@@ -254,14 +208,13 @@
 .imagens-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
     justify-content: center;
 }
 
 .thumb-img {
     width: 100%;
     max-width: 100px;
-    height: auto;
     border: 1px solid #ccc;
     border-radius: 4px;
     object-fit: contain;
@@ -270,20 +223,23 @@
 /* --- Botões --- */
 .orcamento-impresso-actions {
     display: flex;
-    gap: 12px;
-    margin-top: 32px;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
 }
 
 .button {
-    padding: 10px 18px;
+    padding: 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     transition: background-color 0.3s;
     color: white;
     background-color: #3f51b5;
+    width: 100%;
 }
 
 .button:disabled {
@@ -291,17 +247,10 @@
     cursor: not-allowed;
 }
 
-/* --- Layout Desktop e Impressão --- */
-.force-print-layout {
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    max-width: 794px;
-    box-sizing: content-box !important;
-}
-
+/* --- Layout Desktop: Chave para o alinhamento 50/50 --- */
 @media (min-width: 768px) {
     .orcamento-impresso-content {
+        max-width: 794px;
         padding: 40px;
     }
 
@@ -312,78 +261,87 @@
     }
 
     .header-impresso h1 {
-        font-size: 24px;
+        font-size: 22px;
         max-width: 60%;
         margin-bottom: 0;
     }
 
     .logo-impresso {
-        width: 150px;
-        position: static;
+        width: 80px;
+        margin-top: 0;
     }
 
     .info-table {
-        display: table;
+        justify-content: space-around;
+        gap: 12px 40px;
     }
 
     .info-table td {
-        font-size: 16px;
-        padding: 8px 0;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        flex: none;
-        text-align: left;
-    }
-
-    .info-table td:nth-child(2n) {
-        text-align: left;
+        font-size: 14px;
+        color: #333;
     }
 
     .info-table td span {
-        display: inline-block;
-        margin-left: 4px;
+        color: #222;
     }
 
     .items-section h2 {
-        font-size: 20px;
+        font-size: 18px;
+        color: #222;
     }
 
     .items-columns {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    .items-columns ul {
-        width: 48%;
+        /* AQUI ESTÁ A CHAVE: Força um grid de 2 colunas */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 40px;
     }
 
     .items-columns li {
-        font-size: 14px;
+        font-size: 13px;
+        color: #222;
+        /* Adicionado para impedir a quebra de linha */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .total-section {
+        margin-right: 0;
     }
 
     .total-line-impresso {
-        font-size: 16px;
+        font-size: 15px;
+        color: #333;
     }
 
     .final-total {
-        font-size: 20px;
+        font-size: 18px;
+        color: #222;
     }
 
     .extra-info-section-impresso p {
-        font-size: 16px;
+        font-size: 14px;
+        color: #333;
     }
 
     .policy-footer h4 {
-        font-size: 18px;
+        font-size: 16px;
+        color: #222;
     }
 
     .policy-footer p {
-        font-size: 14px;
+        font-size: 13px;
+        color: #333;
+    }
+
+    .policy-acceptance {
+        color: #222 !important;
     }
 
     .imagens-section h2 {
-        font-size: 20px;
+        font-size: 18px;
+        color: #222;
     }
 
     .imagens-container {
@@ -393,16 +351,115 @@
     .thumb-img {
         max-width: 200px;
     }
-}
 
-/* Responsivo */
-@media (max-width: 767px) {
-    .items-columns {
-        flex-direction: column;
+    .orcamento-impresso-actions {
+        flex-direction: row;
+        justify-content: flex-end;
+        width: auto;
     }
 
-    .items-columns ul {
+    .button {
+        width: auto;
+        padding: 10px 18px;
+        font-size: 16px;
+    }
+}
+
+/* --- Layout for print/pdf --- */
+.force-print-layout {
+  width: 794px !important;
+  max-width: none !important;
+  padding: 20px;
+  box-sizing: border-box !important;
+  font-size: 12px; /* ou ajuste conforme o tamanho desejado */
+  line-height: 1.4; /* mantém o espaçamento natural */
+}
+
+/* --- Estilos de impressão --- */
+@media print {
+    /* Remove sombras e background */
+    body, html {
+        margin: 0;
+        padding: 0;
+        background: white;
+    }
+
+    @page {
+        size: A4;
+        margin: 20mm; /* Margem da página */
+    }
+
+    .orcamento-impresso-container {
+        display: block !important;
+        background-color: white !important;
+        margin: 0 !important;
+        padding: 0 !important;
         width: 100%;
+    }
+
+    .orcamento-impresso-content {
+        box-shadow: none !important;
+        margin: 0 auto;       /* Centraliza o conteúdo */
+        padding: 20px;        /* Margem interna */
+        width: 100%;
+        max-width: 754px;     /* 794px - 2*20mm da página */
+        box-sizing: border-box;
+    }
+
+    /* Oculta botões e elementos desnecessários */
+    .orcamento-impresso-actions {
+        display: none !important;
+    }
+
+    /* Header, info e itens */
+    .header-impresso {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .header-impresso h1 {
+        font-size: 22px;
+        max-width: 60%;
+        margin-bottom: 0;
+    }
+
+    .logo-impresso {
+        width: 150px;
+        margin-top: 0;
+    }
+
+    .info-table {
+        justify-content: space-around;
+        gap: 12px 40px;
+    }
+
+    .items-columns {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 40px;
+    }
+
+    .items-columns li {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 13px;
+    }
+
+    .checkbox-box {
+        transform: scale(0.6);
+    }
+
+    .total-section,
+    .final-total,
+    .extra-info-section-impresso p,
+    .policy-footer p,
+    .policy-footer h4 {
+        font-size: inherit;
+        margin: 0;
         padding: 0;
     }
 }
