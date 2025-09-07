@@ -14,14 +14,13 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
   const [uploading, setUploading] = useState(false);
   const dropRef = useRef(null);
 
-  // --- Definição de handleFiles com useCallback ---
+  // --- handleFiles deve vir antes do useEffect que o utiliza ---
   const handleFiles = useCallback((files) => {
     if (!files.length) return;
 
-    // Filtrando arquivos inválidos (tipo e tamanho)
     const validFiles = files.filter(file => {
       const isImage = file.type.startsWith("image/");
-      const isSizeOk = file.size <= MAX_FILE_SIZE_MB * 1024 * 1024; // Limite de tamanho
+      const isSizeOk = file.size <= MAX_FILE_SIZE_MB * 1024 * 1024;
       return isImage && isSizeOk;
     });
 
@@ -40,7 +39,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
     }));
 
     setSelectedFiles(prev => [...prev, ...filesWithPreview]);
-  }, [selectedFiles]); // A função `handleFiles` agora depende de `selectedFiles`.
+  }, [selectedFiles]);
 
   // --- Revoke object URLs quando desmonta ---
   useEffect(() => {
@@ -58,7 +57,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
         if (!res.ok) {
           const errorText = await res.text();
           console.error(`Erro ao buscar imagens: ${res.status} - ${errorText}`);
-          onUploaded([]); // Evita travar a tela
+          onUploaded([]);
           return;
         }
 
@@ -67,7 +66,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
 
       } catch (err) {
         console.error("Erro de rede ou JSON inválido ao buscar imagens:", err);
-        onUploaded([]); // Mantém consistência mesmo em erro
+        onUploaded([]);
       }
     };
 
@@ -96,7 +95,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
       dropArea.removeEventListener("dragleave", handleDragLeave);
       dropArea.removeEventListener("drop", handleDrop);
     };
-  }, [handleFiles]); // Agora `handleFiles` é uma dependência.
+  }, [handleFiles]);
 
   const handleFileChange = (event) => handleFiles(Array.from(event.target.files || []));
 
