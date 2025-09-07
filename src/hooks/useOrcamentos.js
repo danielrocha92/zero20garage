@@ -1,5 +1,5 @@
 // src/hooks/useOrcamentos.js
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import api from "../api/client";
 
 // TTL do cache (1 minuto)
@@ -30,12 +30,11 @@ export function useOrcamentos({ search = "", page = 1, limit = 10, autoRefreshMs
   const [error, setError] = useState("");
 
   const debouncedSearch = useDebouncedValue(search, 500);
-  const mountedRef = useRef(false);
 
   const fetchData = useCallback(async ({ force = false } = {}) => {
     const now = Date.now();
 
-    // Usa cache se válido
+    // Usa cache se for válido e não houver busca
     if (!force && cache.data && now - cache.timestamp < TTL_MS && !debouncedSearch) {
       setData(cache.data);
       setTotalPages(Math.ceil(cache.data.length / limit));
@@ -46,16 +45,18 @@ export function useOrcamentos({ search = "", page = 1, limit = 10, autoRefreshMs
     setError("");
 
     try {
-      const res = await api.get("/hooks/useOrcamentos", {
+      // Ajuste a URL da requisição aqui
+      const res = await api.get("/api/orcamentos", {
         params: { search: debouncedSearch, page, limit },
       });
 
       const fetchedData = res.data.data || res.data || [];
+      const totalCount = res.data.totalCount || fetchedData.length; // Supondo que a API retorna totalCount
 
       setData(fetchedData);
-      setTotalPages(Math.ceil(fetchedData.length / limit));
+      setTotalPages(Math.ceil(totalCount / limit));
 
-      // Atualiza cache apenas se não estiver buscando
+      // Atualiza cache apenas se não houver busca
       if (!debouncedSearch) {
         cache.data = fetchedData;
         cache.timestamp = Date.now();
@@ -73,12 +74,7 @@ export function useOrcamentos({ search = "", page = 1, limit = 10, autoRefreshMs
 
   // Fetch inicial e quando search/page mudar
   useEffect(() => {
-    if (!mountedRef.current) {
-      mountedRef.current = true;
-      fetchData({ force: false });
-    } else {
-      fetchData({ force: true });
-    }
+    fetchData();
   }, [fetchData]);
 
   // Auto-refresh, se configurado
