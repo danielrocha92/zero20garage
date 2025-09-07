@@ -1,14 +1,12 @@
-// src/components/HistoricoOrcamentos.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './HistoricoOrcamentos.css';
 import { FaEye, FaEdit, FaTrash } from 'react-icons/fa';
 
 const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
+const PAGE_SIZE = 10;
 
-/** =======================
- *  Modal Customizado
- * ======================= */
+// Modal Customizado
 const CustomModal = ({
   isOpen,
   title,
@@ -26,14 +24,8 @@ const CustomModal = ({
         <h3>{title}</h3>
         <p>{message}</p>
         <div className="modal-actions">
-          {showCancel && (
-            <button onClick={onCancel} className="cancel-btn">
-              {cancelText}
-            </button>
-          )}
-          <button onClick={onConfirm} className="confirm-btn">
-            {confirmText}
-          </button>
+          {showCancel && <button onClick={onCancel} className="cancel-btn">{cancelText}</button>}
+          <button onClick={onConfirm} className="confirm-btn">{confirmText}</button>
         </div>
       </div>
     </div>
@@ -42,8 +34,10 @@ const CustomModal = ({
 
 const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
   const [historico, setHistorico] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   const [modalConfig, setModalConfig] = useState({
     isOpen: false,
@@ -56,46 +50,36 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     showCancel: false,
   });
 
-  const abrirModal = (config) => {
-    setModalConfig({ ...modalConfig, isOpen: true, ...config });
-  };
+  const abrirModal = (config) => setModalConfig({ ...modalConfig, isOpen: true, ...config });
+  const fecharModal = () => setModalConfig({ ...modalConfig, isOpen: false });
 
-  const fecharModal = () => {
-    setModalConfig({ ...modalConfig, isOpen: false });
-  };
-
-  /** =======================
-   *  Busca histórico de orçamentos
-   * ======================= */
-  const buscarHistorico = async () => {
+  // --- Buscar histórico com paginação e tratamento seguro ---
+  const buscarHistorico = useCallback(async () => {
+    if (loading || !hasMore) return;
     setLoading(true);
     setError(null);
+
     try {
-      const response = await axios.get(`${API_BASE_URL}/hooks/useOrcamentos`);
-      setHistorico(response.data);
+      const res = await axios.get(`${API_BASE_URL}/api/orcamentos`, {
+        params: { page, size: PAGE_SIZE },
+      });
+
+      const data = Array.isArray(res.data) ? res.data : [];
+      setHistorico(prev => [...prev, ...data]);
+      setHasMore(data.length === PAGE_SIZE);
     } catch (err) {
       console.error('Erro ao buscar histórico:', err);
-
       let mensagemErro = 'Erro ao carregar histórico de orçamentos.';
-      if (err.response?.data?.erro) {
-        mensagemErro += ` Detalhes: ${err.response.data.erro}`;
-      } else if (err.message) {
-        mensagemErro += ` (${err.message})`;
-      }
-
+      if (err.response?.data?.erro) mensagemErro += ` Detalhes: ${err.response.data.erro}`;
+      else if (err.message) mensagemErro += ` (${err.message})`;
       setError(mensagemErro);
     } finally {
       setLoading(false);
     }
-  };
+  }, [page, loading, hasMore]);
 
-  useEffect(() => {
-    buscarHistorico();
-  }, []);
+  useEffect(() => { buscarHistorico(); }, [buscarHistorico]);
 
-  /** =======================
-   *  Excluir orçamento
-   * ======================= */
   const handleExcluirOrcamento = (orcamento) => {
     abrirModal({
       title: 'Confirmar Exclusão',
@@ -106,31 +90,26 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
       onConfirm: async () => {
         fecharModal();
         try {
-          await axios.delete(`${API_BASE_URL}/${orcamento.id}`);
+          await axios.delete(`${API_BASE_URL}/api/orcamentos/${orcamento.id}`);
           abrirModal({
             title: 'Sucesso',
             message: 'Orçamento excluído com sucesso!',
             confirmText: 'OK',
             showCancel: false,
-            onConfirm: () => fecharModal(),
+            onConfirm: fecharModal,
           });
-          buscarHistorico();
+          setHistorico(prev => prev.filter(h => h.id !== orcamento.id));
         } catch (err) {
           console.error('Erro ao excluir orçamento:', err);
-
           let mensagemErro = 'Erro ao excluir orçamento.';
-          if (err.response?.data?.erro) {
-            mensagemErro += ` Detalhes: ${err.response.data.erro}`;
-          } else if (err.message) {
-            mensagemErro += ` (${err.message})`;
-          }
-
+          if (err.response?.data?.erro) mensagemErro += ` Detalhes: ${err.response.data.erro}`;
+          else if (err.message) mensagemErro += ` (${err.message})`;
           abrirModal({
             title: 'Erro',
             message: mensagemErro,
             confirmText: 'Fechar',
             showCancel: false,
-            onConfirm: () => fecharModal(),
+            onConfirm: fecharModal,
           });
         }
       },
@@ -140,14 +119,10 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
 
   const getStatusTagClass = (status) => {
     switch (status) {
-      case 'Aberto':
-        return 'amarelo';
-      case 'Concluído':
-        return 'verde';
-      case 'Cancelado':
-        return 'vermelho';
-      default:
-        return '';
+      case 'Aberto': return 'amarelo';
+      case 'Concluído': return 'verde';
+      case 'Cancelado': return 'vermelho';
+      default: return '';
     }
   };
 
@@ -155,16 +130,13 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     if (!data) return 'Data não disponível';
     let d = null;
     if (typeof data === 'string') d = new Date(data);
-    else if (data && typeof data.toDate === 'function') d = data.toDate();
     else if (data instanceof Date) d = data;
-    else if (data && typeof data._seconds === 'number') {
-      d = new Date(data._seconds * 1000 + data._nanoseconds / 1000000);
-    }
+    else if (data?._seconds) d = new Date(data._seconds * 1000 + (data._nanoseconds || 0) / 1000000);
     return d && !isNaN(d.getTime()) ? d.toLocaleString('pt-BR') : 'Data inválida';
   };
 
   const getImagemUrl = (orcamento) => {
-    if (Array.isArray(orcamento.imagens) && orcamento.imagens.length > 0 && typeof orcamento.imagens[0]?.secure_url === 'string') {
+    if (Array.isArray(orcamento.imagens) && orcamento.imagens.length && typeof orcamento.imagens[0]?.secure_url === 'string') {
       return orcamento.imagens[0].secure_url;
     }
     return orcamento.imagem?.url || orcamento.imageUrl || null;
@@ -172,23 +144,18 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
 
   const historicoOrdenado = [...historico].sort((a, b) => new Date(b.data) - new Date(a.data));
 
-  if (loading) return <div className="loading-message">Carregando histórico...</div>;
-  if (error) return <div className="error-message">{error}</div>;
-  if (historicoOrdenado.length === 0)
-    return <div className="no-data-message">Nenhum orçamento encontrado.</div>;
+  if (loading && historico.length === 0) return <div className="loading-message">Carregando histórico...</div>;
+  if (error && historico.length === 0) return <div className="error-message">{error}</div>;
+  if (historicoOrdenado.length === 0) return <div className="no-data-message">Nenhum orçamento encontrado.</div>;
 
   return (
     <div id="ancora-historico-orcamentos" className="tabela-historico">
       <div className="header-bar">
         <h2>Histórico de Orçamentos</h2>
-        {onClose && (
-          <button className="close-button" onClick={onClose}>
-            Fechar
-          </button>
-        )}
+        {onClose && <button className="close-button" onClick={onClose}>Fechar</button>}
       </div>
 
-      {/* Estrutura Desktop */}
+      {/* Desktop */}
       <div className="historico-desktop">
         <table className="tabela-light">
           <thead>
@@ -205,7 +172,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
             </tr>
           </thead>
           <tbody>
-            {historicoOrdenado.map((orcamento) => (
+            {historicoOrdenado.map(orcamento => (
               <tr key={orcamento.id}>
                 <td>{orcamento.ordemServico || '-'}</td>
                 <td>{orcamento.cliente}</td>
@@ -213,19 +180,13 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                 <td>{orcamento.tipo}</td>
                 <td>R$ {Number(orcamento.valorTotal).toFixed(2)}</td>
                 <td>{formatarData(orcamento.data)}</td>
-                <td>
-                  <span className={`status-tag ${getStatusTagClass(orcamento.status)}`}>
-                    {orcamento.status || 'Aberto'}
-                  </span>
-                </td>
+                <td><span className={`status-tag ${getStatusTagClass(orcamento.status)}`}>{orcamento.status || 'Aberto'}</span></td>
                 <td>
                   {getImagemUrl(orcamento) ? (
                     <a href={getImagemUrl(orcamento)} target="_blank" rel="noopener noreferrer" title="Clique para ampliar">
                       <img src={getImagemUrl(orcamento)} alt="Imagem do orçamento" style={{ width: '80px', borderRadius: '6px' }} crossOrigin="anonymous" />
                     </a>
-                  ) : (
-                    '-'
-                  )}
+                  ) : '-'}
                 </td>
                 <td className="acoes-icones">
                   <button onClick={() => onViewBudget(orcamento)} title="Visualizar"><FaEye /></button>
@@ -238,9 +199,9 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
         </table>
       </div>
 
-      {/* Estrutura Mobile */}
+      {/* Mobile */}
       <div className="historico-mobile">
-        {historicoOrdenado.map((orcamento) => (
+        {historicoOrdenado.map(orcamento => (
           <details key={orcamento.id} className="orcamento-card">
             <summary className="card-header">
               <h3>OS.: {orcamento.ordemServico || '-'}</h3>
@@ -269,8 +230,15 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
         ))}
       </div>
 
-      {/* Modal Customizado */}
       <CustomModal {...modalConfig} />
+
+      {hasMore && !loading && (
+        <div className="load-more">
+          <button onClick={() => setPage(prev => prev + 1)}>Carregar Mais</button>
+        </div>
+      )}
+
+      {loading && <div className="loading-more">Carregando mais...</div>}
     </div>
   );
 };
