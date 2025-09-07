@@ -6,6 +6,12 @@ const api = axios.create({
   timeout: 15000,
 });
 
+const baseURL = import.meta.env.VITE_API_BASE_URL;
+
+if (!baseURL) {
+  console.error("VITE_API_BASE_URL is not defined!");
+}
+
 // Evita “tempestade” de requisições repetidas:
 let inFlight = {};
 api.interceptors.request.use((config) => {
