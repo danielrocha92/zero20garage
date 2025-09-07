@@ -2,15 +2,22 @@ import { useState } from "react";
 import Layout from "../../components/Layout";
 import { useOrcamentos } from "../../hooks/useOrcamentos";
 
+const ITEMS_PER_PAGE = 10;
+
 export default function OrcamentoLista() {
   const [query, setQuery] = useState("");
+  const [page, setPage] = useState(1);
 
-  // Hook atualizado com startAfter
-  const { data, loading, error, refetch, loadMore, hasMore } = useOrcamentos({
-    search: query,
-    pageSize: 10,
-    autoRefreshMs: 60000,
-  });
+const { data, loading, error, refetch, totalPages } = useOrcamentos({
+  search: query,
+  page,
+  limit: ITEMS_PER_PAGE,
+  autoRefreshMs: 60000,
+});
+
+
+  const handlePrev = () => setPage(p => Math.max(1, p - 1));
+  const handleNext = () => setPage(p => p + 1);
 
   return (
     <Layout>
@@ -21,7 +28,7 @@ export default function OrcamentoLista() {
           <input
             placeholder="Buscar por cliente..."
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={e => { setQuery(e.target.value); setPage(1); }}
             style={{ padding: 8, minWidth: 240 }}
           />
           <button onClick={refetch}>Atualizar</button>
@@ -34,23 +41,22 @@ export default function OrcamentoLista() {
         {data.length > 0 && (
           <>
             <ul style={{ display: "grid", gap: 8, listStyle: "none", padding: 0 }}>
-              {data.map((o) => (
+              {data.map(o => (
                 <li key={o.id} style={{ padding: 12, border: "1px solid #ddd", borderRadius: 8 }}>
                   <strong>{o.cliente || "Sem nome"}</strong>
                   <div>ID: {o.id}</div>
-                  <div>Total: {o.total ?? "-"}</div>
+                  <div>Total: {o.valorTotal ?? "-"}</div>
                   <div>Data: {o.data ?? "-"}</div>
                 </li>
               ))}
             </ul>
 
-            {hasMore && (
-              <div style={{ display: "flex", justifyContent: "center", marginTop: 16 }}>
-                <button onClick={loadMore} disabled={loading}>
-                  {loading ? "Carregando..." : "Carregar mais"}
-                </button>
-              </div>
-            )}
+            <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 16 }}>
+                <button onClick={handlePrev} disabled={page === 1}>Anterior</button>
+                    <span>Página {page} de {totalPages}</span>
+                <button onClick={handleNext} disabled={page === totalPages}>Próxima</button>
+            </div>
+
           </>
         )}
       </div>
