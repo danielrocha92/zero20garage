@@ -40,7 +40,7 @@
 
     const fetchHistorico = useCallback(async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/orcamentos`);
+        const response = await fetch(`${API_BASE_URL}`);
         const data = await response.json();
         setHistorico(data);
       } catch (error) {
@@ -55,11 +55,11 @@
 
     const handleSalvar = async (dados) => {
       const envio = { ...dados, tipo, data: new Date().toLocaleString('pt-BR') };
-      let url = `${API_BASE_URL}/api/orcamentos`;
+      let url = `${API_BASE_URL}`;
       let method = 'POST';
 
       if (editingData?.id) {
-        url = `${API_BASE_URL}/api/orcamentos/${editingData.id}`;
+        url = `${API_BASE_URL}/${editingData.id}`;
         method = 'PUT';
         envio.id = editingData.id;
       }

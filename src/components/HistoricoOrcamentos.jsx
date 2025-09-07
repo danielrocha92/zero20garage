@@ -71,7 +71,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/orcamentos`);
+      const response = await axios.get(`${API_BASE_URL}/hooks/useOrcamentos`);
       setHistorico(response.data);
     } catch (err) {
       console.error('Erro ao buscar histórico:', err);
@@ -106,7 +106,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
       onConfirm: async () => {
         fecharModal();
         try {
-          await axios.delete(`${API_BASE_URL}/api/orcamentos/${orcamento.id}`);
+          await axios.delete(`${API_BASE_URL}/${orcamento.id}`);
           abrirModal({
             title: 'Sucesso',
             message: 'Orçamento excluído com sucesso!',
