@@ -1,17 +1,17 @@
 // src/services/firebaseBlog.js
-import { initializeApp, getApps } from "firebase/app";
+import { initializeApp, getApps } from 'firebase/app';
 import { getFirestore } from "firebase/firestore";
 import { getAuth, signInAnonymously } from "firebase/auth";
 
 // Configuração do Firebase (use a mesma que você me mostrou antes)
 const firebaseConfig = {
-  apiKey: "AIzaSyDZEG2BIV8nLF27usGvE3FwWLW1aNfLCMk",
-  authDomain: "zero20garage-10bc0.firebaseapp.com",
-  projectId: "zero20garage-10bc0",
-  storageBucket: "zero20garage-10bc0.firebasestorage.app",
-  messagingSenderId: "436903228814",
-  appId: "1:436903228814:web:b1dbd8aa5ad0549312a0df",
-  measurementId: "G-6YVS5KNQXF"
+  apiKey: "AIzaSyC2yLYIEdl21s2CDCI5B-5IYA9XKyuC7J8",
+  authDomain: "blogsharezero20garage.firebaseapp.com",
+  projectId: "blogsharezero20garage",
+  storageBucket: "blogsharezero20garage.firebasestorage.app",
+  messagingSenderId: "691838476330",
+  appId: "1:691838476330:web:ddd1577da5d67f0233e353",
+  measurementId: "G-XG6LVSJ0GB"
 };
 
 // Inicializar o app só uma vez
