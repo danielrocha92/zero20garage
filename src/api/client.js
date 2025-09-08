@@ -1,16 +1,15 @@
+// src/api/client.js
 import axios from "axios";
 
-// Alteração da sintaxe: de import.meta.env para process.env
-// E do prefixo: de VITE_ para REACT_APP_
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL || "https://api-orcamento-n49u.onrender.com",
+  baseURL: import.meta.env.VITE_API_BASE_URL || "https://api-orcamento-n49u.onrender.com",
   timeout: 15000,
 });
 
-const baseURL = process.env.REACT_APP_API_BASE_URL;
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 if (!baseURL) {
-  console.error("REACT_APP_API_BASE_URL is not defined!");
+  console.error("VITE_API_BASE_URL is not defined!");
 }
 
 // Evita “tempestade” de requisições repetidas:
@@ -35,17 +34,12 @@ api.interceptors.response.use(
     const key = error.config?.metadata?.key;
     if (key) delete inFlight[key];
 
-    if (axios.isCancel(error)) return Promise.reject(error);
-
-    // Limite de requisições
+    // Tratamento especial para 429 vindo do backend
     if (error.response && error.response.status === 429) {
       return Promise.reject(new Error("Limite de requisições atingido. Tente novamente mais tarde."));
     }
-
-    // 404: rota não encontrada, retorna array vazio para não quebrar JSON
-    if (error.response && error.response.status === 404) {
-      return Promise.resolve({ data: [] });
-    }
+    // Cancels não devem aparecer como erro de UI
+    if (axios.isCancel(error)) return Promise.reject(error);
 
     return Promise.reject(error);
   }

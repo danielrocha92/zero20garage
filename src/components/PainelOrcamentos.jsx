@@ -1,268 +1,252 @@
-/* global __app_id, __firebase_config, __initial_auth_token */
-import React, { useState, useEffect, useCallback } from 'react';
-import { collection, query, orderBy, limit, startAfter, getDocs, deleteDoc, doc } from 'firebase/firestore';
-import { getAuth, signInWithCustomToken, signInAnonymously } from "firebase/auth";
-import { initializeApp } from 'firebase/app';
-import { getFirestore, setLogLevel } from 'firebase/firestore';
-import { FaEye, FaEdit, FaTrash } from 'react-icons/fa';
+// src/components/PainelOrcamentos.jsx
+import React, { useState, useEffect, useCallback, useRef, Suspense } from 'react';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import { useNavigate } from 'react-router-dom';
+
+import OrcamentoCabecote from './OrcamentoCabecote';
+import OrcamentoMotorCompleto from './OrcamentoMotorCompleto';
+import HistoricoOrcamentos from './HistoricoOrcamentos';
+import OrcamentoImpresso from './OrcamentoImpresso';
 import './PainelOrcamentos.css';
 
-/* Importando os outros componentes */
-import FormularioOrcamento from './FormularioOrcamento';
-import HistoricoOrcamentos from './HistoricoOrcamentos';
-import OrcamentoCabecote from './OrcamentoCabecote';
-import OrcamentoGenerico from './OrcamentoGenerico';
-import OrcamentoImpresso from './OrcamentoImpresso';
-import OrcamentoMotorCompleto from './OrcamentoMotorCompleto';
-import UploadImagemOrcamento from './UploadImagemOrcamento';
-
-// Variáveis globais fornecidas pelo ambiente Canvas
-const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-const PAGE_SIZE = 10;
-
-// Configuração e Inicialização do Firebase
-setLogLevel('debug');
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-
-// Modal Customizado
-const CustomModal = ({ isOpen, title, message, onConfirm, onCancel, confirmText = 'OK', cancelText = 'Cancelar', showCancel = false }) => {
-    if (!isOpen) return null;
-    return (
-        <div className="custom-modal-overlay">
-            <div className="custom-modal">
-                <h3>{title}</h3>
-                <p>{message}</p>
-                <div className="modal-actions">
-                    {showCancel && <button onClick={onCancel} className="cancel-btn">{cancelText}</button>}
-                    <button onClick={onConfirm} className="confirm-btn">{confirmText}</button>
-                </div>
-            </div>
-        </div>
-    );
-};
+const UploadImagemOrcamento = React.lazy(() => import('./UploadImagemOrcamento'));
+const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
 
 const PainelOrcamentos = () => {
-    const [orcamentos, setOrcamentos] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [lastVisible, setLastVisible] = useState(null);
-    const [hasMore, setHasMore] = useState(true);
-    const [error, setError] = useState(null);
-    const [user, setUser] = useState(null);
-    const [isAuthReady, setIsAuthReady] = useState(false);
+  const navigate = useNavigate();
+  const historicoRef = useRef(null);
 
-    const [orcamentoSelecionado, setOrcamentoSelecionado] = useState(null);
-    const [viewMode, setViewMode] = useState("lista");
-    // modos: "lista", "formulario", "visualizar", "imprimir", "upload"
+  const [tipo, setTipo] = useState('motor');
+  const [historico, setHistorico] = useState([]);
+  const [message, setMessage] = useState('');
+  const [showMessage, setShowMessage] = useState(false);
+  const [editingData, setEditingData] = useState(null);
+  const [selectedBudgetForView, setSelectedBudgetForView] = useState(null);
 
-    const [modalConfig, setModalConfig] = useState({
-        isOpen: false,
-        title: '',
-        message: '',
-        onConfirm: null,
-        onCancel: null,
-        confirmText: 'OK',
-        cancelText: 'Cancelar',
-        showCancel: false,
-    });
+  const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
 
-    const abrirModal = (config) => setModalConfig({ ...modalConfig, isOpen: true, ...config });
-    const fecharModal = () => setModalConfig({ ...modalConfig, isOpen: false });
+  const showMessageBox = (msg) => {
+    setMessage(msg);
+    setShowMessage(true);
+  };
 
-    /* --- Autenticação --- */
-    useEffect(() => {
-        const handleAuth = async () => {
-            try {
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                } else {
-                    await signInAnonymously(auth);
-                }
-            } catch (err) {
-                console.error("Erro na autenticação:", err);
-                setError("Erro na autenticação. Verifique as credenciais.");
-            }
-        };
+  const hideMessageBox = () => {
+    setShowMessage(false);
+    setMessage('');
+  };
 
-        const unsubscribe = auth.onAuthStateChanged(authUser => {
-            setUser(authUser);
-            setIsAuthReady(true);
-        });
+  const fetchHistorico = useCallback(async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/orcamentos`);
+      const data = await response.json();
+      setHistorico(data);
+    } catch (error) {
+      console.error('Erro ao buscar histórico:', error);
+      showMessageBox('Erro ao carregar histórico de orçamentos.');
+    }
+  }, []);
 
-        handleAuth();
-        return () => unsubscribe();
-    }, []);
+  useEffect(() => {
+    fetchHistorico();
+  }, [fetchHistorico]);
 
-    /* --- Buscar orçamentos --- */
-    const buscarOrcamentos = useCallback(async () => {
-        if (loading || !hasMore || !user) return;
-        setLoading(true);
-        setError(null);
+  const handleSalvar = async (dados) => {
+    const envio = { ...dados, tipo, data: new Date().toLocaleString('pt-BR') };
+    let url = `${API_BASE_URL}/api/orcamentos`;
+    let method = 'POST';
 
-        const collectionPath = `/artifacts/${appId}/users/${user.uid}/orcamentos`;
+    if (editingData?.id) {
+      url = `${API_BASE_URL}/api/orcamentos/${editingData.id}`;
+      method = 'PUT';
+      envio.id = editingData.id;
+    }
 
-        try {
-            let q = query(
-                collection(db, collectionPath),
-                orderBy('data', 'desc'),
-                limit(PAGE_SIZE)
-            );
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(envio),
+      });
+      const result = await res.json();
+      if (res.ok) {
+        showMessageBox(`Orçamento ${method === 'POST' ? 'criado' : 'atualizado'} com sucesso.`);
+        fetchHistorico();
+        setEditingData(null);
+      } else {
+        showMessageBox(`Erro ao salvar: ${result.msg || 'Erro desconhecido'}`);
+      }
+    } catch (err) {
+      console.error('Erro ao conectar com a API:', err);
+      showMessageBox('Erro ao conectar com o servidor.');
+    } finally {
+      setEditingData(null);
+    }
+  };
 
-            if (lastVisible) {
-                q = query(
-                    collection(db, collectionPath),
-                    orderBy('data', 'desc'),
-                    startAfter(lastVisible),
-                    limit(PAGE_SIZE)
-                );
-            }
+  const exportarExcel = () => {
+    if (!historico.length) return showMessageBox('Nenhum dado para exportar.');
+    const excelData = historico.map(h => ({
+      Data: h.data,
+      Tipo: h.tipo,
+      Cliente: h.cliente || '',
+      Veículo: h.veiculo || '',
+      Placa: h.placa || '',
+      Telefone: h.telefone || '',
+      'Valor Total': h.valorTotal,
+      'Peças': h.pecasSelecionadas?.join('; ') || '',
+      'Serviços': h.servicosSelecionados?.join('; ') || '',
+      Observações: h.observacoes || '',
+      'Forma de Pagamento': h.formaPagamento || '',
+    }));
+    const ws = XLSX.utils.json_to_sheet(excelData);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Orçamentos');
+    const buf = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    saveAs(new Blob([buf], { type: 'application/octet-stream' }), 'painel-orcamentos.xlsx');
+  };
 
-            const snapshot = await getDocs(q);
-            const data = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
+  const exportarPDFCompleto = async () => {
+    if (!historico.length) return showMessageBox('Nenhum dado para exportar.');
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+    const margin = 10;
+    const contentWidth = pdfWidth - margin * 2;
 
-            setOrcamentos(prev => [...prev, ...data]);
-            setLastVisible(snapshot.docs[snapshot.docs.length - 1] || null);
-            setHasMore(data.length === PAGE_SIZE);
-        } catch (err) {
-            console.error('Erro ao buscar orçamentos:', err);
-            setError('Erro ao carregar os orçamentos.');
-        } finally {
-            setLoading(false);
-        }
-    }, [loading, hasMore, lastVisible, user]);
+    for (let i = 0; i < historico.length; i++) {
+      const orcamento = historico[i];
+      const tempDiv = document.createElement('div');
+      tempDiv.style.position = 'absolute';
+      tempDiv.style.left = '-9999px';
+      tempDiv.style.width = `${contentWidth}mm`;
+      tempDiv.style.padding = '10mm';
+      tempDiv.style.backgroundColor = 'white';
+      document.body.appendChild(tempDiv);
 
-    useEffect(() => {
-        if (isAuthReady && user) {
-            setOrcamentos([]);
-            setLastVisible(null);
-            setHasMore(true);
-            buscarOrcamentos();
-        }
-    }, [isAuthReady, user, buscarOrcamentos]);
+      const imagemUrl = orcamento?.imagem?.url || orcamento?.imageUrl || orcamento?.imagemUrl || null;
 
-    /* --- Exclusão --- */
-    const handleExcluirOrcamento = (orcamento) => {
-        abrirModal({
-            title: 'Confirmar Exclusão',
-            message: `Deseja excluir o orçamento de ${orcamento.cliente || 'cliente'} (OS: ${orcamento.ordemServico || '-'})?`,
-            confirmText: 'Sim, excluir',
-            cancelText: 'Cancelar',
-            showCancel: true,
-            onConfirm: async () => {
-                fecharModal();
-                try {
-                    const docPath = `/artifacts/${appId}/users/${user.uid}/orcamentos/${orcamento.id}`;
-                    await deleteDoc(doc(db, docPath));
-                    setOrcamentos(prev => prev.filter(o => o.id !== orcamento.id));
-                    abrirModal({
-                        title: 'Sucesso',
-                        message: 'Orçamento excluído com sucesso!',
-                        confirmText: 'OK',
-                        showCancel: false,
-                        onConfirm: fecharModal,
-                    });
-                } catch (err) {
-                    console.error('Erro ao excluir orçamento:', err);
-                    abrirModal({
-                        title: 'Erro',
-                        message: 'Erro ao excluir orçamento.',
-                        confirmText: 'Fechar',
-                        showCancel: false,
-                        onConfirm: fecharModal,
-                    });
-                }
-            },
-            onCancel: fecharModal,
-        });
-    };
-
-    /* --- Funções de utilidade --- */
-    const getStatusTagClass = (status) => {
-        switch (status) {
-            case 'Aberto': return 'amarelo';
-            case 'Concluído': return 'verde';
-            case 'Cancelado': return 'vermelho';
-            default: return '';
-        }
-    };
-
-    const formatarData = (data) => {
-        if (!data) return 'Data não disponível';
-        let d = null;
-        if (data instanceof Date) d = data;
-        else if (data?._seconds) d = new Date(data._seconds * 1000 + (data._nanoseconds || 0) / 1000000);
-        else d = new Date(data);
-        return d && !isNaN(d.getTime()) ? d.toLocaleString('pt-BR') : 'Data inválida';
-    };
-
-    const getImagemUrl = (orcamento) => {
-        if (Array.isArray(orcamento.imagens) && orcamento.imagens.length && typeof orcamento.imagens[0]?.secure_url === 'string') {
-            return orcamento.imagens[0].secure_url;
-        }
-        return orcamento.imagem?.url || orcamento.imageUrl || null;
-    };
-
-    /* --- Renderização condicional --- */
-    if (!isAuthReady) return <div className="loading-message">Iniciando sessão...</div>;
-    if (!user) return <div className="error-message">Erro de autenticação. Por favor, tente novamente.</div>;
-
-    return (
-        <div className="painel-orcamentos">
-            <h2>Painel de Orçamentos</h2>
-            <div className="user-info">Usuário: {user.uid}</div>
-
-            {viewMode === "lista" && (
-                <>
-                    {/* Tabela e cards mobile */}
-                    {/* ... (sua tabela atual permanece aqui) ... */}
-
-                    {/* Histórico */}
-                    <HistoricoOrcamentos />
-
-                    {hasMore && !loading && (
-                        <div className="load-more">
-                            <button onClick={buscarOrcamentos}>Carregar Mais</button>
-                        </div>
-                    )}
-                    {loading && <div className="loading-more">Carregando mais...</div>}
-                </>
-            )}
-
-            {viewMode === "formulario" && (
-                <FormularioOrcamento
-                    orcamento={orcamentoSelecionado}
-                    onCancel={() => setViewMode("lista")}
-                />
-            )}
-
-            {viewMode === "visualizar" && orcamentoSelecionado && (
-                <OrcamentoGenerico
-                    orcamento={orcamentoSelecionado}
-                    onClose={() => setViewMode("lista")}
-                />
-            )}
-
-            {viewMode === "imprimir" && orcamentoSelecionado && (
-                <OrcamentoImpresso
-                    orcamento={orcamentoSelecionado}
-                    onClose={() => setViewMode("lista")}
-                />
-            )}
-
-            {viewMode === "upload" && orcamentoSelecionado && (
-                <UploadImagemOrcamento
-                    orcamento={orcamentoSelecionado}
-                    onClose={() => setViewMode("lista")}
-                />
-            )}
-
-            <CustomModal {...modalConfig} />
+      tempDiv.innerHTML = `
+        <div class="orcamento-impresso-content">
+          <h1>ORÇAMENTO - ${orcamento.tipo === 'motor' ? 'MOTOR' : 'CABEÇOTE'}</h1>
+          ${imagemUrl ? `<img src="${imagemUrl}" crossorigin="anonymous" style="max-width:100%; max-height:300px;" />` : ''}
         </div>
-    );
+      `;
+
+      await new Promise(resolve => setTimeout(resolve, 50));
+
+      try {
+        const canvas = await html2canvas(tempDiv, { scale: 2, useCORS: true });
+        const imgData = canvas.toDataURL('image/png');
+        const imgHeight = (canvas.height * contentWidth) / canvas.width;
+        let heightLeft = imgHeight;
+        let position = margin;
+
+        if (i > 0) pdf.addPage();
+        pdf.addImage(imgData, 'PNG', margin, position, contentWidth, imgHeight);
+        heightLeft -= (pdfHeight - margin);
+
+        while (heightLeft > -1 * (pdfHeight - margin)) {
+          position = heightLeft - imgHeight + margin;
+          pdf.addPage();
+          pdf.addImage(imgData, 'PNG', margin, position, contentWidth, imgHeight);
+          heightLeft -= (pdfHeight - margin);
+        }
+      } catch (error) {
+        console.error('Erro ao gerar PDF:', error);
+      } finally {
+        document.body.removeChild(tempDiv);
+      }
+    }
+    pdf.save('historico-orcamentos-zero20.pdf');
+    showMessageBox('PDF do histórico gerado com sucesso!');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    navigate('/orcamento');
+  };
+
+  const handleEditarOrcamento = (orcamento) => {
+    setEditingData(orcamento);
+    setTipo(orcamento.tipo === 'Geral' ? 'cabecote' : 'motor');
+    setSelectedBudgetForView(null);
+    setTimeout(() => {
+      document.getElementById('orcamento-form')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
+  const handleViewBudget = (orcamento) => setSelectedBudgetForView(orcamento);
+  const handleCloseView = () => setSelectedBudgetForView(null);
+  const scrollToHistorico = () => historicoRef.current?.scrollIntoView({ behavior: 'smooth' });
+
+  const imagensExistentes = (() => {
+    if (!editingData) return [];
+    if (Array.isArray(editingData.imagens) && editingData.imagens.length) return editingData.imagens;
+    if (editingData.imagem) return [editingData.imagem];
+    if (editingData.imageUrl) return [{ url: editingData.imageUrl, public_id: editingData.public_id }];
+    return [];
+  })();
+
+  return (
+    <div className='painel-orcamentos-container'>
+      {showMessage && (
+        <div className="message-box">
+          <span>{message}</span>
+          <button onClick={hideMessageBox}>&times;</button>
+        </div>
+      )}
+
+      {selectedBudgetForView ? (
+        <OrcamentoImpresso orcamento={selectedBudgetForView} onClose={handleCloseView} />
+      ) : (
+        <>
+          <h1 className='titulo-escuro'>Painel de Orçamentos</h1>
+
+          <nav className="tipo-orcamento-selector">
+            <button onClick={() => { setTipo('motor'); setEditingData(null); }} className={tipo === 'motor' ? 'active' : ''}>
+              Orçamento Motor Completo
+            </button>
+            <button onClick={() => { setTipo('cabecote'); setEditingData(null); }} className={tipo === 'cabecote' ? 'active' : ''}>
+              Orçamento Cabeçote
+            </button>
+            <button onClick={scrollToHistorico}>Histórico de Orçamentos</button>
+            <button onClick={handleLogout}>Sair</button>
+          </nav>
+
+          <main className="orcamento-form-wrapper" id="orcamento-form">
+            {tipo === 'motor'
+              ? <OrcamentoMotorCompleto onSubmit={handleSalvar} editingData={editingData} />
+              : <OrcamentoCabecote onSubmit={handleSalvar} editingData={editingData} />
+            }
+
+            <Suspense fallback={<div>Carregando upload de imagem...</div>}>
+              <UploadImagemOrcamento
+                orcamentoId={editingData?.id}
+                authToken={authToken}
+                imagemAtual={imagensExistentes}
+                onUploaded={async (imgs) => {
+                  if (editingData) setEditingData(prev => prev ? { ...prev, imagens: imgs } : prev);
+                  fetchHistorico();
+                }}
+              />
+            </Suspense>
+
+            <div className="historico-buttons-group">
+              <button onClick={exportarExcel} className="button">Exportar Todos para Excel</button>
+              <button onClick={exportarPDFCompleto} className="button">Exportar Todos para PDF</button>
+            </div>
+          </main>
+
+          <div ref={historicoRef}>
+            <HistoricoOrcamentos onEditarOrcamento={handleEditarOrcamento} onViewBudget={handleViewBudget} />
+          </div>
+        </>
+      )}
+    </div>
+  );
 };
 
 export default PainelOrcamentos;
