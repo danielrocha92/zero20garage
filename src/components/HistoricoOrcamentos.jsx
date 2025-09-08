@@ -106,19 +106,21 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
             onConfirm: () => fecharModal(),
           });
           setHistorico(prev => prev.filter(h => h.id !== orcamento.id));
-        } catch (err) {
-          console.error('Erro ao excluir orçamento:', err);
-          let mensagemErro = 'Erro ao excluir orçamento.';
-          if (err.response?.data?.erro) mensagemErro += ` Detalhes: ${err.response.data.erro}`;
-          else if (err.message) mensagemErro += ` (${err.message})`;
-          abrirModal({
-            title: 'Erro',
-            message: 'Erro ao excluir orçamento.',
-            confirmText: 'Fechar',
-            showCancel: false,
-            onConfirm: () => fecharModal(),
-          });
-        }
+          } catch (err) {
+            console.error('Erro ao excluir orçamento:', err);
+            let mensagemErro = 'Erro ao excluir orçamento.';
+            if (err.response?.data?.erro) mensagemErro += ` Detalhes: ${err.response.data.erro}`;
+            else if (err.message) mensagemErro += ` (${err.message})`;
+
+            // Use a variável 'mensagemErro' aqui
+            abrirModal({
+              title: 'Erro',
+              message: mensagemErro, // <-- Modifique esta linha
+              confirmText: 'Fechar',
+              showCancel: false,
+              onConfirm: () => fecharModal(),
+            });
+          }
       },
       onCancel: fecharModal,
     });
