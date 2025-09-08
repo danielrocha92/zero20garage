@@ -68,6 +68,9 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
    *  Busca histórico de orçamentos
    * ======================= */
   const buscarHistorico = async () => {
+    // Se já houve erro, não tenta novamente automaticamente
+    if (error) return;
+
     setLoading(true);
     setError(null);
     try {
@@ -91,7 +94,8 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
 
   useEffect(() => {
     buscarHistorico();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Mantemos lógica original
 
   /** =======================
    *  Excluir orçamento
@@ -173,7 +177,18 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
   const historicoOrdenado = [...historico].sort((a, b) => new Date(b.data) - new Date(a.data));
 
   if (loading) return <div className="loading-message">Carregando histórico...</div>;
-  if (error) return <div className="error-message">{error}</div>;
+
+  // Adiciona botão "Tentar novamente" caso ocorra erro
+  if (error)
+    return (
+      <div className="error-message">
+        {error}
+        <button className="retry-btn" onClick={() => setError(null) || buscarHistorico()}>
+          Tentar novamente
+        </button>
+      </div>
+    );
+
   if (historicoOrdenado.length === 0)
     return <div className="no-data-message">Nenhum orçamento encontrado.</div>;
 
