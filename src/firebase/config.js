@@ -1,20 +1,19 @@
-// src/firebase.js
+// src/firebase/config.js
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore"; // Importe o Firestore aqui
+import { getFirestore } from "firebase/firestore";
 
+// ⚠️ Todas essas variáveis precisam estar configuradas no .env.local e no Vercel
 const firebaseConfig = {
-  apiKey: "AIzaSyChLSQrE2uma5PHXEmbzgxRLE6WbwCw0CM",
-  authDomain: "zero20-upload-api-e3a14.firebaseapp.com",
-  projectId: "zero20-upload-api-e3a14",
-  storageBucket: "zero20-upload-api-e3a14.firebasestorage.app",
-  messagingSenderId: "571940430324",
-  appId: "1:571940430324:web:d3a8579a3e31d9967dd9a1",
-  measurementId: "G-BQGXRLEPCJ"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
-// Inicialize o Firebase e o Firestore
+// Inicializa o Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
-// Exporte a instância do Firestore para usar em outros lugares
-export { db };
+// Exporta apenas o Firestore
+export const db = getFirestore(app);
