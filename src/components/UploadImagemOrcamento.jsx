@@ -1,128 +1,158 @@
 // src/components/UploadImagemOrcamento.jsx
+
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
 import "./UploadImagemOrcamento.css";
 
-const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded, apiBaseUrl }) => {
+const API_BASE_URL =
+  process.env.REACT_APP_API_BASE_URL ||
+  "https://api-orcamento-n49u.onrender.com";
+
+const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
   const dropRef = useRef(null);
 
   // --- Revoke object URLs quando desmonta ---
   useEffect(() => {
-    return () => selectedFiles.forEach(f => URL.revokeObjectURL(f.preview));
+    return () =>
+      selectedFiles.forEach((f) => URL.revokeObjectURL(f.preview));
   }, [selectedFiles]);
 
-  // --- Carregar imagens existentes ao editar ---
+  // --- Drag & Drop ---
   useEffect(() => {
-    if (!orcamentoId) return;
-    const fetchImagens = async () => {
-      try {
-        const res = await fetch(`${apiBaseUrl}/api/upload/${orcamentoId}`);
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        const data = await res.json();
-        const normalizedData = data.map(img => ({
-          url: img.url,
-          public_id: img.public_id,
-        }));
-        onUploaded(normalizedData);
-      } catch (error) {
-        console.error("Erro ao buscar imagens existentes:", error);
-      }
+    const dropArea = dropRef.current;
+    if (!dropArea) return;
+
+    const handleDragOver = (e) => {
+      e.preventDefault();
+      dropArea.classList.add("drag-over");
     };
-    fetchImagens();
-  }, [orcamentoId, apiBaseUrl, onUploaded]);
+    const handleDragLeave = () => dropArea.classList.remove("drag-over");
+    const handleDrop = (e) => {
+      e.preventDefault();
+      dropArea.classList.remove("drag-over");
+      handleFiles(Array.from(e.dataTransfer.files || []));
+    };
 
-  const handleFileChange = (e) => {
-    const files = Array.from(e.target.files);
-    setSelectedFiles(prevFiles => [
-      ...prevFiles,
-      ...files.map(file => ({
-        key: URL.createObjectURL(file), // Usar URL como key
-        file,
-        preview: URL.createObjectURL(file),
-        progress: 0,
-        uploaded: false,
-        error: false,
-      })),
-    ]);
+    dropArea.addEventListener("dragover", handleDragOver);
+    dropArea.addEventListener("dragleave", handleDragLeave);
+    dropArea.addEventListener("drop", handleDrop);
+
+    return () => {
+      dropArea.removeEventListener("dragover", handleDragOver);
+      dropArea.removeEventListener("dragleave", handleDragLeave);
+      dropArea.removeEventListener("drop", handleDrop);
+    };
+  }, []);
+
+  const handleFiles = (files) => {
+    if (!files.length) return;
+    const filesWithPreview = files.map((f) => ({
+      file: f,
+      preview: URL.createObjectURL(f),
+      key: f.name + "-" + Date.now() + "-" + Math.random(),
+      uploaded: false,
+      progress: 0,
+      error: null,
+    }));
+    setSelectedFiles((prev) => [...prev, ...filesWithPreview]);
   };
 
-  const handleDrop = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    handleFileChange({ target: { files: e.dataTransfer.files } });
-  };
+  const handleFileChange = (event) =>
+    handleFiles(Array.from(event.target.files || []));
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  const handleDeleteSelected = (key) => {
-    setSelectedFiles(prevFiles => prevFiles.filter(f => f.key !== key));
-  };
-
-  const handleUploadAll = async () => {
+  // --- Upload ---
+  const handleUploadAll = useCallback(async () => {
+    const filesToUpload = selectedFiles.filter(
+      (f) => !f.uploaded && !f.error
+    );
+    if (!filesToUpload.length || !orcamentoId) return;
     setUploading(true);
-    const formData = new FormData();
 
-    selectedFiles.filter(f => !f.uploaded).forEach(f => {
-      formData.append('files', f.file);
+    const formData = new FormData();
+    filesToUpload.forEach((f) => {
+      formData.append("files", f.file);
     });
 
     try {
-      const response = await axios.post(`${apiBaseUrl}/api/upload/${orcamentoId}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        onUploadProgress: (progressEvent) => {
-          const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-          setSelectedFiles(prevFiles =>
-            prevFiles.map(f => (f.uploaded || f.error ? f : { ...f, progress }))
-          );
-        },
-      });
+      const response = await axios.post(
+        `${API_BASE_URL}/api/upload/${orcamentoId}`,
+        formData,
+        {
+          onUploadProgress: (progressEvent) => {
+            const percent = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            setSelectedFiles((prev) =>
+              prev.map((f) => {
+                if (filesToUpload.some((fu) => fu.key === f.key)) {
+                  return { ...f, progress: percent };
+                }
+                return f;
+              })
+            );
+          },
+        }
+      );
 
       if (response.status === 200) {
-        const uploadedImages = response.data.files;
-        onUploaded(uploadedImages);
+        onUploaded(response.data.files);
         setSelectedFiles([]);
       }
     } catch (error) {
       console.error("Erro no upload:", error);
-      setSelectedFiles(prevFiles =>
-        prevFiles.map(f => (f.uploaded ? f : { ...f, error: true }))
+      setSelectedFiles((prev) =>
+        prev.map((f) => {
+          if (filesToUpload.some((fu) => fu.key === f.key)) {
+            return { ...f, uploaded: false, error: "Falha" };
+          }
+          return f;
+        })
       );
     } finally {
       setUploading(false);
     }
+  }, [selectedFiles, orcamentoId, onUploaded]);
+
+  const handleDeleteSelected = (key) => {
+    setSelectedFiles((prev) =>
+      prev.filter((f) => {
+        if (f.key === key) URL.revokeObjectURL(f.preview);
+        return f.key !== key;
+      })
+    );
   };
 
-  const handleDeleteUploaded = async (publicId) => {
+  const handleDeleteUploaded = async (img) => {
+    if (!orcamentoId || !img.public_id) return;
     try {
-      await axios.delete(`${apiBaseUrl}/api/upload/${orcamentoId}/${publicId}`);
-      onUploaded(imagemAtual.filter(img => img.public_id !== publicId));
+      const res = await fetch(
+        `${API_BASE_URL}/api/upload/${orcamentoId}/${img.public_id}`,
+        { method: "DELETE" }
+      );
+      if (res.ok) {
+        onUploaded(imagemAtual.filter((i) => i.public_id !== img.public_id));
+      }
     } catch (error) {
       console.error("Erro ao deletar imagem:", error);
     }
   };
 
   return (
-    <div className="upload-container">
-      <h2>Imagens do Orçamento</h2>
-
+    <div className="upload-imagem-orcamento">
+      {/* Dropzone */}
       <div
-        className="drop-zone"
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
         ref={dropRef}
+        className="dropzone"
+        onClick={() => {
+          const fileInput = dropRef.current?.querySelector("input");
+          if (fileInput) fileInput.click();
+        }}
       >
-        <AiOutlinePlus size={24} />
-        <p>Arraste e solte ou clique para adicionar imagens</p>
+        <AiOutlinePlus size={32} />
+        <span>Arraste e solte imagens ou clique aqui</span>
         <input
           type="file"
           multiple
@@ -136,20 +166,27 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded, apiB
       {/* Pré-visualização */}
       {selectedFiles.length > 0 && (
         <div className="image-list">
-          {selectedFiles.map(f => (
+          {selectedFiles.map((f) => (
             <div key={f.key} className="image-item">
               <img src={f.preview} alt={f.file.name || "Pré-visualização"} />
               <div className="progress-bar">
                 <div style={{ width: `${f.progress}%` }} />
               </div>
               {!f.uploaded && !f.error && (
-                <button className="btn-delete" onClick={() => handleDeleteSelected(f.key)}>Cancelar</button>
+                <button
+                  className="btn-delete"
+                  onClick={() => handleDeleteSelected(f.key)}
+                >
+                  Cancelar
+                </button>
               )}
             </div>
           ))}
           <button
             onClick={handleUploadAll}
-            disabled={uploading || selectedFiles.every(f => f.uploaded || f.error)}
+            disabled={
+              uploading || selectedFiles.every((f) => f.uploaded || f.error)
+            }
           >
             {uploading ? "Enviando..." : "Enviar todas"}
           </button>
@@ -159,11 +196,14 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded, apiB
       {/* Imagens já enviadas */}
       {imagemAtual.length > 0 && (
         <div className="existing-images">
-          {imagemAtual.map(img => (
+          {imagemAtual.map((img) => (
             <div key={img.public_id} className="image-item">
-              <img src={img.url} alt={`Imagem enviada`} />
-              <button className="btn-delete" onClick={() => handleDeleteUploaded(img.public_id)}>
-                &times;
+              <img src={img.url} alt="Imagem enviada" />
+              <button
+                className="btn-delete"
+                onClick={() => handleDeleteUploaded(img)}
+              >
+                Excluir
               </button>
             </div>
           ))}
