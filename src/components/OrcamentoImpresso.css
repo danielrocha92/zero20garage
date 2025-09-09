@@ -104,7 +104,7 @@
     color: #222;
     line-height: 1.4;
     padding: 4px 0;
-    white-space: nowrap; /* Impede a quebra de texto */
+    white-space: nowrap; /* Impede a quebra de texto (corrigido no mobile) */
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -300,7 +300,6 @@
     .items-columns li {
         font-size: 13px;
         color: #222;
-        /* Adicionado para impedir a quebra de linha */
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -371,13 +370,12 @@
   max-width: none !important;
   padding: 20px;
   box-sizing: border-box !important;
-  font-size: 12px; /* ou ajuste conforme o tamanho desejado */
-  line-height: 1.4; /* mantém o espaçamento natural */
+  font-size: 12px;
+  line-height: 1.4;
 }
 
 /* --- Estilos de impressão --- */
 @media print {
-    /* Remove sombras e background */
     body, html {
         margin: 0;
         padding: 0;
@@ -386,7 +384,7 @@
 
     @page {
         size: A4;
-        margin: 20mm; /* Margem da página */
+        margin: 20mm;
     }
 
     .orcamento-impresso-container {
@@ -399,19 +397,17 @@
 
     .orcamento-impresso-content {
         box-shadow: none !important;
-        margin: 0 auto;       /* Centraliza o conteúdo */
-        padding: 20px;        /* Margem interna */
+        margin: 0 auto;
+        padding: 20px;
         width: 100%;
-        max-width: 754px;     /* 794px - 2*20mm da página */
+        max-width: 754px;
         box-sizing: border-box;
     }
 
-    /* Oculta botões e elementos desnecessários */
     .orcamento-impresso-actions {
         display: none !important;
     }
 
-    /* Header, info e itens */
     .header-impresso {
         flex-direction: row;
         justify-content: space-between;
@@ -461,5 +457,26 @@
         font-size: inherit;
         margin: 0;
         padding: 0;
+    }
+}
+
+/* --- Correções específicas para Mobile --- */
+@media (max-width: 767px) {
+    .items-columns li {
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: unset !important;
+        line-height: 1.5;
+    }
+
+    .info-table {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 13px;
+    }
+
+    .info-table td {
+        display: block;
+        width: 100%;
     }
 }
