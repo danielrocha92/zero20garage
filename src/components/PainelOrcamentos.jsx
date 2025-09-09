@@ -14,8 +14,9 @@ import OrcamentoImpresso from './OrcamentoImpresso';
 import './PainelOrcamentos.css';
 
 const UploadImagemOrcamento = React.lazy(() => import('./UploadImagemOrcamento'));
-// Altere esta linha para usar a variável de ambiente
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "https://api-orcamento-n49u.onrender.com";
+
+// URL base da API
+const API_BASE_URL = "https://api-orcamento-n49u.onrender.com";
 
 const PainelOrcamentos = () => {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ const PainelOrcamentos = () => {
     setMessage('');
   };
 
+  // --- BUSCAR HISTÓRICO ---
   const fetchHistorico = useCallback(async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/orcamentos`);
@@ -55,6 +57,7 @@ const PainelOrcamentos = () => {
     fetchHistorico();
   }, [fetchHistorico]);
 
+  // --- SALVAR / ATUALIZAR ORÇAMENTO ---
   const handleSalvar = async (dados) => {
     const envio = { ...dados, tipo, data: new Date().toLocaleString('pt-BR') };
     let url = `${API_BASE_URL}/api/orcamentos`;
@@ -63,15 +66,20 @@ const PainelOrcamentos = () => {
     if (editingData?.id) {
       url = `${API_BASE_URL}/api/orcamentos/${editingData.id}`;
       method = 'PUT';
-      envio.id = editingData.id;
     }
 
     try {
+      // Remove campos undefined e imagens antes de enviar
+      const cleanEnvio = Object.fromEntries(
+        Object.entries(envio).filter(([key, value]) => value !== undefined && key !== 'imagens')
+      );
+
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(envio),
+        body: JSON.stringify(cleanEnvio),
       });
+
       const result = await res.json();
       if (res.ok) {
         showMessageBox(`Orçamento ${method === 'POST' ? 'criado' : 'atualizado'} com sucesso.`);
@@ -88,6 +96,7 @@ const PainelOrcamentos = () => {
     }
   };
 
+  // --- EXPORTAR EXCEL ---
   const exportarExcel = () => {
     if (!historico.length) return showMessageBox('Nenhum dado para exportar.');
     const excelData = historico.map(h => ({
@@ -110,6 +119,7 @@ const PainelOrcamentos = () => {
     saveAs(new Blob([buf], { type: 'application/octet-stream' }), 'painel-orcamentos.xlsx');
   };
 
+  // --- EXPORTAR PDF ---
   const exportarPDFCompleto = async () => {
     if (!historico.length) return showMessageBox('Nenhum dado para exportar.');
     const pdf = new jsPDF('p', 'mm', 'a4');
@@ -236,8 +246,8 @@ const PainelOrcamentos = () => {
                 authToken={authToken}
                 imagemAtual={imagensExistentes}
                 onUploaded={async (imgs) => {
-                  // Corrigido: Atualiza o estado 'historico' e 'editingData'
-                  setHistorico(prev => prev.map(o => o._id === editingData._id ? { ...o, imagens: imgs } : o));
+                  // Atualiza apenas o frontend, sem enviar para PUT
+                  setHistorico(prev => prev.map(o => o.id === editingData.id ? { ...o, imagens: imgs } : o));
                   if (editingData) setEditingData(prev => prev ? { ...prev, imagens: imgs } : prev);
                 }}
                 apiBaseUrl={API_BASE_URL}

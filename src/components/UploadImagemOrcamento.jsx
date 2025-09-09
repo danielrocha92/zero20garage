@@ -14,10 +14,9 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
   const [uploading, setUploading] = useState(false);
   const dropRef = useRef(null);
 
-  // --- Revoke object URLs quando desmonta ---
+  // --- Revoke object URLs ao desmontar ---
   useEffect(() => {
-    return () =>
-      selectedFiles.forEach((f) => URL.revokeObjectURL(f.preview));
+    return () => selectedFiles.forEach((f) => URL.revokeObjectURL(f.preview));
   }, [selectedFiles]);
 
   // --- Drag & Drop ---
@@ -47,6 +46,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
     };
   }, []);
 
+  // --- Normaliza arquivos selecionados ---
   const handleFiles = (files) => {
     if (!files.length) return;
     const filesWithPreview = files.map((f) => ({
@@ -60,62 +60,63 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
     setSelectedFiles((prev) => [...prev, ...filesWithPreview]);
   };
 
-  const handleFileChange = (event) =>
-    handleFiles(Array.from(event.target.files || []));
+  const handleFileChange = (e) => handleFiles(Array.from(e.target.files || []));
 
-  // --- Upload ---
+  // --- Upload de todos os arquivos ---
   const handleUploadAll = useCallback(async () => {
-    const filesToUpload = selectedFiles.filter(
-      (f) => !f.uploaded && !f.error
-    );
+    const filesToUpload = selectedFiles.filter((f) => !f.uploaded && !f.error);
     if (!filesToUpload.length || !orcamentoId) return;
+
     setUploading(true);
 
-    const formData = new FormData();
-    filesToUpload.forEach((f) => {
-      formData.append("files", f.file);
-    });
-
     try {
+      const formData = new FormData();
+      filesToUpload.forEach((f) => formData.append("files", f.file));
+
       const response = await axios.post(
         `${API_BASE_URL}/api/upload/${orcamentoId}`,
         formData,
         {
+          headers: { "Content-Type": "multipart/form-data" },
           onUploadProgress: (progressEvent) => {
             const percent = Math.round(
               (progressEvent.loaded * 100) / progressEvent.total
             );
             setSelectedFiles((prev) =>
-              prev.map((f) => {
-                if (filesToUpload.some((fu) => fu.key === f.key)) {
-                  return { ...f, progress: percent };
-                }
-                return f;
-              })
+              prev.map((f) =>
+                filesToUpload.some((fu) => fu.key === f.key)
+                  ? { ...f, progress: percent }
+                  : f
+              )
             );
           },
         }
       );
 
       if (response.status === 200) {
-        onUploaded(response.data.files);
+        // Mescla imagens existentes com as novas
+        const normalized = response.data.files.map((f) => ({
+          url: f.url || f.secure_url,
+          public_id: f.public_id,
+        }));
+        onUploaded([...imagemAtual, ...normalized]);
         setSelectedFiles([]);
       }
     } catch (error) {
       console.error("Erro no upload:", error);
       setSelectedFiles((prev) =>
-        prev.map((f) => {
-          if (filesToUpload.some((fu) => fu.key === f.key)) {
-            return { ...f, uploaded: false, error: "Falha" };
-          }
-          return f;
-        })
+        prev.map((f) =>
+          filesToUpload.some((fu) => fu.key === f.key)
+            ? { ...f, uploaded: false, error: "Falha" }
+            : f
+        )
       );
     } finally {
       setUploading(false);
     }
-  }, [selectedFiles, orcamentoId, onUploaded]);
+  }, [selectedFiles, orcamentoId, imagemAtual, onUploaded]);
 
+  // --- Deletar arquivo selecionado ---
   const handleDeleteSelected = (key) => {
     setSelectedFiles((prev) =>
       prev.filter((f) => {
@@ -125,6 +126,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
     );
   };
 
+  // --- Deletar imagem enviada ---
   const handleDeleteUploaded = async (img) => {
     if (!orcamentoId || !img.public_id) return;
     try {
@@ -184,9 +186,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
           ))}
           <button
             onClick={handleUploadAll}
-            disabled={
-              uploading || selectedFiles.every((f) => f.uploaded || f.error)
-            }
+            disabled={uploading || selectedFiles.every((f) => f.uploaded || f.error)}
           >
             {uploading ? "Enviando..." : "Enviar todas"}
           </button>
