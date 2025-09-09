@@ -1,7 +1,4 @@
 // src/components/HistoricoOrcamentos.jsx
-import React from 'react';
-import React, { useState, useEffect } from 'react';
-// src/components/HistoricoOrcamentos.jsx
 import React, { useState, useEffect } from 'react';
 // import axios from 'axios'; // Remova esta linha
 import './HistoricoOrcamentos.css';
@@ -14,7 +11,7 @@ import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
 
 /** =======================
- *  Modal Customizado
+ * Modal Customizado
  * ======================= */
 const CustomModal = ({
   isOpen,
@@ -67,7 +64,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
   const fecharModal = () => setModalConfig({ ...modalConfig, isOpen: false });
 
   /** =======================
-   *  Busca histórico de orçamentos
+   * Busca histórico de orçamentos
    * ======================= */
   const buscarHistorico = async () => {
   setLoading(true);
@@ -101,7 +98,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
   }, []);
 
   /** =======================
-   *  Excluir orçamento
+   * Excluir orçamento
    * ======================= */
   const handleExcluirOrcamento = (orcamento) => {
     abrirModal({
