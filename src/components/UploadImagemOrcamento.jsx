@@ -71,7 +71,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
 
     try {
       const formData = new FormData();
-      filesToUpload.forEach((f) => formData.append("files", f.file));
+      filesToUpload.forEach((f) => formData.append("files", f.file)); // 'files' deve bater com backend
 
       const response = await axios.post(
         `${API_BASE_URL}/api/upload/${orcamentoId}`,
@@ -94,7 +94,6 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
       );
 
       if (response.status === 200) {
-        // Mescla imagens existentes com as novas
         const normalized = response.data.files.map((f) => ({
           url: f.url || f.secure_url,
           public_id: f.public_id,

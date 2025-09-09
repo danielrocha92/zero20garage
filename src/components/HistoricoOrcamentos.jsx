@@ -56,21 +56,14 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     showCancel: false,
   });
 
-  const abrirModal = (config) => {
-    setModalConfig({ ...modalConfig, isOpen: true, ...config });
-  };
-
-  const fecharModal = () => {
-    setModalConfig({ ...modalConfig, isOpen: false });
-  };
+  const abrirModal = (config) => setModalConfig({ ...modalConfig, isOpen: true, ...config });
+  const fecharModal = () => setModalConfig({ ...modalConfig, isOpen: false });
 
   /** =======================
    *  Busca histórico de orçamentos
    * ======================= */
   const buscarHistorico = async () => {
-    // Se já houve erro, não tenta novamente automaticamente
-    if (error) return;
-
+    if (error) return; // evita re-tentativa automática se já houve erro
     setLoading(true);
     setError(null);
     try {
@@ -78,14 +71,12 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
       setHistorico(response.data);
     } catch (err) {
       console.error('Erro ao buscar histórico:', err);
-
       let mensagemErro = 'Erro ao carregar histórico de orçamentos.';
-      if (err.response?.data?.erro) {
-        mensagemErro += ` Detalhes: ${err.response.data.erro}`;
+      if (err.response?.data?.erro || err.response?.data?.error) {
+        mensagemErro += ` Detalhes: ${err.response.data.erro || err.response.data.error}`;
       } else if (err.message) {
         mensagemErro += ` (${err.message})`;
       }
-
       setError(mensagemErro);
     } finally {
       setLoading(false);
@@ -95,7 +86,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
   useEffect(() => {
     buscarHistorico();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Mantemos lógica original
+  }, []);
 
   /** =======================
    *  Excluir orçamento
@@ -121,14 +112,12 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
           buscarHistorico();
         } catch (err) {
           console.error('Erro ao excluir orçamento:', err);
-
           let mensagemErro = 'Erro ao excluir orçamento.';
-          if (err.response?.data?.erro) {
-            mensagemErro += ` Detalhes: ${err.response.data.erro}`;
+          if (err.response?.data?.erro || err.response?.data?.error) {
+            mensagemErro += ` Detalhes: ${err.response.data.erro || err.response.data.error}`;
           } else if (err.message) {
             mensagemErro += ` (${err.message})`;
           }
-
           abrirModal({
             title: 'Erro',
             message: mensagemErro,
@@ -144,44 +133,39 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
 
   const getStatusTagClass = (status) => {
     switch (status) {
-      case 'Aberto':
-        return 'amarelo';
-      case 'Concluído':
-        return 'verde';
-      case 'Cancelado':
-        return 'vermelho';
-      default:
-        return '';
+      case 'Aberto': return 'amarelo';
+      case 'Concluído': return 'verde';
+      case 'Cancelado': return 'vermelho';
+      default: return '';
     }
   };
 
   const formatarData = (data) => {
-    if (!data) return 'Data não disponível';
+    if (!data) return '-';
     let d = null;
     if (typeof data === 'string') d = new Date(data);
-    else if (data && typeof data.toDate === 'function') d = data.toDate();
+    else if (data?.toDate instanceof Function) d = data.toDate();
     else if (data instanceof Date) d = data;
-    else if (data && typeof data._seconds === 'number') {
-      d = new Date(data._seconds * 1000 + data._nanoseconds / 1000000);
-    }
-    return d && !isNaN(d.getTime()) ? d.toLocaleString('pt-BR') : 'Data inválida';
+    else if (data?._seconds) d = new Date(data._seconds * 1000 + (data._nanoseconds || 0)/1000000);
+    return d && !isNaN(d.getTime()) ? d.toLocaleString('pt-BR') : '-';
   };
 
-  // Função auxiliar para obter a URL da imagem
   const getImagemUrl = (orcamento) => {
-    // Se o orçamento tiver um array de imagens, use a URL da primeira imagem
-    if (orcamento.imagens && orcamento.imagens.length > 0) {
-      return orcamento.imagens[0].url;
+    if (!orcamento) return null;
+    if (Array.isArray(orcamento.imagens) && orcamento.imagens.length > 0) {
+      return orcamento.imagens[0].url || orcamento.imagens[0].secure_url || null;
     }
-    // Fallback para as propriedades antigas, caso existam
     return orcamento.imagem?.url || orcamento.imageUrl || orcamento.imagemUrl || null;
   };
 
-  const historicoOrdenado = [...historico].sort((a, b) => new Date(b.data) - new Date(a.data));
+  const historicoOrdenado = [...historico].sort((a, b) => {
+    const dataA = a.data?.toDate ? a.data.toDate() : new Date(a.data);
+    const dataB = b.data?.toDate ? b.data.toDate() : new Date(b.data);
+    return dataB - dataA;
+  });
 
   if (loading) return <div className="loading-message">Carregando histórico...</div>;
 
-  // Adiciona botão "Tentar novamente" caso ocorra erro
   if (error)
     return (
       <div className="error-message">
@@ -199,14 +183,10 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     <div id="ancora-historico-orcamentos" className="tabela-historico">
       <div className="header-bar">
         <h2>Histórico de Orçamentos</h2>
-        {onClose && (
-          <button className="close-button" onClick={onClose}>
-            Fechar
-          </button>
-        )}
+        {onClose && <button className="close-button" onClick={onClose}>Fechar</button>}
       </div>
 
-      {/* Estrutura Desktop */}
+      {/* Desktop */}
       <div className="historico-desktop">
         <table className="tabela-light">
           <thead>
@@ -229,7 +209,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                 <td>{orcamento.cliente}</td>
                 <td>{orcamento.veiculo || '-'}</td>
                 <td>{orcamento.tipo}</td>
-                <td>R$ {Number(orcamento.valorTotal).toFixed(2)}</td>
+                <td>R$ {Number(orcamento.valorTotal || 0).toFixed(2)}</td>
                 <td>{formatarData(orcamento.data)}</td>
                 <td>
                   <span className={`status-tag ${getStatusTagClass(orcamento.status)}`}>
@@ -239,11 +219,9 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                 <td>
                   {getImagemUrl(orcamento) ? (
                     <a href={getImagemUrl(orcamento)} target="_blank" rel="noopener noreferrer" title="Clique para ampliar">
-                      <img src={getImagemUrl(orcamento)} alt="Imagem do orçamento" style={{ width: '80px', borderRadius: '6px' }} crossOrigin="anonymous" />
+                      <img src={getImagemUrl(orcamento)} alt="Imagem do orçamento" style={{ width: '80px', borderRadius: '6px' }} />
                     </a>
-                  ) : (
-                    '-'
-                  )}
+                  ) : '-'}
                 </td>
                 <td className="acoes-icones">
                   <button onClick={() => onViewBudget(orcamento)} title="Visualizar"><FaEye /></button>
@@ -256,7 +234,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
         </table>
       </div>
 
-      {/* Estrutura Mobile */}
+      {/* Mobile */}
       <div className="historico-mobile">
         {historicoOrdenado.map((orcamento) => (
           <details key={orcamento.id} className="orcamento-card">
@@ -268,12 +246,12 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
               <p><strong>Cliente:</strong> {orcamento.cliente}</p>
               <p><strong>Veículo:</strong> {orcamento.veiculo || '-'}</p>
               <p><strong>Tipo:</strong> {orcamento.tipo}</p>
-              <p><strong>Valor Total:</strong> R$ {Number(orcamento.valorTotal).toFixed(2)}</p>
+              <p><strong>Valor Total:</strong> R$ {Number(orcamento.valorTotal || 0).toFixed(2)}</p>
               <p><strong>Data/Hora:</strong> {formatarData(orcamento.data)}</p>
               {getImagemUrl(orcamento) && (
                 <div>
                   <a href={getImagemUrl(orcamento)} target="_blank" rel="noopener noreferrer">
-                    <img src={getImagemUrl(orcamento)} alt="Imagem do orçamento" crossOrigin="anonymous" />
+                    <img src={getImagemUrl(orcamento)} alt="Imagem do orçamento" />
                   </a>
                 </div>
               )}
@@ -287,7 +265,6 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
         ))}
       </div>
 
-      {/* Modal Customizado */}
       <CustomModal {...modalConfig} />
     </div>
   );
