@@ -1,10 +1,11 @@
 // src/components/UploadImagemOrcamento.jsx
+
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
 import "./UploadImagemOrcamento.css";
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8080";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "https://api-orcamento-n49u.onrender.com";
 
 const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -25,22 +26,22 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
     }));
   };
 
-  // --- Carregar imagens existentes ao editar ---
-  useEffect(() => {
-    if (!orcamentoId) return;
-    const fetchImagens = async () => {
-      try {
-        const res = await fetch(`${API_BASE_URL}/api/upload/${orcamentoId}`);
-        if (!res.ok) throw new Error("Erro ao buscar imagens");
-        const data = await res.json();
-        const normalized = normalizeFiles(data);
-        onUploaded(normalized); // Atualiza imagemAtual
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchImagens();
-  }, [orcamentoId, onUploaded]);
+  // --- REMOVA ESTE BLOCO! Ele é a causa do erro 404 ---
+  // useEffect(() => {
+  //   if (!orcamentoId) return;
+  //   const fetchImagens = async () => {
+  //     try {
+  //       const res = await fetch(`${API_BASE_URL}/api/upload/${orcamentoId}`);
+  //       if (!res.ok) throw new Error("Erro ao buscar imagens");
+  //       const data = await res.json();
+  //       const normalized = normalizeFiles(data);
+  //       onUploaded(normalized); // Atualiza imagemAtual
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   };
+  //   fetchImagens();
+  // }, [orcamentoId, onUploaded]);
 
   // --- Drag & Drop ---
   useEffect(() => {
