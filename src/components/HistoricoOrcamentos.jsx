@@ -5,7 +5,7 @@ import './HistoricoOrcamentos.css';
 import { FaEye, FaEdit, FaTrash } from 'react-icons/fa';
 
 // Importe a instância do banco de dados (db) do seu arquivo de configuração local
-import { db } from '../firebase';
+import { db } from '../firebase/config';
 // Importe as funções do Firestore diretamente do pacote 'firebase/firestore'
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore'; 
 
