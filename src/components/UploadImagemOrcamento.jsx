@@ -1,13 +1,10 @@
 // src/components/UploadImagemOrcamento.jsx
-
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
 import "./UploadImagemOrcamento.css";
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "https://api-orcamento-n49u.onrender.com";
-
-const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) => {
+const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded, apiBaseUrl }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
   const dropRef = useRef(null);
@@ -17,132 +14,115 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
     return () => selectedFiles.forEach(f => URL.revokeObjectURL(f.preview));
   }, [selectedFiles]);
 
-  // --- Normalização de imagens (garante {url, public_id}) ---
-  const normalizeFiles = (files) => {
-    if (!files) return [];
-    return files.map(f => ({
-      url: f.url || f.secure_url,
-      public_id: f.public_id
-    }));
-  };
-
-  // --- REMOVA ESTE BLOCO! Ele é a causa do erro 404 ---
-  // useEffect(() => {
-  //   if (!orcamentoId) return;
-  //   const fetchImagens = async () => {
-  //     try {
-  //       const res = await fetch(`${API_BASE_URL}/api/upload/${orcamentoId}`);
-  //       if (!res.ok) throw new Error("Erro ao buscar imagens");
-  //       const data = await res.json();
-  //       const normalized = normalizeFiles(data);
-  //       onUploaded(normalized); // Atualiza imagemAtual
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   };
-  //   fetchImagens();
-  // }, [orcamentoId, onUploaded]);
-
-  // --- Drag & Drop ---
+  // --- Carregar imagens existentes ao editar ---
   useEffect(() => {
-    const dropArea = dropRef.current;
-    const handleDragOver = e => { e.preventDefault(); dropArea.classList.add("drag-over"); };
-    const handleDragLeave = () => dropArea.classList.remove("drag-over");
-    const handleDrop = e => {
-      e.preventDefault();
-      dropArea.classList.remove("drag-over");
-      handleFiles(Array.from(e.dataTransfer.files || []));
-    };
-
-    dropArea.addEventListener("dragover", handleDragOver);
-    dropArea.addEventListener("dragleave", handleDragLeave);
-    dropArea.addEventListener("drop", handleDrop);
-
-    return () => {
-      dropArea.removeEventListener("dragover", handleDragOver);
-      dropArea.removeEventListener("dragleave", handleDragLeave);
-      dropArea.removeEventListener("drop", handleDrop);
-    };
-  }, []);
-
-  const handleFiles = (files) => {
-    if (!files.length) return;
-    const filesWithPreview = files.map(f => ({
-      file: f,
-      preview: URL.createObjectURL(f),
-      key: f.name + "-" + Date.now() + "-" + Math.random(),
-      uploaded: false,
-      progress: 0,
-      error: null
-    }));
-    setSelectedFiles(prev => [...prev, ...filesWithPreview]);
-  };
-
-  const handleFileChange = (event) => handleFiles(Array.from(event.target.files || []));
-
-  // --- Upload ---
-  const handleUploadAll = useCallback(async () => {
-    if (!selectedFiles.length || !orcamentoId) return;
-    setUploading(true);
-    let uploadedUrls = [...imagemAtual];
-
-    for (const fileItem of selectedFiles) {
-      const formData = new FormData();
-      formData.append("files", fileItem.file);
-
+    if (!orcamentoId) return;
+    const fetchImagens = async () => {
       try {
-        const response = await axios.post(`${API_BASE_URL}/api/upload/${orcamentoId}`, formData, {
-          onUploadProgress: progressEvent => {
-            const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-            setSelectedFiles(prev =>
-              prev.map(f => f.key === fileItem.key ? { ...f, progress: percent } : f)
-            );
-          }
-        });
-
-        const newFiles = normalizeFiles(response.data.files);
-        uploadedUrls = [...uploadedUrls, ...newFiles];
-
-        setSelectedFiles(prev =>
-          prev.map(f => f.key === fileItem.key ? { ...f, uploaded: true, progress: 100, error: null } : f)
-        );
-
-      } catch {
-        setSelectedFiles(prev =>
-          prev.map(f => f.key === fileItem.key ? { ...f, uploaded: false, error: "Falha" } : f)
-        );
+        const res = await fetch(`${apiBaseUrl}/api/upload/${orcamentoId}`);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const data = await res.json();
+        const normalizedData = data.map(img => ({
+          url: img.url,
+          public_id: img.public_id,
+        }));
+        onUploaded(normalizedData);
+      } catch (error) {
+        console.error("Erro ao buscar imagens existentes:", error);
       }
-    }
+    };
+    fetchImagens();
+  }, [orcamentoId, apiBaseUrl, onUploaded]);
 
-    onUploaded(uploadedUrls);
-    setUploading(false);
-  }, [selectedFiles, orcamentoId, imagemAtual, onUploaded]);
-
-  const handleDeleteSelected = key => {
-    setSelectedFiles(prev => prev.filter(f => {
-      if (f.key === key) URL.revokeObjectURL(f.preview);
-      return f.key !== key;
-    }));
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    setSelectedFiles(prevFiles => [
+      ...prevFiles,
+      ...files.map(file => ({
+        key: URL.createObjectURL(file), // Usar URL como key
+        file,
+        preview: URL.createObjectURL(file),
+        progress: 0,
+        uploaded: false,
+        error: false,
+      })),
+    ]);
   };
 
-  const handleDeleteUploaded = async img => {
-    if (!orcamentoId || !img.public_id) return;
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    handleFileChange({ target: { files: e.dataTransfer.files } });
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDeleteSelected = (key) => {
+    setSelectedFiles(prevFiles => prevFiles.filter(f => f.key !== key));
+  };
+
+  const handleUploadAll = async () => {
+    setUploading(true);
+    const formData = new FormData();
+
+    selectedFiles.filter(f => !f.uploaded).forEach(f => {
+      formData.append('files', f.file);
+    });
+
     try {
-      const res = await fetch(`${API_BASE_URL}/api/upload/${orcamentoId}/${img.public_id}`, { method: "DELETE" });
-      if (res.ok) onUploaded(prev => prev.filter(i => i.public_id !== img.public_id));
-    } catch {}
+      const response = await axios.post(`${apiBaseUrl}/api/upload/${orcamentoId}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        onUploadProgress: (progressEvent) => {
+          const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          setSelectedFiles(prevFiles =>
+            prevFiles.map(f => (f.uploaded || f.error ? f : { ...f, progress }))
+          );
+        },
+      });
+
+      if (response.status === 200) {
+        const uploadedImages = response.data.files;
+        onUploaded(uploadedImages);
+        setSelectedFiles([]);
+      }
+    } catch (error) {
+      console.error("Erro no upload:", error);
+      setSelectedFiles(prevFiles =>
+        prevFiles.map(f => (f.uploaded ? f : { ...f, error: true }))
+      );
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleDeleteUploaded = async (publicId) => {
+    try {
+      await axios.delete(`${apiBaseUrl}/api/upload/${orcamentoId}/${publicId}`);
+      onUploaded(imagemAtual.filter(img => img.public_id !== publicId));
+    } catch (error) {
+      console.error("Erro ao deletar imagem:", error);
+    }
   };
 
   return (
-    <div className="upload-imagem-orcamento">
-      {/* Dropzone */}
+    <div className="upload-container">
+      <h2>Imagens do Orçamento</h2>
+
       <div
+        className="drop-zone"
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
         ref={dropRef}
-        className="dropzone"
-        onClick={() => dropRef.current.querySelector('input').click()}
       >
-        <AiOutlinePlus size={32} />
-        <span>Arraste e solte imagens ou clique aqui</span>
+        <AiOutlinePlus size={24} />
+        <p>Arraste e solte ou clique para adicionar imagens</p>
         <input
           type="file"
           multiple
@@ -182,7 +162,9 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
           {imagemAtual.map(img => (
             <div key={img.public_id} className="image-item">
               <img src={img.url} alt={`Imagem enviada`} />
-              <button className="btn-delete" onClick={() => handleDeleteUploaded(img)}>Excluir</button>
+              <button className="btn-delete" onClick={() => handleDeleteUploaded(img.public_id)}>
+                &times;
+              </button>
             </div>
           ))}
         </div>
