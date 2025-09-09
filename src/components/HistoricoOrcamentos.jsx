@@ -69,25 +69,30 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
    *  Busca histórico de orçamentos
    * ======================= */
   const buscarHistorico = async () => {
-    if (error) return; // evita re-tentativa automática se já houve erro
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await axios.get(`${API_BASE_URL}/api/orcamentos`);
-      setHistorico(response.data);
-    } catch (err) {
-      console.error('Erro ao buscar histórico:', err);
-      let mensagemErro = 'Erro ao carregar histórico de orçamentos.';
-      if (err.response?.data?.erro || err.response?.data?.error) {
-        mensagemErro += ` Detalhes: ${err.response.data.erro || err.response.data.error}`;
-      } else if (err.message) {
-        mensagemErro += ` (${err.message})`;
-      }
-      setError(mensagemErro);
-    } finally {
-      setLoading(false);
-    }
-  };
+  setLoading(true);
+  setError(null);
+  try {
+    // 1. Crie uma referência para a coleção 'orcamentos'
+    const orcamentosCollection = collection(db, 'orcamentos');
+
+    // 2. Obtenha um "snapshot" (um instantâneo) da coleção
+    const orcamentoSnapshot = await getDocs(orcamentosCollection);
+    
+    // 3. Mapeie os documentos para um array de objetos
+    const historicoList = orcamentoSnapshot.docs.map(doc => ({
+      id: doc.id, // O ID do documento é necessário para exclusão e edição
+      ...doc.data(), // Espalha o restante dos dados do documento
+    }));
+
+    setHistorico(historicoList);
+  } catch (err) {
+    console.error('Erro ao buscar histórico:', err);
+    setError('Erro ao carregar histórico de orçamentos.');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   useEffect(() => {
     buscarHistorico();
