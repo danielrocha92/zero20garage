@@ -453,23 +453,44 @@
 @media (max-width: 767px) {
     .items-columns li {
         flex-wrap: wrap;
-        font-size: 13px;
-        line-height: 1.5;
     }
 
-    .item-value {
-        text-align: right;
-        width: 100%;
+    .items-columns li span {
+        display: block;
+        margin-bottom: 6px;
     }
 
     .info-table {
-        flex-direction: column;
-        align-items: flex-start;
-        font-size: 13px;
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
     }
 
     .info-table td {
         display: block;
         width: 100%;
-    
+        padding: 8px 0;
+        border-bottom: 1px solid #ddd;
     }
+
+    .info-table td strong {
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    .orcamento-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .orcamento-header img {
+        max-width: 160px;
+        height: auto;
+    }
+
+    .orcamento-titulo {
+        font-size: 1.4rem;
+        line-height: 1.4;
+    }
+} /* ✅ fecha o @media corretamente */
