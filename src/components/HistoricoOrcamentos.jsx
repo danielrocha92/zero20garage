@@ -112,7 +112,12 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
       onConfirm: async () => {
         fecharModal();
         try {
-          await axios.delete(`${API_BASE_URL}/api/orcamentos/${orcamento.id}`);
+          // 1. Crie uma referência para o documento específico a ser deletado
+          const docRef = doc(db, 'orcamentos', orcamento.id);
+
+          // 2. Use a função deleteDoc para remover o documento
+          await deleteDoc(docRef);
+
           abrirModal({
             title: 'Sucesso',
             message: 'Orçamento excluído com sucesso!',
@@ -120,18 +125,12 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
             showCancel: false,
             onConfirm: () => fecharModal(),
           });
-          buscarHistorico();
+          buscarHistorico(); // Atualize a lista após a exclusão
         } catch (err) {
           console.error('Erro ao excluir orçamento:', err);
-          let mensagemErro = 'Erro ao excluir orçamento.';
-          if (err.response?.data?.erro || err.response?.data?.error) {
-            mensagemErro += ` Detalhes: ${err.response.data.erro || err.response.data.error}`;
-          } else if (err.message) {
-            mensagemErro += ` (${err.message})`;
-          }
           abrirModal({
             title: 'Erro',
-            message: mensagemErro,
+            message: 'Erro ao excluir orçamento.',
             confirmText: 'Fechar',
             showCancel: false,
             onConfirm: () => fecharModal(),
