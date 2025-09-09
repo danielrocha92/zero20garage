@@ -53,7 +53,7 @@
 
 .info-table {
     display: flex;
-    justify-content: center; /* Alterado para centralizar o conteúdo em mobile */
+    justify-content: center;
     width: 100%;
     flex-wrap: wrap;
     gap: 8px 16px;
@@ -71,7 +71,7 @@
     color: #222;
 }
 
-/* --- Itens (Peças e Serviços): Estrutura com proporção fixa 50/50 --- */
+/* --- Itens (Peças e Serviços): Estrutura --- */
 .items-section {
     margin-bottom: 16px;
 }
@@ -88,7 +88,6 @@
 
 .items-columns {
     display: grid;
-    /* A chave: Força uma única coluna em telas menores para empilhamento */
     grid-template-columns: 1fr;
     gap: 8px;
     list-style: none;
@@ -96,27 +95,42 @@
     padding: 0;
 }
 
-/* Cada item da lista é um flexbox */
+/* Cada item da lista agora com texto e valor alinhados */
 .items-columns li {
-    display: flex; /* Adicionado para alinhar o checkbox e o texto na mesma linha */
-    align-items: center; /* Adicionado para alinhar verticalmente */
+    display: flex;
+    justify-content: space-between; /* texto à esquerda, valor à direita */
+    align-items: center;
     font-size: 12px;
     color: #222;
     line-height: 1.4;
     padding: 4px 0;
-    white-space: nowrap; /* Impede a quebra de texto (corrigido no mobile) */
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    gap: 8px;
 }
 
+/* Checkbox alinhado */
 .checkbox-box {
-    margin-right: 8px;
     flex-shrink: 0;
-    transform: scale(1.2); /* Reduzido para um tamanho menor */
+    transform: scale(1.1);
+    margin-right: 6px;
     position: relative;
-    top: 2px;
+    top: 0;
     max-width: 16px;
-    color: brown;
+}
+
+/* Texto e valores */
+.item-label {
+    flex: 1;
+    text-align: left;
+}
+
+.item-value {
+    min-width: 60px;
+    text-align: right;
+    font-weight: 600;
+    color: #111;
 }
 
 /* --- Totais --- */
@@ -247,7 +261,7 @@
     cursor: not-allowed;
 }
 
-/* --- Layout Desktop: Chave para o alinhamento 50/50 --- */
+/* --- Layout Desktop --- */
 @media (min-width: 768px) {
     .orcamento-impresso-content {
         max-width: 794px;
@@ -281,17 +295,12 @@
         color: #333;
     }
 
-    .info-table td span {
-        color: #222;
-    }
-
     .items-section h2 {
         font-size: 18px;
         color: #222;
     }
 
     .items-columns {
-        /* AQUI ESTÁ A CHAVE: Força um grid de 2 colunas */
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 10px 40px;
@@ -300,9 +309,6 @@
     .items-columns li {
         font-size: 13px;
         color: #222;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
 
     .total-section {
@@ -332,10 +338,6 @@
     .policy-footer p {
         font-size: 13px;
         color: #333;
-    }
-
-    .policy-acceptance {
-        color: #222 !important;
     }
 
     .imagens-section h2 {
@@ -439,34 +441,25 @@
     .items-columns li {
         display: flex;
         align-items: center;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
         font-size: 13px;
     }
 
     .checkbox-box {
         transform: scale(0.6);
     }
-
-    .total-section,
-    .final-total,
-    .extra-info-section-impresso p,
-    .policy-footer p,
-    .policy-footer h4 {
-        font-size: inherit;
-        margin: 0;
-        padding: 0;
-    }
 }
 
 /* --- Correções específicas para Mobile --- */
 @media (max-width: 767px) {
     .items-columns li {
-        white-space: normal !important;
-        overflow: visible !important;
-        text-overflow: unset !important;
+        flex-wrap: wrap;
+        font-size: 13px;
         line-height: 1.5;
+    }
+
+    .item-value {
+        text-align: right;
+        width: 100%;
     }
 
     .info-table {
@@ -478,5 +471,4 @@
     .info-table td {
         display: block;
         width: 100%;
-    }
-}
+    
