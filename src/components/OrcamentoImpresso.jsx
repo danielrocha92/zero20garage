@@ -19,14 +19,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
 
   // --- Helpers Cloudinary ---
   const isCloudinaryUrl = (url) => typeof url === 'string' && url.includes('/upload/');
-  const getCloudinaryThumb = (url) => {
-    if (!isCloudinaryUrl(url)) return url;
-    const base = url.split('/upload/')[0] + '/upload/';
-    const after = url.split('/upload/')[1] || '';
-    const [firstSeg, ...rest] = after.split('/');
-    if (/^v\d+$/i.test(firstSeg)) return base + 'w_240,c_limit,q_auto,f_auto/' + after;
-    return base + 'w_240,c_limit,q_auto,f_auto,' + firstSeg + '/' + rest.join('/');
-  };
+
   const getCloudinaryOriginal = useCallback((url) => {
     if (!isCloudinaryUrl(url)) return url;
     const base = url.split('/upload/')[0] + '/upload/';
@@ -77,7 +70,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     if (!imagens || imagens.length === 0) return;
     const dataUrls = [];
     for (const it of imagens) {
-      const dataUrl = await getOriginalImageAsDataUrl(it);
+      const dataUrl = await getOriginalImageAsDataUrl(it.url); // Ajuste: passa a URL
       if (dataUrl) dataUrls.push(dataUrl);
     }
     if (!dataUrls.length) return;
@@ -88,6 +81,9 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     pdf.addPage();
     pdf.setFontSize(14);
     pdf.text('Imagens originais (alta resolução)', margin, margin + 2);
+
+    let currentY = margin + 10;
+    const pageH = pdf.internal.pageSize.getHeight();
 
     for (let idx = 0; idx < dataUrls.length; idx++) {
       const dataUrl = dataUrls[idx];
@@ -103,10 +99,14 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       const drawW = img.width * ratio;
       const drawH = img.height * ratio;
       const imgX = (pageW - drawW) / 2;
-      const imgY = pdf.lastAutoTable ? pdf.lastAutoTable.finalY + margin : margin + 10;
 
-      pdf.addImage(dataUrl, 'PNG', imgX, imgY, drawW, drawH);
-      if (idx < dataUrls.length - 1) pdf.addPage();
+      if (currentY + drawH + margin > pageH) {
+        pdf.addPage();
+        currentY = margin;
+      }
+
+      pdf.addImage(dataUrl, 'PNG', imgX, currentY, drawW, drawH);
+      currentY += drawH + margin;
     }
   };
 
@@ -274,13 +274,10 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           <section className="imagens-section">
             <h2>Imagens do Veículo</h2>
             <div className="imagens-container">
-              {orcamento.imagens.map((img, idx) => {
-                let thumbSrc = '';
-                if (typeof img === 'string') thumbSrc = getCloudinaryThumb(img);
-                else if (img instanceof File) thumbSrc = URL.createObjectURL(img);
-                else if (img?.data?.data) thumbSrc = `data:image/jpeg;base64,${img.data.data}`;
-                return <img key={idx} src={thumbSrc} alt={`Foto ${idx + 1}`} className="thumb-img" />;
-              })}
+              {orcamento.imagens.map((img, idx) => (
+                // Lógica ajustada para usar a URL do objeto
+                <img key={idx} src={img.url} alt={`Foto ${idx + 1}`} className="thumb-img" />
+              ))}
             </div>
           </section>
         )}

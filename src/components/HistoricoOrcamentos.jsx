@@ -167,11 +167,14 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     return d && !isNaN(d.getTime()) ? d.toLocaleString('pt-BR') : 'Data inválida';
   };
 
+  // Função auxiliar para obter a URL da imagem
   const getImagemUrl = (orcamento) => {
-    if (Array.isArray(orcamento.imagens) && orcamento.imagens.length > 0 && typeof orcamento.imagens[0]?.secure_url === 'string') {
-      return orcamento.imagens[0].secure_url;
+    // Se o orçamento tiver um array de imagens, use a URL da primeira imagem
+    if (orcamento.imagens && orcamento.imagens.length > 0) {
+      return orcamento.imagens[0].url;
     }
-    return orcamento.imagem?.url || orcamento.imageUrl || null;
+    // Fallback para as propriedades antigas, caso existam
+    return orcamento.imagem?.url || orcamento.imageUrl || orcamento.imagemUrl || null;
   };
 
   const historicoOrdenado = [...historico].sort((a, b) => new Date(b.data) - new Date(a.data));
