@@ -1,8 +1,14 @@
 // src/components/HistoricoOrcamentos.jsx
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// src/components/HistoricoOrcamentos.jsx
+import React, { useState, useEffect } from 'react';
+// import axios from 'axios'; // Remova esta linha
 import './HistoricoOrcamentos.css';
 import { FaEye, FaEdit, FaTrash } from 'react-icons/fa';
+
+// Importe a instância do banco de dados (db) e as funções do Firestore
+import { db } from '../firebase';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore'; 
 
 const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
 
