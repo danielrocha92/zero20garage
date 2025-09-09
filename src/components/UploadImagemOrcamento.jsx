@@ -16,6 +16,15 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
     return () => selectedFiles.forEach(f => URL.revokeObjectURL(f.preview));
   }, [selectedFiles]);
 
+  // --- Normalização de imagens (garante {url, public_id}) ---
+  const normalizeFiles = (files) => {
+    if (!files) return [];
+    return files.map(f => ({
+      url: f.url || f.secure_url,
+      public_id: f.public_id
+    }));
+  };
+
   // --- Carregar imagens existentes ao editar ---
   useEffect(() => {
     if (!orcamentoId) return;
@@ -24,7 +33,8 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
         const res = await fetch(`${API_BASE_URL}/api/upload/${orcamentoId}`);
         if (!res.ok) throw new Error("Erro ao buscar imagens");
         const data = await res.json();
-        onUploaded(data); // Atualiza imagemAtual
+        const normalized = normalizeFiles(data);
+        onUploaded(normalized); // Atualiza imagemAtual
       } catch (err) {
         console.error(err);
       }
@@ -89,7 +99,8 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
           }
         });
 
-        uploadedUrls = [...uploadedUrls, ...response.data.files];
+        const newFiles = normalizeFiles(response.data.files);
+        uploadedUrls = [...uploadedUrls, ...newFiles];
 
         setSelectedFiles(prev =>
           prev.map(f => f.key === fileItem.key ? { ...f, uploaded: true, progress: 100, error: null } : f)
