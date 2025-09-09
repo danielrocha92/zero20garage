@@ -1,4 +1,5 @@
 // src/components/HistoricoOrcamentos.jsx
+import React from 'react';
 import React, { useState, useEffect } from 'react';
 // src/components/HistoricoOrcamentos.jsx
 import React, { useState, useEffect } from 'react';
