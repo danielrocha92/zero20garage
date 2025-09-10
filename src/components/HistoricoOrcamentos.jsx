@@ -1,12 +1,9 @@
 // src/components/HistoricoOrcamentos.jsx
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios'; // Remova esta linha
 import './HistoricoOrcamentos.css';
 import { FaEye, FaEdit, FaTrash } from 'react-icons/fa';
 
-// Importe a instância do banco de dados (db) do seu arquivo de configuração local
 import { db } from '../firebase/config';
-// Importe as funções do Firestore diretamente do pacote 'firebase/firestore'
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore'; 
 
 const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
@@ -68,30 +65,25 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
    * Busca histórico de orçamentos
    * ======================= */
   const buscarHistorico = async () => {
-  setLoading(true);
-  setError(null);
-  try {
-    // 1. Crie uma referência para a coleção 'orcamentos'
-    const orcamentosCollection = collection(db, 'orcamentos');
+    setLoading(true);
+    setError(null);
+    try {
+      const orcamentosCollection = collection(db, 'orcamentos');
+      const orcamentoSnapshot = await getDocs(orcamentosCollection);
+      
+      const historicoList = orcamentoSnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
 
-    // 2. Obtenha um "snapshot" (um instantâneo) da coleção
-    const orcamentoSnapshot = await getDocs(orcamentosCollection);
-    
-    // 3. Mapeie os documentos para um array de objetos
-    const historicoList = orcamentoSnapshot.docs.map(doc => ({
-      id: doc.id, // O ID do documento é necessário para exclusão e edição
-      ...doc.data(), // Espalha o restante dos dados do documento
-    }));
-
-    setHistorico(historicoList);
-  } catch (err) {
-    console.error('Erro ao buscar histórico:', err);
-    setError('Erro ao carregar histórico de orçamentos.');
-  } finally {
-    setLoading(false);
-  }
-};
-
+      setHistorico(historicoList);
+    } catch (err) {
+      console.error('Erro ao buscar histórico:', err);
+      setError('Erro ao carregar histórico de orçamentos.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     buscarHistorico();
@@ -111,10 +103,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
       onConfirm: async () => {
         fecharModal();
         try {
-          // 1. Crie uma referência para o documento específico a ser deletado
           const docRef = doc(db, 'orcamentos', orcamento.id);
-
-          // 2. Use a função deleteDoc para remover o documento
           await deleteDoc(docRef);
 
           abrirModal({
@@ -124,7 +113,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
             showCancel: false,
             onConfirm: () => fecharModal(),
           });
-          buscarHistorico(); // Atualize a lista após a exclusão
+          buscarHistorico();
         } catch (err) {
           console.error('Erro ao excluir orçamento:', err);
           abrirModal({
@@ -140,6 +129,9 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     });
   };
 
+  /** =======================
+   * Helpers
+   * ======================= */
   const getStatusTagClass = (status) => {
     switch (status) {
       case 'Aberto': return 'amarelo';
@@ -173,6 +165,9 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     return dataB - dataA;
   });
 
+  /** =======================
+   * Renderização
+   * ======================= */
   if (loading) return <div className="loading-message">Carregando histórico...</div>;
 
   if (error)
@@ -233,7 +228,19 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                   ) : '-'}
                 </td>
                 <td className="acoes-icones">
-                  <button onClick={() => onViewBudget(orcamento)} title="Visualizar"><FaEye /></button>
+                  <button
+                    onClick={() => {
+                      // Normaliza o objeto antes de enviar
+                      const orcamentoComImagens = {
+                        ...orcamento,
+                        imagens: orcamento.imagens || (getImagemUrl(orcamento) ? [{ url: getImagemUrl(orcamento) }] : []),
+                      };
+                      onViewBudget(orcamentoComImagens);
+                    }}
+                    title="Visualizar"
+                  >
+                    <FaEye />
+                  </button>
                   <button onClick={() => onEditarOrcamento(orcamento)} title="Editar"><FaEdit /></button>
                   <button onClick={() => handleExcluirOrcamento(orcamento)} title="Excluir"><FaTrash /></button>
                 </td>
@@ -265,7 +272,18 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                 </div>
               )}
               <div className="card-acoes">
-                <button onClick={() => onViewBudget(orcamento)} className="action-btn view-btn">Visualizar</button>
+                <button
+                  onClick={() => {
+                    const orcamentoComImagens = {
+                      ...orcamento,
+                      imagens: orcamento.imagens || (getImagemUrl(orcamento) ? [{ url: getImagemUrl(orcamento) }] : []),
+                    };
+                    onViewBudget(orcamentoComImagens);
+                  }}
+                  className="action-btn view-btn"
+                >
+                  Visualizar
+                </button>
                 <button onClick={() => onEditarOrcamento(orcamento)} className="action-btn edit-btn">Editar</button>
                 <button onClick={() => handleExcluirOrcamento(orcamento)} className="action-btn delete-btn">Excluir</button>
               </div>
