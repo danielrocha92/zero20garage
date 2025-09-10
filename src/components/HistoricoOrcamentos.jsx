@@ -1,13 +1,15 @@
 // src/components/HistoricoOrcamentos.jsx
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import './HistoricoOrcamentos.css';
 import { FaEye, FaEdit, FaTrash } from 'react-icons/fa';
+
+import { db } from '../firebase/config';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore'; 
 
 const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
 
 /** =======================
- *  Modal Customizado
+ * Modal Customizado
  * ======================= */
 const CustomModal = ({
   isOpen,
@@ -60,24 +62,24 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
   const fecharModal = () => setModalConfig({ ...modalConfig, isOpen: false });
 
   /** =======================
-   *  Busca histórico de orçamentos
+   * Busca histórico de orçamentos
    * ======================= */
   const buscarHistorico = async () => {
-    if (error) return; // evita re-tentativa automática se já houve erro
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/orcamentos`);
-      setHistorico(response.data);
+      const orcamentosCollection = collection(db, 'orcamentos');
+      const orcamentoSnapshot = await getDocs(orcamentosCollection);
+      
+      const historicoList = orcamentoSnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      setHistorico(historicoList);
     } catch (err) {
       console.error('Erro ao buscar histórico:', err);
-      let mensagemErro = 'Erro ao carregar histórico de orçamentos.';
-      if (err.response?.data?.erro || err.response?.data?.error) {
-        mensagemErro += ` Detalhes: ${err.response.data.erro || err.response.data.error}`;
-      } else if (err.message) {
-        mensagemErro += ` (${err.message})`;
-      }
-      setError(mensagemErro);
+      setError('Erro ao carregar histórico de orçamentos.');
     } finally {
       setLoading(false);
     }
@@ -89,7 +91,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
   }, []);
 
   /** =======================
-   *  Excluir orçamento
+   * Excluir orçamento
    * ======================= */
   const handleExcluirOrcamento = (orcamento) => {
     abrirModal({
@@ -101,7 +103,9 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
       onConfirm: async () => {
         fecharModal();
         try {
-          await axios.delete(`${API_BASE_URL}/api/orcamentos/${orcamento.id}`);
+          const docRef = doc(db, 'orcamentos', orcamento.id);
+          await deleteDoc(docRef);
+
           abrirModal({
             title: 'Sucesso',
             message: 'Orçamento excluído com sucesso!',
@@ -112,15 +116,9 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
           buscarHistorico();
         } catch (err) {
           console.error('Erro ao excluir orçamento:', err);
-          let mensagemErro = 'Erro ao excluir orçamento.';
-          if (err.response?.data?.erro || err.response?.data?.error) {
-            mensagemErro += ` Detalhes: ${err.response.data.erro || err.response.data.error}`;
-          } else if (err.message) {
-            mensagemErro += ` (${err.message})`;
-          }
           abrirModal({
             title: 'Erro',
-            message: mensagemErro,
+            message: 'Erro ao excluir orçamento.',
             confirmText: 'Fechar',
             showCancel: false,
             onConfirm: () => fecharModal(),
@@ -131,6 +129,9 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     });
   };
 
+  /** =======================
+   * Helpers
+   * ======================= */
   const getStatusTagClass = (status) => {
     switch (status) {
       case 'Aberto': return 'amarelo';
@@ -164,6 +165,9 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     return dataB - dataA;
   });
 
+  /** =======================
+   * Renderização
+   * ======================= */
   if (loading) return <div className="loading-message">Carregando histórico...</div>;
 
   if (error)
@@ -224,7 +228,19 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                   ) : '-'}
                 </td>
                 <td className="acoes-icones">
-                  <button onClick={() => onViewBudget(orcamento)} title="Visualizar"><FaEye /></button>
+                  <button
+                    onClick={() => {
+                      // Normaliza o objeto antes de enviar
+                      const orcamentoComImagens = {
+                        ...orcamento,
+                        imagens: orcamento.imagens || (getImagemUrl(orcamento) ? [{ url: getImagemUrl(orcamento) }] : []),
+                      };
+                      onViewBudget(orcamentoComImagens);
+                    }}
+                    title="Visualizar"
+                  >
+                    <FaEye />
+                  </button>
                   <button onClick={() => onEditarOrcamento(orcamento)} title="Editar"><FaEdit /></button>
                   <button onClick={() => handleExcluirOrcamento(orcamento)} title="Excluir"><FaTrash /></button>
                 </td>
@@ -256,7 +272,18 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                 </div>
               )}
               <div className="card-acoes">
-                <button onClick={() => onViewBudget(orcamento)} className="action-btn view-btn">Visualizar</button>
+                <button
+                  onClick={() => {
+                    const orcamentoComImagens = {
+                      ...orcamento,
+                      imagens: orcamento.imagens || (getImagemUrl(orcamento) ? [{ url: getImagemUrl(orcamento) }] : []),
+                    };
+                    onViewBudget(orcamentoComImagens);
+                  }}
+                  className="action-btn view-btn"
+                >
+                  Visualizar
+                </button>
                 <button onClick={() => onEditarOrcamento(orcamento)} className="action-btn edit-btn">Editar</button>
                 <button onClick={() => handleExcluirOrcamento(orcamento)} className="action-btn delete-btn">Excluir</button>
               </div>
