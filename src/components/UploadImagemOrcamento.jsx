@@ -71,7 +71,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
     try {
       for (const f of filesToUpload) {
         const formData = new FormData();
-        formData.append("image", f.file);
+        formData.append("files", f.file);
 
         const response = await axios.post(
           `${API_BASE_URL}/api/upload/${orcamentoId}`,
