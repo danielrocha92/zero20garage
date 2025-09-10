@@ -4,9 +4,7 @@ import './HistoricoOrcamentos.css';
 import { FaEye, FaEdit, FaTrash } from 'react-icons/fa';
 
 import { db } from '../firebase/config';
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore'; 
-
-const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 
 /** =======================
  * Modal Customizado
@@ -46,7 +44,6 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
   const [historico, setHistorico] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const [modalConfig, setModalConfig] = useState({
     isOpen: false,
     title: '',
@@ -70,7 +67,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     try {
       const orcamentosCollection = collection(db, 'orcamentos');
       const orcamentoSnapshot = await getDocs(orcamentosCollection);
-      
+
       const historicoList = orcamentoSnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data(),
@@ -105,7 +102,6 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
         try {
           const docRef = doc(db, 'orcamentos', orcamento.id);
           await deleteDoc(docRef);
-
           abrirModal({
             title: 'Sucesso',
             message: 'Orçamento excluído com sucesso!',
@@ -169,19 +165,15 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
    * Renderização
    * ======================= */
   if (loading) return <div className="loading-message">Carregando histórico...</div>;
-
-  if (error)
-    return (
-      <div className="error-message">
-        {error}
-        <button className="retry-btn" onClick={() => setError(null) || buscarHistorico()}>
-          Tentar novamente
-        </button>
-      </div>
-    );
-
-  if (historicoOrdenado.length === 0)
-    return <div className="no-data-message">Nenhum orçamento encontrado.</div>;
+  if (error) return (
+    <div className="error-message">
+      {error}
+      <button className="retry-btn" onClick={() => setError(null) || buscarHistorico()}>
+        Tentar novamente
+      </button>
+    </div>
+  );
+  if (historicoOrdenado.length === 0) return <div className="no-data-message">Nenhum orçamento encontrado.</div>;
 
   return (
     <div id="ancora-historico-orcamentos" className="tabela-historico">
@@ -230,12 +222,12 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                 <td className="acoes-icones">
                   <button
                     onClick={() => {
-                      // Normaliza o objeto antes de enviar
-                      const orcamentoComImagens = {
+                      // Envia orçamento com todas as imagens para edição ou visualização
+                      const orcamentoCompleto = {
                         ...orcamento,
                         imagens: orcamento.imagens || (getImagemUrl(orcamento) ? [{ url: getImagemUrl(orcamento) }] : []),
                       };
-                      onViewBudget(orcamentoComImagens);
+                      onViewBudget(orcamentoCompleto);
                     }}
                     title="Visualizar"
                   >
@@ -274,11 +266,11 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
               <div className="card-acoes">
                 <button
                   onClick={() => {
-                    const orcamentoComImagens = {
+                    const orcamentoCompleto = {
                       ...orcamento,
                       imagens: orcamento.imagens || (getImagemUrl(orcamento) ? [{ url: getImagemUrl(orcamento) }] : []),
                     };
-                    onViewBudget(orcamentoComImagens);
+                    onViewBudget(orcamentoCompleto);
                   }}
                   className="action-btn view-btn"
                 >

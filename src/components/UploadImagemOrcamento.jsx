@@ -1,5 +1,4 @@
 // src/components/UploadImagemOrcamento.jsx
-
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
@@ -14,12 +13,12 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
   const [uploading, setUploading] = useState(false);
   const dropRef = useRef(null);
 
-  // --- Revoke object URLs ao desmontar ---
+  // Revoke object URLs ao desmontar
   useEffect(() => {
     return () => selectedFiles.forEach((f) => URL.revokeObjectURL(f.preview));
   }, [selectedFiles]);
 
-  // --- Drag & Drop ---
+  // Drag & Drop
   useEffect(() => {
     const dropArea = dropRef.current;
     if (!dropArea) return;
@@ -46,7 +45,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
     };
   }, []);
 
-  // --- Normaliza arquivos selecionados ---
+  // Normaliza arquivos selecionados
   const handleFiles = (files) => {
     if (!files.length) return;
     const filesWithPreview = files.map((f) => ({
@@ -62,7 +61,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
 
   const handleFileChange = (e) => handleFiles(Array.from(e.target.files || []));
 
-  // --- Upload de todos os arquivos ---
+  // Upload de todos os arquivos
   const handleUploadAll = useCallback(async () => {
     const filesToUpload = selectedFiles.filter((f) => !f.uploaded && !f.error);
     if (!filesToUpload.length || !orcamentoId) return;
@@ -70,37 +69,41 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
     setUploading(true);
 
     try {
-      const formData = new FormData();
-      filesToUpload.forEach((f) => formData.append("files", f.file)); // 'files' deve bater com backend
+      for (const f of filesToUpload) {
+        const formData = new FormData();
+        formData.append("image", f.file);
 
-      const response = await axios.post(
-        `${API_BASE_URL}/api/upload/${orcamentoId}`,
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-          onUploadProgress: (progressEvent) => {
-            const percent = Math.round(
-              (progressEvent.loaded * 100) / progressEvent.total
-            );
-            setSelectedFiles((prev) =>
-              prev.map((f) =>
-                filesToUpload.some((fu) => fu.key === f.key)
-                  ? { ...f, progress: percent }
-                  : f
-              )
-            );
-          },
+        const response = await axios.post(
+          `${API_BASE_URL}/api/upload/${orcamentoId}`,
+          formData,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+            onUploadProgress: (progressEvent) => {
+              const percent = Math.round(
+                (progressEvent.loaded * 100) / progressEvent.total
+              );
+              setSelectedFiles((prev) =>
+                prev.map((file) =>
+                  file.key === f.key ? { ...file, progress: percent } : file
+                )
+              );
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          const uploadedImg = { url: response.data.url };
+          onUploaded([...imagemAtual, uploadedImg]);
+          setSelectedFiles((prev) =>
+            prev.map((file) =>
+              file.key === f.key ? { ...file, uploaded: true } : file
+            )
+          );
         }
-      );
-
-      if (response.status === 200) {
-        const normalized = response.data.files.map((f) => ({
-          url: f.url || f.secure_url,
-          public_id: f.public_id,
-        }));
-        onUploaded([...imagemAtual, ...normalized]);
-        setSelectedFiles([]);
       }
+
+      // Limpa arquivos enviados
+      setSelectedFiles((prev) => prev.filter((f) => !f.uploaded));
     } catch (error) {
       console.error("Erro no upload:", error);
       setSelectedFiles((prev) =>
@@ -115,7 +118,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
     }
   }, [selectedFiles, orcamentoId, imagemAtual, onUploaded]);
 
-  // --- Deletar arquivo selecionado ---
+  // Deletar arquivo selecionado
   const handleDeleteSelected = (key) => {
     setSelectedFiles((prev) =>
       prev.filter((f) => {
@@ -125,20 +128,10 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
     );
   };
 
-  // --- Deletar imagem enviada ---
-  const handleDeleteUploaded = async (img) => {
-    if (!orcamentoId || !img.public_id) return;
-    try {
-      const res = await fetch(
-        `${API_BASE_URL}/api/upload/${orcamentoId}/${img.public_id}`,
-        { method: "DELETE" }
-      );
-      if (res.ok) {
-        onUploaded(imagemAtual.filter((i) => i.public_id !== img.public_id));
-      }
-    } catch (error) {
-      console.error("Erro ao deletar imagem:", error);
-    }
+  // Deletar imagem enviada
+  const handleDeleteUploaded = async (imgUrl) => {
+    // Aqui você pode criar rota DELETE no backend se quiser remover do Cloudinary
+    onUploaded(imagemAtual.filter((i) => i.url !== imgUrl));
   };
 
   return (
@@ -185,7 +178,9 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
           ))}
           <button
             onClick={handleUploadAll}
-            disabled={uploading || selectedFiles.every((f) => f.uploaded || f.error)}
+            disabled={
+              uploading || selectedFiles.every((f) => f.uploaded || f.error)
+            }
           >
             {uploading ? "Enviando..." : "Enviar todas"}
           </button>
@@ -196,11 +191,11 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
       {imagemAtual.length > 0 && (
         <div className="existing-images">
           {imagemAtual.map((img) => (
-            <div key={img.public_id} className="image-item">
+            <div key={img.url} className="image-item">
               <img src={img.url} alt="Imagem enviada" />
               <button
                 className="btn-delete"
-                onClick={() => handleDeleteUploaded(img)}
+                onClick={() => handleDeleteUploaded(img.url)}
               >
                 Excluir
               </button>
