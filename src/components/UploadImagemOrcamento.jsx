@@ -91,8 +91,8 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
           }
         );
 
-        if (response.status === 200) {
-          const uploadedImg = { url: response.data.url };
+        if (response.status === 200 && response.data.files?.length) {
+          const uploadedImg = response.data.files[0]; // ✅ pega retorno do backend
           onUploaded([...imagemAtual, uploadedImg]);
           setSelectedFiles((prev) =>
             prev.map((file) =>
@@ -128,9 +128,8 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
     );
   };
 
-  // Deletar imagem enviada
+  // Deletar imagem enviada (local, não no Cloudinary)
   const handleDeleteUploaded = async (imgUrl) => {
-    // Aqui você pode criar rota DELETE no backend se quiser remover do Cloudinary
     onUploaded(imagemAtual.filter((i) => i.url !== imgUrl));
   };
 
@@ -174,6 +173,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
                   Cancelar
                 </button>
               )}
+              {f.error && <span className="error-text">{f.error}</span>}
             </div>
           ))}
           <button
