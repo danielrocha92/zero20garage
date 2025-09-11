@@ -28,20 +28,18 @@ const PainelOrcamentos = () => {
 
   const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
 
-  const showMessageBox = (msg) => {
+  // --- Mensagem de feedback automática ---
+  const showMessageBox = (msg, duration = 4000) => {
     setMessage(msg);
     setShowMessage(true);
-  };
-  const hideMessageBox = () => {
-    setShowMessage(false);
-    setMessage('');
+    setTimeout(() => setShowMessage(false), duration);
   };
 
-  // --- Fetch histórico de orçamentos ---
+  // --- Fetch histórico completo ---
   const fetchHistorico = useCallback(async () => {
     try {
       const res = await fetch(`${API_BASE_URL}/api/orcamentos`, {
-        headers: authToken ? { 'Authorization': `Bearer ${authToken}` } : undefined,
+        headers: authToken ? { Authorization: `Bearer ${authToken}` } : undefined,
       });
       const data = await res.json();
       setHistorico(Array.isArray(data) ? data : []);
@@ -51,7 +49,9 @@ const PainelOrcamentos = () => {
     }
   }, [authToken]);
 
-  useEffect(() => { fetchHistorico(); }, [fetchHistorico]);
+  useEffect(() => {
+    fetchHistorico();
+  }, [fetchHistorico]);
 
   // --- Salvar orçamento ---
   const handleSalvar = async (dados) => {
@@ -68,7 +68,7 @@ const PainelOrcamentos = () => {
     try {
       const res = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json', ...(authToken && { 'Authorization': `Bearer ${authToken}` }) },
+        headers: { 'Content-Type': 'application/json', ...(authToken && { Authorization: `Bearer ${authToken}` }) },
         body: JSON.stringify(envio),
       });
       const result = await res.json();
@@ -88,7 +88,7 @@ const PainelOrcamentos = () => {
     }
   };
 
-  // --- Exportação Excel ---
+  // --- Exportar Excel ---
   const exportarExcel = () => {
     if (!historico.length) return showMessageBox('Nenhum dado para exportar.');
     const excelData = historico.map(h => ({
@@ -111,7 +111,7 @@ const PainelOrcamentos = () => {
     saveAs(new Blob([buf], { type: 'application/octet-stream' }), 'painel-orcamentos.xlsx');
   };
 
-  // --- Exportação PDF ---
+  // --- Exportar PDF ---
   const exportarPDFCompleto = async () => {
     if (!historico.length) return showMessageBox('Nenhum dado para exportar.');
     const pdf = new jsPDF('p', 'mm', 'a4');
@@ -144,7 +144,6 @@ const PainelOrcamentos = () => {
         const canvas = await html2canvas(tempDiv, { scale: 2, useCORS: true });
         const imgData = canvas.toDataURL('image/png');
         const imgHeight = (canvas.height * contentWidth) / canvas.width;
-
         if (i > 0) pdf.addPage();
         pdf.addImage(imgData, 'PNG', margin, margin, contentWidth, imgHeight);
       } catch (error) {
@@ -168,9 +167,7 @@ const PainelOrcamentos = () => {
     setEditingData(orcamento);
     setTipo(orcamento.tipo === 'cabecote' ? 'cabecote' : 'motor');
     setSelectedBudgetForView(null);
-    setTimeout(() => {
-      document.getElementById('orcamento-form')?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+    setTimeout(() => document.getElementById('orcamento-form')?.scrollIntoView({ behavior: 'smooth' }), 100);
   };
 
   // --- Visualização ---
@@ -179,20 +176,14 @@ const PainelOrcamentos = () => {
   const scrollToHistorico = () => historicoRef.current?.scrollIntoView({ behavior: 'smooth' });
 
   // --- Imagens existentes ---
-  const imagensExistentes = (() => {
-    if (!editingData) return [];
-    if (Array.isArray(editingData.imagens) && editingData.imagens.length) return editingData.imagens;
-    if (editingData.imagem) return [editingData.imagem];
-    if (editingData.imageUrl) return [{ url: editingData.imageUrl, public_id: editingData.public_id }];
-    return [];
-  })();
+  const imagensExistentes = editingData?.imagens || (editingData?.imagem ? [editingData.imagem] : []);
 
   return (
-    <div className='painel-orcamentos-container'>
+    <div className="painel-orcamentos-container">
       {showMessage && (
         <div className="message-box">
           <span>{message}</span>
-          <button onClick={hideMessageBox}>&times;</button>
+          <button onClick={() => setShowMessage(false)}>&times;</button>
         </div>
       )}
 
@@ -200,15 +191,11 @@ const PainelOrcamentos = () => {
         <OrcamentoImpresso orcamento={selectedBudgetForView} onClose={handleCloseView} />
       ) : (
         <>
-          <h1 className='titulo-escuro'>Painel de Orçamentos</h1>
+          <h1 className="titulo-escuro">Painel de Orçamentos</h1>
 
           <nav className="tipo-orcamento-selector">
-            <button onClick={() => { setTipo('motor'); setEditingData(null); }} className={tipo === 'motor' ? 'active' : 'button'}>
-              Orçamento Motor Completo
-            </button>
-            <button onClick={() => { setTipo('cabecote'); setEditingData(null); }} className={tipo === 'cabecote' ? 'active' : 'button'}>
-              Orçamento Cabeçote
-            </button>
+            <button onClick={() => { setTipo('motor'); setEditingData(null); }} className={tipo === 'motor' ? 'active' : 'button'}>Orçamento Motor Completo</button>
+            <button onClick={() => { setTipo('cabecote'); setEditingData(null); }} className={tipo === 'cabecote' ? 'active' : 'button'}>Orçamento Cabeçote</button>
             <button onClick={scrollToHistorico} className="button">Histórico de Orçamentos</button>
           </nav>
 
@@ -229,7 +216,7 @@ const PainelOrcamentos = () => {
                 orcamentoId={editingData?.id}
                 authToken={authToken}
                 imagemAtual={imagensExistentes}
-                onUploaded={async (imgs) => {
+                onUploaded={(imgs) => {
                   if (editingData) setEditingData(prev => prev ? { ...prev, imagens: imgs } : prev);
                   fetchHistorico();
                 }}
@@ -241,6 +228,7 @@ const PainelOrcamentos = () => {
             <HistoricoOrcamentos
               onEditarOrcamento={handleEditarOrcamento}
               onViewBudget={handleViewBudget}
+              authToken={authToken}
             />
           </div>
         </>
