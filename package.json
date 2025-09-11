@@ -57,6 +57,7 @@
     "react-transition-group": "^4.4.5",
     "react-webcam": "^7.2.0",
     "slick-carousel": "^1.8.1",
+    "streamifier": "^0.1.1",
     "styled-components": "^6.1.15",
     "swiper": "^11.2.8",
     "web-vitals": "^2.1.4",

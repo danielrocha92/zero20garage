@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import DynamicHeader from '../components/DynamicHeader';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ const Login = () => {
 
   return (
     <div className="page-escuro">
+      <DynamicHeader page="login" messages={[{ title: "Área Restrita", subtitle: "Acesso exclusivo para administradores." }]} />
       <div className="login-container">
         <h2 className="titulo-claro">Login Admin</h2>
         <form onSubmit={handleSubmit} className="form-login" autoComplete="on">

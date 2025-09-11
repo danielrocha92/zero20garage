@@ -27,7 +27,6 @@ import Usinagem from './pages/home/Usinagem';
 import MontagemTeste from './pages/home/MontagemTeste';
 
 import Orcamento from './pages/orcamento/Orcamento';
-import OrcamentoLista from './pages/orcamento/OrcamentoLista';
 import GerarPdfPage from './components/GerarPdfPage';
 
 import Blog from './pages/blog/Blog';
@@ -94,7 +93,6 @@ const AnimatedRoutes = () => {
           <Route path="/Trabalhe-conosco" element={<TrabalheConosco />} />
           <Route path="/Termos" element={<Termos />} />
           <Route path="/orcamento" element={<Orcamento />} />
-          <Route path="/orcamentos" element={<OrcamentoLista />} />
           <Route path="/gerar-pdf" element={<GerarPdfPage />} />
           <Route path="/login" element={<Login />} />
 
