@@ -50,7 +50,7 @@ const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUpl
       {/* Área de upload */}
       <label htmlFor="file-upload" className="dropzone">
         <AiOutlineUpload size={40} />
-        <span>{uploading ? 'Enviando imagens...' : 'Clique ou arraste as imagens aqui'}</span>
+        <span>{uploading ? 'Enviando imagens...' : 'Clique aqui'}</span>
         <input
           id="file-upload"
           type="file"

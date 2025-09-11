@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import axios from 'axios';
 import './HistoricoOrcamentos.css';
 import { FaEye, FaEdit, FaTrash } from 'react-icons/fa';
@@ -56,10 +56,14 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     showCancel: false,
   });
 
-  const abrirModal = (config) => setModalConfig({ ...modalConfig, isOpen: true, ...config });
+  const abrirModal = (config) =>
+    setModalConfig({ ...modalConfig, isOpen: true, ...config });
   const fecharModal = () => setModalConfig({ ...modalConfig, isOpen: false });
 
-  // --- Buscar histórico com paginação e tratamento seguro ---
+  const authToken =
+    typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
+
+  // --- Buscar histórico com paginação ---
   const buscarHistorico = useCallback(async () => {
     if (loading || !hasMore) return;
     setLoading(true);
@@ -67,24 +71,30 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     try {
       const res = await axios.get(`${API_BASE_URL}/api/orcamentos`, {
         params: { page, size: PAGE_SIZE },
+        headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
       });
 
       const data = Array.isArray(res.data) ? res.data : [];
-      setHistorico(prev => [...prev, ...data]);
+      setHistorico((prev) => [...prev, ...data]);
       setHasMore(data.length === PAGE_SIZE);
     } catch (err) {
       console.error('Erro ao buscar histórico:', err);
       let mensagemErro = 'Erro ao carregar histórico de orçamentos.';
-      if (err.response?.data?.erro) mensagemErro += ` Detalhes: ${err.response.data.erro}`;
+      if (err.response?.data?.erro)
+        mensagemErro += ` Detalhes: ${err.response.data.erro}`;
       else if (err.message) mensagemErro += ` (${err.message})`;
+      else mensagemErro += ' Possível bloqueio por CORS ou problema de rede.';
       setError(mensagemErro);
     } finally {
       setLoading(false);
     }
-  }, [page, loading, hasMore]);
+  }, [page, loading, hasMore, authToken]);
 
-  useEffect(() => { buscarHistorico(); }, [buscarHistorico]);
+  useEffect(() => {
+    buscarHistorico();
+  }, [buscarHistorico]);
 
+  // --- Excluir orçamento ---
   const handleExcluirOrcamento = (orcamento) => {
     abrirModal({
       title: 'Confirmar Exclusão',
@@ -97,7 +107,14 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
       onConfirm: async () => {
         fecharModal();
         try {
-          await axios.delete(`${API_BASE_URL}/api/orcamentos/${orcamento.id}`);
+          await axios.delete(`${API_BASE_URL}/api/orcamentos/${orcamento.id}`, {
+            headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
+          });
+
+          setHistorico((prev) =>
+            prev.filter((h) => h.id !== orcamento.id)
+          );
+
           abrirModal({
             title: 'Sucesso',
             message: 'Orçamento excluído com sucesso!',
@@ -105,22 +122,21 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
             showCancel: false,
             onConfirm: () => fecharModal(),
           });
-          setHistorico(prev => prev.filter(h => h.id !== orcamento.id));
-          } catch (err) {
-            console.error('Erro ao excluir orçamento:', err);
-            let mensagemErro = 'Erro ao excluir orçamento.';
-            if (err.response?.data?.erro) mensagemErro += ` Detalhes: ${err.response.data.erro}`;
-            else if (err.message) mensagemErro += ` (${err.message})`;
+        } catch (err) {
+          console.error('Erro ao excluir orçamento:', err);
+          let mensagemErro = 'Erro ao excluir orçamento.';
+          if (err.response?.data?.erro)
+            mensagemErro += ` Detalhes: ${err.response.data.erro}`;
+          else if (err.message) mensagemErro += ` (${err.message})`;
 
-            // Use a variável 'mensagemErro' aqui
-            abrirModal({
-              title: 'Erro',
-              message: mensagemErro, // <-- Modifique esta linha
-              confirmText: 'Fechar',
-              showCancel: false,
-              onConfirm: () => fecharModal(),
-            });
-          }
+          abrirModal({
+            title: 'Erro',
+            message: mensagemErro,
+            confirmText: 'Fechar',
+            showCancel: false,
+            onConfirm: () => fecharModal(),
+          });
+        }
       },
       onCancel: fecharModal,
     });
@@ -145,22 +161,35 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     let d = null;
     if (typeof data === 'string') d = new Date(data);
     else if (data instanceof Date) d = data;
-    else if (data?._seconds) d = new Date(data._seconds * 1000 + (data._nanoseconds || 0) / 1000000);
+    else if (data?._seconds)
+      d = new Date(
+        data._seconds * 1000 + (data._nanoseconds || 0) / 1000000
+      );
     return d && !isNaN(d.getTime()) ? d.toLocaleString('pt-BR') : 'Data inválida';
   };
 
   const getImagemUrl = (orcamento) => {
-    if (Array.isArray(orcamento.imagens) && orcamento.imagens.length && typeof orcamento.imagens[0]?.secure_url === 'string') {
+    if (
+      Array.isArray(orcamento.imagens) &&
+      orcamento.imagens.length &&
+      typeof orcamento.imagens[0]?.secure_url === 'string'
+    ) {
       return orcamento.imagens[0].secure_url;
     }
     return orcamento.imagem?.url || orcamento.imageUrl || null;
   };
 
-  const historicoOrdenado = [...historico].sort((a, b) => new Date(b.data) - new Date(a.data));
+  const historicoOrdenado = useMemo(
+    () => [...historico].sort((a, b) => new Date(b.data) - new Date(a.data)),
+    [historico]
+  );
 
-  if (loading && historico.length === 0) return <div className="loading-message">Carregando histórico...</div>;
-  if (error && historico.length === 0) return <div className="error-message">{error}</div>;
-  if (historicoOrdenado.length === 0) return <div className="no-data-message">Nenhum orçamento encontrado.</div>;
+  if (loading && historico.length === 0)
+    return <div className="loading-message">Carregando histórico...</div>;
+  if (error && historico.length === 0)
+    return <div className="error-message">{error}</div>;
+  if (historicoOrdenado.length === 0)
+    return <div className="no-data-message">Nenhum orçamento encontrado.</div>;
 
   return (
     <div id="ancora-historico-orcamentos" className="tabela-historico">
@@ -190,17 +219,23 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
             </tr>
           </thead>
           <tbody>
-            {historicoOrdenado.map(orcamento => (
+            {historicoOrdenado.map((orcamento) => (
               <tr key={orcamento.id}>
                 <td>{orcamento.ordemServico || '-'}</td>
                 <td>{orcamento.cliente}</td>
                 <td>{orcamento.veiculo || '-'}</td>
                 <td>{orcamento.tipo}</td>
-                <td>
-                  R$ {Number(orcamento.valorTotal).toFixed(2)}
-                </td>
+                <td>R$ {Number(orcamento.valorTotal).toFixed(2)}</td>
                 <td>{formatarData(orcamento.data)}</td>
-                <td><span className={`status-tag ${getStatusTagClass(orcamento.status)}`}>{orcamento.status || 'Aberto'}</span></td>
+                <td>
+                  <span
+                    className={`status-tag ${getStatusTagClass(
+                      orcamento.status
+                    )}`}
+                  >
+                    {orcamento.status || 'Aberto'}
+                  </span>
+                </td>
                 <td>
                   {getImagemUrl(orcamento) ? (
                     <a
@@ -247,14 +282,12 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
 
       {/* Mobile */}
       <div className="historico-mobile">
-        {historicoOrdenado.map(orcamento => (
+        {historicoOrdenado.map((orcamento) => (
           <details key={orcamento.id} className="orcamento-card">
             <summary className="card-header">
               <h3>OS.: {orcamento.ordemServico || '-'}</h3>
               <span
-                className={`status-tag ${getStatusTagClass(
-                  orcamento.status
-                )}`}
+                className={`status-tag ${getStatusTagClass(orcamento.status)}`}
               >
                 {orcamento.status || 'Aberto'}
               </span>
@@ -274,8 +307,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                 {Number(orcamento.valorTotal).toFixed(2)}
               </p>
               <p>
-                <strong>Data/Hora:</strong>{' '}
-                {formatarData(orcamento.data)}
+                <strong>Data/Hora:</strong> {formatarData(orcamento.data)}
               </p>
               {getImagemUrl(orcamento) && (
                 <div>
@@ -322,7 +354,9 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
 
       {hasMore && !loading && (
         <div className="load-more">
-          <button onClick={() => setPage(prev => prev + 1)}>Carregar Mais</button>
+          <button onClick={() => setPage((prev) => prev + 1)}>
+            Carregar Mais
+          </button>
         </div>
       )}
 

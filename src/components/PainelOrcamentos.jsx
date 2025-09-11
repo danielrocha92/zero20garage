@@ -1,10 +1,9 @@
-// src/components/PainelOrcamentos.jsx
 import React, { useState, useEffect, useCallback, useRef, Suspense } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import { useNavigate } from 'react-router-dom';
 
 import OrcamentoCabecote from './OrcamentoCabecote';
 import OrcamentoMotorCompleto from './OrcamentoMotorCompleto';
@@ -13,6 +12,7 @@ import OrcamentoImpresso from './OrcamentoImpresso';
 import './PainelOrcamentos.css';
 
 const UploadImagemOrcamento = React.lazy(() => import('./UploadImagemOrcamento'));
+
 const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
 
 const PainelOrcamentos = () => {
@@ -32,27 +32,28 @@ const PainelOrcamentos = () => {
     setMessage(msg);
     setShowMessage(true);
   };
-
   const hideMessageBox = () => {
     setShowMessage(false);
     setMessage('');
   };
 
+  // --- Fetch histórico de orçamentos ---
   const fetchHistorico = useCallback(async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/orcamentos`);
-      const data = await response.json();
-      setHistorico(data);
+      const res = await fetch(`${API_BASE_URL}/api/orcamentos`, {
+        headers: authToken ? { 'Authorization': `Bearer ${authToken}` } : undefined,
+      });
+      const data = await res.json();
+      setHistorico(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error('Erro ao buscar histórico:', error);
       showMessageBox('Erro ao carregar histórico de orçamentos.');
     }
-  }, []);
+  }, [authToken]);
 
-  useEffect(() => {
-    fetchHistorico();
-  }, [fetchHistorico]);
+  useEffect(() => { fetchHistorico(); }, [fetchHistorico]);
 
+  // --- Salvar orçamento ---
   const handleSalvar = async (dados) => {
     const envio = { ...dados, tipo, data: new Date().toLocaleString('pt-BR') };
     let url = `${API_BASE_URL}/api/orcamentos`;
@@ -67,10 +68,11 @@ const PainelOrcamentos = () => {
     try {
       const res = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...(authToken && { 'Authorization': `Bearer ${authToken}` }) },
         body: JSON.stringify(envio),
       });
       const result = await res.json();
+
       if (res.ok) {
         showMessageBox(`Orçamento ${method === 'POST' ? 'criado' : 'atualizado'} com sucesso.`);
         fetchHistorico();
@@ -86,6 +88,7 @@ const PainelOrcamentos = () => {
     }
   };
 
+  // --- Exportação Excel ---
   const exportarExcel = () => {
     if (!historico.length) return showMessageBox('Nenhum dado para exportar.');
     const excelData = historico.map(h => ({
@@ -108,11 +111,11 @@ const PainelOrcamentos = () => {
     saveAs(new Blob([buf], { type: 'application/octet-stream' }), 'painel-orcamentos.xlsx');
   };
 
+  // --- Exportação PDF ---
   const exportarPDFCompleto = async () => {
     if (!historico.length) return showMessageBox('Nenhum dado para exportar.');
     const pdf = new jsPDF('p', 'mm', 'a4');
     const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
     const margin = 10;
     const contentWidth = pdfWidth - margin * 2;
 
@@ -141,19 +144,9 @@ const PainelOrcamentos = () => {
         const canvas = await html2canvas(tempDiv, { scale: 2, useCORS: true });
         const imgData = canvas.toDataURL('image/png');
         const imgHeight = (canvas.height * contentWidth) / canvas.width;
-        let heightLeft = imgHeight;
-        let position = margin;
 
         if (i > 0) pdf.addPage();
-        pdf.addImage(imgData, 'PNG', margin, position, contentWidth, imgHeight);
-        heightLeft -= (pdfHeight - margin);
-
-        while (heightLeft > -1 * (pdfHeight - margin)) {
-          position = heightLeft - imgHeight + margin;
-          pdf.addPage();
-          pdf.addImage(imgData, 'PNG', margin, position, contentWidth, imgHeight);
-          heightLeft -= (pdfHeight - margin);
-        }
+        pdf.addImage(imgData, 'PNG', margin, margin, contentWidth, imgHeight);
       } catch (error) {
         console.error('Erro ao gerar PDF:', error);
       } finally {
@@ -164,24 +157,28 @@ const PainelOrcamentos = () => {
     showMessageBox('PDF do histórico gerado com sucesso!');
   };
 
+  // --- Logout ---
   const handleLogout = () => {
     localStorage.removeItem('authToken');
     navigate('/orcamento');
   };
 
+  // --- Edição ---
   const handleEditarOrcamento = (orcamento) => {
     setEditingData(orcamento);
-    setTipo(orcamento.tipo === 'Geral' ? 'cabecote' : 'motor');
+    setTipo(orcamento.tipo === 'cabecote' ? 'cabecote' : 'motor');
     setSelectedBudgetForView(null);
     setTimeout(() => {
       document.getElementById('orcamento-form')?.scrollIntoView({ behavior: 'smooth' });
     }, 100);
   };
 
+  // --- Visualização ---
   const handleViewBudget = (orcamento) => setSelectedBudgetForView(orcamento);
   const handleCloseView = () => setSelectedBudgetForView(null);
   const scrollToHistorico = () => historicoRef.current?.scrollIntoView({ behavior: 'smooth' });
 
+  // --- Imagens existentes ---
   const imagensExistentes = (() => {
     if (!editingData) return [];
     if (Array.isArray(editingData.imagens) && editingData.imagens.length) return editingData.imagens;
@@ -206,14 +203,19 @@ const PainelOrcamentos = () => {
           <h1 className='titulo-escuro'>Painel de Orçamentos</h1>
 
           <nav className="tipo-orcamento-selector">
-            <button onClick={() => { setTipo('motor'); setEditingData(null); }} className={tipo === 'motor' ? 'active' : ''}>
+            <button onClick={() => { setTipo('motor'); setEditingData(null); }} className={tipo === 'motor' ? 'active' : 'button'}>
               Orçamento Motor Completo
             </button>
-            <button onClick={() => { setTipo('cabecote'); setEditingData(null); }} className={tipo === 'cabecote' ? 'active' : ''}>
+            <button onClick={() => { setTipo('cabecote'); setEditingData(null); }} className={tipo === 'cabecote' ? 'active' : 'button'}>
               Orçamento Cabeçote
             </button>
-            <button onClick={scrollToHistorico}>Histórico de Orçamentos</button>
-            <button onClick={handleLogout}>Sair</button>
+            <button onClick={scrollToHistorico} className="button">Histórico de Orçamentos</button>
+          </nav>
+
+          <nav className="tipo-orcamento-selector">
+            <button onClick={exportarExcel} className="button">Exportar Todos para Excel</button>
+            <button onClick={exportarPDFCompleto} className="button">Exportar Todos para PDF</button>
+            <button className="button" onClick={handleLogout}>Sair</button>
           </nav>
 
           <main className="orcamento-form-wrapper" id="orcamento-form">
@@ -233,15 +235,13 @@ const PainelOrcamentos = () => {
                 }}
               />
             </Suspense>
-
-            <div className="historico-buttons-group">
-              <button onClick={exportarExcel} className="button">Exportar Todos para Excel</button>
-              <button onClick={exportarPDFCompleto} className="button">Exportar Todos para PDF</button>
-            </div>
           </main>
 
           <div ref={historicoRef}>
-            <HistoricoOrcamentos onEditarOrcamento={handleEditarOrcamento} onViewBudget={handleViewBudget} />
+            <HistoricoOrcamentos
+              onEditarOrcamento={handleEditarOrcamento}
+              onViewBudget={handleViewBudget}
+            />
           </div>
         </>
       )}
