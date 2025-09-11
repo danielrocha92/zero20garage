@@ -2,14 +2,14 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "https://api-orcamento-n49u.onrender.com",
+  baseURL: import.meta.env.REACT_API_BASE_URL || "https://api-orcamento-n49u.onrender.com",
   timeout: 15000,
 });
 
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+const baseURL = import.meta.env.REACT_API_BASE_URL;
 
 if (!baseURL) {
-  console.error("VITE_API_BASE_URL is not defined!");
+  console.error("REACT_API_BASE_URL is not defined!");
 }
 
 // Evita “tempestade” de requisições repetidas:

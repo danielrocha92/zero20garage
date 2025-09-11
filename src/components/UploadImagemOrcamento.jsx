@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { AiOutlinePlus } from 'react-icons/ai';
+import axios from 'axios';
 import './UploadImagemOrcamento.css';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8080";
@@ -10,28 +12,36 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
 
   // --- Revoke object URLs quando desmonta ---
   useEffect(() => {
-    return () => selectedFiles.forEach(f => URL.revokeObjectURL(f.preview));
-  }, [selectedFiles]);
+    return () => {
+      // Limpa os arquivos selecionados
+      selectedFiles.forEach(f => URL.revokeObjectURL(f.preview));
+      // Limpa os arquivos já enviados
+      imagemAtual.forEach(f => {
+        if (f.preview) URL.revokeObjectURL(f.preview);
+      });
+    }
+  }, [selectedFiles, imagemAtual]);
+
+  const fetchImagens = useCallback(async () => {
+    if (!orcamentoId) return;
+    try {
+      const res = await axios.get(`${API_BASE_URL}/api/upload/${orcamentoId}`);
+      onUploaded(res.data);
+    } catch (err) {
+      console.error("Erro ao buscar imagens:", err);
+    }
+  }, [orcamentoId, onUploaded]);
 
   // --- Carregar imagens existentes ao editar ---
   useEffect(() => {
-    if (!orcamentoId) return;
-    const fetchImagens = async () => {
-      try {
-        const res = await fetch(`${API_BASE_URL}/api/upload/${orcamentoId}`);
-        if (!res.ok) throw new Error("Erro ao buscar imagens");
-        const data = await res.json();
-        onUploaded(data); // Atualiza imagemAtual
-      } catch (err) {
-        console.error(err);
-      }
-    };
     fetchImagens();
-  }, [orcamentoId, onUploaded]);
+  }, [fetchImagens]);
 
   // --- Drag & Drop ---
   useEffect(() => {
     const dropArea = dropRef.current;
+    if (!dropArea) return;
+
     const handleDragOver = e => { e.preventDefault(); dropArea.classList.add("drag-over"); };
     const handleDragLeave = () => dropArea.classList.remove("drag-over");
     const handleDrop = e => {
@@ -70,7 +80,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
   const handleUploadAll = useCallback(async () => {
     if (!selectedFiles.length || !orcamentoId) return;
     setUploading(true);
-    let uploadedUrls = [...imagemAtual];
+    let allUploadedFiles = [...imagemAtual];
 
     for (const fileItem of selectedFiles) {
       const formData = new FormData();
@@ -86,37 +96,40 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
           }
         });
 
-        uploadedUrls = [...uploadedUrls, ...response.data.files];
+        allUploadedFiles = [...allUploadedFiles, ...response.data];
 
         setSelectedFiles(prev =>
           prev.map(f => f.key === fileItem.key ? { ...f, uploaded: true, progress: 100, error: null } : f)
         );
 
-      } catch {
+      } catch (err) {
         setSelectedFiles(prev =>
-          prev.map(f => f.key === fileItem.key ? { ...f, uploaded: false, error: "Falha" } : f)
+          prev.map(f => f.key === fileItem.key ? { ...f, uploaded: false, error: "Falha no envio" } : f)
         );
       }
     }
 
-    onUploaded(uploadedUrls);
+    onUploaded(allUploadedFiles);
+    setSelectedFiles([]); // Limpa a lista de arquivos selecionados
     setUploading(false);
   }, [selectedFiles, orcamentoId, imagemAtual, onUploaded]);
 
-  const handleDeleteSelected = key => {
+  const handleDeleteSelected = useCallback(key => {
     setSelectedFiles(prev => prev.filter(f => {
       if (f.key === key) URL.revokeObjectURL(f.preview);
       return f.key !== key;
     }));
-  };
+  }, []);
 
-  const handleDeleteUploaded = async img => {
+  const handleDeleteUploaded = useCallback(async img => {
     if (!orcamentoId || !img.public_id) return;
     try {
-      const res = await fetch(`${API_BASE_URL}/api/upload/${orcamentoId}/${img.public_id}`, { method: "DELETE" });
-      if (res.ok) onUploaded(prev => prev.filter(i => i.public_id !== img.public_id));
-    } catch {}
-  };
+      await axios.delete(`${API_BASE_URL}/api/upload/${orcamentoId}/${img.public_id}`);
+      onUploaded(prev => prev.filter(i => i.public_id !== img.public_id));
+    } catch (err) {
+      console.error("Erro ao excluir imagem:", err);
+    }
+  }, [orcamentoId, onUploaded]);
 
   return (
     <div className="upload-imagem-orcamento">
@@ -124,7 +137,10 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
       <div
         ref={dropRef}
         className="dropzone"
-        onClick={() => dropRef.current.querySelector('input').click()}
+        onClick={() => {
+          const input = dropRef.current?.querySelector('input[type="file"]');
+          if (input) input.click();
+        }}
       >
         <AiOutlinePlus size={32} />
         <span>Arraste e solte imagens ou clique aqui</span>
@@ -143,13 +159,14 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
         <div className="image-list">
           {selectedFiles.map(f => (
             <div key={f.key} className="image-item">
-              <img src={f.preview} alt={f.file.name || "Pré-visualização"} />
+              <img src={f.preview} alt={f.file?.name || "Pré-visualização"} />
               <div className="progress-bar">
                 <div style={{ width: `${f.progress}%` }} />
               </div>
               {!f.uploaded && !f.error && (
                 <button className="btn-delete" onClick={() => handleDeleteSelected(f.key)}>Cancelar</button>
               )}
+              {f.error && <span className="upload-error">{f.error}</span>}
             </div>
           ))}
           <button
@@ -166,7 +183,7 @@ const UploadImagemOrcamento = ({ orcamentoId, imagemAtual = [], onUploaded }) =>
         <div className="existing-images">
           {imagemAtual.map(img => (
             <div key={img.public_id} className="image-item">
-              <img src={img.url} alt={`Imagem enviada`} />
+              <img src={img.url} alt="Imagem enviada" />
               <button className="btn-delete" onClick={() => handleDeleteUploaded(img)}>Excluir</button>
             </div>
           ))}
