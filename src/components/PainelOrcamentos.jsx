@@ -1,4 +1,5 @@
 // src/components/PainelOrcamentos.jsx
+
 import React, { useState, useEffect, useCallback, useRef, Suspense } from 'react';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
@@ -13,7 +14,9 @@ import OrcamentoImpresso from './OrcamentoImpresso';
 import './PainelOrcamentos.css';
 
 const UploadImagemOrcamento = React.lazy(() => import('./UploadImagemOrcamento'));
-const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
+
+// URL base da API
+const API_BASE_URL = "https://api-orcamento-n49u.onrender.com";
 
 const PainelOrcamentos = () => {
   const navigate = useNavigate();
@@ -38,6 +41,7 @@ const PainelOrcamentos = () => {
     setMessage('');
   };
 
+  // --- BUSCAR HISTÓRICO ---
   const fetchHistorico = useCallback(async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/orcamentos`);
@@ -53,6 +57,7 @@ const PainelOrcamentos = () => {
     fetchHistorico();
   }, [fetchHistorico]);
 
+  // --- SALVAR / ATUALIZAR ORÇAMENTO ---
   const handleSalvar = async (dados) => {
     const envio = { ...dados, tipo, data: new Date().toLocaleString('pt-BR') };
     let url = `${API_BASE_URL}/api/orcamentos`;
@@ -61,15 +66,20 @@ const PainelOrcamentos = () => {
     if (editingData?.id) {
       url = `${API_BASE_URL}/api/orcamentos/${editingData.id}`;
       method = 'PUT';
-      envio.id = editingData.id;
     }
 
     try {
+      // Remove campos undefined e imagens antes de enviar
+      const cleanEnvio = Object.fromEntries(
+        Object.entries(envio).filter(([key, value]) => value !== undefined && key !== 'imagens')
+      );
+
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(envio),
+        body: JSON.stringify(cleanEnvio),
       });
+
       const result = await res.json();
       if (res.ok) {
         showMessageBox(`Orçamento ${method === 'POST' ? 'criado' : 'atualizado'} com sucesso.`);
@@ -86,6 +96,7 @@ const PainelOrcamentos = () => {
     }
   };
 
+  // --- EXPORTAR EXCEL ---
   const exportarExcel = () => {
     if (!historico.length) return showMessageBox('Nenhum dado para exportar.');
     const excelData = historico.map(h => ({
@@ -108,6 +119,7 @@ const PainelOrcamentos = () => {
     saveAs(new Blob([buf], { type: 'application/octet-stream' }), 'painel-orcamentos.xlsx');
   };
 
+  // --- EXPORTAR PDF ---
   const exportarPDFCompleto = async () => {
     if (!historico.length) return showMessageBox('Nenhum dado para exportar.');
     const pdf = new jsPDF('p', 'mm', 'a4');
@@ -216,7 +228,13 @@ const PainelOrcamentos = () => {
             <button onClick={handleLogout}>Sair</button>
           </nav>
 
-          <main className="orcamento-form-wrapper" id="orcamento-form">
+          {/* --- Barra fixa de exportação --- */}
+          <div className="export-buttons-fixed top-0 left-0 w-full bg-white shadow-md z-50 p-4 flex justify-center gap-4">
+            <button onClick={exportarExcel} className="button">Exportar Todos para Excel</button>
+            <button onClick={exportarPDFCompleto} className="button">Exportar Todos para PDF</button>
+          </div>
+
+          <main className="orcamento-form-wrapper mt-24" id="orcamento-form">
             {tipo === 'motor'
               ? <OrcamentoMotorCompleto onSubmit={handleSalvar} editingData={editingData} />
               : <OrcamentoCabecote onSubmit={handleSalvar} editingData={editingData} />
@@ -228,16 +246,13 @@ const PainelOrcamentos = () => {
                 authToken={authToken}
                 imagemAtual={imagensExistentes}
                 onUploaded={async (imgs) => {
+                  // Atualiza apenas o frontend, sem enviar para PUT
+                  setHistorico(prev => prev.map(o => o.id === editingData.id ? { ...o, imagens: imgs } : o));
                   if (editingData) setEditingData(prev => prev ? { ...prev, imagens: imgs } : prev);
-                  fetchHistorico();
                 }}
+                apiBaseUrl={API_BASE_URL}
               />
             </Suspense>
-
-            <div className="historico-buttons-group">
-              <button onClick={exportarExcel} className="button">Exportar Todos para Excel</button>
-              <button onClick={exportarPDFCompleto} className="button">Exportar Todos para PDF</button>
-            </div>
           </main>
 
           <div ref={historicoRef}>

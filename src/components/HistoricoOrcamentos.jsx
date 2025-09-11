@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+// src/components/HistoricoOrcamentos.jsx
+import React, { useState, useEffect } from 'react';
 import './HistoricoOrcamentos.css';
 import { FaEye, FaEdit, FaTrash } from 'react-icons/fa';
 
-const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
-const PAGE_SIZE = 10;
+import { db } from '../firebase/config';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 
-// Modal Customizado
+/** =======================
+ * Modal Customizado
+ * ======================= */
 const CustomModal = ({
   isOpen,
   title,
@@ -42,9 +44,6 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
   const [historico, setHistorico] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-
   const [modalConfig, setModalConfig] = useState({
     isOpen: false,
     title: '',
@@ -59,32 +58,38 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
   const abrirModal = (config) => setModalConfig({ ...modalConfig, isOpen: true, ...config });
   const fecharModal = () => setModalConfig({ ...modalConfig, isOpen: false });
 
-  // --- Buscar histórico com paginação e tratamento seguro ---
-  const buscarHistorico = useCallback(async () => {
-    if (loading || !hasMore) return;
+  /** =======================
+   * Busca histórico de orçamentos
+   * ======================= */
+  const buscarHistorico = async () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.get(`${API_BASE_URL}/api/orcamentos`, {
-        params: { page, size: PAGE_SIZE },
-      });
+      const orcamentosCollection = collection(db, 'orcamentos');
+      const orcamentoSnapshot = await getDocs(orcamentosCollection);
 
-      const data = Array.isArray(res.data) ? res.data : [];
-      setHistorico(prev => [...prev, ...data]);
-      setHasMore(data.length === PAGE_SIZE);
+      const historicoList = orcamentoSnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      setHistorico(historicoList);
     } catch (err) {
       console.error('Erro ao buscar histórico:', err);
-      let mensagemErro = 'Erro ao carregar histórico de orçamentos.';
-      if (err.response?.data?.erro) mensagemErro += ` Detalhes: ${err.response.data.erro}`;
-      else if (err.message) mensagemErro += ` (${err.message})`;
-      setError(mensagemErro);
+      setError('Erro ao carregar histórico de orçamentos.');
     } finally {
       setLoading(false);
     }
   }, [page, loading, hasMore]);
 
-  useEffect(() => { buscarHistorico(); }, [buscarHistorico]);
+  useEffect(() => {
+    buscarHistorico();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
+  /** =======================
+   * Excluir orçamento
+   * ======================= */
   const handleExcluirOrcamento = (orcamento) => {
     abrirModal({
       title: 'Confirmar Exclusão',
@@ -97,7 +102,8 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
       onConfirm: async () => {
         fecharModal();
         try {
-          await axios.delete(`${API_BASE_URL}/api/orcamentos/${orcamento.id}`);
+          const docRef = doc(db, 'orcamentos', orcamento.id);
+          await deleteDoc(docRef);
           abrirModal({
             title: 'Sucesso',
             message: 'Orçamento excluído com sucesso!',
@@ -105,72 +111,77 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
             showCancel: false,
             onConfirm: () => fecharModal(),
           });
-          setHistorico(prev => prev.filter(h => h.id !== orcamento.id));
-          } catch (err) {
-            console.error('Erro ao excluir orçamento:', err);
-            let mensagemErro = 'Erro ao excluir orçamento.';
-            if (err.response?.data?.erro) mensagemErro += ` Detalhes: ${err.response.data.erro}`;
-            else if (err.message) mensagemErro += ` (${err.message})`;
-
-            // Use a variável 'mensagemErro' aqui
-            abrirModal({
-              title: 'Erro',
-              message: mensagemErro, // <-- Modifique esta linha
-              confirmText: 'Fechar',
-              showCancel: false,
-              onConfirm: () => fecharModal(),
-            });
-          }
+          buscarHistorico();
+        } catch (err) {
+          console.error('Erro ao excluir orçamento:', err);
+          abrirModal({
+            title: 'Erro',
+            message: 'Erro ao excluir orçamento.',
+            confirmText: 'Fechar',
+            showCancel: false,
+            onConfirm: () => fecharModal(),
+          });
+        }
       },
       onCancel: fecharModal,
     });
   };
 
-  // --- Utilitários ---
+  /** =======================
+   * Helpers
+   * ======================= */
   const getStatusTagClass = (status) => {
     switch (status) {
-      case 'Aberto':
-        return 'amarelo';
-      case 'Concluído':
-        return 'verde';
-      case 'Cancelado':
-        return 'vermelho';
-      default:
-        return '';
+      case 'Aberto': return 'amarelo';
+      case 'Concluído': return 'verde';
+      case 'Cancelado': return 'vermelho';
+      default: return '';
     }
   };
 
   const formatarData = (data) => {
-    if (!data) return 'Data não disponível';
+    if (!data) return '-';
     let d = null;
     if (typeof data === 'string') d = new Date(data);
+    else if (data?.toDate instanceof Function) d = data.toDate();
     else if (data instanceof Date) d = data;
-    else if (data?._seconds) d = new Date(data._seconds * 1000 + (data._nanoseconds || 0) / 1000000);
-    return d && !isNaN(d.getTime()) ? d.toLocaleString('pt-BR') : 'Data inválida';
+    else if (data?._seconds) d = new Date(data._seconds * 1000 + (data._nanoseconds || 0)/1000000);
+    return d && !isNaN(d.getTime()) ? d.toLocaleString('pt-BR') : '-';
   };
 
   const getImagemUrl = (orcamento) => {
-    if (Array.isArray(orcamento.imagens) && orcamento.imagens.length && typeof orcamento.imagens[0]?.secure_url === 'string') {
-      return orcamento.imagens[0].secure_url;
+    if (!orcamento) return null;
+    if (Array.isArray(orcamento.imagens) && orcamento.imagens.length > 0) {
+      return orcamento.imagens[0].url || orcamento.imagens[0].secure_url || null;
     }
-    return orcamento.imagem?.url || orcamento.imageUrl || null;
+    return orcamento.imagem?.url || orcamento.imageUrl || orcamento.imagemUrl || null;
   };
 
-  const historicoOrdenado = [...historico].sort((a, b) => new Date(b.data) - new Date(a.data));
+  const historicoOrdenado = [...historico].sort((a, b) => {
+    const dataA = a.data?.toDate ? a.data.toDate() : new Date(a.data);
+    const dataB = b.data?.toDate ? b.data.toDate() : new Date(b.data);
+    return dataB - dataA;
+  });
 
-  if (loading && historico.length === 0) return <div className="loading-message">Carregando histórico...</div>;
-  if (error && historico.length === 0) return <div className="error-message">{error}</div>;
+  /** =======================
+   * Renderização
+   * ======================= */
+  if (loading) return <div className="loading-message">Carregando histórico...</div>;
+  if (error) return (
+    <div className="error-message">
+      {error}
+      <button className="retry-btn" onClick={() => setError(null) || buscarHistorico()}>
+        Tentar novamente
+      </button>
+    </div>
+  );
   if (historicoOrdenado.length === 0) return <div className="no-data-message">Nenhum orçamento encontrado.</div>;
 
   return (
     <div id="ancora-historico-orcamentos" className="tabela-historico">
       <div className="header-bar">
         <h2>Histórico de Orçamentos</h2>
-        {onClose && (
-          <button className="close-button" onClick={onClose}>
-            Fechar
-          </button>
-        )}
+        {onClose && <button className="close-button" onClick={onClose}>Fechar</button>}
       </div>
 
       {/* Desktop */}
@@ -196,6 +207,8 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                 <td>{orcamento.cliente}</td>
                 <td>{orcamento.veiculo || '-'}</td>
                 <td>{orcamento.tipo}</td>
+                <td>R$ {Number(orcamento.valorTotal || 0).toFixed(2)}</td>
+                <td>{formatarData(orcamento.data)}</td>
                 <td>
                   R$ {Number(orcamento.valorTotal).toFixed(2)}
                 </td>
@@ -203,41 +216,27 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                 <td><span className={`status-tag ${getStatusTagClass(orcamento.status)}`}>{orcamento.status || 'Aberto'}</span></td>
                 <td>
                   {getImagemUrl(orcamento) ? (
-                    <a
-                      href={getImagemUrl(orcamento)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img
-                        src={getImagemUrl(orcamento)}
-                        alt="Imagem do orçamento"
-                        style={{ width: '80px', borderRadius: '6px' }}
-                        crossOrigin="anonymous"
-                      />
+                    <a href={getImagemUrl(orcamento)} target="_blank" rel="noopener noreferrer" title="Clique para ampliar">
+                      <img src={getImagemUrl(orcamento)} alt="Imagem do orçamento" style={{ width: '80px', borderRadius: '6px' }} />
                     </a>
-                  ) : (
-                    '-'
-                  )}
+                  ) : '-'}
                 </td>
                 <td className="acoes-icones">
                   <button
-                    onClick={() => onViewBudget(orcamento)}
+                    onClick={() => {
+                      // Envia orçamento com todas as imagens para edição ou visualização
+                      const orcamentoCompleto = {
+                        ...orcamento,
+                        imagens: orcamento.imagens || (getImagemUrl(orcamento) ? [{ url: getImagemUrl(orcamento) }] : []),
+                      };
+                      onViewBudget(orcamentoCompleto);
+                    }}
                     title="Visualizar"
                   >
                     <FaEye />
                   </button>
-                  <button
-                    onClick={() => onEditarOrcamento(orcamento)}
-                    title="Editar"
-                  >
-                    <FaEdit />
-                  </button>
-                  <button
-                    onClick={() => handleExcluirOrcamento(orcamento)}
-                    title="Excluir"
-                  >
-                    <FaTrash />
-                  </button>
+                  <button onClick={() => onEditarOrcamento(orcamento)} title="Editar"><FaEdit /></button>
+                  <button onClick={() => handleExcluirOrcamento(orcamento)} title="Excluir"><FaTrash /></button>
                 </td>
               </tr>
             ))}
@@ -260,64 +259,39 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
               </span>
             </summary>
             <div className="card-content">
-              <p>
-                <strong>Cliente:</strong> {orcamento.cliente}
-              </p>
-              <p>
-                <strong>Veículo:</strong> {orcamento.veiculo || '-'}
-              </p>
-              <p>
-                <strong>Tipo:</strong> {orcamento.tipo}
-              </p>
-              <p>
-                <strong>Valor Total:</strong> R${' '}
-                {Number(orcamento.valorTotal).toFixed(2)}
-              </p>
-              <p>
-                <strong>Data/Hora:</strong>{' '}
-                {formatarData(orcamento.data)}
-              </p>
+              <p><strong>Cliente:</strong> {orcamento.cliente}</p>
+              <p><strong>Veículo:</strong> {orcamento.veiculo || '-'}</p>
+              <p><strong>Tipo:</strong> {orcamento.tipo}</p>
+              <p><strong>Valor Total:</strong> R$ {Number(orcamento.valorTotal || 0).toFixed(2)}</p>
+              <p><strong>Data/Hora:</strong> {formatarData(orcamento.data)}</p>
               {getImagemUrl(orcamento) && (
                 <div>
-                  <a
-                    href={getImagemUrl(orcamento)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      src={getImagemUrl(orcamento)}
-                      alt="Imagem do orçamento"
-                      crossOrigin="anonymous"
-                    />
+                  <a href={getImagemUrl(orcamento)} target="_blank" rel="noopener noreferrer">
+                    <img src={getImagemUrl(orcamento)} alt="Imagem do orçamento" />
                   </a>
                 </div>
               )}
               <div className="card-acoes">
                 <button
-                  onClick={() => onViewBudget(orcamento)}
+                  onClick={() => {
+                    const orcamentoCompleto = {
+                      ...orcamento,
+                      imagens: orcamento.imagens || (getImagemUrl(orcamento) ? [{ url: getImagemUrl(orcamento) }] : []),
+                    };
+                    onViewBudget(orcamentoCompleto);
+                  }}
                   className="action-btn view-btn"
                 >
                   Visualizar
                 </button>
-                <button
-                  onClick={() => onEditarOrcamento(orcamento)}
-                  className="action-btn edit-btn"
-                >
-                  Editar
-                </button>
-                <button
-                  onClick={() => handleExcluirOrcamento(orcamento)}
-                  className="action-btn delete-btn"
-                >
-                  Excluir
-                </button>
+                <button onClick={() => onEditarOrcamento(orcamento)} className="action-btn edit-btn">Editar</button>
+                <button onClick={() => handleExcluirOrcamento(orcamento)} className="action-btn delete-btn">Excluir</button>
               </div>
             </div>
           </details>
         ))}
       </div>
 
-      {/* Modal Customizado */}
       <CustomModal {...modalConfig} />
 
       {hasMore && !loading && (
