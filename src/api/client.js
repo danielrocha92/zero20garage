@@ -1,16 +1,16 @@
-// src/api/client.js
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "https://api-orcamento-n49u.onrender.com",
-  timeout: 15000,
-});
-
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+// Determina a URL base com base no ambiente de execução.
+const baseURL = process.env.REACT_APP_API_BASE_URL || "https://api-orcamento-n49u.onrender.com";
 
 if (!baseURL) {
-  console.error("VITE_API_BASE_URL is not defined!");
+  console.error("A variável de ambiente REACT_APP_API_BASE_URL não está definida!");
 }
+
+const api = axios.create({
+  baseURL: baseURL,
+  timeout: 15000,
+});
 
 // Evita “tempestade” de requisições repetidas:
 let inFlight = {};
