@@ -4,7 +4,7 @@ import './HistoricoOrcamentos.css';
 import { FaEye, FaEdit, FaTrash } from 'react-icons/fa';
 
 import { db } from '../firebase/config';
-import { collection, getDocs, deleteDoc, doc, query, orderBy, limit, startAfter } from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 
 /** =======================
  * Modal Customizado
@@ -55,56 +55,36 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     showCancel: false,
   });
 
-  // Estados para a paginação
-  const [lastDoc, setLastDoc] = useState(null);
-  const [hasMore, setHasMore] = useState(true);
-
   const abrirModal = (config) => setModalConfig({ ...modalConfig, isOpen: true, ...config });
   const fecharModal = () => setModalConfig({ ...modalConfig, isOpen: false });
 
   /** =======================
    * Busca histórico de orçamentos
    * ======================= */
-  const buscarHistorico = async (loadMore = false) => {
+  const buscarHistorico = async () => {
     setLoading(true);
     setError(null);
     try {
       const orcamentosCollection = collection(db, 'orcamentos');
-      const LIMIT = 10;
-      let q = query(orcamentosCollection, orderBy('data', 'desc'), limit(LIMIT));
+      const orcamentoSnapshot = await getDocs(orcamentosCollection);
 
-      if (loadMore && lastDoc) {
-        q = query(orcamentosCollection, orderBy('data', 'desc'), startAfter(lastDoc), limit(LIMIT));
-      }
-
-      const orcamentoSnapshot = await getDocs(q);
       const historicoList = orcamentoSnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data(),
       }));
 
-      // Atualiza o estado com os novos documentos
-      setHistorico(prev => [...prev, ...historicoList]);
-
-      // Atualiza o último documento para a próxima busca
-      if (!orcamentoSnapshot.empty) {
-        setLastDoc(orcamentoSnapshot.docs[orcamentoSnapshot.docs.length - 1]);
-      }
-
-      // Checa se há mais documentos para carregar
-      setHasMore(orcamentoSnapshot.docs.length === LIMIT);
-
+      setHistorico(historicoList);
     } catch (err) {
       console.error('Erro ao buscar histórico:', err);
       setError('Erro ao carregar histórico de orçamentos.');
     } finally {
       setLoading(false);
     }
-  };
+  }, [page, loading, hasMore]);
 
   useEffect(() => {
     buscarHistorico();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /** =======================
@@ -131,10 +111,6 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
             showCancel: false,
             onConfirm: () => fecharModal(),
           });
-          // Reinicia a busca do histórico
-          setHistorico([]);
-          setLastDoc(null);
-          setHasMore(true);
           buscarHistorico();
         } catch (err) {
           console.error('Erro ao excluir orçamento:', err);
@@ -181,10 +157,16 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     return orcamento.imagem?.url || orcamento.imageUrl || orcamento.imagemUrl || null;
   };
 
+  const historicoOrdenado = [...historico].sort((a, b) => {
+    const dataA = a.data?.toDate ? a.data.toDate() : new Date(a.data);
+    const dataB = b.data?.toDate ? b.data.toDate() : new Date(b.data);
+    return dataB - dataA;
+  });
+
   /** =======================
    * Renderização
    * ======================= */
-  if (loading && historico.length === 0) return <div className="loading-message">Carregando histórico...</div>;
+  if (loading) return <div className="loading-message">Carregando histórico...</div>;
   if (error) return (
     <div className="error-message">
       {error}
@@ -193,7 +175,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
       </button>
     </div>
   );
-  if (historico.length === 0 && !loading) return <div className="no-data-message">Nenhum orçamento encontrado.</div>;
+  if (historicoOrdenado.length === 0) return <div className="no-data-message">Nenhum orçamento encontrado.</div>;
 
   return (
     <div id="ancora-historico-orcamentos" className="tabela-historico">
@@ -219,7 +201,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
             </tr>
           </thead>
           <tbody>
-            {historico.map(orcamento => (
+            {historicoOrdenado.map(orcamento => (
               <tr key={orcamento.id}>
                 <td>{orcamento.ordemServico || '-'}</td>
                 <td>{orcamento.cliente}</td>
@@ -227,17 +209,22 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                 <td>{orcamento.tipo}</td>
                 <td>R$ {Number(orcamento.valorTotal || 0).toFixed(2)}</td>
                 <td>{formatarData(orcamento.data)}</td>
+                <td>
+                  R$ {Number(orcamento.valorTotal).toFixed(2)}
+                </td>
+                <td>{formatarData(orcamento.data)}</td>
                 <td><span className={`status-tag ${getStatusTagClass(orcamento.status)}`}>{orcamento.status || 'Aberto'}</span></td>
                 <td>
                   {getImagemUrl(orcamento) ? (
                     <a href={getImagemUrl(orcamento)} target="_blank" rel="noopener noreferrer" title="Clique para ampliar">
-                      <img src={getImagemUrl(orcamento)} alt="Imagem do orçamento" className="thumbnail-img" />
+                      <img src={getImagemUrl(orcamento)} alt="Imagem do orçamento" style={{ width: '80px', borderRadius: '6px' }} />
                     </a>
                   ) : '-'}
                 </td>
                 <td className="acoes-icones">
                   <button
                     onClick={() => {
+                      // Envia orçamento com todas as imagens para edição ou visualização
                       const orcamentoCompleto = {
                         ...orcamento,
                         imagens: orcamento.imagens || (getImagemUrl(orcamento) ? [{ url: getImagemUrl(orcamento) }] : []),
@@ -259,7 +246,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
 
       {/* Mobile */}
       <div className="historico-mobile">
-        {historico.map(orcamento => (
+        {historicoOrdenado.map(orcamento => (
           <details key={orcamento.id} className="orcamento-card">
             <summary className="card-header">
               <h3>OS.: {orcamento.ordemServico || '-'}</h3>
@@ -280,7 +267,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
               {getImagemUrl(orcamento) && (
                 <div>
                   <a href={getImagemUrl(orcamento)} target="_blank" rel="noopener noreferrer">
-                    <img src={getImagemUrl(orcamento)} alt="Imagem do orçamento" className="card-img" />
+                    <img src={getImagemUrl(orcamento)} alt="Imagem do orçamento" />
                   </a>
                 </div>
               )}
@@ -309,11 +296,11 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
 
       {hasMore && !loading && (
         <div className="load-more">
-          <button onClick={() => buscarHistorico(true)}>Carregar Mais</button>
+          <button onClick={() => setPage(prev => prev + 1)}>Carregar Mais</button>
         </div>
       )}
 
-      {loading && historico.length > 0 && <div className="loading-more">Carregando mais...</div>}
+      {loading && <div className="loading-more">Carregando mais...</div>}
     </div>
   );
 };

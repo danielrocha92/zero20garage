@@ -6,7 +6,7 @@ import emailjs from 'emailjs-com';
 import PainelOrcamentos from '../../components/PainelOrcamentos';
 
 // Acessa a URL da API do ambiente. Usa uma URL de fallback para o ambiente de produção
-const API_BASE_URL = import.meta.env.REACT_API_BASE_URL || "https://api-orcamento-n49u.onrender.com";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://api-orcamento-n49u.onrender.com";
 
 function Orcamento() {
   const [isAdmin, setIsAdmin] = useState(false);
