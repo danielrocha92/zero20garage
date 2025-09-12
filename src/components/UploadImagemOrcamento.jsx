@@ -1,56 +1,78 @@
+// src/components/UploadImagemOrcamento.jsx
 import React, { useState } from 'react';
-import './UploadImagemOrcamento.css';
-import { AiOutlineUpload, AiOutlineDelete, AiOutlineEye } from 'react-icons/ai';  // Ícones para upload, excluir e visualizar
+import axios from 'axios';
+import './UploadImagemOrcamento.css'; // Mantenha o arquivo de CSS
+import { AiOutlineUpload, AiOutlineDelete, AiOutlineEye } from 'react-icons/ai';
 
-const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUploaded }) => {
+const API_BASE_URL = 'https://zero20-upload-api.onrender.com/api/orcamentos';
+
+const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess, imagemAtual = [] }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
-  const [progress, setProgress] = useState(0); // Para controlar a barra de progresso
+  const [progress, setProgress] = useState(0);
+  const [error, setError] = useState(null);
 
-  const handleFileChange = async (e) => {
-    const files = Array.from(e.target.files || []);
-    if (!files.length) return;
-    setSelectedFiles(files);
+  const authToken = typeof window !== "undefined" ? localStorage.getItem("authToken") : null;
+
+  const handleFileChange = (e) => {
+    setSelectedFiles(Array.from(e.target.files));
     setProgress(0);
+    setError(null);
+  };
 
-    if (!orcamentoId) return; // sem orçamento vinculado, apenas preview
+  const handleUpload = async () => {
+    if (!selectedFiles.length) return;
+
     setUploading(true);
+    setProgress(0);
+    setError(null);
 
-    const form = new FormData();
-    files.forEach((f) => form.append('file', f));
+    const formData = new FormData();
+    selectedFiles.forEach((file) => formData.append("files", file));
 
     try {
-      const res = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL || 'https://api-orcamento-n49u.onrender.com'}/api/orcamentos/${orcamentoId}/imagens`,
+      const res = await axios.post(
+        `${API_BASE_URL}/${orcamentoId}/imagens`,
+        formData,
         {
-          method: 'POST',
-          body: form,
-          headers: authToken ? { Authorization: `Bearer ${authToken}` } : undefined,
+          headers: {
+            "Content-Type": "multipart/form-data",
+            ...(authToken && { Authorization: `Bearer ${authToken}` }),
+          },
+          onUploadProgress: (event) => {
+            const percent = Math.round((event.loaded * 100) / event.total);
+            setProgress(percent);
+          },
         }
       );
 
-      if (!res.ok) {
-        console.error('Erro no upload:', await res.text());
-        return;
-      }
-
-      const data = await res.json();
-      if (res.ok) {
-        onUploaded?.(data); // Retorna imagens atualizadas
-      }
+      setSelectedFiles([]);
+      if (onUploadSuccess) onUploadSuccess(res.data.files);
     } catch (err) {
-      console.error('Falha no upload:', err);
+      console.error("Erro no upload:", err);
+      setError(
+        err.response?.data?.error ||
+          err.message ||
+          "Erro desconhecido ao enviar imagens."
+      );
     } finally {
       setUploading(false);
+      setProgress(0);
     }
+  };
+
+  const handleRemoveSelectedFile = (idx) => {
+    setSelectedFiles(prev => prev.filter((_, i) => i !== idx));
   };
 
   return (
     <div className="upload-imagem-orcamento">
-      {/* Área de upload */}
-      <label htmlFor="file-upload" className="dropzone">
-        <AiOutlineUpload size={40} />
-        <span>{uploading ? 'Enviando imagens...' : 'Clique aqui'}</span>
+      {/* Área de upload - Unificado */}
+      <div className="upload-area">
+        <label htmlFor="file-upload" className="dropzone">
+          <AiOutlineUpload size={40} />
+          <span>{uploading ? 'Enviando...' : 'Clique para selecionar'}</span>
+        </label>
         <input
           id="file-upload"
           type="file"
@@ -60,9 +82,16 @@ const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUpl
           onChange={handleFileChange}
           disabled={uploading}
         />
-      </label>
+        <button
+          onClick={handleUpload}
+          disabled={uploading || !selectedFiles.length}
+          className="upload-btn"
+        >
+          {uploading ? "Enviando..." : "Enviar Imagens"}
+        </button>
+      </div>
 
-      {/* Exibição do progresso de upload */}
+      {/* Barra de progresso */}
       {uploading && <div className="progress-bar"><div style={{ width: `${progress}%` }} /></div>}
 
       {/* Pré-visualização das imagens selecionadas */}
@@ -80,7 +109,7 @@ const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUpl
                     className="image-preview"
                     onLoad={() => URL.revokeObjectURL(objectUrl)}
                   />
-                  <AiOutlineDelete className="delete-icon" onClick={() => setSelectedFiles(prev => prev.filter((_, i) => i !== idx))} />
+                  <AiOutlineDelete className="delete-icon" onClick={() => handleRemoveSelectedFile(idx)} />
                 </div>
               );
             })}
@@ -109,6 +138,8 @@ const UploadImagemOrcamento = ({ orcamentoId, authToken, imagemAtual = [], onUpl
           </div>
         </div>
       )}
+
+      {error && <p className="upload-error">{error}</p>}
     </div>
   );
 };
