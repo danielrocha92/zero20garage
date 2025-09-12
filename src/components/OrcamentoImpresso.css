@@ -53,7 +53,7 @@
 
 .info-table {
     display: flex;
-    justify-content: center; /* Alterado para centralizar o conteúdo em mobile */
+    justify-content: center;
     width: 100%;
     flex-wrap: wrap;
     gap: 8px 16px;
@@ -61,9 +61,9 @@
 }
 
 .info-table td {
-    white-space: nowrap;
     font-size: 12px;
     color: #333;
+    white-space: normal; /* ✅ deixa quebrar linha no mobile */
 }
 
 .info-table td span {
@@ -71,7 +71,7 @@
     color: #222;
 }
 
-/* --- Itens (Peças e Serviços): Estrutura com proporção fixa 50/50 --- */
+/* --- Itens (Peças e Serviços) --- */
 .items-section {
     margin-bottom: 16px;
 }
@@ -88,7 +88,6 @@
 
 .items-columns {
     display: grid;
-    /* A chave: Força uma única coluna em telas menores para empilhamento */
     grid-template-columns: 1fr;
     gap: 8px;
     list-style: none;
@@ -96,23 +95,23 @@
     padding: 0;
 }
 
-/* Cada item da lista é um flexbox */
+/* Cada item da lista */
 .items-columns li {
-    display: flex; /* Adicionado para alinhar o checkbox e o texto na mesma linha */
-    align-items: center; /* Adicionado para alinhar verticalmente */
+    display: flex;
+    align-items: center;
     font-size: 12px;
     color: #222;
     line-height: 1.4;
     padding: 4px 0;
-    white-space: nowrap; /* Impede a quebra de texto */
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;   /* ✅ permite quebra no mobile */
+    overflow: visible;
+    text-overflow: unset;
 }
 
 .checkbox-box {
     margin-right: 8px;
     flex-shrink: 0;
-    transform: scale(1.2); /* Reduzido para um tamanho menor */
+    transform: scale(1.2);
     position: relative;
     top: 2px;
     max-width: 16px;
@@ -214,10 +213,11 @@
 
 .thumb-img {
     width: 100%;
-    max-width: 100px;
+    max-width: 100%;   /* ✅ evita estourar no mobile */
     border: 1px solid #ccc;
     border-radius: 4px;
     object-fit: contain;
+    height: auto;
 }
 
 /* --- Botões --- */
@@ -247,7 +247,7 @@
     cursor: not-allowed;
 }
 
-/* --- Layout Desktop: Chave para o alinhamento 50/50 --- */
+/* --- Layout Desktop --- */
 @media (min-width: 768px) {
     .orcamento-impresso-content {
         max-width: 794px;
@@ -279,10 +279,7 @@
     .info-table td {
         font-size: 14px;
         color: #333;
-    }
-
-    .info-table td span {
-        color: #222;
+        white-space: nowrap; /* ✅ só no desktop */
     }
 
     .items-section h2 {
@@ -291,7 +288,6 @@
     }
 
     .items-columns {
-        /* AQUI ESTÁ A CHAVE: Força um grid de 2 colunas */
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 10px 40px;
@@ -300,8 +296,7 @@
     .items-columns li {
         font-size: 13px;
         color: #222;
-        /* Adicionado para impedir a quebra de linha */
-        white-space: nowrap;
+        white-space: nowrap;   /* ✅ só no desktop */
         overflow: hidden;
         text-overflow: ellipsis;
     }
@@ -371,13 +366,12 @@
   max-width: none !important;
   padding: 20px;
   box-sizing: border-box !important;
-  font-size: 12px; /* ou ajuste conforme o tamanho desejado */
-  line-height: 1.4; /* mantém o espaçamento natural */
+  font-size: 12px;
+  line-height: 1.4;
 }
 
 /* --- Estilos de impressão --- */
 @media print {
-    /* Remove sombras e background */
     body, html {
         margin: 0;
         padding: 0;
@@ -386,7 +380,7 @@
 
     @page {
         size: A4;
-        margin: 20mm; /* Margem da página */
+        margin: 20mm;
     }
 
     .orcamento-impresso-container {
@@ -399,19 +393,17 @@
 
     .orcamento-impresso-content {
         box-shadow: none !important;
-        margin: 0 auto;       /* Centraliza o conteúdo */
-        padding: 20px;        /* Margem interna */
+        margin: 0 auto;
+        padding: 20px;
         width: 100%;
-        max-width: 754px;     /* 794px - 2*20mm da página */
+        max-width: 754px;
         box-sizing: border-box;
     }
 
-    /* Oculta botões e elementos desnecessários */
     .orcamento-impresso-actions {
         display: none !important;
     }
 
-    /* Header, info e itens */
     .header-impresso {
         flex-direction: row;
         justify-content: space-between;
