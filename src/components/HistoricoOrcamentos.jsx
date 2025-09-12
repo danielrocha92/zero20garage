@@ -30,7 +30,7 @@ const CustomModal = ({
             </button>
           )}
           <button onClick={onConfirm} className="confirm-btn">
-              {confirmText}
+            {confirmText}
           </button>
         </div>
       </div>
@@ -166,12 +166,11 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
 
   // ** LÓGICA CORRIGIDA APLICADA AQUI **
   const getImagemUrl = (orcamento) => {
-    // Verifica se existe um array de 'imagens' e se ele não está vazio.
+    // Novo formato: array "imagens"
     if (Array.isArray(orcamento.imagens) && orcamento.imagens.length > 0) {
-      // Retorna a URL do primeiro item da lista.
       return orcamento.imagens[0].url || null;
     }
-    // Caso contrário, tenta encontrar a imagem em formatos antigos.
+    // Retrocompatibilidade
     return orcamento.imagem?.url || orcamento.imageUrl || null;
   };
 
@@ -221,7 +220,9 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                 <td>{formatarData(orcamento.data)}</td>
                 <td>
                   <span
-                    className={`status-tag ${getStatusTagClass(orcamento.status)}`}
+                    className={`status-tag ${getStatusTagClass(
+                      orcamento.status
+                    )}`}
                   >
                     {orcamento.status || 'Aberto'}
                   </span>
@@ -245,13 +246,22 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                   )}
                 </td>
                 <td className="acoes-icones">
-                  <button onClick={() => onViewBudget(orcamento)} title="Visualizar">
+                  <button
+                    onClick={() => onViewBudget(orcamento)}
+                    title="Visualizar"
+                  >
                     <FaEye />
                   </button>
-                  <button onClick={() => onEditarOrcamento(orcamento)} title="Editar">
+                  <button
+                    onClick={() => onEditarOrcamento(orcamento)}
+                    title="Editar"
+                  >
                     <FaEdit />
                   </button>
-                  <button onClick={() => handleExcluirOrcamento(orcamento)} title="Excluir">
+                  <button
+                    onClick={() => handleExcluirOrcamento(orcamento)}
+                    title="Excluir"
+                  >
                     <FaTrash />
                   </button>
                 </td>
@@ -267,27 +277,63 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
           <details key={`${orcamento.id}-${index}`} className="orcamento-card">
             <summary className="card-header">
               <h3>OS.: {orcamento.ordemServico || '-'}</h3>
-              <span className={`status-tag ${getStatusTagClass(orcamento.status)}`}>
+              <span
+                className={`status-tag ${getStatusTagClass(orcamento.status)}`}
+              >
                 {orcamento.status || 'Aberto'}
               </span>
             </summary>
             <div className="card-content">
-              <p><strong>Cliente:</strong> {orcamento.cliente}</p>
-              <p><strong>Veículo:</strong> {orcamento.veiculo || '-'}</p>
-              <p><strong>Tipo:</strong> {orcamento.tipo}</p>
-              <p><strong>Valor Total:</strong> R$ {Number(orcamento.valorTotal).toFixed(2)}</p>
-              <p><strong>Data/Hora:</strong> {formatarData(orcamento.data)}</p>
+              <p>
+                <strong>Cliente:</strong> {orcamento.cliente}
+              </p>
+              <p>
+                <strong>Veículo:</strong> {orcamento.veiculo || '-'}
+              </p>
+              <p>
+                <strong>Tipo:</strong> {orcamento.tipo}
+              </p>
+              <p>
+                <strong>Valor Total:</strong> R${' '}
+                {Number(orcamento.valorTotal).toFixed(2)}
+              </p>
+              <p>
+                <strong>Data/Hora:</strong> {formatarData(orcamento.data)}
+              </p>
               {getImagemUrl(orcamento) && (
                 <div>
-                  <a href={getImagemUrl(orcamento)} target="_blank" rel="noopener noreferrer">
-                    <img src={getImagemUrl(orcamento)} alt="Imagem do orçamento" crossOrigin="anonymous"/>
+                  <a
+                    href={getImagemUrl(orcamento)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={getImagemUrl(orcamento)}
+                      alt="Imagem do orçamento"
+                      crossOrigin="anonymous"
+                    />
                   </a>
                 </div>
               )}
               <div className="card-acoes">
-                <button onClick={() => onViewBudget(orcamento)} className="action-btn view-btn">Visualizar</button>
-                <button onClick={() => onEditarOrcamento(orcamento)} className="action-btn edit-btn">Editar</button>
-                <button onClick={() => handleExcluirOrcamento(orcamento)} className="action-btn delete-btn">Excluir</button>
+                <button
+                  onClick={() => onViewBudget(orcamento)}
+                  className="action-btn view-btn"
+                >
+                  Visualizar
+                </button>
+                <button
+                  onClick={() => onEditarOrcamento(orcamento)}
+                  className="action-btn edit-btn"
+                >
+                  Editar
+                </button>
+                <button
+                  onClick={() => handleExcluirOrcamento(orcamento)}
+                  className="action-btn delete-btn"
+                >
+                  Excluir
+                </button>
               </div>
             </div>
           </details>
@@ -300,11 +346,15 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
       {/* Carregar mais */}
       {hasMore && !loading && (
         <div className="load-more">
-          <button onClick={() => setPage((prev) => prev + 1)}>Carregar Mais</button>
+          <button onClick={() => setPage((prev) => prev + 1)}>
+            Carregar Mais
+          </button>
         </div>
       )}
 
-      {loading && historico.length > 0 && <div className="loading-more">Carregando mais...</div>}
+      {loading && historico.length > 0 && (
+        <div className="loading-more">Carregando mais...</div>
+      )}
     </div>
   );
 };
