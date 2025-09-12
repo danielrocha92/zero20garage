@@ -30,7 +30,7 @@ const CustomModal = ({
             </button>
           )}
           <button onClick={onConfirm} className="confirm-btn">
-            {confirmText}
+              {confirmText}
           </button>
         </div>
       </div>
@@ -164,14 +164,14 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     return !isNaN(d.getTime()) ? d.toLocaleString('pt-BR') : 'Data inválida';
   };
 
+  // ** LÓGICA CORRIGIDA APLICADA AQUI **
   const getImagemUrl = (orcamento) => {
-    if (
-      Array.isArray(orcamento.imagens) &&
-      orcamento.imagens.length &&
-      typeof orcamento.imagens[0]?.secure_url === 'string'
-    ) {
-      return orcamento.imagens[0].secure_url;
+    // Verifica se existe um array de 'imagens' e se ele não está vazio.
+    if (Array.isArray(orcamento.imagens) && orcamento.imagens.length > 0) {
+      // Retorna a URL do primeiro item da lista.
+      return orcamento.imagens[0].url || null;
     }
+    // Caso contrário, tenta encontrar a imagem em formatos antigos.
     return orcamento.imagem?.url || orcamento.imageUrl || null;
   };
 
