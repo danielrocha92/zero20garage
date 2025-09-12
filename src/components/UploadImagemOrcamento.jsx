@@ -1,30 +1,24 @@
-// src/components/UploadImagemOrcamento.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import './UploadImagemOrcamento.css';
 import { AiOutlineUpload, AiOutlineDelete, AiOutlineEye } from 'react-icons/ai';
 
-// URL base do backend para upload de imagens de orçamentos
 const API_BASE_URL = 'https://zero20-upload-api.onrender.com/api/orcamentos';
 
 const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess, imagemAtual = [] }) => {
-  // Estado local
-  const [selectedFiles, setSelectedFiles] = useState([]); // arquivos escolhidos mas ainda não enviados
-  const [uploading, setUploading] = useState(false);      // indica se está enviando
-  const [progress, setProgress] = useState(0);           // progresso do upload em %
-  const [error, setError] = useState(null);             // mensagem de erro
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [error, setError] = useState(null);
 
-  // Pega o token de autenticação do localStorage
   const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
 
-  /** Seleção de arquivos */
   const handleFileChange = (e) => {
     setSelectedFiles(Array.from(e.target.files));
     setProgress(0);
     setError(null);
   };
 
-  /** Upload de arquivos para o backend / Cloudinary */
   const handleUpload = async () => {
     if (!selectedFiles.length) return;
 
@@ -32,7 +26,6 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess, imagemAtual = [] 
     setProgress(0);
     setError(null);
 
-    // Cria FormData para envio multipart/form-data
     const formData = new FormData();
     selectedFiles.forEach((file) => formData.append('imagens', file));
 
@@ -52,9 +45,8 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess, imagemAtual = [] 
         }
       );
 
-      // Limpa os arquivos selecionados e envia para o componente pai
       setSelectedFiles([]);
-      if (onUploadSuccess) onUploadSuccess(res.data.files);
+      if (onUploadSuccess) onUploadSuccess(res.data.imagens); // <- usa imagens do backend
     } catch (err) {
       console.error('Erro no upload:', err);
       setError(
@@ -68,14 +60,12 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess, imagemAtual = [] 
     }
   };
 
-  /** Remover arquivo ainda não enviado */
   const handleRemoveSelectedFile = (idx) => {
     setSelectedFiles((prev) => prev.filter((_, i) => i !== idx));
   };
 
   return (
     <div className="upload-imagem-orcamento">
-      {/* Área de upload */}
       <div className="upload-area">
         <label htmlFor="file-upload" className="dropzone">
           <AiOutlineUpload size={40} />
@@ -99,14 +89,12 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess, imagemAtual = [] 
         </button>
       </div>
 
-      {/* Barra de progresso */}
       {uploading && (
         <div className="progress-bar">
           <div style={{ width: `${progress}%` }} />
         </div>
       )}
 
-      {/* Pré-visualização das imagens selecionadas */}
       {selectedFiles.length > 0 && (
         <div className="selected-images">
           <h4>Pré-visualização ({selectedFiles.length}):</h4>
@@ -132,7 +120,6 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess, imagemAtual = [] 
         </div>
       )}
 
-      {/* Exibição das imagens já enviadas */}
       {imagemAtual.length > 0 && (
         <div className="existing-images">
           <h4>Imagens já enviadas:</h4>
@@ -154,7 +141,6 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess, imagemAtual = [] 
         </div>
       )}
 
-      {/* Mensagem de erro */}
       {error && <p className="upload-error">{error}</p>}
     </div>
   );
