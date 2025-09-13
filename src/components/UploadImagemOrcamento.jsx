@@ -7,7 +7,7 @@ const API_BASE_URL = 'https://zero20-upload-api.onrender.com/api/orcamentos';
 
 const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const [previewFiles, setPreviewFiles] = useState([]); // URLs temporárias para preview
+  const [previewFiles, setPreviewFiles] = useState([]);
   const [imagemAtual, setImagemAtual] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -15,6 +15,15 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
   const [modalImage, setModalImage] = useState(null);
 
   const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
+
+  // --- Função utilitária para obter URL da imagem ---
+  const getImageUrl = (img) => {
+    if (!img) return '';
+    if (typeof img === 'string') return img;
+    if (img.url) return img.url;
+    if (img.uri) return img.uri;
+    return '';
+  };
 
   // --- Busca imagens já enviadas ---
   useEffect(() => {
@@ -27,7 +36,7 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
         });
         setImagemAtual(res.data.imagens || []);
       } catch (err) {
-        console.error("Erro ao buscar imagens do orçamento:", err);
+        console.error('Erro ao buscar imagens do orçamento:', err);
       }
     };
 
@@ -36,12 +45,10 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
 
   // --- Preview de arquivos selecionados ---
   useEffect(() => {
-    // Cria URLs para preview
-    const objectUrls = selectedFiles.map(file => URL.createObjectURL(file));
+    const objectUrls = selectedFiles.map((file) => URL.createObjectURL(file));
     setPreviewFiles(objectUrls);
 
-    // Limpeza ao desmontar ou trocar arquivos
-    return () => objectUrls.forEach(url => URL.revokeObjectURL(url));
+    return () => objectUrls.forEach((url) => URL.revokeObjectURL(url));
   }, [selectedFiles]);
 
   const handleFileChange = (e) => {
@@ -83,8 +90,8 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
       console.error('Erro no upload:', err);
       setError(
         err.response?.data?.error ||
-        err.message ||
-        'Erro desconhecido ao enviar imagens.'
+          err.message ||
+          'Erro desconhecido ao enviar imagens.'
       );
     } finally {
       setUploading(false);
@@ -94,18 +101,24 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
 
   const handleRemoveSelectedFile = (idx) => {
     setSelectedFiles((prev) => prev.filter((_, i) => i !== idx));
+    setPreviewFiles((prev) => prev.filter((_, i) => i !== idx));
   };
 
   const handleRemoveUploadedImage = async (public_id) => {
     try {
-      await axios.delete(`${API_BASE_URL}/${orcamentoId}/imagens/${public_id}`, {
-        headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
-      });
+      await axios.delete(
+        `${API_BASE_URL}/${orcamentoId}/imagens/${public_id}`,
+        {
+          headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
+        }
+      );
 
-      setImagemAtual((prev) => prev.filter((img) => img.public_id !== public_id));
+      setImagemAtual((prev) =>
+        prev.filter((img) => img.public_id !== public_id)
+      );
     } catch (err) {
-      console.error("Erro ao remover imagem:", err);
-      setError("Erro ao remover a imagem.");
+      console.error('Erro ao remover imagem:', err);
+      setError('Erro ao remover a imagem.');
     }
   };
 
@@ -150,7 +163,7 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
               <div key={idx} className="image-item">
                 <img
                   src={url}
-                  alt={selectedFiles[idx].name}
+                  alt={selectedFiles[idx]?.name || `Pré-visualização ${idx + 1}`}
                   className="image-preview"
                 />
                 <AiOutlineDelete
@@ -169,9 +182,12 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
           <h4>Imagens já enviadas:</h4>
           <div className="image-list">
             {imagemAtual.map((img, idx) => {
-              const imgSrc = img.url || img.uri || img;
+              const imgSrc = getImageUrl(img);
               return (
-                <div key={img.public_id || imgSrc || idx} className="image-item">
+                <div
+                  key={img.public_id || idx}
+                  className="image-item"
+                >
                   <img
                     src={imgSrc}
                     alt={`Imagem ${idx + 1}`}
@@ -206,7 +222,11 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
               className="modal-close"
               onClick={() => setModalImage(null)}
             />
-            <img src={modalImage} alt="Visualização" className="modal-image" />
+            <img
+              src={modalImage}
+              alt="Visualização"
+              className="modal-image"
+            />
           </div>
         </div>
       )}
