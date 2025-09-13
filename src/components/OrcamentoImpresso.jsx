@@ -17,13 +17,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     return `R$ ${num.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
   };
 
-  // --- Funções utilitárias para Cloudinary e imagens ---
   const isCloudinaryUrl = (url) => typeof url === 'string' && url.includes('/upload/');
-  const getCloudinaryThumb = (url) => {
-    if (!isCloudinaryUrl(url)) return url;
-    const [base, after] = url.split('/upload/');
-    return base + '/upload/w_240,c_limit,q_auto,f_auto/' + after;
-  };
   const getCloudinaryOriginal = useCallback((url) => {
     if (!isCloudinaryUrl(url)) return url;
     const [base, after] = url.split('/upload/');
@@ -67,6 +61,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
 
   const appendOriginalImagesToPdf = async (pdf, imagens) => {
     if (!imagens || imagens.length === 0) return;
+
     const dataUrls = [];
     for (const it of imagens) {
       const dataUrl = await getOriginalImageAsDataUrl(it);
@@ -128,8 +123,8 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
 
       const imgData = canvas.toDataURL('image/png');
 
-      const pdfWidth = 210; // mm
-      const margin = 20; // mm
+      const pdfWidth = 210;
+      const margin = 20;
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width + 2 * margin;
       const pdf = new jsPDF('portrait', 'mm', [pdfWidth, pdfHeight]);
 
@@ -169,28 +164,25 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
 
   let formattedDate = '___________';
   if (orcamento?.data) {
-    const dateToFormat =
-      typeof orcamento.data === 'object' && orcamento.data._seconds
-        ? dayjs.unix(orcamento.data._seconds)
-        : dayjs(orcamento.data);
+    const dateToFormat = typeof orcamento.data === 'object' && orcamento.data._seconds
+      ? dayjs.unix(orcamento.data._seconds)
+      : dayjs(orcamento.data);
     if (dateToFormat.isValid()) formattedDate = dateToFormat.format('DD/MM/YYYY HH:mm');
   }
 
-  // --- Componente interno para preview de imagens ---
   const ImagensVeiculo = ({ imagens }) => {
     const [objectUrls, setObjectUrls] = useState([]);
 
     useEffect(() => {
       const urls = imagens.map(img => {
         if (img instanceof File) return URL.createObjectURL(img);
-        if (typeof img === 'string') return getCloudinaryThumb(img);
+        if (typeof img === 'string') return img;
         if (img?.data?.data) return `data:image/jpeg;base64,${img.data.data}`;
         if (img?.url) return img.url;
         if (img?.uri) return img.uri;
         return '';
       });
       setObjectUrls(urls);
-
       return () => urls.forEach(url => url.startsWith('blob:') && URL.revokeObjectURL(url));
     }, [imagens]);
 
