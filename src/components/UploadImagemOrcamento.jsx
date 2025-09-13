@@ -25,6 +25,10 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
     return '';
   };
 
+  const handleImageError = (e) => {
+    e.currentTarget.src = '/placeholder.png'; // fallback caso 404
+  };
+
   // --- Busca imagens já enviadas ---
   useEffect(() => {
     if (!orcamentoId) return;
@@ -34,7 +38,8 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
         const res = await axios.get(`${API_BASE_URL}/${orcamentoId}`, {
           headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
         });
-        setImagemAtual(res.data.imagens || []);
+        const validImages = (res.data.imagens || []).filter(img => getImageUrl(img));
+        setImagemAtual(validImages);
       } catch (err) {
         console.error('Erro ao buscar imagens do orçamento:', err);
       }
@@ -84,14 +89,15 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
       );
 
       setSelectedFiles([]);
-      setImagemAtual(res.data.imagens || []);
-      if (onUploadSuccess) onUploadSuccess(res.data.imagens || []);
+      const validImages = (res.data.imagens || []).filter(img => getImageUrl(img));
+      setImagemAtual(validImages);
+      if (onUploadSuccess) onUploadSuccess(validImages);
     } catch (err) {
       console.error('Erro no upload:', err);
       setError(
         err.response?.data?.error ||
-          err.message ||
-          'Erro desconhecido ao enviar imagens.'
+        err.message ||
+        'Erro desconhecido ao enviar imagens.'
       );
     } finally {
       setUploading(false);
@@ -165,6 +171,7 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
                   src={url}
                   alt={selectedFiles[idx]?.name || `Pré-visualização ${idx + 1}`}
                   className="image-preview"
+                  onError={handleImageError}
                 />
                 <AiOutlineDelete
                   className="delete-icon"
@@ -184,15 +191,13 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
             {imagemAtual.map((img, idx) => {
               const imgSrc = getImageUrl(img);
               return (
-                <div
-                  key={img.public_id || idx}
-                  className="image-item"
-                >
+                <div key={img.public_id || idx} className="image-item">
                   <img
                     src={imgSrc}
                     alt={`Imagem ${idx + 1}`}
                     className="image-preview"
                     onClick={() => setModalImage(imgSrc)}
+                    onError={handleImageError}
                   />
                   <div className="image-actions">
                     <AiOutlineEye
@@ -226,6 +231,7 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
               src={modalImage}
               alt="Visualização"
               className="modal-image"
+              onError={handleImageError}
             />
           </div>
         </div>

@@ -180,6 +180,28 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     return null;
   };
 
+  // 🔹 Pré-carregar imagens antes de editar
+  const preloadImages = async (orcamento) => {
+    if (!orcamento?.imagens || orcamento.imagens.length === 0) return [];
+
+    const loadedImages = await Promise.all(
+      orcamento.imagens.map(async (img) => {
+        if (typeof img === 'string') return img;
+        if (img?.url) return img.url;
+        if (img?.uri) return img.uri;
+        if (img?.data?.data) return `data:image/jpeg;base64,${img.data.data}`;
+        return null;
+      })
+    );
+
+    return loadedImages.filter(Boolean);
+  };
+
+  const handleEditar = async (orcamento) => {
+    const imagensPreload = await preloadImages(orcamento);
+    onEditarOrcamento({ ...orcamento, imagens: imagensPreload });
+  };
+
   if (loading && historico.length === 0) return <div className="loading-message">Carregando histórico...</div>;
   if (error && historico.length === 0) return <div className="error-message">{error}</div>;
   if (historico.length === 0) return <div className="no-data-message">Nenhum orçamento encontrado.</div>;
@@ -237,7 +259,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                   <button onClick={() => onViewBudget(orcamento)} title="Visualizar" >
                     <FaEye />
                   </button>
-                  <button onClick={() => onEditarOrcamento(orcamento)} title="Editar" >
+                  <button onClick={() => handleEditar(orcamento)} title="Editar" >
                     <FaEdit />
                   </button>
                   <button onClick={() => handleExcluirOrcamento(orcamento)} title="Excluir" >
@@ -286,7 +308,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                 <button onClick={() => onViewBudget(orcamento)} className="action-btn view-btn" >
                   Visualizar
                 </button>
-                <button onClick={() => onEditarOrcamento(orcamento)} className="action-btn edit-btn" >
+                <button onClick={() => handleEditar(orcamento)} className="action-btn edit-btn" >
                   Editar
                 </button>
                 <button onClick={() => handleExcluirOrcamento(orcamento)} className="action-btn delete-btn" >
