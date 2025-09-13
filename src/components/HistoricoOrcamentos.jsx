@@ -1,4 +1,3 @@
-// src/components/HistoricoOrcamentos.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './HistoricoOrcamentos.css';
@@ -8,16 +7,7 @@ const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
 const PAGE_SIZE = 10;
 
 // --- Modal Customizado ---
-const CustomModal = ({
-  isOpen,
-  title,
-  message,
-  onConfirm,
-  onCancel,
-  confirmText = 'OK',
-  cancelText = 'Cancelar',
-  showCancel = false,
-}) => {
+const CustomModal = ({ isOpen, title, message, onConfirm, onCancel, confirmText = 'OK', cancelText = 'Cancelar', showCancel = false, }) => {
   if (!isOpen) return null;
   return (
     <div className="custom-modal-overlay">
@@ -45,7 +35,6 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-
   const [modalConfig, setModalConfig] = useState({
     isOpen: false,
     title: '',
@@ -57,19 +46,23 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     showCancel: false,
   });
 
-  const abrirModal = (config) =>
-    setModalConfig({ ...modalConfig, isOpen: true, ...config });
+  const abrirModal = (config) => setModalConfig({ ...modalConfig, isOpen: true, ...config });
   const fecharModal = () => setModalConfig({ ...modalConfig, isOpen: false });
 
-  const authToken =
-    typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
+  const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
 
   // --- Buscar histórico da API ---
   const buscarHistorico = async () => {
-    if (loading || !hasMore) return;
+    if (loading) return;
+
+    // Resetar o estado se for a primeira página
+    if (page === 1) {
+      setHistorico([]);
+      setHasMore(true);
+    }
+
     setLoading(true);
     setError(null);
-
     try {
       const res = await axios.get(`${API_BASE_URL}/api/orcamentos`, {
         params: { page, size: PAGE_SIZE },
@@ -81,19 +74,26 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
         return;
       }
 
-      // --- Usar imagens direto do objeto de cada orçamento ---
-      const historicoComImagens = res.data.map((orc) => ({
+      const novosOrcamentos = res.data.map((orc) => ({
         ...orc,
         imagens: orc.imagens || [],
       }));
 
-      setHistorico((prev) => [...prev, ...historicoComImagens]);
+      // Lógica de desduplicação e concatenação
+      setHistorico((prev) => {
+        const combined = page === 1 ? novosOrcamentos : [...prev, ...novosOrcamentos];
+        const unique = combined.filter((orc, index, self) =>
+          index === self.findIndex((o) => o.id === orc.id)
+        );
+        return unique;
+      });
+
       setHasMore(res.data.length === PAGE_SIZE);
+
     } catch (err) {
       console.error('Erro ao buscar histórico:', err);
       let mensagemErro = 'Erro ao carregar histórico de orçamentos.';
-      if (err.response?.data?.erro)
-        mensagemErro += ` Detalhes: ${err.response.data.erro}`;
+      if (err.response?.data?.erro) mensagemErro += ` Detalhes: ${err.response.data.erro}`;
       else if (err.message) mensagemErro += ` (${err.message})`;
       setError(mensagemErro);
     } finally {
@@ -101,19 +101,15 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     }
   };
 
-  // --- Busca inicial e ao mudar página ---
   useEffect(() => {
     buscarHistorico();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
-  // --- Excluir orçamento ---
   const handleExcluirOrcamento = (orcamento) => {
     abrirModal({
       title: 'Confirmar Exclusão',
-      message: `Tem certeza que deseja excluir o orçamento de ${
-        orcamento.cliente || 'cliente desconhecido'
-      } (OS: ${orcamento.ordemServico || '-'})?`,
+      message: `Tem certeza que deseja excluir o orçamento de ${ orcamento.cliente || 'cliente desconhecido' } (OS: ${orcamento.ordemServico || '-'})?`,
       confirmText: 'Sim, excluir',
       cancelText: 'Cancelar',
       showCancel: true,
@@ -134,10 +130,8 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
         } catch (err) {
           console.error('Erro ao excluir orçamento:', err);
           let mensagemErro = 'Erro ao excluir orçamento.';
-          if (err.response?.data?.erro)
-            mensagemErro += ` Detalhes: ${err.response.data.erro}`;
+          if (err.response?.data?.erro) mensagemErro += ` Detalhes: ${err.response.data.erro}`;
           else if (err.message) mensagemErro += ` (${err.message})`;
-
           abrirModal({
             title: 'Erro',
             message: mensagemErro,
@@ -151,17 +145,12 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     });
   };
 
-  // --- Utilitários ---
   const getStatusTagClass = (status) => {
     switch (status) {
-      case 'Aberto':
-        return 'amarelo';
-      case 'Concluído':
-        return 'verde';
-      case 'Cancelado':
-        return 'vermelho';
-      default:
-        return '';
+      case 'Aberto': return 'amarelo';
+      case 'Concluído': return 'verde';
+      case 'Cancelado': return 'vermelho';
+      default: return '';
     }
   };
 
@@ -171,7 +160,6 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     return !isNaN(d.getTime()) ? d.toLocaleString('pt-BR') : 'Data inválida';
   };
 
-  // --- Thumbnail Cloudinary ---
   const getCloudinaryThumb = (url) => {
     if (!url || typeof url !== 'string' || !url.includes('/upload/')) return url;
     const [base, after] = url.split('/upload/');
@@ -179,15 +167,11 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     let firstSeg = parts[0];
     let rest = parts.slice(1).join('/');
     if (/^v\d+$/i.test(firstSeg)) firstSeg = '';
-    return `${base}/upload/w_240,c_limit,q_auto,f_auto${
-      firstSeg ? ',' + firstSeg : ''
-    }/${rest}`;
+    return `${base}/upload/w_240,c_limit,q_auto,f_auto${ firstSeg ? ',' + firstSeg : '' }/${rest}`;
   };
 
-  // --- Pegar só a primeira imagem ---
   const getImagemUrl = (orcamento) => {
     if (!orcamento?.imagens || orcamento.imagens.length === 0) return null;
-
     const img = orcamento.imagens[0];
     if (typeof img === 'string') return getCloudinaryThumb(img);
     if (img?.url) return getCloudinaryThumb(img.url);
@@ -196,13 +180,9 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     return null;
   };
 
-  // --- Render ---
-  if (loading && historico.length === 0)
-    return <div className="loading-message">Carregando histórico...</div>;
-  if (error && historico.length === 0)
-    return <div className="error-message">{error}</div>;
-  if (historico.length === 0)
-    return <div className="no-data-message">Nenhum orçamento encontrado.</div>;
+  if (loading && historico.length === 0) return <div className="loading-message">Carregando histórico...</div>;
+  if (error && historico.length === 0) return <div className="error-message">{error}</div>;
+  if (historico.length === 0) return <div className="no-data-message">Nenhum orçamento encontrado.</div>;
 
   return (
     <div id="ancora-historico-orcamentos" className="tabela-historico">
@@ -214,7 +194,6 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
           </button>
         )}
       </div>
-
       {/* Desktop */}
       <div className="historico-desktop">
         <table className="tabela-light">
@@ -241,49 +220,27 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                 <td>R$ {Number(orcamento.valorTotal).toFixed(2)}</td>
                 <td>{formatarData(orcamento.data)}</td>
                 <td>
-                  <span
-                    className={`status-tag ${getStatusTagClass(
-                      orcamento.status
-                    )}`}
-                  >
+                  <span className={`status-tag ${getStatusTagClass( orcamento.status )}`} >
                     {orcamento.status || 'Aberto'}
                   </span>
                 </td>
                 <td>
                   {getImagemUrl(orcamento) ? (
-                    <a
-                      href={getImagemUrl(orcamento)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img
-                        src={getImagemUrl(orcamento)}
-                        alt="Imagem do orçamento"
-                        style={{ width: '80px', borderRadius: '6px' }}
-                        crossOrigin="anonymous"
-                      />
+                    <a href={getImagemUrl(orcamento)} target="_blank" rel="noopener noreferrer" >
+                      <img src={getImagemUrl(orcamento)} alt="Imagem do orçamento" style={{ width: '80px', borderRadius: '6px' }} crossOrigin="anonymous" />
                     </a>
                   ) : (
                     '-'
                   )}
                 </td>
                 <td className="acoes-icones">
-                  <button
-                    onClick={() => onViewBudget(orcamento)}
-                    title="Visualizar"
-                  >
+                  <button onClick={() => onViewBudget(orcamento)} title="Visualizar" >
                     <FaEye />
                   </button>
-                  <button
-                    onClick={() => onEditarOrcamento(orcamento)}
-                    title="Editar"
-                  >
+                  <button onClick={() => onEditarOrcamento(orcamento)} title="Editar" >
                     <FaEdit />
                   </button>
-                  <button
-                    onClick={() => handleExcluirOrcamento(orcamento)}
-                    title="Excluir"
-                  >
+                  <button onClick={() => handleExcluirOrcamento(orcamento)} title="Excluir" >
                     <FaTrash />
                   </button>
                 </td>
@@ -292,16 +249,13 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
           </tbody>
         </table>
       </div>
-
       {/* Mobile */}
       <div className="historico-mobile">
         {historico.map((orcamento, index) => (
           <details key={`${orcamento.id}-${index}`} className="orcamento-card">
             <summary className="card-header">
               <h3>OS.: {orcamento.ordemServico || '-'}</h3>
-              <span
-                className={`status-tag ${getStatusTagClass(orcamento.status)}`}
-              >
+              <span className={`status-tag ${getStatusTagClass(orcamento.status)}`} >
                 {orcamento.status || 'Aberto'}
               </span>
             </summary>
@@ -316,45 +270,26 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                 <strong>Tipo:</strong> {orcamento.tipo}
               </p>
               <p>
-                <strong>Valor Total:</strong> R${' '}
-                {Number(orcamento.valorTotal).toFixed(2)}
+                <strong>Valor Total:</strong> R$ {Number(orcamento.valorTotal).toFixed(2)}
               </p>
               <p>
                 <strong>Data/Hora:</strong> {formatarData(orcamento.data)}
               </p>
               {getImagemUrl(orcamento) && (
                 <div>
-                  <a
-                    href={getImagemUrl(orcamento)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      src={getImagemUrl(orcamento)}
-                      alt="Imagem do orçamento"
-                      style={{ width: '100%', borderRadius: '6px' }}
-                      crossOrigin="anonymous"
-                    />
+                  <a href={getImagemUrl(orcamento)} target="_blank" rel="noopener noreferrer" >
+                    <img src={getImagemUrl(orcamento)} alt="Imagem do orçamento" style={{ width: '100%', borderRadius: '6px' }} crossOrigin="anonymous" />
                   </a>
                 </div>
               )}
               <div className="card-acoes">
-                <button
-                  onClick={() => onViewBudget(orcamento)}
-                  className="action-btn view-btn"
-                >
+                <button onClick={() => onViewBudget(orcamento)} className="action-btn view-btn" >
                   Visualizar
                 </button>
-                <button
-                  onClick={() => onEditarOrcamento(orcamento)}
-                  className="action-btn edit-btn"
-                >
+                <button onClick={() => onEditarOrcamento(orcamento)} className="action-btn edit-btn" >
                   Editar
                 </button>
-                <button
-                  onClick={() => handleExcluirOrcamento(orcamento)}
-                  className="action-btn delete-btn"
-                >
+                <button onClick={() => handleExcluirOrcamento(orcamento)} className="action-btn delete-btn" >
                   Excluir
                 </button>
               </div>
@@ -362,10 +297,8 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
           </details>
         ))}
       </div>
-
       {/* Modal */}
       <CustomModal {...modalConfig} />
-
       {/* Carregar mais */}
       {hasMore && !loading && (
         <div className="load-more">
@@ -374,7 +307,6 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
           </button>
         </div>
       )}
-
       {loading && historico.length > 0 && (
         <div className="loading-more">Carregando mais...</div>
       )}
