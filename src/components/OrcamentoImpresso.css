@@ -63,7 +63,7 @@
 .info-table td {
     font-size: 12px;
     color: #333;
-    white-space: normal; /* ✅ deixa quebrar linha no mobile */
+    white-space: normal;
 }
 
 .info-table td span {
@@ -103,7 +103,7 @@
     color: #222;
     line-height: 1.4;
     padding: 4px 0;
-    white-space: normal;   /* ✅ permite quebra no mobile */
+    white-space: normal;
     overflow: visible;
     text-overflow: unset;
 }
@@ -189,35 +189,32 @@
     color: #222 !important;
 }
 
-/* --- Imagens --- */
-.imagens-section {
-    margin-top: 16px;
-}
-
-.imagens-section h2 {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 14px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 4px;
-    margin-bottom: 10px;
-    color: #222;
-    font-weight: 700;
-}
-
+/* --- Grid responsivo de imagens --- */
 .imagens-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    justify-items: center;
+}
+
+.thumb-wrapper {
+    width: 100%;
+    max-width: 200px;
+    overflow: hidden;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    transition: transform 0.3s;
+}
+
+.thumb-wrapper:hover {
+    transform: scale(1.05);
 }
 
 .thumb-img {
     width: 100%;
-    max-width: 100%;   /* ✅ evita estourar no mobile */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    object-fit: contain;
     height: auto;
+    object-fit: cover;
+    display: block;
 }
 
 /* --- Botões --- */
@@ -238,7 +235,7 @@
     font-weight: 700;
     transition: background-color 0.3s;
     color: white;
-    background-color: #3f51b5;
+    background-color: #e60012; /* ZER0 20 GARAGE™ vermelho */
     width: 100%;
 }
 
@@ -279,7 +276,7 @@
     .info-table td {
         font-size: 14px;
         color: #333;
-        white-space: nowrap; /* ✅ só no desktop */
+        white-space: nowrap;
     }
 
     .items-section h2 {
@@ -288,26 +285,15 @@
     }
 
     .items-columns {
-        display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 10px 40px;
     }
 
     .items-columns li {
         font-size: 13px;
-        color: #222;
-        white-space: nowrap;   /* ✅ só no desktop */
+        white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-    }
-
-    .total-section {
-        margin-right: 0;
-    }
-
-    .total-line-impresso {
-        font-size: 15px;
-        color: #333;
     }
 
     .final-total {
@@ -317,30 +303,18 @@
 
     .extra-info-section-impresso p {
         font-size: 14px;
-        color: #333;
     }
 
     .policy-footer h4 {
         font-size: 16px;
-        color: #222;
     }
 
     .policy-footer p {
         font-size: 13px;
-        color: #333;
-    }
-
-    .policy-acceptance {
-        color: #222 !important;
     }
 
     .imagens-section h2 {
         font-size: 18px;
-        color: #222;
-    }
-
-    .imagens-container {
-        justify-content: flex-start;
     }
 
     .thumb-img {
@@ -454,4 +428,12 @@
         margin: 0;
         padding: 0;
     }
+}
+
+.orcamento-impresso-imagens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+  margin-top: 16px;
 }

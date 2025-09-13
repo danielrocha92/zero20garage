@@ -1,3 +1,4 @@
+// src/components/HistoricoOrcamentos.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './HistoricoOrcamentos.css';
@@ -80,7 +81,13 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
         return;
       }
 
-      setHistorico((prev) => [...prev, ...res.data]);
+      // --- Usar imagens direto do objeto de cada orçamento ---
+      const historicoComImagens = res.data.map((orc) => ({
+        ...orc,
+        imagens: orc.imagens || [],
+      }));
+
+      setHistorico((prev) => [...prev, ...historicoComImagens]);
       setHasMore(res.data.length === PAGE_SIZE);
     } catch (err) {
       console.error('Erro ao buscar histórico:', err);
@@ -164,14 +171,29 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
     return !isNaN(d.getTime()) ? d.toLocaleString('pt-BR') : 'Data inválida';
   };
 
-  // ** LÓGICA CORRIGIDA APLICADA AQUI **
+  // --- Thumbnail Cloudinary ---
+  const getCloudinaryThumb = (url) => {
+    if (!url || typeof url !== 'string' || !url.includes('/upload/')) return url;
+    const [base, after] = url.split('/upload/');
+    const parts = after.split('/');
+    let firstSeg = parts[0];
+    let rest = parts.slice(1).join('/');
+    if (/^v\d+$/i.test(firstSeg)) firstSeg = '';
+    return `${base}/upload/w_240,c_limit,q_auto,f_auto${
+      firstSeg ? ',' + firstSeg : ''
+    }/${rest}`;
+  };
+
+  // --- Pegar só a primeira imagem ---
   const getImagemUrl = (orcamento) => {
-    // Novo formato: array "imagens"
-    if (Array.isArray(orcamento.imagens) && orcamento.imagens.length > 0) {
-      return orcamento.imagens[0].url || null;
-    }
-    // Retrocompatibilidade
-    return orcamento.imagem?.url || orcamento.imageUrl || null;
+    if (!orcamento?.imagens || orcamento.imagens.length === 0) return null;
+
+    const img = orcamento.imagens[0];
+    if (typeof img === 'string') return getCloudinaryThumb(img);
+    if (img?.url) return getCloudinaryThumb(img.url);
+    if (img?.uri) return img.uri;
+    if (img?.data?.data) return `data:image/jpeg;base64,${img.data.data}`;
+    return null;
   };
 
   // --- Render ---
@@ -310,6 +332,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
                     <img
                       src={getImagemUrl(orcamento)}
                       alt="Imagem do orçamento"
+                      style={{ width: '100%', borderRadius: '6px' }}
                       crossOrigin="anonymous"
                     />
                   </a>

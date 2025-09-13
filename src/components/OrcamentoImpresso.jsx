@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 import dayjs from 'dayjs';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -17,7 +17,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     return `R$ ${num.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
   };
 
-  // --- Helpers Cloudinary ---
+  // --- Funções utilitárias para Cloudinary e imagens ---
   const isCloudinaryUrl = (url) => typeof url === 'string' && url.includes('/upload/');
   const getCloudinaryThumb = (url) => {
     if (!isCloudinaryUrl(url)) return url;
@@ -67,6 +67,8 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
         return dataUrl;
       }
       if (img?.data?.data) return `data:image/jpeg;base64,${img.data.data}`;
+      if (img?.url) return await toPngDataUrlFromSrc(img.url);
+      if (img?.uri) return await toPngDataUrlFromSrc(img.uri);
     } catch (e) {
       console.warn('Falha ao preparar imagem para PDF:', e);
     }
@@ -110,7 +112,6 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     }
   };
 
-  // --- Geração PDF contínuo ---
   const handleSharePdf = async () => {
     if (!componentRef.current || isPdfGenerating) return;
     setIsPdfGenerating(true);
@@ -185,6 +186,42 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     if (dateToFormat.isValid()) formattedDate = dateToFormat.format('DD/MM/YYYY HH:mm');
   }
 
+  // --- Componente interno para preview de imagens ---
+  const ImagensVeiculo = ({ imagens }) => {
+    const [objectUrls, setObjectUrls] = useState([]);
+
+    useEffect(() => {
+      const urls = imagens.map(img => {
+        if (img instanceof File) return URL.createObjectURL(img);
+        if (typeof img === 'string') return getCloudinaryThumb(img);
+        if (img?.data?.data) return `data:image/jpeg;base64,${img.data.data}`;
+        if (img?.url) return img.url;
+        if (img?.uri) return img.uri;
+        return '';
+      });
+      setObjectUrls(urls);
+
+      return () => {
+        urls.forEach(url => {
+          if (url.startsWith('blob:')) URL.revokeObjectURL(url);
+        });
+      };
+    }, [imagens]);
+
+    return (
+      <section className="imagens-section">
+        <h2>Imagens do Veículo</h2>
+        <div className="imagens-container">
+          {objectUrls.map((src, idx) => (
+            <div key={idx} className="thumb-wrapper">
+              <img src={src} alt={`Foto ${idx + 1}`} className="thumb-img" />
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  };
+
   return (
     <div className="orcamento-impresso-container">
       <div className="orcamento-impresso-content" ref={componentRef}>
@@ -258,6 +295,9 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           {showObservacoes && <p className="observations"><strong>Observações:</strong> {orcamento.observacoes}</p>}
         </div>
 
+        {/* Preview de Imagens */}
+        {showImages && <ImagensVeiculo imagens={orcamento.imagens} />}
+
         {/* Política */}
         <section className="policy-footer">
           <h4>Política de Garantia, Troca e Devolução</h4>
@@ -268,22 +308,6 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           <p>Não haverá reembolso de peças já instaladas no veículo, sob nenhuma circunstância.</p>
           <p className="policy-acceptance">Ao aceitar o orçamento e iniciar o serviço com a Zero 20 Garage, o cliente declara estar ciente e de acordo com os termos descritos acima.</p>
         </section>
-
-        {/* Imagens */}
-        {showImages && (
-          <section className="imagens-section">
-            <h2>Imagens do Veículo</h2>
-            <div className="imagens-container">
-              {orcamento.imagens.map((img, idx) => {
-                let thumbSrc = '';
-                if (typeof img === 'string') thumbSrc = getCloudinaryThumb(img);
-                else if (img instanceof File) thumbSrc = URL.createObjectURL(img);
-                else if (img?.data?.data) thumbSrc = `data:image/jpeg;base64,${img.data.data}`;
-                return <img key={idx} src={thumbSrc} alt={`Foto ${idx + 1}`} className="thumb-img" />;
-              })}
-            </div>
-          </section>
-        )}
       </div>
 
       {/* Ações */}

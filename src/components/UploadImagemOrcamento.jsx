@@ -1,17 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './UploadImagemOrcamento.css';
-import { AiOutlineUpload, AiOutlineDelete, AiOutlineEye } from 'react-icons/ai';
+import { AiOutlineUpload, AiOutlineDelete, AiOutlineEye, AiOutlineClose } from 'react-icons/ai';
 
 const API_BASE_URL = 'https://zero20-upload-api.onrender.com/api/orcamentos';
 
-const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess, imagemAtual = [] }) => {
+const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [previewFiles, setPreviewFiles] = useState([]); // URLs temporárias para preview
+  const [imagemAtual, setImagemAtual] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState(null);
+  const [modalImage, setModalImage] = useState(null);
 
   const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
+
+  // --- Busca imagens já enviadas ---
+  useEffect(() => {
+    if (!orcamentoId) return;
+
+    const fetchOrcamento = async () => {
+      try {
+        const res = await axios.get(`${API_BASE_URL}/${orcamentoId}`, {
+          headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
+        });
+        setImagemAtual(res.data.imagens || []);
+      } catch (err) {
+        console.error("Erro ao buscar imagens do orçamento:", err);
+      }
+    };
+
+    fetchOrcamento();
+  }, [orcamentoId, authToken]);
+
+  // --- Preview de arquivos selecionados ---
+  useEffect(() => {
+    // Cria URLs para preview
+    const objectUrls = selectedFiles.map(file => URL.createObjectURL(file));
+    setPreviewFiles(objectUrls);
+
+    // Limpeza ao desmontar ou trocar arquivos
+    return () => objectUrls.forEach(url => URL.revokeObjectURL(url));
+  }, [selectedFiles]);
 
   const handleFileChange = (e) => {
     setSelectedFiles(Array.from(e.target.files));
@@ -46,7 +77,8 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess, imagemAtual = [] 
       );
 
       setSelectedFiles([]);
-      if (onUploadSuccess) onUploadSuccess(res.data.imagens); // <- usa imagens do backend
+      setImagemAtual(res.data.imagens || []);
+      if (onUploadSuccess) onUploadSuccess(res.data.imagens || []);
     } catch (err) {
       console.error('Erro no upload:', err);
       setError(
@@ -64,8 +96,22 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess, imagemAtual = [] 
     setSelectedFiles((prev) => prev.filter((_, i) => i !== idx));
   };
 
+  const handleRemoveUploadedImage = async (public_id) => {
+    try {
+      await axios.delete(`${API_BASE_URL}/${orcamentoId}/imagens/${public_id}`, {
+        headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
+      });
+
+      setImagemAtual((prev) => prev.filter((img) => img.public_id !== public_id));
+    } catch (err) {
+      console.error("Erro ao remover imagem:", err);
+      setError("Erro ao remover a imagem.");
+    }
+  };
+
   return (
     <div className="upload-imagem-orcamento">
+      {/* Área de upload */}
       <div className="upload-area">
         <label htmlFor="file-upload" className="dropzone">
           <AiOutlineUpload size={40} />
@@ -95,24 +141,55 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess, imagemAtual = [] 
         </div>
       )}
 
-      {selectedFiles.length > 0 && (
+      {/* Preview de arquivos selecionados */}
+      {previewFiles.length > 0 && (
         <div className="selected-images">
-          <h4>Pré-visualização ({selectedFiles.length}):</h4>
+          <h4>Pré-visualização ({previewFiles.length}):</h4>
           <div className="image-list">
-            {selectedFiles.map((file, idx) => {
-              const objectUrl = URL.createObjectURL(file);
+            {previewFiles.map((url, idx) => (
+              <div key={idx} className="image-item">
+                <img
+                  src={url}
+                  alt={selectedFiles[idx].name}
+                  className="image-preview"
+                />
+                <AiOutlineDelete
+                  className="delete-icon"
+                  onClick={() => handleRemoveSelectedFile(idx)}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Imagens já enviadas */}
+      {imagemAtual.length > 0 && (
+        <div className="existing-images">
+          <h4>Imagens já enviadas:</h4>
+          <div className="image-list">
+            {imagemAtual.map((img, idx) => {
+              const imgSrc = img.url || img.uri || img;
               return (
-                <div key={idx} className="image-item">
+                <div key={img.public_id || imgSrc || idx} className="image-item">
                   <img
-                    src={objectUrl}
-                    alt={file.name}
+                    src={imgSrc}
+                    alt={`Imagem ${idx + 1}`}
                     className="image-preview"
-                    onLoad={() => URL.revokeObjectURL(objectUrl)}
+                    onClick={() => setModalImage(imgSrc)}
                   />
-                  <AiOutlineDelete
-                    className="delete-icon"
-                    onClick={() => handleRemoveSelectedFile(idx)}
-                  />
+                  <div className="image-actions">
+                    <AiOutlineEye
+                      size={20}
+                      className="action-icon"
+                      onClick={() => setModalImage(imgSrc)}
+                    />
+                    <AiOutlineDelete
+                      size={20}
+                      className="action-icon"
+                      onClick={() => handleRemoveUploadedImage(img.public_id)}
+                    />
+                  </div>
                 </div>
               );
             })}
@@ -120,23 +197,16 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess, imagemAtual = [] 
         </div>
       )}
 
-      {imagemAtual.length > 0 && (
-        <div className="existing-images">
-          <h4>Imagens já enviadas:</h4>
-          <div className="image-list">
-            {imagemAtual.map((img, idx) => (
-              <div key={img.public_id || img.url || idx} className="image-item">
-                <img
-                  src={img.url || img.uri || img}
-                  alt={`Imagem ${idx + 1}`}
-                  className="image-preview"
-                />
-                <div className="image-actions">
-                  <AiOutlineEye size={20} className="action-icon" />
-                  <AiOutlineDelete size={20} className="action-icon" />
-                </div>
-              </div>
-            ))}
+      {/* Modal */}
+      {modalImage && (
+        <div className="modal-overlay" onClick={() => setModalImage(null)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <AiOutlineClose
+              size={24}
+              className="modal-close"
+              onClick={() => setModalImage(null)}
+            />
+            <img src={modalImage} alt="Visualização" className="modal-image" />
           </div>
         </div>
       )}
