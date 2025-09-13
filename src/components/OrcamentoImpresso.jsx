@@ -21,20 +21,14 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
   const isCloudinaryUrl = (url) => typeof url === 'string' && url.includes('/upload/');
   const getCloudinaryThumb = (url) => {
     if (!isCloudinaryUrl(url)) return url;
-    const base = url.split('/upload/')[0] + '/upload/';
-    const after = url.split('/upload/')[1] || '';
-    const [firstSeg, ...rest] = after.split('/');
-    if (/^v\d+$/i.test(firstSeg)) return base + 'w_240,c_limit,q_auto,f_auto/' + after;
-    return base + 'w_240,c_limit,q_auto,f_auto,' + firstSeg + '/' + rest.join('/');
+    const [base, after] = url.split('/upload/');
+    return base + '/upload/w_240,c_limit,q_auto,f_auto/' + after;
   };
   const getCloudinaryOriginal = useCallback((url) => {
     if (!isCloudinaryUrl(url)) return url;
-    const base = url.split('/upload/')[0] + '/upload/';
-    const after = url.split('/upload/')[1] || '';
+    const [base, after] = url.split('/upload/');
     const parts = after.split('/');
-    if (parts.length === 0) return url;
-    if (/^v\d+$/i.test(parts[0])) return url;
-    return base + parts.slice(1).join('/');
+    return base + '/upload/' + parts.slice(1).join('/');
   }, []);
 
   const toPngDataUrlFromSrc = useCallback(async (src) => {
@@ -58,20 +52,16 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
   }, []);
 
   const getOriginalImageAsDataUrl = useCallback(async (img) => {
-    try {
-      if (typeof img === 'string') return await toPngDataUrlFromSrc(getCloudinaryOriginal(img));
-      if (img instanceof File) {
-        const objectUrl = URL.createObjectURL(img);
-        const dataUrl = await toPngDataUrlFromSrc(objectUrl);
-        URL.revokeObjectURL(objectUrl);
-        return dataUrl;
-      }
-      if (img?.data?.data) return `data:image/jpeg;base64,${img.data.data}`;
-      if (img?.url) return await toPngDataUrlFromSrc(img.url);
-      if (img?.uri) return await toPngDataUrlFromSrc(img.uri);
-    } catch (e) {
-      console.warn('Falha ao preparar imagem para PDF:', e);
+    if (typeof img === 'string') return await toPngDataUrlFromSrc(getCloudinaryOriginal(img));
+    if (img instanceof File) {
+      const objectUrl = URL.createObjectURL(img);
+      const dataUrl = await toPngDataUrlFromSrc(objectUrl);
+      URL.revokeObjectURL(objectUrl);
+      return dataUrl;
     }
+    if (img?.data?.data) return `data:image/jpeg;base64,${img.data.data}`;
+    if (img?.url) return await toPngDataUrlFromSrc(img.url);
+    if (img?.uri) return await toPngDataUrlFromSrc(img.uri);
     return null;
   }, [toPngDataUrlFromSrc, getCloudinaryOriginal]);
 
@@ -201,11 +191,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       });
       setObjectUrls(urls);
 
-      return () => {
-        urls.forEach(url => {
-          if (url.startsWith('blob:')) URL.revokeObjectURL(url);
-        });
-      };
+      return () => urls.forEach(url => url.startsWith('blob:') && URL.revokeObjectURL(url));
     }, [imagens]);
 
     return (
