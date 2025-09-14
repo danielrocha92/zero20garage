@@ -1,31 +1,30 @@
 // src/services/firebaseUpload.js
-import { initializeApp, getApps } from "firebase/app"; // removi getApp
-import { getFirestore } from "firebase/firestore";
-import { getAuth, signInAnonymously } from "firebase/auth";
+import axios from 'axios';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyChLSQrE2uma5PHXEmbzgxRLE6WbwCw0CM",
-  authDomain: "zero20-upload-api-e3a14.firebaseapp.com",
-  projectId: "zero20-upload-api-e3a14",
-  storageBucket: "zero20-upload-api-e3a14.firebasestorage.app",
-  messagingSenderId: "571940430324",
-  appId: "1:571940430324:web:bfe8e1170901824b7dd9a1",
-  measurementId: "G-3WXV8S717C"
-};
-
-// Inicializar app Firebase
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
-
-const db = getFirestore(app);
-const auth = getAuth(app);
-
-export const authenticateUser = async () => {
+/**
+ * Faz upload de uma imagem para um orçamento específico.
+ * @param {string} orcamentoId - ID do orçamento no backend
+ * @param {File} arquivo - Arquivo de imagem selecionado pelo usuário
+ * @returns {Promise<string>} - Retorna a URL da imagem após upload
+ */
+export const uploadImagemOrcamento = async (orcamentoId, arquivo) => {
   try {
-    await signInAnonymously(auth);
-    console.log("✅ Autenticado anonimamente no Firebase (Upload)");
+    const formData = new FormData();
+    formData.append('imagem', arquivo);
+
+    const response = await axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/api/orcamentos/${orcamentoId}/imagens`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+
+    return response.data.url; // URL retornada pelo backend (Cloudinary)
   } catch (error) {
-    console.error("❌ Erro ao autenticar:", error);
+    console.error('Erro ao enviar imagem para o orçamento:', error);
+    throw error;
   }
 };
-
-export { db };

@@ -76,15 +76,13 @@ const PainelOrcamentos = () => {
       if (res.ok) {
         showMessageBox(`Orçamento ${method === 'POST' ? 'criado' : 'atualizado'} com sucesso.`);
         fetchHistorico();
-        setEditingData(null);
+        setEditingData(result); // Atualiza com o retorno do backend
       } else {
         showMessageBox(`Erro ao salvar: ${result.msg || 'Erro desconhecido'}`);
       }
     } catch (err) {
       console.error('Erro ao conectar com a API:', err);
       showMessageBox('Erro ao conectar com o servidor.');
-    } finally {
-      setEditingData(null);
     }
   };
 
@@ -175,9 +173,6 @@ const PainelOrcamentos = () => {
   const handleCloseView = () => setSelectedBudgetForView(null);
   const scrollToHistorico = () => historicoRef.current?.scrollIntoView({ behavior: 'smooth' });
 
-  // --- Imagens existentes ---
-  const imagensExistentes = editingData?.imagens || (editingData?.imagem ? [editingData.imagem] : []);
-
   return (
     <div className="painel-orcamentos-container">
       {showMessage && (
@@ -212,15 +207,15 @@ const PainelOrcamentos = () => {
             }
 
             <Suspense fallback={<div>Carregando upload de imagem...</div>}>
-              <UploadImagemOrcamento
-                orcamentoId={editingData?.id}
-                authToken={authToken}
-                imagemAtual={imagensExistentes}
-                onUploaded={(imgs) => {
-                  if (editingData) setEditingData(prev => prev ? { ...prev, imagens: imgs } : prev);
-                  fetchHistorico();
-                }}
-              />
+              {editingData?.id && (
+                <UploadImagemOrcamento
+                  orcamentoId={editingData.id}
+                  onUploadSuccess={(uploadedImages) => {
+                    setEditingData(prev => prev ? { ...prev, imagens: uploadedImages } : prev);
+                    fetchHistorico();
+                  }}
+                />
+              )}
             </Suspense>
           </main>
 

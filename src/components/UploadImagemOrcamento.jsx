@@ -3,7 +3,9 @@ import axios from 'axios';
 import './UploadImagemOrcamento.css';
 import { AiOutlineUpload, AiOutlineDelete, AiOutlineEye, AiOutlineClose } from 'react-icons/ai';
 
-const API_BASE_URL = 'https://zero20-upload-api.onrender.com/api/orcamentos';
+// URLs corretas das APIs
+const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com/api/orcamentos'; // API de orçamentos
+const API_UPLOAD_URL = 'https://api-orcamento-n49u.onrender.com/api/imagens'; // API de upload de imagens (ajustado)
 
 const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -16,17 +18,17 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
 
   const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
 
-  // --- Função utilitária para obter URL da imagem ---
   const getImageUrl = (img) => {
     if (!img) return '';
     if (typeof img === 'string') return img;
     if (img.url) return img.url;
+    if (img.imagemUrl) return img.imagemUrl; // ajuste para novo backend
     if (img.uri) return img.uri;
     return '';
   };
 
   const handleImageError = (e) => {
-    e.currentTarget.src = '/placeholder.png'; // fallback caso 404
+    e.currentTarget.src = '/placeholder.png';
   };
 
   // --- Busca imagens já enviadas ---
@@ -35,13 +37,15 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
 
     const fetchOrcamento = async () => {
       try {
-        const res = await axios.get(`${API_BASE_URL}/${orcamentoId}`, {
+        const url = `${API_BASE_URL}/${orcamentoId}`;
+        const res = await axios.get(url, {
           headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
         });
         const validImages = (res.data.imagens || []).filter(img => getImageUrl(img));
         setImagemAtual(validImages);
       } catch (err) {
         console.error('Erro ao buscar imagens do orçamento:', err);
+        setError('Não foi possível carregar as imagens deste orçamento.');
       }
     };
 
@@ -70,26 +74,23 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
     setError(null);
 
     const formData = new FormData();
-    selectedFiles.forEach((file) => formData.append('imagens', file));
+    selectedFiles.forEach((file) => formData.append('imagem', file)); // ⚠️ deve coincidir com upload.single('imagem') no backend
 
     try {
-      const res = await axios.post(
-        `${API_BASE_URL}/${orcamentoId}/imagens`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            ...(authToken && { Authorization: `Bearer ${authToken}` }),
-          },
-          onUploadProgress: (event) => {
-            const percent = Math.round((event.loaded * 100) / event.total);
-            setProgress(percent);
-          },
-        }
-      );
+      const url = `${API_UPLOAD_URL}/${orcamentoId}`;
+      const res = await axios.post(url, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          ...(authToken && { Authorization: `Bearer ${authToken}` }),
+        },
+        onUploadProgress: (event) => {
+          const percent = Math.round((event.loaded * 100) / event.total);
+          setProgress(percent);
+        },
+      });
 
       setSelectedFiles([]);
-      const validImages = (res.data.imagens || []).filter(img => getImageUrl(img));
+      const validImages = res.data.imagemUrl ? [res.data.imagemUrl] : [];
       setImagemAtual(validImages);
       if (onUploadSuccess) onUploadSuccess(validImages);
     } catch (err) {
@@ -112,12 +113,10 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
 
   const handleRemoveUploadedImage = async (public_id) => {
     try {
-      await axios.delete(
-        `${API_BASE_URL}/${orcamentoId}/imagens/${public_id}`,
-        {
-          headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
-        }
-      );
+      const url = `${API_UPLOAD_URL}/${orcamentoId}/${public_id}`;
+      await axios.delete(url, {
+        headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
+      });
 
       setImagemAtual((prev) =>
         prev.filter((img) => img.public_id !== public_id)
@@ -130,7 +129,6 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
 
   return (
     <div className="upload-imagem-orcamento">
-      {/* Área de upload */}
       <div className="upload-area">
         <label htmlFor="file-upload" className="dropzone">
           <AiOutlineUpload size={40} />
@@ -160,7 +158,6 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
         </div>
       )}
 
-      {/* Preview de arquivos selecionados */}
       {previewFiles.length > 0 && (
         <div className="selected-images">
           <h4>Pré-visualização ({previewFiles.length}):</h4>
@@ -183,7 +180,6 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
         </div>
       )}
 
-      {/* Imagens já enviadas */}
       {imagemAtual.length > 0 && (
         <div className="existing-images">
           <h4>Imagens já enviadas:</h4>
@@ -205,11 +201,13 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
                       className="action-icon"
                       onClick={() => setModalImage(imgSrc)}
                     />
-                    <AiOutlineDelete
-                      size={20}
-                      className="action-icon"
-                      onClick={() => handleRemoveUploadedImage(img.public_id)}
-                    />
+                    {img.public_id && (
+                      <AiOutlineDelete
+                        size={20}
+                        className="action-icon"
+                        onClick={() => handleRemoveUploadedImage(img.public_id)}
+                      />
+                    )}
                   </div>
                 </div>
               );
@@ -218,7 +216,6 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
         </div>
       )}
 
-      {/* Modal */}
       {modalImage && (
         <div className="modal-overlay" onClick={() => setModalImage(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
