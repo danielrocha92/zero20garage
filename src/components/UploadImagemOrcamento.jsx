@@ -3,9 +3,9 @@ import axios from 'axios';
 import './UploadImagemOrcamento.css';
 import { AiOutlineUpload, AiOutlineDelete, AiOutlineEye, AiOutlineClose } from 'react-icons/ai';
 
-// URLs corretas das APIs
+// API URLs
 const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com/api/orcamentos'; // API de orçamentos
-const API_UPLOAD_URL = 'https://api-orcamento-n49u.onrender.com/api/imagens'; // API de upload de imagens (ajustado)
+const API_UPLOAD_URL = 'https://api-orcamento-n49u.onrender.com/api/upload'; // Ajustado para backend
 
 const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -20,25 +20,19 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
 
   const getImageUrl = (img) => {
     if (!img) return '';
-    if (typeof img === 'string') return img;
-    if (img.url) return img.url;
-    if (img.imagemUrl) return img.imagemUrl; // ajuste para novo backend
-    if (img.uri) return img.uri;
-    return '';
+    return img.url || img.imagemUrl || img.uri || '';
   };
 
   const handleImageError = (e) => {
     e.currentTarget.src = '/placeholder.png';
   };
 
-  // --- Busca imagens já enviadas ---
+  // --- Buscar imagens já enviadas ---
   useEffect(() => {
     if (!orcamentoId) return;
-
     const fetchOrcamento = async () => {
       try {
-        const url = `${API_BASE_URL}/${orcamentoId}`;
-        const res = await axios.get(url, {
+        const res = await axios.get(`${API_BASE_URL}/${orcamentoId}`, {
           headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
         });
         const validImages = (res.data.imagens || []).filter(img => getImageUrl(img));
@@ -48,16 +42,14 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
         setError('Não foi possível carregar as imagens deste orçamento.');
       }
     };
-
     fetchOrcamento();
   }, [orcamentoId, authToken]);
 
-  // --- Preview de arquivos selecionados ---
+  // --- Preview dos arquivos selecionados ---
   useEffect(() => {
-    const objectUrls = selectedFiles.map((file) => URL.createObjectURL(file));
+    const objectUrls = selectedFiles.map(file => URL.createObjectURL(file));
     setPreviewFiles(objectUrls);
-
-    return () => objectUrls.forEach((url) => URL.revokeObjectURL(url));
+    return () => objectUrls.forEach(url => URL.revokeObjectURL(url));
   }, [selectedFiles]);
 
   const handleFileChange = (e) => {
@@ -74,11 +66,10 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
     setError(null);
 
     const formData = new FormData();
-    selectedFiles.forEach((file) => formData.append('imagem', file)); // ⚠️ deve coincidir com upload.single('imagem') no backend
+    selectedFiles.forEach(file => formData.append('imagem', file)); // ⚠️ deve bater com backend
 
     try {
-      const url = `${API_UPLOAD_URL}/${orcamentoId}`;
-      const res = await axios.post(url, formData, {
+      const res = await axios.post(`${API_UPLOAD_URL}/${orcamentoId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           ...(authToken && { Authorization: `Bearer ${authToken}` }),
@@ -89,17 +80,15 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
         },
       });
 
+      // Atualiza lista de imagens sem perder as existentes
+      const novasImagens = res.data.imagemUrl ? [res.data.imagemUrl] : [];
+      setImagemAtual(prev => [...prev, ...novasImagens]);
+
       setSelectedFiles([]);
-      const validImages = res.data.imagemUrl ? [res.data.imagemUrl] : [];
-      setImagemAtual(validImages);
-      if (onUploadSuccess) onUploadSuccess(validImages);
+      if (onUploadSuccess) onUploadSuccess([...imagemAtual, ...novasImagens]);
     } catch (err) {
       console.error('Erro no upload:', err);
-      setError(
-        err.response?.data?.error ||
-        err.message ||
-        'Erro desconhecido ao enviar imagens.'
-      );
+      setError(err.response?.data?.error || err.message || 'Erro desconhecido ao enviar imagens.');
     } finally {
       setUploading(false);
       setProgress(0);
@@ -107,20 +96,16 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
   };
 
   const handleRemoveSelectedFile = (idx) => {
-    setSelectedFiles((prev) => prev.filter((_, i) => i !== idx));
-    setPreviewFiles((prev) => prev.filter((_, i) => i !== idx));
+    setSelectedFiles(prev => prev.filter((_, i) => i !== idx));
+    setPreviewFiles(prev => prev.filter((_, i) => i !== idx));
   };
 
   const handleRemoveUploadedImage = async (public_id) => {
     try {
-      const url = `${API_UPLOAD_URL}/${orcamentoId}/${public_id}`;
-      await axios.delete(url, {
+      await axios.delete(`${API_UPLOAD_URL}/${orcamentoId}/${public_id}`, {
         headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
       });
-
-      setImagemAtual((prev) =>
-        prev.filter((img) => img.public_id !== public_id)
-      );
+      setImagemAtual(prev => prev.filter(img => img.public_id !== public_id));
     } catch (err) {
       console.error('Erro ao remover imagem:', err);
       setError('Erro ao remover a imagem.');

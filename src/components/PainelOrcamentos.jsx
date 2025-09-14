@@ -13,7 +13,7 @@ import './PainelOrcamentos.css';
 
 const UploadImagemOrcamento = React.lazy(() => import('./UploadImagemOrcamento'));
 
-const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const PainelOrcamentos = () => {
   const navigate = useNavigate();
@@ -28,14 +28,14 @@ const PainelOrcamentos = () => {
 
   const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
 
-  // --- Mensagem de feedback automática ---
+  // --- Mensagem de feedback ---
   const showMessageBox = (msg, duration = 4000) => {
     setMessage(msg);
     setShowMessage(true);
     setTimeout(() => setShowMessage(false), duration);
   };
 
-  // --- Fetch histórico completo ---
+  // --- Fetch histórico ---
   const fetchHistorico = useCallback(async () => {
     try {
       const res = await fetch(`${API_BASE_URL}/api/orcamentos`, {
@@ -76,13 +76,15 @@ const PainelOrcamentos = () => {
       if (res.ok) {
         showMessageBox(`Orçamento ${method === 'POST' ? 'criado' : 'atualizado'} com sucesso.`);
         fetchHistorico();
-        setEditingData(result); // Atualiza com o retorno do backend
+        setEditingData(null);
       } else {
         showMessageBox(`Erro ao salvar: ${result.msg || 'Erro desconhecido'}`);
       }
     } catch (err) {
       console.error('Erro ao conectar com a API:', err);
       showMessageBox('Erro ao conectar com o servidor.');
+    } finally {
+      setEditingData(null);
     }
   };
 
@@ -207,15 +209,14 @@ const PainelOrcamentos = () => {
             }
 
             <Suspense fallback={<div>Carregando upload de imagem...</div>}>
-              {editingData?.id && (
-                <UploadImagemOrcamento
-                  orcamentoId={editingData.id}
-                  onUploadSuccess={(uploadedImages) => {
-                    setEditingData(prev => prev ? { ...prev, imagens: uploadedImages } : prev);
-                    fetchHistorico();
-                  }}
-                />
-              )}
+              <UploadImagemOrcamento
+                orcamentoId={editingData?.id}
+                authToken={authToken}
+                onUploaded={(imgs) => {
+                  if (editingData) setEditingData(prev => prev ? { ...prev, imagens: imgs } : prev);
+                  fetchHistorico();
+                }}
+              />
             </Suspense>
           </main>
 
