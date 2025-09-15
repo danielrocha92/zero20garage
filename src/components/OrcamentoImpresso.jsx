@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import dayjs from 'dayjs';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -53,9 +53,8 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       URL.revokeObjectURL(objectUrl);
       return dataUrl;
     }
+    if (img?.imagemUrl) return await toPngDataUrlFromSrc(img.imagemUrl); // 👈 Ajuste aqui
     if (img?.data?.data) return `data:image/jpeg;base64,${img.data.data}`;
-    if (img?.url) return await toPngDataUrlFromSrc(img.url);
-    if (img?.uri) return await toPngDataUrlFromSrc(img.uri);
     return null;
   }, [toPngDataUrlFromSrc, getCloudinaryOriginal]);
 
@@ -171,30 +170,19 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
   }
 
   const ImagensVeiculo = ({ imagens }) => {
-    const [objectUrls, setObjectUrls] = useState([]);
-
-    useEffect(() => {
-      const urls = imagens.map(img => {
-        if (img instanceof File) return URL.createObjectURL(img);
-        if (typeof img === 'string') return img;
-        if (img?.data?.data) return `data:image/jpeg;base64,${img.data.data}`;
-        if (img?.url) return img.url;
-        if (img?.uri) return img.uri;
-        return '';
-      });
-      setObjectUrls(urls);
-      return () => urls.forEach(url => url.startsWith('blob:') && URL.revokeObjectURL(url));
-    }, [imagens]);
-
     return (
       <section className="imagens-section">
         <h2>Imagens do Veículo</h2>
         <div className="imagens-container">
-          {objectUrls.map((src, idx) => (
-            <div key={idx} className="thumb-wrapper">
-              <img src={src} alt={`Foto ${idx + 1}`} className="thumb-img" />
-            </div>
-          ))}
+          {imagens.map((img, idx) => {
+            const src = img?.imagemUrl || '';
+            console.log('🖼️ URL da imagem para renderizar:', src);
+            return (
+              <div key={idx} className="thumb-wrapper">
+                <img src={src} alt={`Foto ${idx + 1}`} className="thumb-img" />
+              </div>
+            );
+          })}
         </div>
       </section>
     );

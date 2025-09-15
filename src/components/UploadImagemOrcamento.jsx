@@ -28,7 +28,12 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploaded }) => {
         const res = await axios.get(`${API_BASE_URL}/${orcamentoId}`, {
           headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
         });
+
+        console.log("🔎 Retorno da API ao buscar orçamento:", res.data);
+
         const validImages = (res.data.imagens || []).filter(img => getImageUrl(img));
+        console.log("📸 Imagens válidas extraídas:", validImages);
+
         setImagemAtual(validImages);
       } catch (err) {
         console.error('Erro ao buscar imagens do orçamento:', err);
@@ -73,8 +78,16 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploaded }) => {
         },
       });
 
+      console.log("⬆️ Retorno da API após upload:", res.data);
+
       const novasImagens = res.data.imagens || [];
-      setImagemAtual(prev => [...prev, ...novasImagens]);
+      console.log("🆕 Novas imagens recebidas:", novasImagens);
+
+      setImagemAtual(prev => {
+        const updated = [...prev, ...novasImagens];
+        console.log("📌 Estado final de imagens após upload:", updated);
+        return updated;
+      });
       setSelectedFiles([]);
 
       if (onUploaded) onUploaded([...imagemAtual, ...novasImagens]);
