@@ -3,7 +3,10 @@ import axios from 'axios';
 import './UploadImagemOrcamento.css';
 import { AiOutlineUpload, AiOutlineDelete, AiOutlineEye, AiOutlineClose } from 'react-icons/ai';
 
-const UploadImagemOrcamento = ({ orcamentoId, apiBaseUrl, onUploaded }) => {
+// API Base
+const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com/api/orcamentos'; // Base de orçamentos
+
+const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [previewFiles, setPreviewFiles] = useState([]);
   const [imagemAtual, setImagemAtual] = useState([]);
@@ -13,9 +16,6 @@ const UploadImagemOrcamento = ({ orcamentoId, apiBaseUrl, onUploaded }) => {
   const [modalImage, setModalImage] = useState(null);
 
   const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
-
-  const API_ORCAMENTOS = `${apiBaseUrl}/api/orcamentos`;
-  const API_UPLOAD = `${apiBaseUrl}/api/upload`;
 
   const getImageUrl = (img) => img?.url || img?.imagemUrl || img?.uri || '';
 
@@ -28,7 +28,7 @@ const UploadImagemOrcamento = ({ orcamentoId, apiBaseUrl, onUploaded }) => {
     if (!orcamentoId) return;
     const fetchOrcamento = async () => {
       try {
-        const res = await axios.get(`${API_ORCAMENTOS}/${orcamentoId}`, {
+        const res = await axios.get(`${API_BASE_URL}/${orcamentoId}`, {
           headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
         });
         const validImages = (res.data.imagens || []).filter(img => getImageUrl(img));
@@ -39,7 +39,7 @@ const UploadImagemOrcamento = ({ orcamentoId, apiBaseUrl, onUploaded }) => {
       }
     };
     fetchOrcamento();
-  }, [orcamentoId, authToken, API_ORCAMENTOS]);
+  }, [orcamentoId, authToken]);
 
   // --- Preview dos arquivos selecionados ---
   useEffect(() => {
@@ -62,10 +62,10 @@ const UploadImagemOrcamento = ({ orcamentoId, apiBaseUrl, onUploaded }) => {
     setError(null);
 
     const formData = new FormData();
-    selectedFiles.forEach(file => formData.append('imagem', file));
+    selectedFiles.forEach(file => formData.append('imagens', file));
 
     try {
-      const res = await axios.post(`${API_UPLOAD}/${orcamentoId}`, formData, {
+      const res = await axios.post(`${API_BASE_URL}/${orcamentoId}/imagens`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           ...(authToken && { Authorization: `Bearer ${authToken}` }),
@@ -76,12 +76,12 @@ const UploadImagemOrcamento = ({ orcamentoId, apiBaseUrl, onUploaded }) => {
         },
       });
 
-      const novasImagens = res.data.imagemUrl ? [{ url: res.data.imagemUrl, public_id: res.data.public_id }] : [];
-      const todasImagens = [...imagemAtual, ...novasImagens];
+      // Atualiza lista de imagens sem perder as existentes
+      const novasImagens = res.data.imagemUrl ? [res.data] : [];
+      setImagemAtual(prev => [...prev, ...novasImagens]);
 
-      setImagemAtual(todasImagens);
       setSelectedFiles([]);
-      if (onUploaded) onUploaded(todasImagens);
+      if (onUploadSuccess) onUploadSuccess([...imagemAtual, ...novasImagens]);
     } catch (err) {
       console.error('Erro no upload:', err);
       setError(err.response?.data?.erro || err.message || 'Erro desconhecido ao enviar imagens.');
@@ -98,12 +98,10 @@ const UploadImagemOrcamento = ({ orcamentoId, apiBaseUrl, onUploaded }) => {
 
   const handleRemoveUploadedImage = async (public_id) => {
     try {
-      await axios.delete(`${API_UPLOAD}/${orcamentoId}/${public_id}`, {
+      await axios.delete(`${API_BASE_URL}/${orcamentoId}/imagens/${public_id}`, {
         headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
       });
-      const novasImagens = imagemAtual.filter(img => img.public_id !== public_id);
-      setImagemAtual(novasImagens);
-      if (onUploaded) onUploaded(novasImagens);
+      setImagemAtual(prev => prev.filter(img => img.public_id !== public_id));
     } catch (err) {
       console.error('Erro ao remover imagem:', err);
       setError('Erro ao remover a imagem.');

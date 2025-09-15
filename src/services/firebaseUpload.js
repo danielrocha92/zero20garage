@@ -10,7 +10,7 @@ import axios from 'axios';
 export const uploadImagemOrcamento = async (orcamentoId, arquivo) => {
   try {
     const formData = new FormData();
-    formData.append('imagem', arquivo);
+    formData.append('imagens', arquivo);
 
     const response = await axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/api/orcamentos/${orcamentoId}/imagens`,
