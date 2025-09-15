@@ -13,7 +13,8 @@ import './PainelOrcamentos.css';
 
 const UploadImagemOrcamento = React.lazy(() => import('./UploadImagemOrcamento'));
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+// Atualize a URL para seu novo backend
+const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
 
 const PainelOrcamentos = () => {
   const navigate = useNavigate();
@@ -129,7 +130,7 @@ const PainelOrcamentos = () => {
       tempDiv.style.backgroundColor = 'white';
       document.body.appendChild(tempDiv);
 
-      const imagemUrl = orcamento?.imagem?.url || orcamento?.imageUrl || orcamento?.imagemUrl || null;
+      const imagemUrl = orcamento?.imagens?.[0]?.url || null;
 
       tempDiv.innerHTML = `
         <div class="orcamento-impresso-content">
@@ -212,6 +213,7 @@ const PainelOrcamentos = () => {
               <UploadImagemOrcamento
                 orcamentoId={editingData?.id}
                 authToken={authToken}
+                apiBaseUrl={API_BASE_URL} // passe a URL do novo backend
                 onUploaded={(imgs) => {
                   if (editingData) setEditingData(prev => prev ? { ...prev, imagens: imgs } : prev);
                   fetchHistorico();

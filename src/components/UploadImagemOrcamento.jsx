@@ -3,11 +3,7 @@ import axios from 'axios';
 import './UploadImagemOrcamento.css';
 import { AiOutlineUpload, AiOutlineDelete, AiOutlineEye, AiOutlineClose } from 'react-icons/ai';
 
-// API URLs
-const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com/api/orcamentos'; // API de orçamentos
-const API_UPLOAD_URL = 'https://api-orcamento-n49u.onrender.com/api/upload'; // Ajustado para backend
-
-const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
+const UploadImagemOrcamento = ({ orcamentoId, apiBaseUrl, onUploaded }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [previewFiles, setPreviewFiles] = useState([]);
   const [imagemAtual, setImagemAtual] = useState([]);
@@ -18,10 +14,10 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
 
   const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
 
-  const getImageUrl = (img) => {
-    if (!img) return '';
-    return img.url || img.imagemUrl || img.uri || '';
-  };
+  const API_ORCAMENTOS = `${apiBaseUrl}/api/orcamentos`;
+  const API_UPLOAD = `${apiBaseUrl}/api/upload`;
+
+  const getImageUrl = (img) => img?.url || img?.imagemUrl || img?.uri || '';
 
   const handleImageError = (e) => {
     e.currentTarget.src = '/placeholder.png';
@@ -32,7 +28,7 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
     if (!orcamentoId) return;
     const fetchOrcamento = async () => {
       try {
-        const res = await axios.get(`${API_BASE_URL}/${orcamentoId}`, {
+        const res = await axios.get(`${API_ORCAMENTOS}/${orcamentoId}`, {
           headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
         });
         const validImages = (res.data.imagens || []).filter(img => getImageUrl(img));
@@ -43,7 +39,7 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
       }
     };
     fetchOrcamento();
-  }, [orcamentoId, authToken]);
+  }, [orcamentoId, authToken, API_ORCAMENTOS]);
 
   // --- Preview dos arquivos selecionados ---
   useEffect(() => {
@@ -66,10 +62,10 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
     setError(null);
 
     const formData = new FormData();
-    selectedFiles.forEach(file => formData.append('imagem', file)); // ⚠️ deve bater com backend
+    selectedFiles.forEach(file => formData.append('imagem', file));
 
     try {
-      const res = await axios.post(`${API_UPLOAD_URL}/${orcamentoId}`, formData, {
+      const res = await axios.post(`${API_UPLOAD}/${orcamentoId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           ...(authToken && { Authorization: `Bearer ${authToken}` }),
@@ -80,15 +76,15 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
         },
       });
 
-      // Atualiza lista de imagens sem perder as existentes
-      const novasImagens = res.data.imagemUrl ? [res.data.imagemUrl] : [];
-      setImagemAtual(prev => [...prev, ...novasImagens]);
+      const novasImagens = res.data.imagemUrl ? [{ url: res.data.imagemUrl, public_id: res.data.public_id }] : [];
+      const todasImagens = [...imagemAtual, ...novasImagens];
 
+      setImagemAtual(todasImagens);
       setSelectedFiles([]);
-      if (onUploadSuccess) onUploadSuccess([...imagemAtual, ...novasImagens]);
+      if (onUploaded) onUploaded(todasImagens);
     } catch (err) {
       console.error('Erro no upload:', err);
-      setError(err.response?.data?.error || err.message || 'Erro desconhecido ao enviar imagens.');
+      setError(err.response?.data?.erro || err.message || 'Erro desconhecido ao enviar imagens.');
     } finally {
       setUploading(false);
       setProgress(0);
@@ -102,10 +98,12 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
 
   const handleRemoveUploadedImage = async (public_id) => {
     try {
-      await axios.delete(`${API_UPLOAD_URL}/${orcamentoId}/${public_id}`, {
+      await axios.delete(`${API_UPLOAD}/${orcamentoId}/${public_id}`, {
         headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
       });
-      setImagemAtual(prev => prev.filter(img => img.public_id !== public_id));
+      const novasImagens = imagemAtual.filter(img => img.public_id !== public_id);
+      setImagemAtual(novasImagens);
+      if (onUploaded) onUploaded(novasImagens);
     } catch (err) {
       console.error('Erro ao remover imagem:', err);
       setError('Erro ao remover a imagem.');

@@ -15,7 +15,7 @@ export default function LimparImagensVisual() {
     try {
       // Ajuste do endpoint para o backend no Render
       const res = await axios.get(
-        "https://zero20-upload-api.onrender.com/api/limpezaImagens"
+        "https://api-orcamento-n49u.onrender.com/api/limpezaImagens"
       );
 
       // O backend retorna { message, detalhes }
