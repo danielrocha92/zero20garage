@@ -3,10 +3,7 @@ import axios from 'axios';
 import './UploadImagemOrcamento.css';
 import { AiOutlineUpload, AiOutlineDelete, AiOutlineEye, AiOutlineClose } from 'react-icons/ai';
 
-// API Base
-const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com/api/orcamentos'; // Base de orçamentos
-
-const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
+const UploadImagemOrcamento = ({ orcamentoId, onUploaded }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [previewFiles, setPreviewFiles] = useState([]);
   const [imagemAtual, setImagemAtual] = useState([]);
@@ -17,11 +14,11 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
 
   const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
 
-  const getImageUrl = (img) => img?.url || img?.imagemUrl || img?.uri || '';
+  const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com/api/orcamentos';
 
-  const handleImageError = (e) => {
-    e.currentTarget.src = '/placeholder.png';
-  };
+  const getImageUrl = (img) => img?.imagemUrl || img?.url || '';
+
+  const handleImageError = (e) => e.currentTarget.src = '/placeholder.png';
 
   // --- Buscar imagens já enviadas ---
   useEffect(() => {
@@ -76,15 +73,14 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
         },
       });
 
-      // Atualiza lista de imagens sem perder as existentes
-      const novasImagens = res.data.imagemUrl ? [res.data] : [];
+      const novasImagens = res.data.imagens || [];
       setImagemAtual(prev => [...prev, ...novasImagens]);
-
       setSelectedFiles([]);
-      if (onUploadSuccess) onUploadSuccess([...imagemAtual, ...novasImagens]);
+
+      if (onUploaded) onUploaded([...imagemAtual, ...novasImagens]);
     } catch (err) {
       console.error('Erro no upload:', err);
-      setError(err.response?.data?.erro || err.message || 'Erro desconhecido ao enviar imagens.');
+      setError(err.response?.data?.erro || 'Erro desconhecido ao enviar imagens.');
     } finally {
       setUploading(false);
       setProgress(0);
@@ -177,11 +173,7 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
                     onError={handleImageError}
                   />
                   <div className="image-actions">
-                    <AiOutlineEye
-                      size={20}
-                      className="action-icon"
-                      onClick={() => setModalImage(imgSrc)}
-                    />
+                    <AiOutlineEye size={20} className="action-icon" onClick={() => setModalImage(imgSrc)} />
                     {img.public_id && (
                       <AiOutlineDelete
                         size={20}
@@ -200,17 +192,8 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploadSuccess }) => {
       {modalImage && (
         <div className="modal-overlay" onClick={() => setModalImage(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <AiOutlineClose
-              size={24}
-              className="modal-close"
-              onClick={() => setModalImage(null)}
-            />
-            <img
-              src={modalImage}
-              alt="Visualização"
-              className="modal-image"
-              onError={handleImageError}
-            />
+            <AiOutlineClose size={24} className="modal-close" onClick={() => setModalImage(null)} />
+            <img src={modalImage} alt="Visualização" className="modal-image" onError={handleImageError} />
           </div>
         </div>
       )}
