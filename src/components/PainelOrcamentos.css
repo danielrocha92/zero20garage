@@ -261,35 +261,43 @@
 /* === NOVAS CLASSES PARA OS CARDS === */
 .cards-container {
   display: flex;
-  gap: 20px;
+  gap: 15px;
   flex-wrap: wrap;
   margin: 20px 0;
   justify-content: center;
 }
 
 .card-option {
-  flex: 1 1 200px;
-  max-width: 220px;
+  flex: 1 1 45%; /* 50/50 no mobile */
+  max-width: 48%;
   background: #fff;
   border: 2px solid #ddd;
   border-radius: 10px;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  font-family: Arial, sans-serif;
+  font-size: 0.9em; /* Fonte um pouco menor */
+}
+
+.card-option i,
+.card-option svg {
+  font-size: 1.6em;
+  color: #d32f2f; /* Ícone vermelho padrão */
 }
 
 .card-option span {
   display: block;
-  margin-top: 10px;
+  margin-top: 8px;
   font-weight: 600;
   color: #333;
 }
 
 .card-option:hover {
   border-color: #d32f2f;
-  transform: translateY(-5px);
+  transform: translateY(-4px);
   box-shadow: 0 6px 14px rgba(0,0,0,0.15);
 }
 
@@ -352,5 +360,15 @@
     .historico-orcamentos-container {
         max-width: 1200px;
         margin-top: 40px;
+    }
+
+    .cards-container {
+        gap: 20px;
+    }
+
+    .card-option {
+        flex: 1 1 200px;
+        max-width: 220px;
+        font-size: 1em;
     }
 }
