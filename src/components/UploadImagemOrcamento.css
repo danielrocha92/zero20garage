@@ -1,355 +1,420 @@
 /* --------------------------- Testimonial / Carousel --------------------------- */
 .testimonial-carousel {
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
 }
 
 .testimonial-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
 }
 
 .highlight-testimonial-card {
-  background-color: #1c1c1e;
-  color: #fff;
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  max-width: 600px;
-  width: 100%;
-  text-align: center;
+    background-color: #1c1c1e;
+    color: #fff;
+    border-radius: 20px;
+    padding: 1.5rem; /* Ajuste para mobile */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra mais leve para mobile */
+    width: 100%;
+    text-align: center;
 }
 
 .user-photo {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 1rem;
-  border: 2px solid #fff;
+    width: 60px; /* Menor para mobile */
+    height: 60px; /* Menor para mobile */
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+    border: 2px solid #fff;
 }
 
 .service-photo-container {
-  margin: 1rem 0;
+    margin: 0.5rem 0; /* Menor para mobile */
 }
 
 .service-photo {
-  width: 100%;
-  max-height: 350px;
-  object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-height: 250px; /* Otimizado para mobile */
+    object-fit: cover;
+    border-radius: 10px; /* Menor para mobile */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25); /* Sombra mais leve */
 }
 
 /* --------------------------- Modal Testimonial --------------------------- */
 .testimonial-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.822);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.822);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
 .testimonial-modal-content {
-  background: var(-webkit-backdrop-filter, blur(10px));
-  backdrop-filter: blur(10px);
-  padding: 1.5rem;
-  border-radius: 20px;
-  max-width: 600px;
-  width: 90%;
-  text-align: center;
-  position: relative;
-  max-height: 90vh;
-  overflow-y: auto;
+    background: var(-webkit-backdrop-filter, blur(10px));
+    backdrop-filter: blur(10px);
+    padding: 1rem; /* Ajuste para mobile */
+    border-radius: 15px; /* Ajuste para mobile */
+    width: 90%;
+    text-align: center;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .testimonial-modal .user-photo {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 1rem;
+    width: 50px; /* Menor para mobile */
+    height: 50px; /* Menor para mobile */
+    margin-bottom: 0.5rem;
 }
 
 .testimonial-modal .service-photo {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 20px;
-  margin-top: 1rem;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px; /* Menor para mobile */
+    margin-top: 0.5rem;
 }
 
 .testimonial-modal .review-date,
 .testimonial-modal .stars,
 .testimonial-modal p {
-  margin-top: 0.5rem;
+    margin-top: 0.5rem;
 }
 
 /* --------------------------- Swiper --------------------------- */
 .swiper-button-prev,
 .swiper-button-next {
-  color: white;
-  background-color: transparent;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 6px rgba(0,0,0,0.3);
-  transition: background-color 0.3s ease;
+    color: white;
+    background-color: transparent;
+    width: 30px; /* Menor para mobile */
+    height: 30px; /* Menor para mobile */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 6px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease;
 }
 
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
-  background-color: #e23838;
-  color: white;
-  box-shadow: 0 0 10px rgba(226, 56, 56, 0.7);
+    background-color: #e23838;
+    color: white;
+    box-shadow: 0 0 10px rgba(226, 56, 56, 0.7);
 }
 
 .swiper-button-prev::after,
 .swiper-button-next::after {
-  font-size: 20px;
-  font-weight: bold;
+    font-size: 16px; /* Menor para mobile */
+    font-weight: bold;
 }
 
 .swiper-button-prev {
-  left: 10px;
+    left: 5px; /* Mais perto da borda */
 }
 
 .swiper-button-next {
-  right: 10px;
+    right: 5px; /* Mais perto da borda */
 }
 
 .swiper-pagination-bullet {
-  background: #888;
-  opacity: 1;
+    background: #888;
+    opacity: 1;
 }
 
 .swiper-pagination-bullet-active {
-  background: #fff;
-}
-
-/* --------------------------- Responsivo --------------------------- */
-@media (max-width: 768px) {
-  .service-photo {
-    max-height: 250px;
-  }
-}
-
-@media (max-width: 480px) {
-  .testimonial-modal-content {
-    max-width: 90vw;
-    padding: 0.5rem;
-  }
-
-  .testimonial-modal .user-photo {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 1rem;
-  }
-
-  .testimonial-modal .service-photo {
-    width: 100%;
-    height: auto;
-    max-height: 45vh;
-    object-fit: contain;
-    display: block;
-    border-radius: 20px;
-  }
-
-  .service-photo {
-    max-height: 200px;
-  }
-
-  .button {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
-  }
+    background: #fff;
 }
 
 /* --------------------------- UploadImagemOrcamento --------------------------- */
 .upload-imagem-orcamento {
-  width: 100%;
-  max-width: 900px;
-  margin: 1rem auto;
-  font-family: 'Roboto', sans-serif;
+    width: 100%;
+    margin: 1rem auto;
+    font-family: 'Roboto', sans-serif;
+    padding: 0 1rem; /* Adicionado padding para não grudar nas bordas */
 }
 
 .upload-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 .dropzone {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  padding: 1rem;
-  border: 2px dashed #e23838;
-  border-radius: 20px;
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 1rem;
-  transition: background-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 1rem;
+    border: 2px dashed #e23838;
+    border-radius: 20px;
+    width: 100%;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s ease;
 }
 
 .dropzone:hover {
-  background-color: rgba(226, 56, 56, 0.1);
+    background-color: rgba(226, 56, 56, 0.1);
 }
 
 #file-upload {
-  display: none;
+    display: none;
 }
 
 .upload-btn {
-  padding: 0.6rem 1.2rem;
-  border-radius: 10px;
-  background-color: #e23838;
-  color: white;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    background-color: #e23838;
+    color: white;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .upload-btn:disabled {
-  background-color: #aaa;
-  cursor: not-allowed;
+    background-color: #aaa;
+    cursor: not-allowed;
 }
 
 .progress-bar {
-  width: 100%;
-  max-width: 400px;
-  height: 8px;
-  background-color: #ddd;
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: 1rem;
+    width: 100%;
+    height: 8px;
+    background-color: #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1rem;
 }
 
 .progress-bar div {
-  height: 100%;
-  background-color: #e23838;
-  width: 0%;
-  transition: width 0.3s ease;
+    height: 100%;
+    background-color: #e23838;
+    width: 0%;
+    transition: width 0.3s ease;
 }
 
 .selected-images,
 .existing-images {
-  margin-top: 1rem;
+    margin-top: 1rem;
 }
 
 .image-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centralizado para melhor visualização em mobile */
+    gap: 0.5rem;
 }
 
 .image-item {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  border-radius: 10px;
-  overflow: hidden;
-  cursor: pointer;
-  flex-shrink: 0;
+    position: relative;
+    width: 80px; /* Reduzido para caber mais na tela */
+    height: 80px; /* Reduzido para caber mais na tela */
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    flex-shrink: 0;
 }
 
 .image-preview {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .delete-icon,
 .action-icon {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  color: #fff;
-  background: rgba(0,0,0,0.5);
-  border-radius: 50%;
-  padding: 2px;
-  cursor: pointer;
-  transition: background 0.2s ease;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #fff;
+    background: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    padding: 2px;
+    cursor: pointer;
+    transition: background 0.2s ease;
 }
 
 .delete-icon:hover,
 .action-icon:hover {
-  background: rgba(226,56,56,0.9);
+    background: rgba(226,56,56,0.9);
 }
 
 .image-actions {
-  position: absolute;
-  bottom: 5px;
-  left: 5px;
-  display: flex;
-  gap: 5px;
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    display: flex;
+    gap: 5px;
 }
 
 .upload-error {
-  color: #e23838;
-  margin-top: 0.5rem;
-  text-align: center;
-  font-weight: 600;
+    color: #e23838;
+    margin-top: 0.5rem;
+    text-align: center;
+    font-weight: 600;
 }
 
 /* Modal Upload */
 .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
 }
 
 .modal-content {
-  position: relative;
-  background: #1c1c1e;
-  padding: 1rem;
-  border-radius: 20px;
-  max-width: 90%;
-  max-height: 90%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    position: relative;
+    background: #1c1c1e;
+    padding: 0.5rem; /* Menor para mobile */
+    border-radius: 10px; /* Menor para mobile */
+    max-width: 95%; /* Maior para preencher melhor a tela */
+    max-height: 95%; /* Maior para preencher melhor a tela */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-image {
-  max-width: 100%;
-  max-height: 80vh;
-  border-radius: 20px;
-  object-fit: contain;
+    max-width: 100%;
+    max-height: 90vh; /* Ajustado para caber na tela */
+    border-radius: 10px;
+    object-fit: contain;
 }
 
 .modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  color: white;
-  cursor: pointer;
-  background: rgba(0,0,0,0.5);
-  border-radius: 50%;
-  padding: 4px;
-  transition: background 0.2s ease;
+    position: absolute;
+    top: 5px; /* Mais perto da borda */
+    right: 5px; /* Mais perto da borda */
+    color: white;
+    cursor: pointer;
+    background: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    padding: 4px;
+    transition: background 0.2s ease;
 }
 
 .modal-close:hover {
-  background: rgba(226,56,56,0.9);
+    background: rgba(226,56,56,0.9);
+}
+
+/* --------------------------- Media Queries Desktop --------------------------- */
+@media (min-width: 768px) {
+    /* Testimonial */
+    .testimonial-carousel {
+        max-width: 900px;
+    }
+
+    .highlight-testimonial-card {
+        padding: 2rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        max-width: 600px;
+    }
+
+    .user-photo {
+        width: 72px;
+        height: 72px;
+        margin-bottom: 1rem;
+    }
+
+    .service-photo-container {
+        margin: 1rem 0;
+    }
+
+    .service-photo {
+        max-height: 350px;
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Modal Testimonial */
+    .testimonial-modal-content {
+        padding: 1.5rem;
+        border-radius: 20px;
+        max-width: 600px;
+    }
+
+    .testimonial-modal .user-photo {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+    }
+
+    .testimonial-modal .service-photo {
+        border-radius: 20px;
+        margin-top: 1rem;
+    }
+
+    /* Swiper */
+    .swiper-button-prev,
+    .swiper-button-next {
+        width: 40px;
+        height: 40px;
+    }
+
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+        font-size: 20px;
+    }
+
+    .swiper-button-prev {
+        left: 10px;
+    }
+
+    .swiper-button-next {
+        right: 10px;
+    }
+
+    /* UploadImagemOrcamento */
+    .upload-imagem-orcamento {
+        max-width: 900px;
+        padding: 0;
+    }
+
+    .dropzone {
+        max-width: 400px;
+    }
+
+    .progress-bar {
+        max-width: 400px;
+    }
+
+    .image-list {
+        justify-content: flex-start; /* Alinhado à esquerda no desktop */
+    }
+
+    .image-item {
+        width: 100px;
+        height: 100px;
+    }
+
+    .modal-content {
+        padding: 1rem;
+        border-radius: 20px;
+        max-width: 90%;
+        max-height: 90%;
+    }
+
+    .modal-image {
+        max-height: 80vh;
+    }
+
+    .modal-close {
+        top: 10px;
+        right: 10px;
+    }
 }

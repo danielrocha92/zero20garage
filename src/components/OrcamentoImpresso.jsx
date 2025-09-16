@@ -1,15 +1,18 @@
+// src/components/OrcamentoImpresso.jsx
 import React, { useRef, useState, useCallback } from 'react';
 import dayjs from 'dayjs';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import axios from 'axios';
 import './OrcamentoImpresso.css';
 import logo from '../assets/images/background.jpg';
 
 const OrcamentoImpresso = ({ orcamento, onClose }) => {
   const componentRef = useRef(null);
   const [isPdfGenerating, setIsPdfGenerating] = useState(false);
+  const [imagens, setImagens] = useState(orcamento?.imagens || []);
 
-  const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
+  const sleep = (ms) => new Promise(res => setTimeout(res, ms));
 
   const formatValue = (value) => {
     const num = Number(value);
@@ -53,7 +56,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       URL.revokeObjectURL(objectUrl);
       return dataUrl;
     }
-    if (img?.imagemUrl) return await toPngDataUrlFromSrc(img.imagemUrl); // 👈 Ajuste aqui
+    if (img?.imagemUrl) return await toPngDataUrlFromSrc(img.imagemUrl);
     if (img?.data?.data) return `data:image/jpeg;base64,${img.data.data}`;
     return null;
   }, [toPngDataUrlFromSrc, getCloudinaryOriginal]);
@@ -129,7 +132,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
 
       pdf.addImage(imgData, 'PNG', margin, margin, pdfWidth - 2 * margin, (canvas.height * pdfWidth) / canvas.width);
 
-      await appendOriginalImagesToPdf(pdf, orcamento?.imagens || []);
+      await appendOriginalImagesToPdf(pdf, imagens);
 
       const filename = `Orçamento_OS_${orcamento?.ordemServico || 'SemOS'}_${orcamento?.cliente || 'SemCliente'}.pdf`;
       pdf.save(filename);
@@ -153,13 +156,41 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     }, 100);
   };
 
+  const handleDeleteImage = async (index) => {
+    try {
+      const imageToDelete = imagens[index];
+      if (!imageToDelete || !imageToDelete.public_id) {
+        console.warn('❌ Imagem inválida para exclusão');
+        return;
+      }
+
+      // Chamada DELETE usando variável de ambiente
+      const response = await axios.delete(
+        `${import.meta.env.VITE_API_BASE_URL}/orcamentos/${orcamento.id}/imagens/${encodeURIComponent(imageToDelete.public_id)}`,
+        {
+          withCredentials: true,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      );
+
+      console.log('✅ Imagem removida no backend:', response.data);
+
+      const updated = imagens.filter((_, i) => i !== index);
+      setImagens(updated);
+
+    } catch (err) {
+      console.error('❌ Erro ao remover imagem:', err);
+      alert('Não foi possível remover a imagem. Tente novamente.');
+    }
+  };
+
   if (!orcamento) return <div className="orcamento-impresso-container">Nenhum orçamento selecionado.</div>;
 
   const pecas = orcamento.pecasSelecionadas || [];
   const servicos = orcamento.servicosSelecionados || [];
-  const showServices = (servicos.length > 0) || (Number(orcamento.valorTotalServicos) > 0) || (Number(orcamento.totalMaoDeObra) > 0);
-  const showImages = orcamento.imagens && orcamento.imagens.length > 0;
-  const showObservacoes = orcamento.observacoes && orcamento.observacoes.trim() !== '';
+  const showServices = servicos.length > 0 || Number(orcamento.valorTotalServicos) > 0 || Number(orcamento.totalMaoDeObra) > 0;
+  const showImages = imagens.length > 0;
+  const showObservacoes = orcamento.observacoes?.trim() !== '';
 
   let formattedDate = '___________';
   if (orcamento?.data) {
@@ -169,35 +200,30 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     if (dateToFormat.isValid()) formattedDate = dateToFormat.format('DD/MM/YYYY HH:mm');
   }
 
-  const ImagensVeiculo = ({ imagens }) => {
-    return (
-      <section className="imagens-section">
-        <h2>Imagens do Veículo</h2>
-        <div className="imagens-container">
-          {imagens.map((img, idx) => {
-            const src = img?.imagemUrl || '';
-            console.log('🖼️ URL da imagem para renderizar:', src);
-            return (
-              <div key={idx} className="thumb-wrapper">
-                <img src={src} alt={`Foto ${idx + 1}`} className="thumb-img" />
-              </div>
-            );
-          })}
-        </div>
-      </section>
-    );
-  };
+  const ImagensVeiculo = ({ imagens }) => (
+    <section className="imagens-section">
+      <h2>Imagens do Veículo</h2>
+      <div className="imagens-container">
+        {imagens.map((img, idx) => (
+          <div key={idx} className="thumb-wrapper">
+            <img src={img?.imagemUrl || ''} alt={`Foto ${idx + 1}`} className="thumb-img" />
+            {img?.public_id && (
+              <button className="delete-btn" onClick={() => handleDeleteImage(idx)}>❌</button>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 
   return (
     <div className="orcamento-impresso-container">
       <div className="orcamento-impresso-content" ref={componentRef}>
-        {/* Cabeçalho */}
         <div className="header-impresso">
           <h1>ORÇAMENTO - {orcamento.tipo === 'motor' ? 'MOTOR COMPLETO/PARCIAL' : 'CABEÇOTE'}</h1>
           <img src={logo} alt="Logo Zero20Garage" className="logo-impresso" />
         </div>
 
-        {/* Informações */}
         <section className="info-section">
           <table className="info-table">
             <tbody>
@@ -211,7 +237,6 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           </table>
         </section>
 
-        {/* Peças */}
         <section className="items-section">
           <h2>Peças</h2>
           <div className="items-columns">
@@ -227,7 +252,6 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           </div>
         </section>
 
-        {/* Serviços */}
         {showServices && (
           <>
             <section className="items-section">
@@ -250,33 +274,29 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           </>
         )}
 
-        {/* Total Geral */}
         <div className="total-line-impresso final-total">
           <span>TOTAL GERAL:</span> <strong>{formatValue(orcamento.valorTotal)}</strong>
         </div>
 
-        {/* Informações Extras */}
         <div className="extra-info-section-impresso">
           <p className="payment-method"><strong>Forma de Pagamento:</strong> {orcamento.formaPagamento || '___________'}</p>
           {showObservacoes && <p className="observations"><strong>Observações:</strong> {orcamento.observacoes}</p>}
         </div>
 
-        {/* Preview de Imagens */}
-        {showImages && <ImagensVeiculo imagens={orcamento.imagens} />}
+        {showImages && <ImagensVeiculo imagens={imagens} />}
 
-        {/* Política */}
+       {/* Política */}
         <section className="policy-footer">
           <h4>Política de Garantia, Troca e Devolução</h4>
           <p>A garantia dos serviços realizados pela Zero 20 Garage é válida apenas se o veículo for utilizado conforme as orientações da oficina, incluindo manutenções em dia, uso adequado de combustíveis e respeito aos prazos de revisão. Clientes com pagamentos pendentes não terão direito à garantia, sendo que a mesma só pode ser ativada mediante apresentação do orçamento.</p>
           <p>O documento comprova a realização dos serviços e/ou compra das peças para o motor completo, mediante contato com a oficina para análise do problema. A Zero 20 Garage preza pela qualidade dos serviços prestados e realiza todos os procedimentos com base em diagnósticos técnicos e profissionais qualificados.</p>
-          <p>Em casos de avariações, se o veículo apresentar danos ou acidentes ocasionados por fenômenos da natureza ou da ação de terceiros, a garantia não será válida.</p>
+          <p>Em casos de avarias, se o veículo apresentar danos ou acidentes ocasionados por fenômenos da natureza ou da ação de terceiros, a garantia não será válida.</p>
           <p>Em caso de uso incorreto ou desgaste natural de componentes, o cliente poderá solicitar a análise do caso.</p>
           <p>Não haverá reembolso de peças já instaladas no veículo, sob nenhuma circunstância.</p>
           <p className="policy-acceptance">Ao aceitar o orçamento e iniciar o serviço com a Zero 20 Garage, o cliente declara estar ciente e de acordo com os termos descritos acima.</p>
         </section>
       </div>
 
-      {/* Ações */}
       <div className="orcamento-impresso-actions">
         <button className='button' onClick={handleSharePdf} disabled={isPdfGenerating}>
           {isPdfGenerating ? 'Gerando PDF...' : 'Gerar PDF'}
