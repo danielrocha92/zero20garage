@@ -46,13 +46,7 @@ const HistoricoOrcamentos = ({ onEditarOrcamento, onViewBudget, onClose }) => {
 
     try {
       const res = await axios.get(`${API_BASE_URL}`, {
-        params: {
-          page,
-          size: PAGE_SIZE,
-          // Adicione um parâmetro para ordenar por Ordem de Serviço de forma decrescente
-          orderBy: 'ordemServico',
-          direction: 'desc'
-        },
+        params: { page, size: PAGE_SIZE },
         headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
       });
 

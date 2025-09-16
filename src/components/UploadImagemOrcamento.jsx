@@ -4,229 +4,216 @@ import './UploadImagemOrcamento.css';
 import { AiOutlineUpload, AiOutlineDelete, AiOutlineEye, AiOutlineClose } from 'react-icons/ai';
 
 const UploadImagemOrcamento = ({ orcamentoId, onUploaded }) => {
-  const [selectedFiles, setSelectedFiles] = useState([]);
-  const [previewFiles, setPreviewFiles] = useState([]);
-  const [imagemAtual, setImagemAtual] = useState([]);
-  const [uploading, setUploading] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [error, setError] = useState(null);
-  const [modalImage, setModalImage] = useState(null);
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [previewFiles, setPreviewFiles] = useState([]);
+  const [imagemAtual, setImagemAtual] = useState([]);
+  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [error, setError] = useState(null);
+  const [modalImage, setModalImage] = useState(null);
 
-  const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
-  const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com/api/orcamentos';
+  const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
 
-  // --- Função utilitária para obter URL da imagem ---
-  const getImageUrl = (img) => {
-    if (!img) return '';
-    if (typeof img === 'string') return img;
-    // Priorize a URL se existir, caso contrário, tente outras propriedades
-    return img.url || img.uri || img.imagemUrl || '';
-  };
+  const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com/api/orcamentos';
 
-  const handleImageError = (e) => e.currentTarget.src = '/placeholder.png';
+  const getImageUrl = (img) => img?.imagemUrl || img?.url || '';
 
-  // --- Buscar imagens já enviadas ---
-  useEffect(() => {
-    if (!orcamentoId) return;
-    const fetchOrcamento = async () => {
-      try {
-        const res = await axios.get(`${API_BASE_URL}/${orcamentoId}`, {
-          headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
-        });
+  const handleImageError = (e) => e.currentTarget.src = '/placeholder.png';
 
-        console.log("🔎 Retorno da API ao buscar orçamento:", res.data);
+  // --- Buscar imagens já enviadas ---
+  useEffect(() => {
+    if (!orcamentoId) return;
+    const fetchOrcamento = async () => {
+      try {
+        const res = await axios.get(`${API_BASE_URL}/${orcamentoId}`, {
+          headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
+        });
 
-        const validImages = (res.data.imagens || []).filter(img => getImageUrl(img));
-        console.log("📸 Imagens válidas extraídas:", validImages);
+        console.log("🔎 Retorno da API ao buscar orçamento:", res.data);
 
-        setImagemAtual(validImages);
-      } catch (err) {
-        console.error('Erro ao buscar imagens do orçamento:', err);
-        setError('Não foi possível carregar as imagens deste orçamento.');
-      }
-    };
-    fetchOrcamento();
-  }, [orcamentoId, authToken]);
+        const validImages = (res.data.imagens || []).filter(img => getImageUrl(img));
+        console.log("📸 Imagens válidas extraídas:", validImages);
 
-  // --- Preview dos arquivos selecionados ---
-  useEffect(() => {
-    const objectUrls = selectedFiles.map(file => URL.createObjectURL(file));
-    setPreviewFiles(objectUrls);
-    return () => objectUrls.forEach(url => URL.revokeObjectURL(url));
-  }, [selectedFiles]);
+        setImagemAtual(validImages);
+      } catch (err) {
+        console.error('Erro ao buscar imagens do orçamento:', err);
+        setError('Não foi possível carregar as imagens deste orçamento.');
+      }
+    };
+    fetchOrcamento();
+  }, [orcamentoId, authToken]);
 
-  const handleFileChange = (e) => {
-    setSelectedFiles(Array.from(e.target.files));
-    setProgress(0);
-    setError(null);
-  };
+  // --- Preview dos arquivos selecionados ---
+  useEffect(() => {
+    const objectUrls = selectedFiles.map(file => URL.createObjectURL(file));
+    setPreviewFiles(objectUrls);
+    return () => objectUrls.forEach(url => URL.revokeObjectURL(url));
+  }, [selectedFiles]);
 
-  const handleUpload = async () => {
-    if (!selectedFiles.length) return;
+  const handleFileChange = (e) => {
+    setSelectedFiles(Array.from(e.target.files));
+    setProgress(0);
+    setError(null);
+  };
 
-    setUploading(true);
-    setProgress(0);
-    setError(null);
+  const handleUpload = async () => {
+    if (!selectedFiles.length) return;
 
-    const formData = new FormData();
-    selectedFiles.forEach(file => formData.append('imagens', file));
+    setUploading(true);
+    setProgress(0);
+    setError(null);
 
-    try {
-      const res = await axios.post(`${API_BASE_URL}/${orcamentoId}/imagens`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          ...(authToken && { Authorization: `Bearer ${authToken}` }),
-        },
-        onUploadProgress: (event) => {
-          const percent = Math.round((event.loaded * 100) / event.total);
-          setProgress(percent);
-        },
-      });
+    const formData = new FormData();
+    selectedFiles.forEach(file => formData.append('imagens', file));
 
-      console.log("⬆️ Retorno da API após upload:", res.data);
+    try {
+      const res = await axios.post(`${API_BASE_URL}/${orcamentoId}/imagens`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          ...(authToken && { Authorization: `Bearer ${authToken}` }),
+        },
+        onUploadProgress: (event) => {
+          const percent = Math.round((event.loaded * 100) / event.total);
+          setProgress(percent);
+        },
+      });
 
-      const novasImagens = res.data.imagens || [];
-      console.log("🆕 Novas imagens recebidas:", novasImagens);
+      console.log("⬆️ Retorno da API após upload:", res.data);
 
-      setImagemAtual(prev => {
-        const updated = [...prev, ...novasImagens];
-        console.log("📌 Estado final de imagens após upload:", updated);
-        return updated;
-      });
-      setSelectedFiles([]);
+      const novasImagens = res.data.imagens || [];
+      console.log("🆕 Novas imagens recebidas:", novasImagens);
 
-      if (onUploaded) onUploaded([...imagemAtual, ...novasImagens]);
-    } catch (err) {
-      console.error('Erro no upload:', err);
-      setError(err.response?.data?.erro || 'Erro desconhecido ao enviar imagens.');
-    } finally {
-      setUploading(false);
-      setProgress(0);
-    }
-  };
+      setImagemAtual(prev => {
+        const updated = [...prev, ...novasImagens];
+        console.log("📌 Estado final de imagens após upload:", updated);
+        return updated;
+      });
+      setSelectedFiles([]);
 
-  const handleRemoveSelectedFile = (idx) => {
-    setSelectedFiles(prev => prev.filter((_, i) => i !== idx));
-    setPreviewFiles(prev => prev.filter((_, i) => i !== idx));
-  };
+      if (onUploaded) onUploaded([...imagemAtual, ...novasImagens]);
+    } catch (err) {
+      console.error('Erro no upload:', err);
+      setError(err.response?.data?.erro || 'Erro desconhecido ao enviar imagens.');
+    } finally {
+      setUploading(false);
+      setProgress(0);
+    }
+  };
 
-  // --- Nova função de exclusão de imagens já enviadas ---
-  const handleRemoveUploadedImage = async (public_id) => {
-    if (!public_id) return;
-    try {
-      const res = await axios.delete(`${API_BASE_URL}/${orcamentoId}/imagens/${encodeURIComponent(public_id)}`, {
-        headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
-      });
+  const handleRemoveSelectedFile = (idx) => {
+    setSelectedFiles(prev => prev.filter((_, i) => i !== idx));
+    setPreviewFiles(prev => prev.filter((_, i) => i !== idx));
+  };
 
-      console.log('✅ Imagem removida do backend:', res.data);
+  const handleRemoveUploadedImage = async (public_id) => {
+    try {
+      await axios.delete(`${API_BASE_URL}/${orcamentoId}/imagens/${public_id}`, {
+        headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
+      });
+      setImagemAtual(prev => prev.filter(img => img.public_id !== public_id));
+    } catch (err) {
+      console.error('Erro ao remover imagem:', err);
+      setError('Erro ao remover a imagem.');
+    }
+  };
 
-      setImagemAtual(prev => prev.filter(img => img.public_id !== public_id));
-      if (onUploaded) onUploaded(imagemAtual.filter(img => img.public_id !== public_id));
-    } catch (err) {
-      console.error('❌ Erro ao remover imagem:', err);
-      setError('Erro ao remover a imagem.');
-    }
-  };
+  return (
+    <div className="upload-imagem-orcamento">
+      <div className="upload-area">
+        <label htmlFor="file-upload" className="dropzone">
+          <AiOutlineUpload size={40} />
+          <span>{uploading ? 'Enviando...' : 'Clique para selecionar'}</span>
+        </label>
+        <input
+          id="file-upload"
+          type="file"
+          accept="image/*"
+          multiple
+          capture="environment"
+          onChange={handleFileChange}
+          disabled={uploading}
+        />
+        <button
+          onClick={handleUpload}
+          disabled={uploading || !selectedFiles.length}
+          className="upload-btn"
+        >
+          {uploading ? 'Enviando...' : 'Enviar Imagens'}
+        </button>
+      </div>
 
-  return (
-    <div className="upload-imagem-orcamento">
-      <div className="upload-area">
-        <label htmlFor="file-upload" className="dropzone">
-          <AiOutlineUpload size={40} />
-          <span>{uploading ? 'Enviando...' : 'Clique para selecionar'}</span>
-        </label>
-        <input
-          id="file-upload"
-          type="file"
-          accept="image/*"
-          multiple
-          capture="environment"
-          onChange={handleFileChange}
-          disabled={uploading}
-        />
-        <button
-          onClick={handleUpload}
-          disabled={uploading || !selectedFiles.length}
-          className="upload-btn"
-        >
-          {uploading ? 'Enviando...' : 'Enviar Imagens'}
-        </button>
-      </div>
+      {uploading && (
+        <div className="progress-bar">
+          <div style={{ width: `${progress}%` }} />
+        </div>
+      )}
 
-      {uploading && (
-        <div className="progress-bar">
-          <div style={{ width: `${progress}%` }} />
-        </div>
-      )}
+      {previewFiles.length > 0 && (
+        <div className="selected-images">
+          <h4>Pré-visualização ({previewFiles.length}):</h4>
+          <div className="image-list">
+            {previewFiles.map((url, idx) => (
+              <div key={idx} className="image-item">
+                <img
+                  src={url}
+                  alt={selectedFiles[idx]?.name || `Pré-visualização ${idx + 1}`}
+                  className="image-preview"
+                  onError={handleImageError}
+                />
+                <AiOutlineDelete
+                  className="delete-icon"
+                  onClick={() => handleRemoveSelectedFile(idx)}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
-      {previewFiles.length > 0 && (
-        <div className="selected-images">
-          <h4>Pré-visualização ({previewFiles.length}):</h4>
-          <div className="image-list">
-            {previewFiles.map((url, idx) => (
-              <div key={idx} className="image-item">
-                <img
-                  src={url}
-                  alt={selectedFiles[idx]?.name || `Pré-visualização ${idx + 1}`}
-                  className="image-preview"
-                  onError={handleImageError}
-                />
-                <AiOutlineDelete
-                  className="delete-icon"
-                  onClick={() => handleRemoveSelectedFile(idx)}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      {imagemAtual.length > 0 && (
+        <div className="existing-images">
+          <h4>Imagens já enviadas:</h4>
+          <div className="image-list">
+            {imagemAtual.map((img, idx) => {
+              const imgSrc = getImageUrl(img);
+              return (
+                <div key={img.public_id || idx} className="image-item">
+                  <img
+                    src={imgSrc}
+                    alt={`Imagem ${idx + 1}`}
+                    className="image-preview"
+                    onClick={() => setModalImage(imgSrc)}
+                    onError={handleImageError}
+                  />
+                  <div className="image-actions">
+                    <AiOutlineEye size={20} className="action-icon" onClick={() => setModalImage(imgSrc)} />
+                    {img.public_id && (
+                      <AiOutlineDelete
+                        size={20}
+                        className="action-icon"
+                        onClick={() => handleRemoveUploadedImage(img.public_id)}
+                      />
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
-      {imagemAtual.length > 0 && (
-        <div className="existing-images">
-          <h4>Imagens já enviadas:</h4>
-          <div className="image-list">
-            {imagemAtual.map((img, idx) => {
-              const imgSrc = getImageUrl(img);
-              // Usa o `public_id` ou um identificador único para a chave
-              const key = img.public_id || imgSrc || idx;
-              return (
-                <div key={key} className="image-item">
-                  <img
-                    src={imgSrc}
-                    alt={`Imagem ${idx + 1}`}
-                    className="image-preview"
-                    onClick={() => setModalImage(imgSrc)}
-                    onError={handleImageError}
-                  />
-                  <div className="image-actions">
-                    <AiOutlineEye size={20} className="action-icon" onClick={() => setModalImage(imgSrc)} />
-                    {img.public_id && (
-                      <AiOutlineDelete
-                        size={20}
-                        className="action-icon"
-                        onClick={() => handleRemoveUploadedImage(img.public_id)}
-                      />
-                    )}
-                  </div>
-              </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
+      {modalImage && (
+        <div className="modal-overlay" onClick={() => setModalImage(null)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <AiOutlineClose size={24} className="modal-close" onClick={() => setModalImage(null)} />
+            <img src={modalImage} alt="Visualização" className="modal-image" onError={handleImageError} />
+          </div>
+        </div>
+      )}
 
-      {modalImage && (
-        <div className="modal-overlay" onClick={() => setModalImage(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <AiOutlineClose size={24} className="modal-close" onClick={() => setModalImage(null)} />
-            <img src={modalImage} alt="Visualização" className="modal-image" onError={handleImageError} />
-          </div>
-        </div>
-      )}
-
-      {error && <p className="upload-error">{error}</p>}
-    </div>
-  );
+      {error && <p className="upload-error">{error}</p>}
+    </div>
+  );
 };
 
 export default UploadImagemOrcamento;
