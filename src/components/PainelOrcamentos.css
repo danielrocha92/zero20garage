@@ -216,7 +216,6 @@
     align-items: center;
 }
 
-
 /* Estilos de status */
 .status-aberto { color: #007bff; }
 .status-aprovado { color: #28a745; }
@@ -257,6 +256,46 @@
 @keyframes fadeInDown {
   from { opacity: 0; transform: translate(-50%, -30px);}
   to   { opacity: 1; transform: translate(-50%, 0);}
+}
+
+/* === NOVAS CLASSES PARA OS CARDS === */
+.cards-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  justify-content: center;
+}
+
+.card-option {
+  flex: 1 1 200px;
+  max-width: 220px;
+  background: #fff;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.card-option span {
+  display: block;
+  margin-top: 10px;
+  font-weight: 600;
+  color: #333;
+}
+
+.card-option:hover {
+  border-color: #d32f2f;
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+.card-option.active {
+  border-color: #d32f2f;
+  background: #f9f9f9;
 }
 
 /* MEDIA QUERY PARA DESKTOP */
