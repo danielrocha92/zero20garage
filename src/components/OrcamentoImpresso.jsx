@@ -166,7 +166,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
 
       // Chamada DELETE usando variável de ambiente
       const response = await axios.delete(
-        `${import.meta.env.VITE_API_BASE_URL}/orcamentos/${orcamento.id}/imagens/${encodeURIComponent(imageToDelete.public_id)}`,
+        `${import.meta.env.REACT_API_BASE_URL}/orcamentos/${orcamento.id}/imagens/${encodeURIComponent(imageToDelete.public_id)}`,
         {
           withCredentials: true,
           headers: { 'Content-Type': 'application/json' }

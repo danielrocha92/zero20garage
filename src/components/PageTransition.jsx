@@ -7,9 +7,7 @@ import jsPDF from 'jspdf';
 import "./PainelOrcamentos.css"; // CSS específico para este componente
 
 // Importante: No React (frontend), você normalmente não usa 'process.env' diretamente para variáveis de ambiente
-// que são definidas no build do React App (ex: usando Create React App ou Vite).
 // Para o frontend, as variáveis de ambiente devem ser prefixadas com REACT_APP_ (se for CRA)
-// ou VITE_ (se for Vite) para serem "injetadas" no build.
 // Se você está usando uma API de backend que consome essa URL, isso seria no backend.
 // Se você quer que o frontend se conecte diretamente ao Google Apps Script,
 // você precisará definir essa variável como uma env do frontend.
