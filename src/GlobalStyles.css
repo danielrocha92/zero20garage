@@ -401,20 +401,60 @@ a:hover {
   text-decoration: none;
 }
 
-/* ===== Formulários (já mobile-first) ===== */
-input,
-textarea {
-  width: 100%;
-  padding: 0.8rem;
+/* ===== Formulários refinados (Padrão Apple) ===== */
+.form-group {
   margin-bottom: 1rem;
-  border: 1px solid var(--cinza-medio);
-  border-radius: 20px;
-  font-size: 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--cinza-escuro);
 }
 
-/* ===== Destaques (já mobile-first, com ajuste para desktop no media query) ===== */
+label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--cinza-medio);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-family: 'San Francisco', 'Helvetica Neue', 'Arial', sans-serif;
+  padding-left: 0.5rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--cinza-medio);
+  border-radius: 10px;
+  font-size: 1rem;
+  background-color: transparent;
+  color: var(--cinza-escuro);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+textarea::placeholder {
+  color: rgba(143, 137, 137, 0.6);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--vermelho-principal);
+  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
+}
+
+/* Destaques (já mobile-first, com ajuste para desktop no media query) */
 .highlights-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -764,22 +804,40 @@ textarea {
 }
 
 /* ===== Formulários refinados ===== */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--cinza-escuro);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-family: 'San Francisco', 'Helvetica Neue', 'Arial', sans-serif;
+  padding-left: 0.5rem;
+}
+
 input,
 textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   width: 100%;
   padding: 0.9rem 1rem;
-  border-radius: 20px;
+  border-radius: 10px; /* Reduzido para um padrão mais sutil */
   font-size: 1rem;
   border: 1px solid var(--cinza-medio);
   background-color: rgba(255, 255, 255, 0.1);
-  transition: border-color 0.3s ease;
   color: var(--cinza-escuro);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 input:focus,
 textarea:focus {
   outline: none;
-  box-shadow: 0 0 4px rgba(255, 0, 0, 0.3);
+  border-color: var(--vermelho-principal);
+  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
 }
 
 /* ===== Botões refinados ===== */
