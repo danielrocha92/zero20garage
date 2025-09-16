@@ -1,4 +1,3 @@
-// src/components/Login.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
@@ -51,39 +50,45 @@ const Login = () => {
   return (
     <div className="page-escuro">
       <DynamicHeader page="login" messages={[{ title: "Área Restrita", subtitle: "Acesso exclusivo para administradores." }]} />
-      <div className="login-container">
-        <h2 className="titulo-claro">Login Admin</h2>
-        <form onSubmit={handleSubmit} className="form-login" autoComplete="on">
-          <label htmlFor="email">E-mail</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Digite seu e-mail"
-            value={form.email}
-            onChange={handleChange}
-            required
-            autoComplete="username"
-          />
-
-          <label htmlFor="password">Senha</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Digite sua senha"
-            value={form.password}
-            onChange={handleChange}
-            required
-            autoComplete="current-password"
-          />
-
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Entrando..." : "Entrar"}
-          </button>
-
-          {message && <p className="erro">{message}</p>}
-        </form>
+      <div className="login-container container-escuro">
+        <div className="highlight-card">
+          <h2 className="titulo-claro">Login Admin</h2>
+          <form onSubmit={handleSubmit} className="orcamento-form" autoComplete="on">
+            <div className="form-group">
+              <label htmlFor="email">E-mail</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Digite seu e-mail"
+                value={form.email}
+                onChange={handleChange}
+                required
+                autoComplete="username"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Senha</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Digite sua senha"
+                value={form.password}
+                onChange={handleChange}
+                required
+                autoComplete="current-password"
+              />
+            </div>
+            <button
+              type="submit"
+              className="submit-button"
+              disabled={isSubmitting}>
+              {isSubmitting ? "Entrando..." : "Entrar"}
+            </button>
+            {message && <p className="feedback feedback-error">{message}</p>}
+          </form>
+        </div>
       </div>
     </div>
   );
