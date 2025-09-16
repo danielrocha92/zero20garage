@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../Orcamento.css';
+import './Orcamento.css';
 import DynamicHeader from '../../components/DynamicHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import emailjs from 'emailjs-com';
