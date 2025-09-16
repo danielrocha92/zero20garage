@@ -1,105 +1,140 @@
-.login-container {
-  max-width: 350px;
-  margin: 1rem auto;
-  padding: 2rem;
-  background-color: #121212;
-  border-radius: 20px;
-  box-shadow: 0 0 10px #ff0000cc;
-  color: #eee;
-  font-family: 'Inter', sans-serif;
-  border: 1px solid #ff0000;
+import React, { useState } from 'react';
+import './FormularioContato.css';
+import emailjs from 'emailjs-com';
+
+function FormularioContato() {
+  const [formData, setFormData] = useState({
+    nome: '',
+    email: '',
+    assunto: '',
+    mensagem: '',
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [feedback, setFeedback] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setFeedback(null);
+
+    emailjs
+      .send(
+        'service_mbg69sw',
+        'template_tso8mol',
+        { ...formData },
+        'NxziW1zSC820uuLvF'
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          setFeedback({
+            type: 'success',
+            message: 'Mensagem enviada com sucesso!',
+          });
+          setFormData({
+            nome: '',
+            email: '',
+            assunto: '',
+            mensagem: '',
+          });
+        },
+        (error) => {
+          console.log(error.text);
+          setFeedback({
+            type: 'error',
+            message: 'Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente.',
+          });
+        }
+      )
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  return (
+    <section className="container-claro orcamento-section">
+      <div className="form-section highlight-card">
+        <h2 className="titulo-claro">Entre em Contato</h2>
+        <h3 className="subtitulo-claro">
+          Preencha o formulário e responderemos o mais breve possível.
+        </h3>
+
+        <form onSubmit={handleSubmit} className="orcamento-form">
+          <div className="form-group">
+            <label htmlFor="nome">Nome:</label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              value={formData.nome}
+              onChange={handleChange}
+              required
+              placeholder="Seu nome completo"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              placeholder="Seu email"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="assunto">Assunto:</label>
+            <input
+              type="text"
+              id="assunto"
+              name="assunto"
+              value={formData.assunto}
+              onChange={handleChange}
+              required
+              placeholder="Assunto da mensagem"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="mensagem">Mensagem:</label>
+            <textarea
+              id="mensagem"
+              name="mensagem"
+              value={formData.mensagem}
+              onChange={handleChange}
+              rows="6"
+              required
+              placeholder="Sua mensagem"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            className="submit-button"
+            disabled={loading}
+          >
+            {loading ? 'Enviando...' : 'Enviar Mensagem'}
+          </button>
+
+          {feedback && (
+            <div className={`feedback ${feedback.type === 'success' ? 'feedback-success' : 'feedback-error'}`}>
+              {feedback.message}
+            </div>
+          )}
+        </form>
+      </div>
+    </section>
+  );
 }
 
-.form-login {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.form-login input {
-  padding: 0.8rem;
-  border: 1px solid #444;
-  border-radius: 20px;
-  font-size: 1rem;
-  background-color: #222;
-  color: #eee;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.form-login input:focus {
-  outline: none;
-  border-color: #ff0000;
-  box-shadow: 0 0 8px #ff0000aa;
-}
-
-.form-login button {
-  background-color: #ff0000;
-  color: white;
-  padding: 0.8rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
-}
-
-.form-login button:hover {
-  background-color: #cc0000;
-  transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
-}
-
-.form-login button:active {
-  transform: scale(0.98);
-}
-
-.erro {
-  margin-top: 1rem;
-  color: #ff5555;
-  font-weight: 600;
-  text-align: center;
-}
-
-.titulo-claro {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: white;
-  font-weight: bold;
-}
-
-.painel-header {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
-}
-
-.logout-btn {
-  background-color: #b22222;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  font-weight: bold;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.logout-btn:hover {
-  background-color: #8b1a1a;
-}
-
-/* Novas regras para a animação */
-.loading {
-  animation: pulse 0.5s infinite alternate;
-}
-
-@keyframes pulse {
-  from {
-    transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    transform: scale(1.05);
-    opacity: 0.8;
-  }
-}
+export default FormularioContato;
