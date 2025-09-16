@@ -5,6 +5,8 @@ import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
+import { FaCogs, FaTools, FaHistory, FaFileExcel, FaFilePdf, FaSignOutAlt } from 'react-icons/fa';
+
 import OrcamentoCabecote from './OrcamentoCabecote';
 import OrcamentoMotorCompleto from './OrcamentoMotorCompleto';
 import HistoricoOrcamentos from './HistoricoOrcamentos';
@@ -41,14 +43,13 @@ const PainelOrcamentos = () => {
 
   // --- Fetch histórico com cursor e cache ---
   const fetchHistorico = useCallback(async (loadMore = false) => {
-    if (loadingHistorico) return; // break: não dispara se já está carregando
+    if (loadingHistorico) return;
     setLoadingHistorico(true);
     try {
       const url = new URL(`${API_BASE_URL}/api/orcamentos`);
       url.searchParams.append('size', 10);
       if (loadMore && lastDocId) url.searchParams.append('lastId', lastDocId);
 
-      // --- cache simples para evitar mesma requisição ---
       const cacheKey = url.toString();
       if (window._historicoCache && window._historicoCache[cacheKey]) {
         const cachedData = window._historicoCache[cacheKey];
@@ -71,7 +72,6 @@ const PainelOrcamentos = () => {
       setLastDocId(data.lastDocId);
       setHasMore(novosOrcamentos.length > 0 && data.lastDocId !== null);
 
-      // --- salvar cache ---
       window._historicoCache = window._historicoCache || {};
       window._historicoCache[cacheKey] = data;
 
@@ -163,7 +163,6 @@ const PainelOrcamentos = () => {
       tempDiv.style.backgroundColor = 'white';
       document.body.appendChild(tempDiv);
 
-      // Inserir conteúdo básico do orçamento
       const imagemUrl = orcamento?.imagens?.[0]?.url || null;
       tempDiv.innerHTML = `
         <div class="orcamento-impresso-content">
@@ -172,7 +171,7 @@ const PainelOrcamentos = () => {
         </div>
       `;
 
-      await new Promise(resolve => setTimeout(resolve, 50)); // break
+      await new Promise(resolve => setTimeout(resolve, 50));
 
       try {
         const canvas = await html2canvas(tempDiv, { scale: 2, useCORS: true });
@@ -225,17 +224,37 @@ const PainelOrcamentos = () => {
         <>
           <h1 className="titulo-escuro">Painel de Orçamentos</h1>
 
-          <nav className="tipo-orcamento-selector">
-            <button onClick={() => { setTipo('motor'); setEditingData(null); }} className={tipo === 'motor' ? 'active' : 'button'}>Orçamento Motor Completo</button>
-            <button onClick={() => { setTipo('cabecote'); setEditingData(null); }} className={tipo === 'cabecote' ? 'active' : 'button'}>Orçamento Cabeçote</button>
-            <button onClick={scrollToHistorico} className="button">Histórico de Orçamentos</button>
-          </nav>
+          {/* Cards principais */}
+          <div className="cards-container">
+            <div className={`card-option ${tipo === 'motor' ? 'active' : ''}`} onClick={() => { setTipo('motor'); setEditingData(null); }}>
+              <FaCogs size={40} />
+              <span>Orçamento Motor Completo</span>
+            </div>
+            <div className={`card-option ${tipo === 'cabecote' ? 'active' : ''}`} onClick={() => { setTipo('cabecote'); setEditingData(null); }}>
+              <FaTools size={40} />
+              <span>Orçamento Cabeçote</span>
+            </div>
+            <div className="card-option" onClick={scrollToHistorico}>
+              <FaHistory size={40} />
+              <span>Histórico de Orçamentos</span>
+            </div>
+          </div>
 
-          <nav className="tipo-orcamento-selector">
-            <button onClick={exportarExcel} className="button">Exportar Todos para Excel</button>
-            <button onClick={exportarPDFCompleto} className="button">Exportar Todos para PDF</button>
-            <button className="button" onClick={handleLogout}>Sair</button>
-          </nav>
+          {/* Cards de exportação */}
+          <div className="cards-container">
+            <div className="card-option" onClick={exportarExcel}>
+              <FaFileExcel size={40} color="green" />
+              <span>Exportar Excel</span>
+            </div>
+            <div className="card-option" onClick={exportarPDFCompleto}>
+              <FaFilePdf size={40} color="red" />
+              <span>Exportar PDF</span>
+            </div>
+            <div className="card-option" onClick={handleLogout}>
+              <FaSignOutAlt size={40} color="gray" />
+              <span>Sair</span>
+            </div>
+          </div>
 
           <main className="orcamento-form-wrapper" id="orcamento-form">
             {tipo === 'motor'
