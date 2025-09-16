@@ -5,7 +5,7 @@ import html2canvas from 'html2canvas';
 import './OrcamentoImpresso.css';
 import logo from '../assets/images/background.jpg';
 
-const OrcamentoImpresso = ({ orcamento, onClose }) => {
+const OrcamentoImpresso = ({ orcamento, onClose, onDeleteImage }) => {
   const componentRef = useRef(null);
   const [isPdfGenerating, setIsPdfGenerating] = useState(false);
 
@@ -53,7 +53,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       URL.revokeObjectURL(objectUrl);
       return dataUrl;
     }
-    if (img?.imagemUrl) return await toPngDataUrlFromSrc(img.imagemUrl); // 👈 Ajuste aqui
+    if (img?.imagemUrl) return await toPngDataUrlFromSrc(img.imagemUrl);
     if (img?.data?.data) return `data:image/jpeg;base64,${img.data.data}`;
     return null;
   }, [toPngDataUrlFromSrc, getCloudinaryOriginal]);
@@ -69,14 +69,19 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     if (!dataUrls.length) return;
 
     const pageW = pdf.internal.pageSize.getWidth();
+    const pageH = pdf.internal.pageSize.getHeight();
     const margin = 20;
 
     pdf.addPage();
     pdf.setFontSize(14);
     pdf.text('Imagens originais (alta resolução)', margin, margin + 2);
 
+    let y = margin + 10;
+    let pageNum = pdf.getNumberOfPages();
+
     for (let idx = 0; idx < dataUrls.length; idx++) {
       const dataUrl = dataUrls[idx];
+
       const img = await new Promise((resolve, reject) => {
         const i = new Image();
         i.onload = () => resolve(i);
@@ -85,15 +90,25 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       });
 
       const maxW = pageW - margin * 2;
-      const ratio = maxW / img.width;
+      const ratio = Math.min(1, maxW / img.width);
       const drawW = img.width * ratio;
       const drawH = img.height * ratio;
       const imgX = (pageW - drawW) / 2;
-      const imgY = pdf.lastAutoTable ? pdf.lastAutoTable.finalY + margin : margin + 10;
 
-      pdf.addImage(dataUrl, 'PNG', imgX, imgY, drawW, drawH);
-      if (idx < dataUrls.length - 1) pdf.addPage();
+      if (y + drawH > pageH - margin) {
+        pdf.setFontSize(10);
+        pdf.text(`Página ${pageNum}`, pageW / 2, pageH - 10, { align: 'center' });
+        pdf.addPage();
+        y = margin;
+        pageNum = pdf.getNumberOfPages();
+      }
+
+      pdf.addImage(dataUrl, 'PNG', imgX, y, drawW, drawH);
+      y += drawH + 10;
     }
+
+    pdf.setFontSize(10);
+    pdf.text(`Página ${pageNum}`, pageW / 2, pageH - 10, { align: 'center' });
   };
 
   const handleSharePdf = async () => {
@@ -157,7 +172,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
 
   const pecas = orcamento.pecasSelecionadas || [];
   const servicos = orcamento.servicosSelecionados || [];
-  const showServices = (servicos.length > 0) || (Number(orcamento.valorTotalServicos) > 0) || (Number(orcamento.totalMaoDeObra) > 0);
+  const showServices = servicos.length > 0 || Number(orcamento.valorTotalServicos) > 0 || Number(orcamento.totalMaoDeObra) > 0;
   const showImages = orcamento.imagens && orcamento.imagens.length > 0;
   const showObservacoes = orcamento.observacoes && orcamento.observacoes.trim() !== '';
 
@@ -169,17 +184,24 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     if (dateToFormat.isValid()) formattedDate = dateToFormat.format('DD/MM/YYYY HH:mm');
   }
 
+  const handleDeleteImage = (idx) => {
+    if (!onDeleteImage) return;
+    onDeleteImage(idx);
+  };
+
   const ImagensVeiculo = ({ imagens }) => {
     return (
       <section className="imagens-section">
         <h2>Imagens do Veículo</h2>
         <div className="imagens-container">
           {imagens.map((img, idx) => {
-            const src = img?.imagemUrl || '';
-            console.log('🖼️ URL da imagem para renderizar:', src);
+            const src = img?.imagemUrl || (typeof img === 'string' ? img : '');
             return (
               <div key={idx} className="thumb-wrapper">
                 <img src={src} alt={`Foto ${idx + 1}`} className="thumb-img" />
+                <button className="delete-img-btn" onClick={() => handleDeleteImage(idx)}>
+                  Excluir
+                </button>
               </div>
             );
           })}
@@ -191,13 +213,11 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
   return (
     <div className="orcamento-impresso-container">
       <div className="orcamento-impresso-content" ref={componentRef}>
-        {/* Cabeçalho */}
         <div className="header-impresso">
           <h1>ORÇAMENTO - {orcamento.tipo === 'motor' ? 'MOTOR COMPLETO/PARCIAL' : 'CABEÇOTE'}</h1>
           <img src={logo} alt="Logo Zero20Garage" className="logo-impresso" />
         </div>
 
-        {/* Informações */}
         <section className="info-section">
           <table className="info-table">
             <tbody>
@@ -211,7 +231,6 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           </table>
         </section>
 
-        {/* Peças */}
         <section className="items-section">
           <h2>Peças</h2>
           <div className="items-columns">
@@ -227,7 +246,6 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           </div>
         </section>
 
-        {/* Serviços */}
         {showServices && (
           <>
             <section className="items-section">
@@ -250,18 +268,15 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           </>
         )}
 
-        {/* Total Geral */}
         <div className="total-line-impresso final-total">
           <span>TOTAL GERAL:</span> <strong>{formatValue(orcamento.valorTotal)}</strong>
         </div>
 
-        {/* Informações Extras */}
         <div className="extra-info-section-impresso">
           <p className="payment-method"><strong>Forma de Pagamento:</strong> {orcamento.formaPagamento || '___________'}</p>
           {showObservacoes && <p className="observations"><strong>Observações:</strong> {orcamento.observacoes}</p>}
         </div>
 
-        {/* Preview de Imagens */}
         {showImages && <ImagensVeiculo imagens={orcamento.imagens} />}
 
         {/* Política */}
@@ -269,14 +284,14 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           <h4>Política de Garantia, Troca e Devolução</h4>
           <p>A garantia dos serviços realizados pela Zero 20 Garage é válida apenas se o veículo for utilizado conforme as orientações da oficina, incluindo manutenções em dia, uso adequado de combustíveis e respeito aos prazos de revisão. Clientes com pagamentos pendentes não terão direito à garantia, sendo que a mesma só pode ser ativada mediante apresentação do orçamento.</p>
           <p>O documento comprova a realização dos serviços e/ou compra das peças para o motor completo, mediante contato com a oficina para análise do problema. A Zero 20 Garage preza pela qualidade dos serviços prestados e realiza todos os procedimentos com base em diagnósticos técnicos e profissionais qualificados.</p>
-          <p>Em casos de avariações, se o veículo apresentar danos ou acidentes ocasionados por fenômenos da natureza ou da ação de terceiros, a garantia não será válida.</p>
+          <p>Em casos de avarias, se o veículo apresentar danos ou acidentes ocasionados por fenômenos da natureza ou da ação de terceiros, a garantia não será válida.</p>
           <p>Em caso de uso incorreto ou desgaste natural de componentes, o cliente poderá solicitar a análise do caso.</p>
           <p>Não haverá reembolso de peças já instaladas no veículo, sob nenhuma circunstância.</p>
           <p className="policy-acceptance">Ao aceitar o orçamento e iniciar o serviço com a Zero 20 Garage, o cliente declara estar ciente e de acordo com os termos descritos acima.</p>
         </section>
       </div>
 
-      {/* Ações */}
+
       <div className="orcamento-impresso-actions">
         <button className='button' onClick={handleSharePdf} disabled={isPdfGenerating}>
           {isPdfGenerating ? 'Gerando PDF...' : 'Gerar PDF'}

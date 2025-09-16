@@ -13,7 +13,6 @@ import './PainelOrcamentos.css';
 
 const UploadImagemOrcamento = React.lazy(() => import('./UploadImagemOrcamento'));
 
-// Atualize a URL para seu novo backend
 const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
 
 const PainelOrcamentos = () => {
@@ -27,6 +26,10 @@ const PainelOrcamentos = () => {
   const [editingData, setEditingData] = useState(null);
   const [selectedBudgetForView, setSelectedBudgetForView] = useState(null);
 
+  const [lastDocId, setLastDocId] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingHistorico, setLoadingHistorico] = useState(false);
+
   const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
 
   // --- Mensagem de feedback ---
@@ -36,19 +39,49 @@ const PainelOrcamentos = () => {
     setTimeout(() => setShowMessage(false), duration);
   };
 
-  // --- Fetch histórico ---
-  const fetchHistorico = useCallback(async () => {
+  // --- Fetch histórico com cursor e cache ---
+  const fetchHistorico = useCallback(async (loadMore = false) => {
+    if (loadingHistorico) return; // break: não dispara se já está carregando
+    setLoadingHistorico(true);
     try {
-      const res = await fetch(`${API_BASE_URL}/api/orcamentos`, {
+      const url = new URL(`${API_BASE_URL}/api/orcamentos`);
+      url.searchParams.append('size', 10);
+      if (loadMore && lastDocId) url.searchParams.append('lastId', lastDocId);
+
+      // --- cache simples para evitar mesma requisição ---
+      const cacheKey = url.toString();
+      if (window._historicoCache && window._historicoCache[cacheKey]) {
+        const cachedData = window._historicoCache[cacheKey];
+        setHistorico(prev => loadMore ? [...prev, ...cachedData.orcamentos] : cachedData.orcamentos);
+        setLastDocId(cachedData.lastDocId);
+        setHasMore(cachedData.orcamentos.length > 0 && cachedData.lastDocId !== null);
+        setLoadingHistorico(false);
+        return;
+      }
+
+      const res = await fetch(url.toString(), {
         headers: authToken ? { Authorization: `Bearer ${authToken}` } : undefined,
       });
+
+      if (!res.ok) throw new Error(`Erro ${res.status}`);
       const data = await res.json();
-      setHistorico(Array.isArray(data) ? data : []);
+
+      const novosOrcamentos = data.orcamentos || [];
+      setHistorico(prev => loadMore ? [...prev, ...novosOrcamentos] : novosOrcamentos);
+      setLastDocId(data.lastDocId);
+      setHasMore(novosOrcamentos.length > 0 && data.lastDocId !== null);
+
+      // --- salvar cache ---
+      window._historicoCache = window._historicoCache || {};
+      window._historicoCache[cacheKey] = data;
+
     } catch (error) {
       console.error('Erro ao buscar histórico:', error);
       showMessageBox('Erro ao carregar histórico de orçamentos.');
+    } finally {
+      setLoadingHistorico(false);
     }
-  }, [authToken]);
+  }, [authToken, lastDocId, loadingHistorico]);
 
   useEffect(() => {
     fetchHistorico();
@@ -112,7 +145,7 @@ const PainelOrcamentos = () => {
     saveAs(new Blob([buf], { type: 'application/octet-stream' }), 'painel-orcamentos.xlsx');
   };
 
-  // --- Exportar PDF ---
+  // --- Exportar PDF contínuo ---
   const exportarPDFCompleto = async () => {
     if (!historico.length) return showMessageBox('Nenhum dado para exportar.');
     const pdf = new jsPDF('p', 'mm', 'a4');
@@ -130,8 +163,8 @@ const PainelOrcamentos = () => {
       tempDiv.style.backgroundColor = 'white';
       document.body.appendChild(tempDiv);
 
+      // Inserir conteúdo básico do orçamento
       const imagemUrl = orcamento?.imagens?.[0]?.url || null;
-
       tempDiv.innerHTML = `
         <div class="orcamento-impresso-content">
           <h1>ORÇAMENTO - ${orcamento.tipo === 'motor' ? 'MOTOR' : 'CABEÇOTE'}</h1>
@@ -139,7 +172,7 @@ const PainelOrcamentos = () => {
         </div>
       `;
 
-      await new Promise(resolve => setTimeout(resolve, 50));
+      await new Promise(resolve => setTimeout(resolve, 50)); // break
 
       try {
         const canvas = await html2canvas(tempDiv, { scale: 2, useCORS: true });
@@ -153,6 +186,7 @@ const PainelOrcamentos = () => {
         document.body.removeChild(tempDiv);
       }
     }
+
     pdf.save('historico-orcamentos-zero20.pdf');
     showMessageBox('PDF do histórico gerado com sucesso!');
   };
@@ -213,7 +247,7 @@ const PainelOrcamentos = () => {
               <UploadImagemOrcamento
                 orcamentoId={editingData?.id}
                 authToken={authToken}
-                apiBaseUrl={API_BASE_URL} // passe a URL do novo backend
+                apiBaseUrl={API_BASE_URL}
                 onUploaded={(imgs) => {
                   if (editingData) setEditingData(prev => prev ? { ...prev, imagens: imgs } : prev);
                   fetchHistorico();
@@ -224,9 +258,12 @@ const PainelOrcamentos = () => {
 
           <div ref={historicoRef}>
             <HistoricoOrcamentos
+              historico={historico}
               onEditarOrcamento={handleEditarOrcamento}
               onViewBudget={handleViewBudget}
-              authToken={authToken}
+              fetchMore={fetchHistorico}
+              hasMore={hasMore}
+              loading={loadingHistorico}
             />
           </div>
         </>
