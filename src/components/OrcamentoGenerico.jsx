@@ -1,6 +1,6 @@
 // src/components/OrcamentoGenerico.jsx
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import "./OrcamentoForms.css";
+import "./OrcamentoGenerico.css";
 
 const OrcamentoGenerico = ({
   onSubmit,
@@ -77,7 +77,6 @@ const OrcamentoGenerico = ({
     return Number(value.replace(/\D/g, "")) / 100;
   };
 
-  // Preenche formData ao editar
   useEffect(() => {
     if (!editingData) return;
 
@@ -272,10 +271,9 @@ const OrcamentoGenerico = ({
     ));
 
   return (
-    <div className="client-vehicle-section">
+    <div className="orcamento-container">
       <h1>{titulo}</h1>
       <form onSubmit={handleSubmit}>
-        {/* Seções de cliente e veículo */}
         <section className="client-vehicle-section">
           <h2>Informações do Cliente e Veículo</h2>
           <table className="form-table">
