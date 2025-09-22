@@ -185,6 +185,8 @@ const OrcamentoImpresso = ({ orcamento, onClose, onDeleteImage }) => {
   }
 
   const handleDeleteImage = (idx) => {
+    // A função de exclusão da nuvem deve ser implementada no componente pai
+    // e passada como prop 'onDeleteImage'
     if (!onDeleteImage) return;
     onDeleteImage(idx);
   };
@@ -279,7 +281,6 @@ const OrcamentoImpresso = ({ orcamento, onClose, onDeleteImage }) => {
 
         {showImages && <ImagensVeiculo imagens={orcamento.imagens} />}
 
-        {/* Política */}
         <section className="policy-footer">
           <h4>Política de Garantia, Troca e Devolução</h4>
           <p>A garantia dos serviços realizados pela Zero 20 Garage é válida apenas se o veículo for utilizado conforme as orientações da oficina, incluindo manutenções em dia, uso adequado de combustíveis e respeito aos prazos de revisão. Clientes com pagamentos pendentes não terão direito à garantia, sendo que a mesma só pode ser ativada mediante apresentação do orçamento.</p>
@@ -290,7 +291,6 @@ const OrcamentoImpresso = ({ orcamento, onClose, onDeleteImage }) => {
           <p className="policy-acceptance">Ao aceitar o orçamento e iniciar o serviço com a Zero 20 Garage, o cliente declara estar ciente e de acordo com os termos descritos acima.</p>
         </section>
       </div>
-
 
       <div className="orcamento-impresso-actions">
         <button className='button' onClick={handleSharePdf} disabled={isPdfGenerating}>

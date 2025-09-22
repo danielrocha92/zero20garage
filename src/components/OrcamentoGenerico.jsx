@@ -358,76 +358,19 @@ const OrcamentoGenerico = ({
           {/* Peças */}
           <section className="section-form">
             <h2>Peças</h2>
-            <table className="items-table">
-              <tbody>
-                {formData.pecas.map((peca, index) => (
-                  <tr key={index}>
-                    <td className="checkbox-cell">
-                      <label className="custom-checkbox">
-                        <input
-                          type="checkbox"
-                          checked={peca.selecionado}
-                          onChange={() => handleToggleSelecionado("pecas", index)}
-                        />
-                        <span className="checkbox-box"></span>
-                        {peca.nome}
-                      </label>
-                    </td>
-                    <td className="subitems-cell">
-                      {peca.selecionado && peca.subItens?.length > 0 && (
-                        <div>
-                          {peca.subItens.map((sub, sIdx) => (
-                            <div key={sIdx} className="sub-item-input-group">
-                              {sub.type === "checkbox" ? (
-                                <label className="custom-checkbox">
-                                  <input
-                                    type="checkbox"
-                                    checked={sub.value}
-                                    onChange={(e) =>
-                                      handleSubItemChange("pecas", index, sIdx, e.target.checked)
-                                    }
-                                  />
-                                  <span className="checkbox-box"></span>
-                                  {sub.label}
-                                </label>
-                              ) : (
-                                <>
-                                  <label className="sub-item-label">{sub.label}:</label>
-                                  <input
-                                    type="text"
-                                    value={sub.value}
-                                    onChange={(e) =>
-                                      handleSubItemChange("pecas", index, sIdx, e.target.value)
-                                    }
-                                    className="small-input"
-                                  />
-                                </>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </td>
-                    <td className="quantidade-cell">
-                      {peca.selecionado && peca.temQuantidade && (
-                        <>
-                          <label className="quantidade-label">Qtd:</label>
-                          <select
-                            value={peca.quantidade}
-                            onChange={(e) =>
-                              handleQuantidadeChange("pecas", index, parseInt(e.target.value))
-                            }
-                            className="quantidade-select"
-                          >
-                            {gerarOpcoesQuantidade()}
-                          </select>
-                        </>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div className="items-list">
+              {formData.pecas.map((peca, index) => (
+                <label key={index} className="custom-checkbox">
+                  <input
+                    type="checkbox"
+                    checked={peca.selecionado}
+                    onChange={() => handleToggleSelecionado("pecas", index)}
+                  />
+                  <span className="checkbox-box"></span>
+                  {peca.nome}
+                </label>
+              ))}
+            </div>
             <div className="total-line-form">
               <span className="label">Valor total de Peças:</span>
               <input
@@ -444,78 +387,19 @@ const OrcamentoGenerico = ({
           {/* Serviços */}
           <section className="section-form">
             <h2>Serviços</h2>
-            <table className="items-table">
-              <tbody>
-                {formData.servicos.map((servico, index) => (
-                  <tr key={index}>
-                    <td className="checkbox-cell">
-                      <label className="custom-checkbox">
-                        <input
-                          type="checkbox"
-                          checked={servico.selecionado}
-                          onChange={() =>
-                            handleToggleSelecionado("servicos", index)
-                          }
-                        />
-                        <span className="checkbox-box"></span>
-                        {servico.nome}
-                      </label>
-                    </td>
-                    <td className="subitems-cell">
-                      {servico.selecionado && servico.subItens?.length > 0 && (
-                        <div>
-                          {servico.subItens.map((sub, sIdx) => (
-                            <div key={sIdx} className="sub-item-input-group">
-                              {sub.type === "checkbox" ? (
-                                <label className="custom-checkbox">
-                                  <input
-                                    type="checkbox"
-                                    checked={sub.value}
-                                    onChange={(e) =>
-                                      handleSubItemChange("servicos", index, sIdx, e.target.checked)
-                                    }
-                                  />
-                                  <span className="checkbox-box"></span>
-                                  {sub.label}
-                                </label>
-                              ) : (
-                                <>
-                                  <label className="sub-item-label">{sub.label}:</label>
-                                  <input
-                                    type="text"
-                                    value={sub.value}
-                                    onChange={(e) =>
-                                      handleSubItemChange("servicos", index, sIdx, e.target.value)
-                                    }
-                                    className="small-input"
-                                  />
-                                </>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </td>
-                    <td className="quantidade-cell">
-                      {servico.selecionado && servico.temQuantidade && (
-                        <>
-                          <label className="quantidade-label">Qtd:</label>
-                          <select
-                            value={servico.quantidade}
-                            onChange={(e) =>
-                              handleQuantidadeChange("servicos", index, parseInt(e.target.value))
-                            }
-                            className="quantidade-select"
-                          >
-                            {gerarOpcoesQuantidade()}
-                          </select>
-                        </>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div className="items-list">
+              {formData.servicos.map((servico, index) => (
+                <label key={index} className="custom-checkbox">
+                  <input
+                    type="checkbox"
+                    checked={servico.selecionado}
+                    onChange={() => handleToggleSelecionado("servicos", index)}
+                  />
+                  <span className="checkbox-box"></span>
+                  {servico.nome}
+                </label>
+              ))}
+            </div>
             <div className="total-line-form">
               <span className="label">Valor total de Serviços:</span>
               <input
@@ -529,6 +413,13 @@ const OrcamentoGenerico = ({
             </div>
           </section>
         </div>
+
+        {/* Total geral */}
+        <div className="total-geral">
+          <span>Total geral:</span>
+          <strong>R$ {calcularTotalGeral()}</strong>
+        </div>
+
 
         {/* Totais gerais */}
         <section className="summary-section">

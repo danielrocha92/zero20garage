@@ -96,6 +96,7 @@
     box-shadow: 0 6px 15px rgba(197, 4, 4, 0.4);
     transform: translateY(-2px);
 }
+
 .action-btn:active {
     transform: translateY(0);
     box-shadow: 0 2px 5px rgba(197, 4, 4, 0.2);
@@ -120,6 +121,7 @@
     background-color: #007bff;
     color: white;
 }
+
 .action-btn-small.view-btn:hover {
     background-color: #0056b3;
     transform: translateY(-1px);
@@ -130,6 +132,7 @@
     background-color: #ffc107;
     color: #333;
 }
+
 .action-btn-small.edit-btn:hover {
     background-color: #e0a800;
     transform: translateY(-1px);
@@ -140,6 +143,7 @@
     background-color: #dc3545;
     color: white;
 }
+
 .action-btn-small.delete-btn:hover {
     background-color: #c82333;
     transform: translateY(-1px);
@@ -189,6 +193,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    color: #fff; /* Trocado para branco */
 }
 
 .orcamento-item:hover {
@@ -199,7 +204,7 @@
 .orcamento-item p {
     margin: 5px 0;
     font-size: 0.95em;
-    color: #e0e0e0;
+    color: #fff; /* Trocado para branco */
 }
 
 .orcamento-item p strong {
@@ -216,6 +221,27 @@
     align-items: center;
 }
 
+/* Estilos para os checkbox dos itens selecionados */
+.orcamento-checkbox {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.orcamento-checkbox.checked {
+    background-color: #c50404;
+    border-color: #c50404;
+    color: #fff;
+}
+
 /* Estilos de status */
 .status-aberto { color: #007bff; }
 .status-aprovado { color: #28a745; }
@@ -224,86 +250,110 @@
 
 /* Message Box (para feedback de sucesso/erro) */
 .message-box {
-  position: fixed;
-  top: 32px; /* ou 16px para mais próximo do topo */
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9999;
-  background: #fff;
-  color: #222;
-  border: 2px solid #ff0015;
-  border-radius: 8px;
-  padding: 1rem 2.5rem 1rem 1rem;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
-  font-size: 1.1rem;
-  min-width: 280px;
-  max-width: 90vw;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  animation: fadeInDown 0.3s;
+    position: fixed;
+    top: 32px; /* ou 16px para mais próximo do topo */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: #fff;
+    color: #222;
+    border: 2px solid #ff0015;
+    border-radius: 8px;
+    padding: 1rem 2.5rem 1rem 1rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    font-size: 1.1rem;
+    min-width: 280px;
+    max-width: 90vw;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: fadeInDown 0.3s;
 }
 
 .message-box button {
-  background: none;
-  border: none;
-  color: #ff0015;
-  font-size: 1.5rem;
-  cursor: pointer;
-  margin-left: auto;
+    background: none;
+    border: none;
+    color: #ff0015;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: auto;
 }
 
 @keyframes fadeInDown {
-  from { opacity: 0; transform: translate(-50%, -30px);}
-  to   { opacity: 1; transform: translate(-50%, 0);}
+    from { opacity: 0; transform: translate(-50%, -30px);}
+    to   { opacity: 1; transform: translate(-50%, 0);}
 }
 
 /* === NOVAS CLASSES PARA OS CARDS === */
 .cards-container {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-  margin: 20px 0;
-  justify-content: center;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+    justify-content: center;
 }
 
 .card-option {
-  flex: 1 1 45%; /* 50/50 no mobile */
-  max-width: 48%;
-  background: #fff;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  padding: 15px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  font-family: Arial, sans-serif;
-  font-size: 0.9em; /* Fonte um pouco menor */
+    flex: 1 1 45%; /* 50/50 no mobile */
+    max-width: 48%;
+    background: #fff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    font-family: Arial, sans-serif;
+    font-size: 0.9em; /* Fonte um pouco menor */
 }
 
 .card-option i,
 .card-option svg {
-  font-size: 1.6em;
-  color: #d32f2f; /* Ícone vermelho padrão */
+    font-size: 1.6em;
+    color: #d32f2f; /* Ícone vermelho padrão */
 }
 
 .card-option span {
-  display: block;
-  margin-top: 8px;
-  font-weight: 600;
-  color: #333;
+    display: block;
+    margin-top: 8px;
+    font-weight: 600;
+    color: #333;
 }
 
 .card-option:hover {
-  border-color: #d32f2f;
-  transform: translateY(-4px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    border-color: #d32f2f;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
 }
 
 .card-option.active {
-  border-color: #d32f2f;
-  background: #f9f9f9;
+    border-color: #d32f2f;
+    background: #f9f9f9;
+}
+
+/* Estilização para as opções de quantidade (exemplo) */
+.quantidade-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.quantidade-option-item {
+    background: #4a4a4a;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #666;
+    transition: all 0.2s;
+}
+
+.quantidade-option-item:hover,
+.quantidade-option-item.selected {
+    background: #c50404;
+    border-color: #c50404;
 }
 
 /* MEDIA QUERY PARA DESKTOP */
@@ -347,9 +397,10 @@
         width: auto;
     }
 
+    /* Layout de duas colunas com 50/50 para desktop */
     .historico-list {
-        display: grid; /* Layout de grid para desktop */
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         gap: 20px;
     }
 

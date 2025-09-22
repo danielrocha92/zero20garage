@@ -253,15 +253,6 @@
     flex-grow: unset;
 }
 
-.checkbox-cell,
-.inputs-cell,
-.subitems-cell,
-.total-cell {
-    width: 100%;
-    padding: 0;
-    margin-bottom: 10px;
-}
-
 /* Checkboxes personalizados */
 .custom-checkbox {
     display: flex;

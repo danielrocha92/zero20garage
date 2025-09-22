@@ -138,12 +138,6 @@
   width: 60px;
 }
 
-.checkbox-cell,
-.subitems-cell,
-.quantidade-cell {
-  padding: 6px;
-}
-
 .custom-checkbox {
   position: relative;
   display: inline-flex;
@@ -232,5 +226,19 @@
   .payment-observacoes-section {
     flex-direction: row;
     gap: 1rem;
+  }
+  .grid-50-50 {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .grid-50-50 .section-form {
+    flex: 1;
+    min-width: 300px; /* evita colunas muito estreitas */
+  }
+  .grid-50-50 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
   }
 }
