@@ -1,140 +1,132 @@
-import React, { useState } from 'react';
-import './FormularioContato.css';
-import emailjs from 'emailjs-com';
+/*
+ * ========================
+ * Estilos da Página de Login
+ * ========================
+ */
 
-function FormularioContato() {
-  const [formData, setFormData] = useState({
-    nome: '',
-    email: '',
-    assunto: '',
-    mensagem: '',
-  });
-
-  const [loading, setLoading] = useState(false);
-  const [feedback, setFeedback] = useState(null);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setFeedback(null);
-
-    emailjs
-      .send(
-        'service_mbg69sw',
-        'template_tso8mol',
-        { ...formData },
-        'NxziW1zSC820uuLvF'
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          setFeedback({
-            type: 'success',
-            message: 'Mensagem enviada com sucesso!',
-          });
-          setFormData({
-            nome: '',
-            email: '',
-            assunto: '',
-            mensagem: '',
-          });
-        },
-        (error) => {
-          console.log(error.text);
-          setFeedback({
-            type: 'error',
-            message: 'Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente.',
-          });
-        }
-      )
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  return (
-    <section className="container-claro orcamento-section">
-      <div className="form-section highlight-card">
-        <h2 className="titulo-claro">Entre em Contato</h2>
-        <h3 className="subtitulo-claro">
-          Preencha o formulário e responderemos o mais breve possível.
-        </h3>
-
-        <form onSubmit={handleSubmit} className="orcamento-form">
-          <div className="form-group">
-            <label htmlFor="nome">Nome:</label>
-            <input
-              type="text"
-              id="nome"
-              name="nome"
-              value={formData.nome}
-              onChange={handleChange}
-              required
-              placeholder="Seu nome completo"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              placeholder="Seu email"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="assunto">Assunto:</label>
-            <input
-              type="text"
-              id="assunto"
-              name="assunto"
-              value={formData.assunto}
-              onChange={handleChange}
-              required
-              placeholder="Assunto da mensagem"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="mensagem">Mensagem:</label>
-            <textarea
-              id="mensagem"
-              name="mensagem"
-              value={formData.mensagem}
-              onChange={handleChange}
-              rows="6"
-              required
-              placeholder="Sua mensagem"
-            ></textarea>
-          </div>
-
-          <button
-            type="submit"
-            className="submit-button"
-            disabled={loading}
-          >
-            {loading ? 'Enviando...' : 'Enviar Mensagem'}
-          </button>
-
-          {feedback && (
-            <div className={`feedback ${feedback.type === 'success' ? 'feedback-success' : 'feedback-error'}`}>
-              {feedback.message}
-            </div>
-          )}
-        </form>
-      </div>
-    </section>
-  );
+.page-escuro {
+  background-color: #121212; /* Um fundo escuro */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #e0e0e0; /* Cor do texto claro para contraste */
+  font-family: Arial, sans-serif;
+  padding: 2rem 1rem;
 }
 
-export default FormularioContato;
+.login-container.container-escuro {
+  width: 100%;
+  max-width: 400px;
+  padding: 1.5rem;
+}
+
+.highlight-card {
+  background-color: #1e1e1e; /* Um tom um pouco mais claro que o fundo */
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.titulo-claro {
+  color: #ffffff;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+/*
+ * ========================
+ * Estilos do Formulário
+ * ========================
+ */
+
+.orcamento-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #bbbbbb;
+}
+
+.form-group input {
+  background-color: #2b2b2b;
+  border: 1px solid #444;
+  color: #e0e0e0;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #007bff;
+}
+
+/*
+ * ========================
+ * Estilos do Botão e Feedback
+ * ========================
+ */
+
+.submit-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.submit-button:disabled {
+  background-color: #4a4a4a;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.feedback {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.feedback-error {
+  background-color: #3b1b1b;
+  color: #ff6b6b;
+}
+
+/*
+ * ========================
+ * Estilos para Dispositivos Maiores
+ * ========================
+ */
+
+@media (min-width: 768px) {
+  .login-container.container-escuro {
+    padding: 3rem;
+  }
+}
