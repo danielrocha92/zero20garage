@@ -109,57 +109,87 @@ const OrcamentoGenerico = ({
       observacoes: editingData.observacoes || "",
       status: editingData.status || "Aberto",
       pecas: itensData.map((pecaData) => {
-        const pecaEdit = editingData.pecasSelecionadas?.find((p) =>
-          p.includes(pecaData.nome)
-        );
-        const quantidadeMatch = pecaEdit ? pecaEdit.match(/::\s*(\d+)/) : null;
-        const quantidade = quantidadeMatch
-          ? parseInt(quantidadeMatch[1], 10)
-          : pecaData.temQuantidade
-          ? 1
-          : 0;
+        const pecaEdit = editingData.pecasSelecionadas?.find((p) => {
+          // Solução: Verifique se a string começa com o nome da peça.
+          // Isso é mais robusto que `includes`
+          const pecaNomePadrao = new RegExp(`^${pecaData.nome}(::.*|\\s*$)`);
+          return pecaNomePadrao.test(p);
+        });
+
+        const selecionado = !!pecaEdit;
+        let quantidade = pecaData.temQuantidade ? 1 : 0;
+        if (selecionado) {
+          const quantidadeMatch = pecaEdit.match(/::\s*(\d+)/);
+          quantidade = quantidadeMatch
+            ? parseInt(quantidadeMatch[1], 10)
+            : pecaData.temQuantidade
+            ? 1
+            : 0;
+        }
+
+        const newSubItens = pecaData.subItens
+          ? pecaData.subItens.map((sub) => {
+              let value = sub.initialValue || (sub.type === "checkbox" ? false : "");
+              if (selecionado) {
+                if (sub.type === "checkbox" && pecaEdit.includes(sub.label)) {
+                  value = true;
+                } else if (sub.type === "text") {
+                  const subItemMatch = pecaEdit.match(new RegExp(`${sub.label}:\\s*(.*?)(;|$)`));
+                  if (subItemMatch && subItemMatch[1]) {
+                    value = subItemMatch[1].trim();
+                  }
+                }
+              }
+              return { ...sub, value };
+            })
+          : [];
 
         return {
           ...pecaData,
-          selecionado: !!pecaEdit,
+          selecionado,
           quantidade,
-          subItens: pecaData.subItens
-            ? pecaData.subItens.map((sub) => ({
-                ...sub,
-                value:
-                  !!pecaEdit && pecaEdit.includes(sub.label)
-                    ? true
-                    : sub.initialValue,
-              }))
-            : [],
+          subItens: newSubItens,
         };
       }),
       servicos: servicosData.map((servicoData) => {
-        const servicoEdit = editingData.servicosSelecionados?.find((s) =>
-          s.includes(servicoData.nome)
-        );
-        const quantidadeMatch = servicoEdit
-          ? servicoEdit.match(/::\s*(\d+)/)
-          : null;
-        const quantidade = quantidadeMatch
-          ? parseInt(quantidadeMatch[1], 10)
-          : servicoData.temQuantidade
-          ? 1
-          : 0;
+        const servicoEdit = editingData.servicosSelecionados?.find((s) => {
+          const servicoNomePadrao = new RegExp(`^${servicoData.nome}(::.*|\\s*$)`);
+          return servicoNomePadrao.test(s);
+        });
 
+        const selecionado = !!servicoEdit;
+        let quantidade = servicoData.temQuantidade ? 1 : 0;
+        if (selecionado) {
+          const quantidadeMatch = servicoEdit.match(/::\s*(\d+)/);
+          quantidade = quantidadeMatch
+            ? parseInt(quantidadeMatch[1], 10)
+            : servicoData.temQuantidade
+            ? 1
+            : 0;
+        }
+        
+        const newSubItens = servicoData.subItens
+        ? servicoData.subItens.map((sub) => {
+            let value = sub.initialValue || (sub.type === "checkbox" ? false : "");
+            if (selecionado) {
+              if (sub.type === "checkbox" && servicoEdit.includes(sub.label)) {
+                value = true;
+              } else if (sub.type === "text") {
+                const subItemMatch = servicoEdit.match(new RegExp(`${sub.label}:\\s*(.*?)(;|$)`));
+                if (subItemMatch && subItemMatch[1]) {
+                  value = subItemMatch[1].trim();
+                }
+              }
+            }
+            return { ...sub, value };
+          })
+        : [];
+        
         return {
           ...servicoData,
-          selecionado: !!servicoEdit,
+          selecionado,
           quantidade,
-          subItens: servicoData.subItens
-            ? servicoData.subItens.map((sub) => ({
-                ...sub,
-                value:
-                  !!servicoEdit && servicoEdit.includes(sub.label)
-                    ? true
-                    : sub.initialValue,
-              }))
-            : [],
+          subItens: newSubItens,
         };
       }),
     }));
