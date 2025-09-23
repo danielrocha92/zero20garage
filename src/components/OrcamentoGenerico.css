@@ -1,5 +1,6 @@
 /* src/components/OrcamentoGenerico.css */
 
+/* --- Variáveis Globais de Estilo --- */
 :root {
   --color-bg: #1a1a1a;
   --color-card: #2a2a2a;
@@ -12,81 +13,102 @@
   --color-input-focus-border: #c50404;
   --shadow-strong: rgba(0, 0, 0, 0.6);
   --shadow-medium: rgba(0, 0, 0, 0.4);
+  --color-secondary: #555;
+  --color-light-gray: #bbb;
+}
+
+/* --- Estilos Base (Mobile-First) --- */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text); /* Ajuste a cor do texto do corpo para o claro */
 }
 
 .orcamento-container {
-  font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   background-color: var(--color-card);
-  color: var(--color-text);
-  padding: 1.5rem;
+  color: var(--color-text); /* Cor do texto do container ajustada */
+  padding: 2rem 1.5rem;
   border-radius: 20px;
   max-width: 1100px;
-  margin: 20px auto;
-  box-shadow: 0 8px 20px var(--shadow-strong);
+  margin: 2rem auto;
+  box-shadow: 0 10px 30px var(--shadow-strong);
+  overflow-x: hidden;
 }
 
 .orcamento-container h1,
 .orcamento-container h2 {
   text-align: center;
   color: var(--color-brand-red);
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
 }
 
-.orcamento-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.orcamento-form input,
-.orcamento-form select,
-.orcamento-form textarea {
-  padding: 0.75rem 1rem;
+/* Campos de formulário gerais */
+.orcamento-container input,
+.orcamento-container select,
+.orcamento-container textarea {
+  padding: 0.85rem 1rem;
   font-size: 1rem;
   border-radius: 12px;
   border: 1px solid var(--color-input-border);
   background-color: var(--color-input-bg);
-  color: var(--color-input-text);
-  transition: border 0.3s ease, box-shadow 0.3s ease;
+  color: var(--color-input-text); /* Cor do texto de campos de formulário ajustada */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.orcamento-form input:focus,
-.orcamento-form select:focus,
-.orcamento-form textarea:focus {
+.orcamento-container input:focus,
+.orcamento-container select:focus,
+.orcamento-container textarea:focus {
   border-color: var(--color-input-focus-border);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(197, 4, 4, 0.5);
+  box-shadow: 0 0 0 3px rgba(197, 4, 4, 0.2);
 }
 
-.orcamento-form button {
-  background-color: var(--color-brand-red);
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+/* Seções principais */
+.client-vehicle-section,
+.summary-section,
+.payment-observacoes-section {
+  margin-bottom: 2rem;
 }
 
-.orcamento-form button:hover {
-  background-color: var(--color-brand-red-hover);
-  transform: translateY(-2px);
+/* Layout da tabela de informações do cliente */
+.form-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 1rem;
 }
 
+.form-table td {
+  padding: 0;
+  vertical-align: top;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  color: var(--color-light-gray); /* Cor da label ajustada para clara */
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+/* Layout da tabela de itens (Peças e Serviços) */
 .items-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .items-table th,
 .items-table td {
-  border-bottom: 1px solid #444;
-  padding: 8px;
-  text-align: center;
+  border-bottom: 1px solid var(--color-secondary);
+  padding: 12px 8px;
+  text-align: left;
 }
 
 .items-table th {
@@ -94,57 +116,55 @@
   color: var(--color-brand-red);
   font-weight: bold;
   text-transform: uppercase;
+  font-size: 0.9rem;
 }
 
-.items-table input,
-.items-table select {
-  width: 80px;
-  padding: 6px;
-  border-radius: 8px;
-  border: 1px solid var(--color-input-border);
-  background-color: var(--color-input-bg);
-  color: var(--color-input-text);
-  text-align: center;
+/* Células e seus elementos */
+.items-table .checkbox-cell {
+  width: 50%;
 }
 
-.items-table button {
-  background-color: transparent;
-  border: 1px solid var(--color-brand-red);
-  color: var(--color-brand-red);
-  padding: 4px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+.items-table .quantidade-cell {
+  width: 25%;
+  white-space: nowrap;
 }
 
-.items-table button:hover {
-  background-color: var(--color-brand-red);
-  color: white;
+.items-table .subitems-cell {
+  width: 25%;
+}
+
+.items-table select.quantidade-select,
+.items-table input.small-input {
+  width: 100%;
+  padding: 15px;
+  text-align: right;
+  font-weight: bold;
+  color: var(--color-brand-red); /* Cor do texto ajustada */
 }
 
 .sub-item-input-group {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 4px;
+  gap: 0.75rem;
+  margin-top: 8px;
 }
 
 .sub-item-label {
   min-width: 80px;
-  text-align: right;
+  text-align: left;
+  color: var(--color-light-gray); /* Cor da label ajustada para clara */
+  font-size: 0.9rem;
 }
 
-.small-input {
-  width: 60px;
-}
-
+/* Checkbox Customizado */
 .custom-checkbox {
   position: relative;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
   user-select: none;
-  gap: 6px;
+  gap: 10px;
+  font-size: 1rem;
 }
 
 .custom-checkbox input {
@@ -154,11 +174,13 @@
 }
 
 .checkbox-box {
-  width: 16px;
-  height: 16px;
-  border: 1px solid var(--color-input-border);
+  min-width: 18px;
+  height: 18px;
+  border: 2px solid var(--color-input-border);
   border-radius: 4px;
   background-color: var(--color-input-bg);
+  transition: all 0.2s ease;
+  position: relative;
 }
 
 .custom-checkbox input:checked + .checkbox-box {
@@ -166,44 +188,92 @@
   border-color: var(--color-brand-red);
 }
 
+.checkbox-box::after {
+  content: '';
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 1px;
+  width: 4px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.custom-checkbox input:checked + .checkbox-box::after {
+  display: block;
+}
+
+/* Linhas de Total */
 .total-line-form {
   display: flex;
+  flex-direction: column;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-end;
   gap: 0.5rem;
   font-weight: bold;
-  margin-top: 10px;
-  color: var(--color-brand-red);
+  margin-top: 15px;
+  color: var(--color-brand-red); /* Cor da linha total ajustada */
+  font-size: 1.1rem;
 }
 
-.total-line-form input {
-  width: 120px;
+.total-line-form .label {
+  font-size: 0.95rem;
+  color: var(--color-text); /* Cor da label ajustada */
+  margin-right: 0.5rem;
+}
+
+.total-line-form input.input-total {
+  width: 100%;
   text-align: right;
+  font-weight: bold;
+  color: var(--color-brand-red); /* Cor do input total ajustada */
 }
 
-.summary-section {
-  margin-top: 20px;
+.total-geral {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--color-brand-red);
 }
 
-.payment-observacoes-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+/* Botões */
+.submit-button {
+  background-color: var(--color-brand-red);
+  border: none;
+  color: white;
+  padding: 0.85rem 2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.submit-button:hover {
+  background-color: var(--color-brand-red-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(197, 4, 4, 0.4);
 }
 
 .form-actions {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 3rem;
 }
 
+/* Mensagens de Sucesso/Erro */
 .message-box {
-  margin-top: 15px;
-  padding: 10px;
+  margin-top: 20px;
+  padding: 15px;
   border-radius: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-weight: bold;
 }
 
 .message-box.success {
@@ -216,29 +286,61 @@
   color: var(--color-brand-red);
 }
 
+.message-box button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+/* Para alterar a cor dos textos da lista */
+.item-list {
+  color: #e0e0e0; /* Cor clara, ajustando para um tom de cinza claro ou branco */
+}
+
+/* --- Media Query para Telas Maiores (Tablet e Desktop) --- */
 @media (min-width: 768px) {
-  .orcamento-form {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 1rem;
+  .orcamento-container {
+    padding: 3rem;
+  }
+
+  .form-table {
+    display: table;
+    table-layout: fixed;
+  }
+
+  .form-table tr {
+    display: table-row;
+  }
+
+  .form-table td {
+    display: table-cell;
+    padding-right: 2rem;
   }
 
   .payment-observacoes-section {
     flex-direction: row;
-    gap: 1rem;
-  }
-  .grid-50-50 {
-    flex-direction: row;
-    flex-wrap: wrap;
+    gap: 2rem;
   }
 
-  .grid-50-50 .section-form {
-    flex: 1;
-    min-width: 300px; /* evita colunas muito estreitas */
-  }
   .grid-50-50 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .grid-50-50 > * {
+    min-width: 0;
+  }
+
+  .total-line-form {
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .total-line-form input.input-total {
+    width: 180px;
   }
 }

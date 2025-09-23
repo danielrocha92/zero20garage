@@ -316,6 +316,8 @@
     align-items: flex-end;
     margin-top: 0;
     width: 100%;
+    box-sizing: border-box;
+    padding: 0;
 }
 
 .item-inputs > div {
