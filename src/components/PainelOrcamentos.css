@@ -167,9 +167,11 @@
     text-align: center;
 }
 
-.loading-message, .error-message, .no-data-message {
+.loading-message,
+.error-message,
+.no-data-message {
     text-align: center;
-    color: #bbb;
+    color: #e0e0e0; /* claro no tema escuro */
     font-size: 1.1em;
     padding: 20px;
 }
@@ -193,7 +195,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    color: #fff; /* Trocado para branco */
+    color: #fff;
 }
 
 .orcamento-item:hover {
@@ -204,7 +206,7 @@
 .orcamento-item p {
     margin: 5px 0;
     font-size: 0.95em;
-    color: #fff; /* Trocado para branco */
+    color: #fff;
 }
 
 .orcamento-item p strong {
@@ -251,13 +253,13 @@
 /* Message Box (para feedback de sucesso/erro) */
 .message-box {
     position: fixed;
-    top: 32px; /* ou 16px para mais próximo do topo */
+    top: 32px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 9999;
-    background: #fff;
-    color: #222;
-    border: 2px solid #ff0015;
+    background: #2a2a2a; /* escuro */
+    color: #fff;
+    border: 2px solid #c50404;
     border-radius: 8px;
     padding: 1rem 2.5rem 1rem 1rem;
     box-shadow: 0 4px 24px rgba(0,0,0,0.18);
@@ -273,7 +275,7 @@
 .message-box button {
     background: none;
     border: none;
-    color: #ff0015;
+    color: #c50404;
     font-size: 1.5rem;
     cursor: pointer;
     margin-left: auto;
@@ -294,10 +296,10 @@
 }
 
 .card-option {
-    flex: 1 1 45%; /* 50/50 no mobile */
+    flex: 1 1 45%;
     max-width: 48%;
-    background: #fff;
-    border: 2px solid #ddd;
+    background: #2a2a2a; /* escuro */
+    border: 2px solid #444;
     border-radius: 10px;
     padding: 15px;
     text-align: center;
@@ -305,20 +307,21 @@
     transition: all 0.3s ease;
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     font-family: Arial, sans-serif;
-    font-size: 0.9em; /* Fonte um pouco menor */
+    font-size: 0.9em;
+    color: #e0e0e0;
 }
 
 .card-option i,
 .card-option svg {
     font-size: 1.6em;
-    color: #d32f2f; /* Ícone vermelho padrão */
+    color: #d32f2f;
 }
 
 .card-option span {
     display: block;
     margin-top: 8px;
     font-weight: 600;
-    color: #333;
+    color: #e0e0e0; /* claro */
 }
 
 .card-option:hover {
@@ -329,10 +332,10 @@
 
 .card-option.active {
     border-color: #d32f2f;
-    background: #f9f9f9;
+    background: #3a3a3a;
 }
 
-/* Estilização para as opções de quantidade (exemplo) */
+/* Estilização para as opções de quantidade */
 .quantidade-options {
     display: flex;
     flex-wrap: wrap;
@@ -369,7 +372,7 @@
     }
 
     .tipo-orcamento-selector {
-        flex-direction: row; /* Muda para layout horizontal */
+        flex-direction: row;
         gap: 15px;
         margin-bottom: 30px;
     }
@@ -385,7 +388,7 @@
     }
 
     .historico-buttons-group {
-        flex-direction: row; /* Muda para layout horizontal */
+        flex-direction: row;
         gap: 15px;
     }
 
@@ -397,7 +400,6 @@
         width: auto;
     }
 
-    /* Layout de duas colunas com 50/50 para desktop */
     .historico-list {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -405,7 +407,7 @@
     }
 
     .orcamento-actions {
-        flex-direction: row; /* Muda para layout horizontal */
+        flex-direction: row;
     }
 
     .historico-orcamentos-container {
