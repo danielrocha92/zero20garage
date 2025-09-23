@@ -1,12 +1,22 @@
 /*
  * ========================
- * Estilos da Página de Login
+ * Estilos Gerais para a Página de Login
  * ========================
  */
-.login-container.container-escuro {
+
+.login-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Garante que a página ocupe a altura total da tela */
+  padding: 2rem 1rem; /* Padding para telas pequenas */
+  box-sizing: border-box; /* Garante que o padding não cause overflow */
+}
+
+.login-container {
   width: 100%;
   max-width: 400px;
-  padding: 1.5rem;
 }
 
 .highlight-card {
@@ -113,7 +123,8 @@
  */
 
 @media (min-width: 768px) {
-  .login-container.container-escuro {
+  .login-container {
     padding: 3rem;
   }
 }
+
