@@ -43,6 +43,14 @@ body {
   letter-spacing: 1px;
 }
 
+.orcamento-container h1 {
+  font-size: 1.5rem;
+}
+
+.orcamento-container h2 {
+  font-size: 1.1rem;
+}
+
 /* Campos de formulário gerais */
 .orcamento-container input,
 .orcamento-container select,
@@ -303,6 +311,14 @@ body {
 @media (min-width: 768px) {
   .orcamento-container {
     padding: 3rem;
+  }
+
+  .orcamento-container h1 {
+  font-size: 2rem;
+}
+
+  .orcamento-container h2 {
+    font-size: 1.6rem;
   }
 
   .form-table {

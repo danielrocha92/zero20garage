@@ -134,7 +134,7 @@ const PainelOrcamentos = () => {
       Telefone: h.telefone || '',
       'Valor Total': h.valorTotal,
       'Peças': h.pecasSelecionadas?.join('; ') || '',
-      'Serviços': h.servicosSelecionados?.join('; ') || '',
+      'Serviços': h.servicosSelecionadas?.join('; ') || '',
       Observações: h.observacoes || '',
       'Forma de Pagamento': h.formaPagamento || '',
     }));
@@ -185,7 +185,6 @@ const PainelOrcamentos = () => {
         document.body.removeChild(tempDiv);
       }
     }
-
     pdf.save('historico-orcamentos-zero20.pdf');
     showMessageBox('PDF do histórico gerado com sucesso!');
   };
@@ -208,6 +207,25 @@ const PainelOrcamentos = () => {
   const handleViewBudget = (orcamento) => setSelectedBudgetForView(orcamento);
   const handleCloseView = () => setSelectedBudgetForView(null);
   const scrollToHistorico = () => historicoRef.current?.scrollIntoView({ behavior: 'smooth' });
+
+  // --- NOVO: Função para atualizar as imagens após upload/exclusão ---
+  const handleImagesUpdated = useCallback((updatedImages) => {
+    // Atualiza o estado de edição para refletir a nova lista de imagens
+    if (editingData) {
+      setEditingData(prev => ({ ...prev, imagens: updatedImages }));
+    }
+
+    // Atualiza o histórico para que a lista seja recarregada em tempo real
+    setHistorico(prevHistorico => {
+      const index = prevHistorico.findIndex(item => item.id === editingData?.id || item._id === editingData?._id);
+      if (index > -1) {
+        const novoHistorico = [...prevHistorico];
+        novoHistorico[index] = { ...novoHistorico[index], imagens: updatedImages };
+        return novoHistorico;
+      }
+      return prevHistorico;
+    });
+  }, [editingData]);
 
   return (
     <div className="painel-orcamentos-container">
@@ -264,13 +282,11 @@ const PainelOrcamentos = () => {
 
             <Suspense fallback={<div>Carregando upload de imagem...</div>}>
               <UploadImagemOrcamento
-                orcamentoId={editingData?.id}
+                orcamentoId={editingData?.id || editingData?._id}
                 authToken={authToken}
                 apiBaseUrl={API_BASE_URL}
-                onUploaded={(imgs) => {
-                  if (editingData) setEditingData(prev => prev ? { ...prev, imagens: imgs } : prev);
-                  fetchHistorico();
-                }}
+                // Conecta o componente de upload à nova função de atualização
+                onUploaded={handleImagesUpdated}
               />
             </Suspense>
           </main>

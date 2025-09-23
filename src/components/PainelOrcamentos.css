@@ -68,7 +68,7 @@
 
 /* Labels do formulário */
 .orcamento-form-wrapper label {
-    display: block;
+    display: flex;
     margin-bottom: 8px;
     font-weight: 600;
     color: #e0e0e0; /* claro */
