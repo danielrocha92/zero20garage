@@ -147,7 +147,7 @@ body {
   padding: 15px;
   text-align: right;
   font-weight: bold;
-  color: var(--color-brand-red); /* Cor do texto ajustada */
+  color: var(--color-text); /* **NOVO**: Cor do texto ajustada para a variável global */
 }
 
 .sub-item-input-group {
