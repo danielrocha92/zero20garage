@@ -57,6 +57,45 @@
   background: #333;
 }
 
+/* Estilos de melhoria */
+
+/* Validação visual (campo com erro) */
+.form-apple input.error,
+.form-apple textarea.error,
+.form-apple select.error {
+  border-color: #e33b3b;
+}
+
+/* Campos desativados */
+.form-apple input:disabled,
+.form-apple select:disabled,
+.form-apple textarea:disabled {
+  background-color: #f5f5f7;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* Estilo para placeholders */
+.form-apple input::placeholder,
+.form-apple textarea::placeholder {
+  color: #b0b0b0;
+}
+
+/* Seção para campos com ícone (exemplo, para uso futuro) */
+.form-apple .input-with-icon {
+  position: relative;
+}
+.form-apple .input-with-icon input {
+  padding-left: 2.5rem; /* Espaço para o ícone */
+}
+.form-apple .input-with-icon .icon {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8e8e93;
+}
+
 /* Compacto para mobile */
 @media (max-width: 480px) {
   .form-apple {
