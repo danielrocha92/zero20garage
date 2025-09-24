@@ -117,6 +117,7 @@ body {
   border-bottom: 1px solid var(--color-secondary);
   padding: 12px 8px;
   text-align: left;
+  vertical-align: top;
 }
 
 .items-table th {
@@ -127,7 +128,7 @@ body {
   font-size: 0.9rem;
 }
 
-/* Células e seus elementos */
+/* Colunas */
 .items-table .checkbox-cell {
   width: 40%;
 }
@@ -163,13 +164,8 @@ body {
   box-shadow: 0 0 4px var(--color-brand-red);
 }
 
-/* Campo de observações */
-.items-table .observacoes-cell {
-  width: 100%;
-  padding-top: 10px;
-}
-
-.items-table textarea.observacoes-input {
+/* Campo de observações dentro da célula de subitens */
+.items-table .subitems-cell textarea {
   width: 100%;
   min-height: 60px;
   padding: 10px;
@@ -182,13 +178,13 @@ body {
   transition: 0.2s;
 }
 
-.items-table textarea.observacoes-input:focus {
+.items-table .subitems-cell textarea:focus {
   outline: none;
   border-color: var(--color-brand-red);
   box-shadow: 0 0 4px var(--color-brand-red);
 }
 
-/* Subitens */
+/* Subitens alinhados */
 .sub-item-input-group {
   display: flex;
   align-items: center;
