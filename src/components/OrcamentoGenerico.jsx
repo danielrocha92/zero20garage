@@ -610,6 +610,7 @@ const [formData, setFormData] = useState(() => ({
             <label>Observações:</label>
             <textarea
               name="observacoes"
+              className="observacoes-input"
               value={formData.observacoes}
               onChange={handleInputChange}
             ></textarea>
