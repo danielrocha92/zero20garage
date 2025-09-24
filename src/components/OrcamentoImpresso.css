@@ -1,333 +1,340 @@
 /* Importação de fontes */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap');
 
-/* ---------------------- Estilos Gerais (Mobile First) ---------------------- */
+/* --- Estilos Gerais (Mobile First) --- */
 .orcamento-impresso-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 16px;
-  background-color: #f4f4f4;
-  font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    background-color: #f4f4f4;
+    font-family: 'Roboto', sans-serif;
 }
 
 .orcamento-impresso-content {
-  width: 100%;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  padding: 16px;
-  box-sizing: border-box;
-  color: #333;
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    box-sizing: border-box;
+    color: #333;
 }
 
-/* ---------------------- Cabeçalho ---------------------- */
+/* Cabeçalho */
 .header-impresso {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 16px;
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px;
+    position: relative;
+    text-align: center;
 }
 
 .header-impresso h1 {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 16px;
-  color: #222;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin: 0 0 8px 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+    color: #222;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 0 8px 0;
 }
 
-/* ---------------------- Dados Gerais ---------------------- */
-.dados-gerais {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-size: 12px;
-  margin-bottom: 16px;
+.logo-impresso {
+    width: 80px;
+    height: auto;
+    margin-top: 8px;
 }
 
-.dados-gerais p {
-  margin: 0;
-  color: #333;
+/* --- Info: Alinhamento e cor corrigidos --- */
+.info-section {
+    margin-bottom: 16px;
 }
 
-.dados-gerais strong {
-  font-weight: 700;
-  color: #222;
-}
-
-/* ---------------------- Seções (Peças e Serviços) ---------------------- */
-.orcamento-section {
-  margin-bottom: 16px;
-}
-
-.section-title {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  color: #222;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 4px;
-  margin-bottom: 8px;
-}
-
-.section-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
-}
-
-.section-card {
-  background: #fafafa;
-  border: 1px solid #eee;
-  border-radius: 6px;
-  padding: 8px;
-}
-
-.section-subtitle {
-  font-size: 13px;
-  font-weight: 700;
-  margin-bottom: 6px;
-  color: #444;
-}
-
-.section-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.list-item {
-  display: flex;
-  align-items: center;
-  font-size: 12px;
-  color: #222;
-  line-height: 1.4;
-  padding: 4px 0;
-}
-
-/* Checkbox real clicável */
-.list-item input[type="checkbox"] {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  margin-right: 8px;
-  width: 14px;
-  height: 14px;
-  border: 1px solid #999;
-  border-radius: 4px;
-  background-color: #f0f0f0;
-  display: inline-grid;
-  place-content: center;
-  cursor: pointer;
-}
-
-.list-item input[type="checkbox"]::after {
-  content: "✔";
-  font-size: 10px;
-  color: white;
-  transform: scale(0);
-  transition: transform 0.15s ease-in-out;
-}
-
-.list-item input[type="checkbox"]:checked {
-  background-color: #e60012;
-  border-color: #e60012;
-}
-
-.list-item input[type="checkbox"]:checked::after {
-  transform: scale(1);
-}
-
-/* ---------------------- Totais ---------------------- */
-.section-total,
-.total-geral {
-  text-align: right;
-  margin-top: 10px;
-  font-size: 13px;
-  color: #333;
-}
-
-.section-total span,
-.total-geral span {
-  margin-right: 6px;
-}
-
-.section-total strong,
-.total-geral strong {
-  font-weight: 700;
-}
-
-.total-geral {
-  border-top: 2px solid #ccc;
-  padding-top: 10px;
-  margin-top: 20px;
-  font-size: 15px;
-}
-
-/* ---------------------- Observações ---------------------- */
-.observacoes {
-  margin-top: 20px;
-  font-size: 12px;
-  line-height: 1.4;
-  color: #333;
-}
-
-/* ---------------------- Imagens ---------------------- */
-.imagens {
-  margin-top: 20px;
-}
-
-.imagens h2 {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 14px;
-  color: #222;
-  font-weight: 700;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 4px;
-  margin-bottom: 8px;
-}
-
-.imagens-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px,1fr));
-  gap: 10px;
-}
-
-.imagens-grid img {
-  width: 100%;
-  height: auto;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  object-fit: cover;
-}
-
-/* ---------------------- Rodapé ---------------------- */
-.rodape {
-  margin-top: 20px;
-  border-top: 1px dashed #ccc;
-  padding-top: 12px;
-}
-
-.rodape h4 {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 14px;
-  text-align: center;
-  margin-bottom: 10px;
-  font-weight: 700;
-  color: #222;
-}
-
-.rodape p {
-  font-size: 11px;
-  line-height: 1.4;
-  color: #333;
-  text-align: justify;
-}
-
-/* ---------------------- Ações (Botões) ---------------------- */
-.acoes {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 20px;
-  width: 100%;
-}
-
-.btn {
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  color: #fff;
-  width: 100%;
-}
-
-.btn-primary {
-  background-color: #e60012;
-}
-
-.btn-primary:disabled {
-  background-color: #9fa8da;
-  cursor: not-allowed;
-}
-
-.btn-secondary {
-  background-color: #444;
-}
-
-/* ---------------------- Layout Desktop ---------------------- */
-@media (min-width: 768px) {
-  .orcamento-impresso-content {
-    max-width: 794px;
-    padding: 40px;
-  }
-
-  .header-impresso {
-    flex-direction: row;
+.info-table {
+    display: flex;
     justify-content: center;
-    margin-bottom: 24px;
-  }
-
-  .header-impresso h1 {
-    font-size: 22px;
-    margin-bottom: 0;
-  }
-
-  .dados-gerais {
-    flex-direction: row;
-    justify-content: space-between;
-    font-size: 14px;
-  }
-
-  .section-title {
-    font-size: 18px;
-  }
-
-  .section-grid {
-    grid-template-columns: repeat(2,1fr);
-    gap: 16px;
-  }
-
-  .list-item {
-    font-size: 13px;
-  }
-
-  .total-geral {
-    font-size: 18px;
-  }
-
-  .rodape h4 {
-    font-size: 16px;
-  }
-
-  .rodape p {
-    font-size: 13px;
-  }
-
-  .imagens h2 {
-    font-size: 18px;
-  }
-
-  .acoes {
-    flex-direction: row;
-    justify-content: flex-end;
-    width: auto;
-  }
-
-  .btn {
-    width: auto;
-    padding: 10px 18px;
-    font-size: 16px;
-  }
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    font-size: 12px;
 }
 
-/* ---------------------- Forçar layout A4 no PDF ---------------------- */
+.info-table td {
+    font-size: 12px;
+    color: #333;
+    white-space: normal;
+}
+
+.info-table td span {
+    font-weight: 700;
+    color: #222;
+}
+
+/* --- Itens (Peças e Serviços) --- */
+.items-section {
+    margin-bottom: 16px;
+}
+
+.items-section h2 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 14px;
+    color: #222;
+    font-weight: 700;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+}
+
+.items-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Cada item da lista */
+.items-columns li {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #222;
+    line-height: 1.4;
+    padding: 4px 0;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+}
+
+.checkbox-box {
+    margin-right: 8px;
+    flex-shrink: 0;
+    transform: scale(1.2);
+    position: relative;
+    top: 2px;
+    max-width: 16px;
+    color: brown;
+}
+
+/* --- Totais --- */
+.total-section {
+    text-align: right;
+    margin-top: 16px;
+}
+
+.total-line-impresso {
+    display: block;
+    font-size: 13px;
+    margin-top: 4px;
+    padding-top: 0;
+    border-top: none;
+    color: #333;
+}
+
+.total-line-impresso span {
+    font-weight: 400;
+    margin-right: 6px;
+}
+
+.final-total {
+    font-size: 16px;
+    font-weight: 700;
+    border-top: 2px solid #ccc;
+    padding-top: 10px;
+    margin-top: 20px;
+    color: #222;
+}
+
+/* --- Extras --- */
+.extra-info-section-impresso {
+    margin-top: 20px;
+}
+
+.extra-info-section-impresso p {
+    font-size: 12px;
+    line-height: 1.4;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+/* --- Política de Garantia --- */
+.policy-footer {
+    margin-top: 20px;
+    border-top: 1px dashed #ccc;
+    padding-top: 12px;
+}
+
+.policy-footer h4 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #222;
+    font-weight: 700;
+}
+
+.policy-footer p {
+    font-size: 11px;
+    line-height: 1.4;
+    margin-bottom: 6px;
+    color: #333;
+    text-align: justify;
+}
+
+.policy-acceptance {
+    font-weight: 700;
+    text-align: center !important;
+    color: #222 !important;
+}
+
+/* --- Grid responsivo de imagens --- */
+.imagens-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    justify-items: center;
+}
+
+.thumb-wrapper {
+    width: 100%;
+    max-width: 200px;
+    overflow: hidden;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    transition: transform 0.3s;
+}
+
+.thumb-wrapper:hover {
+    transform: scale(1.05);
+}
+
+.thumb-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+/* --- Botões --- */
+.orcamento-impresso-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    transition: background-color 0.3s;
+    color: white;
+    background-color: #e60012; /* ZER0 20 GARAGE™ vermelho */
+    width: 100%;
+}
+
+.button:disabled {
+    background-color: #9fa8da;
+    cursor: not-allowed;
+}
+
+/* --- Layout Desktop --- */
+@media (min-width: 768px) {
+    .orcamento-impresso-content {
+        max-width: 794px;
+        padding: 40px;
+    }
+
+    .header-impresso {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .header-impresso h1 {
+        font-size: 22px;
+        max-width: 60%;
+        margin-bottom: 0;
+    }
+
+    .logo-impresso {
+        width: 80px;
+        margin-top: 0;
+    }
+
+    .info-table {
+        justify-content: space-around;
+        gap: 12px 40px;
+    }
+
+    .info-table td {
+        font-size: 14px;
+        color: #333;
+        white-space: nowrap;
+    }
+
+    .items-section h2 {
+        font-size: 18px;
+        color: #222;
+    }
+
+    .items-columns {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 40px;
+    }
+
+    .items-columns li {
+        font-size: 13px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .final-total {
+        font-size: 18px;
+        color: #222;
+    }
+
+    .extra-info-section-impresso p {
+        font-size: 14px;
+    }
+
+    .policy-footer h4 {
+        font-size: 16px;
+    }
+
+    .policy-footer p {
+        font-size: 13px;
+    }
+
+    .imagens-section h2 {
+        font-size: 18px;
+    }
+
+    .thumb-img {
+        max-width: 200px;
+    }
+
+    .orcamento-impresso-actions {
+        flex-direction: row;
+        justify-content: flex-end;
+        width: auto;
+    }
+
+    .button {
+        width: auto;
+        padding: 10px 18px;
+        font-size: 16px;
+    }
+}
+
+/* --- Layout for print/pdf --- */
 .force-print-layout {
   width: 794px !important;
   max-width: none !important;
@@ -337,62 +344,96 @@
   line-height: 1.4;
 }
 
-/* ---------------------- Estilos de impressão ---------------------- */
+/* --- Estilos de impressão --- */
 @media print {
-  body, html {
-    margin: 0;
-    padding: 0;
-    background: white;
-  }
+    body, html {
+        margin: 0;
+        padding: 0;
+        background: white;
+    }
 
-  @page {
-    size: A4;
-    margin: 20mm;
-  }
+    @page {
+        size: A4;
+        margin: 20mm;
+    }
 
-  .orcamento-impresso-container {
-    display: block !important;
-    background-color: white !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100%;
-  }
+    .orcamento-impresso-container {
+        display: block !important;
+        background-color: white !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100%;
+    }
 
-  .orcamento-impresso-content {
-    box-shadow: none !important;
-    margin: 0 auto;
-    padding: 20px;
-    width: 100%;
-    max-width: 754px;
-  }
+    .orcamento-impresso-content {
+        box-shadow: none !important;
+        margin: 0 auto;
+        padding: 20px;
+        width: 100%;
+        max-width: 754px;
+        box-sizing: border-box;
+    }
 
-  .acoes {
-    display: none !important;
-  }
+    .orcamento-impresso-actions {
+        display: none !important;
+    }
 
-  .header-impresso {
-    flex-direction: row;
-    justify-content: space-between;
-  }
+    .header-impresso {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
 
-  .header-impresso h1 {
-    font-size: 20px;
-  }
+    .header-impresso h1 {
+        font-size: 22px;
+        max-width: 60%;
+        margin-bottom: 0;
+    }
 
-  .section-grid {
-    grid-template-columns: repeat(2,1fr);
-  }
+    .logo-impresso {
+        width: 150px;
+        margin-top: 0;
+    }
 
-  .list-item {
-    font-size: 13px;
-  }
+    .info-table {
+        justify-content: space-around;
+        gap: 12px 40px;
+    }
 
-  .list-item input[type="checkbox"] {
-    transform: scale(0.7);
-  }
+    .items-columns {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 40px;
+    }
 
-  .rodape h4,
-  .rodape p {
-    font-size: inherit;
-  }
+    .items-columns li {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 13px;
+    }
+
+    .checkbox-box {
+        transform: scale(0.6);
+    }
+
+    .total-section,
+    .final-total,
+    .extra-info-section-impresso p,
+    .policy-footer p,
+    .policy-footer h4 {
+        font-size: inherit;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.orcamento-impresso-imagens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+  margin-top: 16px;
 }
