@@ -1,12 +1,15 @@
 /* src/components/PainelOrcamentos.css */
 
-/* Estilos gerais do painel */
+/*
+* === Painel de Orçamentos ===
+* Estilos gerais para o container principal, cabeçalhos e seções.
+*/
 .painel-orcamentos-container {
     margin-top: 60px;
     background-color: #1a1a1a;
     color: #e0e0e0;
     min-height: 100vh;
-    padding: 10px; /* Estilo padrão para mobile */
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,15 +18,18 @@
 .titulo-escuro {
     color: #c50404;
     font-family: 'Arial Black', sans-serif;
-    font-size: 1.8em; /* Estilo padrão para mobile */
+    font-size: 1.8em;
     margin-bottom: 20px;
     text-align: center;
 }
 
-/* Seletor de tipo de orçamento (botões) */
+/*
+* === Seletor de Tipo de Orçamento ===
+* Estilos para os botões de seleção de tipo (e.g., Carro, Moto).
+*/
 .tipo-orcamento-selector {
     display: flex;
-    flex-direction: column; /* Estilo padrão para mobile */
+    flex-direction: column;
     gap: 10px;
     margin-bottom: 20px;
     align-items: center;
@@ -38,7 +44,7 @@
     cursor: pointer;
     font-size: 1em;
     transition: all 0.3s ease;
-    width: 100%; /* Ocupa a largura total para mobile */
+    width: 100%;
     max-width: 250px;
 }
 
@@ -55,26 +61,27 @@
     box-shadow: 0 4px 10px rgba(197, 4, 4, 0.3);
 }
 
-/* Área principal do formulário de orçamento */
+/*
+* === Formulário de Orçamento ===
+* Estilos para o wrapper, inputs, labels e seções do formulário.
+*/
 .orcamento-form-wrapper {
     width: 100%;
-    padding: 15px; /* Estilo padrão para mobile */
+    padding: 15px;
     background-color: #2a2a2a;
     border-radius: 20px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
     margin-bottom: 30px;
-    color: #e0e0e0; /* texto claro */
+    color: #e0e0e0;
 }
 
-/* Labels do formulário */
 .orcamento-form-wrapper label {
     display: flex;
     margin-bottom: 8px;
     font-weight: 600;
-    color: #e0e0e0; /* claro */
+    color: #e0e0e0;
 }
 
-/* Inputs, selects e textarea */
 .orcamento-form-wrapper input,
 .orcamento-form-wrapper select,
 .orcamento-form-wrapper textarea {
@@ -83,19 +90,17 @@
     margin-bottom: 15px;
     border: 1px solid #555;
     border-radius: 8px;
-    background-color: #1a1a1a; /* fundo escuro */
-    color: #fff; /* texto branco */
+    background-color: #1a1a1a;
+    color: #fff;
     font-size: 1em;
     transition: all 0.3s ease;
 }
 
-/* Placeholder em tom mais suave */
 .orcamento-form-wrapper input::placeholder,
 .orcamento-form-wrapper textarea::placeholder {
     color: #aaa;
 }
 
-/* Foco nos campos */
 .orcamento-form-wrapper input:focus,
 .orcamento-form-wrapper select:focus,
 .orcamento-form-wrapper textarea:focus {
@@ -104,7 +109,6 @@
     box-shadow: 0 0 6px rgba(197, 4, 4, 0.4);
 }
 
-/* Select com seta customizada */
 .orcamento-form-wrapper select {
     appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23e0e0e0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
@@ -115,234 +119,15 @@
     cursor: pointer;
 }
 
-/* Textarea com altura mínima */
 .orcamento-form-wrapper textarea {
     min-height: 100px;
     resize: vertical;
 }
 
-/* Grupo de botões de histórico (exportar) */
-.historico-buttons-group {
-    display: flex;
-    flex-direction: column; /* Estilo padrão para mobile */
-    gap: 10px;
-    margin-top: 20px;
-    align-items: center;
-}
-
-/* Botões de ação (gerais, como exportar, imprimir, salvar) */
-.action-btn {
-    background-color: #c50404;
-    border: none;
-    color: white;
-    font-family: 'Arial Black', sans-serif;
-    font-weight: 700;
-    padding: 12px 25px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 1em;
-    box-shadow: 0 4px 10px rgba(197, 4, 4, 0.3);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-    width: 100%;
-    max-width: 250px;
-}
-
-.action-btn:hover {
-    background-color: #9e0303;
-    box-shadow: 0 6px 15px rgba(197, 4, 4, 0.4);
-    transform: translateY(-2px);
-}
-
-.action-btn:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 5px rgba(197, 4, 4, 0.2);
-}
-
-/* Botões de ação pequenos (Visualizar, Editar) */
-.action-btn-small {
-    padding: 8px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.9em;
-    margin: 0 5px;
-    transition: all 0.3s ease;
-    font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    border: none;
-    width: 100%;
-    max-width: 180px;
-}
-
-.action-btn-small.view-btn {
-    background-color: #007bff;
-    color: white;
-}
-
-.action-btn-small.view-btn:hover {
-    background-color: #0056b3;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.action-btn-small.edit-btn {
-    background-color: #ffc107;
-    color: #333;
-}
-
-.action-btn-small.edit-btn:hover {
-    background-color: #e0a800;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.action-btn-small.delete-btn {
-    background-color: #dc3545;
-    color: white;
-}
-
-.action-btn-small.delete-btn:hover {
-    background-color: #c82333;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-/* Estilos para o histórico de orçamentos */
-.historico-orcamentos-container {
-    width: 100%;
-    padding: 20px;
-    background-color: #2a2a2a;
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-}
-
-.historico-orcamentos-container h2 {
-    color: #c50404;
-    font-family: 'Arial Black', sans-serif;
-    font-size: 1.8em;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.loading-message,
-.error-message,
-.no-data-message {
-    text-align: center;
-    color: #e0e0e0;
-    font-size: 1.1em;
-    padding: 20px;
-}
-
-/* Lista de histórico */
-.historico-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 0;
-    list-style: none;
-}
-
-.orcamento-item {
-    background-color: #3a3a3a;
-    border: 1px solid #555;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    color: #fff;
-}
-
-.orcamento-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-}
-
-.orcamento-item p {
-    margin: 5px 0;
-    font-size: 0.95em;
-    color: #fff;
-}
-
-.orcamento-item p strong {
-    color: #c50404;
-    margin-right: 5px;
-}
-
-.orcamento-actions {
-    display: flex;
-    flex-direction: column; /* Mobile */
-    gap: 8px;
-    margin-top: 15px;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Checkbox itens */
-.orcamento-checkbox {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5em;
-    cursor: pointer;
-    transition: background-color 0.2s, border-color 0.2s;
-}
-
-.orcamento-checkbox.checked {
-    background-color: #c50404;
-    border-color: #c50404;
-    color: #fff;
-}
-
-/* Status */
-.status-aberto { color: #007bff; }
-.status-aprovado { color: #28a745; }
-.status-rejeitado { color: #dc3545; }
-.status-concluido { color: #6f42c1; }
-
-/* Message Box */
-.message-box {
-    position: fixed;
-    top: 32px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-    background: #2a2a2a;
-    color: #fff;
-    border: 2px solid #c50404;
-    border-radius: 8px;
-    padding: 1rem 2.5rem 1rem 1rem;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
-    font-size: 1.1rem;
-    min-width: 280px;
-    max-width: 90vw;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    animation: fadeInDown 0.3s;
-}
-
-.message-box button {
-    background: none;
-    border: none;
-    color: #c50404;
-    font-size: 1.5rem;
-    cursor: pointer;
-    margin-left: auto;
-}
-
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translate(-50%, -30px);}
-    to   { opacity: 1; transform: translate(-50%, 0);}
-}
-
-/* === Cards === */
+/*
+* === Cards de Opções (e.g., Peças, Serviços) ===
+* Estilos para os cards clicáveis.
+*/
 .cards-container {
     display: flex;
     gap: 15px;
@@ -391,7 +176,10 @@
     background: #3a3a3a;
 }
 
-/* Quantidade */
+/*
+* === Opções de Quantidade ===
+* Estilos para as pílulas de quantidade dentro dos cards.
+*/
 .quantidade-options {
     display: flex;
     flex-wrap: wrap;
@@ -415,7 +203,235 @@
     border-color: #c50404;
 }
 
-/* MEDIA QUERY DESKTOP */
+/*
+* === Botões de Ação ===
+* Estilos para botões de histórico e outras ações.
+*/
+.historico-buttons-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.action-btn {
+    background-color: #c50404;
+    border: none;
+    color: white;
+    font-family: 'Arial Black', sans-serif;
+    font-weight: 700;
+    padding: 12px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1em;
+    box-shadow: 0 4px 10px rgba(197, 4, 4, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    max-width: 250px;
+}
+
+.action-btn:hover {
+    background-color: #9e0303;
+    box-shadow: 0 6px 15px rgba(197, 4, 4, 0.4);
+    transform: translateY(-2px);
+}
+
+.action-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(197, 4, 4, 0.2);
+}
+
+.action-btn-small {
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: none;
+    width: 100%;
+    max-width: 180px;
+}
+
+.action-btn-small.view-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.action-btn-small.view-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.action-btn-small.edit-btn {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.action-btn-small.edit-btn:hover {
+    background-color: #e0a800;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.action-btn-small.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.action-btn-small.delete-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/*
+* === Histórico de Orçamentos ===
+* Estilos para a seção de histórico, lista e itens.
+*/
+.historico-orcamentos-container {
+    width: 100%;
+    padding: 20px;
+    background-color: #2a2a2a;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.historico-orcamentos-container h2 {
+    color: #c50404;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.loading-message,
+.error-message,
+.no-data-message {
+    text-align: center;
+    color: #e0e0e0;
+    font-size: 1.1em;
+    padding: 20px;
+}
+
+.historico-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+    list-style: none;
+}
+
+.orcamento-item {
+    background-color: #3a3a3a;
+    border: 1px solid #555;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #fff;
+}
+
+.orcamento-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.orcamento-item p {
+    margin: 5px 0;
+    font-size: 0.95em;
+    color: #fff;
+}
+
+.orcamento-item p strong {
+    color: #c50404;
+    margin-right: 5px;
+}
+
+.orcamento-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.orcamento-checkbox {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.orcamento-checkbox.checked {
+    background-color: #c50404;
+    border-color: #c50404;
+    color: #fff;
+}
+
+.status-aberto { color: #007bff; }
+.status-aprovado { color: #28a745; }
+.status-rejeitado { color: #dc3545; }
+.status-concluido { color: #6f42c1; }
+
+/*
+* === Mensagens de Alerta ===
+* Estilos para caixas de mensagens (sucesso, erro, etc.).
+*/
+.message-box {
+    position: fixed;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: #2a2a2a;
+    color: #fff;
+    border: 2px solid #c50404;
+    border-radius: 8px;
+    padding: 1rem 2.5rem 1rem 1rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    font-size: 1.1rem;
+    min-width: 280px;
+    max-width: 90vw;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: fadeInDown 0.3s;
+}
+
+.message-box button {
+    background: none;
+    border: none;
+    color: #c50404;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translate(-50%, -30px);}
+    to   { opacity: 1; transform: translate(-50%, 0);}
+}
+
+/*
+* === Media Query para Desktop ===
+* Ajustes de layout para telas maiores (a partir de 768px).
+*/
 @media (min-width: 768px) {
     .painel-orcamentos-container {
         margin-top: 70px;
@@ -458,7 +474,7 @@
 
     .historico-list {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
         gap: 20px;
     }
 
@@ -472,12 +488,13 @@
     }
 
     .cards-container {
+        justify-content: flex-start;
         gap: 20px;
     }
 
     .card-option {
         flex: 1 1 200px;
-        max-width: 220px;
+        max-width: none;
         font-size: 1em;
     }
 }
