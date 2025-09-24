@@ -167,18 +167,25 @@ body {
 }
 
 /* Campo de observações dentro da célula de subitens */
+.items-table .subitems-cell {
+  width: 40%;
+  padding-top: 4px;
+}
+
 .items-table .subitems-cell textarea {
-  width: 100%;
-  min-height: 70px;
+  display: block;
+  width: 100%;           /* ocupa toda a célula */
+  min-height: 90px;      /* aumenta a altura padrão */
   padding: 10px;
   border-radius: 6px;
   border: 1px solid #555;
   background: #222;
   color: var(--color-text);
   font-size: 0.9rem;
-  resize: vertical;
+  line-height: 1.4;
+  resize: vertical;      /* permite aumentar manualmente */
   transition: 0.2s;
-  box-sizing: border-box;
+  box-sizing: border-box; /* inclui padding/borda no cálculo do width */
 }
 
 .items-table .subitems-cell textarea:focus {
