@@ -1,401 +1,333 @@
 /* Importação de fontes */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap');
 
-/* --- Estilos Gerais (Mobile First) --- */
+/* ---------------------- Estilos Gerais (Mobile First) ---------------------- */
 .orcamento-impresso-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 16px;
-    background-color: #f4f4f4;
-    font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  background-color: #f4f4f4;
+  font-family: 'Roboto', sans-serif;
 }
 
 .orcamento-impresso-content {
-    width: 100%;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    box-sizing: border-box;
-    color: #333;
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 16px;
+  box-sizing: border-box;
+  color: #333;
 }
 
-/* Cabeçalho */
+/* ---------------------- Cabeçalho ---------------------- */
 .header-impresso {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 16px;
-    position: relative;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+  text-align: center;
 }
 
 .header-impresso h1 {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 16px;
-    color: #222;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin: 0 0 8px 0;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 16px;
+  color: #222;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 0 8px 0;
 }
 
-.logo-impresso {
-    width: 80px;
-    height: auto;
-    margin-top: 8px;
+/* ---------------------- Dados Gerais ---------------------- */
+.dados-gerais {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  margin-bottom: 16px;
 }
 
-/* --- Info: Alinhamento e cor corrigidos --- */
-.info-section {
-    margin-bottom: 16px;
+.dados-gerais p {
+  margin: 0;
+  color: #333;
 }
 
-.info-table {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    flex-wrap: wrap;
-    gap: 8px 16px;
-    font-size: 12px;
+.dados-gerais strong {
+  font-weight: 700;
+  color: #222;
 }
 
-.info-table td {
-    font-size: 12px;
-    color: #333;
-    white-space: normal;
+/* ---------------------- Seções (Peças e Serviços) ---------------------- */
+.orcamento-section {
+  margin-bottom: 16px;
 }
 
-.info-table td span {
-    font-weight: 700;
-    color: #222;
+.section-title {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #222;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
 }
 
-/* --- Itens (Peças e Serviços) --- */
-.items-section {
-    margin-bottom: 16px;
+.section-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
 }
 
-.items-section h2 {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 14px;
-    color: #222;
-    font-weight: 700;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 4px;
-    margin-bottom: 8px;
+.section-card {
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 8px;
 }
 
-.items-columns {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.section-subtitle {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #444;
 }
 
-/* Cada item da lista */
-.list-item-impresso {
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    color: #222;
-    line-height: 1.4;
-    padding: 4px 0;
-    white-space: normal;
-    overflow: visible;
-    text-overflow: unset;
+.section-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* **NOVO:** Estilo customizado para o checkbox */
-.checkbox-box {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: #f0f0f0;
-    margin: 0;
-    font: inherit;
-    color: currentColor;
-    width: 1rem;
-    height: 1rem;
-    border: 1px solid #999;
-    border-radius: 4px;
-    display: grid;
-    place-content: center;
-    cursor: pointer;
-    margin-right: 8px;
-    flex-shrink: 0;
-    position: relative;
-    top: 2px;
+.list-item {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: #222;
+  line-height: 1.4;
+  padding: 4px 0;
 }
 
-.checkbox-box::after {
-    content: "✔";
-    color: white;
-    font-size: 10px;
-    transform: scale(0);
-    transition: transform 0.1s ease-in-out;
+/* Checkbox real clicável */
+.list-item input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin-right: 8px;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  display: inline-grid;
+  place-content: center;
+  cursor: pointer;
 }
 
-.checkbox-box:checked {
-    background-color: #e60012;
-    border-color: #e60012;
+.list-item input[type="checkbox"]::after {
+  content: "✔";
+  font-size: 10px;
+  color: white;
+  transform: scale(0);
+  transition: transform 0.15s ease-in-out;
 }
 
-.checkbox-box:checked::after {
-    transform: scale(1);
+.list-item input[type="checkbox"]:checked {
+  background-color: #e60012;
+  border-color: #e60012;
 }
 
-
-/* --- Totais --- */
-.total-section {
-    text-align: right;
-    margin-top: 16px;
+.list-item input[type="checkbox"]:checked::after {
+  transform: scale(1);
 }
 
-.total-line-impresso {
-    display: block;
-    font-size: 13px;
-    margin-top: 4px;
-    padding-top: 0;
-    border-top: none;
-    color: #333;
+/* ---------------------- Totais ---------------------- */
+.section-total,
+.total-geral {
+  text-align: right;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #333;
 }
 
-.total-line-impresso span {
-    font-weight: 400;
-    margin-right: 6px;
+.section-total span,
+.total-geral span {
+  margin-right: 6px;
 }
 
-.final-total {
-    font-size: 16px;
-    font-weight: 700;
-    border-top: 2px solid #ccc;
-    padding-top: 10px;
-    margin-top: 20px;
-    color: #222;
+.section-total strong,
+.total-geral strong {
+  font-weight: 700;
 }
 
-/* --- Extras --- */
-.extra-info-section-impresso {
-    margin-top: 20px;
+.total-geral {
+  border-top: 2px solid #ccc;
+  padding-top: 10px;
+  margin-top: 20px;
+  font-size: 15px;
 }
 
-.extra-info-section-impresso p {
-    font-size: 12px;
-    line-height: 1.4;
-    margin-bottom: 6px;
-    color: #333;
+/* ---------------------- Observações ---------------------- */
+.observacoes {
+  margin-top: 20px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #333;
 }
 
-/* --- Política de Garantia --- */
-.policy-footer {
-    margin-top: 20px;
-    border-top: 1px dashed #ccc;
-    padding-top: 12px;
+/* ---------------------- Imagens ---------------------- */
+.imagens {
+  margin-top: 20px;
 }
 
-.policy-footer h4 {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 14px;
-    text-align: center;
-    margin-bottom: 10px;
-    color: #222;
-    font-weight: 700;
+.imagens h2 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 14px;
+  color: #222;
+  font-weight: 700;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
 }
 
-.policy-footer p {
-    font-size: 11px;
-    line-height: 1.4;
-    margin-bottom: 6px;
-    color: #333;
-    text-align: justify;
+.imagens-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px,1fr));
+  gap: 10px;
 }
 
-.policy-acceptance {
-    font-weight: 700;
-    text-align: center !important;
-    color: #222 !important;
+.imagens-grid img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  object-fit: cover;
 }
 
-/* --- Grid responsivo de imagens --- */
-.imagens-section h2 {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 14px;
-    color: #222;
-    font-weight: 700;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 4px;
-    margin-bottom: 8px;
+/* ---------------------- Rodapé ---------------------- */
+.rodape {
+  margin-top: 20px;
+  border-top: 1px dashed #ccc;
+  padding-top: 12px;
 }
 
-.imagens-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 10px;
-    justify-items: center;
+.rodape h4 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: #222;
 }
 
-.thumb-wrapper {
-    width: 100%;
-    max-width: 200px;
-    overflow: hidden;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    transition: transform 0.3s;
-    position: relative; /* Para posicionar o botão de exclusão */
+.rodape p {
+  font-size: 11px;
+  line-height: 1.4;
+  color: #333;
+  text-align: justify;
 }
 
-.thumb-wrapper:hover {
-    transform: scale(1.05);
+/* ---------------------- Ações (Botões) ---------------------- */
+.acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  width: 100%;
 }
 
-.thumb-img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    display: block;
+.btn {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: #fff;
+  width: 100%;
 }
 
-/* **NOVO:** Estilos para o botão de exclusão */
-.delete-img-btn {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background-color: rgba(255, 0, 0, 0.7);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 4px 8px;
-    font-size: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-weight: bold;
+.btn-primary {
+  background-color: #e60012;
 }
 
-.delete-img-btn:hover {
-    background-color: rgba(255, 0, 0, 0.9);
+.btn-primary:disabled {
+  background-color: #9fa8da;
+  cursor: not-allowed;
 }
 
-/* --- Botões --- */
-.orcamento-impresso-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
-    width: 100%;
+.btn-secondary {
+  background-color: #444;
 }
 
-.button {
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 700;
-    transition: background-color 0.3s;
-    color: white;
-    background-color: #e60012; /* ZER0 20 GARAGE™ vermelho */
-    width: 100%;
-}
-
-.button:disabled {
-    background-color: #9fa8da;
-    cursor: not-allowed;
-}
-
-/* --- Layout Desktop --- */
+/* ---------------------- Layout Desktop ---------------------- */
 @media (min-width: 768px) {
-    .orcamento-impresso-content {
-        max-width: 794px;
-        padding: 40px;
-    }
+  .orcamento-impresso-content {
+    max-width: 794px;
+    padding: 40px;
+  }
 
-    .header-impresso {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
+  .header-impresso {
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
 
-    .header-impresso h1 {
-        font-size: 22px;
-        max-width: 60%;
-        margin-bottom: 0;
-    }
+  .header-impresso h1 {
+    font-size: 22px;
+    margin-bottom: 0;
+  }
 
-    .logo-impresso {
-        width: 80px;
-        margin-top: 0;
-    }
+  .dados-gerais {
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 14px;
+  }
 
-    .info-table {
-        justify-content: space-around;
-        gap: 12px 40px;
-    }
+  .section-title {
+    font-size: 18px;
+  }
 
-    .info-table td {
-        font-size: 14px;
-        color: #333;
-        white-space: nowrap;
-    }
+  .section-grid {
+    grid-template-columns: repeat(2,1fr);
+    gap: 16px;
+  }
 
-    .items-section h2 {
-        font-size: 18px;
-        color: #222;
-    }
+  .list-item {
+    font-size: 13px;
+  }
 
-    .items-columns {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px 40px;
-    }
+  .total-geral {
+    font-size: 18px;
+  }
 
-    .list-item-impresso {
-        font-size: 13px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+  .rodape h4 {
+    font-size: 16px;
+  }
 
-    .final-total {
-        font-size: 18px;
-        color: #222;
-    }
+  .rodape p {
+    font-size: 13px;
+  }
 
-    .extra-info-section-impresso p {
-        font-size: 14px;
-    }
+  .imagens h2 {
+    font-size: 18px;
+  }
 
-    .policy-footer h4 {
-        font-size: 16px;
-    }
+  .acoes {
+    flex-direction: row;
+    justify-content: flex-end;
+    width: auto;
+  }
 
-    .policy-footer p {
-        font-size: 13px;
-    }
-
-    .imagens-section h2 {
-        font-size: 18px;
-    }
-
-    .thumb-img {
-        max-width: 200px;
-    }
-
-    .orcamento-impresso-actions {
-        flex-direction: row;
-        justify-content: flex-end;
-        width: auto;
-    }
-
-    .button {
-        width: auto;
-        padding: 10px 18px;
-        font-size: 16px;
-    }
+  .btn {
+    width: auto;
+    padding: 10px 18px;
+    font-size: 16px;
+  }
 }
 
-/* --- Layout for print/pdf --- */
+/* ---------------------- Forçar layout A4 no PDF ---------------------- */
 .force-print-layout {
   width: 794px !important;
   max-width: none !important;
@@ -405,96 +337,62 @@
   line-height: 1.4;
 }
 
-/* --- Estilos de impressão --- */
+/* ---------------------- Estilos de impressão ---------------------- */
 @media print {
-    body, html {
-        margin: 0;
-        padding: 0;
-        background: white;
-    }
+  body, html {
+    margin: 0;
+    padding: 0;
+    background: white;
+  }
 
-    @page {
-        size: A4;
-        margin: 20mm;
-    }
+  @page {
+    size: A4;
+    margin: 20mm;
+  }
 
-    .orcamento-impresso-container {
-        display: block !important;
-        background-color: white !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 100%;
-    }
+  .orcamento-impresso-container {
+    display: block !important;
+    background-color: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+  }
 
-    .orcamento-impresso-content {
-        box-shadow: none !important;
-        margin: 0 auto;
-        padding: 20px;
-        width: 100%;
-        max-width: 754px;
-        box-sizing: border-box;
-    }
+  .orcamento-impresso-content {
+    box-shadow: none !important;
+    margin: 0 auto;
+    padding: 20px;
+    width: 100%;
+    max-width: 754px;
+  }
 
-    .orcamento-impresso-actions {
-        display: none !important;
-    }
+  .acoes {
+    display: none !important;
+  }
 
-    .header-impresso {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
+  .header-impresso {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
-    .header-impresso h1 {
-        font-size: 22px;
-        max-width: 60%;
-        margin-bottom: 0;
-    }
+  .header-impresso h1 {
+    font-size: 20px;
+  }
 
-    .logo-impresso {
-        width: 150px;
-        margin-top: 0;
-    }
+  .section-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
 
-    .info-table {
-        justify-content: space-around;
-        gap: 12px 40px;
-    }
+  .list-item {
+    font-size: 13px;
+  }
 
-    .items-columns {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px 40px;
-    }
+  .list-item input[type="checkbox"] {
+    transform: scale(0.7);
+  }
 
-    .list-item-impresso {
-        display: flex;
-        align-items: center;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 13px;
-    }
-
-    .checkbox-box {
-        transform: scale(0.6);
-    }
-
-    .total-section,
-    .final-total,
-    .extra-info-section-impresso p,
-    .policy-footer p,
-    .policy-footer h4 {
-        font-size: inherit;
-        margin: 0;
-        padding: 0;
-    }
-}
-
-.orcamento-impresso-imagens {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-start;
-  margin-top: 16px;
+  .rodape h4,
+  .rodape p {
+    font-size: inherit;
+  }
 }

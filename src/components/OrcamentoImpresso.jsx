@@ -3,45 +3,48 @@ import dayjs from 'dayjs';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import './OrcamentoImpresso.css';
-import logo from '../assets/images/background.jpg';
+import 'dayjs/locale/pt-br';
+dayjs.locale('pt-br');
 
-// Componente para exibir itens categorizados (não precisa de alteração)
 const CategorizedItemsSection = ({ title, itemsByCategory, totalValue, formatValue }) => {
   const categories = Object.keys(itemsByCategory || {});
-  if (categories.length === 0) {
-    return null;
-  }
+  if (categories.length === 0) return null;
+
   const hasItems = categories.some(category =>
     Array.isArray(itemsByCategory[category]) && itemsByCategory[category].length > 0
   );
-  if (!hasItems) {
-      return null;
-  }
+  if (!hasItems) return null;
+
   return (
-    <section className="items-section">
-      <h2>{title}</h2>
-      <div className="categorized-items-grid">
-        {categories.map((category) => (
-          <div key={category} className="category-block">
-            <h3 className="category-title">{category}</h3>
-            <ul className="category-items-list">
-              {Array.isArray(itemsByCategory[category]) && itemsByCategory[category].map((item, index) => {
-                if (typeof item === 'string' && item.trim() !== '') {
+    <section className="orcamento-section">
+      <h2 className="section-title">{title}</h2>
+      <div className="section-grid">
+        {categories.map(category => (
+          <div key={category} className="section-card">
+            <h3 className="section-subtitle">{category}</h3>
+            <ul className="section-list">
+              {Array.isArray(itemsByCategory[category]) &&
+                itemsByCategory[category].map((item, index) => {
+                  let itemName;
+                  if (typeof item === 'string') itemName = item.trim();
+                  else if (item && typeof item === 'object' && item.name) itemName = item.name;
+                  else return null;
+                  if (!itemName) return null;
+
                   return (
-                    <li key={index} className="category-item">
-                      <input type="checkbox" checked readOnly className="checkbox-box" />
-                      <span className="item-text">{item}</span>
+                    <li key={index} className="list-item">
+                      <input type="checkbox" className="checkbox-box" />
+                      <span>{itemName}</span>
                     </li>
                   );
-                }
-                return null;
-              })}
+                })}
             </ul>
           </div>
         ))}
       </div>
-      <div className="total-line-impresso">
-        <span>Valor total de {title}:</span> <strong>{formatValue(totalValue)}</strong>
+      <div className="section-total">
+        <span>Valor total de {title}:</span>
+        <strong>{formatValue(totalValue)}</strong>
       </div>
     </section>
   );
@@ -50,20 +53,22 @@ const CategorizedItemsSection = ({ title, itemsByCategory, totalValue, formatVal
 const OrcamentoImpresso = ({ orcamento, onClose }) => {
   const componentRef = useRef(null);
   const [isPdfGenerating, setIsPdfGenerating] = useState(false);
-  const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
-  const formatValue = (value) => {
+  const sleep = ms => new Promise(res => setTimeout(res, ms));
+  const formatValue = value => {
     const num = Number(value);
     if (isNaN(num) || num === 0) return '___________';
     return `R$ ${num.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
   };
-  const isCloudinaryUrl = (url) => typeof url === 'string' && url.includes('/upload/');
-  const getCloudinaryOriginal = useCallback((url) => {
+
+  const isCloudinaryUrl = url => typeof url === 'string' && url.includes('/upload/');
+  const getCloudinaryOriginal = useCallback(url => {
     if (!isCloudinaryUrl(url)) return url;
     const [base, after] = url.split('/upload/');
     const parts = after.split('/');
     return base + '/upload/' + parts.slice(1).join('/');
   }, []);
-  const toPngDataUrlFromSrc = useCallback(async (src) => {
+
+  const toPngDataUrlFromSrc = useCallback(async src => {
     try {
       const img = await new Promise((resolve, reject) => {
         const i = new Image();
@@ -82,7 +87,8 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       return null;
     }
   }, []);
-  const getOriginalImageAsDataUrl = useCallback(async (img) => {
+
+  const getOriginalImageAsDataUrl = useCallback(async img => {
     if (typeof img === 'string') return await toPngDataUrlFromSrc(getCloudinaryOriginal(img));
     if (img instanceof File) {
       const objectUrl = URL.createObjectURL(img);
@@ -94,6 +100,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     if (img?.data?.data) return `data:image/jpeg;base64,${img.data.data}`;
     return null;
   }, [toPngDataUrlFromSrc, getCloudinaryOriginal]);
+
   const appendOriginalImagesToPdf = async (pdf, imagens) => {
     if (!imagens || imagens.length === 0) return;
     const dataUrls = [];
@@ -136,6 +143,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     pdf.setFontSize(10);
     pdf.text(`Página ${pageNum}`, pageW / 2, pageH - 10, { align: 'center' });
   };
+
   const handleSharePdf = async () => {
     if (!componentRef.current || isPdfGenerating) return;
     setIsPdfGenerating(true);
@@ -174,6 +182,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       setIsPdfGenerating(false);
     }
   };
+
   const handleVoltarPainel = () => {
     if (onClose) onClose(orcamento.id || orcamento._id);
     setTimeout(() => {
@@ -181,12 +190,16 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
   };
-  if (!orcamento) return <div className="orcamento-impresso-container">Nenhum orçamento selecionado.</div>;
+
+  if (!orcamento)
+    return <div className="orcamento-impresso-container">Nenhum orçamento selecionado.</div>;
+
   const pecasPorCategoria = orcamento.pecasSelecionadas || {};
   const servicosPorCategoria = orcamento.servicosSelecionados || {};
   const showServices = Object.keys(servicosPorCategoria).length > 0 || Number(orcamento.valorTotalServicos) > 0 || Number(orcamento.totalMaoDeObra) > 0;
   const showImages = orcamento.imagens && orcamento.imagens.length > 0;
   const showObservacoes = orcamento.observacoes && orcamento.observacoes.trim() !== '';
+
   let formattedDate = '___________';
   if (orcamento?.data) {
     const dateToFormat = typeof orcamento.data === 'object' && orcamento.data._seconds
@@ -195,13 +208,13 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
     if (dateToFormat.isValid()) formattedDate = dateToFormat.format('DD/MM/YYYY HH:mm');
   }
 
-  // Componente interno para exibir imagens do veículo (sem o botão de exclusão)
   const ImagensVeiculo = ({ imagens }) => (
-    <section className="imagens-section">
+    <section className="imagens">
       <h2>Imagens do Veículo</h2>
-      <div className="imagens-container">
+      <div className="imagens-grid">
         {imagens.map((img, idx) => {
           const src = img?.imagemUrl || (typeof img === 'string' ? img : '');
+          if (!src) return null;
           return (
             <div key={idx} className="thumb-wrapper">
               <img src={src} alt={`Foto ${idx + 1}`} className="thumb-img" />
@@ -217,20 +230,23 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       <div className="orcamento-impresso-content" ref={componentRef}>
         <div className="header-impresso">
           <h1>ORÇAMENTO - {orcamento.tipo === 'motor' ? 'MOTOR COMPLETO/PARCIAL' : 'CABEÇOTE'}</h1>
-          <img src={logo} alt="Logo Zero20Garage" className="logo-impresso" />
         </div>
+
         <section className="info-section">
           <table className="info-table">
             <tbody>
               <tr>
-                <td>Veículo: <span>{orcamento?.veiculo || '___________'}</span></td>
-                <td>OS: <span>{orcamento?.ordemServico || '___________'}</span></td>
-                <td>Cliente: <span>{orcamento?.cliente || '___________'}</span></td>
-                <td>Data: <span>{formattedDate}</span></td>
+                <td><span>Veículo:</span> {orcamento?.veiculo || '___________'}</td>
+                <td><span>OS:</span> {orcamento?.ordemServico || '___________'}</td>
+              </tr>
+              <tr>
+                <td><span>Cliente:</span> {orcamento?.cliente || '___________'}</td>
+                <td><span>Data:</span> {formattedDate}</td>
               </tr>
             </tbody>
           </table>
         </section>
+
         {Object.keys(pecasPorCategoria).length > 0 && (
           <CategorizedItemsSection
             title="Peças"
@@ -239,6 +255,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
             formatValue={formatValue}
           />
         )}
+
         {showServices && (
           <>
             {Object.keys(servicosPorCategoria).length > 0 && (
@@ -249,19 +266,27 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
                 formatValue={formatValue}
               />
             )}
-            <div className="total-line-impresso">
-              <span>Valor total de mão de obra:</span> <strong>{formatValue(orcamento.totalMaoDeObra)}</strong>
+            <div className="total-section">
+              <span>Valor total de mão de obra:</span>
+              <strong>{formatValue(orcamento.totalMaoDeObra)}</strong>
             </div>
           </>
         )}
-        <div className="total-line-impresso final-total">
-          <span>TOTAL GERAL:</span> <strong>{formatValue(orcamento.valorTotal)}</strong>
+
+        <div className="final-total">
+          <span>TOTAL GERAL:</span>
+          <strong>{formatValue(orcamento.valorTotal)}</strong>
         </div>
-        <div className="extra-info-section-impresso">
-          <p className="payment-method"><strong>Forma de Pagamento:</strong> {orcamento.formaPagamento || '___________'}</p>
-          {showObservacoes && <p className="observations"><strong>Observações:</strong> {orcamento.observacoes}</p>}
-        </div>
+
+        {showObservacoes && (
+          <div className="extra-info-section-impresso">
+            <p><strong>Forma de Pagamento:</strong> {orcamento.formaPagamento || '___________'}</p>
+            <p><strong>Observações:</strong> {orcamento.observacoes}</p>
+          </div>
+        )}
+
         {showImages && <ImagensVeiculo imagens={orcamento.imagens} />}
+
         <section className="policy-footer">
           <h4>Política de Garantia, Troca e Devolução</h4>
           <p>A garantia dos serviços realizados pela Zero 20 Garage é válida apenas se o veículo for utilizado conforme as orientações da oficina, incluindo manutenções em dia, uso adequado de combustíveis e respeito aos prazos de revisão. Clientes com pagamentos pendentes não terão direito à garantia, sendo que a mesma só pode ser ativada mediante apresentação do orçamento.</p>
@@ -272,11 +297,14 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
           <p className="policy-acceptance">Ao aceitar o orçamento e iniciar o serviço com a Zero 20 Garage, o cliente declara estar ciente e de acordo com os termos descritos acima.</p>
         </section>
       </div>
+
       <div className="orcamento-impresso-actions">
-        <button className='button' onClick={handleSharePdf} disabled={isPdfGenerating}>
+        <button className="button btn-primary" onClick={handleSharePdf} disabled={isPdfGenerating}>
           {isPdfGenerating ? 'Gerando PDF...' : 'Gerar PDF'}
         </button>
-        <button className='button' onClick={handleVoltarPainel} disabled={isPdfGenerating}>Voltar</button>
+        <button className="button btn-secondary" onClick={handleVoltarPainel} disabled={isPdfGenerating}>
+          Voltar
+        </button>
       </div>
     </div>
   );
