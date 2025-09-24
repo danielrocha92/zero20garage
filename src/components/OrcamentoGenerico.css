@@ -110,12 +110,13 @@ body {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1.5rem;
+  table-layout: fixed; /* Garante divisão proporcional */
 }
 
 .items-table th,
 .items-table td {
   border-bottom: 1px solid var(--color-secondary);
-  padding: 12px 8px;
+  padding: 12px 10px;
   text-align: left;
   vertical-align: top;
 }
@@ -131,11 +132,12 @@ body {
 /* Colunas */
 .items-table .checkbox-cell {
   width: 40%;
+  word-wrap: break-word;
 }
 
 .items-table .quantidade-cell {
   width: 20%;
-  white-space: nowrap;
+  text-align: center;
 }
 
 .items-table .subitems-cell {
@@ -146,7 +148,7 @@ body {
 .items-table select.quantidade-select,
 .items-table input.small-input {
   width: 100%;
-  max-width: 90px;
+  max-width: 100px;
   padding: 8px;
   border-radius: 6px;
   text-align: center;
@@ -167,7 +169,7 @@ body {
 /* Campo de observações dentro da célula de subitens */
 .items-table .subitems-cell textarea {
   width: 100%;
-  min-height: 60px;
+  min-height: 70px;
   padding: 10px;
   border-radius: 6px;
   border: 1px solid #555;
@@ -176,6 +178,7 @@ body {
   font-size: 0.9rem;
   resize: vertical;
   transition: 0.2s;
+  box-sizing: border-box;
 }
 
 .items-table .subitems-cell textarea:focus {
@@ -184,7 +187,7 @@ body {
   box-shadow: 0 0 4px var(--color-brand-red);
 }
 
-/* Subitens alinhados */
+/* Subitens alinhados (labels + inputs dentro da célula) */
 .sub-item-input-group {
   display: flex;
   align-items: center;
