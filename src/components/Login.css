@@ -1,11 +1,19 @@
 /*
  * ========================
- * Estilos Gerais para a Página de Login
+ * Estilos da Página de Login
  * ========================
  */
-.login-container.container-escuro {
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.login-wrapper {
   width: 100%;
   max-width: 400px;
+  padding: 1.5rem;
 }
 
 .login-card {
@@ -67,7 +75,7 @@
  * ========================
  */
 .login-submit {
-  background-color: #ca1111;
+  background-color: #b90202;
   color: #fff;
   border: none;
   padding: 0.8rem 1.5rem;
@@ -80,7 +88,7 @@
 }
 
 .login-submit:hover {
-  background-color: #673630;
+  background-color: #4c0c04;
   transform: translateY(-2px);
 }
 
@@ -106,7 +114,7 @@
  * ========================
  */
 @media (min-width: 768px) {
-  .login-container.container-escuro {
+  .login-wrapper {
     padding: 3rem;
   }
 }
