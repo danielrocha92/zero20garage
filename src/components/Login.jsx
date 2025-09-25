@@ -51,7 +51,7 @@ const Login = () => {
     <div className="login-page">
       <DynamicHeader
         page="login"
-        messages={[{ title: "Área Restrita", subtitle: "Acesso exclusivo para administradores." }]}
+        messages={[{ title: "Área Restrita", subtitle: "Acesso exclusivo para administradores." }] }
       />
       <div className="login-wrapper">
         <div className="login-card">

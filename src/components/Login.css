@@ -1,45 +1,88 @@
-/*
- * ========================
- * Estilos da Página de Login
- * ========================
- */
+/* ===================== */
+/* ===== Variáveis (Assegura que as variáveis do seu arquivo global CSS sejam usadas) ===== */
+/* ===================== */
+:root {
+  --preto: #000000;
+  --cinza-escuro: #121212;
+  --cinza-medio: #8f8989;
+  --cinza-claro: #f5f5f5;
+  --vermelho-principal: #ff0000;
+  --vermelho-hover: #cc0000;
+  --branco: #ffffff;
+  --cor-fundo-card: #1f1f1f; /* Novo: Para o fundo dos cards/wrapper */
+  --cor-input-bg: #2b2b2b; /* Novo: Para o fundo dos inputs */
+  --cor-texto-claro: #e0e0e0;
+}
+
+/* ======================== */
+/* Estilos da Página de Login (Mobile First) */
+/* ======================== */
 .login-page {
+  /* O background deve vir do seu body/page principal, mas mantemos o layout */
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem 1rem;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .login-wrapper {
+  /* Glassmorphism Aprimorado */
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Sombra vermelha sutil, mantendo o estilo original */
+  box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2);
+  border-radius: 20px; /* Aumentado para 20px para consistência com outros containers */
+
+  padding: 1.5rem; /* Ajuste para Mobile */
+  margin: 1rem auto;
+  max-width: 95%; /* Ajuste Mobile */
   width: 100%;
-  max-width: 400px;
-  padding: 1.5rem;
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--cinza-claro, #e0e0e0); /* Usando variável para o texto */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza o card interno */
+  justify-content: center;
+  gap: 1.5rem; /* Aumenta o espaçamento entre o header e o card */
+
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-.titulo-claro {
+/* Card interno que contém o formulário */
 .login-card {
-  background-color: #1e1e1e; /* Um tom um pouco mais claro que o fundo */
+  /* Usando variáveis e mantendo a cor escura */
+  background-color: var(--cor-fundo-card);
   border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  padding: 1.5rem; /* Ajuste Mobile */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra mais forte no card interno */
   text-align: center;
+  width: 100%;
+  max-width: 400px; /* Limite de largura para o formulário */
 }
 
 .login-title {
-  color: #ffffff;
-  font-size: 2rem;
+  /* Usando variável de cor principal */
+  color: var(--vermelho-principal, #ff0000);
+  font-size: 1.8rem; /* Ajuste Mobile */
   margin-bottom: 1.5rem;
+  font-weight: 700;
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
 }
 
-/*
- * ========================
- * Estilos do Formulário
- * ========================
- */
+/* ======================== */
+/* Estilos do Formulário */
+/* ======================== */
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem; /* Espaçamento menor em Mobile */
 }
 
 .login-form-group {
@@ -49,74 +92,115 @@
 }
 
 .login-label {
-  font-size: 1rem;
-  font-weight: bold;
+  font-size: 0.95rem; /* Ajuste Mobile */
+  font-weight: 600;
   margin-bottom: 0.5rem;
-  color: #bbbbbb;
+  color: var(--cinza-claro, #e0e0e0); /* Cor clara para Dark Mode */
 }
 
 .login-input {
-  background-color: #2b2b2b;
-  border: 1px solid #444;
-  color: #e0e0e0;
+  /* Usando variáveis para consistência */
+  background-color: var(--cor-input-bg);
+  border: 1px solid var(--cinza-medio, #444);
+  color: var(--cor-texto-claro, #e0e0e0);
   padding: 0.8rem 1rem;
   border-radius: 12px;
   font-size: 1rem;
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
 }
 
 .login-input:focus {
-  border-color: #007bff;
+  /* Usando variável de cor principal no foco */
+  border-color: var(--vermelho-principal, #ff0000);
+  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
 }
 
-/*
- * ========================
- * Estilos do Botão e Feedback
- * ========================
- */
+.login-input::placeholder {
+  color: var(--cinza-medio, #8f8989);
+  opacity: 0.7;
+}
+
+/* ======================== */
+/* Estilos do Botão e Feedback */
+/* ======================== */
 .login-submit {
-  background-color: #b90202;
-  color: #fff;
+  /* Cores de botão de submissão do tema */
+  background-color: var(--vermelho-principal, #b90202);
+  color: var(--branco, #fff);
   border: none;
   padding: 0.8rem 1.5rem;
   border-radius: 12px;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-top: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  margin-top: 1.5rem; /* Aumentado um pouco o espaçamento */
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
 }
 
 .login-submit:hover {
-  background-color: #4c0c04;
+  /* Usando variável de hover */
+  background-color: var(--vermelho-hover, #cc0000);
   transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 0, 0, 0.5);
 }
 
 .login-submit:disabled {
   background-color: #4a4a4a;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
+  opacity: 0.7;
 }
 
 .login-feedback {
   margin-top: 1rem;
   padding: 0.75rem;
   border-radius: 12px;
-  font-weight: bold;
+  font-weight: 600;
   text-align: center;
-  background-color: #3b1b1b;
-  color: #ff6b6b;
+  /* Estilo de alerta sutil e harmonioso */
+  background-color: rgba(255, 0, 0, 0.1);
+  color: var(--vermelho-principal, #ff6b6b);
+  border: 1px solid rgba(255, 0, 0, 0.3);
 }
 
-/*
- * ========================
- * Estilos para Dispositivos Maiores
- * ========================
- */
+/* ======================== */
+/* Estilos para Dispositivos Maiores (Desktop) */
+/* ======================== */
 @media (min-width: 768px) {
   .login-wrapper {
     padding: 3rem;
+    margin: 2rem auto;
+    max-width: 500px;
+    gap: 2rem;
   }
-}
+
+  .login-card {
+    padding: 2.5rem;
+  }
+
+  .login-title {
+    font-size: 2rem;
+  }
+
+  .login-form {
+    gap: 1.5rem;
+  }
+
+  .login-input {
+    padding: 0.9rem 1.2rem;
+    font-size: 1.05rem;
+  }
+
+  .login-label {
+    font-size: 1rem;
+  }
+
+  .login-submit {
+    padding: 1rem 2rem;
+    font-size: 1.05rem;
+  }
 }
