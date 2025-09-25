@@ -62,7 +62,7 @@
     background-color: var(--color-form-bg);
     color: var(--color-form-text);
     padding: 1rem;
-    border-radius: 20px;
+    border-radius: 12px;
     max-width: 1200px;
     margin: 15px auto;
     box-shadow: 0 8px 20px var(--shadow-strong);
@@ -92,7 +92,7 @@
     width: 60px;
     height: auto;
     max-width: 100%;
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     margin-left: 20px;
 }
@@ -117,7 +117,7 @@
 .client-vehicle-section, .section-form, .summary-section {
     padding: 1rem;
     background-color: var(--color-form-group-bg);
-    border-radius: 20px;
+    border-radius: 12px;
     box-shadow: 0 2px 6px var(--shadow-light);
     margin-bottom: 20px;
 }
@@ -162,7 +162,7 @@
     gap: 0.5rem;
     margin-bottom: 1rem;
     background-color: var(--color-form-group-bg);
-    border-radius: 20px;
+    border-radius: 12px;
     padding: 1rem;
     box-shadow: 0 2px 6px var(--shadow-light);
 }
@@ -184,7 +184,7 @@
     background-color: var(--color-input-bg);
     color: var(--color-input-text);
     border: 1px solid var(--color-input-border);
-    border-radius: 20px;
+    border-radius: 12px;
     transition: border 0.3s ease, box-shadow 0.3s ease;
     appearance: none;
     -webkit-appearance: none;
@@ -278,7 +278,7 @@
     width: 20px;
     height: 20px;
     border: 2px solid var(--color-checkbox-border);
-    border-radius: 20px;
+    border-radius: 12px;
     background-color: var(--color-input-bg);
     display: flex;
     justify-content: center;
@@ -336,7 +336,7 @@
     text-align: center;
     padding: 8px;
     font-size: 0.9em;
-    border-radius: 20px;
+    border-radius: 12px;
     transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -349,7 +349,7 @@
     padding: 6px 8px;
     font-size: 0.85em;
     height: 35px;
-    border-radius: 20px;
+    border-radius: 12px;
     align-items: left;
 }
 
@@ -409,7 +409,7 @@
     max-width: 200px;
     padding: 6px 8px;
     font-size: 0.85em;
-    border-radius: 20px;
+    border-radius: 12px;
     transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -456,7 +456,7 @@
     font-family: var(--font-primary);
     font-weight: 700;
     padding: 10px 20px;
-    border-radius: 20px;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 1.1rem;
     box-shadow: 0 4px 10px var(--shadow-medium);
@@ -493,7 +493,7 @@
     color: var(--color-brand-red);
     font-size: 0.8em;
     padding: 3px 8px;
-    border-radius: 20px;
+    border-radius: 12px;
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease;
     white-space: nowrap;
@@ -544,7 +544,7 @@
 .input-total {
     background-color: var(--color-input-bg);
     border: 1px solid var(--color-input-border);
-    border-radius: 20px;
+    border-radius: 12px;
     padding: 8px 12px;
 }
 
@@ -573,7 +573,7 @@
     color: var(--color-brand-red);
     background-color: var(--color-input-bg);
     border: 1px solid var(--color-input-border);
-    border-radius: 20px;
+    border-radius: 12px;
     padding: 8px 12px;
 }
 
@@ -601,7 +601,7 @@
 .feedback {
     text-align: center;
     padding: 0.75rem;
-    border-radius: 20px;
+    border-radius: 12px;
     font-weight: bold;
     font-size: 0.95rem;
     margin-top: 1rem;
@@ -729,7 +729,7 @@
 
 .images-upload-container input[type="file"] {
     border: 1px solid var(--color-input-border);
-    border-radius: 20px;
+    border-radius: 12px;
     padding: 10px;
     background-color: var(--color-input-bg);
     color: var(--color-input-text);

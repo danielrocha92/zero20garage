@@ -29,7 +29,7 @@
 .historia-image img {
   width: 100%;
   max-width: 400px;
-  border-radius: 20px;
+  border-radius: 12px;
   border: 4px solid var(--vermelho-principal);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   transition: border-color 0.3s ease, transform 0.3s ease;
@@ -115,7 +115,7 @@
   width: 100%;
   height: auto;
   object-fit: cover; /* Garante que a imagem cubra o container sem distorção */
-  border-radius: 20px;
+  border-radius: 12px;
 }
 
 .fachada-image-container {
@@ -133,13 +133,13 @@
   width: 100%;
   height: auto;
   object-fit: cover; /* Garante que a imagem cubra o container sem distorção */
-  border-radius: 20px;
+  border-radius: 12px;
 }
 
 .team-image {
   width: 100%;
   object-fit: cover;
-  border-radius: 20px;
+  border-radius: 12px;
   border: 2px solid var(--vermelho-principal);
   box-shadow: 0 0 10px var(--vermelho-principal);
   transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
@@ -188,7 +188,7 @@
   background-color: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-radius: 20px;
+  border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 
   /* Centralização */
@@ -213,11 +213,45 @@
   margin-bottom: 24px;
 }
 
-.highlight-card {
+.highlight-card-sobre {
   background-color: #790709; /* Cor de fundo específica, sobrescreve .highlight-item */
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2);
+  border-radius: 12px;
+
+  padding: 1.5rem;
+  margin: 1rem auto 1.5rem auto;
+  max-width: 90%;
+  width: 100%;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  color: #333; /* Ajustar dependendo do fundo */
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+
+  animation: fadeIn 1s ease-in-out;
+}
+
+.highlight-card-sobre:hover {
+  transform: translateY(-2px) scale(1.01); /* Movimento e escala mais sutis */
+  box-shadow: 0 10px 40px 0 rgba(255, 0, 0, 0.4); /* Sombra mais intensa no hover */
+  background-color: rgba(255, 255, 255, 0.1); /* Fundo um pouco mais opaco no hover */
 }
 
 .review-date {

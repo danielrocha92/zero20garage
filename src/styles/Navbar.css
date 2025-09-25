@@ -94,7 +94,7 @@ outline: none;
 .navbar-links a:focus {
 outline: none;
 box-shadow: 0 0 6px 2px var(--vermelho-principal);
-border-radius: 8px;
+border-radius: 12px;
 }
 
 .navbar-links a::after {
@@ -143,7 +143,7 @@ outline: none;
 .hamburger:focus {
 outline: none;
 box-shadow: 0 0 6px 3px var(--vermelho-principal);
-border-radius: 8px;
+border-radius: 12px;
 }
 
 .hamburger span {
@@ -259,7 +259,7 @@ font-size: 1.6rem;
 .navbar-links a:focus {
 outline: none;
 box-shadow: 0 0 6px 3px var(--vermelho-principal);
-border-radius: 8px;
+border-radius: 12px;
 }
 }
 

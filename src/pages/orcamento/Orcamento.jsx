@@ -107,7 +107,7 @@ function Orcamento() {
               Preencha o formulário abaixo para receber um orçamento detalhado e personalizado.
             </h3>
 
-            <form className="orcamento-form" onSubmit={handleSubmit}>
+            <form className="orcamento-form-apple" onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="nome">Nome:</label>
                 <input
@@ -149,6 +149,7 @@ function Orcamento() {
               <div className="form-group">
                 <label htmlFor="servico">Serviço Desejado:</label>
                 <select
+                  className='select-form'
                   id="servico"
                   name="servico"
                   value={formData.servico}

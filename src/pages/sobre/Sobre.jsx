@@ -105,7 +105,7 @@ function Sobre() {
 
               {/* Blocos de texto estilo cartões */}
               <div className="equipe-textos">
-                <div className="highlight-card">
+                <div className="highlight-card-sobre">
                   <h3 className="subtitulo-claro">Profissionais Especializados</h3>
                   <p className="paragrafo-claro">
                     Contamos com uma equipe de profissionais altamente especializados e apaixonados por motores.
@@ -113,7 +113,7 @@ function Sobre() {
                   </p>
                 </div>
 
-                <div className="highlight-card" style={{ marginTop: '1.5rem' }}>
+                <div className="highlight-card-sobre" style={{ marginTop: '1.5rem' }}>
                   <h3 className="subtitulo-claro">Experiência Comprovada</h3>
                   <p className="paragrafo-claro">
                     Nossa equipe possui anos de experiência no mercado automotivo, garantindo serviços de alta qualidade

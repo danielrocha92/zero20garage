@@ -64,7 +64,7 @@
 .message-container {
   background: rgba(0, 0, 0, 0.739);
   padding: 20px 30px;
-  border-radius: 20px;
+  border-radius: 12px;
   text-align: center;
   max-width: 600px;
   margin: 20px auto;

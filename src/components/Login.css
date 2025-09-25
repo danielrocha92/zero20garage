@@ -9,14 +9,6 @@
   padding: 1.5rem;
 }
 
-.highlight-card {
-  background-color: #1e1e1e; /* Um tom um pouco mais claro que o fundo */
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  text-align: center;
-}
-
 .titulo-claro {
   color: #ffffff;
   font-size: 2rem;
@@ -53,7 +45,7 @@
   border: 1px solid #444;
   color: #e0e0e0;
   padding: 0.8rem 1rem;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 1rem;
   outline: none;
   transition: border-color 0.3s ease;
@@ -74,7 +66,7 @@
   color: #fff;
   border: none;
   padding: 0.8rem 1.5rem;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
@@ -96,7 +88,7 @@
 .feedback {
   margin-top: 1rem;
   padding: 0.75rem;
-  border-radius: 8px;
+  border-radius: 12px;
   font-weight: bold;
   text-align: center;
 }

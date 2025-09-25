@@ -12,7 +12,7 @@
   max-height: 16rem; /* ajuste conforme necessário */
   display: block;
   margin: 0 auto;
-  border-radius: 20px;
+  border-radius: 12px;
   object-fit: cover;
   box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
@@ -27,7 +27,7 @@
   .carousel-image {
     max-width: 600px;
     max-height: 18rem;
-    border-radius: 20px;
+    border-radius: 12px;
   }
 }
 
@@ -37,6 +37,6 @@
   .carousel-image {
     max-width: 700px;
     max-height: 22rem;
-    border-radius: 20px;
+    border-radius: 12px;
   }
 }

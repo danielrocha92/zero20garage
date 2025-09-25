@@ -26,7 +26,7 @@
   padding: 0.9rem;
   font-size: 1rem;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 12px;
   background: #fafafa;
   transition: border 0.2s ease, box-shadow 0.2s ease;
 }
@@ -47,7 +47,7 @@
   font-size: 1rem;
   padding: 1rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.3s ease;
@@ -55,6 +55,85 @@
 
 .form-apple button:hover {
   background: #333;
+}
+
+/* ===================== */
+/* ===== Estilo para o Select (Mobile First) ===== */
+/* ===================== */
+
+.select-form {
+  /* Reset de aparência padrão */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+
+  /* Arredondamento e espaçamento */
+  border-radius: 10px;
+  margin-bottom: 1rem;
+
+  /* Cores e bordas (Padrão para fundo claro) */
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--cinza-escuro, #333);
+  border: 1px solid var(--cinza-medio, #8f8989);
+
+  /* Transição suave */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+
+  /* Adiciona ícone de seta customizado (funciona bem com appearance: none) */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%238f8989" d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 18px;
+}
+
+/* Foco e interatividade */
+.select-form:focus {
+  outline: none;
+  border-color: var(--vermelho-principal, #ff0000);
+  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
+}
+
+/* Opções (ajusta cor do texto para o modo claro) */
+.select-form option {
+  color: var(--cinza-escuro, #333);
+  background-color: var(--branco, #fff);
+  padding: 0.5rem;
+}
+
+/* ===================== */
+/* ===== Responsividade e Dark Mode (Mobile First) ===== */
+/* ===================== */
+
+/* Ajuste de tamanho para telas menores (Mobile) */
+@media (max-width: 768px) {
+  .select-form {
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Adaptação para o Modo Escuro */
+@media (prefers-color-scheme: dark) {
+  .select-form {
+    /* Glassmorphism sutil para o modo escuro */
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: var(--cinza-medio, #8f8989);
+    color: var(--cinza-claro, #f1f1f1);
+
+    /* Inverte a cor da seta para ser visível no fundo escuro */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23f1f1f1" d="M7 10l5 5 5-5z"/></svg>');
+  }
+
+  .select-form option {
+    /* Fundo escuro puro para as opções no menu dropdown (depende do SO/navegador, mas é uma tentativa) */
+    color: var(--cinza-claro, #f1f1f1);
+    background-color: var(--cinza-escuro, #1f1f1f);
+  }
 }
 
 /* Compacto para mobile */
@@ -73,4 +152,39 @@
     padding: 0.9rem;
     font-size: 0.95rem;
   }
+
+  .highlight-card {
+  background-color: rgba(255, 255, 255, 0.08); /* Transparência estilo vidro */
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2);
+  border-radius: 12px;
+
+  padding: 1.5rem;
+  margin: 1rem auto 1.5rem auto;
+  max-width: 90%;
+  width: 100%;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  color: #333; /* Ajustar dependendo do fundo */
+
+  display: flex;
+  flex-direction: column;
+  align-items: normal;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+
+  animation: fadeIn 1s ease-in-out;
+}
 }

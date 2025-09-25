@@ -21,7 +21,7 @@
   text-align: justify;
 
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
-  border-radius: 20px;
+  border-radius: 12px;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
@@ -58,7 +58,7 @@
   color: var(--branco);
   background-color: var(--cor-destaque);
   border: none;
-  border-radius: 20px;
+  border-radius: 12px;
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
