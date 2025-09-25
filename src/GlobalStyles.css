@@ -429,7 +429,7 @@ textarea {
   border-radius: 10px;
   font-size: 1rem;
   background-color: transparent;
-  color: var(--cinza-escuro);
+  color: var(--cinza-claro);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   align-items: center;
 }

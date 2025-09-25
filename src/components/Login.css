@@ -3,13 +3,29 @@
  * Estilos da Página de Login
  * ========================
  */
-.login-container.container-escuro {
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.login-wrapper {
   width: 100%;
   max-width: 400px;
   padding: 1.5rem;
 }
 
 .titulo-claro {
+.login-card {
+  background-color: #1e1e1e; /* Um tom um pouco mais claro que o fundo */
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.login-title {
   color: #ffffff;
   font-size: 2rem;
   margin-bottom: 1.5rem;
@@ -20,27 +36,26 @@
  * Estilos do Formulário
  * ========================
  */
-
-.orcamento-form {
+.login-form {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
 }
 
-.form-group {
+.login-form-group {
   display: flex;
   flex-direction: column;
   text-align: left;
 }
 
-.form-group label {
+.login-label {
   font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
   color: #bbbbbb;
 }
 
-.form-group input {
+.login-input {
   background-color: #2b2b2b;
   border: 1px solid #444;
   color: #e0e0e0;
@@ -51,7 +66,7 @@
   transition: border-color 0.3s ease;
 }
 
-.form-group input:focus {
+.login-input:focus {
   border-color: #007bff;
 }
 
@@ -60,9 +75,8 @@
  * Estilos do Botão e Feedback
  * ========================
  */
-
-.submit-button {
-  background-color: #007bff;
+.login-submit {
+  background-color: #b90202;
   color: #fff;
   border: none;
   padding: 0.8rem 1.5rem;
@@ -74,26 +88,23 @@
   margin-top: 1rem;
 }
 
-.submit-button:hover {
-  background-color: #0056b3;
+.login-submit:hover {
+  background-color: #4c0c04;
   transform: translateY(-2px);
 }
 
-.submit-button:disabled {
+.login-submit:disabled {
   background-color: #4a4a4a;
   cursor: not-allowed;
   transform: none;
 }
 
-.feedback {
+.login-feedback {
   margin-top: 1rem;
   padding: 0.75rem;
   border-radius: 12px;
   font-weight: bold;
   text-align: center;
-}
-
-.feedback-error {
   background-color: #3b1b1b;
   color: #ff6b6b;
 }
@@ -103,9 +114,9 @@
  * Estilos para Dispositivos Maiores
  * ========================
  */
-
 @media (min-width: 768px) {
-  .login-container.container-escuro {
+  .login-wrapper {
     padding: 3rem;
   }
+}
 }

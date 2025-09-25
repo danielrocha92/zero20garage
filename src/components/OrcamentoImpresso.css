@@ -96,7 +96,7 @@
 }
 
 /* Cada item da lista */
-.list-item-impresso {
+.items-columns li {
     display: flex;
     align-items: center;
     font-size: 12px;
@@ -108,45 +108,15 @@
     text-overflow: unset;
 }
 
-/* **NOVO:** Estilo customizado para o checkbox */
 .checkbox-box {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: #f0f0f0;
-    margin: 0;
-    font: inherit;
-    color: currentColor;
-    width: 1rem;
-    height: 1rem;
-    border: 1px solid #999;
-    border-radius: 4px;
-    display: grid;
-    place-content: center;
-    cursor: pointer;
     margin-right: 8px;
     flex-shrink: 0;
+    transform: scale(1.2);
     position: relative;
     top: 2px;
+    max-width: 16px;
+    color: brown;
 }
-
-.checkbox-box::after {
-    content: "✔";
-    color: white;
-    font-size: 10px;
-    transform: scale(0);
-    transition: transform 0.1s ease-in-out;
-}
-
-.checkbox-box:checked {
-    background-color: #e60012;
-    border-color: #e60012;
-}
-
-.checkbox-box:checked::after {
-    transform: scale(1);
-}
-
 
 /* --- Totais --- */
 .total-section {
@@ -220,16 +190,6 @@
 }
 
 /* --- Grid responsivo de imagens --- */
-.imagens-section h2 {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 14px;
-    color: #222;
-    font-weight: 700;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 4px;
-    margin-bottom: 8px;
-}
-
 .imagens-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -244,7 +204,6 @@
     border-radius: 6px;
     border: 1px solid #ccc;
     transition: transform 0.3s;
-    position: relative; /* Para posicionar o botão de exclusão */
 }
 
 .thumb-wrapper:hover {
@@ -256,26 +215,6 @@
     height: auto;
     object-fit: cover;
     display: block;
-}
-
-/* **NOVO:** Estilos para o botão de exclusão */
-.delete-img-btn {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background-color: rgba(255, 0, 0, 0.7);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 4px 8px;
-    font-size: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-weight: bold;
-}
-
-.delete-img-btn:hover {
-    background-color: rgba(255, 0, 0, 0.9);
 }
 
 /* --- Botões --- */
@@ -350,7 +289,7 @@
         gap: 10px 40px;
     }
 
-    .list-item-impresso {
+    .items-columns li {
         font-size: 13px;
         white-space: nowrap;
         overflow: hidden;
@@ -467,7 +406,7 @@
         gap: 10px 40px;
     }
 
-    .list-item-impresso {
+    .items-columns li {
         display: flex;
         align-items: center;
         white-space: nowrap;

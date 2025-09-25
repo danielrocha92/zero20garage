@@ -48,14 +48,17 @@ const Login = () => {
   };
 
   return (
-    <div className="page-escuro">
-      <DynamicHeader page="login" messages={[{ title: "Área Restrita", subtitle: "Acesso exclusivo para administradores." }]} />
-      <div className="login-container container-escuro">
-        <div className="highlight-card">
-          <h2 className="titulo-claro">Login Admin</h2>
-          <form onSubmit={handleSubmit} className="orcamento-form" autoComplete="on">
-            <div className="form-group">
-              <label htmlFor="email">E-mail</label>
+    <div className="login-page">
+      <DynamicHeader
+        page="login"
+        messages={[{ title: "Área Restrita", subtitle: "Acesso exclusivo para administradores." }]}
+      />
+      <div className="login-wrapper">
+        <div className="login-card">
+          <h2 className="login-title">Login Admin</h2>
+          <form onSubmit={handleSubmit} className="login-form" autoComplete="on">
+            <div className="login-form-group">
+              <label htmlFor="email" className="login-label">E-mail</label>
               <input
                 type="email"
                 id="email"
@@ -65,10 +68,11 @@ const Login = () => {
                 onChange={handleChange}
                 required
                 autoComplete="username"
+                className="login-input"
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="password">Senha</label>
+            <div className="login-form-group">
+              <label htmlFor="password" className="login-label">Senha</label>
               <input
                 type="password"
                 id="password"
@@ -78,15 +82,16 @@ const Login = () => {
                 onChange={handleChange}
                 required
                 autoComplete="current-password"
+                className="login-input"
               />
             </div>
             <button
               type="submit"
-              className="submit-button"
+              className="login-submit"
               disabled={isSubmitting}>
               {isSubmitting ? "Entrando..." : "Entrar"}
             </button>
-            {message && <p className="feedback feedback-error">{message}</p>}
+            {message && <p className="login-feedback">{message}</p>}
           </form>
         </div>
       </div>

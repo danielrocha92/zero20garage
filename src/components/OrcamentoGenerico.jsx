@@ -12,52 +12,56 @@ const OrcamentoGenerico = ({
   orcamentoData,
   titulo,
 }) => {
-  const itensData = useMemo(() => orcamentoData.itens || [], [
-    orcamentoData.itens,
-  ]);
-  const servicosData = useMemo(() => orcamentoData.servicos || [], [
-    orcamentoData.servicos,
-  ]);
+  // Evita acessar propriedades quando orcamentoData for undefined
+  const itensData = useMemo(
+    () => (orcamentoData && Array.isArray(orcamentoData.itens) ? orcamentoData.itens : []),
+    [orcamentoData]
+  );
+  const servicosData = useMemo(
+    () => (orcamentoData && Array.isArray(orcamentoData.servicos) ? orcamentoData.servicos : []),
+    [orcamentoData]
+  );
 
-  const [formData, setFormData] = useState({
-    nome: "",
-    telefone: "",
-    veiculo: "",
-    placa: "",
-    data: new Date().toISOString().slice(0, 10),
-    ordemServico: "",
-    pecas: itensData.map((item) => ({
-      ...item,
-      selecionado: false,
-      quantidade: item.temQuantidade ? 1 : 0,
-      medida: 0,
-      subItens: item.subItens
-        ? item.subItens.map((sub) => ({
-            ...sub,
-            value: sub.initialValue || (sub.type === "checkbox" ? false : ""),
-          }))
-        : [],
-    })),
-    servicos: servicosData.map((servico) => ({
-      ...servico,
-      selecionado: false,
-      quantidade: servico.temQuantidade ? 1 : 0,
-      medida: 0,
-      subItens: servico.subItens
-        ? servico.subItens.map((sub) => ({
-            ...sub,
-            value: sub.initialValue || (sub.type === "checkbox" ? false : ""),
-          }))
-        : [],
-    })),
-    totalPecasManual: "",
-    totalServicosManual: "",
-    totalMaoDeObraManual: "",
-    totalGeralManual: "",
-    formaPagamento: "",
-    observacoes: "",
-    status: "Aberto",
-  });
+const [formData, setFormData] = useState(() => ({
+  nome: "",
+  telefone: "",
+  veiculo: "",
+  placa: "",
+  data: new Date().toISOString().slice(0, 10),
+  ordemServico: "",
+  pecas: (orcamentoData?.itens || []).map((item) => ({
+    ...item,
+    selecionado: false,
+    quantidade: item.temQuantidade ? 1 : 0,
+    medida: 0,
+    itens: [],
+    subItens: item.subItens
+      ? item.subItens.map((sub) => ({
+          ...sub,
+          value: sub.initialValue || (sub.type === "checkbox" ? false : ""),
+        }))
+      : [],
+  })),
+  servicos: (orcamentoData?.servicos || []).map((servico) => ({
+    ...servico,
+    selecionado: false,
+    quantidade: servico.temQuantidade ? 1 : 0,
+    medida: 0,
+    subItens: servico.subItens
+      ? servico.subItens.map((sub) => ({
+          ...sub,
+          value: sub.initialValue || (sub.type === "checkbox" ? false : ""),
+        }))
+      : [],
+  })),
+  totalPecasManual: "",
+  totalServicosManual: "",
+  totalMaoDeObraManual: "",
+  totalGeralManual: "",
+  formaPagamento: "",
+  observacoes: "",
+  status: "Aberto",
+}));
 
   const formatCurrencySmart = useCallback((value, selectionStart) => {
     if (!value) return { formatted: "", newCursor: 0 };
@@ -109,57 +113,87 @@ const OrcamentoGenerico = ({
       observacoes: editingData.observacoes || "",
       status: editingData.status || "Aberto",
       pecas: itensData.map((pecaData) => {
-        const pecaEdit = editingData.pecasSelecionadas?.find((p) =>
-          p.includes(pecaData.nome)
-        );
-        const quantidadeMatch = pecaEdit ? pecaEdit.match(/::\s*(\d+)/) : null;
-        const quantidade = quantidadeMatch
-          ? parseInt(quantidadeMatch[1], 10)
-          : pecaData.temQuantidade
-          ? 1
-          : 0;
+        const pecaEdit = editingData.pecasSelecionadas?.find((p) => {
+          // Solução: Verifique se a string começa com o nome da peça.
+          // Isso é mais robusto que `includes`
+          const pecaNomePadrao = new RegExp(`^${pecaData.nome}(::.*|\\s*$)`);
+          return pecaNomePadrao.test(p);
+        });
+
+        const selecionado = !!pecaEdit;
+        let quantidade = pecaData.temQuantidade ? 1 : 0;
+        if (selecionado) {
+          const quantidadeMatch = pecaEdit.match(/::\s*(\d+)/);
+          quantidade = quantidadeMatch
+            ? parseInt(quantidadeMatch[1], 10)
+            : pecaData.temQuantidade
+            ? 1
+            : 0;
+        }
+
+        const newSubItens = pecaData.subItens
+          ? pecaData.subItens.map((sub) => {
+              let value = sub.initialValue || (sub.type === "checkbox" ? false : "");
+              if (selecionado) {
+                if (sub.type === "checkbox" && pecaEdit.includes(sub.label)) {
+                  value = true;
+                } else if (sub.type === "text") {
+                  const subItemMatch = pecaEdit.match(new RegExp(`${sub.label}:\\s*(.*?)(;|$)`));
+                  if (subItemMatch && subItemMatch[1]) {
+                    value = subItemMatch[1].trim();
+                  }
+                }
+              }
+              return { ...sub, value };
+            })
+          : [];
 
         return {
           ...pecaData,
-          selecionado: !!pecaEdit,
+          selecionado,
           quantidade,
-          subItens: pecaData.subItens
-            ? pecaData.subItens.map((sub) => ({
-                ...sub,
-                value:
-                  !!pecaEdit && pecaEdit.includes(sub.label)
-                    ? true
-                    : sub.initialValue,
-              }))
-            : [],
+          subItens: newSubItens,
         };
       }),
       servicos: servicosData.map((servicoData) => {
-        const servicoEdit = editingData.servicosSelecionados?.find((s) =>
-          s.includes(servicoData.nome)
-        );
-        const quantidadeMatch = servicoEdit
-          ? servicoEdit.match(/::\s*(\d+)/)
-          : null;
-        const quantidade = quantidadeMatch
-          ? parseInt(quantidadeMatch[1], 10)
-          : servicoData.temQuantidade
-          ? 1
-          : 0;
+        const servicoEdit = editingData.servicosSelecionados?.find((s) => {
+          const servicoNomePadrao = new RegExp(`^${servicoData.nome}(::.*|\\s*$)`);
+          return servicoNomePadrao.test(s);
+        });
+
+        const selecionado = !!servicoEdit;
+        let quantidade = servicoData.temQuantidade ? 1 : 0;
+        if (selecionado) {
+          const quantidadeMatch = servicoEdit.match(/::\s*(\d+)/);
+          quantidade = quantidadeMatch
+            ? parseInt(quantidadeMatch[1], 10)
+            : servicoData.temQuantidade
+            ? 1
+            : 0;
+        }
+
+        const newSubItens = servicoData.subItens
+          ? servicoData.subItens.map((sub) => {
+              let value = sub.initialValue || (sub.type === "checkbox" ? false : "");
+              if (selecionado) {
+                if (sub.type === "checkbox" && servicoEdit.includes(sub.label)) {
+                  value = true;
+                } else if (sub.type === "text") {
+                  const subItemMatch = servicoEdit.match(new RegExp(`${sub.label}:\\s*(.*?)(;|$)`));
+                  if (subItemMatch && subItemMatch[1]) {
+                    value = subItemMatch[1].trim();
+                  }
+                }
+              }
+              return { ...sub, value };
+            })
+          : [];
 
         return {
           ...servicoData,
-          selecionado: !!servicoEdit,
+          selecionado,
           quantidade,
-          subItens: servicoData.subItens
-            ? servicoData.subItens.map((sub) => ({
-                ...sub,
-                value:
-                  !!servicoEdit && servicoEdit.includes(sub.label)
-                    ? true
-                    : sub.initialValue,
-              }))
-            : [],
+          subItens: newSubItens,
         };
       }),
     }));
@@ -175,13 +209,17 @@ const OrcamentoGenerico = ({
     const { formatted, newCursor } = formatCurrencySmart(value, selectionStart);
     setFormData((prev) => ({ ...prev, [name]: formatted }));
     requestAnimationFrame(() => {
-      e.target.setSelectionRange(newCursor, newCursor);
+      try {
+        e.target.setSelectionRange(newCursor, newCursor);
+      } catch (err) {
+        // em alguns browsers/inputs a seleção pode falhar; ignoramos com segurança
+      }
     });
   };
 
   const handleToggleSelecionado = (tipo, index) => {
     setFormData((prev) => {
-      const list = prev[tipo].map((item, idx) =>
+      const list = (prev[tipo] || []).map((item, idx) =>
         idx === index ? { ...item, selecionado: !item.selecionado } : item
       );
       return { ...prev, [tipo]: list };
@@ -190,7 +228,7 @@ const OrcamentoGenerico = ({
 
   const handleQuantidadeChange = (tipo, index, quantidade) => {
     setFormData((prev) => {
-      const list = prev[tipo].map((item, idx) =>
+      const list = (prev[tipo] || []).map((item, idx) =>
         idx === index ? { ...item, quantidade } : item
       );
       return { ...prev, [tipo]: list };
@@ -199,9 +237,9 @@ const OrcamentoGenerico = ({
 
   const handleSubItemChange = (tipo, index, subIndex, value) => {
     setFormData((prev) => {
-      const list = prev[tipo].map((item, idx) => {
+      const list = (prev[tipo] || []).map((item, idx) => {
         if (idx === index) {
-          const newSubItens = item.subItens.map((sub, sIdx) =>
+          const newSubItens = (item.subItens || []).map((sub, sIdx) =>
             sIdx === subIndex ? { ...sub, value } : sub
           );
           return { ...item, subItens: newSubItens };
@@ -215,12 +253,12 @@ const OrcamentoGenerico = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.nome) {
-      showMessage("Cliente é obrigatório!", true);
+      showMessage && showMessage("Cliente é obrigatório!", true);
       return;
     }
 
     const formatarItens = (lista) =>
-      lista
+      (lista || [])
         .filter((i) => i.selecionado)
         .map((item) => {
           let nomeCompleto = item.nome;
@@ -228,7 +266,7 @@ const OrcamentoGenerico = ({
             nomeCompleto += `:: ${item.quantidade}`;
           if (item.temQuantidade && item.medida > 0)
             nomeCompleto += ` Medida: ${item.medida}`;
-          const subItensFormatados = item.subItens
+          const subItensFormatados = (item.subItens || [])
             .filter(
               (sub) =>
                 (sub.type === "checkbox" && sub.value) ||
@@ -244,23 +282,24 @@ const OrcamentoGenerico = ({
           return nomeCompleto;
         });
 
-    onSubmit({
-      cliente: formData.nome,
-      telefone: formData.telefone,
-      veiculo: formData.veiculo,
-      placa: formData.placa,
-      data: formData.data,
-      ordemServico: formData.ordemServico,
-      pecasSelecionadas: formatarItens(formData.pecas),
-      servicosSelecionados: formatarItens(formData.servicos),
-      valorTotalPecas: parseCurrencyToNumber(formData.totalPecasManual),
-      valorTotalServicos: parseCurrencyToNumber(formData.totalServicosManual),
-      totalMaoDeObra: parseCurrencyToNumber(formData.totalMaoDeObraManual),
-      valorTotal: parseCurrencyToNumber(formData.totalGeralManual),
-      formaPagamento: formData.formaPagamento,
-      observacoes: formData.observacoes,
-      status: formData.status,
-    });
+    onSubmit &&
+      onSubmit({
+        cliente: formData.nome,
+        telefone: formData.telefone,
+        veiculo: formData.veiculo,
+        placa: formData.placa,
+        data: formData.data,
+        ordemServico: formData.ordemServico,
+        pecasSelecionadas: formatarItens(formData.pecas),
+        servicosSelecionados: formatarItens(formData.servicos),
+        valorTotalPecas: parseCurrencyToNumber(formData.totalPecasManual),
+        valorTotalServicos: parseCurrencyToNumber(formData.totalServicosManual),
+        totalMaoDeObra: parseCurrencyToNumber(formData.totalMaoDeObraManual),
+        valorTotal: parseCurrencyToNumber(formData.totalGeralManual),
+        formaPagamento: formData.formaPagamento,
+        observacoes: formData.observacoes,
+        status: formData.status,
+      });
   };
 
   const gerarOpcoesQuantidade = () =>
@@ -366,7 +405,7 @@ const OrcamentoGenerico = ({
                       <label className="custom-checkbox">
                         <input
                           type="checkbox"
-                          checked={peca.selecionado}
+                          checked={!!peca.selecionado}
                           onChange={() => handleToggleSelecionado("pecas", index)}
                         />
                         <span className="checkbox-box"></span>
@@ -382,7 +421,7 @@ const OrcamentoGenerico = ({
                                 <label className="custom-checkbox">
                                   <input
                                     type="checkbox"
-                                    checked={sub.value}
+                                    checked={!!sub.value}
                                     onChange={(e) =>
                                       handleSubItemChange("pecas", index, sIdx, e.target.checked)
                                     }
@@ -395,7 +434,7 @@ const OrcamentoGenerico = ({
                                   <label className="sub-item-label">{sub.label}:</label>
                                   <input
                                     type="text"
-                                    value={sub.value}
+                                    value={sub.value || ""}
                                     onChange={(e) =>
                                       handleSubItemChange("pecas", index, sIdx, e.target.value)
                                     }
@@ -415,7 +454,7 @@ const OrcamentoGenerico = ({
                           <select
                             value={peca.quantidade}
                             onChange={(e) =>
-                              handleQuantidadeChange("pecas", index, parseInt(e.target.value))
+                              handleQuantidadeChange("pecas", index, parseInt(e.target.value, 10))
                             }
                             className="quantidade-select"
                           >
@@ -452,7 +491,7 @@ const OrcamentoGenerico = ({
                       <label className="custom-checkbox">
                         <input
                           type="checkbox"
-                          checked={servico.selecionado}
+                          checked={!!servico.selecionado}
                           onChange={() =>
                             handleToggleSelecionado("servicos", index)
                           }
@@ -470,7 +509,7 @@ const OrcamentoGenerico = ({
                                 <label className="custom-checkbox">
                                   <input
                                     type="checkbox"
-                                    checked={sub.value}
+                                    checked={!!sub.value}
                                     onChange={(e) =>
                                       handleSubItemChange("servicos", index, sIdx, e.target.checked)
                                     }
@@ -483,7 +522,7 @@ const OrcamentoGenerico = ({
                                   <label className="sub-item-label">{sub.label}:</label>
                                   <input
                                     type="text"
-                                    value={sub.value}
+                                    value={sub.value || ""}
                                     onChange={(e) =>
                                       handleSubItemChange("servicos", index, sIdx, e.target.value)
                                     }
@@ -503,7 +542,7 @@ const OrcamentoGenerico = ({
                           <select
                             value={servico.quantidade}
                             onChange={(e) =>
-                              handleQuantidadeChange("servicos", index, parseInt(e.target.value))
+                              handleQuantidadeChange("servicos", index, parseInt(e.target.value, 10))
                             }
                             className="quantidade-select"
                           >
@@ -571,6 +610,7 @@ const OrcamentoGenerico = ({
             <label>Observações:</label>
             <textarea
               name="observacoes"
+              className="observacoes-input"
               value={formData.observacoes}
               onChange={handleInputChange}
             ></textarea>
