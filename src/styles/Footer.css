@@ -1,127 +1,68 @@
 /* Footer.css */
+
+/* ===== Base (MOBILE FIRST) ===== */
 .footer {
   text-align: center;
   background-color: rgba(0, 0, 0, 0.5);
-  font-size: 0.9rem;
-  padding: 2rem;
+  font-size: 0.8rem; /* menor para mobile */
+  padding: 0.5rem;
   width: 100%;
   transition: background-color 0.3s ease;
   box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
-  position: relative; /* Para o efeito de sombra */
-  z-index: 1; /* Para garantir que a sombra fique acima de outros elementos */
-  display: flex  ;
+  position: relative;
+  z-index: 1;
+  display: flex;
   flex-direction: column-reverse;
   align-items: center;
 }
 
 .footer-section {
   background-color: var(--branco);
-  padding: 0.5rem;
   border-radius: 12px;
-  margin: 1rem 0;
+  margin: 1rem auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 1200px; /* Limita a largura máxima */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #333; /* Cor do texto */
-  font-size: 1rem; /* Tamanho da fonte */
-  line-height: 1.5; /* Espaçamento entre linhas */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave */
-  margin: 0 auto; /* Centraliza o footer */
-  padding: 2rem; /* Espaçamento interno */
-  box-sizing: border-box; /* Inclui padding e border no cálculo da largura */
-}
-
-.footer-desktop {
-  display: flex;
-  flex-direction: column;
+  padding: 1rem;
+  color: #333;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  box-sizing: border-box;
 }
 
 .footer-mobile {
+  display: block;
+}
+
+.footer-desktop {
   display: none;
 }
 
-/* Ícones */
-.icons {
+.footer-content-wrapper {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
   gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.icon-medium {
-  font-size: 1.8rem;
-  color: white;
-}
-
-/* Accordion para mobile */
-.accordion {
-  margin-top: 2rem;
-}
-
-.accordion-item {
-  margin-bottom: 1rem;
-}
-
-.accordion-button {
   width: 100%;
-  text-align: left;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.2rem;
-  padding: 1rem 0;
-  border-bottom: 1px solid #333;
-  cursor: pointer;
-  outline: none;
 }
 
-.accordion-content {
-  padding: 0.5rem 1rem;
-}
-
-.accordion-content li {
-  margin: 0.5rem 0;
-}
-
-.accordion-content a {
+.footer a {
+  font-size: 0.9rem;
+  display: block;
+  padding: 0.4rem 0;
   color: #ffffff;
   text-decoration: none;
-}
-
-.footer-content-wrapper {
-  display: inline-flex; /* Habilita o Flexbox */
-  justify-content: space-between; /* Distribui o espaço entre os elementos */
-  align-items: center; /* Alinha os itens verticalmente ao centro */
-  width: 100%; /* Garante que o contêiner ocupe toda a largura */
+  font-weight: 500;
+  transition: color 0.4s ease, transform 0.3s ease;
 }
 
 .footer a:hover {
   color: #D90000;
-  text-decoration: none;
-  transform: scale(1.05); /* Mantém o efeito de aumento */
-  transition: transform 0.3s ease, color 0.3s ease; /* Transição suave */
-}
-
-.footer:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-.footer a {
-  color: #D3D3D3;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 500;
-  position: relative;
-  transition: color 0.4s ease, transform 0.3s ease; /* Adiciona transição suave */
+  transform: scale(1.05);
 }
 
 .footer span {
-  margin: 0 5px;
-  font-size: 4rem;
+  font-size: 2rem;
   color: #ffffff;
 }
 
@@ -136,203 +77,204 @@
 }
 
 .footer-card i {
-  font-size: 2.5rem; /* Ajuste o valor conforme necessário */
+  font-size: 2rem;
 }
 
 .footer-card .title {
-  margin-bottom: 1rem; /* Espaçamento entre título e ícones */
-  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
 .footer-card .icons {
   display: flex;
   justify-content: center;
-  gap: 1rem; /* Espaçamento entre os ícones */
+  gap: 1rem;
 }
 
-/* Ajuste no hover dos links de redes sociais */
-.footer-card,
-.icons a:hover {
-  transform: scale(1.1); /* Suaviza o efeito de hover */
-  transition: transform 0.3s ease, color 0.3s ease; /* Transição suave */
-  outline: none;
+/* Accordion */
+.accordion {
+  margin-top: 1.5rem;
 }
 
-.footer-card,
-.icons a {
-  display: inline-block; /* Garante que o espaçamento seja consistente */
-  transition: transform 0.3s ease, color 0.3s ease; /* Transição suave */
-  padding: 0.9rem;
+.accordion-item {
+  margin-bottom: 1rem;
 }
 
-.footer-card,
-.icons i {
-  font-size: 2.5rem; /* Ajuste o tamanho dos ícones */
+.accordion-button {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #333;
+  cursor: pointer;
+}
+
+.accordion-content {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+.accordion-content li {
+  margin: 0.4rem 0;
+}
+
+.accordion-content a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* Ícones */
+.icons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.icon-medium {
+  font-size: 1.9rem;
+  color: white;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .footer-nav ul {
-  list-style: none; /* Remove os marcadores de lista */
+  list-style: none;
   padding: 0;
-  margin: 2;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .footer-nav li {
-  display: block; /* Garante que os itens da lista sejam exibidos como blocos */
-  margin-bottom: 0.8rem; /* Adiciona um espaço entre os links */
+  display: block;
+  margin: 0;
 }
 
 .footer-nav a {
-  text-decoration: none; /* Remove o sublinhado padrão dos links */
-  color: #ffffff; /* Define a cor do texto dos links */
-  padding: 0.6rem;
-  outline: none;
+  padding: 0.4rem;
+  color: #ffffff;
 }
 
-/* Estilos para o menu toggle */
 .menu-toggle {
+  display: block;
+  cursor: pointer;
+}
+
+.menu {
   display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #f9f9f9;
 }
 
-/* Estilos para links de redes sociais */
+.menu.show {
+  display: flex;
+}
+
+/* Social & Payment */
 .social-link {
-  margin: 1rem;
+  margin: 0.8rem;
 }
 
-/* Estilos para os ícones de pagamento */
 .payment-icon {
-  font-size: 2rem; /* Tamanho dos ícones */
-  margin: 0 0.5rem;
-  color: #2c3e50; /* Cor padrão dos ícones */
+  font-size: 1.5rem;
+  margin: 0 0.4rem;
+  color: #2c3e50;
   transition: color 0.3s ease;
 }
 
 .payment-icon:hover {
-  color: #c50404; /* Cor ao passar o mouse */
+  color: #c50404;
   cursor: pointer;
 }
 
-/* Estilos para mobile */
-@media (max-width: 768px) {
+.dev-credit {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column; /* força o ícone a ficar acima do texto */
+  align-items: center;    /* centraliza horizontalmente */
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--color-secondary, #ccc);
+  text-align: center;
+}
+
+.dev-logo {
+  width: 60px;   /* maior no mobile */
+  height: 60px;
+  border-radius: 8px;
+}
+
+/* ===== Desktop (>=768px) ===== */
+@media (min-width: 768px) {
   .footer {
-    padding: 0.5rem;
-    font-size: 0.8rem;
-  }
-
-  .footer-content-wrapper {
-    flex-direction: row; /* continua flex row */
-    justify-content: center;
-    align-items: stretch;
-    gap: 1rem;
-  }
-
-  .footer a {
     font-size: 0.9rem;
-    display: block; /* transforma link em bloco para substituir li */
-    padding: 0.4rem 0;
-    color: #ffffff;
-    text-decoration: none;
+    padding: 2rem;
   }
 
-  .footer span {
-    font-size: 2rem;
-  }
-
-  .footer-card i {
-    font-size: 2rem;
-  }
-
-  .footer-card {
-    padding: 0.5rem;
-    width: 100%;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .footer-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 0.5rem;
-  }
-
-  /* Remove estilos de lista para nav na versão mobile */
-  .footer-nav ul {
-    list-style: none; /* sem marcador */
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  /* Remove margens nos li para mobile */
-  .footer-nav li {
-    margin: 0; /* remove espaçamento */
-    display: block;
-  }
-
-  /* Remove qualquer padding/margem para li na versão mobile */
-  .footer-nav li a {
-    padding-left: 0;
-  }
-
-  .footer-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding: 1.5rem 0.5rem;
+  .footer-section {
+    max-width: 1200px;
+    padding: 2rem;
+    font-size: 1rem;
+    line-height: 1.5;
   }
 
   .footer-mobile {
-    display: block;
+    display: none;
   }
 
   .footer-desktop {
-    display: none;
-  }
-
-  .menu-toggle {
-    display: block;
-    cursor: pointer;
-  }
-
-  .menu {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #f9f9f9;
-  }
-
-  .menu.show {
     display: flex;
+    flex-direction: column;
   }
 
-  .accordion-header {
-    background: none;
-    border: none;
-    width: 100%;
-    text-align: left;
+  .footer-content-wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer span {
+    font-size: 4rem;
+  }
+
+  .footer-card i {
+    font-size: 2.5rem;
+  }
+
+  .accordion-button {
     font-size: 1.2rem;
     padding: 1rem 0;
-    cursor: pointer;
   }
 
   .accordion-content {
-    padding-left: 1rem;
-    padding-bottom: 1rem;
-    font-size: 1.9rem;
+    font-size: 1rem;
   }
 
-  .social-icons a,
-  .payment-icons span {
-    margin-right: 1rem;
-    font-size: 1.5rem;
+  .payment-icon {
+    font-size: 2rem;
+  }
+
+  .dev-credit {
+    flex-direction: column; /* mantém centralizado no desktop */
+    gap: 8px;
+    font-size: 1rem;
+  }
+
+  .dev-logo {
+    width: 80px;  /* ainda maior no desktop */
+    height: 80px;
   }
 }

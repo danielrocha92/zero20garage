@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../styles/Footer.css';
 import { FaFacebook, FaInstagram, FaCcVisa, FaCcMastercard, FaBarcode } from 'react-icons/fa';
 import { MdPix } from 'react-icons/md';
+import logoDev from '../assets/favicon.ico'; // ajuste o caminho conforme a pasta
 
 function Footer() {
   const formasPagamento = [
@@ -16,6 +17,8 @@ function Footer() {
   const toggleMenu = (menu) => {
     setActiveMenu(activeMenu === menu ? null : menu);
   };
+
+  const anoAtual = new Date().getFullYear();
 
   return (
     <footer className="footer">
@@ -70,7 +73,12 @@ function Footer() {
           </div>
 
           <div className="footer-card">
-            <span className="title">© 2025 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™ Todos os direitos reservados.</span>
+            <span className="title">© {anoAtual} 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™ - Rocha Tech Solutions. Todos os direitos reservados.<div className="dev-credit">
+              <a href="https://rocha-tech-solutions.vercel.app/" target="_blank" rel="noopener noreferrer">
+                <img src={logoDev} alt="Rocha Tech Solutions" className="dev-logo" />
+              </a>
+              </div>
+            </span>
           </div>
         </div>
 
@@ -138,7 +146,12 @@ function Footer() {
             </div>
 
             <div className="footer-card">
-              <span className="title">© 2025 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™</span>
+              <span className="title">© {anoAtual} 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™ - Rocha Tech Solutions. Todos os direitos reservados.</span>
+              <div className="dev-credit">
+                <a href="https://rocha-tech-solutions.vercel.app/" target="_blank" rel="noopener noreferrer">
+                  <img src={logoDev} alt="Rocha Tech Solutions" className="dev-logo" />
+                </a>
+              </div>
             </div>
           </div>
         </div>

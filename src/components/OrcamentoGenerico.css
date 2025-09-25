@@ -1,5 +1,10 @@
 /* src/components/OrcamentoGenerico.css */
 
+/* 1. CORREÇÃO GLOBAL: Box-sizing */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 /* --- Variáveis Globais de Estilo --- */
 :root {
   --color-bg: #1a1a1a;
@@ -63,7 +68,7 @@ body {
   color: var(--color-input-text);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
-  box-sizing: border-box;
+  /* box-sizing: border-box; - Removido daqui, agora é global */
 }
 
 .orcamento-container input:focus,
@@ -79,6 +84,12 @@ body {
 .summary-section,
 .payment-observacoes-section {
   margin-bottom: 2rem;
+}
+
+/* 2. CORREÇÃO: Garante display: flex no mobile para que o layout funcione */
+.payment-observacoes-section {
+  display: flex;
+  flex-direction: column;
 }
 
 /* Layout da tabela de informações do cliente */
@@ -113,7 +124,15 @@ body {
   table-layout: fixed; /* Garante divisão proporcional */
 }
 
-.items-table th,
+.items-table th {
+  background-color: #141414;
+  color: var(--color-brand-red);
+  font-weight: bold;
+  text-transform: uppercase;
+  /* CORREÇÃO/AJUSTE DE FONTE */
+  font-size: 1rem;
+}
+
 .items-table td {
   border-bottom: 1px solid var(--color-secondary);
   padding: 12px 10px;
@@ -170,6 +189,7 @@ body {
 .items-table .subitems-cell {
   width: 40%;
   padding-top: 4px;
+
 }
 
 .items-table .subitems-cell textarea {
@@ -196,17 +216,13 @@ body {
 
 /* Subitens alinhados (labels + inputs dentro da célula) */
 .sub-item-input-group {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-top: 8px;
-}
-
-.sub-item-label {
-  min-width: 80px;
-  text-align: left;
-  color: var(--color-light-gray);
-  font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 8px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
 }
 
 /* Checkbox Customizado */
@@ -380,6 +396,7 @@ body {
     padding-right: 2rem;
   }
 
+  /* Agora o .payment-observacoes-section já é um flex container */
   .payment-observacoes-section {
     flex-direction: row;
     gap: 2rem;

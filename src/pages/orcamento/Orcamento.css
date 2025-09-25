@@ -1,65 +1,198 @@
-/* Formulário estilo Apple */
-.form-apple {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  max-width: 480px;
-  margin: 0 auto;
-  padding: 1rem;
+/* ===================== */
+/* ===== Variáveis (Assegura que as variáveis do seu arquivo global CSS sejam usadas) ===== */
+/* ===================== */
+:root {
+  /* Variáveis de cores importantes para o formulário */
+  --vermelho-principal: #ff0000;
+  --vermelho-hover: #cc0000;
+  --branco: #ffffff;
+  --cinza-escuro: #121212;
+  --cinza-medio: #8f8989;
+  --cinza-claro: #f5f5f5;
+
+  /* Cores de feedback/status */
+  --cor-sucesso-bg: rgba(76, 175, 80, 0.15); /* Verde suave */
+  --cor-sucesso-texto: #4caf50;
+  --cor-erro-bg: rgba(244, 67, 54, 0.15); /* Vermelho suave */
+  --cor-erro-texto: #f44336;
+}
+
+/* ===================== */
+/* ===== BASE (Mobile First) ===== */
+/* ===================== */
+
+/* Seção do Formulário (Reaproveita highlight-card do tema Dark/Glass) */
+.form-section {
+  padding: 1rem; /* Ajuste para mobile */
+  margin: 1rem auto;
+  max-width: 100%;
+}
+
+/* Títulos do formulário (Mobile First) */
+/* Adaptação das classes genéricas 'titulo-claro' e 'subtitulo-claro' para o contexto */
+.form-section .titulo-claro {
+  color: var(--vermelho-principal);
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-section .subtitulo-claro {
+  color: var(--cinza-claro); /* Texto claro no container escuro */
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+
+/* ===================== */
+/* ===== Estrutura do Formulário (Mobile First) ===== */
+/* ===================== */
+
+/* Contêiner do formulário */
+.orcamento-form-apple {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-}
-
-/* Label discreta acima do campo */
-.form-apple label {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #444;
-  margin-bottom: 0.35rem;
-  display: block;
-}
-
-/* Campos de entrada */
-.form-apple input,
-.form-apple select,
-.form-apple textarea {
+  gap: 1rem; /* Espaçamento entre os grupos de campos */
+  max-width: 500px;
+  margin: 0 auto;
   width: 100%;
-  padding: 0.9rem;
-  font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  background: #fafafa;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Foco no estilo Apple */
-.form-apple input:focus,
-.form-apple select:focus,
-.form-apple textarea:focus {
-  border-color: #0071e3;
+/* Grupo de campo (reaproveita .form-group) */
+.form-group {
+  margin-bottom: 0.5rem;
+}
+
+/* Label (reaproveita estilos de labels genéricas em dark mode) */
+.orcamento-form-apple label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--cinza-claro);
+  margin-bottom: 0.4rem;
+  text-align: left;
+  padding-left: 0.2rem;
+}
+
+/* Campos de entrada (Input, Textarea) */
+.orcamento-form-apple input[type="text"],
+.orcamento-form-apple input[type="email"],
+.orcamento-form-apple input[type="tel"],
+.orcamento-form-apple textarea {
+  /* Estilo Glassmorphism Dark Mode consistente */
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.08); /* Fundo sutil */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--cinza-claro);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.orcamento-form-apple textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Placeholder */
+.orcamento-form-apple input::placeholder,
+.orcamento-form-apple textarea::placeholder {
+  color: var(--cinza-medio);
+  opacity: 0.7;
+}
+
+/* Foco */
+.orcamento-form-apple input:focus,
+.orcamento-form-apple textarea:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(0,113,227,0.2);
+  border-color: var(--vermelho-principal);
+  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.3);
 }
 
-/* Botão Apple style */
-.form-apple button {
-  background: #000;
-  color: #fff;
-  font-size: 1rem;
-  padding: 1rem;
+/* Select (Reaproveitando o estilo select-form que você definiu) */
+.select-form {
+  /* Garantindo que o select não quebre o layout */
+  margin-bottom: 0;
+  /* Adaptação para o tema Dark Mode/Glassmorphism */
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--cinza-claro);
+
+  /* Seta para Dark Mode */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23f5f5f5" d="M7 10l5 5 5-5z"/></svg>');
+}
+
+/* Foco do Select */
+.select-form:focus {
+  border-color: var(--vermelho-principal);
+  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.3);
+}
+
+/* Opções do Select (sempre escuras/claras dependendo do tema) */
+.select-form option {
+  color: var(--cinza-escuro); /* Preto no menu de opções */
+  background-color: var(--branco);
+}
+
+
+/* ===================== */
+/* ===== Botão de Envio e Feedback ===== */
+/* ===================== */
+
+/* Botão de Envio (Reaproveita a classe submit-button) */
+.submit-button {
+  background-color: var(--vermelho-principal);
+  color: var(--branco);
   border: none;
+  padding: 0.9rem 1.5rem;
   border-radius: 12px;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  width: 100%;
 }
 
-.form-apple button:hover {
-  background: #333;
+.submit-button:hover {
+  background-color: var(--vermelho-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 0, 0, 0.5);
 }
 
-/* ===================== */
-/* ===== Estilo para o Select (Mobile First) ===== */
-/* ===================== */
+.submit-button:disabled {
+  background-color: var(--cinza-medio);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  opacity: 0.6;
+}
+
+/* Feedback de Status */
+.feedback {
+  padding: 0.75rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.feedback-success {
+  background-color: var(--cor-sucesso-bg);
+  color: var(--cor-sucesso-texto);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.feedback-error {
+  background-color: var(--cor-erro-bg);
+  color: var(--cor-erro-texto);
+  border: 1px solid rgba(244, 67, 54, 0.3);
+}
 
 .select-form {
   /* Reset de aparência padrão */
@@ -76,11 +209,6 @@
   border-radius: 10px;
   margin-bottom: 1rem;
 
-  /* Cores e bordas (Padrão para fundo claro) */
-  background-color: rgba(255, 255, 255, 0.9);
-  color: var(--cinza-escuro, #333);
-  border: 1px solid var(--cinza-medio, #8f8989);
-
   /* Transição suave */
   transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 
@@ -91,138 +219,33 @@
   background-size: 18px;
 }
 
-/* Foco e interatividade */
-.select-form:focus {
-  outline: none;
-  border-color: var(--vermelho-principal, #ff0000);
-  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
-}
-
-/* Opções (ajusta cor do texto para o modo claro) */
-.select-form option {
-  color: var(--cinza-escuro, #333);
-  background-color: var(--branco, #fff);
-  padding: 0.5rem;
-}
 
 /* ===================== */
-/* ===== Responsividade e Dark Mode (Mobile First) ===== */
+/* ===== Media Queries: Desktop e Telas Maiores (Min-Width) ===== */
 /* ===================== */
+@media (min-width: 768px) {
+  .form-section {
+    padding: 2rem;
+    max-width: 90%;
+  }
 
-/* Ajuste de tamanho para telas menores (Mobile) */
-@media (max-width: 768px) {
-  .select-form {
-    padding: 0.75rem 1rem;
-    font-size: 0.95rem;
+  .orcamento-form-apple {
+    gap: 1.5rem;
+  }
+
+  .form-section .titulo-claro {
+    font-size: 2rem;
+  }
+
+  .form-section .subtitulo-claro {
+    font-size: 1.1rem;
+  }
+
+  .submit-button {
+    max-width: 350px; /* Limita a largura em desktop */
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
-/* Adaptação para o Modo Escuro */
-@media (prefers-color-scheme: dark) {
-  .select-form {
-    /* Glassmorphism sutil para o modo escuro */
-    background-color: rgba(255, 255, 255, 0.05);
-    border-color: var(--cinza-medio, #8f8989);
-    color: var(--cinza-claro, #f1f1f1);
-
-    /* Inverte a cor da seta para ser visível no fundo escuro */
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23f1f1f1" d="M7 10l5 5 5-5z"/></svg>');
-  }
-
-  .select-form option {
-    /* Fundo escuro puro para as opções no menu dropdown (depende do SO/navegador, mas é uma tentativa) */
-    color: var(--cinza-claro, #f1f1f1);
-    background-color: var(--cinza-escuro, #1f1f1f);
-  }
-/* Estilos de melhoria */
-
-/* Validação visual (campo com erro) */
-.form-apple input.error,
-.form-apple textarea.error,
-.form-apple select.error {
-  border-color: #e33b3b;
-}
-
-/* Campos desativados */
-.form-apple input:disabled,
-.form-apple select:disabled,
-.form-apple textarea:disabled {
-  background-color: #f5f5f7;
-  color: #999;
-  cursor: not-allowed;
-}
-
-/* Estilo para placeholders */
-.form-apple input::placeholder,
-.form-apple textarea::placeholder {
-  color: #b0b0b0;
-}
-
-/* Seção para campos com ícone (exemplo, para uso futuro) */
-.form-apple .input-with-icon {
-  position: relative;
-}
-.form-apple .input-with-icon input {
-  padding-left: 2.5rem; /* Espaço para o ícone */
-}
-.form-apple .input-with-icon .icon {
-  position: absolute;
-  left: 0.9rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #8e8e93;
-}
-
-/* Compacto para mobile */
-@media (max-width: 480px) {
-  .form-apple {
-    padding: 0.8rem;
-    gap: 1rem;
-  }
-  .form-apple input,
-  .form-apple select,
-  .form-apple textarea {
-    padding: 0.8rem;
-    font-size: 0.95rem;
-  }
-  .form-apple button {
-    padding: 0.9rem;
-    font-size: 0.95rem;
-  }
-
-  .highlight-card {
-  background-color: rgba(255, 255, 255, 0.08); /* Transparência estilo vidro */
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2);
-  border-radius: 12px;
-
-  padding: 1.5rem;
-  margin: 1rem auto 1.5rem auto;
-  max-width: 90%;
-  width: 100%;
-
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
-  line-height: 1.4;
-  letter-spacing: 0.5px;
-  color: #333; /* Ajustar dependendo do fundo */
-
-  display: flex;
-  flex-direction: column;
-  align-items: normal;
-  justify-content: center;
-  gap: 1rem;
-  text-align: center;
-
-  transition: all 0.3s ease;
-  box-sizing: border-box;
-  position: relative;
-  overflow: hidden;
-
-  animation: fadeIn 1s ease-in-out;
-}
-}
-}
+/* Fim do Orcamento.css */

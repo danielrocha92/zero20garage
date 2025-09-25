@@ -2,7 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap');
 
 /* --- Estilos Gerais (Mobile First) --- */
+
 .orcamento-impresso-container {
+    padding-top: 30px;
+    padding-bottom: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,6 +15,7 @@
 }
 
 .orcamento-impresso-content {
+    padding-top: 30px;
     width: 100%;
     background: white;
     border-radius: 12px;
@@ -61,15 +65,35 @@
 }
 
 .info-table td {
+    /* Permite que o td se expanda/contraia no layout flex */
+    flex: 1 1 auto;
+    min-width: 20%;
     font-size: 12px;
     color: #333;
     white-space: normal;
 }
 
-.info-table td span {
+/* NOVO ESTILO: Sublinhado e formatação para os valores */
+.info-value {
+    display: inline-block;
+    border-bottom: 1px solid #333; /* Adiciona o sublinhado */
     font-weight: 700;
     color: #222;
+    padding-bottom: 2px;
+    width: 70%; /* Largura padrão para OS, Cliente, Data */
+    word-break: break-all;
 }
+
+/* NOVO ESTILO: Garante que a linha do Veículo ocupe toda a largura */
+#info-row-veiculo td {
+    width: 100%;
+    flex: 1 1 100%;
+}
+
+#info-row-veiculo .info-value {
+    width: 85%; /* Mais espaço para o campo Veículo que ocupa 100% da linha */
+}
+/* FIM DAS ALTERAÇÕES NO ESTILO GERAL */
 
 /* --- Itens (Peças e Serviços) --- */
 .items-section {
@@ -93,12 +117,15 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    align-content: center;
+    align-items: center;
+    justify-items: start;
 }
 
 /* Cada item da lista */
 .items-columns li {
     display: flex;
-    align-items: center;
+    align-items: center; /* Manter center no desktop */
     font-size: 12px;
     color: #222;
     line-height: 1.4;
@@ -108,14 +135,25 @@
     text-overflow: unset;
 }
 
-.checkbox-box {
+/* Estilo do checkbox para replicar o modelo */
+.list-item-impresso input[type="checkbox"] {
     margin-right: 8px;
     flex-shrink: 0;
-    transform: scale(1.2);
-    position: relative;
-    top: 2px;
-    max-width: 16px;
-    color: brown;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 05px;
+    height: 05px;
+    border: 1px solid #333;
+    border-radius: 1px;
+    cursor: default;
+    /* CORREÇÃO: Removido position:relative e top:3px que causa desalinhamento na impressão */
+    position: static;
+    top: unset;
+    background-color: transparent;
+}
+
+.list-item-impresso input[type="checkbox"]:checked::after {
+    content: '';
 }
 
 /* --- Totais --- */
@@ -235,7 +273,7 @@
     font-weight: 700;
     transition: background-color 0.3s;
     color: white;
-    background-color: #e60012; /* ZER0 20 GARAGE™ vermelho */
+    background-color: #e60012;
     width: 100%;
 }
 
@@ -334,18 +372,19 @@
     }
 }
 
-/* --- Layout for print/pdf --- */
+/* --- Estilos de Impressão/PDF (Otimização html2canvas) --- */
 .force-print-layout {
-  width: 794px !important;
-  max-width: none !important;
-  padding: 20px;
-  box-sizing: border-box !important;
-  font-size: 12px;
-  line-height: 1.4;
+    width: 794px !important;
+    max-width: none !important;
+    padding: 50px 60px !important;
+    box-shadow: none !important;
+    font-size: 14px;
+    line-height: 1.4;
 }
 
-/* --- Estilos de impressão --- */
+/* --- Estilos de impressão (Regra principal para o @media print) --- */
 @media print {
+
     body, html {
         margin: 0;
         padding: 0;
@@ -367,10 +406,10 @@
 
     .orcamento-impresso-content {
         box-shadow: none !important;
+        padding: 50px 60px 40px 60px;
         margin: 0 auto;
-        padding: 20px;
         width: 100%;
-        max-width: 754px;
+        max-width: 794px;
         box-sizing: border-box;
     }
 
@@ -381,59 +420,101 @@
     .header-impresso {
         flex-direction: row;
         justify-content: space-between;
-        align-items: flex-start;
+        align-items: center;
     }
 
     .header-impresso h1 {
-        font-size: 22px;
-        max-width: 60%;
+        font-size: 24px;
+        max-width: 70%;
         margin-bottom: 0;
     }
 
     .logo-impresso {
-        width: 150px;
+        width: 100px;
         margin-top: 0;
+        position: static; /* Garantido que não usa absolute/relative problemático */
+        right: unset;
+        top: unset;
     }
 
     .info-table {
-        justify-content: space-around;
-        gap: 12px 40px;
+        /* Garante que a tabela (que é flex) continue se comportando corretamente */
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 12px 20px;
+        flex-wrap: wrap;
     }
+
+    .info-table td {
+        /* Os TD's que não são do Veículo devem ser distribuídos em 3 colunas */
+        flex: 1 1 200px;
+        min-width: 20%;
+        max-width: 100%;
+        font-size: 14px;
+        white-space: normal;
+    }
+
+    /* NOVO ESTILO: Garante que a linha do Veículo ocupe toda a largura na impressão */
+    #info-row-veiculo td {
+        flex: 1 1 100%;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* NOVO ESTILO: Configuração do sublinhado na impressão (ajustando a largura) */
+    .info-value {
+        width: 70%; /* Largura padrão para OS, Cliente, Data */
+        border-bottom: 1px solid #333;
+        padding-bottom: 2px;
+    }
+
+    #info-row-veiculo .info-value {
+        width: 85%; /* Veículo mais longo */
+    }
+    /* FIM DAS ALTERAÇÕES NO @MEDIA PRINT */
 
     .items-columns {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px 40px;
+        gap: 15px 50px;
     }
 
     .items-columns li {
-        display: flex;
-        align-items: center;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 13px;
+        /* CORREÇÃO: Alinha o checkbox no topo do texto quebrado */
+        align-items: flex-start;
+        font-size: 14px;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
+        /* Adicionado para garantir que o texto não corte */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
-    .checkbox-box {
-        transform: scale(0.6);
+    .list-item-impresso input[type="checkbox"] {
+        transform: scale(1);
+        top: 0;
+        margin-top: 2px; /* Pequeno ajuste visual se necessário */
+        position: static; /* Garantia de que não tem offset */
     }
 
+    /* CORREÇÃO: Adicionado para evitar quebra de bloco entre páginas */
     .total-section,
+    .policy-footer {
+        page-break-inside: avoid;
+    }
+
+    .total-line-impresso,
     .final-total,
     .extra-info-section-impresso p,
     .policy-footer p,
     .policy-footer h4 {
-        font-size: inherit;
+        font-size: 14px;
         margin: 0;
         padding: 0;
     }
-}
 
-.orcamento-impresso-imagens {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-start;
-  margin-top: 16px;
+    .final-total {
+        font-size: 18px;
+    }
 }

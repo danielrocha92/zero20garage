@@ -1,0 +1,107 @@
+/* Importação de fonte para um visual moderno */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Reset básico e tipografia (Define o estilo global principal) */
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+}
+
+/* 1. Container Principal do Formulário */
+.form-container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 2. Agrupamento de Campos */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 3. Estilo dos Rótulos (Labels) */
+.label {
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: #444;
+    font-size: 14px;
+}
+
+/* 4. Estilo Comum para Inputs e Textarea */
+.input-field,
+.textarea-field {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-field:focus,
+.textarea-field:focus {
+    border-color: #007bff; /* Cor primária */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    outline: none;
+}
+
+/* Estilo específico para o Textarea */
+.textarea-field {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* 5. Botão de Submissão */
+.submit-button {
+    background-color: #e60012;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+}
+
+.submit-button:hover {
+    background-color: #b3000f;
+}
+
+.submit-button:active {
+    transform: scale(0.99);
+}
+
+/* 6. Responsividade para Telas Pequenas (Celulares) */
+@media (max-width: 600px) {
+    .form-container {
+        margin: 20px;
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .input-field,
+    .textarea-field {
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    .submit-button {
+        padding: 12px;
+        font-size: 15px;
+    }
+}

@@ -1,4 +1,3 @@
-// src/components/OrcamentoGenerico.jsx
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import "./OrcamentoGenerico.css";
 
@@ -12,6 +11,10 @@ const OrcamentoGenerico = ({
   orcamentoData,
   titulo,
 }) => {
+  // Regex para validação de entrada
+  const regexTelefone = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/; // (XX) XXXX-XXXX, XXXXXXXXXXX, (XX) 9XXXX-XXXX
+  const regexPlaca = /^[A-Z]{3}[0-9]{4}$|^[A-Z]{3}[0-9][A-Z][0-9]{2}$/i; // AAA1234 ou AAA0A00 (Mercosul)
+
   // Evita acessar propriedades quando orcamentoData for undefined
   const itensData = useMemo(
     () => (orcamentoData && Array.isArray(orcamentoData.itens) ? orcamentoData.itens : []),
@@ -22,64 +25,102 @@ const OrcamentoGenerico = ({
     [orcamentoData]
   );
 
-const [formData, setFormData] = useState(() => ({
-  nome: "",
-  telefone: "",
-  veiculo: "",
-  placa: "",
-  data: new Date().toISOString().slice(0, 10),
-  ordemServico: "",
-  pecas: (orcamentoData?.itens || []).map((item) => ({
-    ...item,
-    selecionado: false,
-    quantidade: item.temQuantidade ? 1 : 0,
-    medida: 0,
-    itens: [],
-    subItens: item.subItens
-      ? item.subItens.map((sub) => ({
-          ...sub,
-          value: sub.initialValue || (sub.type === "checkbox" ? false : ""),
-        }))
-      : [],
-  })),
-  servicos: (orcamentoData?.servicos || []).map((servico) => ({
-    ...servico,
-    selecionado: false,
-    quantidade: servico.temQuantidade ? 1 : 0,
-    medida: 0,
-    subItens: servico.subItens
-      ? servico.subItens.map((sub) => ({
-          ...sub,
-          value: sub.initialValue || (sub.type === "checkbox" ? false : ""),
-        }))
-      : [],
-  })),
-  totalPecasManual: "",
-  totalServicosManual: "",
-  totalMaoDeObraManual: "",
-  totalGeralManual: "",
-  formaPagamento: "",
-  observacoes: "",
-  status: "Aberto",
-}));
+  const [formData, setFormData] = useState(() => ({
+    nome: "",
+    telefone: "",
+    veiculo: "",
+    placa: "",
+    data: new Date().toISOString().slice(0, 10),
+    ordemServico: "",
+    pecas: (orcamentoData?.itens || []).map((item) => ({
+      ...item,
+      selecionado: false,
+      quantidade: item.temQuantidade ? 1 : 0,
+      medida: 0,
+      itens: [],
+      subItens: item.subItens
+        ? item.subItens.map((sub) => ({
+            ...sub,
+            value: sub.initialValue || (sub.type === "checkbox" ? false : ""),
+          }))
+        : [],
+    })),
+    servicos: (orcamentoData?.servicos || []).map((servico) => ({
+      ...servico,
+      selecionado: false,
+      quantidade: servico.temQuantidade ? 1 : 0,
+      medida: 0,
+      subItens: servico.subItens
+        ? servico.subItens.map((sub) => ({
+            ...sub,
+            value: sub.initialValue || (sub.type === "checkbox" ? false : ""),
+          }))
+        : [],
+    })),
+    totalPecasManual: "",
+    totalServicosManual: "",
+    totalMaoDeObraManual: "",
+    totalGeralManual: "", // Será calculado, mas mantemos o state para consistência com o restante
+    formaPagamento: "",
+    observacoes: "",
+    status: "Aberto",
+  }));
 
   const formatCurrencySmart = useCallback((value, selectionStart) => {
     if (!value) return { formatted: "", newCursor: 0 };
     const onlyNumbers = value.replace(/\D/g, "");
-    const number = (parseFloat(onlyNumbers) / 100).toFixed(2);
-    const formatted = Number(number).toLocaleString("pt-BR", {
+    // Trata o número como centavos
+    const number = (parseFloat(onlyNumbers) / 100);
+
+    // Formata o número como BRL
+    const formatted = number.toLocaleString("pt-BR", {
       style: "currency",
       currency: "BRL",
+      minimumFractionDigits: 2,
     });
-    const diff = formatted.length - value.length;
-    const newCursor = (selectionStart || formatted.length) + diff;
+
+    // Calcula a posição do cursor (mantém a lógica, mas a formatação do toLocaleString é mais complexa)
+    // Para simplificar e corrigir o bug, vamos retornar o cursor no final, já que a formatação é automática.
+    const newCursor = formatted.length;
+
     return { formatted, newCursor: Math.max(0, newCursor) };
   }, []);
 
+  // Função para formatar um número puro vindo do banco (edição)
+  const formatNumberToCurrency = useCallback((value) => {
+    if (typeof value !== 'number' || isNaN(value)) return "";
+    return value.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+      minimumFractionDigits: 2,
+    });
+  }, []);
+
+
   const parseCurrencyToNumber = (value) => {
     if (!value) return 0;
-    return Number(value.replace(/\D/g, "")) / 100;
+    // Remove tudo que não for dígito ou vírgula, substitui a vírgula por ponto.
+    // Primeiro remove o R$ e pontos de milhar, depois troca vírgula por ponto.
+    const cleanedValue = value
+      .replace(/[R$\s.]/g, "")
+      .replace(",", ".");
+
+    const number = parseFloat(cleanedValue);
+    return isNaN(number) ? 0 : number;
   };
+
+  // Cálculo automático dos totais (inclui o totalGeral)
+  const totaisCalculados = useMemo(() => {
+    const totalPecas = parseCurrencyToNumber(formData.totalPecasManual);
+    const totalServicos = parseCurrencyToNumber(formData.totalServicosManual);
+    const totalMaoDeObra = parseCurrencyToNumber(formData.totalMaoDeObraManual);
+    const valorTotal = totalPecas + totalServicos + totalMaoDeObra;
+
+    return {
+      valorTotal: formatNumberToCurrency(valorTotal),
+    };
+  }, [formData.totalPecasManual, formData.totalServicosManual, formData.totalMaoDeObraManual, formatNumberToCurrency]);
+
 
   useEffect(() => {
     if (!editingData) return;
@@ -97,18 +138,11 @@ const [formData, setFormData] = useState(() => ({
       placa: editingData.placa || "",
       data: validDate,
       ordemServico: editingData.ordemServico || "",
-      totalPecasManual: editingData.valorTotalPecas
-        ? formatCurrencySmart(String(editingData.valorTotalPecas), 0).formatted
-        : "",
-      totalServicosManual: editingData.valorTotalServicos
-        ? formatCurrencySmart(String(editingData.valorTotalServicos), 0).formatted
-        : "",
-      totalMaoDeObraManual: editingData.totalMaoDeObra
-        ? formatCurrencySmart(String(editingData.totalMaoDeObra), 0).formatted
-        : "",
-      totalGeralManual: editingData.valorTotal
-        ? formatCurrencySmart(String(editingData.valorTotal), 0).formatted
-        : "",
+      // CORREÇÃO DO BUG MONETÁRIO: usar formatNumberToCurrency ao invés de formatCurrencySmart
+      totalPecasManual: formatNumberToCurrency(editingData.valorTotalPecas),
+      totalServicosManual: formatNumberToCurrency(editingData.valorTotalServicos),
+      totalMaoDeObraManual: formatNumberToCurrency(editingData.totalMaoDeObra),
+      // O total geral não será carregado do editingData. Ele será recalculado.
       formaPagamento: editingData.formaPagamento || "",
       observacoes: editingData.observacoes || "",
       status: editingData.status || "Aberto",
@@ -197,7 +231,7 @@ const [formData, setFormData] = useState(() => ({
         };
       }),
     }));
-  }, [editingData, itensData, servicosData, formatCurrencySmart]);
+  }, [editingData, itensData, servicosData, formatNumberToCurrency]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -206,8 +240,14 @@ const [formData, setFormData] = useState(() => ({
 
   const handleMonetaryChange = (e) => {
     const { name, value, selectionStart } = e.target;
-    const { formatted, newCursor } = formatCurrencySmart(value, selectionStart);
+    // O valor deve ser limpo para usar o formatCurrencySmart corretamente,
+    // tratando a entrada como se fosse em centavos.
+    const onlyNumbers = value.replace(/\D/g, "");
+    const { formatted, newCursor } = formatCurrencySmart(onlyNumbers, selectionStart);
+
     setFormData((prev) => ({ ...prev, [name]: formatted }));
+
+    // Atualiza a posição do cursor (comportamento de input monetário)
     requestAnimationFrame(() => {
       try {
         e.target.setSelectionRange(newCursor, newCursor);
@@ -252,10 +292,27 @@ const [formData, setFormData] = useState(() => ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // 1. Validação do Cliente
     if (!formData.nome) {
-      showMessage && showMessage("Cliente é obrigatório!", true);
+      showMessage && showMessage("O campo Cliente é obrigatório!", true);
       return;
     }
+
+    // 2. Validação do Telefone
+    // Limpa o telefone para verificar só os dígitos ou caracteres esperados
+    const telefoneLimpo = formData.telefone.replace(/[\s()-]/g, "");
+    if (formData.telefone && !regexTelefone.test(formData.telefone) && !/^\d{10,11}$/.test(telefoneLimpo)) {
+        showMessage && showMessage("Telefone inválido! Formatos aceitos: (XX) XXXXX-XXXX ou XXXXXXXXXXX (somente dígitos)", true);
+        return;
+    }
+
+    // 3. Validação da Placa
+    if (formData.placa && !regexPlaca.test(formData.placa.toUpperCase())) {
+        showMessage && showMessage("Placa inválida! Formatos aceitos: AAA0A00 (Mercosul) ou AAA1234", true);
+        return;
+    }
+
 
     const formatarItens = (lista) =>
       (lista || [])
@@ -282,6 +339,10 @@ const [formData, setFormData] = useState(() => ({
           return nomeCompleto;
         });
 
+    // O valor total geral será o calculado, não o valor manual
+    const valorTotalCalculado = parseCurrencyToNumber(totaisCalculados.valorTotal);
+
+
     onSubmit &&
       onSubmit({
         cliente: formData.nome,
@@ -295,7 +356,7 @@ const [formData, setFormData] = useState(() => ({
         valorTotalPecas: parseCurrencyToNumber(formData.totalPecasManual),
         valorTotalServicos: parseCurrencyToNumber(formData.totalServicosManual),
         totalMaoDeObra: parseCurrencyToNumber(formData.totalMaoDeObraManual),
-        valorTotal: parseCurrencyToNumber(formData.totalGeralManual),
+        valorTotal: valorTotalCalculado, // Usa o valor calculado
         formaPagamento: formData.formaPagamento,
         observacoes: formData.observacoes,
         status: formData.status,
@@ -338,6 +399,7 @@ const [formData, setFormData] = useState(() => ({
                       value={formData.nome}
                       onChange={handleInputChange}
                       required
+                      className={!formData.nome ? 'input-error' : ''} // Feedback visual de obrigatoriedade
                     />
                   </div>
                 </td>
@@ -373,6 +435,9 @@ const [formData, setFormData] = useState(() => ({
                       name="placa"
                       value={formData.placa}
                       onChange={handleInputChange}
+                      maxLength={7}
+                      // Adicionado feedback visual para placa inválida, se necessário
+                      className={formData.placa && !regexPlaca.test(formData.placa.toUpperCase()) ? 'input-error' : ''}
                     />
                   </div>
                 </td>
@@ -384,6 +449,8 @@ const [formData, setFormData] = useState(() => ({
                       name="telefone"
                       value={formData.telefone}
                       onChange={handleInputChange}
+                       // Adicionado feedback visual para telefone inválido
+                      className={formData.telefone && !regexTelefone.test(formData.telefone.replace(/[\s()-]/g, "")) && !/^\d{10,11}$/.test(formData.telefone.replace(/[\s()-]/g, "")) ? 'input-error' : ''}
                     />
                   </div>
                 </td>
@@ -431,7 +498,6 @@ const [formData, setFormData] = useState(() => ({
                                 </label>
                               ) : (
                                 <>
-                                  <label className="sub-item-label">{sub.label}:</label>
                                   <input
                                     type="text"
                                     value={sub.value || ""}
@@ -439,6 +505,7 @@ const [formData, setFormData] = useState(() => ({
                                       handleSubItemChange("pecas", index, sIdx, e.target.value)
                                     }
                                     className="small-input"
+                                    placeholder={sub.label}
                                   />
                                 </>
                               )}
@@ -519,7 +586,6 @@ const [formData, setFormData] = useState(() => ({
                                 </label>
                               ) : (
                                 <>
-                                  <label className="sub-item-label">{sub.label}:</label>
                                   <input
                                     type="text"
                                     value={sub.value || ""}
@@ -527,6 +593,7 @@ const [formData, setFormData] = useState(() => ({
                                       handleSubItemChange("servicos", index, sIdx, e.target.value)
                                     }
                                     className="small-input"
+                                    placeholder={sub.label}
                                   />
                                 </>
                               )}
@@ -584,13 +651,13 @@ const [formData, setFormData] = useState(() => ({
           </div>
           <div className="total-line-form total-geral">
             <span className="label">Valor total do Orçamento:</span>
+            {/* Campo agora é somente leitura e mostra o valor calculado */}
             <input
               type="text"
-              name="totalGeralManual"
-              value={formData.totalGeralManual}
-              onChange={handleMonetaryChange}
-              placeholder="R$ 0,00"
-              className="input-total"
+              name="totalGeralCalculado"
+              value={totaisCalculados.valorTotal}
+              readOnly
+              className="input-total calculated"
             />
           </div>
         </section>
