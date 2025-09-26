@@ -91,7 +91,6 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       const drawH = img.height * ratio;
       const imgX = (pageW - drawW) / 2;
       const imgY = pdf.lastAutoTable ? pdf.lastAutoTable.finalY + margin : margin + 10;
-
       pdf.addImage(dataUrl, 'PNG', imgX, imgY, drawW, drawH);
       if (idx < dataUrls.length - 1) pdf.addPage();
     }
@@ -221,7 +220,6 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
             </tbody>
           </table>
         </section>
-
         {/* Peças */}
         <section id="pecas-section" className="items-section">
           <h2>Peças</h2>

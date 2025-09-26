@@ -1,3 +1,4 @@
+// Navbar.js - Nenhuma alteração necessária, pois o JSX está correto.
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import '../styles/Navbar.css';
@@ -5,10 +6,6 @@ import logo from '../assets/images/logo.png';
 
 /**
  * Componente de navegação principal.
- * Ele gerencia o menu responsivo, a visibilidade com base no scroll
- * e exibe links de navegação.
- * @param {Object} props - As propriedades do componente.
- * @param {boolean} props.isLoggedIn - O status de autenticação do usuário.
  */
 function Navbar({ isLoggedIn }) {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -18,37 +15,21 @@ function Navbar({ isLoggedIn }) {
     const hamburgerRef = useRef(null);
     const location = useLocation();
 
-    // Função para alternar o estado do menu
-    const toggleMenu = () => {
-        setMenuOpen(!menuOpen);
-    };
+    // ... (Funções e Efeitos de Scroll/Menu/ClickOutside) ...
+    const toggleMenu = () => { setMenuOpen(!menuOpen); };
+    const handleMenuClick = () => { setMenuOpen(false); };
 
-    // Função para fechar o menu ao clicar em um link
-    const handleMenuClick = () => {
-        setMenuOpen(false);
-    };
-
-    // Efeito para adicionar e remover o listener de scroll
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.pageYOffset > 0);
-        };
-
+        const handleScroll = () => { setScrolled(window.pageYOffset > 0); };
         window.addEventListener('scroll', handleScroll);
-        // Chama a função uma vez para definir o estado inicial
         handleScroll();
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        return () => { window.removeEventListener('scroll', handleScroll); };
     }, []);
 
-    // Efeito para fechar o menu ao mudar a rota
     useEffect(() => {
         setMenuOpen(false);
     }, [location]);
 
-    // Efeito para fechar o menu ao clicar fora dele
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (
@@ -72,32 +53,40 @@ function Navbar({ isLoggedIn }) {
     }, [menuOpen]);
 
     return (
-        <nav ref={navRef} className={`navbar ${scrolled ? 'scrolled-down' : ''}`}>
+        <nav
+            ref={navRef}
+            className={`main-navbar ${scrolled ? 'scrolled-down' : ''}`} // Mudança de 'navbar' para 'main-navbar' para especificidade
+            aria-label="Navegação Principal" // ID não é necessário aqui
+        >
             <div className="navbar-logo">
                 <NavLink to="/" onClick={handleMenuClick}>
-                    <img src={logo} alt="Logo" />
+                    <img src={logo} alt="Logo da 020 Garage" />
                 </NavLink>
             </div>
+
             <button
                 ref={hamburgerRef}
-                className={`hamburger ${menuOpen ? 'hamburger--open' : ''}`}
+                className={`hamburger-menu ${menuOpen ? 'hamburger--open' : ''}`} // Mudança de 'hamburger' para 'hamburger-menu'
                 onClick={toggleMenu}
                 aria-label="Alternar menu de navegação"
+                aria-controls="main-menu-list" // Liga o botão à lista de links
+                aria-expanded={menuOpen}
             >
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <div className={`menu ${menuOpen ? 'open' : ''}`}>
-                <ul className="navbar-links">
+
+            <div className={`menu-wrapper ${menuOpen ? 'open' : ''}`}> {/* Mudança de 'menu' para 'menu-wrapper' */}
+                <ul id="main-menu-list" className="navbar-links"> {/* Adicionado ID */}
                     <li>
                         <NavLink to="/" onClick={handleMenuClick} className={({ isActive }) => isActive ? 'glow' : ''} translate='no'>Home</NavLink>
                     </li>
+                    {/* ... (Outros links) ... */}
                     <li>
                         <NavLink to="/servicos" onClick={handleMenuClick} className={({ isActive }) => isActive ? 'glow' : ''}>Serviços</NavLink>
                     </li>
                     <li>
-                        {/* Lógica condicional para o link de Orçamentos */}
                         <NavLink
                             to={isLoggedIn ? "/painel-orcamentos" : "/orcamento"}
                             onClick={handleMenuClick}
@@ -115,7 +104,6 @@ function Navbar({ isLoggedIn }) {
                     <li>
                         <NavLink to="/blog" onClick={handleMenuClick} className={({ isActive }) => isActive ? 'glow' : ''} translate="no">Blog</NavLink>
                     </li>
-                    {/* Exibe o link de Login apenas se o usuário não estiver logado */}
                     {!isLoggedIn && (
                         <li>
                             <NavLink to="/login" onClick={handleMenuClick} className={({ isActive }) => isActive ? 'glow' : ''}>Login</NavLink>
