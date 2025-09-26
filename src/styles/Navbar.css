@@ -14,7 +14,8 @@ left: 0;
 width: 100%;
 min-height: var(--navbar-height-default);
 background: rgba(0, 0, 0, 0.8);
-z-index: 1000;
+/* Garantir que a navbar fique acima de overlays/modais por padrão */
+z-index: 10050;
 display: flex;
 align-items: center;
 justify-content: space-between;
@@ -94,7 +95,7 @@ outline: none;
 .navbar-links a:focus {
 outline: none;
 box-shadow: 0 0 6px 2px var(--vermelho-principal);
-border-radius: 12px;
+border-radius: 8px;
 }
 
 .navbar-links a::after {
@@ -143,7 +144,7 @@ outline: none;
 .hamburger:focus {
 outline: none;
 box-shadow: 0 0 6px 3px var(--vermelho-principal);
-border-radius: 12px;
+border-radius: 8px;
 }
 
 .hamburger span {
@@ -259,53 +260,73 @@ font-size: 1.6rem;
 .navbar-links a:focus {
 outline: none;
 box-shadow: 0 0 6px 3px var(--vermelho-principal);
-border-radius: 12px;
+border-radius: 8px;
 }
 }
 
 /* === Media Query para Desktop === */
 @media (min-width: 769px) {
-.navbar {
-justify-content: space-between;
-padding: 0 2rem;
-}
+  /* ... (outras regras) ... */
 
-.navbar-logo {
-margin: 0;
-margin-right: auto;
-}
+  /* Ajuste crucial para o contêiner principal do menu */
+  .menu {
+    /* 1. Resetar as propriedades de overlay do mobile */
+    position: static;
+    top: auto; /* Garante que 'top' fixo seja removido */
+    left: auto; /* Garante que 'left' fixo seja removido */
+    width: auto;
+    height: auto;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    z-index: auto;
+    padding-top: 0;
+    overflow-y: visible;
 
-.hamburger {
-display: none;
-}
+    /* 2. Definir o layout de desktop */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    visibility: visible;
+    opacity: 1;
+    transform: none; /* Garante que qualquer transformação seja removida */
+  }
 
-.navbar-links {
-display: flex;
-flex-direction: row;
-align-items: center;
-opacity: 1;
-visibility: visible;
-transform: none;
-position: static;
-background: transparent;
-height: auto;
-width: auto;
-}
+  /* Garante que os links voltem a ser uma linha horizontal */
+  .navbar-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    position: static;
+    background: transparent;
+    height: auto;
+    width: auto;
+    padding: 0; /* Remove o padding extra do menu mobile */
+  }
 
-.navbar-links li {
-margin: 0 1rem;
-}
+  /* ... (mantenha o restante das suas regras de desktop) ... */
+  .navbar {
+    justify-content: space-between;
+    padding: 0 2rem;
+  }
 
-.navbar-links a {
-font-size: 1rem;
-}
+  .navbar-logo {
+    margin: 0;
+    margin-right: auto;
+  }
 
-.menu {
-position: static;
-flex-direction: row;
-background: none;
-height: auto;
-width: auto;
-padding: 0;
-}
+  .hamburger {
+    display: none;
+  }
+
+  .navbar-links li {
+    margin: 0 1rem;
+  }
+
+  .navbar-links a {
+    font-size: 1rem;
+  }
 }

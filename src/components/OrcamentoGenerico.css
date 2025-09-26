@@ -1,10 +1,4 @@
 /* src/components/OrcamentoGenerico.css */
-
-/* 1. CORREÇÃO GLOBAL: Box-sizing */
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
 /* --- Variáveis Globais de Estilo --- */
 :root {
   --color-bg: #1a1a1a;
