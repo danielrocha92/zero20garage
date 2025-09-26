@@ -23,11 +23,12 @@ color: #fff;
 transition: min-height 0.3s ease, padding 0.3s ease; /* Transição suave */
 }
 
+/* Corrigido: Linhas 31-36 */
 .navbar.scrolled-down {
-min-height: var(--navbar-height-scrolled);
-justify-content: center;
-padding: 0.3rem 2rem;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-height: var(--navbar-height-scrolled);
+  justify-content: space-between; /* Força o alinhamento padrão */
+  padding: 0.3rem 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* === Logo === */
