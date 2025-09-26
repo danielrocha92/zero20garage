@@ -1,5 +1,7 @@
+/* === Header Base === */
 .header {
-  position: relative;
+  position: relative; /* já existia */
+  z-index: 1; /* fica atrás da navbar */
   height: 60vh;
   display: flex;
   align-items: center;
@@ -10,57 +12,12 @@
   background-repeat: no-repeat;
   background-blend-mode: lighten;
   background-color: rgba(0, 0, 0, 0.4);
-  margin-top: 111px; /* compensação da altura da navbar */
+  padding-top: var(--navbar-height-default, 6rem); /* compensa navbar fixa */
+  margin-top: 0;
+  transition: height 0.3s ease;
 }
 
-
-.header h1 {
-  margin: 0;
-  color: #f50203;
-  animation: fadeIn 1s ease-in-out;
-  font-family: 'Nunito', sans-serif;
-}
-
-.header p {
-  font-size: 2.5rem;
-  margin: 0.5rem 0 0;
-  color: #f0f0f0;
-  animation: fadeIn 1s ease-in-out;
-}
-
-/* Backgrounds dinâmicos */
-.bg-home {
-  background-image: url('../assets/images/home.jpg');
-}
-
-.bg-sobre {
-  background-image: url('../assets/images/sobre.jpg');
-}
-
-.bg-servicos {
-  background-image: url('../assets/images/servicos.jpg');
-}
-
-.bg-orcamento {
-  background-image: url('../assets/images/orcamento.jpg');
-}
-
-.bg-contato {
-  background-image: url('../assets/images/contato.jpg');
-}
-
-.bg-blog {
-  background-image: url('../assets/images/blog-header.jpg');
-}
-
-.bg-footer {
-  background-image: url('../assets/images/footer.jpg');
-}
-
-.bg-default {
-  background-image: url('../assets/images/header.jpg');
-}
-
+/* Header Textos */
 .message-container {
   background: rgba(0, 0, 0, 0.739);
   padding: 20px 30px;
@@ -69,19 +26,19 @@
   max-width: 600px;
   margin: 20px auto;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  animation: fadeIn 1s ease-in-out;
   color: var(--branco);
   font-family: 'Nunito', sans-serif;
   font-size: 1.2rem;
   line-height: 1.5;
+  animation: fadeIn 1s ease-in-out;
+  z-index: 2; /* garante que texto fique acima do header, mas abaixo do menu mobile */
 }
 
-.message-container, h1 {
+.message-container h1 {
   font-size: 3rem;
-  margin: 2rem;
+  margin: 2rem 0 1rem 0;
   color: var(--vermelho-principal);
   animation: fadeIn 1s ease-in-out;
-  font-family: 'Nunito', sans-serif;
   text-shadow: 2px 2px 4px rgba(250, 0, 0, 0.5);
   font-weight: 700;
   text-transform: uppercase;
@@ -91,11 +48,6 @@
   word-break: break-word;
   white-space: pre-wrap;
   overflow-wrap: break-word;
-  word-wrap: break-word;
-  /* Remova ou comente a linha abaixo */
-  /* display: inline-block; */
-  /* Adicione se necessário: */
-  /* width: 100%; */
 }
 
 .message-container p {
@@ -103,9 +55,9 @@
   margin: 0;
   color: var(--branco);
   animation: fadeIn 1s ease-in-out;
-  font-family: 'Nunito', sans-serif;
 }
 
+/* Fade-in / Fade-out (textos) */
 .fade {
   transition: opacity 0.5s ease-in-out;
 }
@@ -118,11 +70,21 @@
   opacity: 0;
 }
 
-/* Responsividade */
+/* === Backgrounds dinâmicos === */
+.bg-home { background-image: url('../assets/images/home.jpg'); }
+.bg-sobre { background-image: url('../assets/images/sobre.jpg'); }
+.bg-servicos { background-image: url('../assets/images/servicos.jpg'); }
+.bg-orcamento { background-image: url('../assets/images/orcamento.jpg'); }
+.bg-contato { background-image: url('../assets/images/contato.jpg'); }
+.bg-blog { background-image: url('../assets/images/blog-header.jpg'); }
+.bg-footer { background-image: url('../assets/images/footer.jpg'); }
+.bg-default { background-image: url('../assets/images/header.jpg'); }
+
+/* === Responsividade === */
 @media (max-width: 768px) {
   .header {
     height: 70vh;
-    margin-top: 95px; /* compensação da altura da navbar */
+    padding-top: calc(var(--navbar-height-default, 6rem) + 20px); /* ajusta altura navbar */
   }
 
   .message-container {
@@ -142,7 +104,7 @@
 @media (max-width: 480px) {
   .header {
     height: 50vh;
-    margin-top: 95px; /* compensação da altura da navbar */
+    padding-top: calc(var(--navbar-height-default, 6rem) + 20px);
   }
 
   .message-container {
@@ -150,7 +112,7 @@
   }
 
   .message-container h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 
   .message-container p {

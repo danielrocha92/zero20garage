@@ -1,118 +1,90 @@
-// Navbar.js - Nenhuma alteração necessária, pois o JSX está correto.
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import '../styles/Navbar.css';
 import logo from '../assets/images/logo.png';
 
-/**
- * Componente de navegação principal.
- */
 function Navbar({ isLoggedIn }) {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const navRef = useRef(null);
+  const location = useLocation();
 
-    const navRef = useRef(null);
-    const hamburgerRef = useRef(null);
-    const location = useLocation();
+  const toggleMenu = () => setMenuOpen(o => !o);
+  const handleMenuClick = () => setMenuOpen(false);
 
-    // ... (Funções e Efeitos de Scroll/Menu/ClickOutside) ...
-    const toggleMenu = () => { setMenuOpen(!menuOpen); };
-    const handleMenuClick = () => { setMenuOpen(false); };
+  // Muda estilo da navbar ao scroll
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.pageYOffset > 0);
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-    useEffect(() => {
-        const handleScroll = () => { setScrolled(window.pageYOffset > 0); };
-        window.addEventListener('scroll', handleScroll);
-        handleScroll();
-        return () => { window.removeEventListener('scroll', handleScroll); };
-    }, []);
+  // Fecha menu ao mudar de rota
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location]);
 
-    useEffect(() => {
+  // Fecha menu ao clicar fora da navbar
+  useEffect(() => {
+    const onDocClick = (e) => {
+      if (menuOpen && navRef.current && !navRef.current.contains(e.target)) {
         setMenuOpen(false);
-    }, [location]);
+      }
+    };
+    document.addEventListener('mousedown', onDocClick);
+    return () => document.removeEventListener('mousedown', onDocClick);
+  }, [menuOpen]);
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (
-                menuOpen &&
-                navRef.current &&
-                !navRef.current.contains(event.target) &&
-                hamburgerRef.current &&
-                !hamburgerRef.current.contains(event.target)
-            ) {
-                setMenuOpen(false);
-            }
-        };
+  // Evita scroll do body quando menu mobile aberto
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
 
-        if (menuOpen) {
-            document.addEventListener('mousedown', handleClickOutside);
-        }
+  return (
+    <nav ref={navRef} className={`navbar ${scrolled ? 'scrolled-down' : ''}`}>
+      <div className="navbar-logo">
+        <NavLink to="/" onClick={handleMenuClick}>
+          <img src={logo} alt="Logo" />
+        </NavLink>
+      </div>
 
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [menuOpen]);
+      {/* Hamburger */}
+      <button
+        className={`hamburger ${menuOpen ? 'hamburger--open' : ''}`}
+        onClick={toggleMenu}
+        aria-label="Alternar menu"
+        aria-controls="site-menu"
+        aria-expanded={menuOpen}
+      >
+        <span />
+        <span />
+        <span />
+      </button>
 
-    return (
-        <nav
-            ref={navRef}
-            className={`main-navbar ${scrolled ? 'scrolled-down' : ''}`} // Mudança de 'navbar' para 'main-navbar' para especificidade
-            aria-label="Navegação Principal" // ID não é necessário aqui
-        >
-            <div className="navbar-logo">
-                <NavLink to="/" onClick={handleMenuClick}>
-                    <img src={logo} alt="Logo da 020 Garage" />
-                </NavLink>
-            </div>
-
-            <button
-                ref={hamburgerRef}
-                className={`hamburger-menu ${menuOpen ? 'hamburger--open' : ''}`} // Mudança de 'hamburger' para 'hamburger-menu'
-                onClick={toggleMenu}
-                aria-label="Alternar menu de navegação"
-                aria-controls="main-menu-list" // Liga o botão à lista de links
-                aria-expanded={menuOpen}
+      {/* Menu */}
+      <div id="site-menu" className={`menu ${menuOpen ? 'open' : ''}`} role="navigation">
+        <ul className="navbar-links">
+          <li><NavLink to="/" onClick={handleMenuClick} className={({ isActive }) => isActive ? 'glow' : ''}>Home</NavLink></li>
+          <li><NavLink to="/servicos" onClick={handleMenuClick} className={({ isActive }) => isActive ? 'glow' : ''}>Serviços</NavLink></li>
+          <li>
+            <NavLink
+              to={isLoggedIn ? "/painel-orcamentos" : "/orcamento"}
+              onClick={handleMenuClick}
+              className={({ isActive }) => isActive ? 'glow' : ''}
             >
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
-            <div className={`menu-wrapper ${menuOpen ? 'open' : ''}`}> {/* Mudança de 'menu' para 'menu-wrapper' */}
-                <ul id="main-menu-list" className="navbar-links"> {/* Adicionado ID */}
-                    <li>
-                        <NavLink to="/" onClick={handleMenuClick} className={({ isActive }) => isActive ? 'glow' : ''} translate='no'>Home</NavLink>
-                    </li>
-                    {/* ... (Outros links) ... */}
-                    <li>
-                        <NavLink to="/servicos" onClick={handleMenuClick} className={({ isActive }) => isActive ? 'glow' : ''}>Serviços</NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to={isLoggedIn ? "/painel-orcamentos" : "/orcamento"}
-                            onClick={handleMenuClick}
-                            className={({ isActive }) => isActive ? 'glow' : ''}
-                        >
-                            Orçamentos
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/contato" onClick={handleMenuClick} className={({ isActive }) => isActive ? 'glow' : ''}>Contato</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/sobre" onClick={handleMenuClick} className={({ isActive }) => isActive ? 'glow' : ''}>Sobre</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/blog" onClick={handleMenuClick} className={({ isActive }) => isActive ? 'glow' : ''} translate="no">Blog</NavLink>
-                    </li>
-                    {!isLoggedIn && (
-                        <li>
-                            <NavLink to="/login" onClick={handleMenuClick} className={({ isActive }) => isActive ? 'glow' : ''}>Login</NavLink>
-                        </li>
-                    )}
-                </ul>
-            </div>
-        </nav>
-    );
+              Orçamentos
+            </NavLink>
+          </li>
+          <li><NavLink to="/contato" onClick={handleMenuClick} className={({ isActive }) => isActive ? 'glow' : ''}>Contato</NavLink></li>
+          <li><NavLink to="/sobre" onClick={handleMenuClick} className={({ isActive }) => isActive ? 'glow' : ''}>Sobre</NavLink></li>
+          <li><NavLink to="/blog" onClick={handleMenuClick} className={({ isActive }) => isActive ? 'glow' : ''}>Blog</NavLink></li>
+          {!isLoggedIn && <li><NavLink to="/login" onClick={handleMenuClick} className={({ isActive }) => isActive ? 'glow' : ''}>Login</NavLink></li>}
+        </ul>
+      </div>
+    </nav>
+  );
 }
 
 export default Navbar;
