@@ -1,4 +1,3 @@
-/* === Variáveis Globais === */
 :root {
   --cinza-claro: #ccc;
   --vermelho-principal: #f00;
@@ -13,98 +12,70 @@
   left: 0;
   width: 100%;
   min-height: var(--navbar-height-default);
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
   z-index: 1000;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  color: #fff;
+  justify-content: space-between; /* Logo left | menu right */
+  padding: 0 2rem;
   transition: min-height 0.3s ease, padding 0.3s ease;
 }
 
-.navbar.scrolled-down {
+.navbar--scrolled {
   min-height: var(--navbar-height-scrolled);
-  justify-content: center;
-  padding: 0.3rem 2rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Logo */
-.navbar-logo {
-  display: flex;
-  align-items: center;
-  margin-right: auto;
-  transition: margin 0.3s ease;
-}
-
+/* === Logo === */
 .navbar-logo img {
   width: 6rem;
   height: auto;
   display: block;
-  transition: width 0.3s ease, transform 0.3s ease;
+  transition: width 0.3s ease;
 }
 
-.navbar.scrolled-down .navbar-logo img {
+.navbar--scrolled .navbar-logo img {
   width: 4rem;
 }
 
-/* Links da Navbar */
+/* === Links Desktop === */
 .navbar-links {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
+  gap: 1.5rem;
 }
 
 .navbar-links li {
-  margin: 0 1rem;
+  margin: 0;
 }
 
-.navbar-links a {
-  color: var(--cinza-claro);
-  text-decoration: none;
+/* Força os links da navbar a não herdarem do CSS global */
+.navbar-link,
+.navbar a {
+  color: var(--cinza-claro) !important;
+  text-decoration: none !important;
   font-size: 1rem;
+  font-weight: 500;
   transition: color 0.3s ease;
   position: relative;
-  padding: 0.5rem 0;
 }
 
-.navbar-links a:hover {
-  color: var(--vermelho-principal);
+.navbar-link:hover,
+.navbar a:hover {
+  color: var(--vermelho-principal) !important;
 }
 
-.navbar-links a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: var(--vermelho-principal);
-  transition: width 0.3s ease;
-}
-
-.navbar-links a:hover::after {
-  width: 100%;
-}
-
-/* Glow ativo */
-.glow {
-  color: var(--vermelho-principal);
-  text-shadow: 0 0 8px var(--vermelho-principal), 0 0 16px var(--vermelho-principal);
+.navbar-link--glow {
+  color: var(--vermelho-principal) !important;
+  text-shadow: 0 0 8px var(--vermelho-principal),
+    0 0 16px var(--vermelho-principal);
   font-weight: bold;
 }
 
-/* Menu container */
-.menu {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-/* Botão Hambúrguer */
-.hamburger {
+/* === Botão Hambúrguer === */
+.navbar-hamburger {
   display: none;
   background: none;
   border: none;
@@ -113,10 +84,9 @@
   width: 30px;
   height: 24px;
   position: relative;
-  padding: 0;
 }
 
-.hamburger span {
+.navbar-hamburger span {
   display: block;
   width: 100%;
   height: 3px;
@@ -126,140 +96,88 @@
   transition: all 0.3s ease;
 }
 
-.hamburger span:nth-child(1) { top: 0; }
-.hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
-.hamburger span:nth-child(3) { bottom: 0; }
+.navbar-hamburger span:nth-child(1) {
+  top: 0;
+}
+.navbar-hamburger span:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.navbar-hamburger span:nth-child(3) {
+  bottom: 0;
+}
 
-.hamburger--open span:nth-child(1) {
+.navbar-hamburger--open span:nth-child(1) {
   top: 50%;
   transform: translateY(-50%) rotate(45deg);
 }
-.hamburger--open span:nth-child(2) { opacity: 0; }
-.hamburger--open span:nth-child(3) {
+.navbar-hamburger--open span:nth-child(2) {
+  opacity: 0;
+}
+.navbar-hamburger--open span:nth-child(3) {
   bottom: 50%;
   transform: translateY(50%) rotate(-45deg);
 }
 
-/* === Media Query Mobile === */
+/* === Mobile === */
 @media (max-width: 768px) {
-  .navbar {
-    justify-content: center;
-    padding: 0 1rem;
-  }
-
-  .navbar-logo {
-    margin: 0 auto;
-  }
-
-  .hamburger {
+  .navbar-hamburger {
     display: block;
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
   }
 
-  .navbar-links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
-    padding: 1rem 0;
-    margin: 0;
-  }
-
-  .menu.open .navbar-links {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  .menu.open {
-    display: flex;
-    flex-direction: column;
+  .navbar-menu {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.95);
-    backdrop-filter: blur(8px);
-    z-index: 2100;
-    padding-top: 80px;
-    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.95);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 1000;
   }
 
-  .menu.open .navbar-links li {
-    margin: 0.75rem 1rem;
-    width: fit-content;
+  .navbar-menu--open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
   }
-
-  .navbar-links a {
-    font-size: 1.6rem;
-  }
-}
-
-/* === Media Query Desktop === */
-@media (min-width: 769px) {
-  .navbar {
-    justify-content: space-between;
-    padding: 0 2rem;
-  }
-
-  .hamburger { display: none; }
 
   .navbar-links {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    position: static;
-    background: transparent;
-    height: auto;
-    width: auto;
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
   }
 
-  .navbar-links li { margin: 0 1rem; }
+  .navbar-link,
+  .navbar a {
+    font-size: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
 
-  .menu { position: static; flex-direction: row; background: none; height: auto; width: auto; padding: 0; }
+  /* Animação em cascata nos links */
+  .navbar-menu--open .navbar-link,
+  .navbar-menu--open .navbar a {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .navbar-menu--open .navbar-links li:nth-child(1) .navbar-link { transition-delay: 0.1s; }
+  .navbar-menu--open .navbar-links li:nth-child(2) .navbar-link { transition-delay: 0.2s; }
+  .navbar-menu--open .navbar-links li:nth-child(3) .navbar-link { transition-delay: 0.3s; }
+  .navbar-menu--open .navbar-links li:nth-child(4) .navbar-link { transition-delay: 0.4s; }
+  .navbar-menu--open .navbar-links li:nth-child(5) .navbar-link { transition-delay: 0.5s; }
+  .navbar-menu--open .navbar-links li:nth-child(6) .navbar-link { transition-delay: 0.6s; }
+  .navbar-menu--open .navbar-links li:nth-child(7) .navbar-link { transition-delay: 0.7s; }
 }
-
-/* === Overlay e Transição de Página === */
-.page-transition, .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.page-transition {
-  z-index: 2000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.overlay {
-  background: rgba(0,0,0,0.5);
-  z-index: 1990;
-  pointer-events: all;
-  transition: opacity 0.3s ease;
-}
-
-.overlay.visible { opacity: 1; }
-.overlay { opacity: 0; }
-
-/* === Fade In / Out para Header e Mensagens === */
-.fade {
-  transition: opacity 0.5s ease-in-out;
-}
-
-.fade-in { opacity: 1; }
-.fade-out { opacity: 0; }

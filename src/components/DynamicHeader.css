@@ -1,7 +1,7 @@
 /* === Header Base === */
 .header {
-  position: relative; /* já existia */
-  z-index: 1; /* fica atrás da navbar */
+  position: relative;
+  z-index: 0; /* 👈 abaixo de navbar/menu */
   height: 60vh;
   display: flex;
   align-items: center;
@@ -31,7 +31,8 @@
   font-size: 1.2rem;
   line-height: 1.5;
   animation: fadeIn 1s ease-in-out;
-  z-index: 2; /* garante que texto fique acima do header, mas abaixo do menu mobile */
+  z-index: 0; /* 👈 garante que nunca fique acima do menu mobile */
+  position: relative;
 }
 
 .message-container h1 {
@@ -61,14 +62,8 @@
 .fade {
   transition: opacity 0.5s ease-in-out;
 }
-
-.fade-in {
-  opacity: 1;
-}
-
-.fade-out {
-  opacity: 0;
-}
+.fade-in { opacity: 1; }
+.fade-out { opacity: 0; }
 
 /* === Backgrounds dinâmicos === */
 .bg-home { background-image: url('../assets/images/home.jpg'); }
@@ -84,7 +79,7 @@
 @media (max-width: 768px) {
   .header {
     height: 70vh;
-    padding-top: calc(var(--navbar-height-default, 6rem) + 20px); /* ajusta altura navbar */
+    padding-top: calc(var(--navbar-height-default, 6rem) + 20px);
   }
 
   .message-container {
