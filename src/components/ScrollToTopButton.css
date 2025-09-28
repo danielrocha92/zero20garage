@@ -14,7 +14,7 @@
   color: white;
   width: 48px;
   height: 48px;
-  font-size: 30px;
+  font-size: 35px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
   z-index: 1000;

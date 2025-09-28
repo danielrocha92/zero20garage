@@ -212,6 +212,15 @@
   cursor: pointer;
 }
 
+
+  .dev-logo {
+  width: 75px; /* Ajuste o tamanho conforme necessário */
+  height: auto;
+  margin-top: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+
 /* Estilos para mobile */
 @media (max-width: 768px) {
   .footer {
@@ -335,4 +344,18 @@
     margin-right: 1rem;
     font-size: 1.5rem;
   }
+
+  .payment-icon {
+    font-size: 1.5rem; /* Tamanho dos ícones */
+    margin: 0 0.3rem;
+    color: #2c3e50; /* Cor padrão dos ícones */
+    transition: color 0.3s ease;
+  }
+
+.dev-logo {
+  width: 65px; /* Ajuste o tamanho conforme necessário */
+  height: auto;
+  margin-top: 0.5rem;
+}
+
 }
