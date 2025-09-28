@@ -48,7 +48,7 @@ body {
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   margin: 0 auto;
-  border-radius: 12px;
+  border-radius: 20px;
   /* Efeito de vidro na borda com box-shadow */
   box-shadow: 0 0 6px rgba(255, 255, 255, 0.1),
     inset 0 0 1px rgba(255, 255, 255, 0.2),
@@ -112,7 +112,7 @@ body {
   background-color: rgba(245, 245, 245, 0.2);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-radius: 12px;
+  border-radius: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -138,7 +138,7 @@ body {
   font-size: 1rem;
   font-weight: bold;
   border: none;
-  border-radius: 12px;
+  border-radius: 20px;
   text-decoration: none;
   transition: background-color 0.3s ease;
   margin-top: 1rem;
@@ -255,7 +255,7 @@ body {
   max-width: 1200px;
   padding: 1rem;
   margin: 0 auto;
-  border-radius: 12px;
+  border-radius: 20px;
 
   backdrop-filter: blur(30px) saturate(180%) contrast(110%);
   -webkit-backdrop-filter: blur(30px) saturate(180%) contrast(110%);
@@ -339,7 +339,7 @@ body {
   background-color: rgba(245, 245, 245, 0.2);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-radius: 12px;
+  border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   color: var(--cinza-escuro);
   margin-bottom: 2rem;
@@ -356,7 +356,7 @@ body {
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: 600;
-  border-radius: 12px;
+  border-radius: 20px;
   width: 100%;
   max-width: max-content;
   margin: 0 auto;
@@ -401,61 +401,20 @@ a:hover {
   text-decoration: none;
 }
 
-/* ===== Formulários refinados (Padrão Apple) ===== */
-.form-group {
-  margin-bottom: 1rem;
-}
-
-label {
-  display: block;
-  font-size: 0.9rem;
-  color: var(--cinza-medio);
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  font-family: 'San Francisco', 'Helvetica Neue', 'Arial', sans-serif;
-  padding-left: 0.5rem;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
+/* ===== Formulários (já mobile-first) ===== */
+input,
 textarea {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   width: 100%;
-  padding: 0.8rem 1rem;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
   border: 1px solid var(--cinza-medio);
-  border-radius: 10px;
+  border-radius: 20px;
   font-size: 1rem;
-  background-color: transparent;
-  color: var(--cinza-claro);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--cinza-escuro);
 }
 
-textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-input[type="text"]::placeholder,
-input[type="email"]::placeholder,
-input[type="password"]::placeholder,
-textarea::placeholder {
-  color: rgba(143, 137, 137, 0.6);
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-textarea:focus {
-  outline: none;
-  border-color: var(--vermelho-principal);
-  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
-}
-
-/* Destaques (já mobile-first, com ajuste para desktop no media query) */
+/* ===== Destaques (já mobile-first, com ajuste para desktop no media query) ===== */
 .highlights-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -472,7 +431,7 @@ textarea:focus {
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.1); /* Borda mais transparente */
   box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2); /* Sombra vermelha e mais suave */
-  border-radius: 12px;
+  border-radius: 20px;
   min-height: 200px;
   display: flex;
   flex-direction: column;
@@ -484,46 +443,24 @@ textarea:focus {
   overflow: hidden;
 }
 
-/* Fade-in animation (colocar fora de qualquer seletor) */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Estilo base (mobile-first) */
 .highlight-card {
-  background-color: rgba(255, 255, 255, 0.08); /* Transparência estilo vidro */
+  /* Efeito de vidro aprimorado com mais transparência e sombra vermelha */
+  background-color: rgba(255, 255, 255, 0.08); /* Mais transparência */
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2);
-  border-radius: 12px;
-
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Borda mais transparente */
+  box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2); /* Sombra vermelha e mais suave */
+  border-radius: 20px;
   padding: 1.5rem;
-  margin: 1rem auto 1.5rem auto;
-  max-width: 90%;
-  width: 100%;
-
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
-  line-height: 1.4;
-  letter-spacing: 0.5px;
-  color: #333; /* Ajustar dependendo do fundo */
-
+  color: var(--branco);
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  align-items: normal;
   justify-content: center;
+  align-items: flex-start;
   gap: 1rem;
-  text-align: center;
-
-  transition: all 0.3s ease;
-  box-sizing: border-box;
   position: relative;
   overflow: hidden;
-
-  animation: fadeIn 1s ease-in-out;
 }
 
 .highlight-card:hover {
@@ -597,7 +534,7 @@ textarea:focus {
 .blog-img {
   width: 100%;
   height: auto;
-  border-radius: 12px;
+  border-radius: 20px;
   margin-bottom: 2rem;
   object-fit: cover;
 }
@@ -616,7 +553,7 @@ textarea:focus {
 
 .home-carousel-wrapper {
   margin-bottom: 2.5rem;
-  border-radius: 12px;
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
 }
@@ -625,13 +562,13 @@ textarea:focus {
   width: 100%;
   height: auto;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 20px;
 }
 
 .home-\[etapa\]-content {
   background-color: rgba(255, 255, 255, 0.03);
   padding: 2rem;
-  border-radius: 12px;
+  border-radius: 20px;
   box-shadow: 0 0 20px rgba(255, 0, 0, 0.05);
 }
 
@@ -641,7 +578,7 @@ textarea:focus {
   background-color: #e60000;
   color: #fff;
   padding: 0.8rem 1.5rem;
-  border-radius: 12px;
+  border-radius: 20px;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
@@ -666,7 +603,7 @@ textarea:focus {
   bottom: 0;
   width: 4px;
   background-color: #ff0015;
-  border-radius: 12px;
+  border-radius: 20px;
 }
 
 
@@ -679,7 +616,7 @@ textarea:focus {
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     margin: 0 auto;
-    border-radius: 12px;
+    border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
@@ -695,7 +632,7 @@ textarea:focus {
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.1); /* Borda mais transparente */
     box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2); /* Sombra vermelha e mais suave */
-    border-radius: 12px;
+    border-radius: 20px;
     min-height: 200px;
     display: flex;
     flex-direction: column;
@@ -712,6 +649,66 @@ textarea:focus {
     box-shadow: 0 10px 40px 0 rgba(255, 0, 0, 0.4); /* Sombra mais intensa no hover */
     background-color: rgba(255, 255, 255, 0.1); /* Fundo um pouco mais opaco no hover */
   }
+}
+
+/* ===== FAQ (já mobile-first, com container-escuro dentro do media query para telas maiores) ===== */
+.faq-section {
+  padding: 0.5rem;
+  /* Ajuste para seção FAQ com blur e transparência */
+  background-color: rgba(245, 245, 245, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section-title {
+  font-size: 1.5rem;
+  color: var(--vermelho-principal);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.faq-item {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-radius: 20px;
+  /* Fundo do item FAQ com transparência e blur */
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.faq-question {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--preto);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-answer-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-item.ativo .faq-answer-wrapper {
+  max-height: 500px;
+  margin-top: 0.5rem;
+}
+
+.faq-answer {
+  font-size: 0.95rem;
+  color: var(--cinza-escuro);
+  line-height: 1.6;
 }
 
 /* --- */
@@ -767,40 +764,22 @@ textarea:focus {
 }
 
 /* ===== Formulários refinados ===== */
-.form-group {
-  margin-bottom: 1rem;
-}
-
-label {
-  display: block;
-  font-size: 0.9rem;
-  color: var(--cinza-escuro);
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  font-family: 'San Francisco', 'Helvetica Neue', 'Arial', sans-serif;
-  padding-left: 0.5rem;
-}
-
 input,
 textarea {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   width: 100%;
   padding: 0.9rem 1rem;
-  border-radius: 10px; /* Reduzido para um padrão mais sutil */
+  border-radius: 20px;
   font-size: 1rem;
   border: 1px solid var(--cinza-medio);
   background-color: rgba(255, 255, 255, 0.1);
+  transition: border-color 0.3s ease;
   color: var(--cinza-escuro);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: var(--vermelho-principal);
-  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
+  box-shadow: 0 0 4px rgba(255, 0, 0, 0.3);
 }
 
 /* ===== Botões refinados ===== */
@@ -816,7 +795,7 @@ textarea:focus {
   color: var(--cinza-claro);
   background-color: var(--vermelho-principal);
   border: none;
-  border-radius: 12px;
+  border-radius: 20px;
   box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -856,7 +835,7 @@ textarea:focus {
   height: auto;
   max-height: 400px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 20px;
   margin-bottom: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -1015,7 +994,7 @@ textarea:focus {
     border: none;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-radius: 12px;
+    border-radius: 20px;
   }
 
   .highlight-card:hover,
@@ -1066,7 +1045,7 @@ textarea:focus {
   }
 
   .blog-img {
-    border-radius: 12px;
+    border-radius: 20px;
     margin-bottom: 1rem;
   }
 
