@@ -62,7 +62,6 @@ body {
   color: var(--color-input-text);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
-  /* box-sizing: border-box; - Removido daqui, agora é global */
 }
 
 .orcamento-container input:focus,
@@ -80,7 +79,6 @@ body {
   margin-bottom: 2rem;
 }
 
-/* 2. CORREÇÃO: Garante display: flex no mobile para que o layout funcione */
 .payment-observacoes-section {
   display: flex;
   flex-direction: column;
@@ -115,7 +113,7 @@ body {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1.5rem;
-  table-layout: fixed; /* Garante divisão proporcional */
+  table-layout: fixed;
 }
 
 .items-table th {
@@ -123,13 +121,12 @@ body {
   color: var(--color-brand-red);
   font-weight: bold;
   text-transform: uppercase;
-  /* CORREÇÃO/AJUSTE DE FONTE */
   font-size: 1rem;
 }
 
 .items-table td {
   border-bottom: 1px solid var(--color-secondary);
-  padding: 12px 10px;
+  padding: 0.75rem;
   text-align: left;
   vertical-align: top;
 }
@@ -183,13 +180,12 @@ body {
 .items-table .subitems-cell {
   width: 40%;
   padding-top: 4px;
-
 }
 
 .items-table .subitems-cell textarea {
   display: block;
-  width: 100%;           /* ocupa toda a célula */
-  min-height: 90px;      /* aumenta a altura padrão */
+  width: 100%;
+  min-height: 90px;
   padding: 10px;
   border-radius: 6px;
   border: 1px solid #555;
@@ -197,9 +193,9 @@ body {
   color: var(--color-text);
   font-size: 0.9rem;
   line-height: 1.4;
-  resize: vertical;      /* permite aumentar manualmente */
+  resize: vertical;
   transition: 0.2s;
-  box-sizing: border-box; /* inclui padding/borda no cálculo do width */
+  box-sizing: border-box;
 }
 
 .items-table .subitems-cell textarea:focus {
@@ -208,64 +204,67 @@ body {
   box-shadow: 0 0 4px var(--color-brand-red);
 }
 
-/* Subitens alinhados (labels + inputs dentro da célula) */
+/* Subitens alinhados */
 .sub-item-input-group {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-top: 8px;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-end;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 8px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
 }
 
-/* Checkbox Customizado */
+/* --- Checkbox Customizado (Novo estilo circular) --- */
 .custom-checkbox {
-  position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   cursor: pointer;
-  user-select: none;
-  gap: 10px;
-  font-size: 1rem;
+  position: relative;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  gap: 6px;
 }
 
-.custom-checkbox input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
+/* Esconde o checkbox padrão */
+.custom-checkbox input[type="checkbox"] {
+  display: none;
 }
 
-.checkbox-box {
-  min-width: 18px;
+/* Bolinha */
+.custom-checkbox .checkbox-box {
+  width: 18px;
   height: 18px;
   border: 2px solid var(--color-input-border);
-  border-radius: 4px;
+  border-radius: 50%;
   background-color: var(--color-input-bg);
-  transition: all 0.2s ease;
+  display: inline-block;
   position: relative;
+  transition: all 0.2s ease;
 }
 
-.custom-checkbox input:checked + .checkbox-box {
+/* Estado marcado */
+.custom-checkbox input[type="checkbox"]:checked + .checkbox-box {
   background-color: var(--color-brand-red);
   border-color: var(--color-brand-red);
 }
 
-.checkbox-box::after {
-  content: '';
+/* Bolinha branca interna */
+.custom-checkbox input[type="checkbox"]:checked + .checkbox-box::after {
   position: absolute;
-  display: none;
-  left: 5px;
-  top: 1px;
-  width: 4px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  top: 4px;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-.custom-checkbox input:checked + .checkbox-box::after {
-  display: block;
+/* Ajuste nas células da tabela */
+.items-table td.checkbox-cell {
+  width: 40px;
+  text-align: center;
 }
 
 /* Linhas de Total */
@@ -369,8 +368,8 @@ body {
   }
 
   .orcamento-container h1 {
-  font-size: 2rem;
-}
+    font-size: 2rem;
+  }
 
   .orcamento-container h2 {
     font-size: 1.6rem;
@@ -390,7 +389,6 @@ body {
     padding-right: 2rem;
   }
 
-  /* Agora o .payment-observacoes-section já é um flex container */
   .payment-observacoes-section {
     flex-direction: row;
     gap: 2rem;

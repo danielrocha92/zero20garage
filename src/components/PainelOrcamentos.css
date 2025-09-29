@@ -77,9 +77,14 @@
 
 .orcamento-form-wrapper label {
     display: flex;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     font-weight: 600;
     color: #e0e0e0;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-start;
 }
 
 .orcamento-form-wrapper input,
