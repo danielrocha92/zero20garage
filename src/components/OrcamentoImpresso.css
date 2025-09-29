@@ -137,7 +137,7 @@
 
 /* NOVO: Estilo para o texto do item, garantindo espaçamento e flexibilidade */
 .list-item-impresso .item-text {
-    margin-left: -4px; /* Espaçamento entre o checkbox e o texto */
+    margin-left: 60px; /* Espaçamento entre o checkbox e o texto */
     vertical-align: 06px;
     line-height: 1.2; /* Adicionado para garantir o espaçamento da linha */
 }
@@ -359,12 +359,29 @@
     }
 
     .info-table {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+
+
+
         justify-content: space-around;
         gap: 6px 20px;
+        font-size: 20px;
+        text-align: left;
     }
 
     .info-table td {
-        font-size: 14px;
+        display: contents;
+        align-items: center;
+        flex: 1 1 30%;
+
+        max-width: 100%;
+
+
+        font-size: 20px;
         min-width: 15%;
         color: #333;
         white-space: nowrap;
