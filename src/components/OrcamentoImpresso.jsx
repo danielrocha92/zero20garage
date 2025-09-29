@@ -243,7 +243,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
                        {" "}
             <tbody>
                            {" "}
-              <tr>
+              <tr id="info-table">
                                {" "}
                 <td>
                   Veículo: <span>{orcamento?.veiculo || ""}</span>

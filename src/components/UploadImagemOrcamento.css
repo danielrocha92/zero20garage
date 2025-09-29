@@ -103,7 +103,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
   transition: background-color 0.3s ease;
 }
 
@@ -167,11 +167,6 @@
 
   .service-photo {
     max-height: 200px;
-  }
-
-  .button {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
   }
 }
 

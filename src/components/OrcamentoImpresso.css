@@ -4,23 +4,23 @@
 /* --- Estilos Gerais (Mobile First) --- */
 
 .orcamento-impresso-container {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 06px;
+    padding: 12px;
     background-color: #f4f4f4;
     font-family: 'Roboto', sans-serif;
 }
 
 .orcamento-impresso-content {
-    padding-top: 10px;
+    padding-top: 20px;
     width: 100%;
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 06px;
+    padding: 12px;
     box-sizing: border-box;
     color: #333;
 }
@@ -41,7 +41,7 @@
     color: #222;
     text-transform: uppercase;
     font-weight: 700;
-    margin: 30;
+    margin: 30px 0;
 }
 
 .logo-impresso {
@@ -61,7 +61,7 @@
     width: 100%;
     flex-wrap: wrap;
     gap: 8px 16px;
-    font-size: 12px;
+    font-size: 15px;
 }
 
 .info-table td {
@@ -79,7 +79,7 @@
     border-bottom: 1px solid #333; /* Adiciona o sublinhado */
     font-weight: 700;
     color: #222;
-    padding-bottom: 2px;
+    padding-bottom: 4px;
     width: 70%; /* Largura padrão para OS, Cliente, Data */
     word-break: break-all;
 }
@@ -106,13 +106,13 @@
     color: #222;
     font-weight: 700;
     border-bottom: 2px solid #ddd;
-    padding-bottom: 1px;
+    padding-bottom: 2px;
     margin-bottom: 4px;
 }
 
 .items-columns {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat;
     gap: 8px;
     list-style: none;
     margin: 0;
@@ -129,7 +129,7 @@
     font-size: 12px;
     color: #222;
     line-height: 1.4;
-    padding: 1px 0;
+    padding: 2px 0;
     white-space: normal;
     overflow: visible;
     text-overflow: unset;
@@ -138,19 +138,20 @@
 /* NOVO: Estilo para o texto do item, garantindo espaçamento e flexibilidade */
 .list-item-impresso .item-text {
     margin-left: -4px; /* Espaçamento entre o checkbox e o texto */
-    vertical-align: 22px;
+    vertical-align: 06px;
+    line-height: 1.2; /* Adicionado para garantir o espaçamento da linha */
 }
 
 /* Estilo de utilidade para Checkbox Customizado */
 .checkbox-box {
-    margin-right: 8px;
+    margin-right: 0; /* Removido o margin-right para evitar espaçamento duplo */
     flex-shrink: 0;
     appearance: none;
     -webkit-appearance: none;
     width: 05px;
     height: 05px;
     border: 1px solid #333;
-    border-radius: 1px;
+    border-radius: 50%;
     cursor: default;
     /* CORREÇÃO: Removido position:relative e top:3px que causa desalinhamento na impressão */
     position: static;
@@ -179,29 +180,28 @@
 
 /* Estilo do checkbox via input[type="checkbox"] (mantido por redundância e segurança, mas o HTML usa .checkbox-box) */
 .list-item-impresso input[type="checkbox"] {
-    /* AJUSTE: Redução da margem para o mínimo */
-    margin-right: -50px;
-
-    /* AJUSTE: Tamanho mínimo mas funcional */
-    width: 10px;
-    height: 10px;
-
-    /* Propriedades para customização */
+    margin-right: -50px;   /* Espaçamento natural entre checkbox e texto */
+    width: 12px;         /* Tamanho proporcional */
+    height: 12px;
     flex-shrink: 0;
     appearance: none;
     -webkit-appearance: none;
     border: 1px solid #333;
-    border-radius: 4px;
+    border-radius: 3px;
     cursor: default;
-
-    /* Propriedades para alinhamento e impressão */
-    position: static;
-    top: unset;
-    background-color: var(checkbox-bg, transparent);
+    background-color: transparent;
+    display: inline-block;
+    vertical-align: middle; /* Alinha melhor com o texto */
 }
 
 .list-item-impresso input[type="checkbox"]:checked::after {
     content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    margin: auto;
+    background-color: #333;
+    border-radius: 2px;
 }
 
 /* --- Totais --- */
@@ -214,7 +214,7 @@
     display: block;
     font-size: 13px;
     margin-top: 4px;
-    padding-top: 0;
+    padding-top: 2;
     border-top: none;
     color: #333;
 }
@@ -228,7 +228,7 @@
     font-size: 16px;
     font-weight: 700;
     border-top: 2px solid #ccc;
-    padding-top: 10px;
+    padding-top: 20px;
     margin-top: 20px;
     color: #222;
 }
@@ -249,7 +249,7 @@
 .policy-footer {
     margin-top: 20px;
     border-top: 1px dashed #ccc;
-    padding-top: 12px;
+    padding-top: 24px;
 }
 
 .policy-footer h4 {
@@ -282,7 +282,7 @@
     color: #222;
     font-weight: 700;
     border-bottom: 2px solid #ddd;
-    padding-bottom: 4px;
+    padding-bottom: 8px;
     margin-bottom: 8px;
 }
 
@@ -323,7 +323,7 @@
 }
 
 .button {
-    padding: 10px;
+    padding: 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -344,7 +344,7 @@
 @media (min-width: 768px) {
     .orcamento-impresso-content {
         max-width: 794px;
-        padding: 20px;
+        padding: 40px;
     }
 
     .header-impresso {
@@ -365,8 +365,11 @@
 
     .info-table td {
         font-size: 14px;
+        min-width: 15%;
         color: #333;
         white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .items-section h2 {
@@ -402,7 +405,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         display: flex;
-        align-items: left;
+        align-items: flex-start; /* mantém checkbox no topo quando texto quebra */
     }
 
     .list-item-impresso .item-text { /* Desktop: Permite que o texto quebre dentro do flex: 1 */
@@ -529,12 +532,16 @@
     }
 
     .info-table {
-        /* Garante que a tabela (que é flex) continue se comportando corretamente */
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 12px 20px;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: flex-start; /* em vez de center */
+        width: 100%;
         flex-wrap: wrap;
+        gap: 8px 16px;
+        font-size: 15px;
     }
+
 
     .info-table td {
         /* Os TD's que não são do Veículo devem ser distribuídos em 3 colunas */
@@ -556,7 +563,7 @@
     .info-value {
         width: 70%; /* Largura padrão para OS, Cliente, Data */
         border-bottom: 1px solid #333;
-        padding-bottom: 2px;
+        padding-bottom: 4px;
     }
 
     #info-row-veiculo .info-value {
@@ -586,12 +593,23 @@
         white-space: normal;
     }
 
-    .list-item-impresso input[type="checkbox"] {
-        transform: scale(1);
-        top: 0;
-        margin-top: 2px; /* Pequeno ajuste visual se necessário */
-        position: static; /* Garantia de que não tem offset */
-    }
+/* Dentro do @media print */
+
+/* O input[type="checkbox"] no print está com margin-right: -50px; o que é um erro. */
+.list-item-impresso input[type="checkbox"] {
+    /* AJUSTE: Redução da margem para um valor sensato ou remoção */
+    margin-right: 8px; /* Alinhamento com o que foi definido para o item-text */
+
+    /* ... outras propriedades mantidas ... */
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #333;
+    border-radius: 4px;
+    cursor: default;
+    position: static;
+    top: unset;
+    background-color: var(checkbox-bg, transparent);
+}
 
     /* CORREÇÃO: Adicionado para evitar quebra de bloco entre páginas */
     .total-section,

@@ -795,9 +795,21 @@ textarea:focus {
   color: var(--cinza-claro);
   background-color: var(--vermelho-principal);
   border: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
   border-radius: 20px;
   box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
   transition: background-color 0.3s ease, transform 0.2s ease;
+  outline: none;
+
+  /* Evitar seleção de texto ao clicar */
+  user-select: none;
+
+  /* Suavizar fontes para melhor legibilidade */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
 }
 
 .button:hover,
