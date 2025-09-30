@@ -1,7 +1,7 @@
 // src/components/TotaisForm.jsx
 import React from "react";
 import { formatCurrency, parseCurrency } from "../hooks/useCurrencyFormatter";
-import "./OrcamentoGenerico.css";
+import "./TotaisForm.css";
 
 const TotaisForm = ({ totais, onChange }) => {
   const handleChange = (field, value) => {

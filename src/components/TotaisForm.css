@@ -1,0 +1,18 @@
+.summary-section {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.total-line-form.total-geral {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.input-total.calculated {
+  background-color: #eaeaea;
+  font-weight: bold;
+}

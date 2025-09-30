@@ -1,0 +1,76 @@
+/* Definindo as variáveis de cor para o tema */
+:root {
+  --color-card-bg: #2a2a2a;
+  --color-text: #e0e0e0;
+  --color-label: #bbb;
+  --color-brand-red: #c50404;
+  --color-input-bg: #1a1a1a;
+  --color-input-border: #444;
+}
+
+/* Estilo do container da seção */
+.section {
+  background-color: var(--color-card-bg);
+  padding: 25px;
+  border-radius: 10px;
+  color: var(--color-text);
+  font-family: Arial, sans-serif;
+}
+
+.section h3 {
+  color: var(--color-brand-red);
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 25px;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+/* --- MUDANÇAS PRINCIPAIS AQUI --- */
+
+/* 1. Layout Padrão (Mobile First): 2 colunas */
+.form-grid {
+  display: grid;
+  /* Define 2 colunas, resultando no layout 50/50 que você pediu para o mobile. */
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* 2. Layout para telas maiores (Desktop) */
+@media (min-width: 768px) {
+  .form-grid {
+    /* Acima de 768px, o layout muda para 3 colunas. */
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* --- FIM DAS MUDANÇAS --- */
+
+
+/* Estilo de cada grupo de label + input (sem alterações) */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--color-label);
+}
+
+.form-group input {
+  background-color: var(--color-input-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-input-border);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--color-brand-red);
+  box-shadow: 0 0 0 3px rgba(197, 4, 4, 0.3);
+}

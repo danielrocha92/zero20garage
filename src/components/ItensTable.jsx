@@ -1,7 +1,7 @@
 // src/components/ItensTable.jsx
 import React from "react";
 import { formatCurrency, parseCurrency } from "../hooks/useCurrencyFormatter";
-import "./OrcamentoGenerico.css";
+import "./ItensTable.css";
 
 const ItensTable = ({ tipo, itens, setItens }) => {
   const handleChange = (index, field, value) => {

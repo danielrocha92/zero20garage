@@ -1,6 +1,6 @@
 // src/components/MessageBox.jsx
 import React from "react";
-import "./OrcamentoGenerico.css";
+import "./MessageBox.css";
 
 const MessageBox = ({ message, isError, onClose }) => {
   if (!message) return null;
