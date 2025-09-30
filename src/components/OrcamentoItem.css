@@ -1,0 +1,54 @@
+.orcamento-item {
+  border: 2px solid #fff;
+  padding: 1rem;
+  margin: 1rem 0;
+  background-color: #2c2c2c;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.item-nome {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.bullet {
+  color: red;
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.subitens {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.5rem 0;
+}
+
+.subitens li {
+  font-size: 1rem;
+  margin: 0.3rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.linha {
+  display: flex;
+  align-items: center;
+  margin-top: 0.7rem;
+  border-top: 2px solid #fff;
+  padding-top: 0.5rem;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.valor {
+  border: 2px solid #fff;
+  padding: 0.2rem 0.5rem;
+  min-width: 80px;
+}
