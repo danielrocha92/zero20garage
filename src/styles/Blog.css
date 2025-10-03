@@ -1,11 +1,4 @@
 /* ===== Estilos base (mobile first) ===== */
-
-.page-escuro {
-  background-color: #1212126b;
-  color: #f0f0f0;
-  padding-bottom: 2rem;
-}
-
 .container-claro {
   max-width: 1080px;
   margin: 0 auto;

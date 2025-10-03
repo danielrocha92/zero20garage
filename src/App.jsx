@@ -6,7 +6,6 @@ import 'font-awesome/css/font-awesome.min.css';
 import Layout from './components/Layout';
 import PageTransition from './components/PageTransition';
 import ScrollToTopButton from './components/ScrollToTopButton';
-import ScrollToTop from './components/ScrollToTop';
 
 import PainelOrcamentos from './components/PainelOrcamentos';
 import Login from './components/Login';
@@ -122,7 +121,6 @@ function App() {
     <Router>
       <Layout>
         <AnimatedRoutes />
-        <ScrollToTop />
         <ScrollToTopButton />
       </Layout>
     </Router>

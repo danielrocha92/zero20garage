@@ -93,7 +93,7 @@ function Home() {
         </div>
 
         {/* Linha do Tempo do Processo de Retífica */}
-          <div className="highlight-item">
+          <div className="highlight-item-processo">
             <h2 className="titulo-claro">Como Funciona o Processo de Retífica</h2>
             <div className="timeline">
               <Link to="/home/diagnostico" className="link-timeline">

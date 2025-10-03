@@ -14,6 +14,9 @@ const Layout = ({ children }) => {
 
   // Controla o loading em cada mudança de rota
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]);
+  useEffect(() => {
     setLoading(true);
     setFadeOut(false);
 
