@@ -18,59 +18,61 @@
 /* Estilos da Página de Login (Mobile First) */
 /* ======================== */
 .login-page {
-  /* O background deve vir do seu body/page principal, mas mantemos o layout */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem 1rem;
+  margin-top: 14px;
   min-height: 100vh;
-  box-sizing: border-box;
-}
-
-.login-wrapper {
-  /* Glassmorphism Aprimorado */
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgb(11 11 11 / 60%);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  /* Sombra vermelha sutil, mantendo o estilo original */
   box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2);
-  border-radius: 20px; /* Aumentado para 20px para consistência com outros containers */
-
-  padding: 1.5rem; /* Ajuste para Mobile */
-  margin: 1rem auto;
-  max-width: 95%; /* Ajuste Mobile */
+  padding: 1.5rem;
   width: 100%;
-
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: var(--cinza-claro, #e0e0e0); /* Usando variável para o texto */
-
+  color: var(--cinza-claro, #e0e0e0);
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centraliza o card interno */
+  align-items: center;
   justify-content: center;
-  gap: 1.5rem; /* Aumenta o espaçamento entre o header e o card */
+  gap: 1.5rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
 
+.login-wrapper {
+  background-color: rgb(11 11 11 / 60%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin: 1rem auto;
+  max-width: 95%;
+  width: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--cinza-claro, #e0e0e0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
   box-sizing: border-box;
   overflow: hidden;
 }
 
 /* Card interno que contém o formulário */
 .login-card {
-  /* Usando variáveis e mantendo a cor escura */
   background-color: var(--cor-fundo-card);
   border-radius: 12px;
-  padding: 1.5rem; /* Ajuste Mobile */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra mais forte no card interno */
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   text-align: center;
   width: 100%;
-  max-width: 400px; /* Limite de largura para o formulário */
+  max-width: 400px;
 }
 
 .login-title {
-  /* Usando variável de cor principal */
   color: var(--vermelho-principal, #ff0000);
-  font-size: 1.8rem; /* Ajuste Mobile */
+  font-size: 1.8rem;
   margin-bottom: 1.5rem;
   font-weight: 700;
   text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
@@ -82,7 +84,7 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem; /* Espaçamento menor em Mobile */
+  gap: 1rem;
 }
 
 .login-form-group {
@@ -92,14 +94,13 @@
 }
 
 .login-label {
-  font-size: 0.95rem; /* Ajuste Mobile */
+  font-size: 0.95rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: var(--cinza-claro, #e0e0e0); /* Cor clara para Dark Mode */
+  color: var(--cinza-claro, #e0e0e0);
 }
 
 .login-input {
-  /* Usando variáveis para consistência */
   background-color: var(--cor-input-bg);
   border: 1px solid var(--cinza-medio, #444);
   color: var(--cor-texto-claro, #e0e0e0);
@@ -112,7 +113,6 @@
 }
 
 .login-input:focus {
-  /* Usando variável de cor principal no foco */
   border-color: var(--vermelho-principal, #ff0000);
   box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
 }
@@ -126,7 +126,6 @@
 /* Estilos do Botão e Feedback */
 /* ======================== */
 .login-submit {
-  /* Cores de botão de submissão do tema */
   background-color: var(--vermelho-principal, #b90202);
   color: var(--branco, #fff);
   border: none;
@@ -136,12 +135,11 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  margin-top: 1.5rem; /* Aumentado um pouco o espaçamento */
+  margin-top: 1.5rem;
   box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
 }
 
 .login-submit:hover {
-  /* Usando variável de hover */
   background-color: var(--vermelho-hover, #cc0000);
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(255, 0, 0, 0.5);
@@ -161,7 +159,6 @@
   border-radius: 12px;
   font-weight: 600;
   text-align: center;
-  /* Estilo de alerta sutil e harmonioso */
   background-color: rgba(255, 0, 0, 0.1);
   color: var(--vermelho-principal, #ff6b6b);
   border: 1px solid rgba(255, 0, 0, 0.3);

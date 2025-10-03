@@ -240,9 +240,11 @@ const PainelOrcamentos = () => {
         <OrcamentoImpresso orcamento={selectedBudgetForView} onClose={handleCloseView} />
       ) : (
         <>
+        <div className="highlight-card">
           <h1 className="titulo-escuro">Painel de Orçamentos</h1>
 
           {/* Cards principais */}
+          <div className="highlight-item">
           <div className="cards-container">
             <div className={`card-option ${tipo === 'motor' ? 'active' : ''}`} onClick={() => { setTipo('motor'); setEditingData(null); }}>
               <FaCogs size={40} />
@@ -257,8 +259,12 @@ const PainelOrcamentos = () => {
               <span>Histórico de Orçamentos</span>
             </div>
           </div>
-
+          </div>
+          </div>
+          <div className="highlight-card">
+          <h1 className="titulo-escuro">Exportação</h1>
           {/* Cards de exportação */}
+          <div className="highlight-item">
           <div className="cards-container">
             <div className="card-option" onClick={exportarExcel}>
               <FaFileExcel size={40} color="green" />
@@ -272,6 +278,8 @@ const PainelOrcamentos = () => {
               <FaSignOutAlt size={40} color="gray" />
               <span>Sair</span>
             </div>
+          </div>
+          </div>
           </div>
 
           <main className="orcamento-form-wrapper" id="orcamento-form">

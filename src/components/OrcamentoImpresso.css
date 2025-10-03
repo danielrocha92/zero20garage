@@ -148,11 +148,11 @@
     flex-shrink: 0;
     appearance: none;
     -webkit-appearance: none;
-    width: 05px;
-    height: 05px;
-    border: 1px solid #333;
+    height: 20px;
+    width: 20px;
+    border: 1px solid #f8f6f6;
     border-radius: 50%;
-    cursor: default;
+    cursor: pointer;
     /* CORREÇÃO: Removido position:relative e top:3px que causa desalinhamento na impressão */
     position: static;
     top: unset;
@@ -192,16 +192,6 @@
     background-color: transparent;
     display: inline-block;
     vertical-align: middle; /* Alinha melhor com o texto */
-}
-
-.list-item-impresso input[type="checkbox"]:checked::after {
-    content: '';
-    display: block;
-    width: 6px;
-    height: 6px;
-    margin: auto;
-    background-color: #333;
-    border-radius: 2px;
 }
 
 /* --- Totais --- */

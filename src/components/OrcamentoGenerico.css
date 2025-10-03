@@ -57,9 +57,18 @@
 /* =================================
    FORMULÁRIO E INPUTS GERAIS
    ================================= */
-.form-table {
-  width: 100%;
-  border-spacing: 20px 10px;
+   .form-table {
+    grid-template-columns: 1fr; /* Uma coluna no mobile */
+}
+
+/* Estilo opcional para inputs e grupos */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-error {
+  border: 1px solid red;
 }
 
 .form-group {
@@ -129,7 +138,7 @@ textarea:focus {
 }
 
 .items-table td {
-  padding: 15px 5px;
+  padding: 5px 5px;
   vertical-align: top;
 }
 
@@ -152,11 +161,14 @@ textarea:focus {
 
 .custom-checkbox input[type="checkbox"] {
   display: none;
+  height: 20px;
+  width: 20px;
+  background-color: var(--color-bg);
 }
 
-.checkbox-box {
-  width: 18px;
-  height: 18px;
+.checkbox-box, escuro {
+  width: 25px;
+  height: 25px;
   background-color: var(--color-bg);
   border: 2px solid var(--color-input-border);
   border-radius: 4px;
@@ -171,6 +183,9 @@ textarea:focus {
 
 .custom-checkbox input[type="checkbox"]:checked + .checkbox-box {
   border-color: var(--color-brand-red);
+  height: 20px;
+  width: 20px;
+  background-color: var(--color-bg);
 }
 
 .custom-checkbox input[type="checkbox"]:checked + .checkbox-box::after {
@@ -336,4 +351,11 @@ textarea:focus {
   .section-form {
     flex: 1 1 48%;
   }
+
+  .form-table {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 por linha no desktop */
+  gap: 10px 20px;
+  width: 100%;
+}
 }

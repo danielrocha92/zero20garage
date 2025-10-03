@@ -5,14 +5,23 @@
 * Estilos gerais para o container principal, cabeçalhos e seções.
 */
 .painel-orcamentos-container {
-    margin-top: 60px;
-    background-color: #1a1a1a;
-    color: #e0e0e0;
+    margin-top: 90px;
     min-height: 100vh;
-    padding: 10px;
+    background-color: rgb(11 11 11 / 60%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2);
+    padding: 1.5rem;
+    width: 100%;
+    color: var(--cinza-claro, #e0e0e0);
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .titulo-escuro {
@@ -66,13 +75,22 @@
 * Estilos para o wrapper, inputs, labels e seções do formulário.
 */
 .orcamento-form-wrapper {
-    width: 100%;
-    padding: 15px;
-    background-color: #2a2a2a;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-    margin-bottom: 30px;
-    color: #e0e0e0;
+  /* Efeito de vidro aprimorado com mais transparência e sombra vermelha */
+  background-color: rgba(255, 255, 255, 0.08); /* Mais transparência */
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Borda mais transparente */
+  box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2); /* Sombra vermelha e mais suave */
+  border-radius: 20px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+  margin: 1rem;
+  color: var(--branco);
+  overflow: hidden;
 }
 
 .orcamento-form-wrapper label {
@@ -91,14 +109,25 @@
 .orcamento-form-wrapper select,
 .orcamento-form-wrapper textarea {
     width: 100%;
-    padding: 10px 14px;
-    margin-bottom: 15px;
+    padding: 5px 5px;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
     border: 1px solid #555;
     border-radius: 8px;
     background-color: #1a1a1a;
-    color: #fff;
+    color: var(--color-brand-red-hover, #ddd);
     font-size: 1em;
     transition: all 0.3s ease;
+    font-family: 'Arial', sans-serif;
+    box-sizing: border-box;
+    display: block;
+    text-align: center;
+    /* Adicionado para evitar quebra de linha desnecessária */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    grid-template-columns: 1fr; /* Tudo em uma coluna no mobile */
 }
 
 .orcamento-form-wrapper input::placeholder,
@@ -118,9 +147,9 @@
     appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23e0e0e0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
     background-repeat: no-repeat;
-    background-position: right 12px center;
+    background-position: right 0px center;
     background-size: 14px;
-    padding-right: 35px;
+    padding-right: 6px;
     cursor: pointer;
 }
 
@@ -136,9 +165,11 @@
 .cards-container {
     display: flex;
     gap: 15px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     margin: 20px 0;
-    justify-content: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    align-items: stretch;
 }
 
 .card-option {
@@ -443,7 +474,7 @@
 */
 @media (min-width: 768px) {
     .painel-orcamentos-container {
-        margin-top: 70px;
+        margin-top: 14px;
         padding: 20px;
     }
 

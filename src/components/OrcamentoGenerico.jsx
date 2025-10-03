@@ -374,90 +374,86 @@ const OrcamentoGenerico = ({
     <div className="orcamento-container">
       <h1>{titulo}</h1>
       <form onSubmit={handleSubmit}>
-        <section className="client-vehicle-section">
-          <h2>Informações do Cliente e Veículo</h2>
-          <table className="form-table">
-            <tbody>
-              <tr>
-                <td>
-                  <div className="form-group">
-                    <label>OS:</label>
-                    <input
-                      type="text"
-                      name="ordemServico"
-                      value={formData.ordemServico}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                </td>
-                <td>
-                  <div className="form-group">
-                    <label>Cliente:</label>
-                    <input
-                      type="text"
-                      name="nome"
-                      value={formData.nome}
-                      onChange={handleInputChange}
-                      required
-                      className={!formData.nome ? 'input-error' : ''} // Feedback visual de obrigatoriedade
-                    />
-                  </div>
-                </td>
-                <td>
-                  <div className="form-group">
-                    <label>Data:</label>
-                    <input
-                      type="date"
-                      name="data"
-                      value={formData.data}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div className="form-group">
-                    <label>Veículo:</label>
-                    <input
-                      type="text"
-                      name="veiculo"
-                      value={formData.veiculo}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                </td>
-                <td>
-                  <div className="form-group">
-                    <label>Placa:</label>
-                    <input
-                      type="text"
-                      name="placa"
-                      value={formData.placa}
-                      onChange={handleInputChange}
-                      maxLength={7}
-                      // Adicionado feedback visual para placa inválida, se necessário
-                      className={formData.placa && !regexPlaca.test(formData.placa.toUpperCase()) ? 'input-error' : ''}
-                    />
-                  </div>
-                </td>
-                <td>
-                  <div className="form-group">
-                    <label>Telefone:</label>
-                    <input
-                      type="text"
-                      name="telefone"
-                      value={formData.telefone}
-                      onChange={handleInputChange}
-                       // Adicionado feedback visual para telefone inválido
-                      className={formData.telefone && !regexTelefone.test(formData.telefone.replace(/[\s()-]/g, "")) && !/^\d{10,11}$/.test(formData.telefone.replace(/[\s()-]/g, "")) ? 'input-error' : ''}
-                    />
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
+<section className="client-vehicle-section">
+  <h2>Informações do Cliente e Veículo</h2>
+  <div className="form-table">
+    <div className="form-group">
+      <label>OS:</label>
+      <input
+        type="text"
+        name="ordemServico"
+        value={formData.ordemServico}
+        onChange={handleInputChange}
+      />
+    </div>
+
+    <div className="form-group">
+      <label>Cliente:</label>
+      <input
+        type="text"
+        name="nome"
+        value={formData.nome}
+        onChange={handleInputChange}
+        required
+        className={!formData.nome ? 'input-error' : ''}
+      />
+    </div>
+
+    <div className="form-group">
+      <label>Data:</label>
+      <input
+        type="date"
+        name="data"
+        value={formData.data}
+        onChange={handleInputChange}
+      />
+    </div>
+
+    <div className="form-group">
+      <label>Veículo:</label>
+      <input
+        type="text"
+        name="veiculo"
+        value={formData.veiculo}
+        onChange={handleInputChange}
+      />
+    </div>
+
+    <div className="form-group">
+      <label>Placa:</label>
+      <input
+        type="text"
+        name="placa"
+        value={formData.placa}
+        onChange={handleInputChange}
+        maxLength={7}
+        className={
+          formData.placa && !regexPlaca.test(formData.placa.toUpperCase())
+            ? 'input-error'
+            : ''
+        }
+      />
+    </div>
+
+    <div className="form-group">
+      <label>Telefone:</label>
+      <input
+        type="text"
+        name="telefone"
+        value={formData.telefone}
+        onChange={handleInputChange}
+        className={
+          formData.telefone &&
+          !regexTelefone.test(formData.telefone.replace(/[\s()-]/g, '')) &&
+          !/^\d{10,11}$/.test(formData.telefone.replace(/[\s()-]/g, ''))
+            ? 'input-error'
+            : ''
+        }
+      />
+    </div>
+  </div>
+</section>
+
 
         {/* Peças e Serviços */}
         <div className="grid-50-50">
@@ -475,7 +471,7 @@ const OrcamentoGenerico = ({
                           checked={!!peca.selecionado}
                           onChange={() => handleToggleSelecionado("pecas", index)}
                         />
-                        <span className="checkbox-box"></span>
+                        <span className="checkbox-box" id="escuro"></span>
                         {peca.nome}
                       </label>
                     </td>

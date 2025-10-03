@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import './Login.css';
 import DynamicHeader from '../components/DynamicHeader';
+import Breadcrumbs from './Breadcrumbs';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -48,11 +49,12 @@ const Login = () => {
   };
 
   return (
-    <div className="login-page">
+    <div className="page-escuro">
       <DynamicHeader
         page="login"
         messages={[{ title: "Área Restrita", subtitle: "Acesso exclusivo para administradores." }] }
       />
+      <Breadcrumbs />
       <div className="login-wrapper">
         <div className="login-card">
           <h2 className="login-title">Login Admin</h2>
