@@ -261,9 +261,6 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
             <tbody>
               <tr id="info-row">
                 <td>
-                  Veículo: <span>{orcamento?.veiculo || ""}</span>
-                </td>
-                <td>
                   OS: <span>{orcamento?.ordemServico || ""}</span>
                 </td>
                 <td>
@@ -271,6 +268,15 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
                 </td>
                 <td>
                   Data: <span>{formattedDate}</span>
+                </td>
+                <td>
+                  Veículo: <span>{orcamento?.veiculo || ""}</span>
+                </td>
+                <td>
+                  Placa: <span>{orcamento?.placa || ""}</span>
+                </td>
+                <td>
+                  Telefone: <span>{orcamento?.telefone || ""}</span>
                 </td>
               </tr>
             </tbody>

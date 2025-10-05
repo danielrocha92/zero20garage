@@ -1,9 +1,29 @@
 .message-box {
-  margin-top: 15px;
-  padding: 12px;
+  /* O posicionamento agora é absoluto em relação à página,
+    permitindo que ele role junto com o conteúdo.
+  */
+  position: absolute;
+
+  /* A posição vertical ('top') e a transformação vertical
+    são controladas via JavaScript para aparecer na área visível do usuário.
+  */
+
+  /* A centralização horizontal é definida aqui */
+  left: 50%;
+
+  /* Garante que a mensagem apareça na frente de outros elementos */
+  z-index: 1000;
+
+  /* Estilos visuais */
+  min-width: 300px;
+  max-width: 90%;
+  padding: 12px 40px 12px 15px; /* Mais espaço à direita para o botão não sobrepor o texto */
   border-radius: 6px;
-  position: relative;
   font-size: 14px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
 }
 
 .message-box.success {
@@ -18,12 +38,19 @@
   color: #721c24;
 }
 
-.message-box button {
+.message-box .close-btn {
+  /* O botão é posicionado absolutamente em relação ao .message-box */
   position: absolute;
-  top: 8px;
-  right: 10px;
-  border: none;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%); /* Alinha o botão perfeitamente ao centro vertical */
+
+  /* Estilos visuais do botão */
   background: transparent;
-  font-weight: bold;
+  border: none;
+  color: inherit; /* Usa a cor do texto do container pai (.success ou .error) */
   cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1;
 }

@@ -144,7 +144,9 @@ const OrcamentoGenerico = ({
       totalMaoDeObraManual: formatNumberToCurrency(editingData.totalMaoDeObra),
       // O total geral não será carregado do editingData. Ele será recalculado.
       formaPagamento: editingData.formaPagamento || "",
-      observacoes: editingData.observacoes || "",
+      observacoes: editingData.observacoes
+        ? editingData.observacoes.replace(/(::.*)?(\(.*\))?/g, "").trim()
+        : "",
       status: editingData.status || "Aberto",
       pecas: itensData.map((pecaData) => {
         const pecaEdit = editingData.pecasSelecionadas?.find((p) => {
@@ -314,30 +316,33 @@ const OrcamentoGenerico = ({
     }
 
 
-    const formatarItens = (lista) =>
-      (lista || [])
-        .filter((i) => i.selecionado)
-        .map((item) => {
-          let nomeCompleto = item.nome;
-          if (item.temQuantidade && item.quantidade > 0)
-            nomeCompleto += `:: ${item.quantidade}`;
-          if (item.temQuantidade && item.medida > 0)
-            nomeCompleto += ` Medida: ${item.medida}`;
-          const subItensFormatados = (item.subItens || [])
-            .filter(
-              (sub) =>
-                (sub.type === "checkbox" && sub.value) ||
-                (sub.type === "text" && sub.value)
-            )
-            .map((sub) =>
-              sub.type === "checkbox"
-                ? sub.label
-                : `${sub.label}: ${sub.value}`
-            )
-            .join("; ");
-          if (subItensFormatados) nomeCompleto += ` (${subItensFormatados})`;
-          return nomeCompleto;
-        });
+const formatarItens = (lista) =>
+  (lista || [])
+    .filter((i) => i.selecionado)
+    .map((item) => {
+      // Remove duplicidades do nome
+      let nomeLimpo = item.nome.replace(/(::.*)?(\(.*\))?$/, "").trim();
+
+      let nomeCompleto = nomeLimpo;
+      if (item.temQuantidade && item.quantidade > 0)
+        nomeCompleto += `:: ${item.quantidade}`;
+      if (item.temQuantidade && item.medida > 0)
+        nomeCompleto += ` Medida: ${item.medida}`;
+      const subItensFormatados = (item.subItens || [])
+        .filter(
+          (sub) =>
+            (sub.type === "checkbox" && sub.value) ||
+            (sub.type === "text" && sub.value)
+        )
+        .map((sub) =>
+          sub.type === "checkbox"
+            ? sub.label
+            : `${sub.label}: ${sub.value}`
+        )
+        .join("; ");
+      if (subItensFormatados) nomeCompleto += ` (${subItensFormatados})`;
+      return nomeCompleto;
+    });
 
     // O valor total geral será o calculado, não o valor manual
     const valorTotalCalculado = parseCurrencyToNumber(totaisCalculados.valorTotal);

@@ -11,7 +11,7 @@ const OrcamentoItem = ({ nome, subitens = [], obs = "", qtd = "" }) => {
     <div className="orcamento-item">
       {/* Nome do item principal */}
       <h3 className="item-nome">
-        <span className="bullet">●</span> {nome}
+        <span className="bullet"></span> {nome}
       </h3>
 
       {/* Lista de subitens */}
@@ -19,7 +19,7 @@ const OrcamentoItem = ({ nome, subitens = [], obs = "", qtd = "" }) => {
         <ul className="subitens">
           {subitens.map((sub, i) => (
             <li key={i}>
-              <span className="bullet">●</span> {sub}
+              <span className="bullet"></span> {sub}
             </li>
           ))}
         </ul>
