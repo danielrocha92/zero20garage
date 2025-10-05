@@ -112,11 +112,28 @@
       }
     };
 
-    const formatarData = data => {
-      if (!data) return 'Data não disponível';
-      let d = new Date(data);
-      return !isNaN(d.getTime()) ? d.toLocaleString('pt-BR') : 'Data inválida';
-    };
+  const formatarData = (data) => {
+    if (!data) return 'Data não disponível';
+    const d = new Date(data);
+    if (isNaN(d.getTime())) return 'Data inválida';
+
+    const dataFormatada = d.toLocaleDateString('pt-BR', {
+      timeZone: 'America/Sao_Paulo',
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
+
+    const horaFormatada = d.toLocaleTimeString('pt-BR', {
+      timeZone: 'America/Sao_Paulo',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+
+    return `${dataFormatada} às ${horaFormatada}`;
+  };
+
+
 
     // --- Corrigido: Obter URL da imagem ---
     const getImagemUrl = (orcamento) => {
