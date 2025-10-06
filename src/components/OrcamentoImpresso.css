@@ -44,8 +44,8 @@ h1.titulo-impresso {
     margin: 0;
     text-align: left;
     flex-grow: 1;
-    word-break: break-word; /* Garante que o título quebre a linha */
-    min-width: 0; /* Permite que o título encolha corretamente no flex container */
+    word-break: break-word; 
+    min-width: 0; 
 }
 
 .logo-impresso {
@@ -55,7 +55,7 @@ h1.titulo-impresso {
     margin-left: 16px;
 }
 
-/* --- Info: Alinhamento e cor corrigidos --- */
+/* Info Section */
 .info-section {
     margin-bottom: 0.5px;
 }
@@ -63,12 +63,12 @@ h1.titulo-impresso {
 .info-container {
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Espaço entre as linhas de informação */
+    gap: 8px;
 }
 
 .info-row {
     display: flex;
-    flex-direction: column; /* Empilha os itens verticalmente em mobile */
+    flex-direction: column; 
     gap: 8px;
 }
 
@@ -76,14 +76,13 @@ h1.titulo-impresso {
     font-size: 12px;
     color: #333;
     white-space: normal;
-    font-weight: 700; /* Título em negrito */
-    word-break: break-word; /* Garante a quebra de linha */
+    font-weight: 700; 
+    word-break: break-word; 
 }
 
 .info-item span {
-    font-weight: 400; /* Valor normal */
+    font-weight: 400;
 }
-/* FIM DAS ALTERAÇÕES NO ESTILO GERAL */
 
 /* --- Itens (Peças e Serviços) --- */
 .items-section {
@@ -102,87 +101,54 @@ h1.titulo-impresso {
 
 .items-columns {
     display: grid;
-    grid-template-columns: 1fr; /* Define uma única coluna para o layout mobile */
+    grid-template-columns: 1fr;
     gap: 8px;
     list-style: none;
     margin: 0;
     padding: 0;
-    align-content: center;
-    align-items: center;
-    justify-items: start;
 }
 
-/* Cada item da lista */
+/* CORREÇÃO: Simplificação do alinhamento dos itens */
 .items-columns li {
     display: flex;
-    align-items: center; /* Ajustado para center (melhor visual para itens curtos) ou use flex-start se houver quebra de linha */
+    align-items: flex-start; /* Alinha o checkbox ao topo do texto, caso ele quebre a linha */
+    gap: 8px; /* Cria um espaço consistente entre o checkbox e o texto */
     font-size: 12px;
     color: #222;
     line-height: 1.4;
     padding: 2px 0;
-    white-space: normal;
-    overflow: visible;
-    text-overflow: unset;
 }
 
-/* NOVO: Estilo para o texto do item, garantindo espaçamento e flexibilidade */
-.list-item-impresso .item-text {
-    margin-left: 60px; /* Espaçamento entre o checkbox e o texto */
-    vertical-align: 06px;
-    line-height: 1.2; /* Adicionado para garantir o espaçamento da linha */
-}
-
-/* Estilo de utilidade para Checkbox Customizado */
-.checkbox-box {
-    margin-right: 0; /* Removido o margin-right para evitar espaçamento duplo */
-    flex-shrink: 0;
-    appearance: none;
-    -webkit-appearance: none;
-    height: 20px;
-    width: 20px;
-    border: 1px solid #f8f6f6;
-    border-radius: 50%;
-    cursor: pointer;
-    /* CORREÇÃO: Removido position:relative e top:3px que causa desalinhamento na impressão */
-    position: static;
-    top: unset;
-    background-color: transparent;
-}
-
-/* NOVO: Estilo para exibir a marca de checado (ponto centralizado) */
-.checkbox-box:checked::after {
-    /* É importante definir o content para que o ::after seja exibido */
-    content: '';
-
-    /* Torna-o um bloco para poder manipular tamanho e cor */
-    display: block;
-    width: 6px; /* Tamanho da marca */
-    height: 6px; /* Tamanho da marca */
-    background-color: #333; /* Cor preta para a marca de checado */
-    border-radius: 2px; /* Deixa a marca com cantos sutis */
-
-    /* Centraliza a marca dentro do checkbox usando absolute/transform */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-/* Estilo do checkbox via input[type="checkbox"] (mantido por redundância e segurança, mas o HTML usa .checkbox-box) */
+/* CORREÇÃO: Removida a margem negativa que causava problemas */
 .list-item-impresso input[type="checkbox"] {
-    margin-right: -50px;   /* Espaçamento natural entre checkbox e texto */
-    width: 12px;         /* Tamanho proporcional */
-    height: 12px;
-    flex-shrink: 0;
+    margin-right: 0; /* Removida a margem negativa de -50px */
+    width: 14px;         
+    height: 14px;
+    flex-shrink: 0; /* Impede que o checkbox encolha */
+    margin-top: 2px; /* Pequeno ajuste para alinhar verticalmente melhor com o texto */
     appearance: none;
     -webkit-appearance: none;
     border: 1px solid #333;
     border-radius: 3px;
     cursor: default;
     background-color: transparent;
-    display: inline-block;
-    vertical-align: middle; /* Alinha melhor com o texto */
 }
+
+/* CORREÇÃO: O texto agora se alinha naturalmente. O margin-left fixo foi removido. */
+.list-item-impresso .item-text {
+    margin-left: 0; 
+    word-break: break-word; /* Garante que palavras longas quebrem a linha */
+}
+
+/* Estilo opcional para quando o checkbox está marcado */
+.list-item-impresso input[type="checkbox"]:checked {
+    background-color: #333;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 
 /* --- Totais --- */
 .total-section {
@@ -194,7 +160,7 @@ h1.titulo-impresso {
     display: block;
     font-size: 13px;
     margin-top: 4px;
-    padding-top: 2;
+    padding-top: 2px;
     border-top: none;
     color: #333;
 }
@@ -255,8 +221,8 @@ h1.titulo-impresso {
     color: #222 !important;
 }
 
-/* --- Grid responsivo de imagens --- */
-.imagens-section h2 { /* Estilo para o título das imagens (Mobile First) */
+/* --- Grid de imagens --- */
+.imagens-section h2 { 
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 14px;
     color: #222;
@@ -303,7 +269,7 @@ h1.titulo-impresso {
 }
 
 .button {
-    padding: 20px;
+    padding: 12px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -328,18 +294,11 @@ h1.titulo-impresso {
     }
 
     .header-impresso {
-        flex-direction: row;
-        justify-content: space-between;
         align-items: flex-start;
     }
 
-    .logo-impresso {
-        width: 80px;
-        margin-top: 0;
-    }
-
     .info-row {
-        flex-direction: row; /* Itens lado a lado em desktop */
+        flex-direction: row;
         justify-content: space-between;
         gap: 16px;
     }
@@ -351,48 +310,27 @@ h1.titulo-impresso {
 
     .items-section h2 {
         font-size: 18px;
-        color: #222;
     }
 
     .items-columns {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1px;
-        justify-items: stretch;
-        position: relative;
-        align-items: left;
-        align-content: left;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        width: 100%;
-        box-sizing: border-box;
-        /* Adicionado para garantir que o conteúdo não ultrapasse */
-        overflow: hidden;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        hyphens: auto;
-        line-height: 1.4;
-        /* Fim das adições */
-        margin-bottom: 10px;
+        gap: 4px 16px; /* Espaçamento vertical e horizontal */
     }
 
+    /* CORREÇÃO: Removido o corte de texto */
     .items-columns li {
         font-size: 13px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: flex;
-        align-items: flex-start; /* mantém checkbox no topo quando texto quebra */
+        white-space: normal; /* Permite que o texto quebre a linha */
+        overflow: visible;
+        text-overflow: unset;
     }
 
-    .list-item-impresso .item-text { /* Desktop: Permite que o texto quebre dentro do flex: 1 */
-        white-space: nowrap;
-        align-items: center;
+    h1.titulo-impresso {
+        font-size: 18px;
     }
 
     .final-total {
         font-size: 18px;
-        color: #222;
     }
 
     .extra-info-section-impresso p {
@@ -411,54 +349,23 @@ h1.titulo-impresso {
         font-size: 18px;
     }
 
-    .thumb-img {
-        max-width: 200px;
-    }
-
     .orcamento-impresso-actions {
         flex-direction: row;
         justify-content: flex-end;
-        width: auto;
+        width: 100%;
     }
 
     .button {
         width: auto;
-        padding: 05px 10px;
+        padding: 10px 20px;
         font-size: 15px;
     }
-
-    h1.titulo-impresso {
-        font-family: 'Roboto Condensed', sans-serif;
-        font-size: 18px;
-        color: #222;
-        text-transform: uppercase;
-        font-weight: 700;
-        margin: 0;
-    }
 }
 
-/* --- Estilos de Impressão/PDF (Otimização html2canvas) --- */
-/* Classe que define o layout forçado (A4) para o html2canvas */
-.force-print-layout {
-    width: 794px !important;
-    max-width: none !important;
-    padding: 30px 40px !important;
-    box-shadow: none !important;
-    font-size: 14px;
-    line-height: 1.4;
-}
 
-/* NOVA CLASSE: Para remover o overflow do body durante a geração do PDF, sem estilo inline */
-.pdf-mode-body-overflow {
-    overflow: visible !important;
-}
-
-/* --- Estilos de impressão (Regra principal para o @media print) --- */
+/* --- Estilos de Impressão --- */
 @media print {
-
     body, html {
-        margin: 0;
-        padding: 0;
         background: white;
     }
 
@@ -468,127 +375,64 @@ h1.titulo-impresso {
     }
 
     .orcamento-impresso-container {
-        display: block !important;
-        background-color: white !important;
-        margin: 0 !important;
         padding: 0 !important;
-        width: 100%;
     }
 
     .orcamento-impresso-content {
         box-shadow: none !important;
-        padding: 40px 50px 30px 50px;
-        margin: 0 auto;
+        border-radius: 0;
+        padding: 0;
         width: 100%;
-        max-width: 794px;
-        box-sizing: border-box;
+        max-width: 100%;
     }
 
     .orcamento-impresso-actions {
         display: none !important;
     }
 
-    .header-impresso {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-
     .header-impresso h1 {
-        font-size: 24px;
-        max-width: 70%;
-        margin-bottom: 0;
+        font-size: 20px;
     }
 
     .logo-impresso {
-        width: 100px;
-        margin-top: 0;
-        position: static; /* Garantido que não usa absolute/relative problemático */
-        right: unset;
-        top: unset;
-    }
-
-    .info-row {
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 16px;
+        width: 90px;
     }
 
     .info-item {
-        flex: 1;
+        font-size: 12px;
+    }
+
+    .items-section h2 {
         font-size: 14px;
     }
-    /* FIM DAS ALTERAÇÕES NO @MEDIA PRINT */
 
     .items-columns {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px 20px;
+        gap: 5px 20px;
     }
 
     .items-columns li {
-        /* CORREÇÃO: Alinha o checkbox no topo do texto quebrado */
-        align-items: flex-start;
-        font-size: 14px;
+        font-size: 12px;
         white-space: normal;
-        overflow: visible;
-        text-overflow: unset;
-        /* Adicionado para garantir que o texto não corte */
-        word-wrap: break-word;
-        overflow-wrap: break-word;
+        word-break: break-word;
     }
 
-    .list-item-impresso .item-text { /* Impressão: Garante que o texto quebre */
-        white-space: normal;
-    }
-
-/* Dentro do @media print */
-
-/* O input[type="checkbox"] no print está com margin-right: -50px; o que é um erro. */
-.list-item-impresso input[type="checkbox"] {
-    /* AJUSTE: Redução da margem para um valor sensato ou remoção */
-    margin-right: 8px; /* Alinhamento com o que foi definido para o item-text */
-
-    /* ... outras propriedades mantidas ... */
-    appearance: none;
-    -webkit-appearance: none;
-    border: 1px solid #333;
-    border-radius: 4px;
-    cursor: default;
-    position: static;
-    top: unset;
-    background-color: var(checkbox-bg, transparent);
-}
-
-    /* CORREÇÃO: Adicionado para evitar quebra de bloco entre páginas */
+    /* Evita quebras de página em locais ruins */
     .total-section,
     .policy-footer {
         page-break-inside: avoid;
     }
 
     .total-line-impresso,
-    .final-total,
     .extra-info-section-impresso p,
     .policy-footer p,
     .policy-footer h4 {
-        font-size: 14px;
-        margin: 0;
-        padding: 0;
+        font-size: 12px;
     }
-
+    
     .final-total {
-        font-size: 18px;
+        font-size: 14px;
     }
-
-
-
-h1.titulo-impresso {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 16px;
-    color: #222;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin: 0;
 }
 
-}
