@@ -44,6 +44,8 @@ h1.titulo-impresso {
     margin: 0;
     text-align: left;
     flex-grow: 1;
+    word-break: break-word; /* Garante que o título quebre a linha */
+    min-width: 0; /* Permite que o título encolha corretamente no flex container */
 }
 
 .logo-impresso {
@@ -61,40 +63,25 @@ h1.titulo-impresso {
 .info-container {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 8px; /* Espaço entre as linhas de informação */
 }
 
 .info-row {
     display: flex;
-    justify-content: space-between;
-    gap: 16px;
+    flex-direction: column; /* Empilha os itens verticalmente em mobile */
+    gap: 8px;
 }
 
 .info-item {
-    flex: 1;
     font-size: 12px;
     color: #333;
     white-space: normal;
+    font-weight: 700; /* Título em negrito */
+    word-break: break-word; /* Garante a quebra de linha */
 }
 
-/* NOVO ESTILO: Sublinhado e formatação para os valores */
-.info-value {
-    display: inline-block;
-    border-bottom: 1px solid #333; /* Adiciona o sublinhado */
-    font-weight: 700;
-    color: #222;
-    padding-bottom: 4px;
-    width: 70%; /* Largura padrão para OS, Cliente, Data */
-    word-break: break-all;
-}
-
-/* NOVO ESTILO: Garante que a linha do Veículo ocupe toda a largura */
-#info-row-veiculo {
-    /* Esta regra pode ser ajustada se um comportamento diferente for necessário */
-}
-
-#info-row-veiculo .info-value {
-    width: 85%; /* Mais espaço para o campo Veículo que ocupa 100% da linha */
+.info-item span {
+    font-weight: 400; /* Valor normal */
 }
 /* FIM DAS ALTERAÇÕES NO ESTILO GERAL */
 
@@ -115,7 +102,7 @@ h1.titulo-impresso {
 
 .items-columns {
     display: grid;
-    grid-template-columns: repeat;
+    grid-template-columns: 1fr; /* Define uma única coluna para o layout mobile */
     gap: 8px;
     list-style: none;
     margin: 0;
@@ -351,14 +338,8 @@ h1.titulo-impresso {
         margin-top: 0;
     }
 
-    .info-container {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
     .info-row {
-        display: flex;
+        flex-direction: row; /* Itens lado a lado em desktop */
         justify-content: space-between;
         gap: 16px;
     }
@@ -366,8 +347,6 @@ h1.titulo-impresso {
     .info-item {
         flex: 1;
         font-size: 14px;
-        color: #333;
-        white-space: normal;
     }
 
     .items-section h2 {
@@ -529,14 +508,8 @@ h1.titulo-impresso {
         top: unset;
     }
 
-    .info-container {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
     .info-row {
-        display: flex;
+        flex-direction: row;
         justify-content: space-between;
         gap: 16px;
     }
@@ -544,25 +517,6 @@ h1.titulo-impresso {
     .info-item {
         flex: 1;
         font-size: 14px;
-        white-space: normal;
-    }
-
-    /* NOVO ESTILO: Garante que a linha do Veículo ocupe toda a largura na impressão */
-    #info-row-veiculo td {
-        flex: 1 1 100%;
-        width: 100%;
-        max-width: 100%;
-    }
-
-    /* NOVO ESTILO: Configuração do sublinhado na impressão (ajustando a largura) */
-    .info-value {
-        width: 70%; /* Largura padrão para OS, Cliente, Data */
-        border-bottom: 1px solid #333;
-        padding-bottom: 4px;
-    }
-
-    #info-row-veiculo .info-value {
-        width: 85%; /* Veículo mais longo */
     }
     /* FIM DAS ALTERAÇÕES NO @MEDIA PRINT */
 
