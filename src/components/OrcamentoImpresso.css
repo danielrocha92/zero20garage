@@ -28,26 +28,29 @@
 /* Cabeçalho */
 .header-impresso {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
     position: relative;
-    text-align: center;
 }
 
-.titulo-impresso h1 {
+h1.titulo-impresso {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 16px;
     color: #222;
     text-transform: uppercase;
     font-weight: 700;
-    margin: 30px 0;
+    margin: 0;
+    text-align: left;
+    flex-grow: 1;
 }
 
 .logo-impresso {
     width: 80px;
     height: auto;
-    margin-top: 8px;
+    margin-top: 0;
+    margin-left: 16px;
 }
 
 /* --- Info: Alinhamento e cor corrigidos --- */
@@ -55,19 +58,20 @@
     margin-bottom: 0.5px;
 }
 
-.info-table {
+.info-container {
     display: flex;
-    justify-content: center;
-    width: 100%;
-    flex-wrap: wrap;
-    gap: 8px 16px;
-    font-size: 15px;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.info-table td {
-    /* Permite que o td se expanda/contraia no layout flex */
-    flex: 1 1 auto;
-    min-width: 20%;
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.info-item {
+    flex: 1;
     font-size: 12px;
     color: #333;
     white-space: normal;
@@ -85,9 +89,8 @@
 }
 
 /* NOVO ESTILO: Garante que a linha do Veículo ocupe toda a largura */
-#info-row-veiculo td {
-    width: 100%;
-    flex: 1 1 100%;
+#info-row-veiculo {
+    /* Esta regra pode ser ajustada se um comportamento diferente for necessário */
 }
 
 #info-row-veiculo .info-value {
@@ -348,35 +351,23 @@
         margin-top: 0;
     }
 
-    .info-table {
-        margin: 0;
-        padding: 0;
+    .info-container {
         display: flex;
-        width: 100%;
-        flex-wrap: wrap;
-
-
-
-        justify-content: space-around;
-        gap: 6px 20px;
-        font-size: 20px;
-        text-align: left;
+        flex-direction: column;
+        gap: 8px;
     }
 
-    .info-table td {
-        display: contents;
-        align-items: center;
-        flex: 1 1 30%;
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+    }
 
-        max-width: 100%;
-
-
-        font-size: 20px;
-        min-width: 15%;
+    .info-item {
+        flex: 1;
+        font-size: 14px;
         color: #333;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        white-space: normal;
     }
 
     .items-section h2 {
@@ -457,13 +448,13 @@
         font-size: 15px;
     }
 
-    .titulo-impresso h1 {
+    h1.titulo-impresso {
         font-family: 'Roboto Condensed', sans-serif;
         font-size: 18px;
         color: #222;
         text-transform: uppercase;
         font-weight: 700;
-        margin: 30;
+        margin: 0;
     }
 }
 
@@ -538,23 +529,20 @@
         top: unset;
     }
 
-    .info-table {
-        margin: 0;
-        padding: 0;
+    .info-container {
         display: flex;
-        justify-content: flex-start; /* em vez de center */
-        width: 100%;
-        flex-wrap: wrap;
-        gap: 8px 16px;
-        font-size: 15px;
+        flex-direction: column;
+        gap: 8px;
     }
 
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+    }
 
-    .info-table td {
-        /* Os TD's que não são do Veículo devem ser distribuídos em 3 colunas */
-        flex: 1 1 200px;
-        min-width: 20%;
-        max-width: 100%;
+    .info-item {
+        flex: 1;
         font-size: 14px;
         white-space: normal;
     }
@@ -640,13 +628,13 @@
 
 
 
-.titulo-impresso h1 {
+h1.titulo-impresso {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 16px;
     color: #222;
     text-transform: uppercase;
     font-weight: 700;
-    margin: 30;
+    margin: 0;
 }
 
 }

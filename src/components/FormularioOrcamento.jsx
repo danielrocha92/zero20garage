@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './OrcamentoForms.css';
+import MessageBox from './MessageBox'; // 1. Importa o componente MessageBox
 
 // Utils para inicializar itens e formatar selecionados
 const inicializarItens = (itens) =>
@@ -34,9 +35,8 @@ const FormularioOrcamento = ({
   servicosData,
   onSubmit,
   editingData,
-  showMessageBox,
+  // As props relacionadas à mensagem continuam vindo do componente pai
   message,
-  showMessage,
   hideMessageBox,
   isErrorMessage
 }) => {
@@ -58,7 +58,7 @@ const FormularioOrcamento = ({
     status: 'Aberto',
   });
 
-  // Popula formulário com dados de edição
+  // Popula formulário com dados de edição (lógica mantida)
   useEffect(() => {
     if (editingData) {
       setFormData(prev => ({
@@ -138,6 +138,13 @@ const FormularioOrcamento = ({
 
   return (
     <div className="orcamento-form-container">
+      {/* 2. O MessageBox é renderizado aqui. Ele vai aparecer fixo no topo da tela */}
+      <MessageBox
+        message={message}
+        isError={isErrorMessage}
+        onClose={hideMessageBox}
+      />
+
       <h1>ORÇAMENTO</h1>
       <form onSubmit={handleSubmit}>
 
@@ -218,13 +225,7 @@ const FormularioOrcamento = ({
           </select>
         </section>
 
-        {/* Mensagem de alerta */}
-        {message && (
-          <div className={`message-box ${isErrorMessage ? 'error' : 'success'}`} onClick={hideMessageBox}>
-            <p>{message}</p>
-            <button onClick={hideMessageBox}>OK</button>
-          </div>
-        )}
+        {/* 3. O 'div' da mensagem que existia aqui foi removido */}
 
         <button type="submit">Salvar Orçamento</button>
       </form>

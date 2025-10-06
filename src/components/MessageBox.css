@@ -1,15 +1,19 @@
 .message-box {
-  /* O posicionamento agora é absoluto em relação à página,
-    permitindo que ele role junto com o conteúdo.
+  /* 'fixed' posiciona o elemento em relação à janela do navegador (viewport),
+    ignorando a rolagem da página.
   */
-  position: absolute;
+  position: fixed;
 
-  /* A posição vertical ('top') e a transformação vertical
-    são controladas via JavaScript para aparecer na área visível do usuário.
-  */
+  /* Posiciona o topo da caixa a 20px do topo da tela */
+  top: 20px;
 
-  /* A centralização horizontal é definida aqui */
+  /* Coloca a borda esquerda da caixa no meio da tela */
   left: 50%;
+
+  /* Puxa a caixa para a esquerda em 50% da SUA PRÓPRIA largura.
+     Este é o truque para a centralização horizontal perfeita.
+  */
+  transform: translateX(-50%);
 
   /* Garante que a mensagem apareça na frente de outros elementos */
   z-index: 1000;
