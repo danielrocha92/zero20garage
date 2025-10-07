@@ -3,27 +3,31 @@
 
 /* --- Estilos Gerais (Mobile First) --- */
 
+/* --- Estilos Gerais (Mobile First) --- */
+
 .orcamento-impresso-container {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 12px;
     background-color: #f4f4f4;
     font-family: 'Roboto', sans-serif;
+
+    /* ADICIONE A ALTURA MÍNIMA AQUI */
+    min-height: 100vh;
 }
 
 .orcamento-impresso-content {
-    padding-top: 20px;
     width: 100%;
-    max-width: 794px; /* Adicionado para consistência */
+    max-width: 794px;
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 12px;
+    padding: 20px;
     box-sizing: border-box;
-    color: #333;
+
+    /* REMOVA A ALTURA MÍNIMA DAQUI */
+    /* min-height: 100vh; */
 }
 
 /* Cabeçalho */
@@ -44,8 +48,8 @@ h1.titulo-impresso {
     margin: 0;
     text-align: left;
     flex-grow: 1;
-    word-break: break-word; 
-    min-width: 0; 
+    word-break: break-word;
+    min-width: 0;
 }
 
 .logo-impresso {
@@ -68,15 +72,17 @@ h1.titulo-impresso {
 
 .info-row {
     display: flex;
-    flex-direction: column; 
+    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
+    flex-direction: column;
     gap: 8px;
 }
 
 .info-item {
     font-size: 12px;
     color: #333;
-    font-weight: 700; 
-    word-break: break-word; 
+    font-weight: 700;
+    word-break: break-word;
+    flex: 1 1 100%; /* Ocupa toda a largura em telas pequenas */
 }
 
 .info-item span {
@@ -109,8 +115,8 @@ h1.titulo-impresso {
 
 .items-columns li {
     display: flex;
-    align-items: flex-start; 
-    gap: 8px; 
+    align-items: flex-start;
+    gap: 8px;
     font-size: 12px;
     color: #222;
     line-height: 1.4;
@@ -119,10 +125,10 @@ h1.titulo-impresso {
 
 .list-item-impresso input[type="checkbox"] {
     margin: 0;
-    width: 14px;         
+    width: 14px;
     height: 14px;
-    flex-shrink: 0; 
-    margin-top: 3px; 
+    flex-shrink: 0;
+    margin-top: 3px;
     appearance: none;
     -webkit-appearance: none;
     border: 1px solid #333;
@@ -132,7 +138,7 @@ h1.titulo-impresso {
 }
 
 .list-item-impresso .item-text {
-    margin-left: 0; 
+    margin-left: 0;
     word-break: break-word;
 }
 
@@ -214,7 +220,7 @@ h1.titulo-impresso {
     margin-top: 16px;
 }
 
-.imagens-section h2 { 
+.imagens-section h2 {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 14px;
     color: #222;
@@ -280,13 +286,14 @@ h1.titulo-impresso {
     h1.titulo-impresso {
         font-size: 18px;
     }
-    
+
     .info-row {
         flex-direction: row;
         gap: 16px;
     }
 
     .info-item {
+        flex: 1 1 0; /* Distribui o espaço igualmente em telas maiores */
         font-size: 14px;
     }
 
@@ -301,7 +308,7 @@ h1.titulo-impresso {
 
     .items-columns li {
         font-size: 13px;
-        white-space: normal; 
+        white-space: normal;
     }
 
     .final-total {
@@ -350,4 +357,3 @@ h1.titulo-impresso {
     .final-total { font-size: 14px !important; }
     .total-section, .policy-footer { page-break-inside: avoid; }
 }
-

@@ -1,95 +1,46 @@
-  import React, { useState, useEffect } from 'react';
-  import axios from 'axios';
-  import './HistoricoOrcamentos.css';
+  import React, { useState } from 'react';
   import { FaEye, FaEdit, FaTrash } from 'react-icons/fa';
+  import axios from 'axios'; // Mover para baixo para agrupar com o código que o usa
+  import './Modal.css'; // Importa o CSS centralizado
+  import './HistoricoOrcamentos.css';
 
-  const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com/api/orcamentos';
-  const PAGE_SIZE = 10;
-
-  // --- Modal Customizado ---
   const CustomModal = ({ isOpen, title, message, onConfirm, onCancel, confirmText = 'OK', cancelText = 'Cancelar', showCancel = false }) => {
     if (!isOpen) return null;
     return (
-      <div className="custom-modal-overlay">
-        <div className="custom-modal">
+      <div className="modal-overlay">
+        <div className="modal-container">
           <h3>{title}</h3>
           <p>{message}</p>
           <div className="modal-actions">
-            {showCancel && <button onClick={onCancel} className="cancel-btn">{cancelText}</button>}
-            <button onClick={onConfirm} className="confirm-btn">{confirmText}</button>
+            {showCancel && <button onClick={onCancel} className="modal-btn cancel">{cancelText}</button>}
+            <button onClick={onConfirm} className="modal-btn confirm">{confirmText}</button>
           </div>
         </div>
       </div>
     );
   };
 
-  const HistoricoOrcamentos = ({ historico: historicoProp = [], fetchMore, hasMore: hasMoreProp = true, loading: loadingProp = false, onEditarOrcamento, onViewBudget, onClose }) => {
-    const [historico, setHistorico] = useState(historicoProp);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [lastDocId, setLastDocId] = useState(null);
-    const [hasMore, setHasMore] = useState(hasMoreProp);
+  const HistoricoOrcamentos = ({ historico = [], hasMore = false, loading = false, fetchMore, onEditarOrcamento, onViewBudget, onOrcamentoDeleted, onClose }) => {
     const [modalConfig, setModalConfig] = useState({ isOpen: false, title: '', message: '', onConfirm: null, onCancel: null, confirmText: 'OK', cancelText: 'Cancelar', showCancel: false });
 
     const abrirModal = (config) => setModalConfig({ ...modalConfig, isOpen: true, ...config });
     const fecharModal = () => setModalConfig({ ...modalConfig, isOpen: false });
 
     const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
-
-    // --- Buscar histórico via cursor ---
-    const buscarHistorico = async () => {
-      if (loading) return;
-      setLoading(true);
-      setError(null);
-
-      try {
-        const res = await axios.get(`${API_BASE_URL}`, {
-          params: { size: PAGE_SIZE, lastId: lastDocId || undefined },
-          headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
-        });
-
-        const data = res.data;
-        const novosOrcamentos = data.orcamentos?.map(orc => ({ ...orc, imagens: orc.imagens || [] })) || [];
-
-        setHistorico(prev => {
-          const combined = [...prev, ...novosOrcamentos];
-          const unique = combined.filter((orc, index, self) => index === self.findIndex(o => o.id === orc.id));
-          return unique;
-        });
-
-        setLastDocId(data.lastDocId);
-        setHasMore(data.lastDocId !== null && novosOrcamentos.length > 0);
-      } catch (err) {
-        console.error('Erro ao buscar histórico:', err);
-        let mensagemErro = 'Erro ao carregar histórico de orçamentos.';
-        if (err.response?.data?.erro) mensagemErro += ` Detalhes: ${err.response.data.erro}`;
-        else if (err.message) mensagemErro += ` (${err.message})`;
-        setError(mensagemErro);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    useEffect(() => {
-      setHistorico(historicoProp);
-      setHasMore(hasMoreProp);
-      setLastDocId(null);
-    }, [historicoProp, hasMoreProp]);
+    const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com/api/orcamentos';
 
     const handleExcluirOrcamento = (orcamento) => {
       abrirModal({
         title: 'Confirmar Exclusão',
         message: `Tem certeza que deseja excluir o orçamento de ${orcamento.cliente || 'cliente desconhecido'} (OS: ${orcamento.ordemServico || '-'})?`,
-        confirmText: 'Sim, excluir',
-        cancelText: 'Cancelar',
-        showCancel: true,
+        confirmText: 'Sim, Excluir', showCancel: true,
         onConfirm: async () => {
           fecharModal();
           try {
             await axios.delete(`${API_BASE_URL}/${orcamento.id}`, {
               headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
             });
-            setHistorico(prev => prev.filter(h => h.id !== orcamento.id));
+            onOrcamentoDeleted(orcamento.id); // Notifica o componente pai
             abrirModal({ title: 'Sucesso', message: 'Orçamento excluído com sucesso!', confirmText: 'OK', showCancel: false, onConfirm: fecharModal });
           } catch (err) {
             console.error('Erro ao excluir orçamento:', err);
@@ -154,13 +105,11 @@
       return loadedImages.filter(Boolean);
     };
 
-    const handleEditar = async (orcamento) => {
-      const imagensPreload = await preloadImages(orcamento);
+    const handleEditar = async (orcamento) => {      const imagensPreload = await preloadImages(orcamento);
       onEditarOrcamento({ ...orcamento, imagens: imagensPreload });
     };
 
     if (loading && historico.length === 0) return <div className="loading-message">Carregando histórico...</div>;
-    if (error && historico.length === 0) return <div className="error-message">{error}</div>;
     if (historico.length === 0) return <div className="no-data-message">Nenhum orçamento encontrado.</div>;
 
     return (
@@ -261,7 +210,7 @@
         <CustomModal {...modalConfig} />
 
         {/* Carregar mais */}
-        {hasMore && !loading && <div className="load-more"><button onClick={buscarHistorico}>Carregar Mais</button></div>}
+        {hasMore && !loading && <div className="load-more"><button onClick={() => fetchMore(true)}>Carregar Mais</button></div>}
         {loading && historico.length > 0 && <div className="loading-more">Carregando mais...</div>}
       </div>
     );

@@ -1,0 +1,15 @@
+/* Estilo para o container dos itens do orçamento */
+.items-columns {
+  /* Por padrão (mobile), os itens ficam em uma única coluna. */
+  column-count: 1;
+}
+
+/* Quando a tela tiver 768px de largura ou mais (tablets/desktops),
+  o layout mudará para duas colunas.
+*/
+@media (min-width: 768px) {
+  .items-columns {
+    column-count: 2;
+    column-gap: 20px; /* Adiciona um espaço entre as colunas */
+  }
+}

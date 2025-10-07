@@ -1,7 +1,8 @@
 /* =================================
-   VARIÁVEIS DE COR E ESTILO
+   BASE E CONTAINER PRINCIPAL
    ================================= */
-:root {
+.orcamento-container {
+  /* --- Variáveis de Cor Escopadas --- */
   --color-bg: #1a1a1a;
   --color-card: #2a2a2a;
   --color-text: #e0e0e0;
@@ -20,12 +21,8 @@
   --color-light-gray: #bbb;
   --color-calculated-text: #9ae29f;
   --color-calculated-border: #2d9933;
-}
 
-/* =================================
-   BASE E CONTAINER PRINCIPAL
-   ================================= */
-.orcamento-container {
+  /* --- Estilos do Container --- */
   background-color: var(--color-card);
   color: var(--color-text);
   padding: 25px;
@@ -167,11 +164,11 @@ textarea:focus {
 }
 
 .checkbox-box, escuro {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   background-color: var(--color-bg);
   border: 2px solid var(--color-input-border);
-  border-radius: 4px;
+  border-radius: 50%;
   position: relative;
   flex-shrink: 0;
   transition: border-color 0.2s;
@@ -310,13 +307,30 @@ textarea:focus {
    MENSAGEM DE SUCESSO/ERRO
    ================================= */
 .message-box {
-  margin-top: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
   padding: 15px;
   border-radius: 8px;
   font-weight: bold;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 1000; /* Garante que fique sobre outros elementos */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.message-box-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 }
 
 .message-box.success {

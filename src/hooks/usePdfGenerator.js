@@ -55,24 +55,33 @@ export const usePdfGenerator = (componentRef) => {
     if (!element || isGenerating) return;
 
     setIsGenerating(true);
-    document.body.classList.add("pdf-mode-body-overflow");
-    element.classList.add("force-print-layout");
+
+    // Adiciona uma classe ao container para controlar o layout de impressão via CSS
+    const container = element.parentElement;
+    if (container) {
+      container.classList.add('pdf-generating');
+    }
 
     try {
       await sleep(300);
       const canvas = await html2canvas(element, {
         scale: 2,
         useCORS: true,
+        backgroundColor: '#ffffff', // Garante um fundo branco para o canvas
         scrollY: -window.scrollY,
         windowWidth: element.scrollWidth,
+        logging: false,
       });
 
       const imgData = canvas.toDataURL("image/png");
-      const pdfWidth = 210;
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-      const pdf = new jsPDF("portrait", "mm", [pdfWidth, pdfHeight]);
+      const pdfWidth = 210; // A4 width in mm
+      const margin = 10; // Margem em mm
+      const contentWidth = pdfWidth - 2 * margin;
+      const contentHeight = (canvas.height * contentWidth) / canvas.width;
+      const pdfHeight = contentHeight + 2 * margin;
 
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      const pdf = new jsPDF("portrait", "mm", [pdfWidth, pdfHeight]);
+      pdf.addImage(imgData, "PNG", margin, margin, contentWidth, contentHeight);
 
       // Adiciona as imagens originais em alta resolução nas páginas seguintes
       await appendOriginalImagesToPdf(pdf, orcamento?.imagens || []);
@@ -85,8 +94,10 @@ export const usePdfGenerator = (componentRef) => {
     } catch (error) {
       console.error("Erro ao gerar PDF:", error);
     } finally {
-      document.body.classList.remove("pdf-mode-body-overflow");
-      element.classList.remove("force-print-layout");
+      // Remove a classe para restaurar o layout original da tela
+      if (container) {
+        container.classList.remove('pdf-generating');
+      }
       setIsGenerating(false);
     }
   }, [componentRef, isGenerating]);

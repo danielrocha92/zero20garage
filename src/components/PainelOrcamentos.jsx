@@ -11,6 +11,7 @@ import OrcamentoCabecote from './OrcamentoCabecote';
 import OrcamentoMotorCompleto from './OrcamentoMotorCompleto';
 import HistoricoOrcamentos from './HistoricoOrcamentos';
 import OrcamentoImpresso from './OrcamentoImpresso';
+import './Modal.css'; // Importa o CSS centralizado para modais
 import './PainelOrcamentos.css';
 
 const UploadImagemOrcamento = React.lazy(() => import('./UploadImagemOrcamento'));
@@ -43,7 +44,7 @@ const PainelOrcamentos = () => {
 
   // --- Fetch histórico com cursor e cache ---
   const fetchHistorico = useCallback(async (loadMore = false) => {
-    if (loadingHistorico) return;
+    if (loadingHistorico || (loadMore && !hasMore)) return;
     setLoadingHistorico(true);
     try {
       const url = new URL(`${API_BASE_URL}/api/orcamentos`);
@@ -51,9 +52,9 @@ const PainelOrcamentos = () => {
       if (loadMore && lastDocId) url.searchParams.append('lastId', lastDocId);
 
       const cacheKey = url.toString();
-      if (window._historicoCache && window._historicoCache[cacheKey]) {
+      if (!loadMore && window._historicoCache && window._historicoCache[cacheKey]) {
         const cachedData = window._historicoCache[cacheKey];
-        setHistorico(prev => loadMore ? [...prev, ...cachedData.orcamentos] : cachedData.orcamentos);
+        setHistorico(cachedData.orcamentos);
         setLastDocId(cachedData.lastDocId);
         setHasMore(cachedData.orcamentos.length > 0 && cachedData.lastDocId !== null);
         setLoadingHistorico(false);
@@ -72,8 +73,10 @@ const PainelOrcamentos = () => {
       setLastDocId(data.lastDocId);
       setHasMore(novosOrcamentos.length > 0 && data.lastDocId !== null);
 
-      window._historicoCache = window._historicoCache || {};
-      window._historicoCache[cacheKey] = data;
+      if (!loadMore) {
+        window._historicoCache = window._historicoCache || {};
+        window._historicoCache[cacheKey] = data;
+      }
 
     } catch (error) {
       console.error('Erro ao buscar histórico:', error);
@@ -81,10 +84,10 @@ const PainelOrcamentos = () => {
     } finally {
       setLoadingHistorico(false);
     }
-  }, [authToken, lastDocId, loadingHistorico]);
+  }, [authToken, lastDocId, loadingHistorico, hasMore]);
 
   useEffect(() => {
-    fetchHistorico();
+    fetchHistorico(false); // Garante que a busca inicial não seja de "load more"
   }, [fetchHistorico]);
 
   // --- Salvar orçamento ---
@@ -109,7 +112,7 @@ const PainelOrcamentos = () => {
 
       if (res.ok) {
         showMessageBox(`Orçamento ${method === 'POST' ? 'criado' : 'atualizado'} com sucesso.`);
-        fetchHistorico();
+        fetchHistorico(false); // Recarrega o histórico do início
         setEditingData(null);
       } else {
         showMessageBox(`Erro ao salvar: ${result.msg || 'Erro desconhecido'}`);
@@ -227,12 +230,23 @@ const PainelOrcamentos = () => {
     });
   }, [editingData]);
 
+  // --- NOVO: Função para remover um orçamento do estado local após exclusão ---
+  const handleOrcamentoDeleted = (orcamentoId) => {
+    setHistorico(prev => prev.filter(h => h.id !== orcamentoId));
+  };
+
   return (
     <div className="painel-orcamentos-container">
       {showMessage && (
-        <div className="message-box">
-          <span>{message}</span>
-          <button onClick={() => setShowMessage(false)}>&times;</button>
+        <div className="modal-overlay" onClick={() => setShowMessage(false)}>
+          <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+            {/* O título pode ser dinâmico, mas por enquanto será fixo */}
+            <h3>Aviso</h3>
+            <p>{message}</p>
+            <div className="modal-actions">
+              <button onClick={() => setShowMessage(false)} className="modal-btn confirm">Fechar</button>
+            </div>
+          </div>
         </div>
       )}
 
@@ -240,46 +254,48 @@ const PainelOrcamentos = () => {
         <OrcamentoImpresso orcamento={selectedBudgetForView} onClose={handleCloseView} />
       ) : (
         <>
-        <div className="highlight-card">
           <h1 className="titulo-escuro">Painel de Orçamentos</h1>
 
-          {/* Cards principais */}
-          <div className="highlight-item">
-          <div className="cards-container">
-            <div className={`card-option ${tipo === 'motor' ? 'active' : ''}`} onClick={() => { setTipo('motor'); setEditingData(null); }}>
-              <FaCogs size={40} />
-              <span>Orçamento Motor Completo</span>
-            </div>
-            <div className={`card-option ${tipo === 'cabecote' ? 'active' : ''}`} onClick={() => { setTipo('cabecote'); setEditingData(null); }}>
-              <FaTools size={40} />
-              <span>Orçamento Cabeçote</span>
-            </div>
-            <div className="card-option" onClick={scrollToHistorico}>
-              <FaHistory size={40} />
-              <span>Histórico de Orçamentos</span>
-            </div>
-          </div>
-          </div>
-          </div>
           <div className="highlight-card">
-          <h1 className="titulo-escuro">Exportação</h1>
-          {/* Cards de exportação */}
-          <div className="highlight-item">
-          <div className="cards-container">
-            <div className="card-option" onClick={exportarExcel}>
-              <FaFileExcel size={40} color="green" />
-              <span>Exportar Excel</span>
-            </div>
-            <div className="card-option" onClick={exportarPDFCompleto}>
-              <FaFilePdf size={40} color="red" />
-              <span>Exportar PDF</span>
-            </div>
-            <div className="card-option" onClick={handleLogout}>
-              <FaSignOutAlt size={40} color="gray" />
-              <span>Sair</span>
+            <h2 className="titulo-escuro">Novo Orçamento</h2>
+            {/* Cards principais */}
+            <div className="highlight-item">
+              <div className="cards-container">
+                <div className={`card-option ${tipo === 'motor' ? 'active' : ''}`} onClick={() => { setTipo('motor'); setEditingData(null); }}>
+                  <FaCogs size={40} />
+                  <span>Orçamento Motor Completo</span>
+                </div>
+                <div className={`card-option ${tipo === 'cabecote' ? 'active' : ''}`} onClick={() => { setTipo('cabecote'); setEditingData(null); }}>
+                  <FaTools size={40} />
+                  <span>Orçamento Cabeçote</span>
+                </div>
+                <div className="card-option" onClick={scrollToHistorico}>
+                  <FaHistory size={40} />
+                  <span>Histórico de Orçamentos</span>
+                </div>
+              </div>
             </div>
           </div>
-          </div>
+
+          <div className="highlight-card">
+            <h2 className="titulo-escuro">Ações</h2>
+            {/* Cards de exportação e logout */}
+            <div className="highlight-item">
+              <div className="cards-container">
+                <div className="card-option" onClick={exportarExcel}>
+                  <FaFileExcel size={40} color="green" />
+                  <span>Exportar Excel</span>
+                </div>
+                <div className="card-option" onClick={exportarPDFCompleto}>
+                  <FaFilePdf size={40} color="red" />
+                  <span>Exportar PDF</span>
+                </div>
+                <div className="card-option" onClick={handleLogout}>
+                  <FaSignOutAlt size={40} color="gray" />
+                  <span>Sair</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           <main className="orcamento-form-wrapper" id="orcamento-form">
@@ -304,6 +320,7 @@ const PainelOrcamentos = () => {
               historico={historico}
               onEditarOrcamento={handleEditarOrcamento}
               onViewBudget={handleViewBudget}
+              onOrcamentoDeleted={handleOrcamentoDeleted}
               fetchMore={fetchHistorico}
               hasMore={hasMore}
               loading={loadingHistorico}

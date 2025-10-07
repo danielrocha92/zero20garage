@@ -4,16 +4,20 @@ import ".//OrcamentoGenerico.css";
 const OrcamentoGenerico = ({
   onSubmit,
   editingData,
-  showMessage,
-  hideMessageBox,
-  message,
-  isErrorMessage,
   orcamentoData,
   titulo,
 }) => {
   // Regex para validação de entrada
   const regexTelefone = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/; // (XX) XXXX-XXXX, XXXXXXXXXXX, (XX) 9XXXX-XXXX
   const regexPlaca = /^[A-Z]{3}[0-9]{4}$|^[A-Z]{3}[0-9][A-Z][0-9]{2}$/i; // AAA1234 ou AAA0A00 (Mercosul)
+
+  // --- NOVO: Estado local para mensagens ---
+  const [localMessage, setLocalMessage] = useState({ text: '', isError: false });
+
+  const showLocalMessage = (text, isError = false, duration = 4000) => {
+    setLocalMessage({ text, isError });
+    setTimeout(() => setLocalMessage({ text: '', isError: false }), duration);
+  };
 
   // Evita acessar propriedades quando orcamentoData for undefined
   const itensData = useMemo(
@@ -297,7 +301,7 @@ const OrcamentoGenerico = ({
 
     // 1. Validação do Cliente
     if (!formData.nome) {
-      showMessage && showMessage("O campo Cliente é obrigatório!", true);
+      showLocalMessage("O campo Cliente é obrigatório!", true);
       return;
     }
 
@@ -305,13 +309,13 @@ const OrcamentoGenerico = ({
     // Limpa o telefone para verificar só os dígitos ou caracteres esperados
     const telefoneLimpo = formData.telefone.replace(/[\s()-]/g, "");
     if (formData.telefone && !regexTelefone.test(formData.telefone) && !/^\d{10,11}$/.test(telefoneLimpo)) {
-        showMessage && showMessage("Telefone inválido! Formatos aceitos: (XX) XXXXX-XXXX ou XXXXXXXXXXX (somente dígitos)", true);
+        showLocalMessage("Telefone inválido! Formatos aceitos: (XX) XXXXX-XXXX ou XXXXXXXXXXX (somente dígitos)", true);
         return;
     }
 
     // 3. Validação da Placa
     if (formData.placa && !regexPlaca.test(formData.placa.toUpperCase())) {
-        showMessage && showMessage("Placa inválida! Formatos aceitos: AAA0A00 (Mercosul) ou AAA1234", true);
+        showLocalMessage("Placa inválida! Formatos aceitos: AAA0A00 (Mercosul) ou AAA1234", true);
         return;
     }
 
@@ -691,10 +695,12 @@ const formatarItens = (lista) =>
           </button>
         </div>
 
-        {message && (
-          <div className={`message-box ${isErrorMessage ? "error" : "success"}`}>
-            <span>{message}</span>
-            <button onClick={hideMessageBox}>X</button>
+        {localMessage.text && (
+          <div className={`message-box ${localMessage.isError ? "error" : "success"}`}>
+            <span>{localMessage.text}</span>
+            <button onClick={() => setLocalMessage({ text: '', isError: false })}>
+              &times;
+            </button>
           </div>
         )}
       </form>

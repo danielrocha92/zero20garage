@@ -9,12 +9,10 @@
     min-height: 100vh;
     background-color: rgb(11 11 11 / 60%);
     backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2);
     padding: 1.5rem;
     width: 100%;
-    color: var(--cinza-claro, #e0e0e0);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -148,7 +146,7 @@
     background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23e0e0e0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
     background-repeat: no-repeat;
     background-position: right 0px center;
-    background-size: 14px;
+    background-size: 10px;
     padding-right: 6px;
     cursor: pointer;
 }
@@ -429,39 +427,6 @@
 * === Mensagens de Alerta ===
 * Estilos para caixas de mensagens (sucesso, erro, etc.).
 */
-.message-box {
-    position: fixed;
-    top: 32px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-    background: #fff;
-    color: #222;
-    border: 2px solid #ff0015;
-    border-radius: 12px;
-    background: #2a2a2a;
-    color: #fff;
-    border: 2px solid #c50404;
-    border-radius: 8px;
-    padding: 1rem 2.5rem 1rem 1rem;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
-    font-size: 1.1rem;
-    min-width: 280px;
-    max-width: 90vw;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    animation: fadeInDown 0.3s;
-}
-
-.message-box button {
-    background: none;
-    border: none;
-    color: #c50404;
-    font-size: 1.5rem;
-    cursor: pointer;
-    margin-left: auto;
-}
 
 @keyframes fadeInDown {
     from { opacity: 0; transform: translate(-50%, -30px);}
