@@ -110,13 +110,13 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
 
       {/* Ações */}
       <div className="orcamento-impresso-actions">
-        <button className="button" onClick={() => generatePdf(orcamento)} disabled={isPdfGenerating}>
+        <button className="ctn-button" onClick={() => generatePdf(orcamento)} disabled={isPdfGenerating}>
           {isPdfGenerating ? "Gerando PDF..." : "Gerar PDF"}
         </button>
-        <button className="button" onClick={() => exportToExcel(orcamento)} disabled={isPdfGenerating}>
+        <button className="ctn-button" onClick={() => exportToExcel(orcamento)} disabled={isPdfGenerating}>
           Exportar Excel
         </button>
-        <button className="button" onClick={handleVoltarPainel} disabled={isPdfGenerating}>
+        <button className="ctn-button" onClick={handleVoltarPainel} disabled={isPdfGenerating}>
           Fechar
         </button>
       </div>
