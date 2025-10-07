@@ -51,22 +51,25 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
 
         {/* Informações */}
         <section className="info-section">
-          <div className="info-container">
-            <div className="info-row">
-              <div className="info-item">OS: <span>{orcamento.ordemServico || ""}</span></div>
-              <div className="info-item">Cliente: <span>{orcamento.cliente || ""}</span></div>
-              <div className="info-item">Data: <span>{formatDate(orcamento.data || new Date())}</span></div>
-            </div>
-            <div className="info-row" id="info-row-veiculo">
-              <div className="info-item">Veículo: <span>{orcamento.veiculo || ""}</span></div>
-              <div className="info-item">Placa: <span>{orcamento.placa || ""}</span></div>
-              <div className="info-item">Telefone: <span>{orcamento.telefone || ""}</span></div>
-            </div>
-          </div>
+          <table className="info-table">
+            <tbody>
+              <tr>
+                <td className="info-item">OS: <span>{orcamento.ordemServico || ""}</span></td>
+                <td className="info-item">Cliente: <span>{orcamento.cliente || ""}</span></td>
+                <td className="info-item">Data: <span>{formatDate(orcamento.data || new Date())}</span></td>
+              </tr>
+              <tr>
+                <td className="info-item">Veículo: <span>{orcamento.veiculo || ""}</span></td>
+                <td className="info-item">Placa: <span>{orcamento.placa || ""}</span></td>
+                <td className="info-item">Telefone: <span>{orcamento.telefone || ""}</span></td>
+              </tr>
+            </tbody>
+          </table>
         </section>
 
         {/* Peças e Serviços */}
         <BudgetSection
+          id="pecas-section"
           title="Peças"
           items={orcamento.pecasSelecionadas}
           total={orcamento.valorTotalPecas}
@@ -74,6 +77,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
         />
 
         <BudgetSection
+          id="servicos-section"
           title="Serviços - Retífica"
           items={orcamento.servicosSelecionados}
           total={orcamento.valorTotalServicos}
@@ -103,7 +107,13 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
         {showImages && <ImagensVeiculo imagens={orcamento.imagens} />}
 
         <section className="policy-footer">
-          {/* ... conteúdo da política de garantia ... */}
+          <h4>Política de Garantia, Troca e Devolução</h4>
+          <p>A garantia dos serviços realizados pela Zero 20 Garage é válida apenas se o veículo for utilizado conforme as orientações da oficina, incluindo manutenções em dia, uso adequado de combustíveis e respeito aos prazos de revisão. Clientes com pagamentos pendentes não terão direito à garantia, sendo que a mesma só pode ser ativada mediante apresentação do orçamento.</p>
+          <p>O documento comprova a realização dos serviços e/ou compra das peças para o motor completo, mediante contato com a oficina para análise do problema. A Zero 20 Garage preza pela qualidade dos serviços prestados e realiza todos os procedimentos com base em diagnósticos técnicos e profissionais qualificados.</p>
+          <p>Em casos de avarias, se o veículo apresentar danos ou acidentes ocasionados por fenômenos da natureza ou da ação de terceiros, a garantia não será válida.</p>
+          <p>Em caso de uso incorreto ou desgaste natural de componentes, o cliente poderá solicitar a análise do caso.</p>
+          <p>Não haverá reembolso de peças já instaladas no veículo, sob nenhuma circunstância.</p>
+          <p className="policy-acceptance">Ao aceitar o orçamento e iniciar o serviço com a Zero 20 Garage, o cliente declara estar ciente e de acordo com os termos descritos acima.</p>
         </section>
 
       </div>
