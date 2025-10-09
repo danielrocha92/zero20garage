@@ -1,11 +1,11 @@
 // src/components/OrcamentoImpresso.jsx
 import React, { useRef } from "react";
-import "./OrcamentoImpresso.css";
-import logo from "../assets/images/background.jpg";
-import { usePdfGenerator } from "../hooks/usePdfGenerator";
-import { useExcelExporter } from "../hooks/useExcelExporter";
-import { formatDate, formatValue } from "../utils/formatters";
-import BudgetSection from "./BudgetSection";
+import "../../styles/OrcamentoImpresso.css";
+import logo from "../../assets/images/background.jpg";
+import { usePdfGenerator } from "../../hooks/usePdfGenerator";
+import { useExcelExporter } from "../../hooks/useExcelExporter";
+import { formatDate, formatValue } from "../../utils/formatters";
+import BudgetSection from "../BudgetSection";
 
 // Componente para as imagens, pode até ficar no mesmo arquivo se for pequeno.
 const ImagensVeiculo = ({ imagens }) => (

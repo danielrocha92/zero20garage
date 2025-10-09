@@ -1,8 +1,8 @@
 // pages/NotFound.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import DynamicHeader from '../../components/DynamicHeader';
-import Breadcrumbs from '../../components/Breadcrumbs';
+import DynamicHeader from '../../components/ui/DynamicHeader';
+import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import './NotFound.css';
 
 const NotFound = () => {

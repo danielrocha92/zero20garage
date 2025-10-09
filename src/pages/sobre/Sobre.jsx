@@ -4,11 +4,11 @@ import './Sobre.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import DynamicHeader from '../../components/DynamicHeader';
+import DynamicHeader from '../../components/ui/DynamicHeader';
 
-import ContatoCta from '../../components/ContatoCta';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import TestimonialsCarousel from '../../components/TestimonialsCarousel';
+import ContatoCta from '../../components/ui/ContatoCta';
+import Breadcrumbs from '../../components/ui/Breadcrumbs';
+import TestimonialsCarousel from '../../components/ui/TestimonialsCarousel';
 import Slider from 'react-slick';
 // Importando imagens
 import equipe from '../../assets/images/equipe.jpg';

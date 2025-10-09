@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../styles/Blog.css';
-import DynamicHeader from '../../components/DynamicHeader';
-import Breadcrumbs from '../../components/Breadcrumbs';
+import DynamicHeader from '../../components/ui/DynamicHeader';
+import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import BlogShare from '../../components/BlogShare';
 import retificaParcialImg from '../../assets/images/retifica-parcial-ou-completa.jpg';
 

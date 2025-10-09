@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import OrcamentoCabecote from './OrcamentoCabecote'; // Certifique-se de que o caminho está correto
-import OrcamentoMotorCompleto from './OrcamentoMotorCompleto'; // Certifique-se de que o caminho está correto
+import OrcamentoCabecote from './orcamento/OrcamentoCabecote'; // Certifique-se de que o caminho está correto
+import OrcamentoMotorCompleto from './orcamento/OrcamentoMotorCompleto'; // Certifique-se de que o caminho está correto
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
-import "./PainelOrcamentos.css"; // CSS específico para este componente
+import "../styles/PainelOrcamentos.css"; // CSS específico para este componente
 
 // Importante: No React (frontend), você normalmente não usa 'process.env' diretamente para variáveis de ambiente
 // que são definidas no build do React App (ex: usando Create React App ou Vite).

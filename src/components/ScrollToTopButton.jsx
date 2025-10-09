@@ -1,7 +1,7 @@
 // src/components/ScrollToTopButton.jsx
 import React, { useState, useEffect } from 'react';
 import { FiArrowUp } from 'react-icons/fi'; // Ícone moderno
-import './ScrollToTopButton.css';
+import '../styles/ScrollToTopButton.css';
 
 const ScrollToTopButton = () => {
   const [visible, setVisible] = useState(false);

@@ -1,5 +1,5 @@
 import React from "react";
-import "./MessageBox.css";
+import "../../styles/MessageBox.css";
 
 const MessageBox = ({ message, isError, onClose }) => {
   // Se não houver mensagem, o componente não renderiza nada

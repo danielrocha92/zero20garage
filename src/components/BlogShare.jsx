@@ -1,6 +1,6 @@
 // src/components/BlogShare.jsx
 import React, { useEffect, useState } from "react";
-import styles from "./BlogShare.module.css";
+import styles from "../styles/BlogShare.module.css";
 import { db } from "../services/firebaseBlog";
 import {
   doc,

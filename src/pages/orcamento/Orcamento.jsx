@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Orcamento.css';
-import DynamicHeader from '../../components/DynamicHeader';
-import Breadcrumbs from '../../components/Breadcrumbs';
+import DynamicHeader from '../../components/ui/DynamicHeader';
+import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import emailjs from 'emailjs-com';
-import PainelOrcamentos from '../../components/PainelOrcamentos';
+import PainelOrcamentos from '../../components/orcamento/PainelOrcamentos';
 
 // Acessa a URL da API do ambiente. Usa uma URL de fallback para o ambiente de produção
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;

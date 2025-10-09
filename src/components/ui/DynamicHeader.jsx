@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './DynamicHeader.css';
+import '../../styles/DynamicHeader.css';
 
 function DynamicHeader({ messages, intervalTime = 4500, page = '' }) {
   const [headerContent, setHeaderContent] = useState(messages[0]);

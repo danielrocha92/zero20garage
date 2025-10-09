@@ -11,8 +11,8 @@ import OrcamentoCabecote from './OrcamentoCabecote';
 import OrcamentoMotorCompleto from './OrcamentoMotorCompleto';
 import HistoricoOrcamentos from './HistoricoOrcamentos';
 import OrcamentoImpresso from './OrcamentoImpresso';
-import './Modal.css'; // Importa o CSS centralizado para modais
-import './PainelOrcamentos.css';
+import '../../styles/Modal.css';
+import '../../styles/PainelOrcamentos.css';
 
 const UploadImagemOrcamento = React.lazy(() => import('./UploadImagemOrcamento'));
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { dadosOrcamento } from '../components/dadosOrcamento';
-import OrcamentoGenerico from './OrcamentoGenerico';
+import { dadosOrcamento } from '../../components/dadosOrcamento.js';
+import OrcamentoGenerico from '../OrcamentoGenerico.jsx';
 
 const OrcamentoMotorCompleto = ({ onSubmit, editingData, showMessage, hideMessageBox, message, isErrorMessage }) => {
   return (

@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import WhatsAppButton from './WhatsAppButton';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import './Layout.css';
+import '../styles/Layout.css';
 
 const Layout = ({ children }) => {
   const location = useLocation();

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
-import DynamicHeader from '../../components/DynamicHeader';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import ContatoCta from '../../components/ContatoCta';
+import DynamicHeader from '../../components/ui/DynamicHeader';
+import Breadcrumbs from '../../components/ui/Breadcrumbs';
+import ContatoCta from '../../components/ui/ContatoCta';
 import '../../styles/Institucional.css'; // estilo institucional padronizado
 import '../../styles/HomeDetails.css';
 

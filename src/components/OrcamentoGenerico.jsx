@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import ".//OrcamentoGenerico.css";
+import "../styles/OrcamentoGenerico.css";
 
 const OrcamentoGenerico = ({
   onSubmit,
@@ -503,6 +503,7 @@ const formatarItens = (lista) =>
                                 </label>
                               ) : (
                                 <>
+                                  <label className="quantidade-label">Obs:</label>
                                   <input
                                     type="text"
                                     value={sub.value || ""}

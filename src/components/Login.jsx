@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import './Login.css';
-import DynamicHeader from '../components/DynamicHeader';
-import Breadcrumbs from './Breadcrumbs';
+import '../styles/Login.css';
+import DynamicHeader from './ui/DynamicHeader';
+import Breadcrumbs from './ui/Breadcrumbs';
 
 const Login = () => {
   const navigate = useNavigate();

@@ -4,7 +4,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import '../components/TestimonialsCarousel.css';
+import '../../styles/TestimonialsCarousel.css';
 
 // Remova todos os 'imports' de imagem aqui, pois os arquivos estão agora na pasta 'public'.
 

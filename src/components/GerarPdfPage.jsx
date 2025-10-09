@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // Certifique-se de que este CSS está importado no seu projeto, por exemplo, em GerarPdfPage.css
-import './GerarPdfPage.css';
+import '../styles/GerarPdfPage.css';
 
 /**
  * Componente Formulario

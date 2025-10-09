@@ -1,8 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import '../../styles/Blog.css';
-import DynamicHeader from '../../components/DynamicHeader';
-import Breadcrumbs from '../../components/Breadcrumbs';
+import DynamicHeader from '../../components/ui/DynamicHeader';
+import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import BlogShare from '../../components/BlogShare';
 import custoRetificaImg from '../../assets/images/custo-retifica.jpg';
 

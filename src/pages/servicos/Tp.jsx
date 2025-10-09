@@ -1,9 +1,9 @@
 // TrocaDePecas.jsx
 import React from 'react';
 import '../../styles/Institucional.css'; // Aplicando o padrão institucional
-import DynamicHeader from '../../components/DynamicHeader';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import ContatoCta from '../../components/ContatoCta';
+import DynamicHeader from '../../components/ui/DynamicHeader';
+import Breadcrumbs from '../../components/ui/Breadcrumbs';
+import ContatoCta from '../../components/ui/ContatoCta';
 
 const TrocaDePecas = () => {
   const messages = [

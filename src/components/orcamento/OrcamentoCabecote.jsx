@@ -1,6 +1,6 @@
 import React from 'react';
-import { dadosOrcamento } from '../components/dadosOrcamento';
-import OrcamentoGenerico from './OrcamentoGenerico';
+import { dadosOrcamento } from '../dadosOrcamento';
+import OrcamentoGenerico from '../OrcamentoGenerico';
 
 const OrcamentoCabecote = ({
   onSubmit,

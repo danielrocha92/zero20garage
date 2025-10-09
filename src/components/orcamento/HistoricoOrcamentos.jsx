@@ -1,8 +1,8 @@
   import React, { useState } from 'react';
   import { FaEye, FaEdit, FaTrash } from 'react-icons/fa';
   import axios from 'axios'; // Mover para baixo para agrupar com o código que o usa
-  import './Modal.css'; // Importa o CSS centralizado
-  import './HistoricoOrcamentos.css';
+  import '../../styles/Modal.css'; // Importa o CSS centralizado
+  import '../../styles/HistoricoOrcamentos.css';
 
   const CustomModal = ({ isOpen, title, message, onConfirm, onCancel, confirmText = 'OK', cancelText = 'Cancelar', showCancel = false }) => {
     if (!isOpen) return null;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './UploadImagemOrcamento.css';
+import '../../styles/UploadImagemOrcamento.css';
 import { AiOutlineUpload, AiOutlineDelete, AiOutlineEye, AiOutlineClose } from 'react-icons/ai';
 
 const UploadImagemOrcamento = ({ orcamentoId, onUploaded }) => {

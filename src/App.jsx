@@ -7,7 +7,7 @@ import Layout from './components/Layout';
 import PageTransition from './components/PageTransition';
 import ScrollToTopButton from './components/ScrollToTopButton';
 
-import PainelOrcamentos from './components/PainelOrcamentos';
+import PainelOrcamentos from './components/orcamento/PainelOrcamentos';
 import Login from './components/Login';
 
 import Home from './pages/home/Home';

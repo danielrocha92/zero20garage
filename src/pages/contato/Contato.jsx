@@ -1,9 +1,9 @@
 import React from 'react';
-import DynamicHeader from '../../components/DynamicHeader';
-import Breadcrumbs from '../../components/Breadcrumbs';
+import DynamicHeader from '../../components/ui/DynamicHeader';
+import Breadcrumbs from '../../components/ui/Breadcrumbs';
 
 import './Contato.css';
-import ContatoCta from '../../components/ContatoCta';
+import ContatoCta from '../../components/ui/ContatoCta';
 
 function Contato() {
   const messages = [

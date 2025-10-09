@@ -1,8 +1,8 @@
 // TrabalheConosco.jsx
 import React from 'react';
 import { FaLinkedin } from 'react-icons/fa';
-import DynamicHeader from '../../components/DynamicHeader';
-import Breadcrumbs from '../../components/Breadcrumbs';
+import DynamicHeader from '../../components/ui/DynamicHeader';
+import Breadcrumbs from '../../components/ui/Breadcrumbs';
 
 import '../../styles/Institucional.css'; // Estilos compartilhados
 

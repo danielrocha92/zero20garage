@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './Servicos.css';
-import DynamicHeader from '../../components/DynamicHeader';
-import Breadcrumbs from '../../components/Breadcrumbs';
+import DynamicHeader from '../../components/ui/DynamicHeader';
+import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import { Helmet } from 'react-helmet-async';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 

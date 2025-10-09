@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../GlobalStyles.css'; // apenas se necessário, se ainda não estiver no App.jsx
+import '../../GlobalStyles.css'; // apenas se necessário, se ainda não estiver no App.jsx
 
 const faqData = [
   {

@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import '../../styles/Home.css'; // Importa o arquivo global de estilos
-import DynamicHeader from '../../components/DynamicHeader';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import TestimonialsCarousel from '../../components/TestimonialsCarousel';
+import DynamicHeader from '../../components/ui/DynamicHeader';
+import Breadcrumbs from '../../components/ui/Breadcrumbs';
+import TestimonialsCarousel from '../../components/ui/TestimonialsCarousel';
 import {FaCogs, FaTools, FaCheckCircle, FaCreditCard } from 'react-icons/fa';
 import { MdEngineering } from 'react-icons/md';
-import { TbTruckDelivery, TbSettingsSearch } from 'react-icons/tb';import FAQSection from '../../components/FAQSection';
+import { TbTruckDelivery, TbSettingsSearch } from 'react-icons/tb';import FAQSection from '../../components/ui/FAQSection';
 import { Helmet } from 'react-helmet-async';
-import ContatoCta from '../../components/ContatoCta';
+import ContatoCta from '../../components/ui/ContatoCta';
 
 
 
