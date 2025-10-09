@@ -10,9 +10,12 @@
 ## 🛠️ Tecnologias Utilizadas
 
 - **React.js** — SPA moderna e performática.
+- **Node.js & Express** — Backend robusto para a API de orçamentos.
 - **HTML5** — Estrutura semântica e acessível.
 - **CSS3** — Design responsivo com estilização modular.
-
+- **Firebase (Firestore)** — Banco de dados NoSQL para interatividade do blog (views, likes).
+- **Framer Motion** — Animações e transições de página fluidas.
+- **jsPDF & XLSX** — Exportação de dados para PDF e Excel.
 ---
 
 ## 🎯 Propósito do Projeto
@@ -23,6 +26,7 @@ Criar uma presença digital profissional para a **Zero20 Garage**, destacando:
 ✅ Processo técnico apresentado com infográficos e animações.
 ✅ Diferenciais competitivos da oficina.
 ✅ Canal direto de contato via WhatsApp.
+✅ **Painel administrativo** para criação, gestão e exportação de orçamentos.
 
 ---
 
@@ -34,12 +38,15 @@ site-institucional/
 │   ├── favicon.ico
 ├── src/
 │   ├── assets/            # Imagens e fontes
-│   ├── components/        # Componentes reutilizáveis
-│   ├── pages/             # Páginas principais
-│   ├── App.js             # Componente raiz
-│   ├── index.js           # Entrada do React
-│   ├── styles/            # CSS modularizado
-│   ├── data.js            # Conteúdo institucional
+│   ├── components/
+│   │   ├── orcamento/     # Componentes da funcionalidade de orçamento
+│   │   └── ui/            # Componentes de UI genéricos (botões, modais)
+│   ├── dados/             # Mock de dados e configurações
+│   ├── hooks/             # Hooks customizados (usePdfGenerator, etc.)
+│   ├── pages/             # Componentes de página (rotas)
+│   ├── services/          # Configuração de serviços (Firebase)
+│   ├── styles/            # Arquivos CSS centralizados
+│   ├── App.jsx            # Componente raiz e gerenciador de rotas
 └── package.json
 
 ---
@@ -108,12 +115,21 @@ Acesse: http://localhost:3000
 
 ✨ Funcionalidades em Destaque
 
-✅ Animação Lottie integrada no Hero e processo.
-✅ Design responsivo: mobile, tablet e desktop.
-✅ Contato rápido: botão fixo de WhatsApp.
-✅ Blog institucional: dicas e informações sobre retífica.
-✅ Infográfico do processo: educativo e visual.
+✅ **Painel Administrativo Completo:**
+  - Autenticação de usuário com rotas protegidas.
+  - Criação e edição de orçamentos detalhados (Motor e Cabeçote).
+  - Histórico de orçamentos com paginação infinita.
+  - Upload de imagens associadas a cada orçamento.
+  - Exportação de relatórios em PDF e Excel.
 
+✅ **Blog Interativo:**
+  - Integração com Firebase para contagem de visualizações e curtidas.
+  - Componente de compartilhamento em redes sociais.
+
+✅ **Experiência de Usuário Aprimorada:**
+  - Animações e transições de página com Framer Motion.
+  - Design totalmente responsivo (mobile, tablet, desktop).
+  - Componentes de UI reutilizáveis, como modais, carrossel e botões.
 ⸻
 
 🌱 Aprendizados e Práticas Aplicadas
@@ -121,7 +137,7 @@ Acesse: http://localhost:3000
 	•	Organização modular de estilos.
 	•	Integração de animações JSON com React.
 	•	Deploy contínuo na Vercel.
-	•	Acessibilidade e boas práticas de UX/UI.
+	•	Boas práticas de UX/UI e acessibilidade (a11y).
 
 ⸻
 
@@ -130,15 +146,18 @@ Acesse: http://localhost:3000
 Daniel Rocha
 Front-End Developer apaixonado por criar experiências digitais impactantes.
 
+🌐 Site
+[Rocha Tech Solutions](https://rocha-tech-solutions.vercel.app/)
+
 📫 LinkedIn
 [Daniel Rocha](https://www.linkedin.com/in/danielrocha92)
 
 ⸻
 
 🚧 Próximos Passos
-	•	Implementar testes unitários com Jest.
-	•	SEO técnico: otimização de metatags.
-	•	Melhorar acessibilidade (a11y) com ARIA.
+	•	Implementar testes unitários com **Jest** e **React Testing Library**.
+	•	Otimizar o SEO técnico com `sitemap.xml` e `robots.txt`.
+	•	Refatorar componentes grandes para hooks customizados, melhorando a legibilidade.
 
 ⸻
 
