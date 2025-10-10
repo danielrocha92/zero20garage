@@ -70,10 +70,10 @@ const PainelOrcamentos = () => {
         }
 
         hasMorePages = data.hasMore || false;
-        currentPage++;
+          currentPage++;
       }
 
-      // Ordena os orçamentos: mais novos primeiro, registros sem data por último.
+      // Ordena os orçamentos: mais novos primeiro, registros sem data por último
       allOrcamentos.sort((a, b) => {
         const dateA = a.data ? new Date(a.data) : null;
         const dateB = b.data ? new Date(b.data) : null;
