@@ -50,7 +50,6 @@ const PainelOrcamentos = () => {
 
   // --- Fetch histórico ---
   const fetchHistorico = useCallback(async () => {
-    if (loadingHistorico) return;
     setLoadingHistorico(true);
 
     let allOrcamentos = [];
@@ -70,7 +69,6 @@ const PainelOrcamentos = () => {
         }
 
         hasMorePages = data.hasMore || false;
-          currentPage++;
       }
 
       // Ordena os orçamentos: mais novos primeiro, registros sem data por último
@@ -91,12 +89,12 @@ const PainelOrcamentos = () => {
     } finally {
       setLoadingHistorico(false);
     }
-  }, [authToken, loadingHistorico, showMessageBox]);
+  }, [authToken, showMessageBox]); // loadingHistorico foi removido para evitar ciclos
 
   // Efeito para a busca inicial, roda apenas uma vez
   useEffect(() => {
     fetchHistorico(); // Busca inicial
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [fetchHistorico]); // Adicionado fetchHistorico para seguir as regras dos hooks
 
   // --- Salvar orçamento ---
   const handleSalvar = async (dados) => {
@@ -264,20 +262,24 @@ const PainelOrcamentos = () => {
     });
   };
 
-  const filteredHistorico = historico.filter(orcamento => {
+  // Ordena o histórico principal uma vez: mais novos primeiro
+  const historicoOrdenado = [...historico].sort((a, b) => {
+    const dateA = a.data ? new Date(a.data) : null;
+    const dateB = b.data ? new Date(b.data) : null;
+    if (!dateA && !dateB) return 0;
+    if (!dateA) return 1;
+    if (!dateB) return -1;
+    return dateB - dateA;
+  });
+
+  const filteredHistorico = historicoOrdenado.filter(orcamento => {
     if (!searchTerm) return true;
     const term = searchTerm.toLowerCase();
-
     const dataFormatada = orcamento.data ? new Date(orcamento.data).toLocaleDateString('pt-BR') : '';
 
-    return (
-      orcamento.ordemServico?.toLowerCase().includes(term) ||
-      orcamento.cliente?.toLowerCase().includes(term) ||
-      orcamento.veiculo?.toLowerCase().includes(term) ||
-      orcamento.placa?.toLowerCase().includes(term) ||
-      orcamento.telefone?.toLowerCase().includes(term) ||
-      dataFormatada.includes(term)
-    );
+    return Object.values(orcamento).some(value =>
+      String(value).toLowerCase().includes(term)
+    ) || dataFormatada.includes(term);
   });
 
 
