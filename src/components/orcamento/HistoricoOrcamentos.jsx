@@ -1,58 +1,8 @@
-  import React, { useState } from 'react';
+  import React from 'react';
   import { FaEye, FaEdit, FaTrash } from 'react-icons/fa';
-  import axios from 'axios'; // Mover para baixo para agrupar com o código que o usa
-  import '../../styles/Modal.css'; // Importa o CSS centralizado
   import '../../styles/HistoricoOrcamentos.css';
 
-  const CustomModal = ({ isOpen, title, message, onConfirm, onCancel, confirmText = 'OK', cancelText = 'Cancelar', showCancel = false }) => {
-    if (!isOpen) return null;
-    return (
-      <div className="modal-overlay">
-        <div className="modal-container">
-          <h3>{title}</h3>
-          <p>{message}</p>
-          <div className="modal-actions">
-            {showCancel && <button onClick={onCancel} className="modal-btn cancel">{cancelText}</button>}
-            <button onClick={onConfirm} className="modal-btn confirm">{confirmText}</button>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const HistoricoOrcamentos = ({ historico = [], hasMore = false, loading = false, fetchMore, onEditarOrcamento, onViewBudget, onOrcamentoDeleted, onClose }) => {
-    const [modalConfig, setModalConfig] = useState({ isOpen: false, title: '', message: '', onConfirm: null, onCancel: null, confirmText: 'OK', cancelText: 'Cancelar', showCancel: false });
-
-    const abrirModal = (config) => setModalConfig({ ...modalConfig, isOpen: true, ...config });
-    const fecharModal = () => setModalConfig({ ...modalConfig, isOpen: false });
-
-    const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
-    const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com/api/orcamentos';
-
-    const handleExcluirOrcamento = (orcamento) => {
-      abrirModal({
-        title: 'Confirmar Exclusão',
-        message: `Tem certeza que deseja excluir o orçamento de ${orcamento.cliente || 'cliente desconhecido'} (OS: ${orcamento.ordemServico || '-'})?`,
-        confirmText: 'Sim, Excluir', showCancel: true,
-        onConfirm: async () => {
-          fecharModal();
-          try {
-            await axios.delete(`${API_BASE_URL}/${orcamento.id}`, {
-              headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
-            });
-            onOrcamentoDeleted(orcamento.id); // Notifica o componente pai
-            abrirModal({ title: 'Sucesso', message: 'Orçamento excluído com sucesso!', confirmText: 'OK', showCancel: false, onConfirm: fecharModal });
-          } catch (err) {
-            console.error('Erro ao excluir orçamento:', err);
-            let mensagemErro = 'Erro ao excluir orçamento.';
-            if (err.response?.data?.erro) mensagemErro += ` Detalhes: ${err.response.data.erro}`;
-            else if (err.message) mensagemErro += ` (${err.message})`;
-            abrirModal({ title: 'Erro', message: mensagemErro, confirmText: 'Fechar', showCancel: false, onConfirm: fecharModal });
-          }
-        },
-        onCancel: fecharModal,
-      });
-    };
+  const HistoricoOrcamentos = ({ historico = [], loading = false, onEditarOrcamento, onViewBudget, onExcluirOrcamento, onClose, fetchMore, hasMore, searchTerm, onSearchChange }) => {
 
     const getStatusTagClass = status => {
       switch (status) {
@@ -110,7 +60,6 @@
     };
 
     if (loading && historico.length === 0) return <div className="loading-message">Carregando histórico...</div>;
-    if (historico.length === 0) return <div className="no-data-message">Nenhum orçamento encontrado.</div>;
 
     return (
       <div id="ancora-historico-orcamentos" className="tabela-historico">
@@ -118,6 +67,19 @@
           <h2>Histórico de Orçamentos</h2>
           {onClose && <button className="close-button" onClick={onClose}>Fechar</button>}
         </div>
+
+        <div className="historico-search-bar">
+          <input
+            type="text"
+            placeholder="Buscar por OS, Cliente, Placa, Data, etc..."
+            value={searchTerm}
+            onChange={onSearchChange}
+          />
+        </div>
+
+        {historico.length === 0 && !loading && (
+          <div className="no-data-message">Nenhum orçamento encontrado para a busca realizada.</div>
+        )}
 
   {/* Desktop */}
   <div className="historico-desktop">
@@ -157,7 +119,7 @@
             <td className="acoes-icones">
               <button onClick={() => onViewBudget(orcamento)} title="Visualizar"><FaEye /></button>
               <button onClick={() => handleEditar(orcamento)} title="Editar"><FaEdit /></button>
-              <button onClick={() => handleExcluirOrcamento(orcamento)} title="Excluir"><FaTrash /></button>
+              <button onClick={() => onExcluirOrcamento(orcamento)} title="Excluir"><FaTrash /></button>
             </td>
           </tr>
         ))}
@@ -198,20 +160,20 @@
           <div className="card-acoes">
             <button onClick={() => onViewBudget(orcamento)} className="action-btn view-btn">Visualizar</button>
             <button onClick={() => handleEditar(orcamento)} className="action-btn edit-btn">Editar</button>
-            <button onClick={() => handleExcluirOrcamento(orcamento)} className="action-btn delete-btn">Excluir</button>
+            <button onClick={() => onExcluirOrcamento(orcamento)} className="action-btn delete-btn">Excluir</button>
           </div>
         </div>
       </details>
     ))}
   </div>
 
+      {hasMore && !loading && (
+        <div className="load-more">
+          <button onClick={fetchMore} disabled={loading}>Carregar Mais</button>
+        </div>
+      )}
+      {loading && <div className="loading-more">Carregando...</div>}
 
-        {/* Modal */}
-        <CustomModal {...modalConfig} />
-
-        {/* Carregar mais */}
-        {hasMore && !loading && <div className="load-more"><button onClick={() => fetchMore(true)}>Carregar Mais</button></div>}
-        {loading && historico.length > 0 && <div className="loading-more">Carregando mais...</div>}
       </div>
     );
   };

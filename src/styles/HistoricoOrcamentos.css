@@ -52,6 +52,29 @@
   background: #c62828;
 }
 
+/* ====== Barra de Busca ====== */
+.historico-search-bar {
+  margin-bottom: 1.5rem;
+}
+
+.historico-search-bar input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #555;
+  background-color: #2c2c2c;
+  color: #f0f0f0;
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.historico-search-bar input:focus {
+  outline: none;
+  border-color: #e53935;
+  box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.4);
+}
+
 /* ====== Tabela Desktop ====== */
 .historico-desktop {
   overflow-x: auto;

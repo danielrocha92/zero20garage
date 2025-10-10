@@ -1,5 +1,6 @@
   import React, { useState, useEffect, useCallback, useRef, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
@@ -11,6 +12,7 @@ import OrcamentoCabecote from './OrcamentoCabecote';
 import OrcamentoMotorCompleto from './OrcamentoMotorCompleto';
 import HistoricoOrcamentos from './HistoricoOrcamentos';
 import OrcamentoImpresso from './OrcamentoImpresso';
+import CustomModal from './CustomModal';
 import '../../styles/Modal.css';
 import '../../styles/PainelOrcamentos.css';
 
@@ -24,71 +26,69 @@ const PainelOrcamentos = () => {
 
   const [tipo, setTipo] = useState('motor');
   const [historico, setHistorico] = useState([]);
-  const [message, setMessage] = useState('');
-  const [showMessage, setShowMessage] = useState(false);
+  const [messageData, setMessageData] = useState({ text: null, isError: false });
   const [editingData, setEditingData] = useState(null);
   const [selectedBudgetForView, setSelectedBudgetForView] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
-  const [lastDocId, setLastDocId] = useState(null);
+  const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loadingHistorico, setLoadingHistorico] = useState(false);
+  const [modalConfig, setModalConfig] = useState({ isOpen: false });
 
   const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
 
   // --- Mensagem de feedback ---
-  const showMessageBox = (msg, duration = 4000) => {
-    setMessage(msg);
-    setShowMessage(true);
-    setTimeout(() => setShowMessage(false), duration);
-  };
+  const showMessageBox = useCallback((text, isError = false, duration = 4000) => {
+    setMessageData({ text, isError });
+    setTimeout(() => {
+      setMessageData({ text: null, isError: false });
+    }, duration);
+  }, [setMessageData]);
 
-  // --- Fetch histórico com cursor e cache ---
-  const fetchHistorico = useCallback(async (loadMore = false) => {
-    if (loadingHistorico || (loadMore && !hasMore)) return;
+  const abrirModal = (config) => setModalConfig({ ...modalConfig, isOpen: true, ...config });
+  const fecharModal = () => setModalConfig({ ...modalConfig, isOpen: false });
+
+
+  // --- Fetch histórico ---
+  const fetchHistorico = useCallback(async (reset = false, fetchAll = false) => {
+    if (loadingHistorico) return;
     setLoadingHistorico(true);
+
+    let currentPage = reset ? 1 : page;
+    let allOrcamentos = reset ? [] : [...historico];
+    let shouldContinue = true;
+
     try {
-      const url = new URL(`${API_BASE_URL}/api/orcamentos`);
-      url.searchParams.append('size', 10);
-      if (loadMore && lastDocId) url.searchParams.append('lastId', lastDocId);
+      while (shouldContinue) {
+        const url = new URL(`${API_BASE_URL}/api/orcamentos?page=${currentPage}&limit=20`);
+        const res = await axios.get(url.toString(), {
+          headers: authToken ? { Authorization: `Bearer ${authToken}` } : undefined,
+        });
 
-      const cacheKey = url.toString();
-      if (!loadMore && window._historicoCache && window._historicoCache[cacheKey]) {
-        const cachedData = window._historicoCache[cacheKey];
-        setHistorico(cachedData.orcamentos);
-        setLastDocId(cachedData.lastDocId);
-        setHasMore(cachedData.orcamentos.length > 0 && cachedData.lastDocId !== null);
-        setLoadingHistorico(false);
-        return;
+        const data = res.data;
+        const novosOrcamentos = data.orcamentos || [];
+        allOrcamentos = [...allOrcamentos, ...novosOrcamentos];
+
+        setHistorico(allOrcamentos);
+        setHasMore(data.hasMore || false);
+        currentPage++;
+        setPage(currentPage);
+
+        shouldContinue = fetchAll && (data.hasMore || false);
       }
-
-      const res = await fetch(url.toString(), {
-        headers: authToken ? { Authorization: `Bearer ${authToken}` } : undefined,
-      });
-
-      if (!res.ok) throw new Error(`Erro ${res.status}`);
-      const data = await res.json();
-
-      const novosOrcamentos = data.orcamentos || [];
-      setHistorico(prev => loadMore ? [...prev, ...novosOrcamentos] : novosOrcamentos);
-      setLastDocId(data.lastDocId);
-      setHasMore(novosOrcamentos.length > 0 && data.lastDocId !== null);
-
-      if (!loadMore) {
-        window._historicoCache = window._historicoCache || {};
-        window._historicoCache[cacheKey] = data;
-      }
-
     } catch (error) {
       console.error('Erro ao buscar histórico:', error);
-      showMessageBox('Erro ao carregar histórico de orçamentos.');
+      showMessageBox('Erro ao carregar histórico de orçamentos.', true);
     } finally {
       setLoadingHistorico(false);
     }
-  }, [authToken, lastDocId, loadingHistorico, hasMore]);
+  }, [authToken, historico, loadingHistorico, page, showMessageBox]);
 
+  // Efeito para a busca inicial, roda apenas uma vez
   useEffect(() => {
-    fetchHistorico(false); // Garante que a busca inicial não seja de "load more"
-  }, [fetchHistorico]);
+    fetchHistorico(true, true); // Busca inicial, reseta e busca TUDO
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // --- Salvar orçamento ---
   const handleSalvar = async (dados) => {
@@ -103,23 +103,24 @@ const PainelOrcamentos = () => {
     }
 
     try {
-      const res = await fetch(url, {
+      const res = await axios({
         method,
+        url,
         headers: { 'Content-Type': 'application/json', ...(authToken && { Authorization: `Bearer ${authToken}` }) },
-        body: JSON.stringify(envio),
+        data: envio,
       });
-      const result = await res.json();
+      const result = res.data;
 
-      if (res.ok) {
+      if (res.status === 200 || res.status === 201) {
         showMessageBox(`Orçamento ${method === 'POST' ? 'criado' : 'atualizado'} com sucesso.`);
-        fetchHistorico(false); // Recarrega o histórico do início
+        fetchHistorico(true, true); // Recarrega o histórico do início
         setEditingData(null);
       } else {
-        showMessageBox(`Erro ao salvar: ${result.msg || 'Erro desconhecido'}`);
+        showMessageBox(`Erro ao salvar: ${result.msg || 'Erro desconhecido'}`, true);
       }
     } catch (err) {
       console.error('Erro ao conectar com a API:', err);
-      showMessageBox('Erro ao conectar com o servidor.');
+      showMessageBox('Erro ao conectar com o servidor.', true);
     } finally {
       setEditingData(null);
     }
@@ -127,7 +128,7 @@ const PainelOrcamentos = () => {
 
   // --- Exportar Excel ---
   const exportarExcel = () => {
-    if (!historico.length) return showMessageBox('Nenhum dado para exportar.');
+    if (!historico.length) return showMessageBox('Nenhum dado para exportar.', true);
     const excelData = historico.map(h => ({
       Data: h.data,
       Tipo: h.tipo,
@@ -150,7 +151,7 @@ const PainelOrcamentos = () => {
 
   // --- Exportar PDF contínuo ---
   const exportarPDFCompleto = async () => {
-    if (!historico.length) return showMessageBox('Nenhum dado para exportar.');
+    if (!historico.length) return showMessageBox('Nenhum dado para exportar.', true);
     const pdf = new jsPDF('p', 'mm', 'a4');
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const margin = 10;
@@ -230,25 +231,63 @@ const PainelOrcamentos = () => {
     });
   }, [editingData]);
 
-  // --- NOVO: Função para remover um orçamento do estado local após exclusão ---
-  const handleOrcamentoDeleted = (orcamentoId) => {
-    setHistorico(prev => prev.filter(h => h.id !== orcamentoId));
+  const handleExcluirOrcamento = (orcamento) => {
+    abrirModal({
+      title: 'Confirmar Exclusão',
+      message: `Tem certeza que deseja excluir o orçamento de ${orcamento.cliente || 'cliente desconhecido'} (OS: ${orcamento.ordemServico || '-'})?`,
+      confirmText: 'Sim, Excluir', showCancel: true,
+      onConfirm: async () => {
+        fecharModal();
+        try {
+          await axios.delete(`${API_BASE_URL}/api/orcamentos/${orcamento.id || orcamento._id}`, {
+            headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
+          });
+          setHistorico(prev => prev.filter(h => (h.id || h._id) !== (orcamento.id || orcamento._id)));
+          showMessageBox('Orçamento excluído com sucesso!');
+        } catch (err) {
+          console.error('Erro ao excluir orçamento:', err);
+          let mensagemErro = 'Erro ao excluir orçamento.';
+          if (err.response?.data?.erro) mensagemErro += ` Detalhes: ${err.response.data.erro}`;
+          else if (err.message) mensagemErro += ` (${err.message})`;
+          showMessageBox(mensagemErro, true);
+        }
+      },
+      onCancel: fecharModal,
+    });
   };
+
+  const filteredHistorico = historico.filter(orcamento => {
+    if (!searchTerm) return true;
+    const term = searchTerm.toLowerCase();
+
+    const dataFormatada = orcamento.data ? new Date(orcamento.data).toLocaleDateString('pt-BR') : '';
+
+    return (
+      orcamento.ordemServico?.toLowerCase().includes(term) ||
+      orcamento.cliente?.toLowerCase().includes(term) ||
+      orcamento.veiculo?.toLowerCase().includes(term) ||
+      orcamento.placa?.toLowerCase().includes(term) ||
+      orcamento.telefone?.toLowerCase().includes(term) ||
+      dataFormatada.includes(term)
+    );
+  });
+
 
   return (
     <div className="painel-orcamentos-container">
-      {showMessage && (
-        <div className="modal-overlay" onClick={() => setShowMessage(false)}>
+      {messageData.text && (
+        <div className="modal-overlay" onClick={() => setMessageData({ text: null, isError: false })}>
           <div className="modal-container" onClick={(e) => e.stopPropagation()}>
-            {/* O título pode ser dinâmico, mas por enquanto será fixo */}
-            <h3>Aviso</h3>
-            <p>{message}</p>
+            <h3 style={{ color: messageData.isError ? '#c50404' : '#4caf50' }}>{messageData.isError ? 'Erro' : 'Sucesso'}</h3>
+            <p>{messageData.text}</p>
             <div className="modal-actions">
-              <button onClick={() => setShowMessage(false)} className="modal-btn confirm">Fechar</button>
+              <button onClick={() => setMessageData({ text: null, isError: false })} className="modal-btn confirm">Fechar</button>
             </div>
           </div>
         </div>
       )}
+
+      <CustomModal {...modalConfig} />
 
       {selectedBudgetForView ? (
         <OrcamentoImpresso orcamento={selectedBudgetForView} onClose={handleCloseView} />
@@ -300,8 +339,18 @@ const PainelOrcamentos = () => {
 
           <main className="orcamento-form-wrapper" id="orcamento-form">
             {tipo === 'motor'
-              ? <OrcamentoMotorCompleto onSubmit={handleSalvar} editingData={editingData} />
-              : <OrcamentoCabecote onSubmit={handleSalvar} editingData={editingData} />
+              ? <OrcamentoMotorCompleto
+                  onSubmit={handleSalvar}
+                  editingData={editingData}
+                  showMessage={showMessageBox}
+                  hideMessageBox={() => setMessageData({ text: null, isError: false })}
+                />
+              : <OrcamentoCabecote
+                  onSubmit={handleSalvar}
+                  editingData={editingData}
+                  showMessage={showMessageBox}
+                  hideMessageBox={() => setMessageData({ text: null, isError: false })}
+                />
             }
 
             <Suspense fallback={<div>Carregando upload de imagem...</div>}>
@@ -317,13 +366,15 @@ const PainelOrcamentos = () => {
 
           <div ref={historicoRef}>
             <HistoricoOrcamentos
-              historico={historico}
+              historico={filteredHistorico}
               onEditarOrcamento={handleEditarOrcamento}
               onViewBudget={handleViewBudget}
-              onOrcamentoDeleted={handleOrcamentoDeleted}
-              fetchMore={fetchHistorico}
-              hasMore={hasMore}
+              onExcluirOrcamento={handleExcluirOrcamento}
               loading={loadingHistorico}
+              fetchMore={() => fetchHistorico(false, false)}
+              hasMore={hasMore}
+              searchTerm={searchTerm}
+              onSearchChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
         </>
