@@ -14,7 +14,7 @@
     };
 
   const formatarData = (data) => {
-    if (!data) return 'Data não disponível';
+    if (!data) return 'Registro antigo';
     const d = new Date(data);
     if (isNaN(d.getTime())) return 'Data inválida';
 

@@ -31,8 +31,6 @@ const PainelOrcamentos = () => {
   const [selectedBudgetForView, setSelectedBudgetForView] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
   const [loadingHistorico, setLoadingHistorico] = useState(false);
   const [modalConfig, setModalConfig] = useState({ isOpen: false });
 
@@ -51,48 +49,58 @@ const PainelOrcamentos = () => {
 
 
   // --- Fetch histórico ---
-  const fetchHistorico = useCallback(async (reset = false, fetchAll = false) => {
+  const fetchHistorico = useCallback(async () => {
     if (loadingHistorico) return;
     setLoadingHistorico(true);
 
-    let currentPage = reset ? 1 : page;
-    let allOrcamentos = reset ? [] : [...historico];
-    let shouldContinue = true;
+    let allOrcamentos = [];
+    let currentPage = 1;
+    let hasMorePages = true;
 
     try {
-      while (shouldContinue) {
-        const url = new URL(`${API_BASE_URL}/api/orcamentos?page=${currentPage}&limit=20`);
+      while (hasMorePages) {
+        const url = new URL(`${API_BASE_URL}/api/orcamentos?page=${currentPage}&limit=50`);
         const res = await axios.get(url.toString(), {
           headers: authToken ? { Authorization: `Bearer ${authToken}` } : undefined,
         });
 
         const data = res.data;
-        const novosOrcamentos = data.orcamentos || [];
-        allOrcamentos = [...allOrcamentos, ...novosOrcamentos];
+        if (data.orcamentos && data.orcamentos.length > 0) {
+          allOrcamentos.push(...data.orcamentos);
+        }
 
-        setHistorico(allOrcamentos);
-        setHasMore(data.hasMore || false);
+        hasMorePages = data.hasMore || false;
         currentPage++;
-        setPage(currentPage);
-
-        shouldContinue = fetchAll && (data.hasMore || false);
       }
+
+      // Ordena os orçamentos: mais novos primeiro, registros sem data por último.
+      allOrcamentos.sort((a, b) => {
+        const dateA = a.data ? new Date(a.data) : null;
+        const dateB = b.data ? new Date(b.data) : null;
+
+        if (!dateA && !dateB) return 0; // Ambos não têm data, mantém a ordem
+        if (!dateA) return 1;          // 'a' não tem data, vai para o fim
+        if (!dateB) return -1;         // 'b' não tem data, vai para o fim
+        return dateB - dateA;          // Ordena do mais novo para o mais antigo
+      });
+
+      setHistorico(allOrcamentos);
     } catch (error) {
       console.error('Erro ao buscar histórico:', error);
       showMessageBox('Erro ao carregar histórico de orçamentos.', true);
     } finally {
       setLoadingHistorico(false);
     }
-  }, [authToken, historico, loadingHistorico, page, showMessageBox]);
+  }, [authToken, loadingHistorico, showMessageBox]);
 
   // Efeito para a busca inicial, roda apenas uma vez
   useEffect(() => {
-    fetchHistorico(true, true); // Busca inicial, reseta e busca TUDO
+    fetchHistorico(); // Busca inicial
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // --- Salvar orçamento ---
   const handleSalvar = async (dados) => {
-    const envio = { ...dados, tipo, data: new Date().toLocaleString('pt-BR') };
+    const envio = { ...dados, tipo, data: new Date().toISOString() };
     let url = `${API_BASE_URL}/api/orcamentos`;
     let method = 'POST';
 
@@ -113,7 +121,7 @@ const PainelOrcamentos = () => {
 
       if (res.status === 200 || res.status === 201) {
         showMessageBox(`Orçamento ${method === 'POST' ? 'criado' : 'atualizado'} com sucesso.`);
-        fetchHistorico(true, true); // Recarrega o histórico do início
+        fetchHistorico(); // Recarrega o histórico do início
         setEditingData(null);
       } else {
         showMessageBox(`Erro ao salvar: ${result.msg || 'Erro desconhecido'}`, true);
@@ -371,8 +379,8 @@ const PainelOrcamentos = () => {
               onViewBudget={handleViewBudget}
               onExcluirOrcamento={handleExcluirOrcamento}
               loading={loadingHistorico}
-              fetchMore={() => fetchHistorico(false, false)}
-              hasMore={hasMore}
+              fetchMore={() => {}} // Função vazia, pois não há mais "carregar mais"
+              hasMore={false}
               searchTerm={searchTerm}
               onSearchChange={(e) => setSearchTerm(e.target.value)}
             />
