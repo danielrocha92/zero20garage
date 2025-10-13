@@ -135,6 +135,14 @@ h1.titulo-impresso {
     word-break: break-word;
 }
 
+.lista-items .item {
+    display: flex;         /* Ativa o Flexbox */
+    align-items: center;   /* Alinha os itens verticalmente ao centro */
+    gap: 8px;              /* Adiciona um espaço entre o checkbox и o texto */
+    margin-bottom: 5px;
+}
+
+
 /* --- Totais --- */
 .total-section {
     text-align: right;
