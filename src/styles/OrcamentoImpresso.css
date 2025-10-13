@@ -53,9 +53,9 @@ h1.titulo-impresso {
 }
 
 .logo-impresso {
-    width: 80px;
+    width: 120px; /* Logo ajustado */
     height: auto;
-    margin-left: 16px;
+    margin-left: 24px;
     flex-shrink: 0;
 }
 
@@ -64,17 +64,11 @@ h1.titulo-impresso {
     margin-bottom: 16px;
 }
 
-.info-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.info-row {
-    display: flex;
-    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
-    flex-direction: column;
-    gap: 8px;
+/* Nova estrutura em Grid para as informações */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* 1 coluna por padrão (mobile) */
+    gap: 8px 16px; /* 8px de espaço vertical, 16px horizontal */
 }
 
 .info-item {
@@ -82,7 +76,6 @@ h1.titulo-impresso {
     color: #333;
     font-weight: 700;
     word-break: break-word;
-    flex: 1 1 100%; /* Ocupa toda a largura em telas pequenas */
 }
 
 .info-item span {
@@ -149,10 +142,13 @@ h1.titulo-impresso {
 }
 
 .total-line-impresso {
-    display: block;
-    font-size: 13px;
-    margin-top: 4px;
-    color: #333;
+    font-size: 18px;
+    font-weight: 700;
+    border-top: 2px solid #ccc;
+    padding-top: 8px;
+    margin-top: 8px;
+    color: #222;
+    font-style: oblique;
 }
 
 .total-line-impresso span {
@@ -161,7 +157,7 @@ h1.titulo-impresso {
 }
 
 .final-total {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 700;
     border-top: 2px solid #ccc;
     padding-top: 8px;
@@ -260,20 +256,62 @@ h1.titulo-impresso {
 }
 
 .button {
+    /* --- Efeito Vidro Líquido Avançado --- */
+    position: relative;
     padding: 12px;
-    border: none;
-    border-radius: 4px;
+    border-radius: 12px; /* Raio mais suave para o vidro */
     cursor: pointer;
     font-size: 14px;
     font-weight: 700;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
     color: white;
-    background-color: #e60012;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    overflow: hidden; /* Essencial para os pseudo-elementos */
     width: 100%;
+
+    /* Fundo semi-transparente para o efeito de vidro */
+    background: rgba(220, 20, 60, 0.55); /* Crimson semi-transparente */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-top-color: rgba(255, 255, 255, 0.3);
+    border-left-color: rgba(255, 255, 255, 0.3);
+
+    /* Efeito de vidro fosco que se adapta ao fundo */
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+
+    /* Sombras para profundidade */
+    box-shadow:
+        inset 0 -6px 12px rgba(0, 0, 0, 0.2),
+        inset 0 6px 12px rgba(255, 255, 255, 0.1),
+        0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Pseudo-elemento para o brilho superior (simula reflexo) */
+.button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.button:active {
+    transform: translateY(0) scale(1);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .button:disabled {
-    background-color: #9fa8da;
+    background: #999;
+    box-shadow: none;
+    transform: none;
     cursor: not-allowed;
 }
 
@@ -287,13 +325,8 @@ h1.titulo-impresso {
         font-size: 18px;
     }
 
-    .info-row {
-        flex-direction: row;
-        gap: 16px;
-    }
-
-    .info-item {
-        flex: 1 1 0; /* Distribui o espaço igualmente em telas maiores */
+    .info-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 colunas em telas maiores */
         font-size: 14px;
     }
 
@@ -312,7 +345,7 @@ h1.titulo-impresso {
     }
 
     .final-total {
-        font-size: 18px;
+        font-size: 22px;
     }
 
     .extra-info-section-impresso p {
@@ -348,12 +381,87 @@ h1.titulo-impresso {
 @media print {
     body, html { background: white; }
     @page { size: A4; margin: 20mm; }
+
     .orcamento-impresso-container { padding: 0 !important; }
     .orcamento-impresso-content { box-shadow: none !important; padding: 0; }
     .orcamento-impresso-actions { display: none !important; }
-    .header-impresso h1 { font-size: 20px; }
-    .items-columns { grid-template-columns: repeat(2, 1fr); gap: 5px 20px; }
-    .items-columns li, .info-item, .total-line-impresso, .extra-info-section-impresso p, .policy-footer p, .policy-footer h4 { font-size: 12px !important; }
-    .final-total { font-size: 14px !important; }
+
+    /* Prioriza layout de uma coluna (mobile) */
+    .info-grid { grid-template-columns: 1fr; }
+    .items-columns { grid-template-columns: 1fr; }
+    .imagens-container { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+
+    /* Ajusta os tamanhos de fonte para impressão */
+    h1.titulo-impresso { font-size: 16px !important; }
+    .info-item, .items-columns li { font-size: 11px !important; }
+    .items-section h2, .policy-footer h4 { font-size: 13px !important; }
+    .extra-info-section-impresso p, .policy-footer p { font-size: 10px !important; }
+    .total-line-impresso, .final-total { font-size: 12px !important; }
     .total-section, .policy-footer { page-break-inside: avoid; }
+}
+
+/* --- Controles de Paginação --- */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.pagination-controls button {
+    /* Herda o estilo .button, mas com ajustes */
+    width: auto;
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+.pagination-controls span { font-size: 14px; color: #555; }
+
+/* --- Mensagem de Feedback (Toast/Snackbar) --- */
+.feedback-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 40px 12px 20px;
+    border-radius: 8px;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1001; /* Acima do overlay do modal, se houver */
+    display: flex;
+    align-items: center;
+    min-width: 300px;
+    max-width: 90%;
+}
+
+.feedback-message.success {
+    background-color: #4caf50; /* Verde para sucesso */
+}
+
+.feedback-message.error {
+    background-color: #c50404; /* Vermelho para erro */
+}
+
+.feedback-message p {
+    margin: 0;
+    font-weight: 500;
+}
+
+.feedback-close-btn {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 5px;
 }
