@@ -9,6 +9,7 @@ import html2canvas from 'html2canvas';
 import { FaCogs, FaTools, FaHistory, FaFileExcel, FaFilePdf, FaSignOutAlt } from 'react-icons/fa';
 
 import OrcamentoCabecote from './OrcamentoCabecote';
+import MessageBox from '../ui/MessageBox';
 import OrcamentoMotorCompleto from './OrcamentoMotorCompleto';
 import HistoricoOrcamentos from './HistoricoOrcamentos';
 import OrcamentoImpresso from './OrcamentoImpresso';
@@ -98,6 +99,7 @@ const PainelOrcamentos = () => {
 
 
     const handleSalvar = async (dados) => {
+        console.log("Salvando orçamento com os seguintes dados:", dados);
         const envio = { ...dados, tipo, data: new Date().toISOString() };
         let url = `${API_BASE_URL}/api/orcamentos`;
         let method = 'POST';
@@ -110,12 +112,14 @@ const PainelOrcamentos = () => {
         }
 
         try {
-            await axios({
+            const response = await axios({
                 method,
                 url,
                 headers: { 'Content-Type': 'application/json', ...(authToken && { Authorization: `Bearer ${authToken}` }) },
                 data: envio,
             });
+
+            console.log("Resposta da API:", response);
 
             showMessageBox(`Orçamento ${method === 'POST' ? 'criado' : 'atualizado'} com sucesso.`);
             fetchHistorico(true); // Recarrega tudo do início
@@ -123,6 +127,10 @@ const PainelOrcamentos = () => {
 
         } catch (err) {
             console.error('Erro ao conectar com a API:', err);
+            if (err.response) {
+                console.error("Dados da resposta do erro:", err.response.data);
+                console.error("Status da resposta do erro:", err.response.status);
+            }
             const errorMsg = err.response?.data?.msg || 'Erro ao conectar com o servidor.';
             showMessageBox(errorMsg, true);
         } finally {
@@ -336,117 +344,113 @@ const PainelOrcamentos = () => {
     }, [historico, sortConfig, searchTerm]);
 
     return (
-        <div className="painel-orcamentos-container">
-            {/* O JSX de retorno não precisa de nenhuma alteração */}
+        <>
             {messageData.text && (
-                   <div className="modal-overlay" onClick={() => setMessageData({ text: null, isError: false })}>
-                      <div className="modal-container" onClick={(e) => e.stopPropagation()}>
-                        <h3 style={{ color: messageData.isError ? '#c50404' : '#4caf50' }}>{messageData.isError ? 'Erro' : 'Sucesso'}</h3>
-                        <p>{messageData.text}</p>
-                        <div className="modal-actions">
-                          <button onClick={() => setMessageData({ text: null, isError: false })} className="modal-btn confirm">Fechar</button>
-                        </div>
-                      </div>
-                    </div>
-            )}
-
-            <CustomModal {...modalConfig} />
-
-            {selectedBudgetForView ? (
-              <OrcamentoImpresso orcamento={selectedBudgetForView} onClose={handleCloseView} />
-            ) : (
-              <>
-                <h1 className="titulo-escuro">Painel de Orçamentos</h1>
-
-                <div className="highlight-card">
-                  <h2 className="titulo-escuro">Novo Orçamento</h2>
-                  <div className="highlight-item">
-                    <div className="cards-container">
-                      <div className={`card-option ${tipo === 'motor' ? 'active' : ''}`} onClick={() => { setTipo('motor'); setEditingData(null); }}>
-                        <FaCogs size={40} />
-                        <span>Orçamento Motor Completo</span>
-                      </div>
-                      <div className={`card-option ${tipo === 'cabecote' ? 'active' : ''}`} onClick={() => { setTipo('cabecote'); setEditingData(null); }}>
-                        <FaTools size={40} />
-                        <span>Orçamento Cabeçote</span>
-                      </div>
-                      <div className="card-option" onClick={scrollToHistorico}>
-                        <FaHistory size={40} />
-                        <span>Histórico de Orçamentos</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="highlight-card">
-                  <h2 className="titulo-escuro">Ações</h2>
-                  <div className="highlight-item">
-                    <div className="cards-container">
-                      <div className="card-option" onClick={exportarExcel}>
-                        <FaFileExcel size={40} color="green" />
-                        <span>Exportar Excel</span>
-                      </div>
-                      <div className="card-option" onClick={exportarPDFCompleto}>
-                        <FaFilePdf size={40} color="red" />
-                        <span>Exportar PDF</span>
-                      </div>
-                      <div className="card-option" onClick={handleLogout}>
-                        <FaSignOutAlt size={40} color="gray" />
-                        <span>Sair</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <main className="orcamento-form-wrapper" ref={formRef} id="orcamento-form">
-                  {tipo === 'motor'
-                    ? <OrcamentoMotorCompleto
-                        onSubmit={handleSalvar}
-                        editingData={editingData}
-                        showMessage={showMessageBox}
-                      />
-                    : <OrcamentoCabecote
-                        onSubmit={handleSalvar}
-                        editingData={editingData}
-                        showMessage={showMessageBox}
-                      />
-                  }
-
-                  {editingData && (
-                    <Suspense fallback={<div>Carregando upload de imagem...</div>}>
-                      <UploadImagemOrcamento
-                        orcamentoId={editingData?.id || editingData?._id}
-                        initialImages={editingData?.imagens || []}
-                        authToken={authToken}
-                        apiBaseUrl={API_BASE_URL}
-                        onUpdate={handleImagesUpdated}
-                        showMessage={showMessageBox}
-                      />
-                    </Suspense>
-                  )}
-                </main>
-
-                <div ref={historicoRef} />
-                <HistoricoOrcamentos
-                  historico={sortedAndFilteredHistorico}
-                  onEditarOrcamento={handleEditarOrcamento}
-                  onViewBudget={handleViewBudget}
-                  onExcluirOrcamento={handleExcluirOrcamento}
-                  loading={loadingHistorico}
-                  searchTerm={searchTerm}
-                  onSearchChange={(e) => setSearchTerm(e.target.value)}
-                  requestSort={requestSort}
-                  sortConfig={sortConfig}
+                <MessageBox
+                    message={messageData.text}
+                    isError={messageData.isError}
+                    onClose={() => setMessageData({ text: null, isError: false })}
                 />
-
-                {hasMore && !loadingHistorico && (
-                  <div className="load-more">
-                    <button onClick={() => fetchHistorico(false)}>Carregar Mais</button>
-                  </div>
-                )}
-              </>
             )}
-        </div>
+            <div className="painel-orcamentos-container">
+                <CustomModal {...modalConfig} />
+
+                {selectedBudgetForView ? (
+                    <OrcamentoImpresso orcamento={selectedBudgetForView} onClose={handleCloseView} />
+                ) : (
+                    <>
+                        <h1 className="titulo-escuro">Painel de Orçamentos</h1>
+
+                        <div className="highlight-card">
+                            <h2 className="titulo-escuro">Novo Orçamento</h2>
+                            <div className="highlight-item">
+                                <div className="cards-container">
+                                    <div className={`card-option ${tipo === 'motor' ? 'active' : ''}`} onClick={() => { setTipo('motor'); setEditingData(null); }}>
+                                        <FaCogs size={40} />
+                                        <span>Orçamento Motor Completo</span>
+                                    </div>
+                                    <div className={`card-option ${tipo === 'cabecote' ? 'active' : ''}`} onClick={() => { setTipo('cabecote'); setEditingData(null); }}>
+                                        <FaTools size={40} />
+                                        <span>Orçamento Cabeçote</span>
+                                    </div>
+                                    <div className="card-option" onClick={scrollToHistorico}>
+                                        <FaHistory size={40} />
+                                        <span>Histórico de Orçamentos</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="highlight-card">
+                            <h2 className="titulo-escuro">Ações</h2>
+                            <div className="highlight-item">
+                                <div className="cards-container">
+                                    <div className="card-option" onClick={exportarExcel}>
+                                        <FaFileExcel size={40} color="green" />
+                                        <span>Exportar Excel</span>
+                                    </div>
+                                    <div className="card-option" onClick={exportarPDFCompleto}>
+                                        <FaFilePdf size={40} color="red" />
+                                        <span>Exportar PDF</span>
+                                    </div>
+                                    <div className="card-option" onClick={handleLogout}>
+                                        <FaSignOutAlt size={40} color="gray" />
+                                        <span>Sair</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <main className="orcamento-form-wrapper" ref={formRef} id="orcamento-form">
+                            {tipo === 'motor'
+                                ? <OrcamentoMotorCompleto
+                                    onSubmit={handleSalvar}
+                                    editingData={editingData}
+                                    showMessage={showMessageBox}
+                                />
+                                : <OrcamentoCabecote
+                                    onSubmit={handleSalvar}
+                                    editingData={editingData}
+                                    showMessage={showMessageBox}
+                                />
+                            }
+
+                            {editingData && (
+                                <Suspense fallback={<div>Carregando upload de imagem...</div>}>
+                                    <UploadImagemOrcamento
+                                        orcamentoId={editingData?.id || editingData?._id}
+                                        initialImages={editingData?.imagens || []}
+                                        authToken={authToken}
+                                        apiBaseUrl={API_BASE_URL}
+                                        onUpdate={handleImagesUpdated}
+                                        showMessage={showMessageBox}
+                                    />
+                                </Suspense>
+                            )}
+                        </main>
+
+                        <div ref={historicoRef} />
+                        <HistoricoOrcamentos
+                            historico={sortedAndFilteredHistorico}
+                            onEditarOrcamento={handleEditarOrcamento}
+                            onViewBudget={handleViewBudget}
+                            onExcluirOrcamento={handleExcluirOrcamento}
+                            loading={loadingHistorico}
+                            searchTerm={searchTerm}
+                            onSearchChange={(e) => setSearchTerm(e.target.value)}
+                            requestSort={requestSort}
+                            sortConfig={sortConfig}
+                        />
+
+                        {hasMore && !loadingHistorico && (
+                            <div className="load-more">
+                                <button onClick={() => fetchHistorico(false)}>Carregar Mais</button>
+                            </div>
+                        )}
+                    </>
+                )}
+            </div>
+        </>
     );
 };
 

@@ -118,7 +118,7 @@
               {historico.map((orcamento, index) => (
                 <tr key={`${orcamento.id}-${index}`}>
                   <td>{orcamento.ordemServico || '-'}</td>
-                  <td>{orcamento.cliente}</td>
+                  <td>{orcamento.cliente || '-'}</td>
                   <td>{orcamento.veiculo || '-'}</td>
                   <td>{orcamento.tipo}</td>
                   <td>R$ {Number(orcamento.valorTotal).toFixed(2)}</td>
@@ -160,7 +160,7 @@
                 <span className={`status-tag ${getStatusTagClass(orcamento.status)}`}>{orcamento.status || 'Aberto'}</span>
               </summary>
               <div className="card-content">
-                <p><strong>Cliente:</strong> {orcamento.cliente}</p>
+                <p><strong>Cliente:</strong> {orcamento.cliente || 'N/A'}</p>
                 <p><strong>Veículo:</strong> {orcamento.veiculo || '-'}</p>
                 <p><strong>Tipo:</strong> {orcamento.tipo}</p>
                 <p><strong>Valor Total:</strong> R$ {Number(orcamento.valorTotal).toFixed(2)}</p>
