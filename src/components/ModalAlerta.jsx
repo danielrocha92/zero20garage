@@ -1,6 +1,5 @@
-// src/components/ModalAlerta.jsx
 import React from "react";
-import "./ModalConfirmacao.css";
+import "./ModalAlerta.css"; // Importa o novo arquivo CSS
 
 const ModalAlerta = ({ 
   titulo = "Atenção", 
@@ -8,13 +7,13 @@ const ModalAlerta = ({
   onFechar 
 }) => {
   return (
-    <div className="modal-overlay">
-      <div className="modal-container">
+    <div className="alerta-modal-overlay">
+      <div className="alerta-modal-container">
         <h3>{titulo}</h3>
         <p>{mensagem}</p>
 
-        <div className="modal-actions">
-          <button className="btn-confirmar" onClick={onFechar}>
+        <div className="alerta-modal-actions">
+          <button className="alerta-btn-fechar" onClick={onFechar}>
             Fechar
           </button>
         </div>
