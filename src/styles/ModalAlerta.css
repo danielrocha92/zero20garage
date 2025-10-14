@@ -1,0 +1,39 @@
+.alerta-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.alerta-modal-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.alerta-modal-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  /* Centraliza o botão único */
+  justify-content: center; 
+  gap: 1rem;
+}
+
+.alerta-btn-fechar {
+  background: #2196F3; /* Cor diferente para o botão de alerta */
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
