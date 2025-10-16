@@ -117,6 +117,7 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploaded }) => {
           type="file"
           accept="image/*"
           multiple
+          capture="environment"
           onChange={handleFileChange}
           disabled={uploading}
         />
@@ -149,6 +150,7 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploaded }) => {
                 />
                 <AiOutlineDelete
                   className="delete-icon"
+                  aria-label="Remover imagem da seleção"
                   onClick={() => handleRemoveSelectedFile(idx)}
                 />
               </div>
@@ -173,10 +175,11 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploaded }) => {
                     onError={handleImageError}
                   />
                   <div className="image-actions">
-                    <AiOutlineEye size={20} className="action-icon" onClick={() => setModalImage(imgSrc)} />
+                    <AiOutlineEye size={20} className="action-icon" aria-label="Visualizar imagem" onClick={() => setModalImage(imgSrc)} />
                     <AiOutlineDelete
                       size={20}
                       className="action-icon"
+                      aria-label="Excluir imagem"
                       onClick={() => handleRemoveUploadedImage(img)}
                     />
                   </div>
@@ -190,7 +193,7 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploaded }) => {
       {modalImage && (
         <div className="modal-overlay" onClick={() => setModalImage(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <AiOutlineClose size={24} className="modal-close" onClick={() => setModalImage(null)} />
+            <AiOutlineClose size={24} className="modal-close" aria-label="Fechar visualização" onClick={() => setModalImage(null)} />
             <img src={modalImage} alt="Visualização" className="modal-image" onError={handleImageError} />
           </div>
         </div>

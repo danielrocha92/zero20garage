@@ -430,7 +430,7 @@ const PainelOrcamentos = () => {
                                         initialImages={editingData?.imagens || []}
                                         authToken={authToken}
                                         apiBaseUrl={API_BASE_URL}
-                                        onUpdate={handleImagesUpdated}
+                                        onUploaded={handleImagesUpdated}
                                         showMessage={showMessageBox}
                                     />
                                 </Suspense>

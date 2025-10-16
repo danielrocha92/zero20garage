@@ -193,7 +193,7 @@
 
         {hasMore && !loading && (
           <div className="load-more">
-            <button onClick={fetchMore} disabled={loading}>Carregar Mais</button>
+            <button onClick={fetchMore} className='ctn-button' disabled={loading}>Carregar Mais</button>
           </div>
         )}
         {loading && <div className="loading-more">Carregando...</div>}

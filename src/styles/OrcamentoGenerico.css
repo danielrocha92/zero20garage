@@ -308,9 +308,9 @@ textarea:focus {
    ================================= */
 .message-box {
   position: fixed;
-  top: 50%;
+  top: 90px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%); /* Apenas translação horizontal */
   width: 90%;
   max-width: 500px;
   padding: 15px;
@@ -319,8 +319,9 @@ textarea:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 1000; /* Garante que fique sobre outros elementos */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra mais suave */
+  border: 1px solid transparent;
 }
 
 .message-box-overlay {
@@ -334,22 +335,30 @@ textarea:focus {
 }
 
 .message-box.success {
-  background-color: var(--color-success-bg);
-  color: var(--color-success-text);
+  background-color: #e8f5e9; /* Verde claro */
+  color: #1c5d20; /* Verde escuro para o texto */
+  border-color: #a5d6a7;
 }
 
 .message-box.error {
-  background-color: var(--color-error-bg);
-  color: var(--color-error-text);
+  background-color: #ffebee; /* Vermelho claro */
+  color: #b71c1c; /* Vermelho escuro para o texto */
+  border-color: #ef9a9a;
 }
 
 .message-box button {
   background: none;
   border: none;
-  color: white;
+  color: inherit; /* Herda a cor do texto do pai */
   font-size: 18px;
   cursor: pointer;
   margin-left: 20px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.message-box button:hover {
+  opacity: 1;
 }
 
 /* =================================
