@@ -127,12 +127,13 @@ const OrcamentoGenerico = ({
 
 
   useEffect(() => {
-    if (!editingData) return;
+    if (!editingData) return; // Não busca mais a próxima OS para novos orçamentos
 
-    const parsedDate = new Date(editingData.data);
-    const validDate = !isNaN(parsedDate.getTime())
-      ? parsedDate.toISOString().slice(0, 10)
-      : new Date().toISOString().slice(0, 10);
+    // Se editingData.data existir e for válido, formata para YYYY-MM-DD.
+    // Caso contrário, define como string vazia para o input não mostrar "Data não disponível".
+    const validDate = editingData.data
+      ? new Date(editingData.data).toISOString().slice(0, 10)
+      : "";
 
     setFormData((prev) => ({
       ...prev,
@@ -141,7 +142,7 @@ const OrcamentoGenerico = ({
       veiculo: editingData.veiculo || "",
       placa: editingData.placa || "",
       data: validDate,
-      ordemServico: editingData.ordemServico || "",
+      ordemServico: editingData.id || editingData.ordemServico || "", // Prioriza o ID, que é a OS
       // CORREÇÃO DO BUG MONETÁRIO: usar formatNumberToCurrency ao invés de formatCurrencySmart
       totalPecasManual: formatNumberToCurrency(editingData.valorTotalPecas),
       totalServicosManual: formatNumberToCurrency(editingData.valorTotalServicos),
@@ -153,12 +154,7 @@ const OrcamentoGenerico = ({
         : "",
       status: editingData.status || "Aberto",
       pecas: itensData.map((pecaData) => {
-        const pecaEdit = editingData.pecasSelecionadas?.find((p) => {
-          // Solução: Verifique se a string começa com o nome da peça.
-          // Isso é mais robusto que `includes`
-          const pecaNomePadrao = new RegExp(`^${pecaData.nome}(::.*|\\s*$)`);
-          return pecaNomePadrao.test(p);
-        });
+        const pecaEdit = editingData.pecasSelecionadas?.find((p) => p.startsWith(pecaData.nome));
 
         const selecionado = !!pecaEdit;
         let quantidade = pecaData.temQuantidade ? 1 : 0;
@@ -196,10 +192,7 @@ const OrcamentoGenerico = ({
         };
       }),
       servicos: servicosData.map((servicoData) => {
-        const servicoEdit = editingData.servicosSelecionados?.find((s) => {
-          const servicoNomePadrao = new RegExp(`^${servicoData.nome}(::.*|\\s*$)`);
-          return servicoNomePadrao.test(s);
-        });
+        const servicoEdit = editingData.servicosSelecionados?.find((s) => s.startsWith(servicoData.nome));
 
         const selecionado = !!servicoEdit;
         let quantidade = servicoData.temQuantidade ? 1 : 0;
@@ -358,7 +351,7 @@ const formatarItens = (lista) =>
         telefone: formData.telefone,
         veiculo: formData.veiculo,
         placa: formData.placa,
-        data: formData.data,
+        data: formData.data || null, // Garante que a data seja enviada, mesmo que nula
         ordemServico: formData.ordemServico,
         pecasSelecionadas: formatarItens(formData.pecas),
         servicosSelecionados: formatarItens(formData.servicos),
@@ -393,6 +386,7 @@ const formatarItens = (lista) =>
         name="ordemServico"
         value={formData.ordemServico}
         onChange={handleInputChange}
+        readOnly={!!editingData} // Torna o campo somente leitura ao editar
       />
     </div>
 

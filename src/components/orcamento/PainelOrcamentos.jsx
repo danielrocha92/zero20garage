@@ -100,7 +100,7 @@ const PainelOrcamentos = () => {
 
     const handleSalvar = async (dados) => {
         console.log("Salvando orçamento com os seguintes dados:", dados);
-        const envio = { ...dados, tipo, data: new Date().toISOString() };
+        const envio = { ...dados, tipo };
         let url = `${API_BASE_URL}/api/orcamentos`;
         let method = 'POST';
 
@@ -109,6 +109,14 @@ const PainelOrcamentos = () => {
             url = `${API_BASE_URL}/api/orcamentos/${id}`;
             method = 'PUT';
             envio.id = id;
+            // Ao editar, usa a data que vem do formulário (dados.data).
+            // A conversão e o tratamento de fuso horário agora são feitos no backend.
+            envio.data = dados.data;
+        } else {
+            // Para novos orçamentos, use a data e hora atuais.
+            // A data de criação agora é definida pelo backend.
+            // O campo 'ordemServico' é necessário para a criação.
+            envio.ordemServico = dados.ordemServico;
         }
 
         try {
