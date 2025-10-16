@@ -38,7 +38,7 @@ const appendOriginalImagesToPdf = async (pdf, imagens) => {
     if (!imagens || imagens.length === 0) return;
 
     const dataUrls = await Promise.all(
-        imagens.map(img => toPngDataUrl(getCloudinaryOriginal(img.imagemUrl)))
+        imagens.map(img => toPngDataUrl(getCloudinaryOriginal(img.imageUrl)))
     );
 
     const validDataUrls = dataUrls.filter(Boolean);

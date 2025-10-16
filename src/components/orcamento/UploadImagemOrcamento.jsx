@@ -15,7 +15,7 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploaded }) => {
   const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
   const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com/api/orcamentos';
 
-  const getImageUrl = (img) => img?.imagemUrl || img?.url || '';
+  const getImageUrl = (img) => img?.imageUrl || img?.url || '';
   const handleImageError = (e) => e.currentTarget.src = '/placeholder.png';
 
   useEffect(() => {
@@ -117,7 +117,6 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploaded }) => {
           type="file"
           accept="image/*"
           multiple
-          capture="environment"
           onChange={handleFileChange}
           disabled={uploading}
         />

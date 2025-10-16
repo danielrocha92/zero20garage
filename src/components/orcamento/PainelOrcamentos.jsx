@@ -113,10 +113,10 @@ const PainelOrcamentos = () => {
             // A conversão e o tratamento de fuso horário agora são feitos no backend.
             envio.data = dados.data;
         } else {
-            // Para novos orçamentos, use a data e hora atuais.
-            // A data de criação agora é definida pelo backend.
-            // O campo 'ordemServico' é necessário para a criação.
+            // Para novos orçamentos, a data de criação é definida pelo backend.
+            // O campo 'ordemServico' é enviado para ser usado como ID do documento.
             envio.ordemServico = dados.ordemServico;
+            envio.data = new Date().toISOString(); // Adiciona a data atual para novos orçamentos
         }
 
         try {
@@ -186,14 +186,14 @@ const PainelOrcamentos = () => {
           tempDiv.style.backgroundColor = 'white';
           document.body.appendChild(tempDiv);
 
-          const imagemUrl = orcamento?.imagens?.[0]?.url || null;
+          const imageUrl = orcamento?.imagens?.[0]?.url || null;
           tempDiv.innerHTML = `
               <div class="orcamento-impresso-content">
                 <h1>ORÇAMENTO - ${orcamento.tipo === 'motor' ? 'MOTOR' : 'CABEÇOTE'}</h1>
                 <p><strong>Cliente:</strong> ${orcamento.cliente || 'N/A'}</p>
                 <p><strong>Veículo:</strong> ${orcamento.veiculo || 'N/A'}</p>
                 <p><strong>Valor:</strong> R$ ${orcamento.valorTotal?.toFixed(2) || '0.00'}</p>
-                ${imagemUrl ? `<img src="${imagemUrl}" crossorigin="anonymous" style="max-width:100%; height:auto;" />` : ''}
+                ${imageUrl ? `<img src="${imageUrl}" crossorigin="anonymous" style="max-width:100%; height:auto;" />` : ''}
               </div>
             `;
 

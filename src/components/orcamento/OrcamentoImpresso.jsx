@@ -14,7 +14,7 @@ const ImagensVeiculo = ({ imagens }) => (
     <div className="imagens-container">
       {imagens.map((img, idx) => (
         <div key={idx} className="thumb-wrapper">
-          <img src={img?.imagemUrl || ""} alt={`Foto ${idx + 1}`} className="thumb-img" />
+          <img src={img?.imageUrl || ""} alt={`Foto ${idx + 1}`} className="thumb-img" />
         </div>
       ))}
     </div>

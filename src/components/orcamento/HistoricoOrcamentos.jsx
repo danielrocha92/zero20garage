@@ -46,8 +46,8 @@
     const getImagemUrl = (orcamento) => {
       if (!orcamento?.imagens || orcamento.imagens.length === 0) return null;
       const img = orcamento.imagens[0];
-      if (typeof img === 'string') return img;
-      if (img?.imagemUrl) return img.imagemUrl;
+      if (typeof img === 'string') return img; // Suporte a formato legado
+      if (img?.imageUrl) return img.imageUrl; // CORREÇÃO: de 'imagemUrl' para 'imageUrl'
       if (img?.url) return img.url;
       if (img?.uri) return img.uri;
       return null;
@@ -56,7 +56,7 @@
     const preloadImages = async (orcamento) => {
       if (!orcamento?.imagens || orcamento.imagens.length === 0) return [];
       const loadedImages = await Promise.all(
-        orcamento.imagens.map(async (img) => typeof img === 'string' ? img : img?.imagemUrl || img?.url || img?.uri || null)
+        orcamento.imagens.map(async (img) => typeof img === 'string' ? img : img?.imageUrl || img?.url || img?.uri || null)
       );
       return loadedImages.filter(Boolean);
     };
