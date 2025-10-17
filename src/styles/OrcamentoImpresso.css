@@ -113,15 +113,15 @@ h1.titulo-impresso {
 
 .list-item-impresso input[type="checkbox"] {
     margin: 0;
-    width: 12px !important;   /* Adicionado !important */
-    height: 12px !important;  /* Adicionado !important */
+    width: 12px !important;
+    height: 12px !important;
     flex-shrink: 0;
     margin-top: 3px;
     appearance: none;
     -webkit-appearance: none;
     border: 1px solid #333;
     border-radius: 50%;
-    font-size: 30px; /* Isso não afeta o tamanho do círculo, mas sim o potencial ícone dentro */
+    font-size: 30px;
     cursor: default;
     background-color: transparent;
     position: relative;
@@ -146,7 +146,6 @@ h1.titulo-impresso {
     margin-top: 16px;
 }
 
-/* Para os subtotais (Valor de Peças, etc.) */
 .total-section p {
     font-size: 16px; /* Ajustado */
     font-weight: 700;
@@ -322,11 +321,11 @@ h1.titulo-impresso {
     }
 
     h1.titulo-impresso {
-        font-size: 24px; /* Ajustado */
+        font-size: 24px;
     }
 
     .items-section h2 {
-        font-size: 18px; /* Mantido */
+        font-size: 18px;
     }
 
     .items-columns {
@@ -335,28 +334,28 @@ h1.titulo-impresso {
     }
 
     .items-columns li {
-        font-size: 14px; /* Ajustado */
+        font-size: 14px;
         white-space: normal;
     }
 
     .final-total {
-        font-size: 20px; /* Ajustado */
+        font-size: 20px;
     }
 
     .extra-info-section-impresso p {
-        font-size: 14px; /* Mantido */
+        font-size: 14px;
     }
 
     .policy-footer h4 {
-        font-size: 16px; /* Mantido */
+        font-size: 16px;
     }
 
     .policy-footer p {
-        font-size: 13px; /* Mantido */
+        font-size: 13px;
     }
 
     .imagens-section h2 {
-        font-size: 18px; /* Mantido */
+        font-size: 18px;
     }
 
     .orcamento-impresso-actions {
@@ -382,7 +381,12 @@ h1.titulo-impresso {
 }
 
 .pdf-generating h1.titulo-impresso {
-    font-size: 24px; /* Ajustado */
+    font-size: 24px;
+}
+
+/* ADICIONADO */
+.pdf-generating .logo-impresso {
+    max-width: 100px;
 }
 
 .pdf-generating .items-section h2 {
@@ -395,12 +399,12 @@ h1.titulo-impresso {
 }
 
 .pdf-generating .items-columns li {
-    font-size: 14px; /* Ajustado */
+    font-size: 14px;
     white-space: normal;
 }
 
 .pdf-generating .final-total {
-    font-size: 26px; /* Ajustado */
+    font-size: 26px;
 }
 
 .pdf-generating .extra-info-section-impresso p {
@@ -432,7 +436,12 @@ h1.titulo-impresso {
     .orcamento-impresso-content { box-shadow: none !important; padding: 0; }
     .orcamento-impresso-actions { display: none !important; }
 
-    .items-columns { grid-template-columns: repeat(2, 1fr); gap: 4px 16px; } /* Ajustado para melhor uso do espaço em A4 */
+    /* ADICIONADO */
+    .logo-impresso {
+        max-width: 100px !important;
+    }
+
+    .items-columns { grid-template-columns: repeat(2, 1fr); gap: 4px 16px; }
     .imagens-container { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
 
     /* Ajusta os tamanhos de fonte para impressão */
@@ -449,7 +458,6 @@ h1.titulo-impresso {
 
 
 /* --- Controles de Paginação e Mensagens (sem alterações) --- */
-/* ... (o restante do seu CSS permanece o mesmo) ... */
 .pagination-controls {
     display: flex;
     justify-content: center;
