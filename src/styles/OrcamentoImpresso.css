@@ -34,7 +34,7 @@
 
 h1.titulo-impresso {
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 20px; /* Ajustado */
+    font-size: 20px;
     color: #222;
     text-transform: uppercase;
     font-weight: 700;
@@ -64,7 +64,7 @@ h1.titulo-impresso {
 }
 
 .info-table .info-item {
-    font-size: 14px; /* Ajustado */
+    font-size: 14px;
     color: #333;
     font-weight: 700;
     word-break: break-word;
@@ -84,7 +84,7 @@ h1.titulo-impresso {
 
 .items-section h2 {
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 16px; /* Ajustado */
+    font-size: 18px;
     color: #222;
     font-weight: 700;
     border-bottom: 2px solid #ddd;
@@ -103,29 +103,81 @@ h1.titulo-impresso {
 
 .items-columns li {
     display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 14px; /* Ajustado */
+    align-items: center;
+    gap: 0; /* O espaçamento será controlado pela margem do checkbox */
+    font-size: 14px;
     color: #222;
     line-height: 1.4;
     padding: 2px 0;
+    position: relative;
+    min-height: 18px;
 }
 
+/* --- Estilos do Checkbox (Versão Limpa e Estável) --- */
+
+/* 1. Define a área clicável do checkbox e o espaço à direita */
 .list-item-impresso input[type="checkbox"] {
-    margin: 0;
-    width: 12px !important;
-    height: 12px !important;
-    flex-shrink: 0;
-    margin-top: 3px;
     appearance: none;
     -webkit-appearance: none;
+    margin: 0;
+    padding: 0;
+    width: 12px;
+    height: 12px;
+    margin-right: 8px; /* Espaço entre o checkbox e o texto */
+    position: relative;
+    cursor: default;
+    flex-shrink: 0;
+    outline: none;
+}
+
+/* 2. Cria a bolinha VISÍVEL */
+.list-item-impresso input[type="checkbox"]::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
     border: 1px solid #333;
     border-radius: 50%;
-    font-size: 30px;
-    cursor: default;
     background-color: transparent;
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza perfeitamente */
 }
+
+/* 3. Estilo de quando a bolinha está MARCADA */
+.list-item-impresso input[type="checkbox"]:checked::before {
+    background-color: #333;
+    border-color: #333;
+}
+
+/* --- Estilos do Checkbox para PDF --- */
+
+/* 1. Transforma a bolinha em um quadrado */
+.pdf-generating .list-item-impresso input[type="checkbox"]::before {
+    border-radius: 2px;
+}
+
+/* 2. Remove o fundo preto quando marcado (para o 'check' aparecer) */
+.pdf-generating .list-item-impresso input[type="checkbox"]:checked::before {
+    background-color: transparent;
+    border-color: #333;
+}
+
+/* 3. Adiciona o símbolo de 'check' (✓) usando o pseudo-elemento ::after */
+.pdf-generating .list-item-impresso input[type="checkbox"]:checked::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    width: 3px;
+    height: 6px;
+    border: solid #333;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
 
 .list-item-impresso .item-text {
     margin-left: 0;
@@ -140,14 +192,16 @@ h1.titulo-impresso {
 }
 
 
-/* --- Totais --- */
+/* --- Totais (Versão Melhorada) --- */
 .total-section {
     text-align: right;
-    margin-top: 16px;
+    margin-top: 24px; /* Mais espaço acima */
+    padding-top: 16px;
+    border-top: 1px solid #eee; /* Linha de separação sutil */
 }
 
 .total-section p {
-    font-size: 16px; /* Ajustado */
+    font-size: 16px;
     font-weight: 700;
     color: #333;
     margin: 4px 0;
@@ -155,23 +209,24 @@ h1.titulo-impresso {
 }
 
 .total-line-impresso {
-    font-size: 16px; /* Ajustado */
-    font-weight: 700;
+    font-size: 16px; /* Aumentado para consistência */
+    font-weight: 400; /* Peso menor para ser um subtotal */
+    color: #555; /* Cor mais suave */
     border-top: 2px solid #ccc;
     padding-top: 8px;
     margin-top: 8px;
-    color: #222;
-    font-style: oblique;
+    font-style: normal; /* Remove itálico para um visual mais limpo */
 }
 
 .final-total {
-    font-size: 22px; /* Ajustado */
+    font-size: 22px; /* Aumentado para máximo destaque */
     font-weight: 700;
-    border-top: 2px solid #ccc;
-    padding-top: 8px;
-    margin-top: 8px;
-    color: #222;
+    color: #000; /* Preto sólido para importância */
+    border-top: 2px solid #333; /* Borda mais forte */
+    padding-top: 12px;
+    margin-top: 12px;
 }
+
 
 /* --- Extras --- */
 .extra-info-section-impresso {
@@ -179,7 +234,7 @@ h1.titulo-impresso {
 }
 
 .extra-info-section-impresso p {
-    font-size: 14px; /* Ajustado */
+    font-size: 14px;
     line-height: 1.4;
     margin-bottom: 3px;
     color: #333;
@@ -205,7 +260,7 @@ h1.titulo-impresso {
 }
 
 .policy-footer p {
-    font-size: 12px; /* Ajustado */
+    font-size: 12px;
     line-height: 1.4;
     margin-bottom: 6px;
     color: #333;
@@ -225,7 +280,7 @@ h1.titulo-impresso {
 
 .imagens-section h2 {
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 16px; /* Ajustado */
+    font-size: 16px;
     color: #222;
     font-weight: 700;
     border-bottom: 2px solid #ddd;
@@ -339,7 +394,7 @@ h1.titulo-impresso {
     }
 
     .final-total {
-        font-size: 20px;
+        font-size: 24px; /* Tamanho ainda maior no desktop */
     }
 
     .extra-info-section-impresso p {
@@ -384,7 +439,6 @@ h1.titulo-impresso {
     font-size: 24px;
 }
 
-/* ADICIONADO */
 .pdf-generating .logo-impresso {
     max-width: 100px;
 }
@@ -436,7 +490,6 @@ h1.titulo-impresso {
     .orcamento-impresso-content { box-shadow: none !important; padding: 0; }
     .orcamento-impresso-actions { display: none !important; }
 
-    /* ADICIONADO */
     .logo-impresso {
         max-width: 100px !important;
     }
