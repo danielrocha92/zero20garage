@@ -1,5 +1,3 @@
-Com certeza. Eu substituí a antiga seção "Aprendizados e Práticas Aplicadas" pela análise de complexidade detalhada que discutimos, formatando-a para se encaixar perfeitamente no seu README.md.
-Aqui está o arquivo README.md completo e atualizado:
 🚗 Zero20 Garage
 Site institucional para oficina mecânica e retífica de motores
 💡 Desenvolvido para destacar a qualidade dos serviços da Zero 20 Garage, com foco em performance, design responsivo e experiência do usuário.
