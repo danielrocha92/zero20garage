@@ -244,7 +244,7 @@ npm start
 <h2>👨‍💻 Autor</h2>
 
 <p><strong>Daniel Rocha</strong><br>
-Front-End Developer apaixonado por criar experiências digitais impactantes.</p>
+Developer Web Full-Stack apaixonado por criar experiências digitais impactantes.</p>
 
 <ul>
     <li><strong>🌐 Site:</strong> <a href="https://rocha-tech-solutions.vercel.app/">Rocha Tech Solutions</a></li>
