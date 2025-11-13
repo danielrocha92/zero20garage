@@ -34,7 +34,7 @@
 
 h1.titulo-impresso {
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 20px;
+    font-size: 22px;
     color: #222;
     text-transform: uppercase;
     font-weight: 700;
@@ -260,7 +260,7 @@ h1.titulo-impresso {
 }
 
 .policy-footer p {
-    font-size: 12px;
+    font-size: 10px;
     line-height: 1.4;
     margin-bottom: 6px;
     color: #333;
@@ -376,7 +376,7 @@ h1.titulo-impresso {
     }
 
     h1.titulo-impresso {
-        font-size: 24px;
+        font-size: 26px;
     }
 
     .items-section h2 {
@@ -406,7 +406,7 @@ h1.titulo-impresso {
     }
 
     .policy-footer p {
-        font-size: 13px;
+        font-size: 11px;
     }
 
     .imagens-section h2 {
@@ -436,7 +436,7 @@ h1.titulo-impresso {
 }
 
 .pdf-generating h1.titulo-impresso {
-    font-size: 24px;
+    font-size: 26px;
 }
 
 .pdf-generating .logo-impresso {
@@ -470,7 +470,7 @@ h1.titulo-impresso {
 }
 
 .pdf-generating .policy-footer p {
-    font-size: 13px;
+    font-size: 11px;
 }
 
 .pdf-generating .imagens-section h2 {
@@ -498,12 +498,12 @@ h1.titulo-impresso {
     .imagens-container { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
 
     /* Ajusta os tamanhos de fonte para impressão */
-    h1.titulo-impresso { font-size: 18px !important; }
+    h1.titulo-impresso { font-size: 20px !important; }
     .info-item { font-size: 12px !important; }
     .items-columns li { font-size: 12px !important; }
     .items-section h2 { font-size: 14px !important; }
     .policy-footer h4 { font-size: 14px !important; }
-    .extra-info-section-impresso p, .policy-footer p { font-size: 11px !important; }
+    .extra-info-section-impresso p, .policy-footer p { font-size: 9px !important; }
     .total-section p { font-size: 13px !important; }
     .final-total { font-size: 10px !important; }
     .total-section, .policy-footer { page-break-inside: avoid; }

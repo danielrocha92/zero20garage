@@ -86,7 +86,7 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
 
         {Number(orcamento.totalMaoDeObra) > 0 && (
             <div className="total-line-impresso">
-                <span>Valor total de mão de obra:</span>
+                <span>Valor total de mão de obra mecânica:</span>
                 <strong>{formatValue(orcamento.totalMaoDeObra)}</strong>
             </div>
         )}
