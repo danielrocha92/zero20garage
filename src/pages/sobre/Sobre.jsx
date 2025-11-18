@@ -11,9 +11,6 @@ import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import TestimonialsCarousel from '../../components/ui/TestimonialsCarousel';
 import Slider from 'react-slick';
 // Importando imagens
-import equipe from '../../assets/images/equipe.jpg';
-import francisco from '../../assets/images/francisco.jpg';
-import rodney from '../../assets/images/rodney.jpg';
 import fachada from '../../assets/images/fachada.jpg';
 
 import { FaBullseye, FaEye, FaStar } from 'react-icons/fa';
@@ -58,6 +55,19 @@ function Sobre() {
     },
   ];
 
+  const teamMembers = [
+    {
+      name: "Francisco Borges",
+      role: "Chefe de Oficina",
+      image: "https://res.cloudinary.com/dlyeywiwk/image/upload/v1763428213/FranciscoBorges_cnuafi.jpg"
+    },
+    {
+      name: "Rodney Santos",
+      role: "Especialista em Retífica",
+      image: "https://res.cloudinary.com/dlyeywiwk/image/upload/v1763428214/RodneySantos_azdeqw.jpg"
+    }
+  ];
+
   return (
     <div className="page-escuro">
 
@@ -78,7 +88,7 @@ function Sobre() {
                 </p>
               </div>
               <div className="historia-image">
-                <img src={equipe} alt="Equipe Zero20 Garage" />
+                <img src="https://res.cloudinary.com/dlyeywiwk/image/upload/v1763428214/Equipe_y6nvty.jpg" alt="Equipe Zero20 Garage" />
               </div>
             </div>
           </div>
@@ -92,14 +102,12 @@ function Sobre() {
               {/* Slider com fotos da equipe */}
               <div className="equipe-slider">
                 <Slider {...settings}>
-                  <div className="team-image-container">
-                    <img src={francisco} alt="Francisco Borges, Chefe de Oficina" className="team-image" />
-                    <p className="team-caption">Francisco Borges, Chefe de Oficina</p>
-                  </div>
-                  <div className="team-image-container">
-                    <img src={rodney} alt="Rodney Santos, Especialista em Retífica" className="team-image" />
-                    <p className="team-caption">Rodney Santos, Especialista em Retífica</p>
-                  </div>
+                  {teamMembers.map((member, index) => (
+                    <div key={index} className="team-image-container">
+                      <img src={member.image} alt={`${member.name}, ${member.role}`} className="team-image" />
+                      <p className="team-caption">{`${member.name}, ${member.role}`}</p>
+                    </div>
+                  ))}
                 </Slider>
               </div>
 
