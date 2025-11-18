@@ -6,22 +6,29 @@
   padding-bottom: 40px;
 }
 
-.historia-grid {
+/* Layout para mobile (padrão) */
+.historia-grid-intro {
   display: flex;
-  flex-direction: row;
+  flex-direction: column; /* Empilha texto e imagem */
   align-items: center;
-  justify-content: space-between;
   gap: 2rem;
-  flex-wrap: wrap;
   margin-top: 1.5rem;
 }
 
-.historia-text {
-  flex: 1 1 300px;
+.historia-continuacao {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--cinza-escuro);
+}
+
+.historia-text-intro {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .historia-image {
-  flex: 1 1 300px;
   display: flex;
   justify-content: center;
 }
@@ -38,6 +45,25 @@
 .historia-image img:hover {
   border-color: var(--vermelho-hover);
   transform: scale(1.05);
+}
+
+/* Layout para Desktop (sobrescreve o mobile) */
+@media (min-width: 992px) {
+  .historia-grid-intro {
+    flex-direction: row; /* Coloca texto e imagem lado a lado */
+    justify-content: space-between;
+    align-items: flex-start; /* Alinha os itens no topo */
+  }
+
+  .historia-text-intro {
+    flex: 1.2; /* Dá um pouco mais de espaço para o texto */
+  }
+
+  .historia-image {
+    flex: 0.8; /* Dá um pouco menos de espaço para a imagem */
+    align-self: center; /* Centraliza a imagem verticalmente no espaço dela */
+    padding-left: 2rem;
+  }
 }
 
 .equipe-grid {
@@ -302,14 +328,4 @@
   }
 }
 
-@media (min-width: 1024px) {
-  .highlights-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .fachada-image-container img {
-  width: 70%;
-}
-
-}
-
+/* Removido o CSS anterior que não é mais necessário */

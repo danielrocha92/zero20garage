@@ -154,6 +154,47 @@ export const servicosMotorCompletoData = [
 ].sort((a, b) => a.nome.localeCompare(b.nome));
 
 // ================================
+// Dados de Serviços Diversos
+// ================================
+export const servicosDiversosData = [
+  { nome: "Alinhamento e Balanceamento", temQuantidade: false },
+  { nome: "Diagnóstico Computadorizado", temQuantidade: false },
+  { nome: "Diagnóstico eletrônico", temQuantidade: false },
+  { nome: "Limpeza de bicos injetores", temQuantidade: false },
+  { nome: "Regulagem e Reparo de Motores", temQuantidade: false },
+  { nome: "Revisão de Sistemas de Freios", temQuantidade: false },
+  { nome: "Revisão de Sistemas de Suspensão e Direção", temQuantidade: false },
+  { nome: "Revisão elétrica básica", temQuantidade: false },
+  { nome: "Revisão Geral e Inspeções", temQuantidade: false },
+  { nome: "Sistemas de Arrefecimento", temQuantidade: false },
+  { nome: "Sistemas de Escapamento", temQuantidade: false },
+  { nome: "Sistemas de Transmissão", temQuantidade: false },
+  { nome: "Sistemas Eletrônicos e Elétricos", temQuantidade: false },
+  { nome: "Substituição de Pneus", temQuantidade: false },
+  { nome: "Troca de correias", temQuantidade: false },
+  { nome: "Troca de velas", temQuantidade: false },
+  { nome: "Outros", temQuantidade: false, subItens: [{ label: "", type: "text", initialValue: "" }] },
+].sort((a, b) => a.nome.localeCompare(b.nome));
+
+// ================================
+// Dados de Troca de Óleo
+// ================================
+export const itensTrocaOleoData = [
+  { nome: "Filtro de ar", temQuantidade: false },
+  { nome: "Filtro de combustível", temQuantidade: false },
+  { nome: "Filtro de óleo", temQuantidade: false },
+  { nome: "Litros de Óleo", temQuantidade: true, subItens: [{ label: "Viscosidade/Marca", type: "text", initialValue: "" }] },
+  { nome: "Outros", temQuantidade: false, subItens: [{ label: "", type: "text", initialValue: "" }] },
+].sort((a, b) => a.nome.localeCompare(b.nome));
+
+export const servicosTrocaOleoData = [
+  { nome: "Mão de Obra - Troca de Óleo e Filtros", temQuantidade: false },
+  { nome: "Checagem de Níveis e Fluídos", temQuantidade: false },
+  { nome: "Outros", temQuantidade: false, subItens: [{ label: "", type: "text", initialValue: "" }] },
+].sort((a, b) => a.nome.localeCompare(b.nome));
+
+
+// ================================
 // Export Geral para facilitar importações
 // ================================
 export const dadosOrcamento = {
@@ -164,5 +205,13 @@ export const dadosOrcamento = {
   motorCompleto: {
     itens: itensMotorCompletoData,
     servicos: servicosMotorCompletoData,
+  },
+  servicosDiversos: {
+    itens: [], // Não há itens de peça para esta categoria
+    servicos: servicosDiversosData,
+  },
+  trocaDeOleo: {
+    itens: itensTrocaOleoData,
+    servicos: servicosTrocaOleoData,
   }
 };

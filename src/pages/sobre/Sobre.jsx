@@ -77,19 +77,51 @@ function Sobre() {
       <div className="container-escuro">
         <section className="sobre-section">
           <div className="highlight-item nossa-historia">
-            <h2 className='titulo-claro'>Nossa História</h2>
-            <div className="historia-grid">
-              <div className="historia-text">
+            <h2 className='titulo-claro'>Sobre a Zero 20 Garage</h2>
+            {/* Primeira parte: Texto inicial + Imagem */}
+            <div className="historia-grid-intro">
+              <div className="historia-text-intro">
+                <p translate='no' className='titulo-claro'>
+                  Paixão, Tradição e Excelência.
+                </p>
                 <p translate='no' className='sobre-paragrafo'>
-                  A Zero 20 Garage nasceu da paixão por motores e do desejo de oferecer serviços de retífica e mecânica automotiva de alta qualidade. Fundada em 2020, nossa oficina se destaca pela excelência no atendimento e pela precisão em cada serviço realizado.
+                A história da Zero 20 Garage é uma jornada de paixão automotiva que atravessa gerações e se consolida na excelência de serviços em Mairiporã e região.
                 </p>
                 <p className='sobre-paragrafo'>
-                  Desde o início, investimos em equipamentos de última geração e na capacitação de nossa equipe, garantindo que cada motor receba o cuidado e a atenção que merece.
+                  Tudo começou há muitos anos com Francisco Borges, carinhosamente conhecido como Chico. Desde a infância, Chico nutria uma paixão por carros e esse entusiasmo se transformou em profissão quando ele fundou a TecFran. Com anos de dedicação e experiência, a TecFran se tornou um nome de confiança, conquistando uma clientela fiel em toda a cidade de Mairiporã.
                 </p>
               </div>
               <div className="historia-image">
                 <img src="https://res.cloudinary.com/dlyeywiwk/image/upload/v1763428214/Equipe_y6nvty.jpg" alt="Equipe Zero20 Garage" />
               </div>
+            </div>
+
+            {/* Segunda parte: Restante do texto */}
+            <div className="historia-continuacao">
+              <p className='titulo-claro'>
+                A Evolução de um Sonho
+              </p>
+              <p className='sobre-paragrafo'>
+                Os anos se passaram, e o legado da paixão automotiva encontrou continuidade em seu filho, Rodney Santos. Assim como o pai, Rodney herdou esse amor por motores e decidiu seguir o mesmo caminho, focando em uma área essencial: a retífica de motores. Com foco, estudo e profissionalização, ele adquiriu uma vasta experiência, dominando as técnicas mais avançadas do setor.
+              </p>
+              <p className='titulo-claro'>
+                O Nascimento da Zero 20 Garage
+              </p>
+              <p className='sobre-paragrafo'>
+                Foi em 2020 que a visão de unir toda essa experiência e paixão familiar se concretizou com o nascimento da Zero 20 Garage. Este projeto uniu o melhor de dois mundos: serviços completos de mecânica geral e a especialidade em retífica de motores e cabeçotes, tudo em um único lugar.
+              </p>
+              <p className='sobre-paragrafo'>
+                A Zero 20 Garage é uma empresa familiar que representa a união perfeita entre tradição e modernidade, mantendo o atendimento atencioso e a qualidade técnica de anos, mas sempre com foco na inovação. Contamos com profissionais altamente capacitados, prontos para cuidar do seu veículo com o máximo de rigor e conhecimento.
+              </p>
+              <p className='titulo-claro'>
+                Ampliando Horizontes e Serviços
+              </p>
+              <p className='sobre-paragrafo'>
+                Em 2025, a Zero 20 Garage deu um passo importante em sua expansão, inaugurando a Zero 20 Óleos e Filtros. Essa filial estratégica visa aumentar nosso mix de produtos e serviços, permitindo-nos atender nossos clientes de forma ainda mais completa e conveniente.Hoje, a Zero 20 Garage é mais do que uma oficina; é um centro de serviços automotivos que é referência em qualidade e confiança, tanto dentro quanto fora de Mairiporã.
+              </p>
+              <p className='sobre-paragrafo'>
+                Confie na experiência que vem de longos anos de história e na paixão que move essas duas gerações.
+              </p>
             </div>
           </div>
         </section>

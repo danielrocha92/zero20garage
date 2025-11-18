@@ -6,11 +6,13 @@ import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
-import { FaCogs, FaTools, FaHistory, FaFileExcel, FaFilePdf, FaSignOutAlt } from 'react-icons/fa';
+import { FaCogs, FaTools, FaHistory, FaFileExcel, FaFilePdf, FaSignOutAlt, FaPlusCircle, FaOilCan } from 'react-icons/fa';
 
 import OrcamentoCabecote from './OrcamentoCabecote';
 import MessageBox from '../ui/MessageBox';
 import OrcamentoMotorCompleto from './OrcamentoMotorCompleto';
+import OrcamentoServicosDiversos from './OrcamentoServicosDiversos';
+import OrcamentoTrocaDeOleo from './OrcamentoTrocaDeOleo';
 import HistoricoOrcamentos from './HistoricoOrcamentos';
 import OrcamentoImpresso from './OrcamentoImpresso';
 import CustomModal from './CustomModal';
@@ -221,7 +223,7 @@ const PainelOrcamentos = () => {
       };
 
       const handleEditarOrcamento = (orcamento) => {
-        setTipo(orcamento.tipo === 'cabecote' ? 'cabecote' : 'motor');
+        setTipo(orcamento.tipo);
         setSelectedBudgetForView(null);
         setEditingData(orcamento);
       };
@@ -351,6 +353,27 @@ const PainelOrcamentos = () => {
         });
     }, [historico, sortConfig, searchTerm]);
 
+    const renderOrcamentoForm = () => {
+        const props = {
+            onSubmit: handleSalvar,
+            editingData: editingData,
+            showMessage: showMessageBox,
+        };
+
+        switch (tipo) {
+            case 'motor':
+                return <OrcamentoMotorCompleto {...props} />;
+            case 'cabecote':
+                return <OrcamentoCabecote {...props} />;
+            case 'servicosDiversos':
+                return <OrcamentoServicosDiversos {...props} />;
+            case 'trocaDeOleo':
+                return <OrcamentoTrocaDeOleo {...props} />;
+            default:
+                return <OrcamentoMotorCompleto {...props} />;
+        }
+    };
+
     return (
         <>
             {messageData.text && (
@@ -375,15 +398,23 @@ const PainelOrcamentos = () => {
                                 <div className="cards-container">
                                     <div className={`card-option ${tipo === 'motor' ? 'active' : ''}`} onClick={() => { setTipo('motor'); setEditingData(null); }}>
                                         <FaCogs size={40} />
-                                        <span>Orçamento Motor Completo</span>
+                                        <span>Motor Completo</span>
                                     </div>
                                     <div className={`card-option ${tipo === 'cabecote' ? 'active' : ''}`} onClick={() => { setTipo('cabecote'); setEditingData(null); }}>
                                         <FaTools size={40} />
-                                        <span>Orçamento Cabeçote</span>
+                                        <span>Cabeçote</span>
+                                    </div>
+                                    <div className={`card-option ${tipo === 'servicosDiversos' ? 'active' : ''}`} onClick={() => { setTipo('servicosDiversos'); setEditingData(null); }}>
+                                        <FaPlusCircle size={40} />
+                                        <span>Serviços Diversos</span>
+                                    </div>
+                                    <div className={`card-option ${tipo === 'trocaDeOleo' ? 'active' : ''}`} onClick={() => { setTipo('trocaDeOleo'); setEditingData(null); }}>
+                                        <FaOilCan size={40} />
+                                        <span>Troca de Óleo</span>
                                     </div>
                                     <div className="card-option" onClick={scrollToHistorico}>
                                         <FaHistory size={40} />
-                                        <span>Histórico de Orçamentos</span>
+                                        <span>Histórico</span>
                                     </div>
                                 </div>
                             </div>
@@ -410,18 +441,7 @@ const PainelOrcamentos = () => {
                         </div>
 
                         <main className="orcamento-form-wrapper" ref={formRef} id="orcamento-form">
-                            {tipo === 'motor'
-                                ? <OrcamentoMotorCompleto
-                                    onSubmit={handleSalvar}
-                                    editingData={editingData}
-                                    showMessage={showMessageBox}
-                                />
-                                : <OrcamentoCabecote
-                                    onSubmit={handleSalvar}
-                                    editingData={editingData}
-                                    showMessage={showMessageBox}
-                                />
-                            }
+                            {renderOrcamentoForm()}
 
                             {editingData && (
                                 <Suspense fallback={<div>Carregando upload de imagem...</div>}>
