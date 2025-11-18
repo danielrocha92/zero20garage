@@ -4,7 +4,7 @@ import '../../styles/Blog.css';
 import DynamicHeader from '../../components/ui/DynamicHeader';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import BlogShare from '../../components/BlogShare';
-import custoRetificaImg from '../../assets/images/custo-retifica.jpg';
+const custoRetificaImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429465/custo-retifica_bnpb4x.jpg';
 
 const CustoRetifica = () => {
   const messages = [
@@ -22,7 +22,7 @@ const CustoRetifica = () => {
         <meta name="keywords" content="retífica de motor, custo da retífica, valores de retífica, motor 1.0, motor 2.0, oficina especializada" />
         <meta property="og:title" content="Quanto custa uma retífica de motor?" />
         <meta property="og:description" content="Entenda os fatores que afetam o preço da retífica de motor e veja exemplos de valores atualizados." />
-        <meta property="og:image" content="/assets/images/custo-retifica.jpg" />
+        <meta property="og:image" content="https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429465/custo-retifica_bnpb4x.jpg" />
         <meta property="og:type" content="article" />
         <meta name="author" content="ZER0 20 GARAGE™" />
 
@@ -38,7 +38,7 @@ const CustoRetifica = () => {
               },
               "headline": "Quanto custa uma retífica de motor?",
               "description": "Descubra quanto custa uma retífica de motor, quais fatores influenciam no valor e como economizar sem perder qualidade.",
-              "image": "https://zero20garage.vercel.app/static/media/custo-retifica.21819f7af189025c1da2.jpg",
+              "image": "https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429465/custo-retifica_bnpb4x.jpg",
               "author": {
                 "@type": "Organization",
                 "name": "Daniel Rocha",

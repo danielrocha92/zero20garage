@@ -11,33 +11,33 @@ import '../../styles/TestimonialsCarousel.css';
 const testimonials = [
   {
     name: "Silas Sales",
-    profilePhoto: "/testimonials/silas_profile.jpg", // Novo caminho
+    profilePhoto: "https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429512/silas_profile_pjwcb0.jpg", // Novo caminho
     review: "Já Fiz o motor de 2 carros com eles e sinceramente é um trabalho excelente parece uma obra de arte sem falar do tratamento excepcional que eles dão te explicam Tudo certinho e estão sempre a disposição para qualquer dúvidas e sem falar que cumprem com o prazo de entrega e fazem o serviço mto rápido. Resumindo super indico esta oficina",
-    servicePhoto: "/testimonials/silas_service.jpg", // Novo caminho
+    servicePhoto: "https://via.placeholder.com/300", // Novo caminho
     date: "um mês atrás",
     rating: 5,
   },
   {
     name: "Luiz Henrique",
-    profilePhoto: "/testimonials/luiz_profile.jpg", // Novo caminho
+    profilePhoto: "https://via.placeholder.com/150", // Novo caminho
     review: "Melhor retifica da região, além disso conta com uma oficina mecânica especializada em motores v6, v,8, motores nacionais e importados.",
-    servicePhoto: "/testimonials/luiz_service.jpg", // Novo caminho
+    servicePhoto: "https://via.placeholder.com/300", // Novo caminho
     date: "um ano atrás",
     rating: 5,
   },
   {
     name: "Willian “Shadow” Felix",
-    profilePhoto: "/testimonials/willian_profile.jpg", // Novo caminho
+    profilePhoto: "https://via.placeholder.com/150", // Novo caminho
     review: "Preço bom e qualidade de serviço top. DEUS OS ABENÇOE SEMPRE 🙏🏽",
-    servicePhoto: "/testimonials/willian_service.jpg", // Novo caminho
+    servicePhoto: "https://via.placeholder.com/300", // Novo caminho
     date: "Abril de 2025",
     rating: 5,
   },
   {
     name: "Juan Sanchez Gonzales",
-    profilePhoto: "/testimonials/juan_profile.jpg", // Novo caminho
+    profilePhoto: "https://via.placeholder.com/150", // Novo caminho
     review: "Super recomendo serviço top de qualidade sempre atencioso com os clientes agilidade com os serviços precisou de retifica zero20 e o nome da melhor retifica da região Deus abençoe vcs e continue assim",
-    servicePhoto: "/testimonials/juan_service.jpg", // Novo caminho
+    servicePhoto: "https://via.placeholder.com/300", // Novo caminho
     date: "Abril de 2025",
     rating: 5,
   }

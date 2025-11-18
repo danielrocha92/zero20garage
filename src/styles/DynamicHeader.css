@@ -66,14 +66,14 @@
 .fade-out { opacity: 0; }
 
 /* === Backgrounds dinâmicos === */
-.bg-home { background-image: url('../assets/images/home.jpg'); }
-.bg-sobre { background-image: url('../assets/images/sobre.jpg'); }
-.bg-servicos { background-image: url('../assets/images/servicos.jpg'); }
-.bg-orcamento { background-image: url('../assets/images/orcamento.jpg'); }
-.bg-contato { background-image: url('../assets/images/contato.jpg'); }
-.bg-blog { background-image: url('../assets/images/blog-header.jpg'); }
-.bg-footer { background-image: url('../assets/images/footer.jpg'); }
-.bg-default { background-image: url('../assets/images/header.jpg'); }
+.bg-home { background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429487/home_k6ug8o.jpg'); }
+.bg-sobre { background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429516/sobre_phb1aw.jpg'); }
+.bg-servicos { background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429508/servicos_gblbyy.jpg'); }
+.bg-orcamento { background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429503/orcamento_ie9rtx.jpg'); }
+.bg-contato { background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429463/contato_ojwrdu.jpg'); }
+.bg-blog { background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429461/blog-header_vzqvrg.jpg'); }
+.bg-footer { background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429482/footer_unphiy.jpg'); }
+.bg-default { background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429485/header_riszob.jpg'); }
 
 /* === Responsividade === */
 @media (max-width: 768px) {

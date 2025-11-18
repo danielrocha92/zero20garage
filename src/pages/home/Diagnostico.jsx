@@ -10,9 +10,9 @@ import '../../styles/HomeDetails.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 // Importando imagens do diagnóstico
-import diagnostico1 from '../../assets/images/diagnostico1.jpg';
-import diagnostico2 from '../../assets/images/diagnostico2.jpg';
-import diagnostico3 from '../../assets/images/diagnostico3.jpg';
+const diagnostico1 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429472/diagnostico1_cufqfl.jpg';
+const diagnostico2 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429473/diagnostico2_ee8n9d.jpg';
+const diagnostico3 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429476/diagnostico3_nvsddl.jpg';
 
 const Diagnostico = () => {
   const messages = [

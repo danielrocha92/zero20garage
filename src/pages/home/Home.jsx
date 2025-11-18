@@ -38,7 +38,7 @@ function Home() {
   {/* Open Graph (para Facebook e redes) */}
   <meta property="og:title" content="ZER0 20 GARAGE™ - Retífica de Motores em Mairiporã" />
   <meta property="og:description" content="Especialistas em retífica de motores nacionais e importados com atendimento ágil e pagamento facilitado." />
-  <meta property="og:image" content="https://www.zero20garage.com/imagens/og-home.jpg" />
+  <meta property="og:image" content="https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429488/imagem-og_trb3ws.jpg" />
   <meta property="og:url" content="https://www.zero20garage.com/" />
   <meta property="og:type" content="website" />
 
@@ -46,7 +46,7 @@ function Home() {
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="ZER0 20 GARAGE™ - Retífica de Motores em Mairiporã" />
   <meta name="twitter:description" content="Oficina mecânica completa para retífica e manutenção de motores." />
-  <meta name="twitter:image" content="https://www.zero20garage.com/imagens/og-home.jpg" />
+  <meta name="twitter:image" content="https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429488/imagem-og_trb3ws.jpg" />
 </Helmet>
 
     <div className="page-escuro">

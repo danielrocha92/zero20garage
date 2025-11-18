@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import "../styles/Navbar.css";
 
-import logo from "../assets/images/logo.png";
+const logo = "https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429492/logo_mqvkvh.png";
 
 function Navbar({ isLoggedIn }) {
   const [menuOpen, setMenuOpen] = useState(false);

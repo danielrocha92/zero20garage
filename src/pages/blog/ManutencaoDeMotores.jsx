@@ -3,7 +3,7 @@ import '../../styles/Blog.css';
 import DynamicHeader from '../../components/ui/DynamicHeader';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import BlogShare from '../../components/BlogShare';
-import manutencaoMotoresImg from '../../assets/images/manutencao-de-motores.jpg';
+const manutencaoMotoresImg = 'https://via.placeholder.com/300';
 
 const ManutencaoDeMotores = () => {
   const messages = [

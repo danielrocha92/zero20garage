@@ -10,10 +10,10 @@ import ContatoCta from '../../components/ui/ContatoCta';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import TestimonialsCarousel from '../../components/ui/TestimonialsCarousel';
 import Slider from 'react-slick';
-// Importando imagens
-import fachada from '../../assets/images/fachada.jpg';
-
 import { FaBullseye, FaEye, FaStar } from 'react-icons/fa';
+
+// Importando imagens
+const fachada = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429481/fachada_jrdazc.jpg';
 
 const settings = {
   dots: true,                // bolinhas de navegação

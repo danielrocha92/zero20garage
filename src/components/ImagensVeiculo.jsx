@@ -24,7 +24,7 @@ const ImagensVeiculo = ({ imagens, getCloudinaryThumb }) => {
   }, [imagens, getCloudinaryThumb]);
 
   const handleImageError = (e) => {
-    e.currentTarget.src = '/placeholder.png'; // fallback caso 404
+    e.currentTarget.src = 'https://via.placeholder.com/150'; // fallback caso 404
   };
 
   return (

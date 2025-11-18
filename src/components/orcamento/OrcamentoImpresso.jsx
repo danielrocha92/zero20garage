@@ -1,11 +1,12 @@
 // src/components/OrcamentoImpresso.jsx
 import React, { useRef } from "react";
 import "../../styles/OrcamentoImpresso.css";
-import logo from "../../assets/images/background.jpg";
 import { usePdfGenerator } from "../../hooks/usePdfGenerator";
 import { useExcelExporter } from "../../hooks/useExcelExporter";
 import { formatDate, formatValue } from "../../utils/formatters";
 import BudgetSection from "../BudgetSection";
+
+const logo = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429460/background_l7aa2x.jpg';
 
 // Componente para as imagens, pode até ficar no mesmo arquivo se for pequeno.
 const ImagensVeiculo = ({ imagens }) => (

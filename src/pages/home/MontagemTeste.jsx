@@ -8,9 +8,9 @@ import '../../styles/Institucional.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import MontagemTeste1 from '../../assets/images/montagem-teste1.jpg';
-import MontagemTeste2 from '../../assets/images/montagem-teste2.jpg';
-import MontagemTeste3 from '../../assets/images/montagem-teste3.jpg';
+const MontagemTeste1 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429495/montagem-teste1_dh7vmo.jpg';
+const MontagemTeste2 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429496/montagem-teste2_qhoy0f.jpg';
+const MontagemTeste3 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429499/montagem-teste3_gq27mv.jpg';
 
 const MontagemTeste = () => {
   const messages = [

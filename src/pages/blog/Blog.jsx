@@ -6,12 +6,12 @@ import { Helmet } from 'react-helmet-async';
 import AnimatedPage from '../../components/AnimatedPage';
 
 // ✅ Import das imagens
-import sinaisRetificaImg from '../../assets/images/sinais-retifica.jpg';
-import custoRetificaImg from '../../assets/images/custo-retifica.jpg';
-import manutencaoMotoresImg from '../../assets/images/manutencao-de-motores.jpg';
-import retificaParcialImg from '../../assets/images/retifica-parcial-ou-completa.jpg';
-import trocarMotorImg from '../../assets/images/trocar-motor.jpg';
-import valeAPenaRetificarImg from '../../assets/images/valeAPenaRetificarImg.jpg';
+const sinaisRetificaImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429515/sinais-retifica_kcy7mm.jpg';
+const custoRetificaImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429465/custo-retifica_bnpb4x.jpg';
+const manutencaoMotoresImg = 'https://via.placeholder.com/300';
+const retificaParcialImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429507/retifica-parcial-ou-completa_mqxitk.jpg';
+const trocarMotorImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429521/trocar-motor_lqzrhf.jpg';
+const valeAPenaRetificarImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429530/valeAPenaRetificarImg_p5wtyt.jpg';
 
 const Blog = () => {
     const messages = [

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../styles/Footer.css';
 import { FaFacebook, FaInstagram, FaCcVisa, FaCcMastercard, FaBarcode } from 'react-icons/fa';
 import { MdPix } from 'react-icons/md';
-import logoDev from '../assets/favicon.ico'; // ajuste o caminho conforme a pasta
+const logoDev = 'https://via.placeholder.com/32';
 
 function Footer() {
   const formasPagamento = [
