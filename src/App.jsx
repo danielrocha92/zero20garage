@@ -1,50 +1,52 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import 'font-awesome/css/font-awesome.min.css';
+// import 'font-awesome/css/font-awesome.min.css';
 
 import Layout from './components/Layout';
 import PageTransition from './components/PageTransition';
 import ScrollToTopButton from './components/ScrollToTopButton';
 
-import PainelOrcamentos from './components/orcamento/PainelOrcamentos';
-import Login from './components/Login';
-
-import Home from './pages/home/Home';
-import Sobre from './pages/sobre/Sobre';
-import Contato from './pages/contato/Contato';
-import Servicos from './pages/servicos/Servicos';
-import Mp from './pages/servicos/Mp';
-import Dp from './pages/servicos/Dp';
-import Tp from './pages/servicos/Tp';
-import Td from './pages/servicos/Td';
-import Cp from './pages/servicos/Cp';
-
-import Diagnostico from './pages/home/Diagnostico';
-import Desmontagem from './pages/home/Desmontagem';
-import Usinagem from './pages/home/Usinagem';
-import MontagemTeste from './pages/home/MontagemTeste';
-
-import Orcamento from './pages/orcamento/Orcamento';
-import GerarPdfPage from './components/GerarPdfPage';
-
-import Blog from './pages/blog/Blog';
-import SinaisRetifica from './pages/blog/SinaisRetifica';
-import CustoRetifica from './pages/blog/CustoRetifica';
-import ManutencaoDeMotores from './pages/blog/ManutencaoDeMotores';
-import RetificaParcialOuCompleta from './pages/blog/RetificaParcialOuCompleta';
-import TrocarMotor from './pages/blog/TrocarMotor';
-import ValeAPenaRetificar from './pages/blog/ValeAPenaRetificar';
-
-import Politica from './pages/footer/Politica';
-import NotFound from './pages/footer/NotFound';
-import Trocas from './pages/footer/Trocas';
-import Faq from './pages/footer/Faq';
-import TrabalheConosco from './pages/footer/TrabalheConosco';
-import Termos from './pages/footer/Termos';
-
 import './App.css';
 import './GlobalStyles.css';
+
+const PainelOrcamentos = lazy(() => import('./components/orcamento/PainelOrcamentos'));
+const Login = lazy(() => import('./components/Login'));
+
+const Home = lazy(() => import('./pages/home/Home'));
+const Sobre = lazy(() => import('./pages/sobre/Sobre'));
+const Contato = lazy(() => import('./pages/contato/Contato'));
+const Servicos = lazy(() => import('./pages/servicos/Servicos'));
+const Mp = lazy(() => import('./pages/servicos/Mp'));
+const Dp = lazy(() => import('./pages/servicos/Dp'));
+const Tp = lazy(() => import('./pages/servicos/Tp'));
+const Td = lazy(() => import('./pages/servicos/Td'));
+const Cp = lazy(() => import('./pages/servicos/Cp'));
+
+const Diagnostico = lazy(() => import('./pages/home/Diagnostico'));
+const Desmontagem = lazy(() => import('./pages/home/Desmontagem'));
+const Usinagem = lazy(() => import('./pages/home/Usinagem'));
+const MontagemTeste = lazy(() => import('./pages/home/MontagemTeste'));
+
+const Orcamento = lazy(() => import('./pages/orcamento/Orcamento'));
+const GerarPdfPage = lazy(() => import('./components/GerarPdfPage'));
+
+const Blog = lazy(() => import('./pages/blog/Blog'));
+const SinaisRetifica = lazy(() => import('./pages/blog/SinaisRetifica'));
+const CustoRetifica = lazy(() => import('./pages/blog/CustoRetifica'));
+const ManutencaoDeMotores = lazy(() => import('./pages/blog/ManutencaoDeMotores'));
+const RetificaParcialOuCompleta = lazy(() => import('./pages/blog/RetificaParcialOuCompleta'));
+const TrocarMotor = lazy(() => import('./pages/blog/TrocarMotor'));
+const ValeAPenaRetificar = lazy(() => import('./pages/blog/ValeAPenaRetificar'));
+
+const Politica = lazy(() => import('./pages/footer/Politica'));
+const NotFound = lazy(() => import('./pages/footer/NotFound'));
+const Trocas = lazy(() => import('./pages/footer/Trocas'));
+const Faq = lazy(() => import('./pages/footer/Faq'));
+const TrabalheConosco = lazy(() => import('./pages/footer/TrabalheConosco'));
+const Termos = lazy(() => import('./pages/footer/Termos'));
+
+
 
 // ----------------------
 // PrivateRoute

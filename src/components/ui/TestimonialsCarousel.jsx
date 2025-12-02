@@ -11,7 +11,7 @@ import '../../styles/TestimonialsCarousel.css';
 const testimonials = [
   {
     name: "Silas Sales",
-    profilePhoto: "https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429512/silas_profile_pjwcb0.jpg", // Novo caminho
+    profilePhoto: "https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429512/silas_profile_pjwcb0.jpg", // Novo caminho
     review: "Já Fiz o motor de 2 carros com eles e sinceramente é um trabalho excelente parece uma obra de arte sem falar do tratamento excepcional que eles dão te explicam Tudo certinho e estão sempre a disposição para qualquer dúvidas e sem falar que cumprem com o prazo de entrega e fazem o serviço mto rápido. Resumindo super indico esta oficina",
     servicePhoto: "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22300%22%20height%3D%22300%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22300%22%20height%3D%22300%22%20fill%3D%22%23eee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23aaa%22%3EService%3C%2Ftext%3E%3C%2Fsvg%3E", // Novo caminho
     date: "um mês atrás",
@@ -64,12 +64,12 @@ const TestimonialsCarousel = () => {
               onClick={() => setSelectedTestimonial(item)}
             >
               <div className="highlight-testimonial-card">
-                <img src={item.profilePhoto} alt={item.name} className="user-photo" />
+                <img src={item.profilePhoto} alt={item.name} className="user-photo" loading="lazy" />
                 <strong>
                   <p className="paragrafo-claro">{item.review.substring(0, 100)}...</p>
                 </strong>
                 <div className="service-photo-container">
-                  <img src={item.servicePhoto} alt={`Serviço de ${item.name}`} className="service-photo" />
+                  <img src={item.servicePhoto} alt={`Serviço de ${item.name}`} className="service-photo" loading="lazy" />
                 </div>
                 <span className="review-date">{item.date}</span>
                 <div className="stars">

@@ -1,7 +1,8 @@
 /* === Header Base === */
 .header {
   position: relative;
-  z-index: 0; /* 👈 abaixo de navbar/menu */
+  z-index: 0;
+  /* 👈 abaixo de navbar/menu */
   height: 60vh;
   display: flex;
   align-items: center;
@@ -12,7 +13,8 @@
   background-repeat: no-repeat;
   background-blend-mode: lighten;
   background-color: rgba(0, 0, 0, 0.4);
-  padding-top: var(--navbar-height-default, 6rem); /* compensa navbar fixa */
+  padding-top: var(--navbar-height-default, 6rem);
+  /* compensa navbar fixa */
   margin-top: 0;
   transition: height 0.3s ease;
 }
@@ -31,7 +33,8 @@
   font-size: 1.2rem;
   line-height: 1.5;
   animation: fadeIn 1s ease-in-out;
-  z-index: 0; /* 👈 garante que nunca fique acima do menu mobile */
+  z-index: 0;
+  /* 👈 garante que nunca fique acima do menu mobile */
   position: relative;
 }
 
@@ -62,18 +65,47 @@
 .fade {
   transition: opacity 0.5s ease-in-out;
 }
-.fade-in { opacity: 1; }
-.fade-out { opacity: 0; }
+
+.fade-in {
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 0;
+}
 
 /* === Backgrounds dinâmicos === */
-.bg-home { background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429487/home_k6ug8o.jpg'); }
-.bg-sobre { background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429516/sobre_phb1aw.jpg'); }
-.bg-servicos { background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429508/servicos_gblbyy.jpg'); }
-.bg-orcamento { background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429503/orcamento_ie9rtx.jpg'); }
-.bg-contato { background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429463/contato_ojwrdu.jpg'); }
-.bg-blog { background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429461/blog-header_vzqvrg.jpg'); }
-.bg-footer { background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429482/footer_unphiy.jpg'); }
-.bg-default { background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429485/header_riszob.jpg'); }
+.bg-home {
+  background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429487/home_k6ug8o.jpg');
+}
+
+.bg-sobre {
+  background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429516/sobre_phb1aw.jpg');
+}
+
+.bg-servicos {
+  background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429508/servicos_gblbyy.jpg');
+}
+
+.bg-orcamento {
+  background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429503/orcamento_ie9rtx.jpg');
+}
+
+.bg-contato {
+  background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429463/contato_ojwrdu.jpg');
+}
+
+.bg-blog {
+  background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429461/blog-header_vzqvrg.jpg');
+}
+
+.bg-footer {
+  background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429482/footer_unphiy.jpg');
+}
+
+.bg-default {
+  background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429485/header_riszob.jpg');
+}
 
 /* === Responsividade === */
 @media (max-width: 768px) {

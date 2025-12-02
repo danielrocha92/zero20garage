@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
+// Force rebuild 2
 import "../styles/OrcamentoGenerico.css";
 
 const OrcamentoGenerico = ({
@@ -45,6 +46,7 @@ const OrcamentoGenerico = ({
       subItens: item.subItens
         ? item.subItens.map((sub) => ({
             ...sub,
+            label: sub.label || "Obs",
             value: sub.initialValue || (sub.type === "checkbox" ? false : ""),
           }))
         : [],
@@ -57,6 +59,7 @@ const OrcamentoGenerico = ({
       subItens: servico.subItens
         ? servico.subItens.map((sub) => ({
             ...sub,
+            label: sub.label || "Obs",
             value: sub.initialValue || (sub.type === "checkbox" ? false : ""),
           }))
         : [],
@@ -100,7 +103,6 @@ const OrcamentoGenerico = ({
     });
   }, []);
 
-
   const parseCurrencyToNumber = (value) => {
     if (!value) return 0;
     // Remove tudo que não for dígito ou vírgula, substitui a vírgula por ponto.
@@ -124,7 +126,6 @@ const OrcamentoGenerico = ({
       valorTotal: formatNumberToCurrency(valorTotal),
     };
   }, [formData.totalPecasManual, formData.totalServicosManual, formData.totalMaoDeObraManual, formatNumberToCurrency]);
-
 
   useEffect(() => {
     if (!editingData) return; // Não busca mais a próxima OS para novos orçamentos
@@ -169,18 +170,19 @@ const OrcamentoGenerico = ({
 
         const newSubItens = pecaData.subItens
           ? pecaData.subItens.map((sub) => {
+              const label = sub.label || "Obs";
               let value = sub.initialValue || (sub.type === "checkbox" ? false : "");
               if (selecionado) {
-                if (sub.type === "checkbox" && pecaEdit.includes(sub.label)) {
+                if (sub.type === "checkbox" && pecaEdit.includes(label)) {
                   value = true;
                 } else if (sub.type === "text") {
-                  const subItemMatch = pecaEdit.match(new RegExp(`${sub.label}:\\s*(.*?)(;|$)`));
+                  const subItemMatch = pecaEdit.match(new RegExp(`${label}:\\s*(.*?)(?:;|\\)$|$)`));
                   if (subItemMatch && subItemMatch[1]) {
                     value = subItemMatch[1].trim();
                   }
                 }
               }
-              return { ...sub, value };
+              return { ...sub, label, value };
             })
           : [];
 
@@ -207,18 +209,19 @@ const OrcamentoGenerico = ({
 
         const newSubItens = servicoData.subItens
           ? servicoData.subItens.map((sub) => {
+              const label = sub.label || "Obs";
               let value = sub.initialValue || (sub.type === "checkbox" ? false : "");
               if (selecionado) {
-                if (sub.type === "checkbox" && servicoEdit.includes(sub.label)) {
+                if (sub.type === "checkbox" && servicoEdit.includes(label)) {
                   value = true;
                 } else if (sub.type === "text") {
-                  const subItemMatch = servicoEdit.match(new RegExp(`${sub.label}:\\s*(.*?)(;|$)`));
+                  const subItemMatch = servicoEdit.match(new RegExp(`${label}:\\s*(.*?)(?:;|\\)$|$)`));
                   if (subItemMatch && subItemMatch[1]) {
                     value = subItemMatch[1].trim();
                   }
                 }
               }
-              return { ...sub, value };
+              return { ...sub, label, value };
             })
           : [];
 

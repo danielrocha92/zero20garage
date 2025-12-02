@@ -38,7 +38,7 @@ const Layout = ({ children }) => {
     checkLoginStatus();
     window.addEventListener('storage', checkLoginStatus);
     return () => window.removeEventListener('storage', checkLoginStatus);
-  }, []);
+  }, [location.pathname]);
 
   const noLayoutRoutes = ['/gerar-pdf', '/not-found'];
   const showLayout = !noLayoutRoutes.includes(location.pathname);
