@@ -13,31 +13,31 @@ const testimonials = [
     name: "Silas Sales",
     profilePhoto: "https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429512/silas_profile_pjwcb0.jpg", // Novo caminho
     review: "Já Fiz o motor de 2 carros com eles e sinceramente é um trabalho excelente parece uma obra de arte sem falar do tratamento excepcional que eles dão te explicam Tudo certinho e estão sempre a disposição para qualquer dúvidas e sem falar que cumprem com o prazo de entrega e fazem o serviço mto rápido. Resumindo super indico esta oficina",
-    servicePhoto: "https://via.placeholder.com/300", // Novo caminho
+    servicePhoto: "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22300%22%20height%3D%22300%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22300%22%20height%3D%22300%22%20fill%3D%22%23eee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23aaa%22%3EService%3C%2Ftext%3E%3C%2Fsvg%3E", // Novo caminho
     date: "um mês atrás",
     rating: 5,
   },
   {
     name: "Luiz Henrique",
-    profilePhoto: "https://via.placeholder.com/150", // Novo caminho
+    profilePhoto: "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22150%22%20height%3D%22150%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22150%22%20height%3D%22150%22%20fill%3D%22%23eee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23aaa%22%3EUser%3C%2Ftext%3E%3C%2Fsvg%3E", // Novo caminho
     review: "Melhor retifica da região, além disso conta com uma oficina mecânica especializada em motores v6, v,8, motores nacionais e importados.",
-    servicePhoto: "https://via.placeholder.com/300", // Novo caminho
+    servicePhoto: "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22300%22%20height%3D%22300%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22300%22%20height%3D%22300%22%20fill%3D%22%23eee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23aaa%22%3EService%3C%2Ftext%3E%3C%2Fsvg%3E", // Novo caminho
     date: "um ano atrás",
     rating: 5,
   },
   {
     name: "Willian “Shadow” Felix",
-    profilePhoto: "https://via.placeholder.com/150", // Novo caminho
+    profilePhoto: "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22150%22%20height%3D%22150%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22150%22%20height%3D%22150%22%20fill%3D%22%23eee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23aaa%22%3EUser%3C%2Ftext%3E%3C%2Fsvg%3E", // Novo caminho
     review: "Preço bom e qualidade de serviço top. DEUS OS ABENÇOE SEMPRE 🙏🏽",
-    servicePhoto: "https://via.placeholder.com/300", // Novo caminho
+    servicePhoto: "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22300%22%20height%3D%22300%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22300%22%20height%3D%22300%22%20fill%3D%22%23eee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23aaa%22%3EService%3C%2Ftext%3E%3C%2Fsvg%3E", // Novo caminho
     date: "Abril de 2025",
     rating: 5,
   },
   {
     name: "Juan Sanchez Gonzales",
-    profilePhoto: "https://via.placeholder.com/150", // Novo caminho
+    profilePhoto: "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22150%22%20height%3D%22150%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22150%22%20height%3D%22150%22%20fill%3D%22%23eee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23aaa%22%3EUser%3C%2Ftext%3E%3C%2Fsvg%3E", // Novo caminho
     review: "Super recomendo serviço top de qualidade sempre atencioso com os clientes agilidade com os serviços precisou de retifica zero20 e o nome da melhor retifica da região Deus abençoe vcs e continue assim",
-    servicePhoto: "https://via.placeholder.com/300", // Novo caminho
+    servicePhoto: "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22300%22%20height%3D%22300%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22300%22%20height%3D%22300%22%20fill%3D%22%23eee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23aaa%22%3EService%3C%2Ftext%3E%3C%2Fsvg%3E", // Novo caminho
     date: "Abril de 2025",
     rating: 5,
   }

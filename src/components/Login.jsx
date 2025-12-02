@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import '../styles/Login.css';
 import DynamicHeader from './ui/DynamicHeader';
 import Breadcrumbs from './ui/Breadcrumbs';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../services/firebaseOrcamentos";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,35 +16,28 @@ const Login = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage(null);
     setIsSubmitting(true);
 
     try {
-      const res = await fetch("https://zero20-login-api.onrender.com/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      const userCredential = await signInWithEmailAndPassword(auth, form.email, form.password);
+      const token = await userCredential.user.getIdToken();
 
-      if (!res.ok) {
-        const text = await res.text();
-        setMessage(`Erro ${res.status}: ${text}`);
-        return;
-      }
-
-      const data = await res.json();
-
-      if (data.token) {
-        localStorage.setItem("authToken", data.token); // 🔑 salva token
-        setMessage("Login bem-sucedido! Redirecionando...");
-        navigate("/painel-orcamentos"); // 🔒 redireciona
-      } else {
-        setMessage("E-mail ou senha inválidos.");
-      }
+      localStorage.setItem("authToken", token); // 🔑 salva token
+      setMessage("Login bem-sucedido! Redirecionando...");
+      navigate("/painel-orcamentos"); // 🔒 redireciona
     } catch (err) {
-      setMessage(`Erro de conexão: ${err.message}`);
+      console.error("Erro no login:", err);
+      let errorMsg = "Erro ao fazer login.";
+      if (err.code === 'auth/invalid-credential' || err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password') {
+        errorMsg = "E-mail ou senha inválidos.";
+      } else if (err.code === 'auth/too-many-requests') {
+        errorMsg = "Muitas tentativas falhas. Tente novamente mais tarde.";
+      }
+      setMessage(errorMsg);
     } finally {
       setIsSubmitting(false);
     }
@@ -52,7 +47,7 @@ const Login = () => {
     <div className="page-escuro">
       <DynamicHeader
         page="login"
-        messages={[{ title: "Área Restrita", subtitle: "Acesso exclusivo para administradores." }] }
+        messages={[{ title: "Área Restrita", subtitle: "Acesso exclusivo para administradores." }]}
       />
       <Breadcrumbs />
       <div className="login-wrapper">

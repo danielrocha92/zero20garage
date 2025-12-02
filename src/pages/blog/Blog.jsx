@@ -8,7 +8,7 @@ import AnimatedPage from '../../components/AnimatedPage';
 // ✅ Import das imagens
 const sinaisRetificaImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429515/sinais-retifica_kcy7mm.jpg';
 const custoRetificaImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429465/custo-retifica_bnpb4x.jpg';
-const manutencaoMotoresImg = 'https://via.placeholder.com/300';
+const manutencaoMotoresImg = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22300%22%20height%3D%22300%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22300%22%20height%3D%22300%22%20fill%3D%22%23eee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23aaa%22%3EManutencao%3C%2Ftext%3E%3C%2Fsvg%3E';
 const retificaParcialImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429507/retifica-parcial-ou-completa_mqxitk.jpg';
 const trocarMotorImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429521/trocar-motor_lqzrhf.jpg';
 const valeAPenaRetificarImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429530/valeAPenaRetificarImg_p5wtyt.jpg';
@@ -52,7 +52,7 @@ const Blog = () => {
             link: '/blog/TrocarMotor',
             image: trocarMotorImg
         },
-                {
+        {
             title: 'Vale a Pena Retificar?',
             description: 'Retífica Vale a Pena ou é Melhor Trocar o Motor?',
             link: '/blog/ValeAPenaRetificar',
