@@ -8,15 +8,41 @@
   align-items: center;
   justify-content: center;
   color: #fff;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-blend-mode: lighten;
-  background-color: rgba(0, 0, 0, 0.4);
   padding-top: var(--navbar-height-default, 6rem);
   /* compensa navbar fixa */
   margin-top: 0;
   transition: height 0.3s ease;
+  overflow: hidden; /* Garante que a imagem não vaze */
+}
+
+/* Wrapper para a imagem e overlay */
+.header-background-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Fica atrás do conteúdo */
+}
+
+/* Imagem de fundo real */
+.header-background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Overlay escuro sobre a imagem */
+.header-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Escurece a imagem */
+  background-blend-mode: lighten; /* Mantém o efeito original se possível, mas com img tag o blend mode funciona diferente. O rgba acima já faz o trabalho. */
 }
 
 /* Header Textos */
@@ -33,8 +59,7 @@
   font-size: 1.2rem;
   line-height: 1.5;
   animation: fadeIn 1s ease-in-out;
-  z-index: 0;
-  /* 👈 garante que nunca fique acima do menu mobile */
+  z-index: 1; /* Garante que fique acima da imagem */
   position: relative;
 }
 
@@ -74,48 +99,11 @@
   opacity: 0;
 }
 
-/* === Backgrounds dinâmicos === */
-.bg-home {
-  background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429487/home_k6ug8o.jpg');
-}
-
-.bg-sobre {
-  background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429516/sobre_phb1aw.jpg');
-}
-
-.bg-servicos {
-  background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429508/servicos_gblbyy.jpg');
-}
-
-.bg-orcamento {
-  background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429503/orcamento_ie9rtx.jpg');
-}
-
-.bg-contato {
-  background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429463/contato_ojwrdu.jpg');
-}
-
-.bg-blog {
-  background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429461/blog-header_vzqvrg.jpg');
-}
-
-.bg-footer {
-  background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429482/footer_unphiy.jpg');
-}
-
-.bg-default {
-  background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429485/header_riszob.jpg');
-}
-
 /* === Responsividade === */
 @media (max-width: 768px) {
   .header {
     height: 70vh;
     padding-top: calc(var(--navbar-height-default, 6rem) + 20px);
-  }
-
-  .bg-home {
-    background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/w_800,f_auto,q_auto/v1763429487/home_k6ug8o.jpg');
   }
 
   .message-container {
@@ -140,6 +128,7 @@
 
   .message-container {
     padding: 10px 15px;
+    max-width: 90%;
   }
 
   .message-container h1 {

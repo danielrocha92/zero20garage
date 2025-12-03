@@ -9,11 +9,12 @@ import ScrollToTopButton from './components/ScrollToTopButton';
 
 import './App.css';
 import './GlobalStyles.css';
+import Home from './pages/home/Home';
 
 const PainelOrcamentos = lazy(() => import('./components/orcamento/PainelOrcamentos'));
 const Login = lazy(() => import('./components/Login'));
 
-const Home = lazy(() => import('./pages/home/Home'));
+
 const Sobre = lazy(() => import('./pages/sobre/Sobre'));
 const Contato = lazy(() => import('./pages/contato/Contato'));
 const Servicos = lazy(() => import('./pages/servicos/Servicos'));
