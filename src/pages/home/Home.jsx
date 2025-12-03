@@ -1,15 +1,17 @@
+import React, { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/Home.css'; // Importa o arquivo global de estilos
 import DynamicHeader from '../../components/ui/DynamicHeader';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
-import TestimonialsCarousel from '../../components/ui/TestimonialsCarousel';
 import {FaCogs, FaTools, FaCheckCircle, FaCreditCard } from 'react-icons/fa';
 import { MdEngineering } from 'react-icons/md';
-import { TbTruckDelivery, TbSettingsSearch } from 'react-icons/tb';import FAQSection from '../../components/ui/FAQSection';
+import { TbTruckDelivery, TbSettingsSearch } from 'react-icons/tb';
 import { Helmet } from 'react-helmet-async';
-import ContatoCta from '../../components/ui/ContatoCta';
 
-
+// Lazy load heavy components
+const TestimonialsCarousel = lazy(() => import('../../components/ui/TestimonialsCarousel'));
+const FAQSection = lazy(() => import('../../components/ui/FAQSection'));
+const ContatoCta = lazy(() => import('../../components/ui/ContatoCta'));
 
 function Home() {
   const messages = [
@@ -245,15 +247,21 @@ function Home() {
         {/* Depoimentos */}
           <div className='highlight-item'>
             <h2 className="titulo-claro">O que Nossos Clientes Dizem</h2>
+            <Suspense fallback={<div>Carregando depoimentos...</div>}>
               <TestimonialsCarousel />
+            </Suspense>
           </div>
 
-        <FAQSection />
+        <Suspense fallback={<div>Carregando FAQ...</div>}>
+          <FAQSection />
+        </Suspense>
         {/* Fale Conosco */}
 
         {/* Endereço */}
         <section className="institucional-section">
-          <ContatoCta />
+          <Suspense fallback={<div>Carregando contato...</div>}>
+            <ContatoCta />
+          </Suspense>
         </section>
       </div>
     </div>

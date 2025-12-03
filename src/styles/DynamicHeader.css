@@ -12,9 +12,11 @@
   /* compensa navbar fixa */
   margin-top: 0;
   transition: height 0.3s ease;
-  overflow: hidden; /* Garante que a imagem não vaze */
+  overflow: hidden;
+  /* Garante que a imagem não vaze */
 }
 
+/* Wrapper para a imagem e overlay */
 /* Wrapper para a imagem e overlay */
 .header-background-wrapper {
   position: absolute;
@@ -22,7 +24,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; /* Fica atrás do conteúdo */
+  z-index: -1;
+  /* Fica atrás do conteúdo */
 }
 
 /* Imagem de fundo real */
@@ -41,8 +44,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Escurece a imagem */
-  background-blend-mode: lighten; /* Mantém o efeito original se possível, mas com img tag o blend mode funciona diferente. O rgba acima já faz o trabalho. */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Escurece a imagem */
 }
 
 /* Header Textos */
@@ -59,7 +62,8 @@
   font-size: 1.2rem;
   line-height: 1.5;
   animation: fadeIn 1s ease-in-out;
-  z-index: 1; /* Garante que fique acima da imagem */
+  z-index: 1;
+  /* Garante que fique acima da imagem */
   position: relative;
 }
 
