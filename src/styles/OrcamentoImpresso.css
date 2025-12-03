@@ -35,7 +35,7 @@
 h1.titulo-impresso {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 22px;
-    color: #222;
+    color: #000 !important;
     text-transform: uppercase;
     font-weight: 700;
     margin: 0;
@@ -65,7 +65,7 @@ h1.titulo-impresso {
 
 .info-table .info-item {
     font-size: 14px;
-    color: #333;
+    color: #000 !important;
     font-weight: 700;
     word-break: break-word;
     padding: 10px;
@@ -74,7 +74,7 @@ h1.titulo-impresso {
 
 .info-table .info-item span {
     font-weight: 400;
-    color: #555;
+    color: #333 !important;
 }
 
 /* --- Itens (Peças e Serviços) --- */
@@ -85,7 +85,7 @@ h1.titulo-impresso {
 .items-section h2 {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 18px;
-    color: #222;
+    color: #000 !important;
     font-weight: 700;
     border-bottom: 2px solid #ddd;
     padding-bottom: 4px;
@@ -96,21 +96,29 @@ h1.titulo-impresso {
     display: grid;
     grid-template-columns: 1fr;
     gap: 8px;
-    list-style: none;
     margin: 0;
     padding: 0;
 }
 
+/* Atualizado para selecionar .list-item-impresso (div) em vez de li */
+.items-columns .list-item-impresso,
 .items-columns li {
     display: flex;
     align-items: center;
-    gap: 0; /* O espaçamento será controlado pela margem do checkbox */
+    gap: 0;
+    /* O espaçamento será controlado pela margem do checkbox */
     font-size: 14px;
-    color: #222;
+    color: #000 !important;
     line-height: 1.4;
     padding: 2px 0;
     position: relative;
     min-height: 18px;
+}
+
+.list-item-impresso .item-text {
+    margin-left: 0;
+    word-break: break-word;
+    color: #000 !important;
 }
 
 /* --- Estilos do Checkbox (Versão Limpa e Estável) --- */
@@ -123,7 +131,8 @@ h1.titulo-impresso {
     padding: 0;
     width: 12px;
     height: 12px;
-    margin-right: 8px; /* Espaço entre o checkbox e o texto */
+    margin-right: 8px;
+    /* Espaço entre o checkbox e o texto */
     position: relative;
     cursor: default;
     flex-shrink: 0;
@@ -142,7 +151,8 @@ h1.titulo-impresso {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Centraliza perfeitamente */
+    transform: translate(-50%, -50%);
+    /* Centraliza perfeitamente */
 }
 
 /* 3. Estilo de quando a bolinha está MARCADA */
@@ -179,52 +189,56 @@ h1.titulo-impresso {
 }
 
 
-.list-item-impresso .item-text {
-    margin-left: 0;
-    word-break: break-word;
-}
-
-.lista-items .item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 5px;
-}
-
-
 /* --- Totais (Versão Melhorada) --- */
 .total-section {
     text-align: right;
-    margin-top: 24px; /* Mais espaço acima */
+    margin-top: 24px;
+    /* Mais espaço acima */
     padding-top: 16px;
-    border-top: 1px solid #eee; /* Linha de separação sutil */
+    border-top: 1px solid #eee;
+    /* Linha de separação sutil */
 }
 
 .total-section p {
     font-size: 16px;
     font-weight: 700;
-    color: #333;
+    color: #000 !important;
     margin: 4px 0;
     padding: 4px 0;
 }
 
 .total-line-impresso {
-    font-size: 16px; /* Aumentado para consistência */
-    font-weight: 400; /* Peso menor para ser um subtotal */
-    color: #555; /* Cor mais suave */
+    font-size: 16px;
+    /* Aumentado para consistência */
+    font-weight: 400;
+    /* Peso menor para ser um subtotal */
+    color: #333 !important;
+    /* Cor mais suave */
     border-top: 2px solid #ccc;
     padding-top: 8px;
     margin-top: 8px;
-    font-style: normal; /* Remove itálico para um visual mais limpo */
+    font-style: normal;
+    /* Remove itálico para um visual mais limpo */
+}
+
+.total-line-impresso strong {
+    color: #000 !important;
 }
 
 .final-total {
-    font-size: 22px; /* Aumentado para máximo destaque */
+    font-size: 22px;
+    /* Aumentado para máximo destaque */
     font-weight: 700;
-    color: #000; /* Preto sólido para importância */
-    border-top: 2px solid #333; /* Borda mais forte */
+    color: #000 !important;
+    /* Preto sólido para importância */
+    border-top: 2px solid #333;
+    /* Borda mais forte */
     padding-top: 12px;
     margin-top: 12px;
+}
+
+.final-total strong {
+    color: #000 !important;
 }
 
 
@@ -237,7 +251,7 @@ h1.titulo-impresso {
     font-size: 14px;
     line-height: 1.4;
     margin-bottom: 3px;
-    color: #333;
+    color: #000 !important;
 }
 
 /* --- Política de Garantia --- */
@@ -255,7 +269,7 @@ h1.titulo-impresso {
     font-size: 14px;
     text-align: center;
     margin-bottom: 10px;
-    color: #222;
+    color: #000 !important;
     font-weight: 700;
 }
 
@@ -263,14 +277,14 @@ h1.titulo-impresso {
     font-size: 10px;
     line-height: 1.4;
     margin-bottom: 6px;
-    color: #333;
+    color: #000 !important;
     text-align: justify;
 }
 
 .policy-acceptance {
     font-weight: 700;
     text-align: center !important;
-    color: #222 !important;
+    color: #000 !important;
 }
 
 /* --- Imagens --- */
@@ -281,7 +295,7 @@ h1.titulo-impresso {
 .imagens-section h2 {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 16px;
-    color: #222;
+    color: #000 !important;
     font-weight: 700;
     border-bottom: 2px solid #ddd;
     padding-bottom: 8px;
@@ -388,13 +402,15 @@ h1.titulo-impresso {
         gap: 4px 16px;
     }
 
+    .items-columns .list-item-impresso,
     .items-columns li {
         font-size: 14px;
         white-space: normal;
     }
 
     .final-total {
-        font-size: 24px; /* Tamanho ainda maior no desktop */
+        font-size: 24px;
+        /* Tamanho ainda maior no desktop */
     }
 
     .extra-info-section-impresso p {
@@ -452,6 +468,7 @@ h1.titulo-impresso {
     gap: 4px 16px;
 }
 
+.pdf-generating .items-columns .list-item-impresso,
 .pdf-generating .items-columns li {
     font-size: 14px;
     white-space: normal;
@@ -483,30 +500,92 @@ h1.titulo-impresso {
 
 /* --- Estilos de Impressão --- */
 @media print {
-    body, html { background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    @page { size: A4; margin: 20mm; }
 
-    .orcamento-impresso-container { padding: 0 !important; }
-    .orcamento-impresso-content { box-shadow: none !important; padding: 0; }
-    .orcamento-impresso-actions { display: none !important; }
+    body,
+    html {
+        background: white;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    @page {
+        size: A4;
+        margin: 20mm;
+    }
+
+    .orcamento-impresso-container {
+        padding: 0 !important;
+    }
+
+    .orcamento-impresso-content {
+        box-shadow: none !important;
+        padding: 0;
+    }
+
+    .orcamento-impresso-actions {
+        display: none !important;
+    }
 
     .logo-impresso {
         max-width: 100px !important;
     }
 
-    .items-columns { grid-template-columns: repeat(2, 1fr); gap: 4px 16px; }
-    .imagens-container { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+    .items-columns {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4px 16px;
+    }
+
+    .imagens-container {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
 
     /* Ajusta os tamanhos de fonte para impressão */
-    h1.titulo-impresso { font-size: 20px !important; }
-    .info-item { font-size: 12px !important; }
-    .items-columns li { font-size: 12px !important; }
-    .items-section h2 { font-size: 14px !important; }
-    .policy-footer h4 { font-size: 14px !important; }
-    .extra-info-section-impresso p, .policy-footer p { font-size: 9px !important; }
-    .total-section p { font-size: 13px !important; }
-    .final-total { font-size: 10px !important; }
-    .total-section, .policy-footer { page-break-inside: avoid; }
+    h1.titulo-impresso {
+        font-size: 20px !important;
+        color: #000 !important;
+    }
+
+    .info-item {
+        font-size: 12px !important;
+        color: #000 !important;
+    }
+
+    .items-columns .list-item-impresso,
+    .items-columns li {
+        font-size: 12px !important;
+        color: #000 !important;
+    }
+
+    .items-section h2 {
+        font-size: 14px !important;
+        color: #000 !important;
+    }
+
+    .policy-footer h4 {
+        font-size: 14px !important;
+        color: #000 !important;
+    }
+
+    .extra-info-section-impresso p,
+    .policy-footer p {
+        font-size: 9px !important;
+        color: #000 !important;
+    }
+
+    .total-section p {
+        font-size: 13px !important;
+        color: #000 !important;
+    }
+
+    .final-total {
+        font-size: 10px !important;
+        color: #000 !important;
+    }
+
+    .total-section,
+    .policy-footer {
+        page-break-inside: avoid;
+    }
 }
 
 
@@ -520,7 +599,7 @@ h1.titulo-impresso {
     padding: 16px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .pagination-controls button {
@@ -529,7 +608,10 @@ h1.titulo-impresso {
     font-size: 14px;
 }
 
-.pagination-controls span { font-size: 14px; color: #555; }
+.pagination-controls span {
+    font-size: 14px;
+    color: #555;
+}
 
 .feedback-message {
     position: fixed;
@@ -547,9 +629,18 @@ h1.titulo-impresso {
     max-width: 90%;
 }
 
-.feedback-message.success { background-color: #4caf50; }
-.feedback-message.error { background-color: #c50404; }
-.feedback-message p { margin: 0; font-weight: 500; }
+.feedback-message.success {
+    background-color: #4caf50;
+}
+
+.feedback-message.error {
+    background-color: #c50404;
+}
+
+.feedback-message p {
+    margin: 0;
+    font-weight: 500;
+}
 
 .feedback-close-btn {
     position: absolute;

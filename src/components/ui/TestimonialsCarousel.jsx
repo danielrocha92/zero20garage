@@ -131,6 +131,7 @@ const TestimonialsCarousel = () => {
                 src={selectedTestimonial.servicePhoto}
                 alt={`Serviço de ${selectedTestimonial.name}`}
                 className="service-photo"
+                loading="lazy"
               />
             </div>
             <button onClick={() => setSelectedTestimonial(null)} className="button">
