@@ -12,11 +12,6 @@
 }
 
 /* Espaçamento para evitar que o conteúdo fique sob a navbar fixa em telas maiores */
-@media (min-width: 769px) {
-  .content {
-    padding-top: var(--navbar-height-default, 6rem);
-  }
-}
 
 .page-transition {
   position: fixed;
@@ -40,7 +35,8 @@
 
 
 .lottie-wrapper {
-  width: 15rem; /* tamanho reduzido */
+  width: 15rem;
+  /* tamanho reduzido */
   height: 15rem;
 }
 
@@ -52,14 +48,15 @@
   width: 100%;
   height: 100%;
   background: transparent;
-  z-index: 5000; /* abaixo da page-transition e muito abaixo da navbar */
+  z-index: 5000;
+  /* abaixo da page-transition e muito abaixo da navbar */
   pointer-events: none;
   transition: background 0.25s ease, opacity 0.25s ease;
   opacity: 0;
 }
 
 .overlay.visible {
-  background: rgba(0,0,0,0.45);
+  background: rgba(0, 0, 0, 0.45);
   opacity: 1;
   pointer-events: auto;
 }

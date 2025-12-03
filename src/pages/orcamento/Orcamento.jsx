@@ -97,7 +97,7 @@ function Orcamento() {
       <DynamicHeader page="orcamento" messages={messages} />
       <Breadcrumbs />
 
-      <div className="container-escuro">
+
         {isAdmin ? (
           <PainelOrcamentos />
         ) : (
@@ -190,7 +190,7 @@ function Orcamento() {
             </form>
           </section>
         )}
-      </div>
+
     </div>
   );
 }

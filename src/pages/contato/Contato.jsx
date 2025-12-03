@@ -27,8 +27,6 @@ function Contato() {
     <Breadcrumbs />
 
 
-      <div className="container-escuro">
-
         {/* Seção de Contato */}
         <ContatoCta />
 
@@ -49,7 +47,6 @@ function Contato() {
               ></iframe>
             </div>
           </div>
-      </div>
     </div>
   );
 }

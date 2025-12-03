@@ -1,11 +1,12 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-// import 'font-awesome/css/font-awesome.min.css';
+
 
 import Layout from './components/Layout';
 import PageTransition from './components/PageTransition';
 import ScrollToTopButton from './components/ScrollToTopButton';
+import ScrollToTop from './components/ScrollToTop';
 
 import './App.css';
 import './GlobalStyles.css';
@@ -34,10 +35,7 @@ const MontagemSincronismo = lazy(() => import('./pages/home/MontagemSincronismo'
 const InstalacaoVeiculo = lazy(() => import('./pages/home/InstalacaoVeiculo'));
 const TesteFuncionamento = lazy(() => import('./pages/home/TesteFuncionamento'));
 
-// const Diagnostico = lazy(() => import('./pages/home/Diagnostico'));
-// const Desmontagem = lazy(() => import('./pages/home/Desmontagem'));
-// const Usinagem = lazy(() => import('./pages/home/Usinagem'));
-// const MontagemTeste = lazy(() => import('./pages/home/MontagemTeste'));
+
 
 const Orcamento = lazy(() => import('./pages/orcamento/Orcamento'));
 const GerarPdfPage = lazy(() => import('./components/GerarPdfPage'));
@@ -146,6 +144,7 @@ function App() {
     <Router>
       <Layout>
         <AnimatedRoutes />
+        <ScrollToTop />
         <ScrollToTopButton />
       </Layout>
     </Router>

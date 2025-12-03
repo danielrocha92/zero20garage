@@ -63,11 +63,9 @@ const Servicos = () => {
             <div className="page-escuro">
             <DynamicHeader page="servicos" messages={messages} />
             <Breadcrumbs />
-
-                <div className="container-escuro">
                     <div className='highlight-item'>
                         <h2 className='titulo-claro' translate='no'>Serviços que executamos</h2>
-                        <div className="highlights-grid">
+                        <div className="service-grid">
                             {services.map((service) => (
                                 <div
                                     className="service-item"
@@ -95,7 +93,6 @@ const Servicos = () => {
                             ))}
                         </div>
                     </div>
-                </div>
             </div>
         </>
     );

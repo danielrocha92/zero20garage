@@ -53,8 +53,7 @@ body {
 }
 
 /* ===== Containers gerais ===== */
-.container-claro,
-.container-escuro {
+.container-claro {
   max-width: 1200px;
   padding: 2rem;
   background: var(--bg-card);
@@ -87,14 +86,6 @@ body {
   color: var(--text-primary);
   font-family: 'Inter', system-ui, sans-serif;
   min-height: 100vh;
-  padding: 1rem;
-}
-
-.page-escuro .container-escuro {
-  background: rgba(30, 30, 30, 0.4);
-  /* Mais transparência */
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
 
 /* ===== Tipografia ===== */
@@ -106,6 +97,8 @@ h5,
 h6 {
   font-family: 'Inter', system-ui, sans-serif;
   color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .titulo-claro,
@@ -152,10 +145,21 @@ h6 {
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 20px;
   padding: 2rem;
-  margin-bottom: 2rem;
+  margin: 1rem auto 2rem auto;
+  max-width: 1200px;
+  width: 100%;
   transition: var(--transition-smooth);
   backdrop-filter: blur(10px);
   color: var(--text-primary);
+  text-align: center;
+  /* Centraliza todo o texto */
+}
+
+/* Força centralização dos parágrafos dentro dos cards */
+.highlight-item .paragrafo-claro,
+.highlight-card .paragrafo-claro,
+.section .paragrafo-claro {
+  text-align: center;
 }
 
 .highlight-item:hover,
@@ -176,17 +180,14 @@ h6 {
   font-size: 1rem;
   font-weight: 700;
   border-radius: 50px;
-  /* Mais arredondado */
   cursor: pointer;
   transition: var(--transition-smooth);
   box-shadow: 0 4px 15px rgba(255, 59, 59, 0.3);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  display: inline-block;
   text-decoration: none;
-  text-align: center;
-  width: auto;
-  min-width: 200px;
+  margin: 0 auto;
+  width: fit-content;
 }
 
 .button:hover,
@@ -244,8 +245,7 @@ textarea:focus {
 /* ===== Responsividade ===== */
 @media (min-width: 768px) {
 
-  .container-claro,
-  .container-escuro {
+  .container-claro {
     padding: 3rem;
   }
 
@@ -257,14 +257,22 @@ textarea:focus {
 
 @media (max-width: 600px) {
 
-  .container-claro,
-  .container-escuro {
-    padding: 1.5rem;
+  .container-claro {
+    padding: 1rem;
+  }
+
+  .highlight-item,
+  .highlight-card,
+  .section {
+    margin-right: 1rem;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-radius: 16px;
   }
 
   .titulo-claro,
   .titulo-escuro {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
 }
 

@@ -74,7 +74,7 @@ function Sobre() {
       <DynamicHeader page="sobre" messages={messages} />
       <Breadcrumbs />
 
-      <div className="container-escuro">
+
 
         {/* Seção: História */}
         <section className="sobre-section">
@@ -165,11 +165,12 @@ function Sobre() {
 
         {/* Seção: Princípios */}
         <section className="sobre-section">
-          <h2 className='titulo-claro' translate='no'>Nossos Princípios</h2>
-          <div className="principios-grid">
+          <div className="sobre-card equipe-container">
+            <h2 className='titulo-claro' translate='no'>Nossos Princípios</h2>
+            <div className="principios-grid">
 
-            <div className="principio-card">
-              <div className="principio-icon-wrapper">
+              <div className="principio-card">
+                <div className="principio-icon-wrapper">
                 <FaBullseye className="principio-icon" />
               </div>
               <h3 className="principio-title">Nossa Missão</h3>
@@ -203,6 +204,7 @@ function Sobre() {
             </div>
 
           </div>
+        </div>
         </section>
 
         {/* Seção: Garagem */}
@@ -242,7 +244,7 @@ function Sobre() {
 
         {/* Contatos */}
         <ContatoCta />
-      </div>
+
     </div>
   );
 }

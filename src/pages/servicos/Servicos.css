@@ -1,7 +1,8 @@
 .service-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 colunas no desktop */
+  gap: 2rem;
   margin-top: 1rem;
 }
 
@@ -96,7 +97,8 @@
 .service-animation {
   width: 200px;
   height: 200px;
-  margin: 0 auto 1rem auto; /* centraliza horizontalmente */
+  margin: 0 auto 1rem auto;
+  /* centraliza horizontalmente */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -115,65 +117,98 @@
 /* Para telas menores que 1024px (tablets em paisagem) */
 @media (max-width: 1024px) {
   .service-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Menor largura para os itens */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Menor largura para os itens */
   }
 
   .service-item__title {
-    font-size: 1.6rem; /* Reduzir o título */
+    font-size: 1.6rem;
+    /* Reduzir o título */
   }
 
   .service-item__description {
-    font-size: 1rem; /* Ajuste na descrição */
+    font-size: 1rem;
+    /* Ajuste na descrição */
   }
 }
 
 /* Para telas menores que 768px (tablets em retrato) */
 @media (max-width: 768px) {
   .service-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Ajusta a grid */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    /* Ajusta a grid */
+    gap: 0.75rem;
+    /* Reduz gap */
+  }
+
+  .service-item {
+    padding: 1rem;
+    /* Reduzido */
+    margin-bottom: 1rem;
+    /* Reduzido */
   }
 
   .service-item__title {
-    font-size: 1.4rem; /* Tamanho do título reduzido */
+    font-size: 1.4rem;
+    /* Tamanho do título reduzido */
+    margin-bottom: 0.5rem;
   }
 
   .service-item__description {
-    font-size: 0.95rem; /* Ajuste na descrição */
+    font-size: 0.95rem;
+    /* Ajuste na descrição */
+    margin-bottom: 1rem;
   }
 
   .service-icon {
-    width: 70px;  /* Ícones menores */
+    width: 70px;
+    /* Ícones menores */
     height: 70px;
+    margin-bottom: 0.5rem;
   }
 
   .service-animation {
     width: 180px;
     height: 180px;
+    margin-bottom: 0.5rem;
   }
 
   .service-item__button {
-    padding: 0.8rem 1.8rem;  /* Reduzir o tamanho do botão */
+    padding: 0.7rem 1.5rem;
+    /* Reduzir o tamanho do botão */
     font-size: 1rem;
     outline: none;
+    margin-top: 0.5rem;
   }
 }
 
 /* Para telas menores que 480px (smartphones em retrato) */
 @media (max-width: 480px) {
   .service-grid {
-    grid-template-columns: 1fr; /* Um item por linha */
+    grid-template-columns: 1fr;
+    /* Um item por linha */
+    gap: 0.5rem;
+  }
+
+  .service-item {
+    padding: 0.75rem;
+    /* Ainda menor em telas muito pequenas */
+    margin-bottom: 0.75rem;
   }
 
   .service-item__title {
-    font-size: 1.2rem;  /* Ajuste do título */
+    font-size: 1.2rem;
+    /* Ajuste do título */
   }
 
   .service-item__description {
-    font-size: 0.9rem; /* Ajuste na descrição */
+    font-size: 0.9rem;
+    /* Ajuste na descrição */
   }
 
   .service-icon {
-    width: 60px; /* Ícones ainda menores */
+    width: 60px;
+    /* Ícones ainda menores */
     height: 60px;
   }
 
@@ -183,8 +218,9 @@
   }
 
   .service-item__button {
-    padding: 0.8rem 1.5rem;  /* Ajuste no tamanho do botão */
-    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+    /* Ajuste no tamanho do botão */
+    font-size: 0.95rem;
     outline: none;
   }
 }

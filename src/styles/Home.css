@@ -122,6 +122,8 @@
   margin: 2rem 0;
   overflow: visible;
   /* Permite que elementos saiam se necessário */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Animação Pulse */
@@ -149,13 +151,6 @@
   outline: none;
 }
 
-/* Highlights */
-.highlights-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-
 /* Endereço */
 .address a {
   color: #ff0015;
@@ -164,6 +159,24 @@
 
 .address a:hover {
   text-decoration: underline;
+}
+
+/* ===== Telas menores (Mobile) ===== */
+@media (max-width: 600px) {
+  .highlight-item-processo {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .highlight-item-processo .timeline-step {
+    padding: 1rem;
+    margin-left: 10px;
+    /* Reduz margem da linha */
+  }
+
+  .highlight-item-processo .timeline {
+    padding-left: 10px;
+  }
 }
 
 /* ===== Telas maiores (≥ 769px) ===== */
@@ -283,12 +296,13 @@
     /* Efeito de zoom leve no desktop */
   }
 
-  .highlights-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
+
 
   .button {
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
+    margin: 0 auto;
+    display: block;
+    width: fit-content;
   }
 }

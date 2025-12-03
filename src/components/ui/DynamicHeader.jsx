@@ -39,8 +39,6 @@ function DynamicHeader({ messages, intervalTime = 4500, page = '' }) {
       <div className="header-background-wrapper">
         <img
           src={imageSrc}
-          srcSet={`${imageSrc.replace('/upload/', '/upload/w_800,')} 800w, ${imageSrc} 1200w`}
-          sizes="(max-width: 768px) 800px, 100vw"
           alt="Background"
           className="header-background-image"
           fetchpriority="high"
