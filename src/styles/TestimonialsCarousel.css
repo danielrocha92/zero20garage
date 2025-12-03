@@ -9,6 +9,170 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
+}
+
+/* Google Review Card Style */
+.google-review-card {
+  background-color: #ffffff;
+  color: #333;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  max-width: 600px;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  /* Fonte padrão do Google */
+}
+
+.google-review-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.google-user-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 1rem;
+}
+
+.google-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.google-user-name {
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: #202124;
+}
+
+.google-review-date {
+  font-size: 0.8rem;
+  color: #70757a;
+}
+
+.google-icon-wrapper {
+  margin-left: auto;
+  /* Empurra o ícone para a direita */
+}
+
+.google-stars {
+  color: #fbbc04;
+  /* Cor das estrelas do Google */
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.google-review-body p {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #4d5156;
+  margin: 0;
+}
+
+/* Modal Styles */
+.testimonial-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.testimonial-modal-content {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  text-align: left;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  color: #333;
+}
+
+.testimonial-modal-content .google-review-header {
+  margin-bottom: 1rem;
+}
+
+.testimonial-modal-content .service-photo-container {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.testimonial-modal-content .service-photo {
+  max-width: 100%;
+  border-radius: 8px;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+/* Swiper Navigation Buttons */
+.swiper-button-prev,
+.swiper-button-next {
+  color: #5f6368;
+  background-color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: #f1f3f4;
+  color: #202124;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.swiper-pagination-bullet {
+  background: #dadce0;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: #1a73e8;
+}
+
+/* Review CTA Button Container */
+.review-cta-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .google-review-card {
+    padding: 1rem;
+  }
+}
+
+.testimonial-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0.5rem;
 }
 
@@ -38,7 +202,8 @@
 
 .service-photo {
   width: 100%;
-  max-height: 350px; /* Ajuste para desktop */
+  max-height: 350px;
+  /* Ajuste para desktop */
   object-fit: cover;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
@@ -63,7 +228,8 @@
   backdrop-filter: blur(10px);
   padding: 1.5rem;
   border-radius: 12px;
-  max-width: 600px; /* Aumentado para desktop */
+  max-width: 600px;
+  /* Aumentado para desktop */
   width: 90%;
   text-align: center;
   position: relative;
@@ -80,7 +246,8 @@
 .testimonial-modal .service-photo {
   width: 100%;
   height: auto;
-  object-fit: contain; /* Exibe imagem completa */
+  object-fit: contain;
+  /* Exibe imagem completa */
   border-radius: 12px;
   margin-top: 1rem;
 }
@@ -102,7 +269,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
   transition: background-color 0.3s ease;
 }
 
@@ -139,7 +306,8 @@
 /* Responsivo */
 @media (max-width: 768px) {
   .service-photo {
-    max-height: 250px; /* Menor altura no mobile */
+    max-height: 250px;
+    /* Menor altura no mobile */
   }
 }
 
@@ -158,14 +326,17 @@
   .testimonial-modal .service-photo {
     width: 100%;
     height: auto;
-    max-height: 45vh; /* Limita para não ocupar a tela toda, mas maior que antes */
-    object-fit: contain; /* Exibe a imagem completa no modal */
+    max-height: 45vh;
+    /* Limita para não ocupar a tela toda, mas maior que antes */
+    object-fit: contain;
+    /* Exibe a imagem completa no modal */
     display: block;
     border-radius: 12px;
   }
 
   .service-photo {
-    max-height: 200px; /* Reduzido ainda mais no mobile */
+    max-height: 200px;
+    /* Reduzido ainda mais no mobile */
   }
 
   .button {

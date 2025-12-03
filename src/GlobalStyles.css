@@ -1,20 +1,33 @@
-/* ===== Cores ===== */
-/* Variáveis de cor para fácil manutenção */
+/* ===== GlobalStyles.css - Dark Premium Theme ===== */
+
+/* Variáveis de Design */
 :root {
+  --bg-dark: #0f0f0f;
+  --bg-card: rgba(30, 30, 30, 0.6);
+  --bg-card-hover: rgba(40, 40, 40, 0.8);
+  --text-primary: #f5f5f5;
+  --text-secondary: #b0b0b0;
+  --accent-color: #ff3b3b;
+  /* Vermelho vibrante */
+  --accent-gradient: linear-gradient(135deg, #ff3b3b 0%, #ff6b6b 100%);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.3);
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  /* Compatibilidade com variáveis antigas */
   --preto: #000000;
   --cinza-escuro: #121212;
   --cinza-medio: #8f8989;
   --cinza-claro: #f5f5f5;
-  --vermelho-principal: #ff0000;
+  --vermelho-principal: #ff3b3b;
   --vermelho-hover: #cc0000;
   --branco: #ffffff;
-
-  --cor-fundo: #121212;
-  --cor-texto: #e0e0e0;
-  --cor-titulo: #ff0015;
-  --cor-subtitulo: #f44336;
-  --cor-link: #ff5555;
-  --cor-link-hover: #ff0000;
+  --cor-fundo: #0f0f0f;
+  --cor-texto: #f5f5f5;
+  --cor-titulo: #ff3b3b;
+  --cor-subtitulo: #f5f5f5;
+  --cor-link: #ff3b3b;
+  --cor-link-hover: #ff6b6b;
   --cor-fundo-container: #1f1f1f;
   --cor-borda: #333;
 }
@@ -32,1049 +45,265 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Arial', sans-serif;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: var(--cinza-escuro);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at top center, #1a1a1a 0%, #050505 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* ===== Containers gerais ===== */
 .container-claro,
 .container-escuro {
   max-width: 1200px;
-  padding: 0.5rem;
-  /* Blur significativo para o efeito iOS */
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  margin: 0 auto;
-  border-radius: 20px;
-  /* Efeito de vidro na borda com box-shadow */
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.1),
-    inset 0 0 1px rgba(255, 255, 255, 0.2),
-    inset 0 0 5px rgba(255, 255, 255, 0.05),
-    0 4px 20px rgba(0, 0, 0, 0.1);
-  border: none;
+  padding: 2rem;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  margin: 2rem auto;
+  border-radius: 24px;
+  border: var(--glass-border);
+  box-shadow: var(--shadow-soft);
+  animation: fadeInUp 0.6s ease-out forwards;
 }
 
-.container-claro {
-  color: var(--branco);
-  /* Opacidade bem baixa para a translucidez */
-  background-color: rgba(247, 247, 247, 0.15);
+/* Animação de Entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.container-escuro {
-  /* Opacidade bem baixa para a translucidez */
-  background-color: rgba(18, 18, 18, 0.3);
-  color: var(--cinza-claro);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-}
-
-/* ===== Estilos .page-claro ===== */
-.page-claro {
-  background-color: var(--branco);
-  color: var(--cinza-escuro);
-  font-family: 'Ubuntu', sans-serif;
-  min-height: 100vh;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 0.5rem;
-}
-
-.page-claro .container-claro {
-  max-width: 1200px;
-  padding: 0.5rem;
-}
-
-.page-claro .title {
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--vermelho-principal);
-  text-align: center;
-  font-family: 'Nunito', sans-serif;
-  margin-bottom: 1rem;
-}
-
-.page-claro,
-.page-claro p {
-  padding: 0.5rem;
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-.page-claro .section {
-  padding: 0.5rem;
-  /* Ajuste para seção clara com blur e transparência */
-  background-color: rgba(245, 245, 245, 0.2);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.page-claro .section h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--vermelho-principal);
-  margin-bottom: 1rem;
-}
-
-.page-claro .section-list {
-  list-style-type: disc;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.page-claro .button {
-  display: inline-block;
-  background-color: var(--vermelho-principal);
-  color: var(--cinza-claro);
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 20px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-  margin-top: 1rem;
-  box-shadow: 0 4px 8px rgba(255, 0, 0, 0.4);
-  text-align: center;
-  outline: none;
-}
-
-.page-claro .button:hover {
-  background-color: var(--vermelho-hover);
-}
-
-/* ===== Tipografia Modo Claro ===== */
-.titulo-claro {
-  font-size: 2rem;
-  font-weight: 700;
-  text-align: center;
-  color: var(--vermelho-principal);
-  font-family: 'Ubuntu', sans-serif;
-  padding: 0.5rem;
-  margin-top: 1rem;
-  letter-spacing: 0.05rem;
-  text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-}
-
-.home-header .titulo-claro {
-  font-size: 1.8rem;
-  font-weight: 700;
-  text-align: center;
-  color: var(--vermelho-principal);
-  font-family: 'Ubuntu', sans-serif;
-  padding: 0.5rem;
-  margin-top: 1rem;
-  letter-spacing: 0.05rem;
-  text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-}
-
-.paragrafo-claro {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  color: var(--cinza-claro);
-  font-family: 'Ubuntu', sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.03rem;
-  text-align: center;
-  word-break: break-all;
-  hyphens: auto;
-  letter-spacing: 0.2px;
-}
-
-.subtitulo-claro {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin: 2rem 0 1rem;
-  text-align: center;
-  align-items: center;
-  color: var(--cinza-claro);
-  font-family: 'Ubuntu', sans-serif;
-  letter-spacing: 0.05rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2),
-    0 0 5px rgba(0, 0, 0, 0.1);
-  word-break: break-word;
-  hyphens: auto;
-  letter-spacing: 0.2px;
-  word-spacing: 0.5px;
-}
-
-.lista-claro li {
-  list-style-type: none;
-  position: relative;
-  padding-left: 1.25rem;
-  margin-bottom: 1rem;
-  font-size: 1.05rem;
-  color: var(--cinza-escuro);
-  text-align: left;
-  line-height: 1.8;
-  text-align: justify;
-  word-break: break-word;
-  hyphens: auto;
-  letter-spacing: 0.2px;
-  word-spacing: 0.5px;
-}
-
-.lista-claro li::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: red;
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-
-/* --- */
-/* ===== Estilos .page-escuro (Mobile First) ===== */
+/* ===== Estilos .page-escuro (Base para todas as páginas escuras) ===== */
 .page-escuro {
-  background-color: var(--cinza-escuro);
-  color: var(--cinza-claro);
-  font-family: 'Ubuntu', sans-serif;
+  background: transparent;
+  /* O body já tem o gradiente */
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
   min-height: 100vh;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 0.5rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
 }
 
 .page-escuro .container-escuro {
-  background-color: rgba(28, 28, 30, 0.25);
-  color: var(--cinza-claro);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
-  max-width: 1200px;
-  padding: 1rem;
-  margin: 0 auto;
-  border-radius: 20px;
-
-  backdrop-filter: blur(30px) saturate(180%) contrast(110%);
-  -webkit-backdrop-filter: blur(30px) saturate(180%) contrast(110%);
-
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease-in-out;
+  background: rgba(30, 30, 30, 0.4);
+  /* Mais transparência */
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
 
+/* ===== Tipografia ===== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--text-primary);
+}
 
-
-/* ===== Tipografia Modo Escuro (Mantido como estava, aplicado a elementos dentro de .page-escuro) ===== */
-.paragrafo-escuro {
-  font-size: 1rem;
-  line-height: 1.2;
-  margin-bottom: 0.5rem;
-  padding: 0.1rem;
-  color: var(--cinza-escuro);
-  font-family: 'Ubuntu', sans-serif;
-  font-weight: 550;
+.titulo-claro,
+.titulo-escuro {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-align: center;
-  word-break: break-all;
-  hyphens: auto;
-  letter-spacing: 0.2px;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-shadow: none;
+  /* Remove sombra antiga para o gradiente funcionar */
 }
 
-.lista-escuro li {
-  list-style-type: none;
-  padding-left: 0;
-  color: var(--cinza-escuro);
-  padding-left: 1.5rem;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-  line-height: 1.6;
-  font-family: 'Ubuntu', sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.05rem;
-  text-align: justify;
-  word-break: break-all;
-  word-spacing: normal;
-}
-
-.lista-escuro li::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: var(--vermelho-principal);
-  font-weight: bold;
-}
-
+.subtitulo-claro,
 .subtitulo-escuro {
   font-size: 1.5rem;
   font-weight: 600;
-  margin: 1rem 0 0.5rem;
-  text-align: center;
-  font-family: 'Ubuntu', sans-serif;
-  letter-spacing: 0.03rem;
-  color: var(--cinza-claro);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4),
-    0 0 10px rgba(0, 0, 0, 0.3);
-  word-break: break-all;
-  hyphens: auto;
-}
-
-.titulo-escuro {
-  padding: 0.5rem;
-  color: var(--vermelho-principal);
-  font-size: 2rem;
-  font-weight: 700;
-  text-align: center;
-  font-family: 'Ubuntu', sans-serif;
+  color: var(--text-primary);
   margin-bottom: 1rem;
-  margin-top: 1rem;
-  letter-spacing: 0.05rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4),
-    0 0 10px rgba(255, 0, 0, 0.2);
+  text-align: center;
+  text-shadow: none;
 }
 
-/* ===== Seções (sem alteração significativa para mobile-first aqui, pois já são fluidas) ===== */
+.paragrafo-claro,
+.paragrafo-escuro {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  text-align: justify;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* ===== Destaques e Cards ===== */
+.highlight-item,
+.highlight-card,
 .section {
-  padding: 0.5rem;
-  background-color: rgba(245, 245, 245, 0.2);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  color: var(--cinza-escuro);
+  padding: 2rem;
   margin-bottom: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition-smooth);
+  backdrop-filter: blur(10px);
+  color: var(--text-primary);
 }
 
-/* ===== Botões (já mobile-first) ===== */
+.highlight-item:hover,
+.highlight-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== Botões ===== */
 .button,
 .submit-button {
-  background-color: var(--vermelho-principal);
-  color: var(--cinza-claro);
+  background: var(--accent-gradient);
+  color: white;
   border: none;
-  padding: 0.9rem 1rem;
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 50px;
+  /* Mais arredondado */
   cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border-radius: 20px;
-  width: 100%;
-  max-width: max-content;
-  margin: 0 auto;
-  margin-bottom: 1rem;
-  display: block;
-  box-shadow: 0 4px 8px rgba(255, 0, 0, 0.4);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 15px rgba(255, 59, 59, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  text-decoration: none;
   text-align: center;
-  outline: none;
+  width: auto;
+  min-width: 200px;
 }
 
 .button:hover,
 .submit-button:hover {
-  background-color: var(--vermelho-hover);
   transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 59, 59, 0.5);
+  filter: brightness(1.1);
 }
 
-.button:focus,
-.submit-button:focus {
-  outline: 2px solid rgba(255, 255, 255, 0.6);
-  outline-offset: 2px;
-}
-
-.button:disabled,
-.submit-button:disabled {
-  background-color: #999;
-  color: #ccc;
-  cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
-  opacity: 0.6;
-}
-
-a {
-  color: var(--vermelho-principal);
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  text-decoration: none;
-}
-
-/* ===== Formulários (já mobile-first) ===== */
+/* ===== Formulários ===== */
 input,
 textarea {
   width: 100%;
-  padding: 0.8rem;
-  margin-bottom: 1rem;
-  border: 1px solid var(--cinza-medio);
-  border-radius: 20px;
-  font-size: 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--cinza-escuro);
-}
-
-/* ===== Destaques (já mobile-first, com ajuste para desktop no media query) ===== */
-.highlights-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  margin-top: 2rem;
-  padding: 0.5rem;
-}
-
-.highlight-item,
-.principio-item {
-  /* Efeito de vidro aprimorado com mais transparência e sombra vermelha */
-  background-color: rgba(255, 255, 255, 0.08); /* Mais transparência */
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Borda mais transparente */
-  box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2); /* Sombra vermelha e mais suave */
-  border-radius: 20px;
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0.5rem;
-  transition: all 0.3s ease;
-  margin: 1rem;
-  color: var(--branco);
-  overflow: hidden;
-}
-
-.highlight-card {
-  /* Efeito de vidro aprimorado com mais transparência e sombra vermelha */
-  background-color: rgba(255, 255, 255, 0.08); /* Mais transparência */
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Borda mais transparente */
-  box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2); /* Sombra vermelha e mais suave */
-  border-radius: 20px;
-  padding: 1.5rem;
-  color: var(--branco);
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 1rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.highlight-card:hover {
-  transform: translateY(-2px) scale(1.01); /* Movimento e escala mais sutis */
-  box-shadow: 0 10px 40px 0 rgba(255, 0, 0, 0.4); /* Sombra mais intensa no hover */
-  background-color: rgba(255, 255, 255, 0.1); /* Fundo um pouco mais opaco no hover */
-}
-
-.highlight-item:hover {
-  transform: translateY(-2px) scale(1.01); /* Movimento e escala mais sutis */
-  box-shadow: 0 10px 40px 0 rgba(255, 0, 0, 0.4); /* Sombra mais intensa no hover */
-  background-color: rgba(255, 255, 255, 0.1); /* Fundo um pouco mais opaco no hover */
-}
-
-.highlight-card h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.highlight-card p {
-  font-size: 1rem;
-  line-height: 1.6;
-  font-weight: 500;
-  text-align: justify;
-}
-
-.highlight-card a {
-  margin-top: auto;
-  font-weight: bold;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.highlight-card a:hover {
-  color: var(--vermelho-hover);
-}
-
-/* ===================== */
-/* Reconhecimento */
-/* ===================== */
-
-.acknowledgment {
-  color: #0c0c0c;
-  font-style: italic;
-  margin-top: 1.875rem;
-}
-
-/* ===================== */
-/* Última Atualização */
-/* ===================== */
-
-.terms-of-use-last-updated {
-  color: #1b1b1b;
-  font-size: 0.9em;
-  margin-top: 0.625rem;
-}
-
-.meta-info {
-  font-size: 0.85rem;
-  color: var(--cinza-escuro);
-  margin-bottom: 1rem;
-}
-
-.subtitulo-italico {
-  font-style: italic;
-  color: var(--cinza-escuro);
-  margin-bottom: 1.5rem;
-}
-
-.blog-img {
-  width: 100%;
-  height: auto;
-  border-radius: 20px;
-  margin-bottom: 2rem;
-  object-fit: cover;
-}
-
-.destaque {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-.container-escuro {
-  padding: 2rem 1rem;
-  max-width: 980px;
-  margin: 0 auto;
-}
-
-.home-carousel-wrapper {
-  margin-bottom: 2.5rem;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
-}
-
-.home-carousel-image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 20px;
-}
-
-.home-\[etapa\]-content {
-  background-color: rgba(255, 255, 255, 0.03);
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.05);
-}
-
-.home-button-voltar {
-  display: inline-block;
-  margin-top: 2rem;
-  background-color: #e60000;
-  color: #fff;
-  padding: 0.8rem 1.5rem;
-  border-radius: 20px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.home-button-voltar:hover {
-  background-color: #cc0000;
-}
-
-.subheading-legal {
-  position: relative;
-  color: #ff0015;
-  font-weight: bold;
-  padding-left: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.subheading-legal::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background-color: #ff0015;
-  border-radius: 20px;
-}
-
-
-@media (min-width: 600px) {
-  /* ===== Containers gerais (ajustes para telas maiores) ===== */
-  .container-claro,
-  .container-escuro {
-    max-width: 1200px;
-    padding: 0.5rem;
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    margin: 0 auto;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .highlights-grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  }
-
-  .highlight-item,
-  .principio-item {
-    /* Consistência com os novos valores para destaques */
-    background-color: rgba(255, 255, 255, 0.08); /* Mais transparência */
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Borda mais transparente */
-    box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2); /* Sombra vermelha e mais suave */
-    border-radius: 20px;
-    min-height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0.5rem;
-    transition: all 0.3s ease;
-    margin: 1rem;
-    color: var(--branco);
-    overflow: hidden;
-  }
-
-  .highlight-item:hover {
-    transform: translateY(-2px) scale(1.01); /* Movimento e escala mais sutis */
-    box-shadow: 0 10px 40px 0 rgba(255, 0, 0, 0.4); /* Sombra mais intensa no hover */
-    background-color: rgba(255, 255, 255, 0.1); /* Fundo um pouco mais opaco no hover */
-  }
-}
-
-/* ===== FAQ (já mobile-first, com container-escuro dentro do media query para telas maiores) ===== */
-.faq-section {
-  padding: 0.5rem;
-  /* Ajuste para seção FAQ com blur e transparência */
-  background-color: rgba(245, 245, 245, 0.2);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.section-title {
-  font-size: 1.5rem;
-  color: var(--vermelho-principal);
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.faq-item {
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  border-radius: 20px;
-  /* Fundo do item FAQ com transparência e blur */
-  background-color: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: background-color 0.3s;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.faq-question {
-  font-weight: 600;
+  border-radius: 12px;
+  color: var(--text-primary);
   font-size: 1rem;
-  color: var(--preto);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.faq-answer-wrapper {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-}
-
-.faq-item.ativo .faq-answer-wrapper {
-  max-height: 500px;
-  margin-top: 0.5rem;
-}
-
-.faq-answer {
-  font-size: 0.95rem;
-  color: var(--cinza-escuro);
-  line-height: 1.6;
-}
-
-/* --- */
-/* ===== Dark Mode Overrides (para sistema que prefere modo escuro) ===== */
-@media (prefers-color-scheme: dark) {
-  .page-escuro {
-    background-color: var(--preto);
-    color: var(--branco);
-  }
-
-  .container-escuro,
-  .page-escuro .container-escuro,
-  .section.dark {
-    /* Ajustes para modo escuro */
-    background-color: rgba(18, 18, 18, 0.4);
-    color: var(--cinza-claro);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  .button,
-  .submit-button {
-    background-color: var(--vermelho-hover);
-  }
-
-  .highlight-item {
-    /* Ajustes para modo escuro com blur forte */
-    background-color: rgba(18, 18, 18, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.3);
-    color: var(--cinza-claro);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-  }
-
-  .faq-section.dark {
-    /* Ajustes para modo escuro */
-    background-color: rgba(30, 30, 30, 0.3);
-    color: var(--cinza-claro);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-
-  .section {
-    /* Ajustes para modo escuro */
-    background-color: rgba(30, 30, 30, 0.3);
-    color: var(--cinza-claro);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-}
-
-/* ===== Formulários refinados ===== */
-input,
-textarea {
-  width: 100%;
-  padding: 0.9rem 1rem;
-  border-radius: 20px;
-  font-size: 1rem;
-  border: 1px solid var(--cinza-medio);
-  background-color: rgba(255, 255, 255, 0.1);
-  transition: border-color 0.3s ease;
-  color: var(--cinza-escuro);
+  transition: var(--transition-smooth);
 }
 
 input:focus,
 textarea:focus {
   outline: none;
-  box-shadow: 0 0 4px rgba(255, 0, 0, 0.3);
+  border-color: var(--accent-color);
+  background: rgba(0, 0, 0, 0.4);
 }
 
-/* ===== Botões refinados ===== */
-.button,
-.submit-button {
-  display: block;
-  width: 100%;
-  max-width: 320px;
-  margin: 1rem auto;
-  padding: 0.8rem 1.2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--cinza-claro);
-  background-color: var(--vermelho-principal);
+/* ===== FAQ Section (Overrides) ===== */
+.faq-section {
+  background: transparent;
   border: none;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  outline: none;
-
-  /* Evitar seleção de texto ao clicar */
-  user-select: none;
-
-  /* Suavizar fontes para melhor legibilidade */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  
+  padding: 0;
+  box-shadow: none;
 }
 
-.button:hover,
-.submit-button:hover {
-  background-color: var(--vermelho-hover);
-  transform: scale(1.02);
+.faq-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  margin-bottom: 1rem;
 }
 
-.button:active,
-.submit-button:active {
-  transform: scale(0.98);
-}
-
-/* ===== FAQ aprimorado ===== */
-.faq-answer-wrapper {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease, padding 0.3s ease;
-}
-
-.faq-item.ativo .faq-answer-wrapper {
-  max-height: 500px;
-  padding-top: 0.5rem;
+.faq-question {
+  color: var(--text-primary);
+  padding: 1.2rem;
 }
 
 .faq-answer {
-  font-size: 0.95rem;
-  color: var(--cinza-escuro);
-  line-height: 1.6;
+  color: var(--text-secondary);
+  padding: 0 1.2rem 1.2rem;
 }
 
-/* ===== Imagens refinadas ===== */
-.blog-img {
-  width: 100%;
-  height: auto;
-  max-height: 400px;
-  object-fit: cover;
-  border-radius: 20px;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* ===== Listas refinadas ===== */
-.lista-claro li,
-.lista-escuro li {
-  font-size: 1rem;
-  line-height: 1.8;
-  padding-left: 1.5rem;
-  position: relative;
-}
-
-.lista-claro li::before,
-.lista-escuro li::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: var(--vermelho-principal);
-  font-weight: bold;
-}
-
-/* ===== Ajustes específicos para telas de até 14 polegadas (1366px) ===== */
-@media (max-width: 1400px) {
-  html {
-    font-size: 15px;
-  }
+/* ===== Responsividade ===== */
+@media (min-width: 768px) {
 
   .container-claro,
   .container-escuro {
-    padding: 1rem;
-    max-width: 90%;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    padding: 3rem;
   }
 
-  .highlight-card,
-  .highlight-item,
-  .principio-item {
-    padding: 1rem;
-    min-height: unset;
-    margin: 0.5rem;
-    /* Sombra para o efeito de vidro nas bordas */
-    box-shadow: 0 0 4px rgba(255, 255, 255, 0.1),
-      inset 0 0 1px rgba(255, 255, 255, 0.2),
-      inset 0 0 3px rgba(255, 255, 255, 0.05),
-      0 4px 20px rgba(0, 0, 0, 0.1);
-    border: none;
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-  }
-
-  .highlight-card:hover,
-  .highlight-item:hover,
-  .principio-item:hover {
-    /* Sombra no hover para destacar mais */
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2),
-      inset 0 0 2px rgba(255, 255, 255, 0.3),
-      inset 0 0 6px rgba(255, 255, 255, 0.1),
-      0 8px 25px rgba(0, 0, 0, 0.25);
-  }
-
-  .highlight-card h3 {
-    font-size: 1.2rem;
-  }
-
-  .highlight-card p {
-    font-size: 0.95rem;
-  }
-
-  .highlights-grid {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1rem;
-  }
-
-  .page-claro .title,
   .titulo-claro,
   .titulo-escuro {
-    font-size: 1.8rem;
-  }
-
-  .page-claro .section h2,
-  .subheading-legal,
-  .subtitulo-claro,
-  .subtitulo-escuro {
-    font-size: 1.2rem;
-  }
-
-  .faq-question {
-    font-size: 0.95rem;
-  }
-
-  .button,
-  .submit-button {
-    padding: 0.7rem 1.2rem;
-    font-size: 0.95rem;
-  }
-
-  .section {
-    padding: 1rem;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-  }
-
-  input,
-  textarea {
-    font-size: 0.95rem;
+    font-size: 3rem;
   }
 }
 
-/* ===== Mobile/Tablets (até 768px) ===== */
-@media (max-width: 768px) {
-  html {
-    font-size: 14px;
-  }
+@media (max-width: 600px) {
 
   .container-claro,
   .container-escuro {
-    max-width: 95%;
-    padding: 0.75rem;
-    margin: 0 auto;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-  }
-
-  .section {
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-
-  .page-claro .title,
-  .titulo-claro,
-  .titulo-escuro {
-    font-size: 1.5rem;
-  }
-
-  .subheading-legal,
-  .subtitulo-claro,
-  .subtitulo-escuro {
-    font-size: 1rem;
-  }
-
-  .highlight-card,
-  .highlight-item,
-  .principio-item {
-    padding: 0.75rem;
-    margin: 0.5rem 0;
-    /* Sombra para o efeito de vidro nas bordas */
-    box-shadow: 0 0 4px rgba(255, 255, 255, 0.1),
-      inset 0 0 1px rgba(255, 255, 255, 0.2),
-      inset 0 0 3px rgba(255, 255, 255, 0.05),
-      0 2px 15px rgba(0, 0, 0, 0.1);
-    border: none;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 20px;
-  }
-
-  .highlight-card:hover,
-  .highlight-item:hover,
-  .principio-item:hover {
-    /* Sombra no hover para destacar mais */
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2),
-      inset 0 0 2px rgba(255, 255, 255, 0.3),
-      inset 0 0 6px rgba(255, 255, 255, 0.1),
-      0 5px 20px rgba(0, 0, 0, 0.2);
-  }
-
-  .highlight-card h3 {
-    font-size: 1.1rem;
-  }
-
-  .highlight-card p {
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-
-  .highlights-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .faq-section {
-    padding: 0.75rem;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-  }
-
-  .faq-question {
-    font-size: 0.95rem;
-  }
-
-  .button,
-  .submit-button {
-    font-size: 0.9rem;
-    padding: 0.6rem 1rem;
-    width: 100%;
-  }
-
-  input,
-  textarea {
-    font-size: 0.95rem;
-    padding: 0.75rem;
-  }
-
-  .blog-img {
-    border-radius: 20px;
-    margin-bottom: 1rem;
-  }
-
-  .meta-info,
-  .terms-of-use-last-updated {
-    font-size: 0.8rem;
-  }
-
-  .lista-claro li,
-  .lista-escuro li {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    padding-left: 1.2rem;
+    padding: 1.5rem;
   }
 
   .titulo-claro,
   .titulo-escuro {
-    text-shadow: none;
+    font-size: 2rem;
   }
+}
+
+/* ===== Classes Utilitárias ===== */
+.icon-animated {
+  color: var(--accent-color);
+  transition: transform 0.3s ease;
+}
+
+.timeline-step:hover .icon-animated {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.home-button-voltar {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.home-button-voltar:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--accent-color);
+}
+
+/* Links */
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+}
+
+a:hover {
+  color: var(--text-primary);
 }

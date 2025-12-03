@@ -1,331 +1,366 @@
+/* ===== Sobre.css - Dark Premium Theme ===== */
 
-.page.dark-mode { /* Mudança de 'page modo-escuro' para 'page.dark-mode' */
-  color: #e0e0e0;
-  font-family: 'Roboto', sans-serif;
+/* Variáveis locais para facilitar ajustes */
+:root {
+  --sobre-card-bg: rgba(255, 255, 255, 0.03);
+  --sobre-card-border: 1px solid rgba(255, 255, 255, 0.05);
+  --sobre-card-hover-bg: rgba(255, 255, 255, 0.05);
+  --sobre-text-color: #e0e0e0;
+  --sobre-accent: #ff3b3b;
+}
+
+/* Container Principal */
+.page-escuro {
+  /* O gradiente já vem do GlobalStyles, mas reforçamos se necessário */
   min-height: 100vh;
   padding-bottom: 40px;
 }
 
-/* Layout para mobile (padrão) */
-.historia-grid-intro {
-  display: flex;
-  flex-direction: column; /* Empilha texto e imagem */
-  align-items: center;
-  gap: 2rem;
-  margin-top: 1.5rem;
+/* Seções */
+.sobre-section {
+  margin-bottom: 3rem;
+  animation: fadeInUp 0.6s ease-out forwards;
 }
 
-.historia-continuacao {
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--cinza-escuro);
+/* Card Base (Glassmorphism) */
+.sobre-card {
+  background: var(--sobre-card-bg);
+  border: var(--sobre-card-border);
+  border-radius: 24px;
+  padding: 2rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  /* Para manter bordas arredondadas com imagens */
 }
 
-.historia-text-intro {
-  flex: 1;
+.sobre-card:hover {
+  background: var(--sobre-card-hover-bg);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== Seção: História ===== */
+.historia-content {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 }
 
-.historia-image {
+.historia-intro {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.historia-image img {
+.historia-text {
+  flex: 1;
+}
+
+.historia-image-wrapper {
   width: 100%;
-  max-width: 400px;
-  border-radius: 12px;
-  border: 4px solid var(--vermelho-principal);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  transition: border-color 0.3s ease, transform 0.3s ease;
+  max-width: 500px;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--sobre-accent);
 }
 
-.historia-image img:hover {
-  border-color: var(--vermelho-hover);
+.historia-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.historia-image-wrapper:hover .historia-img {
   transform: scale(1.05);
 }
 
-/* Layout para Desktop (sobrescreve o mobile) */
-@media (min-width: 992px) {
-  .historia-grid-intro {
-    flex-direction: row; /* Coloca texto e imagem lado a lado */
-    justify-content: space-between;
-    align-items: flex-start; /* Alinha os itens no topo */
-  }
-
-  .historia-text-intro {
-    flex: 1.2; /* Dá um pouco mais de espaço para o texto */
-  }
-
-  .historia-image {
-    flex: 0.8; /* Dá um pouco menos de espaço para a imagem */
-    align-self: center; /* Centraliza a imagem verticalmente no espaço dela */
-    padding-left: 2rem;
-  }
+.historia-details {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.equipe-grid {
+.destaque-texto {
+  font-weight: 700;
+  color: var(--sobre-accent);
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+/* ===== Seção: Equipe ===== */
+.equipe-content {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  margin-top: 1.5rem;
-  flex-wrap: wrap;
+  gap: 3rem;
 }
 
-.equipe-slider {
+.equipe-slider-wrapper {
   width: 100%;
   max-width: 400px;
+  margin: 0 auto;
 }
 
-.equipe-textos {
-  flex: 1 1 300px;
+.team-member-slide {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid var(--sobre-accent);
 }
 
-.sobre-section {
-  margin: 1rem 0;
-  padding: 0.5rem;
+.team-photo {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-.nossa-historia h2 {
-  font-size: 1.5rem;
+.team-info {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 1rem;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  backdrop-filter: blur(5px);
+}
+
+.team-name {
+  color: white;
+  font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 1rem;
-  color: #ff3b3f;
-  text-align: center;
+  margin-bottom: 0.2rem;
 }
 
-.sobre-paragrafo {
-  color: var(--cinza-medio);
-  font-size: 1rem;
+.team-role {
+  color: var(--sobre-accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.equipe-info-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.card-title {
+  color: var(--sobre-accent);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  color: var(--sobre-text-color);
+  font-size: 0.95rem;
   line-height: 1.6;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 1.5rem 0.5rem;
-
-  text-align: justify;
-  word-break: break-word;
-  hyphens: auto;
-  letter-spacing: 0.2px; /* Ajuste conforme necessário */
 }
 
-/* O seletor '.subtitle, h2' no global é mais genérico.
-   Mantenha este H2 específico para sobrescrever o estilo global para esta seção. */
-
-.sobre-section h2 { /* Mais específico para o h2 dentro de sobre-section */
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: #ff3b3f;
-}
-
-.section-list {
-  list-style-type: disc;
-  margin-left: 20px;
-  color: #dcdcdc;
-}
-
-.team-image-container {
-  position: relative;
-  box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
-  text-align: center;
-  padding: 0;
-  box-sizing: border-box;
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-}
-
-.team-image-container img {
-  width: 100%;
-  height: auto;
-  object-fit: cover; /* Garante que a imagem cubra o container sem distorção */
-  border-radius: 12px;
-}
-
-.fachada-image-container {
-  position: relative;
-  box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
-  text-align: center;
-  padding: 0;
-  box-sizing: border-box;
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-}
-
-.fachada-image-container img {
-  width: 100%;
-  height: auto;
-  object-fit: cover; /* Garante que a imagem cubra o container sem distorção */
-  border-radius: 12px;
-}
-
-.team-image {
-  width: 100%;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 2px solid var(--vermelho-principal);
-  box-shadow: 0 0 10px var(--vermelho-principal);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-  object-fit: cover;
-  display: block;
-}
-
-.team-image:hover {
-  border-color: var(--vermelho-hover);
-  box-shadow:
-    8 8 8px var(--vermelho-hover),
-    10 10 10px var(--vermelho-hover),
-    12 12 12px var(--vermelho-hover),
-    14 14 14px var(--vermelho-hover);
-  transform: scale(1.004);
-}
-
-.team-caption {
-  display: block;
-  margin-top: 1rem;
-  font-weight: 600;
-  color: var(--vermelho-principal);
-  font-size: 1.125rem;
-  text-align: center;
-  max-width: 100%;
-  word-break: break-word;
-}
-
-/* Ajustes específicos do react-slick */
-.slick-slide {
-  padding: 0 10px;
-  box-sizing: border-box;
-}
-
-.slick-prev:before,
-.slick-next:before {
-  color: var(--vermelho-principal);
-}
-
+/* ===== Seção: Princípios (Grid) ===== */
 .principios-grid {
-  display: flex;
-  max-width: 80%;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  background-color: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-
-  /* Centralização */
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
 }
 
-.principio-item {
+.principio-card {
+  background: var(--sobre-card-bg);
+  border: var(--sobre-card-border);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  backdrop-filter: blur(16px);
+  transition: all 0.3s ease;
   display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  color: var(--cinza-claro);
+  flex-direction: column;
+  align-items: center;
+}
+
+.principio-card:hover {
+  transform: translateY(-5px);
+  background: var(--sobre-card-hover-bg);
+  border-color: var(--sobre-accent);
+  box-shadow: 0 10px 30px rgba(255, 59, 59, 0.15);
+}
+
+.principio-icon-wrapper {
+  background: rgba(255, 59, 59, 0.1);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 59, 59, 0.2);
 }
 
 .principio-icon {
-  font-size: 2rem;
-  color: var(--vermelho-principal);
-  margin-top: 4px;
-  flex-shrink: 0;
+  font-size: 2.5rem;
+  color: var(--sobre-accent);
 }
 
-.testimonial-item {
-  margin-bottom: 24px;
+.principio-title {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
-.highlight-card-sobre {
-  background-color: #790709; /* Cor de fundo específica, sobrescreve .highlight-item */
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2);
-  border-radius: 12px;
+.principio-text {
+  color: var(--sobre-text-color);
+  font-size: 1rem;
+  line-height: 1.6;
+}
 
-  padding: 1.5rem;
-  margin: 1rem auto 1.5rem auto;
-  max-width: 90%;
+.valores-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
   width: 100%;
+}
 
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
-  line-height: 1.4;
-  letter-spacing: 0.5px;
-  color: #333; /* Ajustar dependendo do fundo */
+.valores-list li {
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  position: relative;
+  color: var(--sobre-text-color);
+}
 
+.valores-list li::before {
+  content: "✓";
+  color: var(--sobre-accent);
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+/* ===== Seção: Garagem ===== */
+.intro-garagem {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.garagem-content {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 1rem;
-  text-align: center;
+  gap: 2rem;
+}
 
-  transition: all 0.3s ease;
-  box-sizing: border-box;
-  position: relative;
+.garagem-image-wrapper {
+  width: 100%;
+  border-radius: 16px;
   overflow: hidden;
-
-  animation: fadeIn 1s ease-in-out;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.highlight-card-sobre:hover {
-  transform: translateY(-2px) scale(1.01); /* Movimento e escala mais sutis */
-  box-shadow: 0 10px 40px 0 rgba(255, 0, 0, 0.4); /* Sombra mais intensa no hover */
-  background-color: rgba(255, 255, 255, 0.1); /* Fundo um pouco mais opaco no hover */
-}
-
-.review-date {
-  font-size: 0.875rem;
-  color: #bbb;
-  margin-top: 8px;
+.garagem-img {
+  width: 100%;
+  height: auto;
   display: block;
+  transition: transform 0.5s ease;
 }
 
-.stars {
-  margin: 8px 0;
-  color: #ffc107;
-  font-size: 1.25rem;
+.garagem-image-wrapper:hover .garagem-img {
+  transform: scale(1.03);
 }
 
-.star {
-  margin-right: 2px;
+.garagem-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-/* Responsividade simples */
+/* ===== Seção: Depoimentos ===== */
+.intro-depoimentos {
+  text-align: center;
+  margin-bottom: 2rem;
+}
 
-@media (min-width: 768px) {
-  .highlights-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* ===== Responsividade (Desktop) ===== */
+@media (min-width: 992px) {
 
-  .team-image {
-    height: 100%;
-  }
-
-  .equipe-grid {
+  /* História */
+  .historia-intro {
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    gap: 4rem;
   }
 
-  .equipe-slider {
-    flex: 1 1 50%;
-    overflow: visible;
+  .historia-image-wrapper {
+    margin: 0;
+    /* Remove auto margin */
+    flex: 0 0 45%;
+    /* Ocupa 45% da largura */
   }
 
-  .equipe-textos {
-    flex: 1 1 50%;
+  /* Equipe */
+  .equipe-content {
+    flex-direction: row;
+    align-items: center;
+    gap: 4rem;
   }
 
-  .section-list {
-    margin-left: 40px;
+  .equipe-slider-wrapper {
+    flex: 0 0 40%;
+  }
+
+  .equipe-info-cards {
+    flex: 1;
+    grid-template-columns: 1fr;
+    /* Mantém empilhado ou pode ser 1fr 1fr */
+  }
+
+  /* Princípios */
+  .principios-grid {
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 colunas */
+  }
+
+  /* Garagem */
+  .garagem-content {
+    flex-direction: row-reverse;
+    /* Imagem à direita, texto à esquerda (ou vice-versa) */
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .garagem-image-wrapper {
+    flex: 0 0 50%;
   }
 }
 
-/* Removido o CSS anterior que não é mais necessário */
+/* Ajustes Slick Dots */
+.slick-dots li button:before {
+  color: white;
+}
+
+.slick-dots li.slick-active button:before {
+  color: var(--sobre-accent);
+}

@@ -114,6 +114,10 @@
     padding-top: calc(var(--navbar-height-default, 6rem) + 20px);
   }
 
+  .bg-home {
+    background-image: url('https://res.cloudinary.com/dlyeywiwk/image/upload/w_800,f_auto,q_auto/v1763429487/home_k6ug8o.jpg');
+  }
+
   .message-container {
     padding: 15px 20px;
     max-width: 90%;

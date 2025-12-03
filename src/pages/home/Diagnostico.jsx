@@ -22,7 +22,7 @@ const Diagnostico = () => {
     }
   ];
 
-const LAST_UPDATED = '22 de junho de 2025'; // atualizado manualmente quando o conteúdo muda
+const LAST_UPDATED = '02 de dezembro de 2025'; // atualizado manualmente quando o conteúdo muda
 
   const images = [diagnostico1, diagnostico2, diagnostico3];
 
@@ -64,18 +64,16 @@ const LAST_UPDATED = '22 de junho de 2025'; // atualizado manualmente quando o c
           </div>
 
         <section className="institucional-section">
-          <h3 className="institucional-subtitle">Análise Completa com Equipamentos de Última Geração</h3>
+          <h3 className="institucional-subtitle">1. Diagnóstico e Avaliação Técnica</h3>
           <p className="institucional-paragraph">
-            O diagnóstico é o primeiro e um dos mais importantes passos no processo de retífica de motores. Nossa equipe realiza uma avaliação minuciosa utilizando scanners automotivos OBD, estetoscópios mecânicos e ferramentas de medição de alta precisão, capazes de identificar desde falhas eletrônicas até desgastes internos imperceptíveis a olho nu.
+            O diagnóstico é o primeiro e um dos mais importantes passos no processo de retífica de motores. Nossa equipe realiza uma avaliação minuciosa utilizando scanners automotivos OBD, estetoscópios mecânicos e ferramentas de medição de alta precisão, capazes de identificar desde falhas eletrônicas até desgastes internos imperceptíveis a olho nu. Durante a análise, inspecionamos cuidadosamente componentes críticos como bloco do motor, cabeçote, virabrequim, bronzinas, pistões, bielas, além dos sistemas de lubrificação e arrefecimento. Essa abordagem detalhada permite detectar fissuras, empenamentos, folgas excessivas e outros problemas. Com base no diagnóstico, elaboramos um laudo técnico que orienta todas as etapas seguintes da retífica, assegurando máxima precisão e durabilidade do motor.
           </p>
+        </section>
+
+        <section className="institucional-section">
+          <h3 className="institucional-subtitle">5. Inspeção e Medição (Metrologia e Análise)</h3>
           <p className="institucional-paragraph">
-            Durante a análise, inspecionamos cuidadosamente componentes críticos como bloco do motor, cabeçote, virabrequim, bronzinas, pistões, bielas, além dos sistemas de lubrificação e arrefecimento. Essa abordagem detalhada permite detectar fissuras, empenamentos, folgas excessivas e outros problemas que comprometem a performance e segurança do motor.
-          </p>
-          <p className="institucional-paragraph">
-            Com base no diagnóstico, elaboramos um laudo técnico que orienta todas as etapas seguintes da retífica. Esse planejamento é fundamental para assegurar que cada intervenção seja realizada com máxima precisão, prevenindo falhas futuras, otimizando o desempenho e garantindo a durabilidade do motor.
-          </p>
-          <p className="institucional-paragraph">
-            Conte com a nossa expertise e tecnologia avançada para obter um diagnóstico confiável e assertivo, o primeiro passo para devolver ao seu veículo a potência e a eficiência de um motor novo.
+            Após a limpeza, inicia-se a inspeção e medição das peças utilizando instrumentos de metrologia como paquímetro, relógio comparador e calibrador de folga. São realizadas checagens de altura de cabeçote, diâmetro dos cilindros, colos do virabrequim, entre outras. Essas informações são essenciais para a elaboração do orçamento e para identificar quais peças deverão ser substituídas, retificadas ou recuperadas.
           </p>
         </section>
 

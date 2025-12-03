@@ -20,7 +20,7 @@ const MontagemTeste = () => {
     }
   ];
 
-const LAST_UPDATED = '22 de junho de 2025'; // atualizado manualmente quando o conteúdo muda
+const LAST_UPDATED = '02 de dezembro de 2025'; // atualizado manualmente quando o conteúdo muda
 
   const images = [MontagemTeste1, MontagemTeste2, MontagemTeste3];
 
@@ -64,47 +64,24 @@ const LAST_UPDATED = '22 de junho de 2025'; // atualizado manualmente quando o c
         </section>
 
         <section className="institucional-section">
-          <h3 className="institucional-subtitle">Precisão, Confiança e Rigor Técnico</h3>
+          <h3 className="institucional-subtitle">7. Montagem e Sincronismo (Montagem Técnica)</h3>
           <p className="institucional-paragraph">
-            Após a retífica e usinagem, a montagem do motor é feita com extrema precisão. Cada componente é montado seguindo rigorosamente as especificações técnicas do fabricante.
-          </p>
-          <p className="institucional-paragraph">
-            Utilizamos torquímetros calibrados, ferramentas específicas e um ambiente controlado para evitar contaminações e garantir a integridade de cada peça.
-          </p>
-          <p className="institucional-paragraph">
-            Nossa equipe é altamente qualificada e experiente na montagem de motores nacionais e importados, entregando confiabilidade e alto desempenho.
+            A montagem é feita com extrema precisão, seguindo rigorosamente as especificações técnicas do fabricante. Utilizamos torquímetros calibrados e ferramentas específicas. O montador realiza uma nova inspeção das peças e componentes, conferindo as medidas e o sincronismo final do motor. Após a montagem, realizamos testes rigorosos em bancada para validar o funcionamento (pressão de óleo, temperatura, compressão), garantindo confiabilidade e alto desempenho.
           </p>
         </section>
 
         <section className="institucional-section">
-          <h3 className="institucional-subtitle">Etapas da Montagem</h3>
-          <ul className="institucional-list">
-            <li>✅ Inspeção final das peças antes da montagem.</li>
-            <li>✅ Instalação de bronzinas, pistões, anéis, virabrequim e comando de válvulas.</li>
-            <li>✅ Ajuste de folgas conforme manuais técnicos.</li>
-            <li>✅ Aplicação de torque correto em todos os parafusos.</li>
-            <li>✅ Lubrificação e limpeza durante o processo.</li>
-          </ul>
-        </section>
-
-        <section className="institucional-section">
-          <h3 className="institucional-subtitle">Teste de Motores</h3>
+          <h3 className="institucional-subtitle">8. Instalação no Veículo (Instalação e Testes)</h3>
           <p className="institucional-paragraph">
-            Após a montagem, realizamos testes rigorosos em bancada para validar o funcionamento do motor antes da entrega.
-          </p>
-          <p className="institucional-paragraph">
-            Monitoramos pressão de óleo, temperatura, compressão e vazamentos. Garantimos que o motor está pronto para rodar com segurança e alto desempenho.
+            Durante a instalação, o mecânico verifica as condições de todos os acessórios no cofre do motor — mangueiras de arrefecimento, sensores e atuadores. Essa inspeção garante que a linha eletrônica e os componentes periféricos estejam em plenas condições de operação, prevenindo o motor de uma quebra causada por superaquecimento ou falta de lubrificação por falha de algum componente. Itens que apresentarem rigidez ou desgaste devem ser substituídos.
           </p>
         </section>
 
         <section className="institucional-section">
-          <h3 className="institucional-subtitle">Vantagens da Montagem Profissional</h3>
-          <ul className="institucional-list">
-            <li>✅ Redução de falhas prematuras.</li>
-            <li>✅ Garantia de montagem técnica e segura.</li>
-            <li>✅ Testes comprovando o funcionamento antes da instalação no veículo.</li>
-            <li>✅ Confiabilidade e tranquilidade para o cliente.</li>
-          </ul>
+          <h3 className="institucional-subtitle">9. Teste de Funcionamento e Rodagem (Rodagem e Entrega)</h3>
+          <p className="institucional-paragraph">
+            A fase final envolve testes indispensáveis para componentes que só podem ser verificados em operação, como os sistemas de arrefecimento e lubrificação, que são submetidos a aumento de temperatura e pressão. Os testes de funcionamento e rodagem comprovam a qualidade do serviço prestado, identificam e corrigem possíveis problemas, e garantem a liberação do veículo pronto para o uso seguro.
+          </p>
         </section>
 
         <section className="institucional-section">

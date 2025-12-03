@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import '../../GlobalStyles.css'; // apenas se necessário, se ainda não estiver no App.jsx
+import '../../GlobalStyles.css';
+import '../../styles/Institucional.css'; // Importa estilos do FAQ
 
 const faqData = [
   {
@@ -24,10 +25,10 @@ const FAQSection = () => {
   };
 
   return (
-          <div className='highlight-item'>
+    <div className='faq-container'>
       <h2 className="section-title">Perguntas Frequentes</h2>
 
-          <div className="faq-list">
+      <div className="faq-list">
         {faqData.map((item, index) => (
           <div key={index} className={`faq-item ${activeIndex === index ? 'active' : ''}`}>
             <div className="faq-question" onClick={() => toggleIndex(index)}>
@@ -36,14 +37,12 @@ const FAQSection = () => {
             </div>
             <div className="faq-answer">
               <p className="paragrafo-escuro">{item.answer}</p>
-
+            </div>
           </div>
-        </div>
-      ))}
-        </div>
-        <a href="/Faq" className="button">Ver Mais</a>
-        </div>
-
+        ))}
+      </div>
+      <a href="/Faq" className="button">Ver Mais</a>
+    </div>
   );
 };
 

@@ -20,7 +20,7 @@ const Usinagem = () => {
     }
   ];
 
-const LAST_UPDATED = '22 de junho de 2025'; // atualizado manualmente quando o conteúdo muda
+const LAST_UPDATED = '02 de dezembro de 2025'; // atualizado manualmente quando o conteúdo muda
 
   const images = [usinagem1, usinagem2, usinagem3];
 
@@ -58,59 +58,9 @@ const LAST_UPDATED = '22 de junho de 2025'; // atualizado manualmente quando o c
       </div>
 
         <section className="institucional-section">
-        <h3 className="institucional-subtitle">Precisão, Eficiência e Durabilidade</h3>
+          <h3 className="institucional-subtitle">6. Retífica das Peças (Usinagem de Precisão)</h3>
           <p className="institucional-paragraph">
-            A usinagem de motores é um dos pilares fundamentais no processo de retífica, responsável por garantir a integridade estrutural, a funcionalidade e a longevidade dos componentes internos do motor.
-          </p>
-          <p className="institucional-paragraph">
-            Os componentes internos — como blocos, cabeçotes, virabrequins, bielas e camisas de cilindro — sofrem desgastes provocados por atrito e temperatura. Quando perdem suas especificações, comprometem a eficiência e segurança do motor.
-          </p>
-          <p className="institucional-paragraph">
-            A usinagem remove deformações e garante tolerâncias rigorosas, restabelecendo o equilíbrio dos componentes.
-          </p>
-        </section>
-
-        <section className="institucional-section">
-          <h3 className="institucional-subtitle">Processos Essenciais na Usinagem</h3>
-          <p className="institucional-paragraph">
-            <strong>Mandrilamento de Cilindros:</strong> Corrige ovalizações e garante paralelismo dos cilindros com rugosidade ideal.
-          </p>
-          <p className="institucional-paragraph">
-            <strong>Plaina de Cabeçotes e Blocos:</strong> Elimina empenamentos, garantindo vedação perfeita da junta.
-          </p>
-          <p className="institucional-paragraph">
-            <strong>Brunimento:</strong> Garante lubrificação ideal e melhor assentamento dos anéis de pistão.
-          </p>
-          <p className="institucional-paragraph">
-            <strong>Retífica de Virabrequim e Comando:</strong> Restaura geometrias e funcionamento dos mancais.
-          </p>
-          <p className="institucional-paragraph">
-            <strong>Usinagem de Sedes e Guias de Válvulas:</strong> Garante vedação e eficiência térmica.
-          </p>
-        </section>
-
-        <section className="institucional-section">
-          <h3 className="institucional-subtitle">Tecnologia Aplicada</h3>
-          <p className="institucional-paragraph">
-            Utilizamos máquinas CNC de última geração e equipamentos de medição tridimensional (CMM) para assegurar precisão micrométrica e repetibilidade.
-          </p>
-        </section>
-
-        <section className="institucional-section">
-          <h3 className="institucional-subtitle">Benefícios da Usinagem de Alta Precisão</h3>
-          <ul className="institucional-list">
-            <li>✅ Redução do consumo de óleo e combustível.</li>
-            <li>✅ Aumento da vida útil do motor.</li>
-            <li>✅ Melhoria no desempenho.</li>
-            <li>✅ Menor emissão de poluentes.</li>
-            <li>✅ Redução de ruídos e vibrações.</li>
-          </ul>
-        </section>
-
-        <section className="institucional-section">
-          <h3 className="institucional-subtitle">Excelência Garantida</h3>
-          <p className="institucional-paragraph">
-            Contamos com equipe técnica especializada, laboratório de metrologia próprio e equipamentos modernos. Seu motor passa por um processo de recuperação com excelência.
+            A usinagem é o pilar da retífica, removendo deformações e restabelecendo tolerâncias rigorosas para garantir a longevidade dos componentes. Utilizamos máquinas CNC de última geração. Processos essenciais incluem: Mandrilamento de Cilindros (corrige ovalizações), Plaina (elimina empenamentos para vedação perfeita), Brunimento (garante lubrificação ideal) e Retífica de Virabrequim/Comando (restaura geometrias). O retificador corrige as medidas ou aplica novas medidas definidas pela engenharia técnica, como o faceamento do cabeçote e brunimento dos cilindros.
           </p>
         </section>
 

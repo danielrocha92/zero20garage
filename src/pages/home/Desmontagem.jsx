@@ -20,7 +20,7 @@ const Desmontagem = () => {
     }
   ];
 
-const LAST_UPDATED = '22 de junho de 2025'; // atualizado manualmente quando o conteúdo muda
+const LAST_UPDATED = '02 de dezembro de 2025'; // atualizado manualmente quando o conteúdo muda
 
   const images = [desmontagem1, desmontagem2, desmontagem3];
 
@@ -64,18 +64,23 @@ const LAST_UPDATED = '22 de junho de 2025'; // atualizado manualmente quando o c
         </section>
 
         <section className="institucional-section">
-          <h3 className="institucional-subtitle">Precisão, Cuidado e Responsabilidade Técnica</h3>
+          <h3 className="institucional-subtitle">2. Remoção do Motor (Remoção do Veículo)</h3>
           <p className="institucional-paragraph">
-            A desmontagem do motor é uma etapa fundamental para a correta avaliação de todos os seus componentes. Nossos técnicos altamente capacitados realizam esse processo de forma sistemática e cuidadosa, garantindo que cada peça seja retirada sem causar danos estruturais.
+            Após receber o veículo na oficina, o mecânico responsável adota como primeiro passo a retirada do motor do compartimento, removendo cabos, conectores de sensores, atuadores e se certificando de que o motor está livre de todas as conexões mecânicas antes de retirá-lo por completo do cofre.
           </p>
+        </section>
+
+        <section className="institucional-section">
+          <h3 className="institucional-subtitle">3. Desmontagem Técnica</h3>
           <p className="institucional-paragraph">
-            Utilizamos ferramentas específicas e técnicas avançadas para assegurar a integridade dos componentes durante a desmontagem. Todo o processo é documentado e organizado para que seja possível identificar a origem de falhas e determinar as necessidades de reparo, substituição ou recuperação de peças.
+            Após a retirada, o mecânico realiza a desmontagem técnica do motor utilizando ferramentas adequadas, conhecimento e experiência para garantir a desmontagem somente do necessário e sem causar danos estruturais. Cada peça é retirada cuidadosamente e o processo é documentado para identificar a origem das falhas e determinar as necessidades de reparo. A inspeção minuciosa pós-desmontagem inclui a análise de trincas, desgastes excessivos, deformações e falhas ocultas, com o apoio de instrumentos de medição de alta precisão, garantindo uma base sólida para a próxima etapa.
           </p>
+        </section>
+
+        <section className="institucional-section">
+          <h3 className="institucional-subtitle">4. Limpeza das Peças (Banho Químico)</h3>
           <p className="institucional-paragraph">
-            A inspeção minuciosa pós-desmontagem inclui a análise de trincas, desgastes excessivos, deformações e falhas ocultas, com o apoio de instrumentos de medição de alta precisão. Esse rigor técnico assegura um diagnóstico preciso e uma base sólida para a próxima etapa do serviço: a usinagem ou reparação adequada.
-          </p>
-          <p className="institucional-paragraph">
-            Confie em nossa equipe para realizar uma desmontagem segura, responsável e alinhada com os mais altos padrões de qualidade da engenharia automotiva.
+            Na fase de limpeza, as partes metálicas do motor são submetidas a um banho químico específico para remover borras de óleo, resíduos de carbono e contaminantes. Isso garante que a limpeza não apenas preserve o motor, mas também evite que qualquer sujeira possa camuflar avarias durante o procedimento de inspeção.
           </p>
         </section>
 

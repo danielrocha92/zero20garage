@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../styles/Footer.css';
 import { FaFacebook, FaInstagram, FaCcVisa, FaCcMastercard, FaBarcode } from 'react-icons/fa';
 import { MdPix } from 'react-icons/md';
-const logoDev = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2232%22%20height%3D%2232%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22%23333%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23fff%22%20font-size%3D%2210%22%3EDev%3C%2Ftext%3E%3C%2Fsvg%3E';
+const logoDev = 'https://rocha-tech-solutions.vercel.app/assets/img/logo.png';
 
 function Footer() {
   const formasPagamento = [

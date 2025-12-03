@@ -23,10 +23,20 @@ const Tp = lazy(() => import('./pages/servicos/Tp'));
 const Td = lazy(() => import('./pages/servicos/Td'));
 const Cp = lazy(() => import('./pages/servicos/Cp'));
 
-const Diagnostico = lazy(() => import('./pages/home/Diagnostico'));
-const Desmontagem = lazy(() => import('./pages/home/Desmontagem'));
-const Usinagem = lazy(() => import('./pages/home/Usinagem'));
-const MontagemTeste = lazy(() => import('./pages/home/MontagemTeste'));
+const DiagnosticoAvaliacao = lazy(() => import('./pages/home/DiagnosticoAvaliacao'));
+const RemocaoMotor = lazy(() => import('./pages/home/RemocaoMotor'));
+const DesmontagemTecnica = lazy(() => import('./pages/home/DesmontagemTecnica'));
+const LimpezaPecas = lazy(() => import('./pages/home/LimpezaPecas'));
+const InspecaoMedicao = lazy(() => import('./pages/home/InspecaoMedicao'));
+const RetificaPecas = lazy(() => import('./pages/home/RetificaPecas'));
+const MontagemSincronismo = lazy(() => import('./pages/home/MontagemSincronismo'));
+const InstalacaoVeiculo = lazy(() => import('./pages/home/InstalacaoVeiculo'));
+const TesteFuncionamento = lazy(() => import('./pages/home/TesteFuncionamento'));
+
+// const Diagnostico = lazy(() => import('./pages/home/Diagnostico'));
+// const Desmontagem = lazy(() => import('./pages/home/Desmontagem'));
+// const Usinagem = lazy(() => import('./pages/home/Usinagem'));
+// const MontagemTeste = lazy(() => import('./pages/home/MontagemTeste'));
 
 const Orcamento = lazy(() => import('./pages/orcamento/Orcamento'));
 const GerarPdfPage = lazy(() => import('./components/GerarPdfPage'));
@@ -77,10 +87,22 @@ const AnimatedRoutes = () => {
           <Route path="/Servicos/Tp" element={<Tp />} />
           <Route path="/Servicos/Td" element={<Td />} />
           <Route path="/Servicos/Cp" element={<Cp />} />
-          <Route path="/Home/Diagnostico" element={<Diagnostico />} />
-          <Route path="/Home/Desmontagem" element={<Desmontagem />} />
-          <Route path="/Home/Usinagem" element={<Usinagem />} />
-          <Route path="/Home/MontagemTeste" element={<MontagemTeste />} />
+          <Route path="/Home/Diagnostico" element={<DiagnosticoAvaliacao />} />
+          <Route path="/Home/diagnostico" element={<DiagnosticoAvaliacao />} />
+          <Route path="/Home/Inspeção-e-Medição" element={<InspecaoMedicao />} />
+
+          <Route path="/Home/Desmontagem" element={<RemocaoMotor />} />
+          <Route path="/Home/Remocao-do-Motor" element={<RemocaoMotor />} />
+          <Route path="/Home/Desmontagem-Técnica" element={<DesmontagemTecnica />} />
+          <Route path="/Home/Limpeza-das-Peças" element={<LimpezaPecas />} />
+
+          <Route path="/Home/Usinagem" element={<RetificaPecas />} />
+          <Route path="/Home/Retífica-das-Peças" element={<RetificaPecas />} />
+
+          <Route path="/Home/MontagemTeste" element={<MontagemSincronismo />} />
+          <Route path="/Home/Montagem-e-Sincronismo" element={<MontagemSincronismo />} />
+          <Route path="/Home/Instalação-no-Veículo" element={<InstalacaoVeiculo />} />
+          <Route path="/Home/Teste-de-Funcionamento-e-Rodagem-do-Motor-do-Veículo" element={<TesteFuncionamento />} />
           <Route path="/Blog" element={<Blog />} />
           <Route path="/Blog/SinaisRetifica" element={<SinaisRetifica />} />
           <Route path="/Blog/CustoRetifica" element={<CustoRetifica />} />

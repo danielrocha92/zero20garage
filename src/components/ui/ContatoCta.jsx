@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt, FaWhatsapp } from 'react-icons/fa';
+import '../../pages/contato/Contato.css'; // Importa estilos específicos do contato
 
 const ContatoCta = () => (
   <div className="highlight-item">

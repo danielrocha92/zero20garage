@@ -23,7 +23,11 @@
     <link rel="icon" href="/favicon.ico" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="canonical" href="https://zero20garage.vercel.app/" />
-    <link rel="preload" as="image" href="https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429487/home_k6ug8o.jpg" />
+
+    <!-- Preload LCP Image (Desktop) -->
+    <link rel="preload" as="image" href="https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429487/home_k6ug8o.jpg" media="(min-width: 769px)" />
+    <!-- Preload LCP Image (Mobile) -->
+    <link rel="preload" as="image" href="https://res.cloudinary.com/dlyeywiwk/image/upload/w_800,f_auto,q_auto/v1763429487/home_k6ug8o.jpg" media="(max-width: 768px)" />
 
     <link rel="amphtml" href="/amp/" />
 

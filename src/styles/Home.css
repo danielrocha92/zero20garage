@@ -1,31 +1,9 @@
 /* ===== Home.css (Mobile First) ===== */
-/* Timeline */
-.highlight-item-processo .timeline {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 por linha no desktop, com 50% de largura para cada item */
-  gap: 1rem; /* Espaçamento entre os cards */
-}
 
-/* Ajuste para os cards */
-.highlight-item-processo .timeline-step {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1rem; /* Aumentado o padding para dar mais espaço interno */
-  border-radius: 20px;
-  text-align: center;
-  backdrop-filter: blur(5px);
-  transition: transform 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Centraliza o conteúdo dentro do card */
-  align-items: center; /* Centraliza o conteúdo dentro do card */
-  height: 260px; /* Define uma altura fixa para todos os cards */
-  box-sizing: border-box;
-  flex: 1 1 100%; /* Garante que o card ocupe 100% da largura disponível dentro do grid */
-}
-
+/* Generic Timeline (Used in "Por que a Zero 20 Garage?") */
 .timeline {
   display: grid;
-  grid-template-columns: 1fr; /* padrão mobile: 1 coluna */
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
@@ -38,44 +16,112 @@
   transition: transform 0.3s ease;
 }
 
+/* Timeline Container (Specific for Processo de Retífica) */
+.highlight-item-processo .timeline {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 2rem;
+  padding-left: 20px;
+  /* Espaço para a linha vertical */
+}
+
+/* Linha Vertical (Espinha de Peixe) */
+.highlight-item-processo .timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #ff0015;
+  border-radius: 2px;
+}
+
+/* Ajuste para os cards */
+.highlight-item-processo .timeline-step {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 15px;
+  text-align: left;
+  /* Texto alinhado à esquerda para leitura natural */
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-height: auto;
+  /* Altura flexível */
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-left: 20px;
+  /* Espaço entre a linha e o card */
+}
+
+/* Conector (Bolinha na linha) */
+.highlight-item-processo .timeline-step::before {
+  content: '';
+  position: absolute;
+  left: -32px;
+  /* Posiciona a bolinha sobre a linha vertical */
+  top: 20px;
+  width: 20px;
+  height: 20px;
+  background: #ff0015;
+  border-radius: 50%;
+  border: 4px solid #1e1e1e;
+  /* Cor do fundo para destacar */
+  z-index: 1;
+}
+
+/* Seta apontando para o card */
+.highlight-item-processo .timeline-step::after {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 25px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid rgba(255, 255, 255, 0.05);
+}
+
 .timeline-step:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+  transform: translateX(5px);
+  /* Move para a direita no hover */
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+  border-color: #ff0015;
 }
 
 .icon-animated {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  animation: pulse 2s infinite;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #ff0015;
+  align-self: center;
+  /* Ícone centralizado */
 }
 
 /* Link da timeline */
 .link-timeline {
-  color: #ff0015;
   text-decoration: none;
-}
-
-.link-timeline:hover {
-  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .highlight-item-processo {
   /* Estilo atual do efeito de vidro */
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   border-radius: 20px;
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0.5rem;
-  transition: all 0.3s ease;
-  margin: 1rem;
-  color: var(--branco);
-  overflow: hidden;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  overflow: visible;
+  /* Permite que elementos saiam se necessário */
 }
 
 /* Animação Pulse */
@@ -84,10 +130,12 @@
     transform: scale(1);
     opacity: 0.8;
   }
+
   50% {
     transform: scale(1.1);
     opacity: 1;
   }
+
   100% {
     transform: scale(1);
     opacity: 0.8;
@@ -104,7 +152,7 @@
 /* Highlights */
 .highlights-grid {
   display: grid;
-  grid-template-columns: 1fr; /* mobile: uma coluna */
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
@@ -124,8 +172,115 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 
-  .timeline-step {
-    padding: 0.5rem;
+  /* Timeline Container Desktop */
+  .highlight-item-processo .timeline {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-left: 0;
+    gap: 0;
+    /* Gap controlado pela margem dos itens */
+  }
+
+  /* Linha Central Vertical */
+  .highlight-item-processo .timeline::before {
+    display: block;
+    /* Reativa a linha */
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    bottom: 0;
+  }
+
+  /* Itens da Timeline (Links) */
+  .highlight-item-processo .link-timeline {
+    width: 45%;
+    margin: 0.5rem 0;
+    /* Reduzido de 1rem para 0.5rem */
+    position: relative;
+  }
+
+  /* Ímpares na Esquerda */
+  .highlight-item-processo .link-timeline:nth-child(odd) {
+    align-self: flex-start;
+    text-align: right;
+    padding-right: 30px;
+    /* Espaço para o conector */
+  }
+
+  /* Pares na Direita */
+  .highlight-item-processo .link-timeline:nth-child(even) {
+    align-self: flex-end;
+    text-align: left;
+    padding-left: 30px;
+    /* Espaço para o conector */
+  }
+
+  /* Card Styles Desktop */
+  .highlight-item-processo .timeline-step {
+    margin-left: 0;
+    height: auto;
+    align-items: center;
+    /* Centraliza itens internamente */
+    text-align: center;
+    /* Centraliza o texto */
+    padding: 1rem;
+    /* Reduzido padding interno */
+  }
+
+  /* Ajuste interno para alinhar texto com o lado correto - REMOVIDO para centralizar */
+  /* .highlight-item-processo .link-timeline:nth-child(odd) .timeline-step {
+    align-items: flex-end;
+  }
+  .highlight-item-processo .link-timeline:nth-child(even) .timeline-step {
+    align-items: flex-start;
+  } */
+
+  /* Conectores (Bolinhas) - Reativar e Posicionar */
+  .highlight-item-processo .timeline-step::before {
+    display: block;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* Bolinha na Direita para itens da Esquerda */
+  .highlight-item-processo .link-timeline:nth-child(odd) .timeline-step::before {
+    left: auto;
+    right: -42px;
+    /* Ajuste fino para cair na linha central */
+  }
+
+  /* Bolinha na Esquerda para itens da Direita */
+  .highlight-item-processo .link-timeline:nth-child(even) .timeline-step::before {
+    left: -42px;
+    /* Ajuste fino para cair na linha central */
+  }
+
+  /* Setas - Reativar e Posicionar */
+  .highlight-item-processo .timeline-step::after {
+    display: block;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* Seta na Direita para itens da Esquerda */
+  .highlight-item-processo .link-timeline:nth-child(odd) .timeline-step::after {
+    left: auto;
+    right: -10px;
+    border-right: none;
+    border-left: 10px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Seta na Esquerda para itens da Direita */
+  .highlight-item-processo .link-timeline:nth-child(even) .timeline-step::after {
+    left: -10px;
+    border-left: none;
+    border-right: 10px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .timeline-step:hover {
+    transform: scale(1.02);
+    /* Efeito de zoom leve no desktop */
   }
 
   .highlights-grid {
