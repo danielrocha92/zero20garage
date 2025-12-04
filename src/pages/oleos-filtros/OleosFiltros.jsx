@@ -8,8 +8,6 @@ import ContatoCta from '../../components/ui/ContatoCta';
 
 // Importe sua logo aqui se necessário, ou use a URL direta
 const logoGarage = "https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429492/logo_mqvkvh.png";
-// Placeholder para a logo "Zero 20 Óleos" - O usuário deve substituir depois
-const logoOleos = "https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429492/logo_mqvkvh.png";
 
 // Vídeos de fundo do banner
 const bannerVideoDesktop = "https://res.cloudinary.com/dlyeywiwk/video/upload/v1764821682/wl0kcac1fvfhm2rgdeja.mp4";
