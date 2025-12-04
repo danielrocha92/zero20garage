@@ -3,7 +3,8 @@ import './Servicos.css';
 import DynamicHeader from '../../components/ui/DynamicHeader';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import { Helmet } from 'react-helmet-async';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { FaOilCan, FaSearch, FaCogs, FaChartLine, FaUserTie } from 'react-icons/fa';
+import FAQSection from '../../components/ui/FAQSection';
 
 const Servicos = () => {
     const messages = [
@@ -18,36 +19,31 @@ const Servicos = () => {
             title: 'Manutenção Preventiva',
             description: 'Manutenção regular para evitar problemas futuros...',
             link: '/servicos/mp',
-            isLottie: true,
-            lottieUrl: 'https://lottie.host/a6897091-f363-45d3-8248-1f401716037c/Zu2Q1IPS9P.lottie',
+            icon: <FaOilCan className="service-icon" />,
         },
         {
             title: 'Diagnóstico de Problemas',
             description: 'Diagnóstico preciso para identificar...',
             link: '/servicos/dp',
-            isLottie: true,
-            lottieUrl: 'https://lottie.host/1015c069-5700-45d3-97f2-f384e1ba5077/HtUxdY6MQL.lottie',
+            icon: <FaSearch className="service-icon" />,
         },
         {
             title: 'Troca de Peças',
             description: 'Substituição de peças desgastadas...',
             link: '/servicos/tp',
-            isLottie: true,
-            lottieUrl: 'https://lottie.host/65fd28e9-8bb9-4fc7-a243-49c4aa7483f2/fyhYTYsPTh.lottie',
+            icon: <FaCogs className="service-icon" />,
         },
         {
             title: 'Teste de Desempenho',
             description: 'Testes rigorosos para garantir...',
             link: '/servicos/td',
-            isLottie: true,
-            lottieUrl: 'https://lottie.host/569ca6d8-8079-4e2b-91bf-eed5308fec69/A1ShQBAMgI.lottie',
+            icon: <FaChartLine className="service-icon" />,
         },
         {
             title: 'Consultoria Técnica',
             description: 'Consultoria especializada para ajudar...',
             link: '/servicos/cp',
-            isLottie: true,
-            lottieUrl: 'https://lottie.host/22e9c59d-76ec-4deb-9603-5d6540ae2fc2/kYkYTa00QB.lottie',
+            icon: <FaUserTie className="service-icon" />,
         },
     ];
 
@@ -64,7 +60,7 @@ const Servicos = () => {
             <DynamicHeader page="servicos" messages={messages} />
             <Breadcrumbs />
                     <div className='highlight-item'>
-                        <h2 className='titulo-claro' translate='no'>Serviços que executamos</h2>
+                        <h2 className='titulo-claro servicos-page-title' translate='no'>Serviços que executamos</h2>
                         <div className="service-grid">
                             {services.map((service) => (
                                 <div
@@ -72,19 +68,9 @@ const Servicos = () => {
                                     key={service.title}
                                     data-aos="fade-up">
                                     <Link to={service.link} className="ctn-button">
-                                        {service.isLottie ? (
-                                            <DotLottieReact
-                                                src={service.lottieUrl}
-                                                loop
-                                                autoplay
-                                                className="service-animation"
-                                                style={{ height: 160 }}
-                                            />
-                                        ) : (
-                                            service.icon
-                                        )}
-                                        <h2 className='titulo-claro'>{service.title}</h2>
-                                        <p className="subtitulo-claro">{service.description}</p>
+                                        {service.icon}
+                                        <h2 className='titulo-claro service-item__title'>{service.title}</h2>
+                                        <p className="subtitulo-claro service-item__description">{service.description}</p>
                                         <button type="submit" className="submit-button">
                                             Saiba Mais
                                         </button>
@@ -93,6 +79,7 @@ const Servicos = () => {
                             ))}
                         </div>
                     </div>
+                    <FAQSection />
             </div>
         </>
     );

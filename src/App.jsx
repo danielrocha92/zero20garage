@@ -24,6 +24,7 @@ const Dp = lazy(() => import('./pages/servicos/Dp'));
 const Tp = lazy(() => import('./pages/servicos/Tp'));
 const Td = lazy(() => import('./pages/servicos/Td'));
 const Cp = lazy(() => import('./pages/servicos/Cp'));
+const OleosFiltros = lazy(() => import('./pages/oleos-filtros/OleosFiltros'));
 
 const DiagnosticoAvaliacao = lazy(() => import('./pages/home/DiagnosticoAvaliacao'));
 const RemocaoMotor = lazy(() => import('./pages/home/RemocaoMotor'));
@@ -85,7 +86,9 @@ const AnimatedRoutes = () => {
           <Route path="/Servicos/Dp" element={<Dp />} />
           <Route path="/Servicos/Tp" element={<Tp />} />
           <Route path="/Servicos/Td" element={<Td />} />
+          <Route path="/Servicos/Td" element={<Td />} />
           <Route path="/Servicos/Cp" element={<Cp />} />
+          <Route path="/oleos-filtros" element={<OleosFiltros />} />
           <Route path="/Home/Diagnostico" element={<DiagnosticoAvaliacao />} />
           <Route path="/Home/diagnostico" element={<DiagnosticoAvaliacao />} />
           <Route path="/Home/Inspeção-e-Medição" element={<InspecaoMedicao />} />

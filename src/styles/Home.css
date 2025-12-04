@@ -245,14 +245,6 @@
     /* Reduzido padding interno */
   }
 
-  /* Ajuste interno para alinhar texto com o lado correto - REMOVIDO para centralizar */
-  /* .highlight-item-processo .link-timeline:nth-child(odd) .timeline-step {
-    align-items: flex-end;
-  }
-  .highlight-item-processo .link-timeline:nth-child(even) .timeline-step {
-    align-items: flex-start;
-  } */
-
   /* Conectores (Bolinhas) - Reativar e Posicionar */
   .highlight-item-processo .timeline-step::before {
     display: block;
@@ -300,13 +292,25 @@
     /* Efeito de zoom leve no desktop */
   }
 
-
-
   .button {
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
     margin: 0 auto;
     display: block;
     width: fit-content;
+  }
+
+  /* === Novos Ajustes Solicitados === */
+
+  /* Diminuir tamanho do título para Desktop */
+  .home-title {
+    font-size: 2.2rem !important;
+    /* Reduzido de 3rem */
+  }
+
+  /* Aumentar Margin Bottom entre os cards e destaques */
+  .home-highlight-item {
+    margin-bottom: 5rem !important;
+    /* Aumentado de 2rem */
   }
 }

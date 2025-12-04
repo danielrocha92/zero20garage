@@ -77,6 +77,15 @@ function Navbar({ isLoggedIn }) {
           </li>
           <li>
             <NavLink
+              to="/oleos-filtros"
+              onClick={handleMenuClick}
+              className={({ isActive }) => (isActive ? "glow" : "")}
+            >
+              Óleos e Filtros
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to={isLoggedIn ? "/painel-orcamentos" : "/orcamento"}
               onClick={handleMenuClick}
               className={({ isActive }) => (isActive ? "glow" : "")}

@@ -10,7 +10,6 @@ import { Helmet } from 'react-helmet-async';
 
 // Lazy load heavy components
 const TestimonialsCarousel = lazy(() => import('../../components/ui/TestimonialsCarousel'));
-const FAQSection = lazy(() => import('../../components/ui/FAQSection'));
 const ContatoCta = lazy(() => import('../../components/ui/ContatoCta'));
 
 function Home() {
@@ -55,15 +54,15 @@ function Home() {
     <DynamicHeader page="home" messages={messages} />
     <Breadcrumbs />
 
-      <div className='highlight-item home-header'>
-        <h2 className="titulo-claro">Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
+      <div className='highlight-item home-header home-highlight-item'>
+        <h2 className="titulo-claro home-title">Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
         <h3 className="subtitulo-claro">Atendimento especializado para veículos nacionais e importados.</h3>
         <a href="/orcamento" className="button">Solicite um Orçamento</a>
       </div>
 
     {/* Destaques */}
-      <div className='highlight-item'>
-        <h2 className="titulo-claro">Por que a Zero 20 Garage?</h2>
+      <div className='highlight-item home-highlight-item'>
+        <h2 className="titulo-claro home-title">Por que a Zero 20 Garage?</h2>
       <div className="timeline">
         <div className="timeline-step">
           <div className="icon-animated">
@@ -93,8 +92,8 @@ function Home() {
     </div>
 
     {/* Linha do Tempo do Processo de Retífica */}
-      <div className="highlight-item-processo">
-        <h2 className="titulo-claro">Como Funciona o Processo de Retífica</h2>
+      <div className="highlight-item-processo home-highlight-item">
+        <h2 className="titulo-claro home-title">Como Funciona o Processo de Retífica</h2>
         <div className="timeline">
           {/* 1. Diagnóstico e Avaliação Técnica */}
           <Link to="/Home/diagnostico" className="link-timeline">
@@ -243,16 +242,14 @@ function Home() {
       </div>
 
     {/* Depoimentos */}
-      <div className='highlight-item'>
-        <h2 className="titulo-claro">O que Nossos Clientes Dizem</h2>
+      <div className='highlight-item home-highlight-item'>
+        <h2 className="titulo-claro home-title">O que Nossos Clientes Dizem</h2>
         <Suspense fallback={<div>Carregando depoimentos...</div>}>
           <TestimonialsCarousel />
         </Suspense>
       </div>
 
-    <Suspense fallback={<div>Carregando FAQ...</div>}>
-      <FAQSection />
-    </Suspense>
+
     {/* Fale Conosco */}
 
     {/* Endereço */}
