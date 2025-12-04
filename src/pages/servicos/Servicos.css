@@ -100,7 +100,8 @@
   /* Aumentado padding para ícone ficar melhor */
   background-color: rgba(197, 4, 4, 0.2);
   box-shadow: 0 0 8px rgba(197, 4, 4, 0.4);
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem auto;
+  display: block;
   transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
 }
 
