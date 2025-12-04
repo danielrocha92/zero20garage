@@ -141,7 +141,7 @@ h6 {
 .highlight-item,
 .highlight-card,
 .section {
-  background: rgba(255, 255, 255, 0.03);
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.7), rgba(10, 10, 10, 0.8));
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 20px;
   padding: 2rem;
@@ -150,6 +150,8 @@ h6 {
   width: 100%;
   transition: var(--transition-smooth);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  /* Fix para Safari/iOS */
   color: var(--text-primary);
   text-align: center;
   /* Centraliza todo o texto */
