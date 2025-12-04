@@ -168,6 +168,176 @@
     box-shadow: var(--green-glow);
 }
 
+/* ===== OleosFiltros.css - Green Theme ===== */
+
+:root {
+    --green-primary: #4CAF50;
+    --green-dark: #2E7D32;
+    --green-gradient: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+    --green-glow: 0 0 15px rgba(76, 175, 80, 0.5);
+}
+
+/* Scoped Green Theme Overrides */
+.page-verde {
+    --accent-color: var(--green-primary);
+    --accent-gradient: var(--green-gradient);
+    --cor-destaque: var(--green-primary);
+    --cor-titulo: var(--green-primary);
+}
+
+.page-verde .titulo-claro,
+.page-verde .titulo-escuro {
+    background: var(--green-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.page-verde .button,
+.page-verde .submit-button {
+    background: var(--green-gradient);
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.page-verde .button:hover,
+.page-verde .submit-button:hover {
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5);
+}
+
+/* Section 1: Banner Video */
+.of-banner {
+    position: relative;
+    height: 80vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.of-video-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.4;
+}
+
+.of-banner-content {
+    z-index: 1;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    max-width: 800px;
+}
+
+.of-banner-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.of-banner-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #ddd;
+}
+
+/* Comparison Table */
+.of-comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    background: rgba(20, 20, 20, 0.8);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.of-comparison-table th,
+.of-comparison-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.of-comparison-table th {
+    background: rgba(76, 175, 80, 0.2);
+    color: var(--green-primary);
+    font-size: 1.1rem;
+}
+
+.of-comparison-table td:first-child {
+    font-weight: bold;
+    color: #fff;
+}
+
+.of-comparison-table tr:hover {
+    background: rgba(76, 175, 80, 0.05);
+}
+
+/* Section 2: Logos & Intro */
+.of-logos-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    margin: 3rem 0;
+    flex-wrap: wrap;
+}
+
+.of-logo-img {
+    height: 80px;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+    transition: transform 0.3s ease;
+}
+
+.of-logo-img:hover {
+    transform: scale(1.05);
+}
+
+.of-intro-text {
+    text-align: justify;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+.of-intro-text strong {
+    color: var(--green-primary);
+}
+
+/* Section 3: Product Lines */
+.of-product-lines {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.of-product-card {
+    background: rgba(30, 30, 30, 0.6);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(76, 175, 80, 0.2);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.of-product-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--green-primary);
+    box-shadow: var(--green-glow);
+}
+
 .of-card-title {
     font-size: 1.5rem;
     color: var(--green-primary);
@@ -190,8 +360,8 @@
     background: rgba(30, 30, 30, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
-    padding: 1.5rem;
-    height: 120px;
+    padding: 1rem;
+    height: 160px;
     display: flex;
     align-items: center;
     justify-content: center;

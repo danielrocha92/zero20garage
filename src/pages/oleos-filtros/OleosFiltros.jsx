@@ -43,7 +43,7 @@ const OleosFiltros = () => {
 
   const brands = [
     { name: "Castrol", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Castrol_logo_2023.svg/2560px-Castrol_logo_2023.svg.png" },
-    { name: "Ipiranga", logo: "https://logospng.org/wp-content/uploads/ipiranga.png" },
+    { name: "Ipiranga", logo: "https://portal.ipiranga/imagens/meta-tag-ipiranga.png" },
     { name: "ACDelco", logo: "https://w7.pngwing.com/pngs/399/786/png-transparent-acdelco-hd-logo.png" },
     { name: "Petronas", logo: "https://cdn.pli-petronas.com/s3fs-public/img_PETRONAS_Lubricants_International.png?VersionId=h0CkkEGuHmnHR9aH4K4fx84vg.s4obep" },
     { name: "Havoline Texaco", logo: "https://i.pinimg.com/736x/f9/b6/6a/f9b66a6cdd65446078ab5cb0bdafd299.jpg" },
@@ -55,9 +55,8 @@ const OleosFiltros = () => {
     { name: "Mopar", logo: "https://www.moparoficial.com.br/content/dam/mopar/home/banner/logo-mopar.svg" },
     { name: "Motorcraft", logo: "https://www.reparadorford.com.br/img/motorcraft/logo-motorcraft.png" },
     { name: "Radnaq", logo: "https://www.radnaq.com.br/assets/img/logo.png" },
-    { name: "Mahle", logo: "https://logospng.org/wp-content/uploads/mahle-metal-leve.png" },
-    { name: "Mann Filter", logo: "https://www.liblogo.com/img-logo/ma5559oef9-mann-filter-logo-oil-filter-hu726-2x-by-mann-filter-on-partsavatar-ca.png" },
-    { name: "Motul", logo: "https://e7.pngegg.com/pngimages/80/219/png-clipart-car-motul-formula-4-uae-championship-motorcycle-logo-car-text-logo-thumbnail.png" }
+    { name: "Mahle", logo: "https://images.cws.digital/produtos/gg/77/87/pistao-mahle-metal-leve-com-bronzinas-025-standard-automotivo-6468777-1748756792296.png" },
+    { name: "Mann Filter", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-uY_tiR0CZeXvIfMIJ_5LuiOhYtHxqqJ9Bw&s" }
   ];
 
   return (

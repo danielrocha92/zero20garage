@@ -268,8 +268,9 @@ textarea:focus {
   .highlight-card,
   .section {
     margin-right: 1rem;
-    padding: 1.25rem;
+    padding: 1rem;
     margin-bottom: 1.5rem;
+    margin-top: 3rem;
     border-radius: 16px;
   }
 

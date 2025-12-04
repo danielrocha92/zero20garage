@@ -11,8 +11,10 @@ import { Helmet } from 'react-helmet-async';
 // Lazy load heavy components
 const TestimonialsCarousel = lazy(() => import('../../components/ui/TestimonialsCarousel'));
 const ContatoCta = lazy(() => import('../../components/ui/ContatoCta'));
+const BrandCarousel = lazy(() => import('../../components/ui/BrandCarousel'));
 
 function Home() {
+
   const messages = [
     {
       title: '𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™',
@@ -239,6 +241,13 @@ function Home() {
             </div>
           </Link>
         </div>
+      </div>
+
+    {/* Marcas que Atendemos */}
+      <div className='highlight-item home-highlight-item' style={{background: 'transparent', boxShadow: 'none'}}>
+        <Suspense fallback={<div>Carregando marcas...</div>}>
+          <BrandCarousel />
+        </Suspense>
       </div>
 
     {/* Depoimentos */}
