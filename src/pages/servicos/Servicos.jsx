@@ -68,12 +68,14 @@ const Servicos = () => {
                                     key={service.title}
                                     data-aos="fade-up">
                                     <Link to={service.link} className="ctn-button">
-                                        {service.icon}
-                                        <h2 className='titulo-claro service-item__title'>{service.title}</h2>
+                                        <div className="icon-wrapper">
+                                            {service.icon}
+                                        </div>
+                                        <h3 className='titulo-claro service-item__title'>{service.title}</h3>
                                         <p className="subtitulo-claro service-item__description">{service.description}</p>
-                                        <button type="submit" className="submit-button">
+                                        <span className="service-item-link">
                                             Saiba Mais
-                                        </button>
+                                        </span>
                                     </Link>
                                 </div>
                             ))}

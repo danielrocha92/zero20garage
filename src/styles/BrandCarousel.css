@@ -23,20 +23,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(255, 255, 255, 0.05);
+    background: #8f434359;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     backdrop-filter: blur(5px);
 }
 
 .brand-logo-wrapper:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--vermelho-principal);
-    box-shadow: 0 8px 15px rgba(255, 0, 0, 0.2);
+    transform: translateY(-2px);
+    background: #d40000ad;
 }
 
 .brand-logo {

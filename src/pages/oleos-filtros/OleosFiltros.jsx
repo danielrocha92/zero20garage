@@ -18,25 +18,28 @@ const workshopPhoto = "https://images.unsplash.com/photo-1632823471565-1ec2a1ad4
 
 const OleosFiltros = () => {
   const carouselSettings = {
-    dots: true,
+    dots: false,
+    arrows: false,
     infinite: true,
-    speed: 500,
-    slidesToShow: 4,
+    speed: 3000,
+    slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 0,
+    cssEase: 'linear',
+    pauseOnHover: true,
     responsive: [
       {
         breakpoint: 1024,
-        settings: { slidesToShow: 3 }
+        settings: { slidesToShow: 4 }
       },
       {
         breakpoint: 768,
-        settings: { slidesToShow: 2 }
+        settings: { slidesToShow: 3 }
       },
       {
         breakpoint: 480,
-        settings: { slidesToShow: 1 }
+        settings: { slidesToShow: 2 }
       }
     ]
   };
