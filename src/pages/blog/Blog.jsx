@@ -6,12 +6,12 @@ import { Helmet } from 'react-helmet-async';
 import AnimatedPage from '../../components/AnimatedPage';
 
 // ✅ Import das imagens
-const sinaisRetificaImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429515/sinais-retifica_kcy7mm.jpg';
-const custoRetificaImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429465/custo-retifica_bnpb4x.jpg';
-const manutencaoMotoresImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1764729616/manutencao-de-motores_iitd4z.png';
-const retificaParcialImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429507/retifica-parcial-ou-completa_mqxitk.jpg';
-const trocarMotorImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429521/trocar-motor_lqzrhf.jpg';
-const valeAPenaRetificarImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429530/valeAPenaRetificarImg_p5wtyt.jpg';
+const sinaisRetificaImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto,w_400,h_250,c_fill/v1763429515/sinais-retifica_kcy7mm.jpg';
+const custoRetificaImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto,w_400,h_250,c_fill/v1763429465/custo-retifica_bnpb4x.jpg';
+const manutencaoMotoresImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto,w_400,h_250,c_fill/v1764729616/manutencao-de-motores_iitd4z.png';
+const retificaParcialImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto,w_400,h_250,c_fill/v1763429507/retifica-parcial-ou-completa_mqxitk.jpg';
+const trocarMotorImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto,w_400,h_250,c_fill/v1763429521/trocar-motor_lqzrhf.jpg';
+const valeAPenaRetificarImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto,w_400,h_250,c_fill/v1763429530/valeAPenaRetificarImg_p5wtyt.jpg';
 
 const Blog = () => {
     const messages = [
@@ -89,6 +89,9 @@ const Blog = () => {
                                         src={post.image}
                                         alt={post.title}
                                         className="blog-item__image"
+                                        loading="lazy"
+                                        width="400"
+                                        height="250"
                                     />
                                     <h2 className='title'>{post.title}</h2>
                                     <p className="paragrafo-claro">{post.description}</p>

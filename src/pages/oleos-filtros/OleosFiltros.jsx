@@ -1,66 +1,21 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import './OleosFiltros.css';
 import ContatoCta from '../../components/ui/ContatoCta';
+import BrandCarousel from '../../components/ui/BrandCarousel';
+import { oilBrands } from '../../data/brands';
 
 // Importe sua logo aqui se necessário, ou use a URL direta
-const logoGarage = "https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429492/logo_mqvkvh.png";
+const logoGarage = "https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429492/logo_mqvkvh.png";
 
 // Vídeos de fundo do banner
 const bannerVideoDesktop = "https://res.cloudinary.com/dlyeywiwk/video/upload/v1764821682/wl0kcac1fvfhm2rgdeja.mp4";
 const bannerVideoMobile = "https://res.cloudinary.com/dlyeywiwk/video/upload/v1764822609/fokcyaolucoogjmhusx1.mp4";
 
 // Placeholder para a foto da oficina
-const workshopPhoto = "https://images.unsplash.com/photo-1632823471565-1ec2a1ad4015?q=80&w=1920&auto=format&fit=crop";
+const workshopPhoto = "https://images.unsplash.com/photo-1632823471565-1ec2a1ad4015?q=80&w=1200&auto=format&fit=crop";
 
 const OleosFiltros = () => {
-  const carouselSettings = {
-    dots: false,
-    arrows: false,
-    infinite: true,
-    speed: 3000,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 0,
-    cssEase: 'linear',
-    pauseOnHover: true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: { slidesToShow: 4 }
-      },
-      {
-        breakpoint: 768,
-        settings: { slidesToShow: 3 }
-      },
-      {
-        breakpoint: 480,
-        settings: { slidesToShow: 2 }
-      }
-    ]
-  };
-
-  const brands = [
-    { name: "Castrol", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Castrol_logo_2023.svg/2560px-Castrol_logo_2023.svg.png" },
-    { name: "Ipiranga", logo: "https://portal.ipiranga/imagens/meta-tag-ipiranga.png" },
-    { name: "ACDelco", logo: "https://w7.pngwing.com/pngs/399/786/png-transparent-acdelco-hd-logo.png" },
-    { name: "Petronas", logo: "https://cdn.pli-petronas.com/s3fs-public/img_PETRONAS_Lubricants_International.png?VersionId=h0CkkEGuHmnHR9aH4K4fx84vg.s4obep" },
-    { name: "Havoline Texaco", logo: "https://i.pinimg.com/736x/f9/b6/6a/f9b66a6cdd65446078ab5cb0bdafd299.jpg" },
-    { name: "Mobil", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnES36d0cO19LxN57TLh3P08KY9A-87AaJSQ&s" },
-    { name: "Shell", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEbNHNiFm8s0Qdcq1oBo1ywO6Wqmz6_Tm0XA&s" },
-    { name: "Tecfil", logo: "https://www.tecfil.com.br/wp-content/themes/tecfill_theme/img/logo.svg" }, // Tecfil not found on Wikimedia, keeping original but monitoring
-    { name: "Wega", logo: "https://media.licdn.com/dms/image/v2/C4D0BAQFNIJ1fJtjUbQ/company-logo_200_200/company-logo_200_200/0/1630537603350/wega_motors_brasil_logo?e=2147483647&v=beta&t=oGWAad_qQwmmSnt5pOcc0ZoDSmSNu63SKs6aDP1YSXQ" },
-    { name: "Bardahl", logo: "https://bardahl.com.br/wp-content/uploads/2022/03/logoRodape.png" },
-    { name: "Mopar", logo: "https://www.moparoficial.com.br/content/dam/mopar/home/banner/logo-mopar.svg" },
-    { name: "Motorcraft", logo: "https://www.reparadorford.com.br/img/motorcraft/logo-motorcraft.png" },
-    { name: "Radnaq", logo: "https://www.radnaq.com.br/assets/img/logo.png" },
-    { name: "Mahle", logo: "https://images.cws.digital/produtos/gg/77/87/pistao-mahle-metal-leve-com-bronzinas-025-standard-automotivo-6468777-1748756792296.png" },
-    { name: "Mann Filter", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-uY_tiR0CZeXvIfMIJ_5LuiOhYtHxqqJ9Bw&s" }
-  ];
 
   return (
     <div className="page-verde">
@@ -71,25 +26,39 @@ const OleosFiltros = () => {
 
       {/* 1. Banner Principal */}
       <section className="of-banner">
-        <video autoPlay loop muted playsInline className="of-video-bg desktop-only">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="of-video-bg desktop-only"
+          poster="https://res.cloudinary.com/dlyeywiwk/video/upload/f_auto,q_auto,so_0/v1764821682/wl0kcac1fvfhm2rgdeja.jpg"
+        >
             <source src={bannerVideoDesktop} type="video/mp4" />
         </video>
-        <video autoPlay loop muted playsInline className="of-video-bg mobile-only">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="of-video-bg mobile-only"
+          poster="https://res.cloudinary.com/dlyeywiwk/video/upload/f_auto,q_auto,so_0,w_800/v1764822609/fokcyaolucoogjmhusx1.jpg"
+        >
             <source src={bannerVideoMobile} type="video/mp4" />
         </video>
       </section>
 
-      <div className="container-claro" style={{marginTop: '2rem', textAlign: 'center'}}>
+      <div className="container-claro of-container-top">
           <h1 className="titulo-claro">Troca Completa de Óleo e Filtros</h1>
           <p className="subtitulo-claro">A Saúde do Seu Veículo Começa Aqui!</p>
-          <a href="/orcamento" className="button" style={{marginBottom: '2rem', display: 'inline-block'}}>Solicite já sua troca.</a>
+          <a href="/orcamento" className="button of-cta-button">Solicite já sua troca.</a>
 
           <table className="of-comparison-table">
             <thead>
               <tr>
                 <th>Serviço</th>
                 <th>Garagem Comum</th>
-                <th>Zero 20 Garage</th>
+                <th>Detalhes</th>
               </tr>
             </thead>
             <tbody>
@@ -112,28 +81,28 @@ const OleosFiltros = () => {
           </table>
       </div>
 
-      <div className="container-claro" style={{textAlign: 'center'}}>
+      <div className="container-claro of-container-center">
         {/* 2. Quem Somos e Logos */}
-        <section className="of-logos-section" style={{justifyContent: 'center', marginBottom: '2rem'}}>
-          <img src={logoGarage} alt="Zero 20 Garage" className="of-logo-img" style={{height: '100px'}} />
-          <h2 style={{color: '#fff', margin: '0 1rem', fontSize: '2rem'}}>+</h2>
-          <div style={{textAlign: 'center'}}>
-            <img src={logoGarage} alt="Zero 20 Óleos" className="of-logo-img" style={{filter: 'hue-rotate(90deg)', height: '100px'}} />
-            <p style={{fontSize: '1rem', color: '#4CAF50', marginTop: '0.5rem'}}>Zero 20 Óleos</p>
+        <section className="of-logos-section">
+          <img src={logoGarage} alt="Zero 20 Garage" className="of-logo-img of-logo-img-large" width="200" height="100" />
+          <h2 className="of-plus-sign">+</h2>
+          <div className="of-logo-wrapper">
+            <img src={logoGarage} alt="Zero 20 Óleos" className="of-logo-img of-logo-oleos" width="200" height="100" />
+            <p className="of-logo-text"></p>
           </div>
         </section>
 
         <section className="of-intro-section">
-          <h2 className="titulo-claro" style={{fontSize: '2.5rem', marginBottom: '2rem'}}>A Zero 20 Garage também é <br /> <span style={{color: '#4CAF50'}}>Zero 20 Óleos e Filtros.</span></h2>
-          <div className="of-intro-text" style={{textAlign: 'center', maxWidth: '900px', margin: '0 auto', fontSize: '1.1rem', lineHeight: '1.8'}}>
-            <p style={{marginBottom: '1.5rem'}}>
-              Somos uma empresa especializada em <strong style={{color: '#4CAF50'}}>serviços automotivos</strong> com <strong style={{color: '#4CAF50'}}>foco total na troca completa de óleos e filtros</strong>.
+          <h2 className="titulo-claro of-intro-title">A Zero 20 Garage também é <br /> <span className="of-text-green">Zero 20 Óleos e Filtros.</span></h2>
+          <div className="of-intro-text of-intro-text-container">
+            <p className="of-mb-1-5">
+              Somos uma empresa especializada em <strong className="of-text-green">serviços automotivos</strong> com <strong className="of-text-green">foco total na troca completa de óleos e filtros</strong>.
               Entendemos que a manutenção preventiva é o coração da longevidade do seu veículo.
             </p>
             <p>
-              <strong style={{color: '#4CAF50', fontSize: '1.2rem'}}>O que fazemos:</strong> A execução do nosso serviço vai além da simples substituição. Realizamos a troca do óleo lubrificante e de
-              <strong style={{color: '#4CAF50'}}> TODOS os filtros</strong> (óleo, ar, combustível e cabine), garantindo que seu motor respire melhor, consuma menos e mantenha a cabine limpa.
-              Trabalhamos com todas as <strong style={{color: '#4CAF50'}}>viscosidades</strong> necessárias, atendendo a <strong style={{color: '#4CAF50'}}>100% dos veículos de linha leve</strong> presentes no mercado.
+              <strong className="of-text-green-lg">O que fazemos:</strong> A execução do nosso serviço vai além da simples substituição. Realizamos a troca do óleo lubrificante e de
+              <strong className="of-text-green"> TODOS os filtros</strong> (óleo, ar, combustível e cabine), garantindo que seu motor respire melhor, consuma menos e mantenha a cabine limpa.
+              Trabalhamos com todas as <strong className="of-text-green">viscosidades</strong> necessárias, atendendo a <strong className="of-text-green">100% dos veículos de linha leve</strong> presentes no mercado.
             </p>
           </div>
 
@@ -156,28 +125,19 @@ const OleosFiltros = () => {
 
         {/* 4. Carrossel de Marcas */}
         <section className="of-carousel-section">
-          <h2 className="titulo-claro">Trabalhamos Apenas com Marcas de Confiança</h2>
-          <Slider {...carouselSettings}>
-            {brands.map((brand, index) => (
-              <div key={index} className="of-brand-card">
-                <div className="of-brand-logo-wrapper">
-                  <img src={brand.logo} alt={brand.name} className="of-brand-logo" />
-                </div>
-              </div>
-            ))}
-          </Slider>
+          <BrandCarousel brands={oilBrands} title="Trabalhamos Apenas com Marcas de Confiança" variant="green" />
         </section>
 
         {/* 5. Contato e Oficina */}
         <section id="contato" className="of-workshop-section">
-          <img src={workshopPhoto} alt="Nossa Oficina" className="of-workshop-img" />
+          <img src={workshopPhoto} alt="Nossa Oficina" className="of-workshop-img" loading="lazy" width="1200" height="800" />
           <div className="of-workshop-overlay">
-            <h2 className="titulo-claro" style={{textAlign: 'left'}}>Nossa Estrutura</h2>
+            <h2 className="titulo-claro of-workshop-title">Nossa Estrutura</h2>
             <p>Conheça o local onde cuidamos do seu carro com a máxima atenção e tecnologia.</p>
           </div>
         </section>
 
-        <div style={{marginTop: '3rem'}}>
+        <div className="of-contato-wrapper">
             <ContatoCta />
         </div>
       </div>

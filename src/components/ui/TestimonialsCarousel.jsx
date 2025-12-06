@@ -110,7 +110,7 @@ const TestimonialsCarousel = () => {
         <div className="testimonial-modal" onClick={() => setSelectedTestimonial(null)}>
           <div className="testimonial-modal-content" onClick={e => e.stopPropagation()}>
             <div className="google-review-header">
-              <img src={selectedTestimonial.profilePhoto} alt={selectedTestimonial.name} className="google-user-photo" />
+              <img src={selectedTestimonial.profilePhoto} alt={selectedTestimonial.name} className="google-user-photo" loading="lazy" />
               <div className="google-user-info">
                 <span className="google-user-name">{selectedTestimonial.name}</span>
                 <span className="google-review-date">{selectedTestimonial.date}</span>

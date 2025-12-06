@@ -16,6 +16,7 @@ const Layout = ({ children }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [location.pathname]);
+
   useEffect(() => {
     setLoading(true);
     setFadeOut(false);

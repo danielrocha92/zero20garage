@@ -7,6 +7,7 @@ import {FaCogs, FaTools, FaCheckCircle, FaCreditCard } from 'react-icons/fa';
 import { MdEngineering } from 'react-icons/md';
 import { TbTruckDelivery, TbSettingsSearch } from 'react-icons/tb';
 import { Helmet } from 'react-helmet-async';
+import { carBrands } from '../../data/brands';
 
 // Lazy load heavy components
 const TestimonialsCarousel = lazy(() => import('../../components/ui/TestimonialsCarousel'));
@@ -246,7 +247,7 @@ function Home() {
     {/* Marcas que Atendemos */}
       <div className='highlight-item home-highlight-item' style={{background: 'transparent', boxShadow: 'none'}}>
         <Suspense fallback={<div>Carregando marcas...</div>}>
-          <BrandCarousel />
+          <BrandCarousel brands={carBrands} />
         </Suspense>
       </div>
 
