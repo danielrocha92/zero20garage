@@ -26,8 +26,8 @@ function DynamicHeader({ messages, intervalTime = 4500, page = '' }) {
         mobile: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto,w_800/v1763429487/home_k6ug8o.jpg'
       };
       case 'sobre': return {
-        desktop: 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1764871614/Design_sem_nome_3_qnkmp0.png',
-        mobile: 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1764871165/Design_sem_nome_2_dhutfq.png'
+        desktop: 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1765200812/IMG_3062_aldoim.jpg',
+        mobile: 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1765200812/IMG_3061_ich3gp.jpg'
       };
       case 'servicos': return 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429508/servicos_gblbyy.jpg';
       case 'orcamento': return {
