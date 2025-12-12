@@ -13,7 +13,7 @@ import Slider from 'react-slick';
 import { FaBullseye, FaEye, FaStar } from 'react-icons/fa';
 
 // Importando imagens
-const fachada = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429481/fachada_jrdazc.jpg';
+const fachada = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1765506349/Gemini_Generated_Image_2pi18x2pi18x2pi1_iqwmam.png';
 
 const settings = {
   dots: true,                // bolinhas de navegação
