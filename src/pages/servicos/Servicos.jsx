@@ -71,8 +71,8 @@ const Servicos = () => {
                                         <div className="icon-wrapper">
                                             {service.icon}
                                         </div>
-                                        <h3 className='titulo-claro service-item__title'>{service.title}</h3>
-                                        <p className="subtitulo-claro service-item__description">{service.description}</p>
+                                        <h3 className='service-item__title'>{service.title}</h3>
+                                        <p className="service-item__description">{service.description}</p>
                                         <span className="service-item-link">
                                             Saiba Mais
                                         </span>

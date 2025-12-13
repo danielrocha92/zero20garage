@@ -102,8 +102,10 @@
   text-transform: uppercase;
   font-size: 0.9rem;
   color: #ffffff;
-  cursor: pointer; /* Adicionado para indicar que é clicável */
-  user-select: none; /* Impede a seleção de texto */
+  cursor: pointer;
+  /* Adicionado para indicar que é clicável */
+  user-select: none;
+  /* Impede a seleção de texto */
 }
 
 .tabela-light th:hover {
@@ -145,9 +147,20 @@
   text-transform: uppercase;
 }
 
-.status-tag.amarelo { background-color: #fbc02d; color: #222; }
-.status-tag.verde { background-color: #43a047; color: #fff; }
-.status-tag.vermelho { background-color: #e53935; color: #fff; }
+.status-tag.amarelo {
+  background-color: #fbc02d;
+  color: #222;
+}
+
+.status-tag.verde {
+  background-color: #43a047;
+  color: #fff;
+}
+
+.status-tag.vermelho {
+  background-color: #e53935;
+  color: #fff;
+}
 
 /* ====== Cards Mobile ====== */
 .historico-mobile {
@@ -160,7 +173,7 @@
   border: 1px solid #444;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
   background: #333;
   font-size: 0.9rem;
   transition: transform 0.2s ease;
@@ -168,7 +181,9 @@
   color: #f0f0f0;
 }
 
-.orcamento-card:hover { transform: translateY(-2px); }
+.orcamento-card:hover {
+  transform: translateY(-2px);
+}
 
 .card-header {
   background: #383838;
@@ -212,15 +227,16 @@
   border-radius: 6px;
   margin: 0.4rem 0;
   cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 /* Ações dos cards */
 .card-acoes {
   display: flex;
-  justify-content: flex-end;
-  gap: 0.4rem;
-  margin-top: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
 .action-btn {
@@ -236,13 +252,50 @@
   color: #fff;
 }
 
-.view-btn { background-color: #2196f3; }
-.edit-btn { background-color: #ffc107; color: #222; }
-.delete-btn { background-color: #e53935; }
+.view-btn {
+  background-color: #2196f3 !important;
+  box-shadow: 0 4px 6px rgba(33, 150, 243, 0.3) !important;
+}
 
-.view-btn:hover { background-color: #1976d2; }
-.edit-btn:hover { background-color: #e0a800; }
-.delete-btn:hover { background-color: #c62828; }
+.edit-btn {
+  background-color: #ffc107 !important;
+  color: #222 !important;
+  box-shadow: 0 4px 6px rgba(255, 193, 7, 0.3) !important;
+}
+
+.delete-btn {
+  background-color: #e53935 !important;
+  box-shadow: 0 4px 6px rgba(229, 57, 53, 0.3) !important;
+}
+
+.view-btn:hover {
+  background-color: #1976d2 !important;
+  box-shadow: 0 6px 12px rgba(33, 150, 243, 0.4) !important;
+  transform: translateY(-2px);
+}
+
+.edit-btn:hover {
+  background-color: #e0a800 !important;
+  box-shadow: 0 6px 12px rgba(255, 193, 7, 0.4) !important;
+  transform: translateY(-2px);
+}
+
+.delete-btn:hover {
+  background-color: #c62828 !important;
+  box-shadow: 0 6px 12px rgba(229, 57, 53, 0.4) !important;
+  transform: translateY(-2px);
+}
+
+/* Override PainelOrcamentos global button styles inside current component */
+.historico-mobile .action-btn {
+  width: auto;
+  max-width: none;
+  flex: 1 1 auto;
+  min-width: 80px;
+  margin: 0;
+  box-shadow: none !important;
+  /* Reset shadow if needed or keep it distinct */
+}
 
 /* ====== Mensagens de status ====== */
 .loading-message,
@@ -259,6 +312,11 @@
 
 /* ====== Responsividade ====== */
 @media (max-width: 768px) {
-  .historico-desktop { display: none; }
-  .historico-mobile { display: block; }
+  .historico-desktop {
+    display: none;
+  }
+
+  .historico-mobile {
+    display: block;
+  }
 }

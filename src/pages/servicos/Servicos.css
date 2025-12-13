@@ -4,37 +4,39 @@
   /* 3 colunas no desktop */
   gap: 2rem;
   margin-top: 1rem;
+  --cor-destaque: var(--accent-color);
 }
 
 .service-item {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  /* Ensure content is spaced out */
-  padding: 2rem;
-  margin-bottom: 2rem;
-  gap: 1.5rem;
+  padding: 1.5rem;
   height: 100%;
-  /* Make cards equal height */
+
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 
   font-family: var(--fonte-texto);
   color: var(--branco);
   text-align: center;
-  /* Centralize text */
-
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  /* Less rounded corners */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-item .ctn-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
 }
 
 .service-item::before {
@@ -51,9 +53,9 @@
 }
 
 .service-item:hover {
-  /* Removed transform displacement */
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .service-item:hover::before {
@@ -67,22 +69,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   transition: all 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 80px;
+  height: 80px;
 }
 
 .service-item:hover .icon-wrapper {
   background: var(--cor-destaque);
   border-color: var(--cor-destaque);
-  transform: scale(1.1);
-  /* Removed rotation */
+  transform: scale(1.1) rotate(5deg);
   box-shadow: 0 0 20px var(--cor-destaque);
 }
 
 .service-icon {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   color: var(--cor-destaque);
   transition: color 0.3s ease;
 }
@@ -94,13 +97,13 @@
 /* Ajuste de tamanho dos títulos e subtítulos */
 .servicos-page-title {
   font-size: 2.2rem !important;
-  /* Reduzido de 3rem */
+  margin-bottom: 2rem;
 }
 
 .service-item__title {
-  font-size: 1.5rem !important;
-  color: #fff;
-  margin-bottom: 0.5rem;
+  font-size: 1.4rem !important;
+  color: var(--cor-destaque);
+  margin-bottom: 1rem;
   font-family: var(--fonte-titulo);
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -108,7 +111,7 @@
 
 .service-item__description {
   font-size: 1rem !important;
-  color: #ccc;
+  color: var(--texto-secundario);
   line-height: 1.6;
   margin-bottom: 1.5rem;
   flex-grow: 1;
@@ -125,15 +128,14 @@
   background: transparent;
   border: 1px solid var(--cor-destaque);
   border-radius: 4px;
-  /* Rectangular button */
   transition: all 0.3s ease;
   margin-top: auto;
-  /* Push to bottom */
 }
 
 .service-item:hover .service-item-link {
   background: var(--cor-destaque);
-  box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+  box-shadow: 0 5px 15px rgba(197, 4, 4, 0.4);
+  transform: translateY(-2px);
 }
 
 /* Responsividade: Ajustando para telas menores */

@@ -136,11 +136,12 @@
   background-color: #fdfdfd;
 }
 
-.container-claro {
+.blog-container-light {
   max-width: 720px;
   margin: 0 auto;
   padding: 1rem;
   background-color: #ffffff;
+  color: #333;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
   border-radius: 12px;
 }
@@ -265,4 +266,133 @@
     padding: 0.8rem 1.8rem;
     font-size: 1rem;
   }
+}
+
+/* ===== Blog Article Light Theme (Institucional Style) ===== */
+.blog-page-light {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background: #f5f5f5;
+  /* Fundo claro */
+  color: #333;
+  /* Letra escura */
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-container-light {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  padding: 3rem;
+  margin: 0 auto;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  max-width: 1200px;
+  width: 100%;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.blog-section {
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.blog-title-light {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #333;
+  /* Escuro */
+  margin-bottom: 1.5rem;
+  text-align: center;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.blog-subtitle-light {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  border-left: 4px solid var(--accent-color);
+  display: flex;
+  align-items: center;
+}
+
+.blog-paragraph-light {
+  font-size: 1.05rem;
+  color: #555;
+  /* Cinza escuro para leitura */
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+.blog-list-light {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.blog-list-light li {
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  position: relative;
+  color: #555;
+  font-size: 1.05rem;
+}
+
+.blog-list-light li::before {
+  content: "•";
+  color: var(--cor-destaque);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* Responsividade igual ao institucional */
+@media (max-width: 600px) {
+  .blog-container-light {
+    padding: 1.5rem;
+  }
+
+  .blog-title-light {
+    font-size: 2rem;
+  }
+
+
+  .blog-subtitle-light {
+    font-size: 1.5rem;
+  }
+}
+
+/* ===== New Utility Classes to Replace Inline Styles ===== */
+.blog-meta-info {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #888;
+}
+
+.blog-intro-text {
+  font-style: italic;
+  text-align: center;
+}
+
+.blog-figure-container {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.blog-featured-image {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.blog-article-footer {
+  margin-top: 3rem;
 }
