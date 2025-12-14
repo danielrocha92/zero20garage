@@ -189,7 +189,8 @@ h6 {
   letter-spacing: 0.5px;
   text-decoration: none;
   margin: 0 auto;
-  width: auto;
+  width: fit-content;
+  white-space: nowrap;
   display: inline-block;
 }
 
