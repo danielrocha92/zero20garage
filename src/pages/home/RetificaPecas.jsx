@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import DynamicHeader from '../../components/ui/DynamicHeader';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
@@ -12,6 +13,11 @@ const RetificaPecas = () => {
   return (
     <div className="institucional-page">
       <DynamicHeader messages={messages} />
+      <Helmet>
+        <title>Retífica de Peças e Usinagem de Precisão | Zero 20 Garage</title>
+        <meta name="description" content="Serviço de usinagem e retífica de precisão. Mandrilamento, brunimento e plaina de cabeçotes em Mairiporã." />
+        <link rel="canonical" href="https://zero20garage.com.br/Home/Retífica-das-Peças" />
+      </Helmet>
       <Breadcrumbs />
       <div className="institucional-container">
         <section className="institucional-section">

@@ -1,27 +1,152 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Páginas Principais -->
   <url>
-    <loc>https://zero20garage.vercel.app/</loc>
+    <loc>https://zero20garage.com.br/</loc>
+    <lastmod>2025-12-14</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://zero20garage.vercel.app/sobre</loc>
+    <loc>https://zero20garage.com.br/sobre</loc>
+    <lastmod>2025-12-14</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zero20garage.vercel.app/servicos</loc>
+    <loc>https://zero20garage.com.br/servicos</loc>
+    <lastmod>2025-12-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/orcamento</loc>
+    <lastmod>2025-12-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/contato</loc>
+    <lastmod>2025-12-14</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zero20garage.vercel.app/contato</loc>
+    <loc>https://zero20garage.com.br/blog</loc>
+    <lastmod>2025-12-14</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://zero20garage.vercel.app/blog</loc>
-    <priority>0.6</priority>
+    <loc>https://zero20garage.com.br/oleos-filtros</loc>
+    <lastmod>2025-12-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Detalhes de Serviços -->
+  <url>
+    <loc>https://zero20garage.com.br/servicos/mp</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zero20garage.vercel.app/orcamento</loc>
+    <loc>https://zero20garage.com.br/servicos/dp</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/servicos/tp</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/servicos/td</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/servicos/cp</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Artigos do Blog -->
+  <url>
+    <loc>https://zero20garage.com.br/blog/custo-retifica</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/blog/manutencao-de-motores</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/blog/retifica-parcial-ou-completa</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/blog/sinais-retifica</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/blog/trocar-motor</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/blog/vale-a-pena-retificar</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Páginas de Processo (Técnicas) -->
+  <url>
+    <loc>https://zero20garage.com.br/Home/diagnostico</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/Home/Remocao-do-Motor</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/Home/Desmontagem-T%C3%A9cnica</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/Home/Limpeza-das-Pe%C3%A7as</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/Home/Inspe%C3%A7%C3%A3o-e-Medi%C3%A7%C3%A3o</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/Home/Ret%C3%ADfica-das-Pe%C3%A7as</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/Home/Montagem-e-Sincronismo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/Home/Instala%C3%A7%C3%A3o-no-Ve%C3%ADculo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zero20garage.com.br/Home/Teste-de-Funcionamento-e-Rodagem-do-Motor-do-Ve%C3%ADculo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

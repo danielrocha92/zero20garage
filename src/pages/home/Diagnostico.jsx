@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import DynamicHeader from '../../components/ui/DynamicHeader';
@@ -41,6 +42,11 @@ const LAST_UPDATED = '02 de dezembro de 2025'; // atualizado manualmente quando 
   return (
     <div className="institucional-page">
       <DynamicHeader messages={messages} />
+      <Helmet>
+        <title>Diagnóstico de Motores e Avaliação Técnica | Zero 20 Garage</title>
+        <meta name="description" content="Diagnóstico preciso de motores com scanners OBD e metrologia avançada. Identificamos falhas em blocos, cabeçotes e virabrequins em Mairiporã." />
+        <link rel="canonical" href="https://zero20garage.com.br/Home/diagnostico" />
+      </Helmet>
       <Breadcrumbs />
 
       <div className="institucional-container">

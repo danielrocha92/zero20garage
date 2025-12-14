@@ -2,6 +2,7 @@ import React from 'react';
 import '../../styles/Blog.css';
 import DynamicHeader from '../../components/ui/DynamicHeader';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
+import { Helmet } from 'react-helmet-async';
 import BlogShare from '../../components/BlogShare';
 const trocarMotorImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429521/trocar-motor_lqzrhf.jpg';
 
@@ -16,6 +17,11 @@ const TrocarMotor = () => {
   return (
     <div className="blog-page-light">
       <DynamicHeader messages={messages} />
+      <Helmet>
+        <title>Retificar ou Trocar o Motor? Guia Completo | Zero 20 Garage</title>
+        <meta name="description" content="Saiba quando compensa retificar o motor ou fazer a troca completa. Análise de custos e vantagens para seu veículo em Mairiporã." />
+        <link rel="canonical" href="https://zero20garage.com.br/blog/trocar-motor" />
+      </Helmet>
       <Breadcrumbs />
 
       <div className="blog-container-light">

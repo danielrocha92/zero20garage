@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import './Orcamento.css';
 import DynamicHeader from '../../components/ui/DynamicHeader';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
@@ -95,6 +96,11 @@ function Orcamento() {
   return (
     <div className="page-escuro">
       <DynamicHeader page="orcamento" messages={messages} />
+      <Helmet>
+        <title>Solicite um Orçamento | Zero 20 Garage - Retífica</title>
+        <meta name="description" content="Solicite seu orçamento online para retífica de motores e serviços mecânicos em Mairiporã. Atendimento rápido e personalizado." />
+        <link rel="canonical" href="https://zero20garage.com.br/orcamento" />
+      </Helmet>
       <Breadcrumbs />
 
 

@@ -1,3 +1,3 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+Sitemap: https://zero20garage.com.br/sitemap.xml

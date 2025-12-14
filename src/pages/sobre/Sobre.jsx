@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 import './Sobre.css';
 import "slick-carousel/slick/slick.css";
@@ -72,6 +73,11 @@ function Sobre() {
     <div className="page-escuro">
 
       <DynamicHeader page="sobre" messages={messages} />
+      <Helmet>
+        <title>Sobre Nós | Zero 20 Garage - Retífica em Mairiporã</title>
+        <meta name="description" content="Conheça a história da Zero 20 Garage, oficina líder em retífica de motores em Mairiporã. Tradição familiar e tecnologia de ponta com Francisco Borges e Rodney Santos." />
+        <link rel="canonical" href="https://zero20garage.com.br/sobre" />
+      </Helmet>
       <Breadcrumbs />
 
 

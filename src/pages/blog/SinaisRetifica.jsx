@@ -2,6 +2,7 @@ import React from 'react';
 import '../../styles/Blog.css';
 import DynamicHeader from '../../components/ui/DynamicHeader';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
+import { Helmet } from 'react-helmet-async';
 import BlogShare from '../../components/BlogShare';
 const funilariaImage = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429515/sinais-retifica_kcy7mm.jpg';
 
@@ -16,6 +17,11 @@ const SinaisRetifica = () => {
   return (
     <div className="blog-page-light">
       <DynamicHeader messages={messages} />
+      <Helmet>
+        <title>Sinais que o Motor Precisa de Retífica | Zero 20 Garage</title>
+        <meta name="description" content="Fumaça, ruídos e perda de potência? Conheça os principais sinais que indicam a necessidade de retificar o motor do seu carro em Mairiporã." />
+        <link rel="canonical" href="https://zero20garage.com.br/blog/sinais-retifica" />
+      </Helmet>
       <Breadcrumbs />
 
       <div className="blog-container-light">

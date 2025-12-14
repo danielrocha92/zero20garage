@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import DynamicHeader from '../../components/ui/DynamicHeader';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
@@ -12,6 +13,11 @@ const LimpezaPecas = () => {
   return (
     <div className="institucional-page">
       <DynamicHeader messages={messages} />
+      <Helmet>
+        <title>Limpeza Química de Peças de Motor | Zero 20 Garage</title>
+        <meta name="description" content="Banho químico especializado para limpeza de motores, removendo borras de óleo e carbonização para uma retífica perfeita." />
+        <link rel="canonical" href="https://zero20garage.com.br/Home/Limpeza-das-Peças" />
+      </Helmet>
       <Breadcrumbs />
       <div className="institucional-container">
         <section className="institucional-section">

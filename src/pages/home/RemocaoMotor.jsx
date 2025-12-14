@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import DynamicHeader from '../../components/ui/DynamicHeader';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
@@ -12,6 +13,11 @@ const RemocaoMotor = () => {
   return (
     <div className="institucional-page">
       <DynamicHeader messages={messages} />
+      <Helmet>
+        <title>Remoção Técnica de Motor | Zero 20 Garage</title>
+        <meta name="description" content="Serviço especializado de remoção de motor com segurança para retífica completa. Atendemos veículos nacionais e importados em Mairiporã." />
+        <link rel="canonical" href="https://zero20garage.com.br/Home/Remocao-do-Motor" />
+      </Helmet>
       <Breadcrumbs />
       <div className="institucional-container">
         <section className="institucional-section">

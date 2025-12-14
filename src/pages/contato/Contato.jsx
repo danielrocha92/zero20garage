@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import DynamicHeader from '../../components/ui/DynamicHeader';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 
@@ -24,6 +25,11 @@ function Contato() {
   return (
     <div className="page-escuro">
     <DynamicHeader page="contato" messages={messages} />
+    <Helmet>
+        <title>Fale Conosco | Zero 20 Garage - Oficna em Mairiporã</title>
+        <meta name="description" content="Entre em contato com a Zero 20 Garage. Telefone, WhatsApp e endereço da melhor oficina de retífica de motores de Mairiporã." />
+        <link rel="canonical" href="https://zero20garage.com.br/contato" />
+    </Helmet>
     <Breadcrumbs />
 
 

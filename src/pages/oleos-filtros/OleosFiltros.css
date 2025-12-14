@@ -148,12 +148,12 @@
 }
 
 .of-logo-img-large {
-    height: 100px;
+    height: 100%;
 }
 
 .of-logo-oleos {
-    filter: hue-rotate(90deg);
-    height: 100px;
+    filter: hue-rotate(90deg) drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+    height: 100%;
 }
 
 .of-logo-img:hover {
@@ -300,7 +300,10 @@
     }
 
     .of-logo-img {
-        height: 60px;
+
+        height: 100px;
+        width: auto;
+        max-width: 100px;
     }
 
     .of-comparison-table {

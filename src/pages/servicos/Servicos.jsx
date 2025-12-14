@@ -53,7 +53,8 @@ const Servicos = () => {
                 <title translate="no" className='subtitle-claro'>
                     Serviços de Retífica de Motores e Manutenção | Zero20 Garage
                 </title>
-                <meta name="description" content="Oferecemos serviços especializados" />
+                <meta name="description" content="Serviços completos de retífica de motores, cabeçotes, usinagem, solda e manutenção preventiva em Mairiporã. Atendemos linha leve e pesada com garantia." />
+                <link rel="canonical" href="https://zero20garage.com.br/servicos" />
             </Helmet>
 
             <div className="page-escuro">
