@@ -14,9 +14,11 @@
     <li><strong>Node.js &amp; Express</strong> &mdash; Backend robusto para a API de orçamentos.</li>
     <li><strong>HTML5</strong> &mdash; Estrutura semântica e acessível.</li>
     <li><strong>CSS3</strong> &mdash; Design responsivo com estilização modular.</li>
-    <li><strong>Firebase (Firestore)</strong> &mdash; Banco de dados NoSQL para interatividade do blog (views, likes).</li>
+    <li><strong>Firebase (Firestore & Storage)</strong> &mdash; Banco de dados e armazenamento de imagens para orçamentos.</li>
     <li><strong>Framer Motion</strong> &mdash; Animações e transições de página fluidas.</li>
-    <li><strong>jsPDF &amp; XLSX</strong> &mdash; Exportação de dados para PDF e Excel.</li>
+    <li><strong>React Helmet Async</strong> &mdash; Otimização avançada de SEO e Meta Tags.</li>
+    <li><strong>Google Maps API</strong> &mdash; Integração de mapas com avaliações.</li>
+    <li><strong>jsPDF &amp; XLSX</strong> &mdash; Exportação de dados e orçamentos para PDF e Excel.</li>
 </ul>
 
 <hr>
@@ -176,10 +178,16 @@ npm start
     <li>Exportação de relatórios em PDF e Excel.</li>
 </ul>
 
-<p>✅ <strong>Blog Interativo:</strong></p>
-<ul>
     <li>Integração com Firebase para contagem de visualizações e curtidas.</li>
+    <li>Padronização visual com CSS Modules (sem estilos inline).</li>
     <li>Componente de compartilhamento em redes sociais.</li>
+</ul>
+
+<p>✅ <strong>SEO & Visibilidade (Novo):</strong></p>
+<ul>
+    <li>Dados estruturados (Schema.org) para Local Business (Google Maps).</li>
+    <li>Preload de imagens LCP para performance mobile e desktop.</li>
+    <li>Open Graph e Twitter Cards configurados para redes sociais.</li>
 </ul>
 
 <p>✅ <strong>Experiência de Usuário Aprimorada:</strong></p>
@@ -254,10 +262,9 @@ Developer Web Full-Stack apaixonado por criar experiências digitais impactantes
 <p>⸻</p>
 
 <h2>🚧 Próximos Passos</h2>
-<ul>
     <li>Implementar testes unitários com <strong>Jest</strong> e <strong>React Testing Library</strong>.</li>
-    <li>Otimizar o SEO técnico com <code>sitemap.xml</code> e <code>robots.txt</code>.</li>
-    <li>Refatorar componentes grandes para hooks customizados, melhorando a legibilidade.</li>
+    <li>Expandir automação de testes E2E (End-to-End).</li>
+    <li>Refatorar componentes grandes para hooks customizados.</li>
 </ul>
 
 <p>⸻</p>
