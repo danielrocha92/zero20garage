@@ -176,8 +176,11 @@ npm start
     <li>Histórico de orçamentos com paginação infinita.</li>
     <li>Upload de imagens associadas a cada orçamento.</li>
     <li>Exportação de relatórios em PDF e Excel.</li>
+    <li><strong>Novo:</strong> Módulo de Termo de Garantia com geração de certificados em PDF.</li>
 </ul>
 
+<p>✅ <strong>Blog e Conteúdo:</strong></p>
+<ul>
     <li>Integração com Firebase para contagem de visualizações e curtidas.</li>
     <li>Padronização visual com CSS Modules (sem estilos inline).</li>
     <li>Componente de compartilhamento em redes sociais.</li>

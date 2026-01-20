@@ -432,6 +432,10 @@ const PainelOrcamentos = () => {
                                         <FaFilePdf size={40} color="red" />
                                         <span>Exportar PDF</span>
                                     </div>
+                                    <div className="card-option" onClick={() => navigate('/termo-garantia')}>
+                                        <FaFilePdf size={40} color="#007bff" />
+                                        <span>Termo Garantia</span>
+                                    </div>
                                     <div className="card-option" onClick={handleLogout}>
                                         <FaSignOutAlt size={40} color="gray" />
                                         <span>Sair</span>
