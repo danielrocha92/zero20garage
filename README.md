@@ -25,11 +25,12 @@ Desenvolvido para representar a excelência técnica da **Zero 20 Garage**, inte
 *   **Lucide React & React Icons** — Conjunto de ícones moderno e consistente.
 
 ### Backend & Serviços
-*   **Firebase (Firestore & Storage)** — Banco de dados em tempo real para orçamentos e armazenamento de evidências fotográficas dos veículos.
+*   **Firebase (Firestore & Storage)** — Banco de dados em tempo real para orçamentos, gerenciamento de mídias de marketing e armazenamento de evidências fotográficas dos veículos.
 *   **Node.js & Express** — Backend especializado para processamento de lógica de negócio e geração de relatórios.
 
 ### Ferramentas de Utilitário
 *   **jsPDF & XLSX** — Geração dinâmica de orçamentos técnicos em PDF e exportação de dados para Excel.
+*   **Swiper.js** — Carrosséis modernos com efeitos Coverflow e Fade para banners de marketing e headers dinâmicos.
 *   **React Helmet Async** — Otimização técnica de SEO para busca local e autoridade de marca.
 *   **Google Maps API** — Visualização de localização e prova social via avaliações.
 
@@ -42,7 +43,11 @@ O painel admin foi reprojetado para maximizar a produtividade no ambiente de ofi
 *   **Navegação Otimizada:** Menu superior intuitivo que libera espaço para visualização de tabelas e formulários complexos.
 *   **Motor de Orçamentos:** Ferramenta avançada para criação de orçamentos de Motores e Cabeçotes, com suporte a itens dinâmicos e cálculos automáticos.
 *   **Gestão de Mídia:** Upload direto de fotos do estado dos motores para anexar aos orçamentos, aumentando a transparência com o cliente.
-*   **Painel Marketing Dinâmico:** Gestão completa de conteúdo visual (imagens e vídeos) no formato de carrossel 3D para múltiplas páginas do site (Home, Óleos, etc), com controle de exibição e links de destino diretamente pelo Admin.
+*   **Painel Marketing Dinâmico:** Gestão completa de conteúdo visual (imagens e vídeos) para todas as páginas do site, com:
+    *   **Cards agrupados por página** — Organização visual limpa com preview grande e mini-carrossel integrado.
+    *   **Banners substituíveis** — Admin pode trocar a imagem de fundo de qualquer página (exceto Home, que é fixa de sistema) diretamente pelo painel.
+    *   **Carrossel automático** — Ao adicionar 2+ banners na mesma página, um carrossel com efeito fade é ativado automaticamente no header correspondente.
+    *   **Indicadores visuais** — Badges de status (⚙️ Sistema, 📌 Padrão, 🎠 Carrossel Ativo) para gestão intuitiva.
 
 ### 👤 Área do Cliente
 *   **Consultas Simplificadas:** Interface limpa para os clientes visualizarem o status e detalhes de seus orçamentos.
@@ -69,7 +74,7 @@ zero20garage/
 │   ├── pages/             # Rotas (Home, Blog, Serviços, Admin, Cliente)
 │   ├── services/          # Camada de integração (Firebase, API)
 │   ├── styles/            # CSS Modules e Tokens de design
-│   ├── hooks/             # Lógica reutilizável (PDF, Auth, Hooks customizados)
+│   ├── hooks/             # Lógica reutilizável (PDF, Auth, useMarketingMedia, Hooks customizados)
 │   └── App.jsx            # Configuração principal da aplicação
 └── package.json           # Dependências e scripts do projeto
 ```
