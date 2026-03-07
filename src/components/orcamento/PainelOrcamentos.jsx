@@ -6,7 +6,7 @@ import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
-import { FaCogs, FaTools, FaHistory, FaFileExcel, FaFilePdf, FaSignOutAlt, FaPlusCircle, FaOilCan } from 'react-icons/fa';
+import { FaCogs, FaTools, FaHistory, FaFileExcel, FaFilePdf, FaSignOutAlt, FaPlusCircle, FaOilCan, FaBullhorn } from 'react-icons/fa';
 
 import OrcamentoCabecote from './OrcamentoCabecote';
 import MessageBox from '../ui/MessageBox';
@@ -14,6 +14,7 @@ import OrcamentoMotorCompleto from './OrcamentoMotorCompleto';
 import OrcamentoServicosDiversos from './OrcamentoServicosDiversos';
 import OrcamentoTrocaDeOleo from './OrcamentoTrocaDeOleo';
 import HistoricoOrcamentos from './HistoricoOrcamentos';
+import PainelMarketing from './PainelMarketing';
 import OrcamentoImpresso from './OrcamentoImpresso';
 import CustomModal from './CustomModal';
 import '../../styles/Modal.css';
@@ -369,6 +370,8 @@ const PainelOrcamentos = () => {
                 return <OrcamentoServicosDiversos {...props} />;
             case 'trocaDeOleo':
                 return <OrcamentoTrocaDeOleo {...props} />;
+            case 'marketing':
+                return <PainelMarketing showMessage={showMessageBox} />;
             default:
                 return <OrcamentoMotorCompleto {...props} />;
         }
@@ -411,6 +414,10 @@ const PainelOrcamentos = () => {
                                     <div className={`card-option ${tipo === 'trocaDeOleo' ? 'active' : ''}`} onClick={() => { setTipo('trocaDeOleo'); setEditingData(null); }}>
                                         <FaOilCan size={40} />
                                         <span>Troca de Óleo</span>
+                                    </div>
+                                    <div className={`card-option ${tipo === 'marketing' ? 'active' : ''}`} onClick={() => { setTipo('marketing'); setEditingData(null); }}>
+                                        <FaBullhorn size={40} />
+                                        <span>Painel Marketing</span>
                                     </div>
                                     <div className="card-option" onClick={scrollToHistorico}>
                                         <FaHistory size={40} />
@@ -461,23 +468,27 @@ const PainelOrcamentos = () => {
                             )}
                         </main>
 
-                        <div ref={historicoRef} />
-                        <HistoricoOrcamentos
-                            historico={sortedAndFilteredHistorico}
-                            onEditarOrcamento={handleEditarOrcamento}
-                            onViewBudget={handleViewBudget}
-                            onExcluirOrcamento={handleExcluirOrcamento}
-                            loading={loadingHistorico}
-                            searchTerm={searchTerm}
-                            onSearchChange={(e) => setSearchTerm(e.target.value)}
-                            requestSort={requestSort}
-                            sortConfig={sortConfig}
-                        />
+                        {tipo !== 'marketing' && (
+                            <>
+                                <div ref={historicoRef} />
+                                <HistoricoOrcamentos
+                                    historico={sortedAndFilteredHistorico}
+                                    onEditarOrcamento={handleEditarOrcamento}
+                                    onViewBudget={handleViewBudget}
+                                    onExcluirOrcamento={handleExcluirOrcamento}
+                                    loading={loadingHistorico}
+                                    searchTerm={searchTerm}
+                                    onSearchChange={(e) => setSearchTerm(e.target.value)}
+                                    requestSort={requestSort}
+                                    sortConfig={sortConfig}
+                                />
 
-                        {hasMore && !loadingHistorico && (
-                            <div className="load-more">
-                                <button onClick={() => fetchHistorico(false)}>Carregar Mais</button>
-                            </div>
+                                {hasMore && !loadingHistorico && (
+                                    <div className="load-more">
+                                        <button onClick={() => fetchHistorico(false)}>Carregar Mais</button>
+                                    </div>
+                                )}
+                            </>
                         )}
                     </>
                 )}

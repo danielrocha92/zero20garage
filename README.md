@@ -42,7 +42,7 @@ O painel admin foi reprojetado para maximizar a produtividade no ambiente de ofi
 *   **Navegação Otimizada:** Menu superior intuitivo que libera espaço para visualização de tabelas e formulários complexos.
 *   **Motor de Orçamentos:** Ferramenta avançada para criação de orçamentos de Motores e Cabeçotes, com suporte a itens dinâmicos e cálculos automáticos.
 *   **Gestão de Mídia:** Upload direto de fotos do estado dos motores para anexar aos orçamentos, aumentando a transparência com o cliente.
-*   **Controle de Banners:** Gestão de conteúdo visual (imagens e vídeos) da página inicial diretamente pelo admin.
+*   **Painel Marketing Dinâmico:** Gestão completa de conteúdo visual (imagens e vídeos) no formato de carrossel 3D para múltiplas páginas do site (Home, Óleos, etc), com controle de exibição e links de destino diretamente pelo Admin.
 
 ### 👤 Área do Cliente
 *   **Consultas Simplificadas:** Interface limpa para os clientes visualizarem o status e detalhes de seus orçamentos.
