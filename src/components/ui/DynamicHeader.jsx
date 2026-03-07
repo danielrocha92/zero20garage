@@ -34,7 +34,7 @@ function DynamicHeader({ messages, intervalTime = 4500, page = '' }) {
 
   // Buscar banners do Firebase (para todas as páginas)
   const activePage = page || 'default';
-  const { media: marketingBanners, loading } = useMarketingMedia(activePage);
+  const { media: marketingBanners } = useMarketingMedia(activePage);
 
   useEffect(() => {
     let index = 0;

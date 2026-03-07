@@ -228,9 +228,6 @@ const PainelMarketing = ({ showMessage }) => {
     showMessage && showMessage(`Preencha a URL para adicionar no banner: ${pagina}`);
   };
 
-  // Separar ativos para o carrossel
-  const activeMedia = mediaList.filter(m => m.ativo);
-
   return (
     <div className="pmkt-container">
 
