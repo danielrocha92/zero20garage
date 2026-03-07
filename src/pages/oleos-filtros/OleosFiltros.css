@@ -58,6 +58,30 @@
     z-index: 1;
 }
 
+/* Swiper no Banner OleosFiltros */
+.of-banner-swiper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.of-banner-swiper .swiper-slide {
+    width: 100%;
+    height: 100%;
+}
+
+.of-banner-swiper .swiper-slide video,
+.of-banner-swiper .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
 .of-banner-overlay {
     position: absolute;
     top: 0;

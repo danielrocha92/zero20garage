@@ -35,6 +35,32 @@
   /* Garante que nada vaze */
 }
 
+/* Swiper Carrossel de Background */
+.header-swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.header-swiper .swiper-slide {
+  width: 100%;
+  height: 100%;
+}
+
+.header-swiper .swiper-slide img,
+.header-swiper .swiper-slide video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.header-swiper .swiper-slide picture {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .header-background-wrapper picture {
   width: 100%;
   height: 100%;

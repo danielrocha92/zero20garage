@@ -2,6 +2,11 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { CheckCircle2, XCircle, Droplet, ShieldCheck, Award, Settings, ArrowRight } from 'lucide-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectFade } from 'swiper/modules';
+import useMarketingMedia from '../../hooks/useMarketingMedia';
+import 'swiper/css';
+import 'swiper/css/effect-fade';
 import './OleosFiltros.css';
 import ContatoCta from '../../components/ui/ContatoCta';
 import BrandCarousel from '../../components/ui/BrandCarousel';
@@ -12,6 +17,8 @@ const bannerVideoMobile = "https://res.cloudinary.com/dlyeywiwk/video/upload/v17
 const workshopPhoto = "https://images.unsplash.com/photo-1632823471565-1ec2a1ad4015?q=80&w=1200&auto=format&fit=crop";
 
 const OleosFiltros = () => {
+  const { media: extraBanners } = useMarketingMedia('oleos-filtros');
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -29,6 +36,8 @@ const OleosFiltros = () => {
     }
   };
 
+  const hasCarousel = extraBanners.length > 0;
+
   return (
     <div className="of-page-verde">
       <Helmet>
@@ -38,12 +47,49 @@ const OleosFiltros = () => {
 
       {/* 1. Banner Principal com Hero Content */}
       <section className="of-banner">
-        <video autoPlay loop muted playsInline className="of-video-bg desktop-only" poster="https://res.cloudinary.com/dlyeywiwk/video/upload/f_auto,q_auto,so_0/v1764821682/wl0kcac1fvfhm2rgdeja.jpg">
-          <source src={bannerVideoDesktop} type="video/mp4" />
-        </video>
-        <video autoPlay loop muted playsInline className="of-video-bg mobile-only" poster="https://res.cloudinary.com/dlyeywiwk/video/upload/f_auto,q_auto,so_0,w_800/v1764822609/fokcyaolucoogjmhusx1.jpg">
-          <source src={bannerVideoMobile} type="video/mp4" />
-        </video>
+        {hasCarousel ? (
+          <Swiper
+            modules={[Autoplay, EffectFade]}
+            effect="fade"
+            fadeEffect={{ crossFade: true }}
+            autoplay={{ delay: 6000, disableOnInteraction: false }}
+            loop={true}
+            speed={1200}
+            className="of-banner-swiper"
+          >
+            {/* Slide original — vídeo */}
+            <SwiperSlide>
+              <video autoPlay loop muted playsInline className="of-video-bg desktop-only" poster="https://res.cloudinary.com/dlyeywiwk/video/upload/f_auto,q_auto,so_0/v1764821682/wl0kcac1fvfhm2rgdeja.jpg">
+                <source src={bannerVideoDesktop} type="video/mp4" />
+              </video>
+              <video autoPlay loop muted playsInline className="of-video-bg mobile-only" poster="https://res.cloudinary.com/dlyeywiwk/video/upload/f_auto,q_auto,so_0,w_800/v1764822609/fokcyaolucoogjmhusx1.jpg">
+                <source src={bannerVideoMobile} type="video/mp4" />
+              </video>
+            </SwiperSlide>
+
+            {/* Slides extras do marketing */}
+            {extraBanners.map((banner) => (
+              <SwiperSlide key={banner.id}>
+                {banner.tipo === 'video' ? (
+                  <video autoPlay loop muted playsInline className="of-video-bg">
+                    <source src={banner.url} type="video/mp4" />
+                  </video>
+                ) : (
+                  <img src={banner.url} alt={banner.titulo || 'Banner'} className="of-video-bg" style={{ objectFit: 'cover' }} />
+                )}
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <>
+            <video autoPlay loop muted playsInline className="of-video-bg desktop-only" poster="https://res.cloudinary.com/dlyeywiwk/video/upload/f_auto,q_auto,so_0/v1764821682/wl0kcac1fvfhm2rgdeja.jpg">
+              <source src={bannerVideoDesktop} type="video/mp4" />
+            </video>
+            <video autoPlay loop muted playsInline className="of-video-bg mobile-only" poster="https://res.cloudinary.com/dlyeywiwk/video/upload/f_auto,q_auto,so_0,w_800/v1764822609/fokcyaolucoogjmhusx1.jpg">
+              <source src={bannerVideoMobile} type="video/mp4" />
+            </video>
+          </>
+        )}
         <div className="of-banner-overlay"></div>
 
         <motion.div className="of-hero-content" initial="hidden" animate="visible" variants={fadeIn}>

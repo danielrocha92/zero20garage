@@ -1,17 +1,33 @@
-/* PainelMarketing.css */
+/* =====================================================
+   PainelMarketing.css — V4 (Padrão Site Zero20)
+   ===================================================== */
 
+/* ── Container principal ── */
 .pmkt-container {
     width: 100%;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
+    padding: 1rem 0;
+    background-color: transparent;
     color: #e0e0e0;
     font-family: 'Inter', Arial, sans-serif;
-    animation: fadeIn 0.4s ease-in-out;
+    animation: pmktFadeIn 0.4s ease-in-out;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    overflow-x: hidden;
 }
 
-@keyframes fadeIn {
+/* Forçar expansão do wrapper pai */
+.orcamento-form-wrapper:has(.pmkt-container) {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0.5rem !important;
+    margin: 0 !important;
+}
+
+@keyframes pmktFadeIn {
     from {
         opacity: 0;
         transform: translateY(10px);
@@ -23,428 +39,28 @@
     }
 }
 
-/* Card Principal do Formulário */
-.pmkt-form-card {
-    background-color: #1a1a1a;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    margin-bottom: 2rem;
-}
-
-.pmkt-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 15px;
-    margin-bottom: 20px;
-}
-
-.pmkt-header h2 {
-    color: #c50404;
-    font-size: 1.5rem;
-    font-weight: 800;
-    margin: 0;
-}
-
-.pmkt-btn-cancel {
-    background: transparent;
-    color: #aaa;
-    border: 1px solid #555;
-    border-radius: 8px;
-    padding: 8px 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: all 0.2s ease;
-}
-
-.pmkt-btn-cancel:hover {
-    background: #333;
-    color: #fff;
-    border-color: #fff;
-}
-
-/* Grids do Formulário */
-.pmkt-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.pmkt-grid-2 {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 20px;
-}
-
-.pmkt-grid-3 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
-}
-
-.pmkt-form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.pmkt-form-group label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #ccc;
-}
-
-.pmkt-form-group input,
-.pmkt-form-group select {
-    background-color: #2a2a2a;
-    border: 1px solid #555;
-    border-radius: 8px;
-    padding: 12px;
-    color: #fff;
-    font-size: 1rem;
-    width: 100%;
-    outline: none;
-    transition: all 0.3s ease;
-}
-
-.pmkt-form-group input:focus,
-.pmkt-form-group select:focus {
-    border-color: #c50404;
-    box-shadow: 0 0 10px rgba(197, 4, 4, 0.3);
-}
-
-.pmkt-input-icon {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.pmkt-input-icon svg {
-    position: absolute;
-    left: 12px;
-    color: #888;
-}
-
-.pmkt-input-icon input {
-    padding-left: 40px;
-}
-
-/* Footer do Form (Checkbox Ativo + Switch + Button Salvar) */
-.pmkt-form-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.pmkt-checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    font-weight: 600;
-    color: #ddd;
-}
-
-.pmkt-checkbox-label input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    accent-color: #c50404;
-    cursor: pointer;
-}
-
-.pmkt-btn-primary {
-    background: linear-gradient(135deg, #c50404, #8b0000);
-    color: white;
-    font-weight: 700;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    font-size: 1rem;
-    box-shadow: 0 4px 15px rgba(197, 4, 4, 0.4);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.pmkt-btn-primary:active {
-    background: #7a0000;
-}
-
-.pmkt-btn-primary:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(197, 4, 4, 0.6);
-}
-
-.pmkt-btn-primary:disabled {
-    background: #555;
-    cursor: not-allowed;
-    box-shadow: none;
-    opacity: 0.7;
-}
-
-/* Seção de Títulos */
-.pmkt-section-title {
-    color: #fff;
-    font-size: 1.3rem;
-    border-left: 4px solid #c50404;
-    padding-left: 12px;
-    margin-bottom: 20px;
-}
-
-.pmkt-mt-4 {
-    margin-top: 2rem;
-}
-
-/* Visão Prévia Carrossel */
-.pmkt-carousel-wrapper {
-    background-color: #0f1115;
-    padding: 30px;
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    margin-bottom: 2rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.pmkt-swiper {
-    width: 100%;
-    padding-top: 20px;
-    padding-bottom: 60px;
-    /* espaco pra paginação */
-}
-
-/* Para Coverflow, slides menores */
-.pmkt-slide {
-    width: 350px !important;
-    height: 250px;
-    border-radius: 12px;
-    overflow: hidden;
-    position: relative;
-    background: #2a2a2a;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.pmkt-media-content {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.pmkt-slide-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 0.9rem;
-    /* backdrop-filter: blur(5px); */
-}
-
-/* Tabela de Listagem */
-.pmkt-table-container {
-    width: 100%;
-    overflow-x: auto;
-    background: #1a1a1a;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-}
-
-.pmkt-table {
-    width: 100%;
-    border-collapse: collapse;
-    color: #e0e0e0;
-}
-
-.pmkt-table th {
-    background-color: rgba(255, 0, 0, 0.1);
-    color: #fff;
-    font-weight: 700;
-    padding: 15px;
-    text-align: left;
-    border-bottom: 2px solid #555;
-}
-
-.pmkt-table td {
-    padding: 15px;
-    border-bottom: 1px solid #333;
-    vertical-align: middle;
-}
-
-.pmkt-table tbody tr {
-    transition: background 0.2s;
-}
-
-.pmkt-table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.03);
-}
-
-.pmkt-col-center {
-    text-align: center;
-}
-
-.pmkt-preview-td {
-    width: 100px;
-    text-align: center;
-}
-
-.pmkt-table-img {
-    width: 80px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 1px solid #555;
-}
-
-.pmkt-ico-vid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    background: #222;
-    padding: 8px;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    color: #aaa;
-}
-
-.pmkt-details-txt {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.pmkt-url-truncated {
-    font-size: 0.8rem;
-    color: #888;
-    max-width: 300px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline-block;
-}
-
-.pmkt-dest-link {
-    font-size: 0.8rem;
-    color: #2196f3;
-}
-
-/* Badge de Status */
-.pmkt-status-badge {
-    padding: 5px 10px;
-    border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.pmkt-status-badge.ativo {
-    background: rgba(40, 167, 69, 0.2);
-    color: #28a745;
-    border: 1px solid rgba(40, 167, 69, 0.4);
-}
-
-.pmkt-status-badge.inativo {
-    background: rgba(108, 117, 125, 0.2);
-    color: #6c757d;
-    border: 1px solid rgba(108, 117, 125, 0.4);
-}
-
-/* Badge de Página */
-.pmkt-page-badge {
-    padding: 4px 8px;
-    background: #007bff;
-    /* Azul para identificar as paginas */
-    color: white;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    display: inline-block;
-}
-
-/* Botões de Ação da Tabela */
-.pmkt-action-btns {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-.pmkt-btn-icon {
-    background: transparent;
-    border: 1px solid #555;
-    padding: 8px;
-    border-radius: 8px;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.pmkt-btn-icon:hover {
-    transform: scale(1.1);
-}
-
-.pmkt-btn-icon.pmkt-edit:hover {
-    background: #ffc107;
-    color: #000;
-    border-color: #ffc107;
-}
-
-.pmkt-btn-icon.pmkt-delete:hover {
-    background: #dc3545;
-    color: #fff;
-    border-color: #dc3545;
-}
-
-.pmkt-empty-msg {
-    color: #aaa;
-    text-align: center;
-    padding: 30px;
-    font-style: italic;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 8px;
-}
-
-/* Tutorial Card */
+/* ── Tutorial / Dicas ao Usuário ── */
 .pmkt-tutorial-card {
-    background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(15, 17, 21, 0.9));
-    border: 1px solid rgba(197, 4, 4, 0.3);
-    border-radius: 12px;
-    margin-bottom: 2rem;
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.7), rgba(10, 10, 10, 0.8));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
     overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .pmkt-tutorial-header {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
     background: transparent;
     border: none;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     color: #e0e0e0;
     cursor: pointer;
-    transition: background 0.2s;
+    font-size: 0.95rem;
+    transition: background 0.3s ease;
 }
 
 .pmkt-tutorial-header:hover {
@@ -454,105 +70,876 @@
 .pmkt-tutorial-title {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 1.1rem;
+    gap: 10px;
     font-weight: 600;
 }
 
-.pmkt-icon-pulse {
+.pmkt-tutorial-title svg {
     color: #c50404;
-    animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
+.pmkt-icon-pulse {
+    animation: pmktPulse 2s infinite;
+}
+
+@keyframes pmktPulse {
+
+    0%,
+    100% {
         opacity: 1;
     }
 
     50% {
-        transform: scale(1.1);
-        opacity: 0.7;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
+        opacity: 0.5;
     }
 }
 
 .pmkt-tutorial-content {
-    background: rgba(0, 0, 0, 0.2);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
 }
 
 .pmkt-tutorial-steps {
-    padding: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    padding: 0 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
 
 .pmkt-step {
     display: flex;
-    gap: 15px;
+    gap: 14px;
     align-items: flex-start;
 }
 
 .pmkt-step-number {
-    background: #c50404;
-    color: white;
-    width: 28px;
-    height: 28px;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #c50404, #ff6b6b);
+    color: #fff;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 800;
-    font-size: 0.9rem;
-    flex-shrink: 0;
-    box-shadow: 0 2px 10px rgba(197, 4, 4, 0.4);
+    font-size: 0.85rem;
 }
 
 .pmkt-step h4 {
-    margin: 0 0 5px 0;
-    font-size: 1rem;
     color: #fff;
+    font-size: 0.95rem;
+    margin: 0 0 4px 0;
+    text-align: left;
 }
 
 .pmkt-step p {
-    margin: 0;
+    color: #b0b0b0;
     font-size: 0.85rem;
-    color: #aaa;
     line-height: 1.5;
+    margin: 0;
+    text-align: left;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
+.pmkt-step p strong {
+    color: #c50404;
+}
 
-    .pmkt-grid-2,
-    .pmkt-grid-3 {
-        grid-template-columns: 1fr;
+/* ── Card do Formulário ── */
+.pmkt-form-card {
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.7), rgba(10, 10, 10, 0.8));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 24px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.pmkt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+}
+
+.pmkt-header h2 {
+    color: #c50404;
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin: 0;
+    text-align: left;
+}
+
+/* ── Formulário ── */
+.pmkt-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.pmkt-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.pmkt-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.pmkt-form-group label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #b0b0b0;
+    margin-bottom: 2px;
+}
+
+.pmkt-form-group input,
+.pmkt-form-group select {
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: #fff;
+    font-size: 0.9rem;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.pmkt-form-group input::placeholder {
+    color: #666;
+}
+
+.pmkt-form-group input:focus,
+.pmkt-form-group select:focus {
+    border-color: #c50404;
+    outline: none;
+    box-shadow: 0 0 6px rgba(197, 4, 4, 0.3);
+}
+
+.pmkt-form-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23e0e0e0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    padding-right: 32px;
+    cursor: pointer;
+}
+
+/* Input com ícone */
+.pmkt-input-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.pmkt-input-icon svg {
+    position: absolute;
+    left: 12px;
+    color: #666;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.pmkt-input-icon input {
+    padding-left: 38px;
+}
+
+/* Footer do formulário (checkbox + botão) */
+.pmkt-form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin-top: 6px;
+}
+
+/* Toggle / Checkbox */
+.pmkt-checkbox-label {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: #b0b0b0;
+    user-select: none;
+}
+
+.pmkt-checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #c50404;
+    cursor: pointer;
+}
+
+/* Botões principais */
+.pmkt-btn-primary {
+    background: linear-gradient(135deg, #c50404, #e53935);
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(197, 4, 4, 0.3);
+    white-space: nowrap;
+}
+
+.pmkt-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(197, 4, 4, 0.5);
+    filter: brightness(1.1);
+}
+
+.pmkt-btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.pmkt-btn-cancel {
+    background: transparent;
+    color: #c50404;
+    border: 1px solid rgba(197, 4, 4, 0.4);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.pmkt-btn-cancel:hover {
+    background: #c50404;
+    color: #fff;
+    border-color: #c50404;
+}
+
+/* ── Títulos de seção ── */
+.pmkt-section-title {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+}
+
+.pmkt-mt-4 {
+    margin-top: 1rem;
+}
+
+/* ── Carrossel ── */
+.pmkt-carousel-wrapper {
+    width: 100%;
+}
+
+.pmkt-swiper {
+    padding: 20px 0 40px;
+}
+
+.pmkt-slide {
+    max-width: 500px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.pmkt-media-content {
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    object-fit: cover;
+    display: block;
+}
+
+.pmkt-slide-caption {
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.pmkt-empty-msg {
+    color: #666;
+    text-align: center;
+    padding: 30px;
+    font-size: 0.9rem;
+}
+
+/* ── Tabela Desktop ── */
+.pmkt-table-container {
+    width: 100%;
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.7), rgba(10, 10, 10, 0.8));
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    overflow-x: auto;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.pmkt-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+}
+
+.pmkt-table th {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 0.72rem;
+    color: #c50404;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pmkt-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    vertical-align: middle;
+    font-size: 0.9rem;
+}
+
+.pmkt-table tr:hover:not(thead tr) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Info e URL */
+.pmkt-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.pmkt-info strong {
+    font-size: 0.9rem;
+    color: #fff;
+}
+
+.pmkt-info code {
+    font-size: 0.7rem;
+    color: #666;
+    word-break: break-all;
+    max-width: 350px;
+    display: block;
+}
+
+/* Imagem preview na tabela */
+.pmkt-table-img {
+    width: 100px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.pmkt-table-img:hover {
+    transform: scale(2.5);
+    z-index: 100;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.pmkt-ico-vid {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: #c50404;
+}
+
+/* Badges */
+.pmkt-status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.pmkt-status-badge.ativo {
+    background: rgba(40, 167, 69, 0.12);
+    color: #28a745;
+    border: 1px solid rgba(40, 167, 69, 0.25);
+}
+
+.pmkt-status-badge.inativo {
+    background: rgba(108, 117, 125, 0.12);
+    color: #888;
+    border: 1px solid rgba(108, 117, 125, 0.25);
+}
+
+.pmkt-page-badge {
+    background: rgba(0, 123, 255, 0.12);
+    color: #4da3ff;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border: 1px solid rgba(0, 123, 255, 0.2);
+}
+
+.pmkt-readonly-badge {
+    color: #ffd700;
+    font-size: 0.75rem;
+    border: 1px dashed rgba(255, 215, 0, 0.4);
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+.pmkt-default-badge {
+    color: #4da3ff;
+    font-size: 0.75rem;
+    border: 1px dashed rgba(77, 163, 255, 0.4);
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+/* Botões de ação na tabela */
+.pmkt-action-btns {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+}
+
+.pmkt-btn-icon {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: #ccc;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pmkt-btn-icon:hover {
+    transform: translateY(-2px);
+}
+
+.pmkt-btn-icon.pmkt-edit:hover {
+    color: #ffc107;
+    border-color: rgba(255, 193, 7, 0.4);
+    background: rgba(255, 193, 7, 0.1);
+}
+
+.pmkt-btn-icon.pmkt-delete:hover {
+    color: #dc3545;
+    border-color: rgba(220, 53, 69, 0.4);
+    background: rgba(220, 53, 69, 0.1);
+}
+
+.pmkt-btn-icon.pmkt-add-more:hover {
+    color: #28a745;
+    border-color: rgba(40, 167, 69, 0.4);
+    background: rgba(40, 167, 69, 0.1);
+}
+
+.pmkt-col-center {
+    text-align: center;
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE RESPONSIVIDADE (CARD MODE)
+   ═══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+
+    .pmkt-container {
+        padding: 0.5rem 0.25rem;
+        gap: 1rem;
     }
 
-    .pmkt-header {
-        flex-direction: column;
-        gap: 15px;
-        align-items: flex-start;
+    /* Tutorial */
+    .pmkt-tutorial-steps {
+        padding: 0 14px 14px;
+        gap: 14px;
+    }
+
+    .pmkt-step-number {
+        width: 26px;
+        height: 26px;
+        font-size: 0.75rem;
+    }
+
+    .pmkt-step h4 {
+        font-size: 0.85rem;
+    }
+
+    .pmkt-step p {
+        font-size: 0.8rem;
+    }
+
+    /* Formulário */
+    .pmkt-form-card {
+        padding: 16px;
+        border-radius: 14px;
+    }
+
+    .pmkt-header h2 {
+        font-size: 1rem;
+    }
+
+    .pmkt-grid-2 {
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
 
     .pmkt-form-footer {
         flex-direction: column;
-        gap: 15px;
         align-items: stretch;
+        gap: 12px;
     }
 
     .pmkt-btn-primary {
         justify-content: center;
+        width: 100%;
     }
 
+    /* Carrossel */
     .pmkt-slide {
-        width: 80% !important;
-        /* Em mobile, quase toma a tela inteira com bordas visiveis aos lados */
+        max-width: 300px;
     }
+
+    .pmkt-media-content {
+        max-height: 220px;
+    }
+
+    /* Tabela → Cards */
+    .pmkt-table-container {
+        background: transparent;
+        border: none;
+        backdrop-filter: none;
+    }
+
+    .pmkt-table,
+    .pmkt-table thead,
+    .pmkt-table tbody,
+    .pmkt-table tr,
+    .pmkt-table td {
+        display: block !important;
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    .pmkt-table thead {
+        display: none !important;
+    }
+
+    .pmkt-table tbody {
+        display: flex !important;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .pmkt-table tr {
+        background: linear-gradient(135deg, rgba(30, 30, 30, 0.7), rgba(10, 10, 10, 0.8)) !important;
+        border: 1px solid rgba(255, 255, 255, 0.06) !important;
+        border-radius: 16px !important;
+        padding: 14px !important;
+        margin-bottom: 0 !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    .pmkt-table td {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 10px 4px !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+    }
+
+    .pmkt-table td:last-child {
+        border-bottom: none !important;
+        justify-content: center !important;
+        background: rgba(0, 0, 0, 0.15);
+        margin: 12px -14px -14px -14px !important;
+        padding: 12px !important;
+        border-radius: 0 0 16px 16px;
+        width: calc(100% + 28px) !important;
+    }
+
+    .pmkt-table td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: #c50404;
+        text-transform: uppercase;
+        font-size: 0.65rem;
+        text-align: left;
+        margin-right: 12px;
+        flex-shrink: 0;
+        letter-spacing: 0.3px;
+    }
+
+    .pmkt-info {
+        text-align: right;
+        max-width: 60%;
+    }
+
+    .pmkt-info code {
+        font-size: 0.6rem;
+        opacity: 0.5;
+        display: block;
+        margin-top: 2px;
+    }
+
+    .pmkt-table-img {
+        width: 50px;
+        height: 35px;
+    }
+
+    .pmkt-col-center {
+        text-align: right !important;
+    }
+
+    .pmkt-action-btns {
+        width: 100%;
+        justify-content: space-evenly;
+    }
+
+    /* Mobile: cards agrupados */
+    .pmkt-page-card-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .pmkt-item-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .pmkt-item-info {
+        max-width: 100%;
+    }
+
+    .pmkt-item-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .pmkt-mini-slide {
+        max-width: 200px !important;
+    }
+}
+
+/* ═══════════════════════════════════════════════
+   CARDS AGRUPADOS POR PÁGINA
+   ═══════════════════════════════════════════════ */
+.pmkt-grouped-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.pmkt-page-card {
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.7), rgba(10, 10, 10, 0.8));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.pmkt-page-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.pmkt-page-card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pmkt-page-count {
+    font-size: 0.75rem;
+    color: #888;
+    font-weight: 600;
+}
+
+.pmkt-carousel-indicator {
+    font-size: 0.72rem;
+    color: #00d26a;
+    font-weight: 700;
+    background: rgba(0, 210, 106, 0.08);
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 210, 106, 0.2);
+}
+
+.pmkt-btn-add-page {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    color: #c50404;
+    border: 1px solid rgba(197, 4, 4, 0.3);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.pmkt-btn-add-page:hover {
+    background: #c50404;
+    color: #fff;
+    border-color: #c50404;
+}
+
+/* Mini carrossel dentro do card */
+.pmkt-mini-carousel {
+    padding: 16px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.pmkt-mini-swiper {
+    padding-bottom: 30px;
+}
+
+.pmkt-mini-swiper .swiper-pagination-bullet {
+    background: #c50404;
+    opacity: 0.5;
+}
+
+.pmkt-mini-swiper .swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+.pmkt-mini-slide {
+    max-width: 280px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.pmkt-mini-media {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
+}
+
+/* Preview única (1 banner) — mesmo tamanho visual do carrossel */
+.pmkt-single-preview {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+}
+
+.pmkt-single-preview .pmkt-mini-media {
+    max-width: 450px;
+    height: 160px;
+    border-radius: 10px;
+}
+
+/* Itens individuais dentro do card */
+.pmkt-page-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.pmkt-item-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: background 0.2s ease;
+}
+
+.pmkt-item-row:last-child {
+    border-bottom: none;
+}
+
+.pmkt-item-row:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.pmkt-item-preview {
+    flex-shrink: 0;
+    width: 120px;
+}
+
+.pmkt-item-preview .pmkt-table-img {
+    width: 120px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pmkt-item-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
+}
+
+.pmkt-item-info strong {
+    font-size: 0.88rem;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pmkt-item-info code {
+    font-size: 0.68rem;
+    color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 100%;
+}
+
+.pmkt-item-status {
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+.pmkt-item-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+    align-items: center;
 }

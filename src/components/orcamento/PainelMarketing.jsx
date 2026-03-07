@@ -4,7 +4,7 @@ import { db } from '../../services/firebaseOrcamentos';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Image, Video, Trash2, PlusCircle, Edit, Link as LinkIcon, Save, X, HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { Image, Video, Trash2, PlusCircle, Edit, Link as LinkIcon, Save, X, HelpCircle, ChevronDown, ChevronUp, PlusSquare } from 'lucide-react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
@@ -31,12 +31,100 @@ const PainelMarketing = ({ showMessage }) => {
 
   const marketingCollectionRef = collection(db, "marketing_media");
 
+  // Banners do sistema. Apenas HOME é fixo (isReadOnly).
+  // Demais são padrões que podem ser substituídos via Firebase.
+  const defaultStaticBanners = [
+    {
+      id: 'static-home-desktop',
+      url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429487/home_k6ug8o.jpg',
+      tipo: 'imagem',
+      titulo: 'Header Dinâmico - Home',
+      pagina: 'home',
+      ordem: 0,
+      ativo: true,
+      isReadOnly: true  // Único fixo de sistema
+    },
+    {
+      id: 'static-sobre',
+      url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1765200812/IMG_3062_aldoim.jpg',
+      tipo: 'imagem',
+      titulo: 'Header Atual - Sobre (Padrão)',
+      pagina: 'sobre',
+      ordem: 0,
+      ativo: true,
+      isDefault: true  // Substituível via Firebase
+    },
+    {
+      id: 'static-servicos',
+      url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429508/servicos_gblbyy.jpg',
+      tipo: 'imagem',
+      titulo: 'Header Atual - Serviços (Padrão)',
+      pagina: 'servicos',
+      ordem: 0,
+      ativo: true,
+      isDefault: true
+    },
+    {
+      id: 'static-orcamento',
+      url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1764870173/img-orcamento-dektop_yx6lgf.png',
+      tipo: 'imagem',
+      titulo: 'Header Atual - Orçamento (Padrão)',
+      pagina: 'orcamento',
+      ordem: 0,
+      ativo: true,
+      isDefault: true
+    },
+    {
+      id: 'static-contato',
+      url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429463/contato_ojwrdu.jpg',
+      tipo: 'imagem',
+      titulo: 'Header Atual - Contato (Padrão)',
+      pagina: 'contato',
+      ordem: 0,
+      ativo: true,
+      isDefault: true
+    },
+    {
+      id: 'static-blog',
+      url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429461/blog-header_vzqvrg.jpg',
+      tipo: 'imagem',
+      titulo: 'Header Atual - Blog (Padrão)',
+      pagina: 'blog',
+      ordem: 0,
+      ativo: true,
+      isDefault: true
+    },
+    {
+      id: 'static-footer',
+      url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429482/footer_unphiy.jpg',
+      tipo: 'imagem',
+      titulo: 'Header Atual - Rodapé (Padrão)',
+      pagina: 'footer',
+      ordem: 0,
+      ativo: true,
+      isDefault: true
+    },
+    {
+      id: 'static-of-desktop',
+      url: 'https://res.cloudinary.com/dlyeywiwk/video/upload/v1764821682/wl0kcac1fvfhm2rgdeja.mp4',
+      tipo: 'video',
+      titulo: 'Banner Atual - Óleos (Padrão)',
+      pagina: 'oleos-filtros',
+      ordem: 0,
+      ativo: true,
+      isDefault: true
+    }
+  ];
+
   const fetchMedia = async () => {
     setLoading(true);
     try {
       const q = query(marketingCollectionRef, orderBy("ordem", "asc"));
       const data = await getDocs(q);
-      setMediaList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      const fetchedData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+
+      // Combinar dados do banco com dados estáticos para que todos listem na tabela.
+      setMediaList([...defaultStaticBanners, ...fetchedData]);
     } catch (error) {
       console.error("Erro ao buscar mídia de marketing:", error);
       showMessage && showMessage("Erro ao carregar banners do marketing.", true);
@@ -131,6 +219,13 @@ const PainelMarketing = ({ showMessage }) => {
     setFormData({ url: '', tipo: 'imagem', titulo: '', linkDestino: '', pagina: 'home', ordem: 0, ativo: true });
     setIsEditing(false);
     setCurrentId(null);
+  };
+
+  const handleAddMoreToPage = (pagina) => {
+    resetForm();
+    setFormData(prev => ({ ...prev, pagina: pagina }));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    showMessage && showMessage(`Preencha a URL para adicionar no banner: ${pagina}`);
   };
 
   // Separar ativos para o carrossel
@@ -255,7 +350,12 @@ const PainelMarketing = ({ showMessage }) => {
                 <option value="home">Página Inicial (Home)</option>
                 <option value="oleos-filtros">Óleos e Filtros</option>
                 <option value="sobre">Quem Somos / Sobre</option>
-                <option value="outra">Outras Páginas</option>
+                <option value="servicos">Serviços</option>
+                <option value="orcamento">Orçamentos (Pública)</option>
+                <option value="contato">Contato</option>
+                <option value="blog">Blog</option>
+                <option value="footer">Rodapé Geral</option>
+                <option value="outra">Outras Páginas (Padrão)</option>
               </select>
             </div>
           </div>
@@ -300,111 +400,150 @@ const PainelMarketing = ({ showMessage }) => {
         </form>
       </motion.div>
 
-      {/* PRÉ-VISUALIZAÇÃO / CARROSSEL MODERNO */}
-      <h3 className="pmkt-section-title">Visualização do Carrossel Ativo</h3>
-      {activeMedia.length > 0 ? (
-        <div className="pmkt-carousel-wrapper">
-          <Swiper
-            effect={'coverflow'}
-            grabCursor={true}
-            centeredSlides={true}
-            slidesPerView={'auto'}
-            coverflowEffect={{
-              rotate: 20,
-              stretch: 0,
-              depth: 300,
-              modifier: 1,
-              slideShadows: true,
-            }}
-            loop={activeMedia.length > 2}
-            autoplay={{ delay: 3500, disableOnInteraction: false }}
-            pagination={{ clickable: true }}
-            modules={[EffectCoverflow, Pagination, Autoplay]}
-            className="pmkt-swiper"
-          >
-            {activeMedia.map(media => (
-              <SwiperSlide key={media.id} className="pmkt-slide">
-                {media.tipo === 'video' ? (
-                  <video src={media.url} autoPlay loop muted playsInline className="pmkt-media-content" />
-                ) : (
-                  <img src={media.url} alt={media.titulo} className="pmkt-media-content" />
-                )}
-                {media.titulo && <div className="pmkt-slide-caption">{media.titulo}</div>}
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      ) : (
-        <div className="pmkt-empty-msg">Nenhuma mídia ativa para exibir no carrossel no momento.</div>
-      )}
-
-      {/* GERENCIAMENTO LISTAGEM EM TABELA */}
+      {/* GERENCIAMENTO — CARDS AGRUPADOS POR PÁGINA */}
       <h3 className="pmkt-section-title pmkt-mt-4">Gerenciar Todas as Mídias</h3>
-      <div className="pmkt-table-container">
-        <table className="pmkt-table">
-          <thead>
-            <tr>
-              <th>Ordem</th>
-              <th>Página</th>
-              <th>Preview</th>
-              <th>Detalhes</th>
-              <th>Status</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <AnimatePresence>
-            {mediaList.map((media) => (
-              <motion.tr
-                key={media.id}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                layout
-              >
-                <td className="pmkt-col-center"><strong>{media.ordem}</strong></td>
-                <td className="pmkt-col-center">
-                  <span className="pmkt-page-badge">{media.pagina === 'home' ? 'Home' : media.pagina === 'oleos-filtros' ? 'Óleos' : media.pagina === 'sobre' ? 'Sobre' : 'Outra'}</span>
-                </td>
-                <td className="pmkt-preview-td">
-                  {media.tipo === 'video'
-                    ? <div className="pmkt-ico-vid"><Video size={30} color="#c50404" /><span>Video</span></div>
-                    : <img src={media.url} alt="preview" className="pmkt-table-img" loading="lazy" />
-                  }
-                </td>
-                <td>
-                  <div className="pmkt-details-txt">
-                    <strong>{media.titulo || "Sem Título"}</strong>
-                    <span className="pmkt-url-truncated" title={media.url}>{media.url}</span>
-                    {media.linkDestino && <span className="pmkt-dest-link">🎯 {media.linkDestino}</span>}
-                  </div>
-                </td>
-                <td className="pmkt-col-center">
-                  <span className={`pmkt-status-badge ${media.ativo ? 'ativo' : 'inativo'}`}>
-                    {media.ativo ? 'Ativo' : 'Oculto'}
-                  </span>
-                </td>
-                <td className="pmkt-col-center">
-                  <div className="pmkt-action-btns">
-                    <button onClick={() => editMedia(media)} className="pmkt-btn-icon pmkt-edit" title="Editar">
-                      <Edit size={18} />
+
+      {(() => {
+        // Agrupar mídias por página
+        const grouped = {};
+        const pageOrder = ['home', 'sobre', 'servicos', 'orcamento', 'oleos-filtros', 'contato', 'blog', 'footer', 'outra'];
+        mediaList.forEach(m => {
+          const pg = m.pagina || 'outra';
+          if (!grouped[pg]) grouped[pg] = [];
+          grouped[pg].push(m);
+        });
+
+        const pageLabel = (pg) => {
+          const labels = { home: 'Home', sobre: 'Sobre', servicos: 'Serviços', orcamento: 'Orçamento', 'oleos-filtros': 'Óleos e Filtros', contato: 'Contato', blog: 'Blog', footer: 'Rodapé', outra: 'Outras' };
+          return labels[pg] || pg;
+        };
+
+        const sortedPages = Object.keys(grouped).sort((a, b) => {
+          const ia = pageOrder.indexOf(a);
+          const ib = pageOrder.indexOf(b);
+          return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+        });
+
+        if (sortedPages.length === 0) {
+          return <div className="pmkt-empty-msg">Nenhuma mídia cadastrada. Comece adicionando acima.</div>;
+        }
+
+        return (
+          <div className="pmkt-grouped-list">
+            {sortedPages.map(pagina => {
+              const items = grouped[pagina];
+              const hasMultiple = items.length > 1;
+
+              return (
+                <motion.div
+                  key={pagina}
+                  className="pmkt-page-card"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Cabeçalho do card agrupado */}
+                  <div className="pmkt-page-card-header">
+                    <div className="pmkt-page-card-title">
+                      <span className="pmkt-page-badge">{pageLabel(pagina)}</span>
+                      <span className="pmkt-page-count">{items.length} {items.length === 1 ? 'banner' : 'banners'}</span>
+                      {hasMultiple && <span className="pmkt-carousel-indicator">🎠 Carrossel Ativo</span>}
+                    </div>
+                    <button
+                      onClick={() => handleAddMoreToPage(pagina)}
+                      className="pmkt-btn-add-page"
+                      title={`Adicionar mídia em "${pageLabel(pagina)}"`}
+                    >
+                      <PlusSquare size={16} /> Adicionar
                     </button>
-                    <button onClick={() => deleteMedia(media.id)} className="pmkt-btn-icon pmkt-delete" title="Excluir">
-                      <Trash2 size={18} />
-                    </button>
                   </div>
-                </td>
-              </motion.tr>
-            ))}
-            {mediaList.length === 0 && (
-              <tr>
-                <td colSpan="5" className="pmkt-empty-msg">Nenhuma mídia cadastrada. Comece adicionando acima.</td>
-              </tr>
-            )}
-            </AnimatePresence>
-          </tbody>
-        </table>
-      </div>
+
+                  {/* Mini carrossel se houver múltiplos banners */}
+                  {hasMultiple ? (
+                    <div className="pmkt-mini-carousel">
+                      <Swiper
+                        effect={'coverflow'}
+                        grabCursor={true}
+                        centeredSlides={true}
+                        slidesPerView={'auto'}
+                        coverflowEffect={{
+                          rotate: 10,
+                          stretch: 0,
+                          depth: 150,
+                          modifier: 1,
+                          slideShadows: false,
+                        }}
+                        loop={items.length > 2}
+                        autoplay={{ delay: 3000, disableOnInteraction: false }}
+                        pagination={{ clickable: true }}
+                        modules={[EffectCoverflow, Pagination, Autoplay]}
+                        className="pmkt-mini-swiper"
+                      >
+                        {items.filter(m => m.ativo).map(m => (
+                          <SwiperSlide key={m.id} className="pmkt-mini-slide">
+                            {m.tipo === 'video' ? (
+                              <video src={m.url} autoPlay loop muted playsInline className="pmkt-mini-media" />
+                            ) : (
+                              <img src={m.url} alt={m.titulo} className="pmkt-mini-media" />
+                            )}
+                          </SwiperSlide>
+                        ))}
+                      </Swiper>
+                    </div>
+                  ) : (
+                    <div className="pmkt-single-preview">
+                      {items[0].tipo === 'video' ? (
+                        <video src={items[0].url} autoPlay loop muted playsInline className="pmkt-mini-media" />
+                      ) : (
+                        <img src={items[0].url} alt={items[0].titulo} className="pmkt-mini-media" />
+                      )}
+                    </div>
+                  )}
+
+                  {/* Lista de itens individuais dentro do card */}
+                  <div className="pmkt-page-items">
+                    {items.map((media) => (
+                      <div key={media.id} className="pmkt-item-row">
+                        <div className="pmkt-item-preview">
+                          {media.tipo === 'video'
+                            ? <div className="pmkt-ico-vid"><Video size={24} color="#c50404" /><span>Vídeo</span></div>
+                            : <img src={media.url} alt={media.titulo} className="pmkt-table-img" />
+                          }
+                        </div>
+                        <div className="pmkt-item-info">
+                          <strong>{media.titulo || 'Sem Título'}</strong>
+                          <code title={media.url}>{media.url}</code>
+                        </div>
+                        <div className="pmkt-item-status">
+                          <span className={`pmkt-status-badge ${media.ativo ? 'ativo' : 'inativo'}`}>
+                            {media.ativo ? 'ATIVO' : 'INATIVO'}
+                          </span>
+                        </div>
+                        <div className="pmkt-item-actions">
+                          {media.isReadOnly ? (
+                            <span className="pmkt-readonly-badge" title="Imagem fixa do sistema">⚙️ Sistema</span>
+                          ) : media.isDefault ? (
+                            <span className="pmkt-default-badge" title="Imagem padrão — substituível">📌 Padrão</span>
+                          ) : (
+                            <>
+                              <button onClick={() => editMedia(media)} className="pmkt-btn-icon pmkt-edit" title="Editar">
+                                <Edit size={16} />
+                              </button>
+                              <button onClick={() => deleteMedia(media.id)} className="pmkt-btn-icon pmkt-delete" title="Excluir">
+                                <Trash2 size={16} />
+                              </button>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        );
+      })()}
     </div>
   );
 };
