@@ -50,10 +50,8 @@ const Servicos = () => {
     return (
         <>
             <Helmet>
-                <title translate="no" className='subtitle-claro'>
-                    Serviços de Retífica de Motores e Manutenção | Zero20 Garage
-                </title>
-                <meta name="description" content="Serviços completos de retífica de motores, cabeçotes, usinagem, solda e manutenção preventiva em Mairiporã. Atendemos linha leve e pesada com garantia." />
+                <title translate="no">Serviços Mecânicos, Suspensão e Auto Elétrica Mairiporã</title>
+                <meta name="description" content="De retífica completa do motor a suspensão e injeção eletrônica. Conheça todos os serviços automotivos da Zero20 Garage em Mairiporã e região." />
                 <link rel="canonical" href="https://zero20garage.com.br/servicos" />
             </Helmet>
 
@@ -61,7 +59,8 @@ const Servicos = () => {
             <DynamicHeader page="servicos" messages={messages} />
             <Breadcrumbs />
                     <div className='highlight-item'>
-                        <h2 className='titulo-claro servicos-page-title' translate='no'>Serviços que executamos</h2>
+                        <h1 className='titulo-claro servicos-page-title' translate='no' style={{fontSize: '2rem'}}>Nossos Serviços Mecânicos em Mairiporã</h1>
+                        <p className="paragrafo-claro" style={{marginBottom: '30px', textAlign: 'center'}}>Rodar pelas estradas de Mairiporã exige uma suspensão em dia. Nossos serviços de freios, amortecimento e motor garantem total segurança para você e sua família no trânsito local da serra.</p>
                         <div className="service-grid">
                             {services.map((service) => (
                                 <div

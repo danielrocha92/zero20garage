@@ -41,8 +41,8 @@ const OleosFiltros = () => {
   return (
     <div className="of-page-verde">
       <Helmet>
-        <title>Óleos e Filtros | Zero 20 Garage</title>
-        <meta name="description" content="Troca completa de óleo e filtros. Trabalhamos com todas as viscosidades e marcas renomadas para veículos nacionais e importados." />
+        <title>Troca de Óleo e Filtros em Mairiporã | Zero20 Garage</title>
+        <meta name="description" content="Faça a troca de óleo e filtros do seu veículo com atenção aos detalhes em Mairiporã. Evite desgastes prematuros no motor na Zero20 Garage!" />
       </Helmet>
 
       {/* 1. Banner Principal com Hero Content */}
@@ -94,8 +94,8 @@ const OleosFiltros = () => {
 
         <motion.div className="of-hero-content" initial="hidden" animate="visible" variants={fadeIn}>
           <span className="of-hero-badge">Especialistas em Lubrificação</span>
-          <h1 className="of-hero-title">Troca Completa de <br/><span className="of-text-gradient">Óleo e Filtros</span></h1>
-          <p className="of-hero-subtitle">A saúde e longevidade do seu motor começam com uma manutenção de excelência. Agende sua troca com especialistas e garanta a máxima performance do seu veículo.</p>
+          <h1 className="of-hero-title">Troca de Óleo e Revisão de Filtros em <br/><span className="of-text-gradient">Mairiporã</span></h1>
+          <p className="of-hero-subtitle">Mantenha as peças internas lubrificadas corretamente e previna superaquecimentos, garantindo estabilidade do motor em aclives típicos de Mairiporã. Use nossas marcas premium selecionadas para a região da serra.</p>
           <a href="/orcamento" className="of-btn-primary">
             Solicite seu Orçamento <ArrowRight className="of-btn-icon" size={20} />
           </a>
@@ -161,8 +161,8 @@ const OleosFiltros = () => {
       {/* 4. Linhas de Produtos (Cards) */}
       <section className="of-products-section wrapper-padrao">
         <motion.div className="of-section-header" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-          <h2 className="of-section-title">Linhas de <span className="of-text-gradient">Produtos</span></h2>
-          <p className="of-section-desc">Oferecemos diferentes categorias para atender exatamente a necessidade do seu motor e do seu bolso, garantindo 100% de procedência.</p>
+          <h2 className="of-section-title">Produtos Premium para <span className="of-text-gradient">Máxima Lubrificação</span></h2>
+          <p className="of-section-desc">Oferecemos diferentes categorias para atender exatamente a necessidade do seu motor e do seu bolso, garantindo 100% de procedência para rodar seguro nas estradas e rodovias da região.</p>
         </motion.div>
 
         <motion.div className="of-cards-grid" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}>

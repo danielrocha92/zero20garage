@@ -34,32 +34,35 @@ function Home() {
   return (
     <>
     <Helmet>
-  <title>ZER0 20 GARAGE™ - Retífica de Motores em Mairiporã</title>
-  <meta name="description" content="Oficina mecânica especializada em retífica de motores nacionais e importados. Diagnóstico, desmontagem, usinagem e montagem com qualidade garantida." />
-  <meta name="keywords" content="retífica de motor, oficina mecânica, Mairiporã, motor fundido, motores nacionais, motores importados, manutenção automotiva" />
-  <meta name="robots" content="index, follow" />
+      <title>Retífica de Motores e Mecânica em Mairiporã | Zero20 Garage</title>
+      <meta name="description" content="A Zero20 Garage é a sua retífica de motores e centro de soluções mecânicas de confiança em Mairiporã e Terra Preta. Agende seu diagnóstico hoje!" />
+      <meta name="keywords" content="retífica de motor, oficina mecânica, Mairiporã, Terra Preta, motor fundido, motores nacionais, motores importados, manutenção automotiva na serra" />
+      <meta name="robots" content="index, follow" />
 
-  {/* Open Graph (para Facebook e redes) */}
-  <meta property="og:title" content="ZER0 20 GARAGE™ - Retífica de Motores em Mairiporã" />
-  <meta property="og:description" content="Especialistas em retífica de motores nacionais e importados com atendimento ágil e pagamento facilitado." />
-  <meta property="og:image" content="https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429488/imagem-og_trb3ws.jpg" />
-  <meta property="og:url" content="https://www.zero20garage.com/" />
-  <meta property="og:type" content="website" />
+      {/* Open Graph (para Facebook e redes) */}
+      <meta property="og:title" content="Retífica de Motores e Mecânica em Mairiporã | Zero20 Garage" />
+      <meta property="og:description" content="Especialistas em retífica de motores em Mairiporã. Atendimento ágil e soluções automotivas completas." />
+      <meta property="og:image" content="https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429488/imagem-og_trb3ws.jpg" />
+      <meta property="og:url" content="https://www.zero20garage.com/" />
+      <meta property="og:type" content="website" />
 
-  {/* Twitter Card */}
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="ZER0 20 GARAGE™ - Retífica de Motores em Mairiporã" />
-  <meta name="twitter:description" content="Oficina mecânica completa para retífica e manutenção de motores." />
-  <meta name="twitter:image" content="https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429488/imagem-og_trb3ws.jpg" />
-</Helmet>
+      {/* Twitter Card */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Retífica de Motores e Mecânica em Mairiporã | Zero20 Garage" />
+      <meta name="twitter:description" content="Soluções sob medida para o seu veículo rodar seguro em Mairiporã e encarar os desafios da nossa região." />
+      <meta name="twitter:image" content="https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429488/imagem-og_trb3ws.jpg" />
+    </Helmet>
 
     <div className="page-escuro">
     <DynamicHeader page="home" messages={messages} />
     <Breadcrumbs />
 
       <div className='highlight-item home-header home-highlight-item'>
-        <h2 className="titulo-claro home-title">Retífica de Motores e Soluções Mecânicas Sob Medida</h2>
-        <h3 className="subtitulo-claro">Atendimento especializado para veículos nacionais e importados.</h3>
+        <h1 className="titulo-claro home-title" style={{fontSize: '2rem'}}>Retífica de Motores e Soluções Mecânicas Sob Medida em Mairiporã</h1>
+        <h2 className="subtitulo-claro" style={{fontSize: '1.2rem', marginTop: '10px'}}>Nossas Soluções Automotivas para Mairiporã e Região</h2>
+        <p className="paragrafo-claro" style={{marginBottom: '20px', fontSize: '1.1rem'}}>
+          Soluções sob medida para o seu veículo rodar seguro em Mairiporã e encarar os desafios da nossa região com confiança. Estrategicamente baseados para atender moradores do Centro de Mairiporã, Terra Preta e entorno de forma rápida.
+        </p>
         <a href="/orcamento" className="button">Solicite um Orçamento</a>
       </div>
 

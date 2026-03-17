@@ -26,8 +26,8 @@ function Contato() {
     <div className="page-escuro">
     <DynamicHeader page="contato" messages={messages} />
     <Helmet>
-        <title>Fale Conosco | Zero 20 Garage - Oficna em Mairiporã</title>
-        <meta name="description" content="Entre em contato com a Zero 20 Garage. Telefone, WhatsApp e endereço da melhor oficina de retífica de motores de Mairiporã." />
+        <title>Fale com a Zero20 | Oficina e Mecânica em Mairiporã</title>
+        <meta name="description" content="Localize a Zero20 Garage facilmente em Mairiporã. Fale via WhatsApp, veja nosso mapa de como chegar ou envie um formulário. Estamos prontos para ajudar!" />
         <link rel="canonical" href="https://zero20garage.com.br/contato" />
     </Helmet>
     <Breadcrumbs />
@@ -38,8 +38,9 @@ function Contato() {
 
         {/* Seção do Mapa */}
           <div className="highlight-item">
-            <h2 className="titulo-claro">Onde Estamos</h2>
-            <p className="subtitulo-claro">Venha nos visitar ou encontre facilmente no Google Maps:</p>
+            <h1 className="titulo-claro" style={{fontSize: '2rem'}}>Contato e Localização em Mairiporã</h1>
+            <h2 className="subtitulo-claro" style={{marginTop: '10px'}}>Venha Nos Fazer uma Visita Hoje!</h2>
+            <p className="paragrafo-claro" style={{marginBottom: '20px'}}>Zero20 Garage – Estr. dos Macacos, 742 - Mairiporã - SP. Encontre facilmente no Google Maps:</p>
             <div className="map-container">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.799744734953!2d-46.5745093!3d-23.3263499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ceede375ca12c9%3A0xa22173d27f744745!2sZERO%2020%20GARAGE!5e0!3m2!1spt-BR!2sbr!4v1711478418134!5m2!1spt-BR!2sbr"

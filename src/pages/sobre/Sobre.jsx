@@ -74,8 +74,8 @@ function Sobre() {
 
       <DynamicHeader page="sobre" messages={messages} />
       <Helmet>
-        <title>Sobre Nós | Zero 20 Garage - Retífica em Mairiporã</title>
-        <meta name="description" content="Conheça a história da Zero 20 Garage, oficina líder em retífica de motores em Mairiporã. Tradição familiar e tecnologia de ponta com Francisco Borges e Rodney Santos." />
+        <title>Sobre a Zero20 | Especialistas em Motores em Mairiporã</title>
+        <meta name="description" content="Conheça a Zero20 Garage: mais que uma oficina, sua parceira de confiança em Mairiporã. Apaixonados por motores, prezamos por qualidade sob medida." />
         <link rel="canonical" href="https://zero20garage.com.br/sobre" />
       </Helmet>
       <Breadcrumbs />
@@ -85,17 +85,17 @@ function Sobre() {
         {/* Seção: História */}
         <section className="sobre-section">
           <div className="sobre-card nossa-historia">
-            <h2 className='titulo-claro'>Sobre a Zero 20 Garage</h2>
+            <h1 className='titulo-claro' style={{fontSize: '2rem'}}>Nossa História e Compromisso com Mairiporã</h1>
 
             <div className="historia-content">
               <div className="historia-intro">
                 <div className="historia-text">
-                  <h3 className='subtitulo-claro' translate='no'>Paixão, Tradição e Excelência.</h3>
+                  <h2 className='subtitulo-claro' translate='no' style={{fontSize: '1.4rem'}}>A Paixão Pelos Motores (Nossa Filosofia)</h2>
                   <p translate='no' className='paragrafo-claro'>
-                    A história da Zero 20 Garage é uma jornada de paixão automotiva que atravessa gerações e se consolida na excelência de serviços em Mairiporã e região.
+                    Nascemos para elevar o nível da mecânica em Mairiporã. Entendemos cada carro como um projeto único e tratamos cada cliente da cidade como um vizinho de longa data, prestando serviços transparentes.
                   </p>
                   <p className='paragrafo-claro'>
-                    Tudo começou há muitos anos com Francisco Borges, carinhosamente conhecido como Chico. Desde a infância, Chico nutria uma paixão por carros e esse entusiasmo se transformou em profissão quando ele fundou a TecFran. Com anos de dedicação e experiência, a TecFran se tornou um nome de confiança, conquistando uma clientela fiel em toda a cidade de Mairiporã.
+                    Tudo começou há muitos anos com Francisco Borges, carinhosamente conhecido como Chico. Desde a infância, Chico nutria uma paixão por carros e esse entusiasmo se transformou em profissão quando ele fundou a TecFran. Com anos de dedicação e experiência, a TecFran se tornou um nome de confiança local.
                   </p>
                 </div>
                 <div className="historia-image-wrapper">
