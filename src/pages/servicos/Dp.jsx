@@ -41,7 +41,7 @@ const LAST_UPDATED = '22 de junho de 2025'; // atualizado manualmente quando o c
         <section className="institucional-section">
           <h3 className="institucional-subtitle">2. Sinais de que seu veículo precisa de um diagnóstico</h3>
           <ul className="institucional-list">
-            <li>Luz de injeção acesa no painel</li>
+            <li>Luz de advertência do motor acesa no painel</li>
             <li>Perda de potência ou consumo excessivo</li>
             <li>Barulhos anormais no motor</li>
             <li>Marcha lenta irregular</li>

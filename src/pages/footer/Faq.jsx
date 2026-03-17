@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Wrench, HelpCircle, Clock, RefreshCw, ShieldCheck, Car, CircleDollarSign, Settings, Receipt, CreditCard, ChevronDown, ChevronUp } from 'lucide-react';
 import '../../styles/Institucional.css'; // Estilos compartilhados
 import DynamicHeader from '../../components/ui/DynamicHeader';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
@@ -7,43 +8,53 @@ import ContatoCta from '../../components/ui/ContatoCta';
 
 const faqData = [
   {
-    question: '🛠️ O que é uma retífica de motor?',
+    icon: <Wrench size={20} color="#ff0015" />,
+    question: 'O que é uma retífica de motor?',
     answer: 'É um processo de reparo que restaura componentes do motor para as especificações originais de fábrica, melhorando o desempenho e prolongando a vida útil.',
   },
   {
-    question: '❓ Quando sei que meu motor precisa de retífica?',
+    icon: <HelpCircle size={20} color="#ff0015" />,
+    question: 'Quando sei que meu motor precisa de retífica?',
     answer: 'Sinais como perda de potência, fumaça excessiva, aquecimento constante e ruídos anormais podem indicar a necessidade de retífica.',
   },
   {
-    question: '⏱️ Quanto tempo dura uma retífica de motor?',
+    icon: <Clock size={20} color="#ff0015" />,
+    question: 'Quanto tempo dura uma retífica de motor?',
     answer: 'Depende do tipo de motor e do serviço necessário, mas normalmente leva de 3 a 7 dias úteis.',
   },
   {
-    question: '🔁 A retífica deixa o motor como novo?',
+    icon: <RefreshCw size={20} color="#ff0015" />,
+    question: 'A retífica deixa o motor como novo?',
     answer: 'Sim! Se feita corretamente, o motor volta a operar com desempenho semelhante ao original.',
   },
   {
-    question: '🛡️ Qual a garantia após a retífica?',
+    icon: <ShieldCheck size={20} color="#ff0015" />,
+    question: 'Qual a garantia após a retífica?',
     answer: 'Oferecemos garantia de 6 meses ou 10.000 km, o que ocorrer primeiro.',
   },
   {
-    question: '🚗 Vocês trabalham com todos os tipos de motores?',
+    icon: <Car size={20} color="#ff0015" />,
+    question: 'Vocês trabalham com todos os tipos de motores?',
     answer: 'Sim! Retificamos motores a gasolina, álcool, diesel e GNV.',
   },
   {
-    question: '💰 É melhor retificar ou trocar o motor?',
+    icon: <CircleDollarSign size={20} color="#ff0015" />,
+    question: 'É melhor retificar ou trocar o motor?',
     answer: 'Depende do estado do motor. A retífica geralmente é mais econômica e mantém o número original do motor.',
   },
   {
-    question: '🔧 Quais peças são substituídas na retífica?',
+    icon: <Settings size={20} color="#ff0015" />,
+    question: 'Quais peças são substituídas na retífica?',
     answer: 'Camisas, pistões, bronzinas, juntas, anéis e outras peças desgastadas são substituídas.',
   },
   {
-    question: '🧾 Fazem serviço com nota fiscal?',
+    icon: <Receipt size={20} color="#ff0015" />,
+    question: 'Fazem serviço com nota fiscal?',
     answer: 'Sim, emitimos nota fiscal e garantimos a procedência do serviço.',
   },
   {
-    question: '💳 Vocês parcelam o serviço?',
+    icon: <CreditCard size={20} color="#ff0015" />,
+    question: 'Vocês parcelam o serviço?',
     answer: 'Sim! Parcelamos em até 6x no cartão de crédito.',
   }
 ];
@@ -81,9 +92,14 @@ const Faq = () => {
           <div className="faq-list">
         {faqData.map((item, index) => (
           <div key={index} className={`faq-item ${activeIndex === index ? 'active' : ''}`}>
-            <div className="faq-question" onClick={() => toggleIndex(index)}>
-              {item.question}
-              <span className="arrow">{activeIndex === index ? '−' : '+'}</span>
+            <div className="faq-question" onClick={() => toggleIndex(index)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span className="faq-question-text" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                {item.icon}
+                {item.question}
+              </span>
+              <span className="arrow">
+                {activeIndex === index ? <ChevronUp size={20} color="#ff0015" /> : <ChevronDown size={20} color="#ff0015" />}
+              </span>
             </div>
             <div className="faq-answer">
               <p className="paragrafo-escuro">{item.answer}</p>

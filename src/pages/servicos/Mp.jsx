@@ -35,9 +35,7 @@ const LAST_UPDATED = '22 de junho de 2025'; // atualizado manualmente quando o c
 
         <section className="institucional-section">
           <h3 className="institucional-subtitle">1. O que é manutenção preventiva?</h3>
-          <p className="institucional-paragraph">
-            É o conjunto de inspeções e serviços realizados com regularidade, mesmo quando o veículo não apresenta problemas aparentes. O objetivo é prevenir falhas, evitar quebras e prolongar a vida útil de componentes essenciais, como o motor, câmbio, suspensão e freios.
-          </p>
+            É o conjunto de inspeções e serviços realizados com regularidade, mesmo quando o veículo não apresenta problemas aparentes. O objetivo é prevenir falhas, evitar quebras e prolongar a vida útil de componentes essenciais no motor.
         </section>
 
         <section className="institucional-section">
@@ -53,8 +51,7 @@ const LAST_UPDATED = '22 de junho de 2025'; // atualizado manualmente quando o c
             <li>Troca de óleo e filtros (óleo, ar, combustível, cabine)</li>
             <li>Verificação de correias e correntes (dentada, polivê)</li>
             <li>Inspeção do sistema de arrefecimento (radiador, válvula termostática, ventoinha)</li>
-            <li>Fluidos: freio, direção hidráulica e arrefecimento</li>
-            <li>Checagem de suspensão, freios, pneus e amortecedores</li>
+            <li>Fluido de arrefecimento</li>
             <li>Análise de compressão dos cilindros (avaliação anual)</li>
             <li>Verificação do sistema elétrico (bateria, alternador, ignição)</li>
           </ul>

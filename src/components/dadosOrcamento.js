@@ -163,7 +163,6 @@ export const servicosDiversosData = [
   { nome: "Limpeza de bicos injetores", temQuantidade: false },
   { nome: "Regulagem e Reparo de Motores", temQuantidade: false },
   { nome: "Revisão de Sistemas de Freios", temQuantidade: false },
-  { nome: "Revisão de Sistemas de Suspensão e Direção", temQuantidade: false },
   { nome: "Revisão elétrica básica", temQuantidade: false },
   { nome: "Revisão Geral e Inspeções", temQuantidade: false },
   { nome: "Sistemas de Arrefecimento", temQuantidade: false },
