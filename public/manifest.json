@@ -1,30 +1,27 @@
 {
-"name": "Zero20 Garage",
-"short_name": "Zero20",
-"description": "Gerenciamento de orçamentos e serviços para a Zero20 Garage.",
-"start_url": ".",
-"display": "standalone",
-"theme_color": "#000000",
-"background_color": "#ffffff",
-"icons": [
-{
-"src": "https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429492/logo_mqvkvh.png",
-"type": "image/png",
-"sizes": "192x192"
-},
-{
-"src": "https://via.placeholder.com/512",
-"type": "image/png",
-"sizes": "512x512"
-}
-],
-"lang": "pt-BR",
-"i18n": [
-{
-"lang": "pt-BR",
-"name": "Zero20 Garagem",
-"short_name": "Zero20",
-"description": "Gerenciamento de orçamentos e serviços para a Zero20 Garagem."
-}
-]
+  "name": "Zero 20 Garage",
+  "short_name": "Zero20",
+  "description": "Oficina mecânica e retífica de motores em Mairiporã-SP.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#ff3b3b",
+  "background_color": "#0f0f0f",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "type": "image/x-icon",
+      "sizes": "48x48"
+    },
+    {
+      "src": "/logo.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "lang": "pt-BR"
 }
