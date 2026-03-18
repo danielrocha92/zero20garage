@@ -3,7 +3,7 @@ import '../../styles/Blog.css';
 import DynamicHeader from '../../components/ui/DynamicHeader';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import BlogShare from '../../components/BlogShare';
-const manutencaoMotoresImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1764729616/manutencao-de-motores_iitd4z.png';
+const manutencaoMotoresImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1764729616/manutencao-de-motores_iitd4z.png';
 
 const ManutencaoDeMotores = () => {
   const messages = [

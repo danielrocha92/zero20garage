@@ -4,7 +4,7 @@ import DynamicHeader from '../../components/ui/DynamicHeader';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import { Helmet } from 'react-helmet-async';
 import BlogShare from '../../components/BlogShare';
-const trocarMotorImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429521/trocar-motor_lqzrhf.jpg';
+const trocarMotorImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429521/trocar-motor_lqzrhf.jpg';
 
 const TrocarMotor = () => {
   const messages = [

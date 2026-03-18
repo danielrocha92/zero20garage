@@ -3,7 +3,7 @@ import '../../styles/Blog.css';
 import DynamicHeader from '../../components/ui/DynamicHeader';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import BlogShare from '../../components/BlogShare';
-const retificaParcialImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429507/retifica-parcial-ou-completa_mqxitk.jpg';
+const retificaParcialImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429507/retifica-parcial-ou-completa_mqxitk.jpg';
 
 const RetificaParcialOuCompleta = () => {
   const messages = [

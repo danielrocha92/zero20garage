@@ -4,7 +4,7 @@ import '../../styles/Blog.css';
 import DynamicHeader from '../../components/ui/DynamicHeader';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import BlogShare from '../../components/BlogShare';
-const custoRetificaImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429465/custo-retifica_bnpb4x.jpg';
+const custoRetificaImg = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429465/custo-retifica_bnpb4x.jpg';
 
 const CustoRetifica = () => {
   const messages = [

@@ -8,9 +8,9 @@ import '../../styles/Institucional.css'; // Usa o estilo institucional
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const desmontagem1 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429467/desmontagem1_ps1gb3.jpg';
-const desmontagem2 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429468/desmontagem2_m74ekd.jpg';
-const desmontagem3 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429470/desmontagem3_uumkin.jpg';
+const desmontagem1 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429467/desmontagem1_ps1gb3.jpg';
+const desmontagem2 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429468/desmontagem2_m74ekd.jpg';
+const desmontagem3 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429470/desmontagem3_uumkin.jpg';
 
 const Desmontagem = () => {
   const messages = [

@@ -14,7 +14,7 @@ import Slider from 'react-slick';
 import { FaBullseye, FaEye, FaStar } from 'react-icons/fa';
 
 // Importando imagens
-const fachada = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1765506349/Gemini_Generated_Image_2pi18x2pi18x2pi1_iqwmam.png';
+const fachada = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1765506349/Gemini_Generated_Image_2pi18x2pi18x2pi1_iqwmam.png';
 
 const settings = {
   dots: true,                // bolinhas de navegação
@@ -60,12 +60,12 @@ function Sobre() {
     {
       name: "Francisco Borges",
       role: "Chefe de Oficina",
-      image: "https://res.cloudinary.com/dlyeywiwk/image/upload/v1763428213/FranciscoBorges_cnuafi.jpg"
+      image: "https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763428213/FranciscoBorges_cnuafi.jpg"
     },
     {
       name: "Rodney Santos",
       role: "Especialista em Retífica",
-      image: "https://res.cloudinary.com/dlyeywiwk/image/upload/v1763428214/RodneySantos_azdeqw.jpg"
+      image: "https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763428214/RodneySantos_azdeqw.jpg"
     }
   ];
 
@@ -104,7 +104,7 @@ function Sobre() {
                 {/* Imagem below the fold: loading=lazy para performance. Alt descritivo para SEO */}
                 <div className="historia-image-wrapper">
                   <img
-                    src="https://res.cloudinary.com/dlyeywiwk/image/upload/v1763428214/Equipe_y6nvty.jpg"
+                    src="https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763428214/Equipe_y6nvty.jpg"
                     alt="Equipe da Zero 20 Garage em Mairiporã - mecânicos especializados em retífica de motores"
                     className="historia-img"
                     loading="lazy"

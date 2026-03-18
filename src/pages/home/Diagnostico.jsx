@@ -11,9 +11,9 @@ import '../../styles/HomeDetails.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 // Importando imagens do diagnóstico
-const diagnostico1 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429472/diagnostico1_cufqfl.jpg';
-const diagnostico2 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429473/diagnostico2_ee8n9d.jpg';
-const diagnostico3 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429476/diagnostico3_nvsddl.jpg';
+const diagnostico1 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429472/diagnostico1_cufqfl.jpg';
+const diagnostico2 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429473/diagnostico2_ee8n9d.jpg';
+const diagnostico3 = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429476/diagnostico3_nvsddl.jpg';
 
 const Diagnostico = () => {
   const messages = [
