@@ -314,3 +314,28 @@
     /* Aumentado de 2rem */
   }
 }
+
+/* ===== Classes Semânticas (SEO Refactor - Substituição de Inline Styles) ===== */
+
+/* H1 principal da Home - menor para impacto visual sem domínio exagerado */
+.home-h1 {
+  font-size: 2rem;
+}
+
+/* Subtítulo com espace menor acima */
+.home-subtitle {
+  font-size: 1.2rem;
+  margin-top: 0.6rem;
+}
+
+/* Parágrafo de introdução da hero section */
+.home-intro-text {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Seção de marcas: fundo transparente e sem sombra */
+.home-brands-section {
+  background: transparent !important;
+  box-shadow: none !important;
+}

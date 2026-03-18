@@ -96,9 +96,10 @@ function Orcamento() {
   return (
     <div className="page-escuro">
       <DynamicHeader page="orcamento" messages={messages} />
+      {/* SEO On-Page: Helmet com title, description e canonical otimizados */}
       <Helmet>
-        <title>Orçamento Online de Mecânica em Mairiporã | Zero20</title>
-        <meta name="description" content="Precisa de mecânico em Mairiporã? Solicite agora mesmo um orçamento online com a Zero20 Garage, de forma transparente e rápida, sem compromisso." />
+        <title>Orçamento Online de Mecânica e Retífica | Zero 20 Garage - Mairiporã-SP</title>
+        <meta name="description" content="Solicite um orçamento de revisão, manutenção automotiva ou retífica de motores em Mairiporã-SP. Rápido, grátis e sem compromisso!" />
         <link rel="canonical" href="https://zero20garage.com.br/orcamento" />
       </Helmet>
       <Breadcrumbs />
@@ -108,11 +109,12 @@ function Orcamento() {
           <PainelOrcamentos />
         ) : (
           <section className="form-section highlight-card">
-            <h1 className="titulo-claro" style={{fontSize: '2rem'}}>Solicite seu Orçamento de Mecânica Hoje!</h1>
-            <h2 className="subtitulo-claro" style={{fontSize: '1.2rem', marginTop: '10px'}}>
+            {/* SEO Semântica: H1 único por página com palavra-chave de conversão */}
+            <h1 className="titulo-claro orcamento-h1">Solicite seu Orçamento de Mecânica Hoje!</h1>
+            <h2 className="subtitulo-claro orcamento-h2">
               Sem surpresas, Transparência Total na Avaliação
             </h2>
-            <p className="paragrafo-claro" style={{marginBottom: '20px', textAlign: 'center'}}>
+            <p className="paragrafo-claro orcamento-intro-text">
               Preencha os detalhes e nossa equipe de especialistas de Mairiporã entrará em contato rápido. Se seu carro parou na rua localmente pela região da serra, avise-nos no campo de comentários!
             </p>
 

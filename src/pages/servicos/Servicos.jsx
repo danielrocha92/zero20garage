@@ -49,18 +49,20 @@ const Servicos = () => {
 
     return (
         <>
+            {/* SEO On-Page: Helmet com title, description e canonical otimizados */}
             <Helmet>
-                <title translate="no">Retifica de Motores, Serviços Mecânicos Troca de Óleo e Filtros em Mairiporã</title>
-                <meta name="description" content="De retífica completa do motor a troca de óleo e filtros. Conheça todos os serviços automotivos da Zero20 Garage em Mairiporã e região." />
+                <title>Serviços da Zero 20 Garage | Retífica, Manutenção e Diagnóstico em Mairiporã-SP</title>
+                <meta name="description" content="Retífica de motores, revisão completa e manutenção automotiva em Mairiporã-SP. Conheça todos os serviços da Zero 20 Garage e peça seu orçamento." />
                 <link rel="canonical" href="https://zero20garage.com.br/servicos" />
             </Helmet>
 
             <div className="page-escuro">
             <DynamicHeader page="servicos" messages={messages} />
             <Breadcrumbs />
+                    {/* SEO Semântica: H1 único com palavra-chave principal da página */}
                     <div className='highlight-item'>
-                        <h1 className='titulo-claro servicos-page-title' translate='no' style={{fontSize: '2rem'}}>Nossos Serviços Mecânicos em Mairiporã</h1>
-                        <p className="paragrafo-claro" style={{marginBottom: '30px', textAlign: 'center'}}>Rodar pelas estradas de Mairiporã exige um motor confiável. Nossos serviços focados em retífica, diagnóstico preciso e lubrificação garantem total segurança e performance para você e sua família no trânsito local da serra.</p>
+                        <h1 className='titulo-claro servicos-page-title servicos-h1' translate='no'>Nossos Serviços Mecânicos em Mairiporã</h1>
+                        <p className="paragrafo-claro servicos-intro-paragraph">Rodar pelas estradas de Mairiporã exige um motor confiável. Nossos serviços focados em retífica, diagnóstico preciso e lubrificação garantem total segurança e performance para você e sua família no trânsito local da serra.</p>
                         <div className="service-grid">
                             {services.map((service) => (
                                 <div

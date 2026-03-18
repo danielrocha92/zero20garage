@@ -251,3 +251,16 @@
     outline: none;
   }
 }
+
+/* ===== Classes Semânticas (SEO Refactor - Substituição de Inline Styles) ===== */
+
+/* H1 principal da página de Serviços */
+.servicos-h1 {
+  font-size: 2rem;
+}
+
+/* Parágrafo de introdução centralizado com espaçamento inferior */
+.servicos-intro-paragraph {
+  margin-bottom: 1.875rem;
+  text-align: center;
+}

@@ -33,23 +33,25 @@ function Home() {
 
   return (
     <>
+    {/* SEO On-Page: Helmet com title e description otimizados para conversão local */}
     <Helmet>
-      <title>Retífica de Motores e Mecânica em Mairiporã | Zero20 Garage</title>
-      <meta name="description" content="A Zero20 Garage é a sua retífica de motores e centro de soluções mecânicas de confiança em Mairiporã e Terra Preta. Agende seu diagnóstico hoje!" />
-      <meta name="keywords" content="retífica de motor, oficina mecânica, Mairiporã, Terra Preta, motor fundido, motores nacionais, motores importados, manutenção automotiva na serra" />
+      <title>Zero 20 Garage | Oficina Mecânica e Retífica de Motores em Mairiporã-SP</title>
+      <meta name="description" content="Oficina mecânica especializada em revisão, manutenção automotiva e retífica de motores em Mairiporã-SP. Qualidade e garantia. Peça seu orçamento!" />
+      <meta name="keywords" content="retífica de motor, oficina mecânica, Mairiporã, Terra Preta, motor fundido, motores nacionais, motores importados, manutenção automotiva" />
       <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://zero20garage.com.br/" />
 
-      {/* Open Graph (para Facebook e redes) */}
-      <meta property="og:title" content="Retífica de Motores e Mecânica em Mairiporã | Zero20 Garage" />
-      <meta property="og:description" content="Especialistas em retífica de motores em Mairiporã. Atendimento ágil e soluções automotivas completas." />
+      {/* Open Graph */}
+      <meta property="og:title" content="Zero 20 Garage | Oficina Mecânica e Retífica de Motores em Mairiporã-SP" />
+      <meta property="og:description" content="Especialistas em retífica de motores e manutenção automotiva em Mairiporã. Atendimento ágil e soluções completas para seu veículo." />
       <meta property="og:image" content="https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429488/imagem-og_trb3ws.jpg" />
-      <meta property="og:url" content="https://www.zero20garage.com/" />
+      <meta property="og:url" content="https://zero20garage.com.br/" />
       <meta property="og:type" content="website" />
 
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="Retífica de Motores e Mecânica em Mairiporã | Zero20 Garage" />
-      <meta name="twitter:description" content="Soluções sob medida para o seu veículo rodar seguro em Mairiporã e encarar os desafios da nossa região." />
+      <meta name="twitter:title" content="Zero 20 Garage | Oficina Mecânica e Retífica de Motores em Mairiporã-SP" />
+      <meta name="twitter:description" content="Revisão, manutenção automotiva e retífica de motores em Mairiporã-SP. Qualidade comprovada e atendimento especializado." />
       <meta name="twitter:image" content="https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429488/imagem-og_trb3ws.jpg" />
     </Helmet>
 
@@ -57,10 +59,11 @@ function Home() {
     <DynamicHeader page="home" messages={messages} />
     <Breadcrumbs />
 
+      {/* SEO Semântica: H1 único por página com palavra-chave principal */}
       <div className='highlight-item home-header home-highlight-item'>
-        <h1 className="titulo-claro home-title" style={{fontSize: '2rem'}}>Retífica de Motores e Soluções Mecânicas Sob Medida em Mairiporã</h1>
-        <h2 className="subtitulo-claro" style={{fontSize: '1.2rem', marginTop: '10px'}}>Nossas Soluções Automotivas para Mairiporã e Região</h2>
-        <p className="paragrafo-claro" style={{marginBottom: '20px', fontSize: '1.1rem'}}>
+        <h1 className="titulo-claro home-title home-h1">Retífica de Motores e Soluções Mecânicas Sob Medida em Mairiporã</h1>
+        <h2 className="subtitulo-claro home-subtitle">Nossas Soluções Automotivas para Mairiporã e Região</h2>
+        <p className="paragrafo-claro home-intro-text">
           Soluções sob medida para o seu veículo rodar seguro em Mairiporã e encarar os desafios da nossa região com confiança. Estrategicamente baseados para atender moradores do Centro de Mairiporã, Terra Preta e entorno de forma rápida.
         </p>
         <a href="/orcamento" className="button">Solicite um Orçamento</a>
@@ -248,7 +251,7 @@ function Home() {
       </div>
 
     {/* Marcas que Atendemos */}
-      <div className='highlight-item home-highlight-item' style={{background: 'transparent', boxShadow: 'none'}}>
+      <div className='highlight-item home-highlight-item home-brands-section'>
         <Suspense fallback={<div>Carregando marcas...</div>}>
           <BrandCarousel brands={carBrands} />
         </Suspense>

@@ -366,3 +366,15 @@
 .slick-dots li.slick-active button:before {
   color: var(--sobre-accent);
 }
+
+/* ===== Classes Semânticas (SEO Refactor - Substituição de Inline Styles) ===== */
+
+/* H1 principal da página Sobre com tamanho reduzido para leitura confortável */
+.sobre-h1 {
+  font-size: 2rem;
+}
+
+/* H2 do subtópico "A Paixão pelos Motores" - tamanho específico de acordo com hierarquia */
+.sobre-subtitulo-filosofia {
+  font-size: 1.4rem;
+}

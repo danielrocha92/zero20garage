@@ -59,3 +59,27 @@
     height: 500px;
   }
 }
+
+/* ===== Classes Semânticas (SEO Refactor - Substituição de Inline Styles) ===== */
+
+/* H1 da página de Contato */
+.contato-h1 {
+  font-size: 2rem;
+}
+
+/* H2 do subtítulo da seção de localização */
+.contato-h2 {
+  margin-top: 0.6rem;
+}
+
+/* Parágrafo de introdução da seção de localização */
+.contato-intro-text {
+  margin-bottom: 1.25rem;
+}
+
+/* Iframe do mapa: remove border sem usar style inline */
+.mapa-embed {
+  border: 0;
+  display: block;
+  width: 100%;
+}

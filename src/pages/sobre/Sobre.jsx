@@ -73,9 +73,10 @@ function Sobre() {
     <div className="page-escuro">
 
       <DynamicHeader page="sobre" messages={messages} />
+      {/* SEO On-Page: Helmet na posição correta, antes do conteúdo */}
       <Helmet>
-        <title>Sobre a Zero20 | Especialistas em Motores em Mairiporã</title>
-        <meta name="description" content="Conheça a Zero20 Garage: mais que uma oficina, sua parceira de confiança em Mairiporã. Apaixonados por motores, prezamos por qualidade sob medida." />
+        <title>Sobre a Zero 20 Garage | Oficina Mecânica de Confiança em Mairiporã-SP</title>
+        <meta name="description" content="Conheça a Zero 20 Garage: expert em retífica de motores e manutenção automotiva em Mairiporã-SP. Empresa familiar com anos de experiência e qualidade garantida." />
         <link rel="canonical" href="https://zero20garage.com.br/sobre" />
       </Helmet>
       <Breadcrumbs />
@@ -84,13 +85,15 @@ function Sobre() {
 
         {/* Seção: História */}
         <section className="sobre-section">
+          {/* Seção: História - H1 único por página com palavra-chave */}
           <div className="sobre-card nossa-historia">
-            <h1 className='titulo-claro' style={{fontSize: '2rem'}}>Nossa História e Compromisso com Mairiporã</h1>
+            <h1 className='titulo-claro sobre-h1'>Nossa História e Compromisso com Mairiporã</h1>
 
             <div className="historia-content">
               <div className="historia-intro">
                 <div className="historia-text">
-                  <h2 className='subtitulo-claro' translate='no' style={{fontSize: '1.4rem'}}>A Paixão Pelos Motores (Nossa Filosofia)</h2>
+                  {/* H2 para subtópico da história */}
+                  <h2 className='subtitulo-claro sobre-subtitulo-filosofia' translate='no'>A Paixão Pelos Motores (Nossa Filosofia)</h2>
                   <p translate='no' className='paragrafo-claro'>
                     Nascemos para elevar o nível da mecânica em Mairiporã. Entendemos cada carro como um projeto único e tratamos cada cliente da cidade como um vizinho de longa data, prestando serviços transparentes.
                   </p>
@@ -98,8 +101,14 @@ function Sobre() {
                     Tudo começou há muitos anos com Francisco Borges, carinhosamente conhecido como Chico. Desde a infância, Chico nutria uma paixão por carros e esse entusiasmo se transformou em profissão quando ele fundou a TecFran. Com anos de dedicação e experiência, a TecFran se tornou um nome de confiança local.
                   </p>
                 </div>
+                {/* Imagem below the fold: loading=lazy para performance. Alt descritivo para SEO */}
                 <div className="historia-image-wrapper">
-                  <img src="https://res.cloudinary.com/dlyeywiwk/image/upload/v1763428214/Equipe_y6nvty.jpg" alt="Equipe Zero20 Garage" className="historia-img" />
+                  <img
+                    src="https://res.cloudinary.com/dlyeywiwk/image/upload/v1763428214/Equipe_y6nvty.jpg"
+                    alt="Equipe da Zero 20 Garage em Mairiporã - mecânicos especializados em retífica de motores"
+                    className="historia-img"
+                    loading="lazy"
+                  />
                 </div>
               </div>
 
@@ -136,9 +145,15 @@ function Sobre() {
             <div className="equipe-content">
               <div className="equipe-slider-wrapper">
                 <Slider {...settings}>
-                  {teamMembers.map((member, index) => (
+                   {/* Fotos dos membros da equipe: loading=lazy (abaixo do fold) */}
+                   {teamMembers.map((member, index) => (
                     <div key={index} className="team-member-slide">
-                      <img src={member.image} alt={`${member.name}, ${member.role}`} className="team-photo" />
+                      <img
+                        src={member.image}
+                        alt={`${member.name}, ${member.role} na Zero 20 Garage em Mairiporã`}
+                        className="team-photo"
+                        loading="lazy"
+                      />
                       <div className="team-info">
                         <h4 className="team-name">{member.name}</h4>
                         <p className="team-role">{member.role}</p>
@@ -222,8 +237,14 @@ function Sobre() {
             </p>
 
             <div className="garagem-content">
+              {/* Imagem da fachada/garagem: loading=lazy e alt descritivo para SEO local */}
               <div className="garagem-image-wrapper">
-                <img src={fachada} alt="Nossa Garagem" className="garagem-img" />
+                <img
+                  src={fachada}
+                  alt="Interior da oficina mecânica Zero 20 Garage em Mairiporã - equipamentos modernos para retífica e manutenção"
+                  className="garagem-img"
+                  loading="lazy"
+                />
               </div>
               <div className="garagem-text-block">
                 <p className='paragrafo-claro'>

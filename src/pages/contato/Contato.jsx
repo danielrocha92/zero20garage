@@ -25,9 +25,10 @@ function Contato() {
   return (
     <div className="page-escuro">
     <DynamicHeader page="contato" messages={messages} />
+    {/* SEO On-Page: Helmet com title e description otimizados */}
     <Helmet>
-        <title>Fale com a Zero20 | Oficina e Mecânica em Mairiporã</title>
-        <meta name="description" content="Localize a Zero20 Garage facilmente em Mairiporã. Fale via WhatsApp, veja nosso mapa de como chegar ou envie um formulário. Estamos prontos para ajudar!" />
+        <title>Contato e Localização | Zero 20 Garage - Oficina Mecânica em Mairiporã-SP</title>
+        <meta name="description" content="Fale com a Zero 20 Garage via WhatsApp ou formulário. Oficina mecânica e retífica de motores em Mairiporã-SP. Saiba como nos encontrar." />
         <link rel="canonical" href="https://zero20garage.com.br/contato" />
     </Helmet>
     <Breadcrumbs />
@@ -36,21 +37,22 @@ function Contato() {
         {/* Seção de Contato */}
         <ContatoCta />
 
-        {/* Seção do Mapa */}
+          {/* Seção do Mapa */}
           <div className="highlight-item">
-            <h1 className="titulo-claro" style={{fontSize: '2rem'}}>Contato e Localização em Mairiporã</h1>
-            <h2 className="subtitulo-claro" style={{marginTop: '10px'}}>Venha Nos Fazer uma Visita Hoje!</h2>
-            <p className="paragrafo-claro" style={{marginBottom: '20px'}}>Zero20 Garage – Estr. dos Macacos, 742 - Mairiporã - SP. Encontre facilmente no Google Maps:</p>
+            {/* SEO Semântica: H1 único por página com palavra-chave de localização */}
+            <h1 className="titulo-claro contato-h1">Contato e Localização em Mairiporã</h1>
+            <h2 className="subtitulo-claro contato-h2">Venha Nos Fazer uma Visita Hoje!</h2>
+            <p className="paragrafo-claro contato-intro-text">Zero20 Garage – Estr. dos Macacos, 742 - Mairiporã - SP. Encontre facilmente no Google Maps:</p>
             <div className="map-container">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.799744734953!2d-46.5745093!3d-23.3263499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ceede375ca12c9%3A0xa22173d27f744745!2sZERO%2020%20GARAGE!5e0!3m2!1spt-BR!2sbr!4v1711478418134!5m2!1spt-BR!2sbr"
                 width="100%"
                 height="500"
-                style={{ border: 0 }}
+                className="mapa-embed"
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Localização da Zero 20 Garage"
+                title="Localização da Zero 20 Garage em Mairiporã-SP"
               ></iframe>
             </div>
           </div>

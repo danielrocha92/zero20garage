@@ -1,4 +1,4 @@
-# 🚗 Zero20 Garage
+# 🚗 Zero 20 Garage
 
 [![Vercel Status](https://vercelbadge.vercel.app/api/danielrocha92/zero20garage)](https://zero20garage.vercel.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -11,7 +11,7 @@ Desenvolvido para representar a excelência técnica da **Zero 20 Garage**, inte
 
 ---
 
-## 🔗 [Acesse o Projeto Online](https://zero20garage.vercel.app/)
+## 🔗 [Acesse o Projeto Online](https://zero20garage.com.br/)
 
 ---
 
@@ -20,7 +20,7 @@ Desenvolvido para representar a excelência técnica da **Zero 20 Garage**, inte
 ### Core Frontend
 *   **React.js (18+)** — SPA robusta focada em performance e modularidade.
 *   **React Router Dom (v7)** — Gerenciamento de rotas institucionais e administrativas protegidas.
-*   **CSS Modules** — Arquitetura de estilos isolada, garantindo manutenibilidade e evitando conflitos.
+*   **CSS Puro Modular** — Arquitetura de estilos dedicada e isolada por página/componente, sem frameworks externos (Bootstrap/Tailwind são proibidos), garantindo máxima performance de carregamento.
 *   **Framer Motion** — Micro-animações e transições de página fluidas para uma experiência premium.
 *   **Lucide React & React Icons** — Conjunto de ícones moderno e consistente.
 
@@ -31,12 +31,23 @@ Desenvolvido para representar a excelência técnica da **Zero 20 Garage**, inte
 ### Ferramentas de Utilitário
 *   **jsPDF & XLSX** — Geração dinâmica de orçamentos técnicos em PDF e exportação de dados para Excel.
 *   **Swiper.js** — Carrosséis modernos com efeitos Coverflow e Fade para banners de marketing e headers dinâmicos.
-*   **React Helmet Async** — Otimização técnica de SEO para busca local e autoridade de marca.
+*   **React Helmet Async** — Otimização técnica de SEO on-page por rota (title, description, canonical, OG tags).
 *   **Google Maps API** — Visualização de localização e prova social via avaliações.
 
 ---
 
 ## ✨ Funcionalidades em Destaque
+
+### 🔍 SEO Técnico & Core Web Vitals
+Refatoração completa voltada para ranqueamento local no Google:
+*   **SEO On-Page:** `<title>` e `<meta description>` otimizados por página com palavras-chave locais (`revisão`, `manutenção automotiva`, `retífica de motores`, `Mairiporã-SP`).
+*   **Schema Markup `AutoRepair`:** JSON-LD enriquecido com `name`, `telephone`, `address`, `geo`, `areaServed` (Mairiporã, Terra Preta, SP), `priceRange` e `openingHoursSpecification` — essencial para Google Maps e SEO Local.
+*   **Hierarquia de Headings:** Um único `<h1>` por página com a keyword principal; `<h2>` e `<h3>` para seções de serviços, garantindo semântica correta para crawlers.
+*   **Atributos `alt` descritivos:** Todas as imagens possuem textos alternativos ricos com contexto do serviço e localização.
+*   **`loading="lazy"`:** Aplicado em todas as imagens abaixo da primeira dobra (below the fold) para otimizar o LCP e reduzir o tempo de carregamento inicial.
+*   **Zero CSS Inline:** Política estrita — nenhum `style={{}}` nas páginas institucionais. Todos os estilos são definidos em arquivos CSS puros com classes semânticas.
+*   **`<html lang="pt-BR">`:** Declaração de idioma correta para indexação geolocalizada.
+*   **Tags `<link rel="canonical">`:** Presentes em todas as rotas para evitar conteúdo duplicado.
 
 ### 🏛️ Painel Administrativo de Precisão
 O painel admin foi reprojetado para maximizar a produtividade no ambiente de oficina:
@@ -56,7 +67,7 @@ O painel admin foi reprojetado para maximizar a produtividade no ambiente de ofi
 ### 📝 Conteúdo & Blog Profissional
 *   **Central de Conhecimento:** Artigos técnicos sobre manutenção e retífica para educar o público e gerar autoridade.
 *   **Engajamento:** Sistema de curtidas e visualizações integrado ao Firebase.
-*   **SEO Local Estruturado:** Dados amigáveis ao Google para destacar a oficina em pesquisas de região.
+*   **SEO Local Estruturado:** Schema.org `AutoRepair` e dados amigáveis ao Google para destacar a oficina em pesquisas da região.
 
 ---
 
@@ -64,7 +75,8 @@ O painel admin foi reprojetado para maximizar a produtividade no ambiente de ofi
 
 ```bash
 zero20garage/
-├── public/                # Assets estáticos, robots.txt, sitemap.xml
+├── public/                # Assets estáticos, index.html, robots.txt, sitemap.xml
+│   └── index.html         # HTML base: lang="pt-BR", Schema AutoRepair JSON-LD, meta global
 ├── src/
 │   ├── assets/            # Imagens técnicas, animações Lottie e vídeos
 │   ├── components/        # Componentes atômicos e estruturais
@@ -72,9 +84,16 @@ zero20garage/
 │   │   ├── layout/        # Navegação global e administrativa
 │   │   └── ui/            # Elementos de interface (Modais, Inputs, Botões)
 │   ├── pages/             # Rotas (Home, Blog, Serviços, Admin, Cliente)
+│   │   ├── home/          # H1 único + Helmet SEO + CSS sem inline styles
+│   │   ├── servicos/      # H1/H2/H3 semânticos + Helmet por rota
+│   │   ├── sobre/         # Alt descritivos + loading="lazy" + Helmet
+│   │   ├── contato/       # H1 único + mapa embed sem style inline
+│   │   └── orcamento/     # Formulário semântico + Helmet otimizado
 │   ├── services/          # Camada de integração (Firebase, API)
-│   ├── styles/            # CSS Modules e Tokens de design
-│   ├── hooks/             # Lógica reutilizável (PDF, Auth, useMarketingMedia, Hooks customizados)
+│   ├── styles/            # CSS puro global e tokens de design
+│   │   ├── GlobalStyles.css   # Variáveis CSS, reset, tipografia base
+│   │   └── Home.css           # Estilos da home + classes semânticas SEO
+│   ├── hooks/             # Lógica reutilizável (PDF, Auth, useMarketingMedia)
 │   └── App.jsx            # Configuração principal da aplicação
 └── package.json           # Dependências e scripts do projeto
 ```
@@ -108,10 +127,24 @@ A escolha cromática reflete a precisão e a confiança do setor automotivo:
 
 | Cor | Hex | Conceito |
 | :--- | :--- | :--- |
-| **Preto Grafite** | `#212121` | Tecnologia e Profissionalismo |
-| **Cinza Metálico** | `#B0BEC5` | Metais, Componentes e Precisão |
-| **Vermelho Mecânico** | `#D32F2F` | Potência, Velocidade e Call-to-Action |
-| **Branco Neve** | `#FFFFFF` | Clareza e Limpeza nos Dados |
+| **Preto Grafite** | `#0f0f0f` | Tecnologia e Profissionalismo |
+| **Cinza Metálico** | `#b0b0b0` | Metais, Componentes e Precisão |
+| **Vermelho Mecânico** | `#ff3b3b` | Potência, Velocidade e Call-to-Action |
+| **Branco Neve** | `#f5f5f5` | Clareza e Limpeza nos Dados |
+
+---
+
+## 🔧 Padrões de Código
+
+| Regra | Status |
+| :--- | :--- |
+| CSS Frameworks (Bootstrap/Tailwind) | ❌ Proibido |
+| CSS Inline (`style={{}}`) nas páginas | ❌ Proibido |
+| CSS puro com classes semânticas | ✅ Obrigatório |
+| Um `<h1>` por página | ✅ Garantido |
+| `alt` descritivo em todas as `<img>` | ✅ Garantido |
+| `loading="lazy"` em imagens below-the-fold | ✅ Garantido |
+| Schema `AutoRepair` JSON-LD | ✅ Implementado |
 
 ---
 
