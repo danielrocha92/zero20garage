@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { CheckCircle2, XCircle, Droplet, ShieldCheck, Award, Settings, ArrowRight } from 'lucide-react';
+import { Droplet, ShieldCheck, Award, Settings, ArrowRight } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade } from 'swiper/modules';
 import useMarketingMedia from '../../hooks/useMarketingMedia';
@@ -14,7 +14,7 @@ import { oilBrands } from '../../data/brands';
 
 const bannerVideoDesktop = "https://res.cloudinary.com/dlyeywiwk/video/upload/v1764821682/wl0kcac1fvfhm2rgdeja.mp4";
 const bannerVideoMobile = "https://res.cloudinary.com/dlyeywiwk/video/upload/v1764822609/fokcyaolucoogjmhusx1.mp4";
-const workshopPhoto = "https://images.unsplash.com/photo-1632823471565-1ec2a1ad4015?q=80&w=1200&auto=format&fit=crop";
+const workshopPhoto = "https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1765506349/Gemini_Generated_Image_2pi18x2pi18x2pi1_iqwmam.png";
 
 const OleosFiltros = () => {
   const { media: extraBanners } = useMarketingMedia('oleos-filtros');
@@ -112,7 +112,9 @@ const OleosFiltros = () => {
             Entendemos que a manutenção preventiva é o coração da longevidade do seu veículo.
           </p>
           <div className="of-highlight-box">
-            <Droplet className="of-highlight-icon" />
+            <div className="of-highlight-icon-wrapper">
+              <Droplet className="of-highlight-icon" />
+            </div>
             <div>
               <h3>O que fazemos</h3>
               <p>A execução do nosso serviço vai além da simples substituição. Realizamos a troca do óleo lubrificante e de <strong>TODOS</strong> os filtros (óleo, ar, combustível e cabine), garantindo que seu motor respire melhor, consuma menos e mantenha o ar-condicionado limpo. Atendemos a todas as medidas e veículos de linha leve do mercado.</p>
@@ -121,42 +123,7 @@ const OleosFiltros = () => {
         </motion.div>
       </section>
 
-      {/* 3. Tabela de Comparação Moderna */}
-      <section className="of-comparison-section wrapper-padrao">
-        <motion.div className="of-section-header" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-          <h2 className="of-section-title">Por que escolher a <span className="of-text-gradient">Zero 20</span>?</h2>
-          <p className="of-section-desc">Descubra a diferença de optar por um serviço focado em excelência automotiva.</p>
-        </motion.div>
 
-        <motion.div className="of-table-container" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-          <div className="of-table-glass">
-            <div className="of-table-row of-table-header">
-              <div className="of-col of-col-feature">Serviço</div>
-              <div className="of-col of-col-comum">Oficinas Comuns / Geral</div>
-              <div className="of-col of-col-zero20">Zero 20 Óleos e Filtros</div>
-            </div>
-
-            <div className="of-table-row">
-              <div className="of-col of-col-feature">Escopo da Troca</div>
-              <div className="of-col of-col-comum"><XCircle className="icon-red"/> Troca simples ou parcial</div>
-              <div className="of-col of-col-zero20"><CheckCircle2 className="icon-green"/> <strong>Completa:</strong> Grande diversidade de óleos e filtros</div>
-            </div>
-
-            <div className="of-table-row">
-              <div className="of-col of-col-feature">Linhas de Produtos</div>
-              <div className="of-col of-col-comum"><XCircle className="icon-red"/> Opções de marcas limitadas</div>
-              <div className="of-col of-col-zero20"><CheckCircle2 className="icon-green"/> Econômica, Intermediária e Genuína</div>
-            </div>
-
-            <div className="of-table-row">
-              <div className="of-col of-col-feature">Especialização</div>
-              <div className="of-col of-col-comum"><XCircle className="icon-red"/> Conhecimento superficial</div>
-              <div className="of-col of-col-zero20"><CheckCircle2 className="icon-green"/> 100% preparados p/ todas viscosidades</div>
-            </div>
-
-          </div>
-        </motion.div>
-      </section>
 
       {/* 4. Linhas de Produtos (Cards) */}
       <section className="of-products-section wrapper-padrao">

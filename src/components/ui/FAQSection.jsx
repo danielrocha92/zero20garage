@@ -50,7 +50,7 @@ const FAQSection = () => {
           </div>
         ))}
       </div>
-      <a href="/Faq" className="button">Ver Mais</a>
+      <a href="/Faq" className="btn btn-primary">Ver Mais</a>
     </div>
   );
 };

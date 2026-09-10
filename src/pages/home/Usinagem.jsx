@@ -75,7 +75,7 @@ const LAST_UPDATED = '02 de dezembro de 2025'; // atualizado manualmente quando 
         </div>
 
         <div className="institucional-section">
-          <Link to="/" className="home-button-voltar">← Voltar para Home</Link>
+          <Link to="/" className="btn btn-secondary">← Voltar para Home</Link>
         </div>
       </div>
     </div>

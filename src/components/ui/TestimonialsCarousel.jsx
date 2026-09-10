@@ -98,7 +98,7 @@ const TestimonialsCarousel = () => {
       <div className="review-cta-container">
         <a
           href="https://search.google.com/local/writereview?placeid=ChIJyRLKdePtzpQRRUd0f9JzIaI"
-          className="button"
+          className="btn btn-primary"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -134,7 +134,7 @@ const TestimonialsCarousel = () => {
                 loading="lazy"
               />
             </div>
-            <button onClick={() => setSelectedTestimonial(null)} className="button">
+            <button onClick={() => setSelectedTestimonial(null)} className="btn btn-primary">
               Fechar
             </button>
           </div>

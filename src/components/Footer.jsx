@@ -73,12 +73,13 @@ function Footer() {
           </div>
 
           <div className="footer-card">
-            <span className="title">© {anoAtual} 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™ - Rocha Tech Solutions. Todos os direitos reservados.<div className="dev-credit">
-              <a href="https://rocha-tech-solutions.vercel.app/" target="_blank" rel="noopener noreferrer">
+            <span className="copyright-text">© {anoAtual} 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™ - Todos os direitos reservados.</span>
+            <div className="dev-credit">
+              <span className="dev-credit-text">Feito por:</span>
+              <a href="https://rocha-tech-solutions.vercel.app/" target="_blank" rel="noopener noreferrer" className="dev-credit-link">
                 <img src={logoDev} alt="Rocha Tech Solutions" className="dev-logo" />
               </a>
             </div>
-            </span>
           </div>
         </div>
 
@@ -146,9 +147,10 @@ function Footer() {
             </div>
 
             <div className="footer-card">
-              <span className="title">© {anoAtual} 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™ - Rocha Tech Solutions. Todos os direitos reservados.</span>
+              <span className="copyright-text">© {anoAtual} 𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™ - Todos os direitos reservados.</span>
               <div className="dev-credit">
-                <a href="https://rocha-tech-solutions.vercel.app/" target="_blank" rel="noopener noreferrer">
+                <span className="dev-credit-text">Feito por:</span>
+                <a href="https://rocha-tech-solutions.vercel.app/" target="_blank" rel="noopener noreferrer" className="dev-credit-link">
                   <img src={logoDev} alt="Rocha Tech Solutions" className="dev-logo" />
                 </a>
               </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 import "../styles/Navbar.css";
 
 const logo = "https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto,w_200,h_200,c_limit/v1763429492/logo_mqvkvh.png";
@@ -46,87 +47,55 @@ function Navbar({ isLoggedIn }) {
   }, [menuOpen]);
 
   return (
-    <nav ref={navRef} className={`navbar ${scrolled ? "scrolled-down" : ""}`}>
+    <nav ref={navRef} className={`navbar ${scrolled ? "scrolled-down" : ""} ${menuOpen ? "navbar--menu-open" : ""}`}>
       {/* Logo */}
       <div className="navbar-logo">
-        <NavLink to="/" onClick={handleMenuClick}>
-          <img src={logo} alt="Logo" />
+        <NavLink to="/" onClick={handleMenuClick} aria-label="Página Inicial">
+          <img src={logo} alt="Logo Zero 20 Garage" width="96" height="96" decoding="async" />
         </NavLink>
       </div>
 
-      {/* Links Desktop */}
-      <div className={`menu ${menuOpen ? "open" : ""}`} id="site-menu">
+      {/* Links Desktop/Mobile */}
+      <div className={`navbar-menu-container ${menuOpen ? "open" : ""}`} id="site-menu">
         <ul className="navbar-links">
           <li>
-            <NavLink
-              to="/"
-              onClick={handleMenuClick}
-              className={({ isActive }) => (isActive ? "glow" : "")}
-            >
+            <NavLink to="/" onClick={handleMenuClick} className={({ isActive }) => (isActive ? "glow" : "")}>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/servicos"
-              onClick={handleMenuClick}
-              className={({ isActive }) => (isActive ? "glow" : "")}
-            >
+            <NavLink to="/servicos" onClick={handleMenuClick} className={({ isActive }) => (isActive ? "glow" : "")}>
               Serviços
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/oleos-filtros"
-              onClick={handleMenuClick}
-              className={({ isActive }) => (isActive ? "glow" : "")}
-            >
+            <NavLink to="/oleos-filtros" onClick={handleMenuClick} className={({ isActive }) => (isActive ? "glow" : "")}>
               Óleos e Filtros
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to={isLoggedIn ? "/painel-orcamentos" : "/orcamento"}
-              onClick={handleMenuClick}
-              className={({ isActive }) => (isActive ? "glow" : "")}
-            >
+            <NavLink to={isLoggedIn ? "/painel-orcamentos" : "/orcamento"} onClick={handleMenuClick} className={({ isActive }) => (isActive ? "glow" : "")}>
               Orçamentos
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/contato"
-              onClick={handleMenuClick}
-              className={({ isActive }) => (isActive ? "glow" : "")}
-            >
+            <NavLink to="/contato" onClick={handleMenuClick} className={({ isActive }) => (isActive ? "glow" : "")}>
               Contato
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/sobre"
-              onClick={handleMenuClick}
-              className={({ isActive }) => (isActive ? "glow" : "")}
-            >
+            <NavLink to="/sobre" onClick={handleMenuClick} className={({ isActive }) => (isActive ? "glow" : "")}>
               Sobre
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/blog"
-              onClick={handleMenuClick}
-              className={({ isActive }) => (isActive ? "glow" : "")}
-            >
+            <NavLink to="/blog" onClick={handleMenuClick} className={({ isActive }) => (isActive ? "glow" : "")}>
               Blog
             </NavLink>
           </li>
           {!isLoggedIn && (
             <li>
-              <NavLink
-                to="/login"
-                onClick={handleMenuClick}
-                className={({ isActive }) => (isActive ? "glow" : "")}
-              >
+              <NavLink to="/login" onClick={handleMenuClick} className={({ isActive }) => (isActive ? "glow" : "")}>
                 Login
               </NavLink>
             </li>
@@ -134,17 +103,15 @@ function Navbar({ isLoggedIn }) {
         </ul>
       </div>
 
-      {/* Botão Hambúrguer (aparece só no mobile) */}
+      {/* Botão Hambúrguer (Mobile) */}
       <button
-        className={`hamburger ${menuOpen ? "hamburger--open" : ""}`}
+        className="mobile-toggle-btn"
         onClick={toggleMenu}
         aria-label="Alternar menu"
         aria-controls="site-menu"
         aria-expanded={menuOpen}
       >
-        <span />
-        <span />
-        <span />
+        {menuOpen ? <X size={32} color="#fff" /> : <Menu size={32} color="#fff" />}
       </button>
     </nav>
   );

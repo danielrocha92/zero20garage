@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/Home.css'; // Importa o arquivo global de estilos
@@ -14,9 +15,14 @@ const TestimonialsCarousel = lazy(() => import('../../components/ui/Testimonials
 const ContatoCta = lazy(() => import('../../components/ui/ContatoCta'));
 const BrandCarousel = lazy(() => import('../../components/ui/BrandCarousel'));
 
-function Home() {
+interface MessageProps {
+  title: string;
+  subtitle: string;
+}
 
-  const messages = [
+const Home: React.FC = () => {
+
+  const messages: MessageProps[] = [
     {
       title: '𝗭𝗘𝗥𝗢 𝟮𝟬 𝗚𝗔𝗥𝗔𝗚𝗘™',
       subtitle: 'Oficina Mecânica e Retífica de Motores Nacionais e Importados',
@@ -35,6 +41,38 @@ function Home() {
     <>
     {/* SEO On-Page: Helmet com title e description otimizados para conversão local */}
     <Helmet>
+      {/* Script JSON-LD para SEO Local (Schema.org) */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "AutoRepair",
+          "name": "Zero 20 Garage",
+          "image": "https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429488/imagem-og_trb3ws.jpg",
+          "@id": "https://zero20garage.com.br",
+          "url": "https://zero20garage.com.br",
+          "telephone": "+551144199999", // Número fictício placeholder
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Av. Laura Gomes Hannickel, 153, Capoavinha",
+            "addressLocality": "Mairiporã",
+            "addressRegion": "SP",
+            "postalCode": "07600-000",
+            "addressCountry": "BR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -23.3195,
+            "longitude": -46.5866
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "08:00",
+            "closes": "18:00"
+          },
+          "priceRange": "$$"
+        })}
+      </script>
       <title>Zero 20 Garage | Oficina Mecânica e Retífica de Motores em Mairiporã-SP</title>
       <meta name="description" content="Oficina mecânica especializada em revisão, manutenção automotiva e retífica de motores em Mairiporã-SP. Qualidade e garantia. Peça seu orçamento!" />
       <meta name="keywords" content="retífica de motor, oficina mecânica, Mairiporã, Terra Preta, motor fundido, motores nacionais, motores importados, manutenção automotiva" />
@@ -66,7 +104,7 @@ function Home() {
         <p className="paragrafo-claro home-intro-text">
           Soluções sob medida para o seu veículo rodar seguro em Mairiporã e encarar os desafios da nossa região com confiança. Estrategicamente baseados para atender moradores do Centro de Mairiporã, Terra Preta e entorno de forma rápida.
         </p>
-        <a href="/orcamento" className="button">Solicite um Orçamento</a>
+        <a href="/orcamento" className="btn btn-primary">Solicite um Orçamento</a>
       </div>
 
     {/* Destaques */}

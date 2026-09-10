@@ -23,17 +23,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #8f434359;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #ffffff; /* Fundo branco padronizado para as logos (evita o problema de JPG vs PNG) */
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease;
-    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
 }
 
 .brand-logo-wrapper.green {
-    background: #4CAF5059;
+    border: 2px solid #4CAF50; /* Apenas a borda indica a variação verde, mantendo o fundo branco para a logo */
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+}
+
+.brand-logo-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
 }
 
 .brand-logo {
@@ -41,7 +46,9 @@
     max-height: 100%;
     object-fit: contain;
     /* Original colors requested */
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
-/* Hover effects removed for static behavior */
+.brand-logo-wrapper:hover .brand-logo {
+    transform: scale(1.05);
+}

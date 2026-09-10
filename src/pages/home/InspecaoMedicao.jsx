@@ -28,7 +28,7 @@ const InspecaoMedicao = () => {
         </section>
         <section className="institucional-section"><ContatoCta /></section>
         <div className="institucional-last-updated"><p className="institucional-acknowledgment">Página atualizada em: {LAST_UPDATED}</p></div>
-        <div className="institucional-section"><Link to="/" className="home-button-voltar">← Voltar para Home</Link></div>
+        <div className="institucional-section"><Link to="/" className="btn btn-secondary">← Voltar para Home</Link></div>
       </div>
     </div>
   );

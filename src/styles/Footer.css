@@ -119,7 +119,7 @@
   transition: color 0.4s ease, transform 0.3s ease; /* Adiciona transição suave */
 }
 
-.footer span {
+.footer .divider {
   margin: 0 5px;
   font-size: 4rem;
   color: #ffffff;
@@ -140,9 +140,17 @@
 }
 
 .footer-card .title {
-  margin-bottom: 1rem; /* Espaçamento entre título e ícones */
-  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
   font-weight: 600;
+}
+
+.copyright-text {
+  font-size: 0.85rem;
+  color: #a1a1aa;
+  text-align: center;
+  display: block;
+  margin-top: 1rem;
 }
 
 .footer-card .icons {
@@ -213,10 +221,42 @@
 }
 
 
-  .dev-logo {
-  width: 75px; /* Ajuste o tamanho conforme necessário */
+.dev-credit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.dev-credit-text {
+  font-size: 0.95rem;
+  color: #94a3b8; /* Cor cinza/azul claro fiel à referência */
+  font-weight: 500;
+}
+
+.dev-credit-link {
+  background-color: #0f172a; /* Fundo azul escuro da caixa */
+  border: 1px solid #1e293b; /* Borda sutil */
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.dev-credit-link:hover {
+  background-color: #1e293b;
+  border-color: #334155;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.dev-logo {
+  width: 75px; 
   height: auto;
-  margin-top: 0.5rem;
   transition: transform 0.3s ease;
 }
 
@@ -243,9 +283,7 @@
     text-decoration: none;
   }
 
-  .footer span {
-    font-size: 2rem;
-  }
+  /* .footer span rule removed */
 
   .footer-card i {
     font-size: 2rem;
@@ -323,12 +361,12 @@
     display: flex;
   }
 
-  .accordion-header {
+  .accordion-button {
     background: none;
     border: none;
     width: 100%;
     text-align: left;
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: 1rem 0;
     cursor: pointer;
   }
@@ -336,7 +374,7 @@
   .accordion-content {
     padding-left: 1rem;
     padding-bottom: 1rem;
-    font-size: 1.9rem;
+    font-size: 0.95rem;
   }
 
   .social-icons a,
@@ -352,10 +390,13 @@
     transition: color 0.3s ease;
   }
 
-.dev-logo {
-  width: 65px; /* Ajuste o tamanho conforme necessário */
-  height: auto;
-  margin-top: 0.5rem;
-}
+  .dev-credit-link {
+    padding: 0.4rem 0.8rem;
+  }
+
+  .dev-logo {
+    width: 65px;
+    height: auto;
+  }
 
 }

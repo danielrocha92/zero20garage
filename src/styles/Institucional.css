@@ -152,25 +152,7 @@
   transform-origin: bottom left;
 }
 
-/* Botão Voltar */
-.home-button-voltar {
-  display: inline-block;
-  padding: 0.8rem 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  color: var(--text-primary);
-  text-decoration: none;
-  font-weight: 600;
-  transition: var(--transition-smooth);
-  margin-top: 1rem;
-}
 
-.home-button-voltar:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateX(-5px);
-  border-color: var(--accent-color);
-}
 
 /* Reconhecimento e Rodapé */
 .institucional-acknowledgment {

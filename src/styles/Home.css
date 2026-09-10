@@ -18,116 +18,100 @@
   transition: transform 0.3s ease;
 }
 
-/* Timeline Container (Specific for Processo de Retífica) */
-.highlight-item-processo .timeline {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  gap: 2rem;
-  padding-left: 20px;
-  /* Espaço para a linha vertical */
-}
-
-/* Linha Vertical (Espinha de Peixe) */
-.highlight-item-processo .timeline::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: #ff0015;
-  border-radius: 2px;
-}
-
-/* Ajuste para os cards */
-.highlight-item-processo .timeline-step {
-  background: linear-gradient(135deg, rgba(30, 30, 30, 0.7), rgba(10, 10, 10, 0.8));
-  padding: 1.5rem;
-  border-radius: 15px;
-  text-align: left;
-  /* Texto alinhado à esquerda para leitura natural */
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  /* Fix para Safari/iOS */
-  transition: transform 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  min-height: auto;
-  /* Altura flexível */
-  position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  margin-left: 20px;
-  /* Espaço entre a linha e o card */
-}
-
-/* Conector (Bolinha na linha) */
-.highlight-item-processo .timeline-step::before {
-  content: '';
-  position: absolute;
-  left: -32px;
-  /* Posiciona a bolinha sobre a linha vertical */
-  top: 20px;
-  width: 20px;
-  height: 20px;
-  background: #ff0015;
-  border-radius: 50%;
-  border: 4px solid #1e1e1e;
-  /* Cor do fundo para destacar */
-  z-index: 1;
-}
-
-/* Seta apontando para o card */
-.highlight-item-processo .timeline-step::after {
-  content: '';
-  position: absolute;
-  left: -10px;
-  top: 25px;
-  width: 0;
-  height: 0;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-right: 10px solid rgba(255, 255, 255, 0.05);
-}
-
-.timeline-step:hover {
-  transform: translateX(5px);
-  /* Move para a direita no hover */
-  box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
-  border-color: #ff0015;
-}
-
-.icon-animated {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #ff0015;
-  align-self: center;
-  /* Ícone centralizado */
-}
-
-/* Link da timeline */
-.link-timeline {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
 .highlight-item-processo {
-  /* Estilo atual do efeito de vidro */
-  background-color: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  background-color: var(--bg-card);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: var(--glass-border);
+  box-shadow: var(--shadow-soft);
   border-radius: 20px;
-  padding: 1.5rem;
-  margin: 2rem 0;
+  padding: 2rem;
+  margin: 2rem auto;
   overflow: visible;
-  /* Permite que elementos saiam se necessário */
   max-width: 1200px;
-  margin: 0 auto;
+  
+  /* CSS Moderno (2026): Container Queries */
+  container-type: inline-size;
+  container-name: processo-container;
+
+  /* CSS Moderno (2026): CSS Nesting Nativo */
+  & .timeline {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 2rem;
+    padding-left: 20px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ff0015;
+      border-radius: 2px;
+    }
+  }
+
+  & .timeline-step {
+    background: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: left;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-height: auto;
+    position: relative;
+    border: var(--glass-border);
+    margin-left: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: -32px;
+      top: 20px;
+      width: 20px;
+      height: 20px;
+      background: #ff0015;
+      border-radius: 50%;
+      border: 4px solid #1e1e1e;
+      z-index: 1;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 25px;
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-right: 10px solid rgba(255, 255, 255, 0.05);
+    }
+  }
+}
+
+/* Fallbacks via @container para a própria section baseada no tamanho dela mesma */
+@container processo-container (max-width: 768px) {
+  .timeline-step {
+    padding: 1.25rem;
+    margin-left: 15px;
+    width: calc(100% - 15px);
+    box-sizing: border-box;
+  }
+  .timeline {
+    padding-left: 10px;
+    padding-right: 10px;
+    overflow-x: hidden;
+  }
 }
 
 /* Animação Pulse */
@@ -148,12 +132,6 @@
   }
 }
 
-/* Botão */
-.button {
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
-  outline: none;
-}
 
 /* Endereço */
 .address a {
@@ -166,21 +144,14 @@
 }
 
 /* ===== Telas menores (Mobile) ===== */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .highlight-item-processo {
-    padding: 1rem;
-    margin: 1rem 0;
+    padding: 1.5rem 1rem;
+    margin: 2rem 0;
+    overflow: hidden; /* Prevent horizontal overflow */
   }
-
-  .highlight-item-processo .timeline-step {
-    padding: 1rem;
-    margin-left: 10px;
-    /* Reduz margem da linha */
-  }
-
-  .highlight-item-processo .timeline {
-    padding-left: 10px;
-  }
+  
+  /* Fallbacks para mobile se necessário */
 }
 
 /* ===== Telas maiores (≥ 769px) ===== */
@@ -292,13 +263,6 @@
     /* Efeito de zoom leve no desktop */
   }
 
-  .button {
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    margin: 0 auto;
-    display: block;
-    width: fit-content;
-  }
 
   /* === Novos Ajustes Solicitados === */
 
@@ -317,14 +281,15 @@
 
 /* ===== Classes Semânticas (SEO Refactor - Substituição de Inline Styles) ===== */
 
-/* H1 principal da Home - menor para impacto visual sem domínio exagerado */
+/* H1 principal da Home - Tipografia Fluida (Mobile -> Desktop) */
 .home-h1 {
-  font-size: 2rem;
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  line-height: 1.3;
 }
 
-/* Subtítulo com espace menor acima */
+/* Subtítulo com tipografia fluida */
 .home-subtitle {
-  font-size: 1.2rem;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
   margin-top: 0.6rem;
 }
 
