@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, orderBy, query } from 'firebase/firestore';
+import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, orderBy, query, setDoc } from 'firebase/firestore';
 import { db } from '../../services/firebaseOrcamentos';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Image, Video, Trash2, PlusCircle, Edit, Link as LinkIcon, Save, X, PlusSquare, AlignLeft, AlignCenter, AlignRight, Type, MousePointer2, LayoutGrid } from 'lucide-react';
@@ -35,7 +35,7 @@ const PainelMarketing = ({ showMessage }) => {
   const marketingCollectionRef = collection(db, "marketing_media");
 
   const defaultStaticBanners = [
-    { id: 'static-home-desktop', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429487/home_k6ug8o.jpg', tipo: 'imagem', titulo: 'Especialistas em Motores', subtitulo: 'Sua oficina de confiança', textoBotao: 'Agendar', posicaoTexto: 'esquerda', filtroEscuro: true, pagina: 'home', ordem: 0, ativo: true, isReadOnly: true },
+    { id: 'static-home-desktop', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429487/home_k6ug8o.jpg', tipo: 'imagem', titulo: 'Especialistas em Motores', subtitulo: 'Sua oficina de confiança', textoBotao: 'Agendar', posicaoTexto: 'esquerda', filtroEscuro: true, pagina: 'home', ordem: 0, ativo: true, isDefault: true },
     { id: 'static-sobre', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1765200812/IMG_3062_aldoim.jpg', tipo: 'imagem', titulo: 'Nossa História', pagina: 'sobre', ordem: 0, ativo: true, isDefault: true },
     { id: 'static-servicos', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429508/servicos_gblbyy.jpg', tipo: 'imagem', titulo: 'Nossos Serviços', pagina: 'servicos', ordem: 0, ativo: true, isDefault: true },
     { id: 'static-orcamento', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1764870173/img-orcamento-dektop_yx6lgf.png', tipo: 'imagem', titulo: 'Faça um Orçamento', pagina: 'orcamento', ordem: 0, ativo: true, isDefault: true },
@@ -103,7 +103,7 @@ const PainelMarketing = ({ showMessage }) => {
 
       if (isEditing && currentId) {
         const mediaDoc = doc(db, "marketing_media", currentId);
-        await updateDoc(mediaDoc, docData);
+        await setDoc(mediaDoc, docData, { merge: true });
         showMessage && showMessage("Mídia atualizada com sucesso!");
       } else {
         docData.createdAt = new Date().toISOString();
@@ -115,7 +115,7 @@ const PainelMarketing = ({ showMessage }) => {
       fetchMedia();
     } catch (error) {
       console.error("Erro ao salvar:", error);
-      showMessage && showMessage("Erro ao salvar mídia.", true);
+      showMessage && showMessage(`Erro ao salvar mídia: ${error.message}`, true);
     } finally {
       setLoading(false);
     }

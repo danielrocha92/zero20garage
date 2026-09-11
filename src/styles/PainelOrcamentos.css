@@ -5,28 +5,41 @@
 * Estilos gerais para o container principal, cabeçalhos e seções.
 */
 .painel-orcamentos-container {
-    margin-top: 90px;
+    margin-top: 80px;
     min-height: 100vh;
-    background-color: rgb(11 11 11 / 60%);
-    backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2);
-    padding: 1.5rem;
+    background-color: #0d0d0d;
+    background-image: radial-gradient(circle at 50% 0%, #2a0808 0%, #0d0d0d 50%);
+    padding: 2rem 1.5rem;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
+    justify-content: flex-start;
+    gap: 2rem;
     box-sizing: border-box;
 }
 
+.highlight-card {
+    width: 100%;
+    max-width: 1200px;
+    background: rgba(20, 20, 20, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
 .titulo-escuro {
-    color: #c50404;
-    font-family: 'Arial Black', sans-serif;
+    color: #fff;
+    font-family: 'Inter', 'Outfit', sans-serif;
     font-size: 1.8em;
-    margin-bottom: 20px;
+    font-weight: 700;
+    margin-bottom: 25px;
     text-align: center;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 /*
@@ -164,54 +177,95 @@
 * Estilos para os cards clicáveis.
 */
 .cards-container {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 20px;
     justify-content: center;
-    flex-direction: row;
     align-items: stretch;
+    width: 100%;
 }
 
 .card-option {
-    flex: 1 1 140px;
-    max-width: 100%;
-    background: #2a2a2a;
-    border: 2px solid #444;
-    border-radius: 10px;
-    padding: 15px;
+    background: linear-gradient(145deg, #1c1c1c 0%, #151515 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 25px 15px;
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    font-family: Arial, sans-serif;
-    font-size: 0.9em;
-    color: #e0e0e0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    position: relative;
+    overflow: hidden;
 }
 
-.card-option i,
-.card-option svg {
-    font-size: 1.6em;
-    color: #d32f2f;
-}
-
-.card-option span {
-    display: block;
-    margin-top: 8px;
-    font-weight: 600;
-    color: #e0e0e0;
+.card-option::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at top, rgba(229, 9, 20, 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
 }
 
 .card-option:hover {
-    border-color: #d32f2f;
-    transform: translateY(-4px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    border-color: rgba(229, 9, 20, 0.4);
+    box-shadow: 0 15px 30px rgba(229, 9, 20, 0.15), 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.card-option:hover::before {
+    opacity: 1;
 }
 
 .card-option.active {
-    border-color: #d32f2f;
-    background: #3a3a3a;
+    background: linear-gradient(145deg, #2a0808 0%, #1a0505 100%);
+    border-color: #e50914;
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.2);
 }
+
+.card-option span {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #e0e0e0;
+    z-index: 1;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.2px;
+}
+
+.icon-wrapper {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e50914;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2) inset;
+}
+
+.card-option:hover .icon-wrapper {
+    background: rgba(229, 9, 20, 0.15);
+    transform: scale(1.15) translateY(-2px);
+    color: #ff3333;
+}
+
+.icon-wrapper.excel { color: #10b981; }
+.card-option:hover .icon-wrapper.excel { background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.4); }
+
+.icon-wrapper.pdf { color: #ef4444; }
+.card-option:hover .icon-wrapper.pdf { background: rgba(239, 68, 68, 0.15); color: #f87171; border-color: rgba(239, 68, 68, 0.4); }
+
+.icon-wrapper.info { color: #3b82f6; }
+.card-option:hover .icon-wrapper.info { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border-color: rgba(59, 130, 246, 0.4); }
+
+.icon-wrapper.logout { color: #9ca3af; }
+.card-option:hover .icon-wrapper.logout { background: rgba(156, 163, 175, 0.15); color: #d1d5db; border-color: rgba(156, 163, 175, 0.4); }
 
 /*
 * === Opções de Quantidade ===
@@ -458,7 +512,7 @@
 */
 @media (min-width: 768px) {
     .painel-orcamentos-container {
-        margin-top: 14px;
+        margin-top: 100px;
         padding: 20px;
     }
 

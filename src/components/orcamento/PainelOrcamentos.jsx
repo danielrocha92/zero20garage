@@ -6,7 +6,7 @@ import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
-import { FaCogs, FaTools, FaHistory, FaFileExcel, FaFilePdf, FaSignOutAlt, FaPlusCircle, FaOilCan, FaBullhorn } from 'react-icons/fa';
+import { Settings, Wrench, PlusCircle, Droplet, Megaphone, History, FileSpreadsheet, FileText, LogOut, ShieldCheck } from 'lucide-react';
 
 import OrcamentoCabecote from './OrcamentoCabecote';
 import MessageBox from '../ui/MessageBox';
@@ -400,27 +400,27 @@ const PainelOrcamentos = () => {
                             <div className="highlight-item">
                                 <div className="cards-container">
                                     <div className={`card-option ${tipo === 'motor' ? 'active' : ''}`} onClick={() => { setTipo('motor'); setEditingData(null); }}>
-                                        <FaCogs size={40} />
+                                        <div className="icon-wrapper"><Settings size={32} /></div>
                                         <span>Motor Completo</span>
                                     </div>
                                     <div className={`card-option ${tipo === 'cabecote' ? 'active' : ''}`} onClick={() => { setTipo('cabecote'); setEditingData(null); }}>
-                                        <FaTools size={40} />
+                                        <div className="icon-wrapper"><Wrench size={32} /></div>
                                         <span>Cabeçote</span>
                                     </div>
                                     <div className={`card-option ${tipo === 'servicosDiversos' ? 'active' : ''}`} onClick={() => { setTipo('servicosDiversos'); setEditingData(null); }}>
-                                        <FaPlusCircle size={40} />
+                                        <div className="icon-wrapper"><PlusCircle size={32} /></div>
                                         <span>Serviços Diversos</span>
                                     </div>
                                     <div className={`card-option ${tipo === 'trocaDeOleo' ? 'active' : ''}`} onClick={() => { setTipo('trocaDeOleo'); setEditingData(null); }}>
-                                        <FaOilCan size={40} />
+                                        <div className="icon-wrapper"><Droplet size={32} /></div>
                                         <span>Troca de Óleo</span>
                                     </div>
                                     <div className={`card-option ${tipo === 'marketing' ? 'active' : ''}`} onClick={() => { setTipo('marketing'); setEditingData(null); }}>
-                                        <FaBullhorn size={40} />
+                                        <div className="icon-wrapper"><Megaphone size={32} /></div>
                                         <span>Painel Marketing</span>
                                     </div>
                                     <div className="card-option" onClick={scrollToHistorico}>
-                                        <FaHistory size={40} />
+                                        <div className="icon-wrapper"><History size={32} /></div>
                                         <span>Histórico</span>
                                     </div>
                                 </div>
@@ -432,19 +432,19 @@ const PainelOrcamentos = () => {
                             <div className="highlight-item">
                                 <div className="cards-container">
                                     <div className="card-option" onClick={exportarExcel}>
-                                        <FaFileExcel size={40} color="green" />
+                                        <div className="icon-wrapper excel"><FileSpreadsheet size={32} /></div>
                                         <span>Exportar Excel</span>
                                     </div>
                                     <div className="card-option" onClick={exportarPDFCompleto}>
-                                        <FaFilePdf size={40} color="red" />
+                                        <div className="icon-wrapper pdf"><FileText size={32} /></div>
                                         <span>Exportar PDF</span>
                                     </div>
                                     <div className="card-option" onClick={() => navigate('/termo-garantia')}>
-                                        <FaFilePdf size={40} color="#007bff" />
+                                        <div className="icon-wrapper info"><ShieldCheck size={32} /></div>
                                         <span>Termo Garantia</span>
                                     </div>
                                     <div className="card-option" onClick={handleLogout}>
-                                        <FaSignOutAlt size={40} color="gray" />
+                                        <div className="icon-wrapper logout"><LogOut size={32} /></div>
                                         <span>Sair</span>
                                     </div>
                                 </div>
