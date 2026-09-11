@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, orderBy, query } from 'firebase/firestore';
 import { db } from '../../services/firebaseOrcamentos';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Image, Video, Trash2, PlusCircle, Edit, Link as LinkIcon, Save, X, HelpCircle, ChevronDown, ChevronUp, PlusSquare, AlignLeft, AlignCenter, AlignRight, Type, MousePointer2, Settings, LayoutGrid } from 'lucide-react';
+import { Image, Video, Trash2, PlusCircle, Edit, Link as LinkIcon, Save, X, PlusSquare, AlignLeft, AlignCenter, AlignRight, Type, MousePointer2, LayoutGrid } from 'lucide-react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
@@ -15,7 +13,7 @@ const PainelMarketing = ({ showMessage }) => {
   const [activeTab, setActiveTab] = useState('novo'); // 'novo' ou 'gerenciar'
   const [mediaList, setMediaList] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showTutorial, setShowTutorial] = useState(false);
+
 
   // States of Form
   const [isEditing, setIsEditing] = useState(false);
@@ -64,6 +62,7 @@ const PainelMarketing = ({ showMessage }) => {
 
   useEffect(() => {
     fetchMedia();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleInputChange = (e) => {
