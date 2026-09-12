@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, orderBy, query, setDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, deleteDoc, doc, orderBy, query, setDoc } from 'firebase/firestore';
 import { db } from '../../services/firebaseOrcamentos';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Image, Video, Trash2, PlusCircle, Edit, Link as LinkIcon, Save, X, PlusSquare, AlignLeft, AlignCenter, AlignRight, Type, MousePointer2, LayoutGrid } from 'lucide-react';
@@ -175,17 +175,17 @@ const PainelMarketing = ({ showMessage }) => {
 
   return (
     <div className="pmkt-container">
-      
+
       {/* Navegação de Abas */}
       <div className="pmkt-tabs">
-        <button 
+        <button
           className={`pmkt-tab-btn ${activeTab === 'novo' ? 'active' : ''}`}
           onClick={() => setActiveTab('novo')}
         >
           <PlusCircle size={18} />
           {isEditing ? 'Editar Banner' : 'Adicionar Banner'}
         </button>
-        <button 
+        <button
           className={`pmkt-tab-btn ${activeTab === 'gerenciar' ? 'active' : ''}`}
           onClick={() => { setActiveTab('gerenciar'); resetForm(); }}
         >
@@ -196,7 +196,7 @@ const PainelMarketing = ({ showMessage }) => {
 
       <AnimatePresence mode="wait">
         {activeTab === 'novo' && (
-          <motion.div 
+          <motion.div
             key="tab-novo"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -217,9 +217,9 @@ const PainelMarketing = ({ showMessage }) => {
                 ) : (
                   <div className="pmkt-preview-placeholder">Sua Imagem / Vídeo Aqui</div>
                 )}
-                
+
                 {formData.filtroEscuro && <div className="pmkt-preview-overlay"></div>}
-                
+
                 <div className={`pmkt-preview-content align-${formData.posicaoTexto}`}>
                   {formData.titulo && <h1 className="pmkt-preview-heading">{formData.titulo}</h1>}
                   {formData.subtitulo && <p className="pmkt-preview-subheading">{formData.subtitulo}</p>}
@@ -300,7 +300,7 @@ const PainelMarketing = ({ showMessage }) => {
                       <button type="button" className={`pmkt-align-btn ${formData.posicaoTexto === 'direita' ? 'active' : ''}`} onClick={() => handlePosicaoChange('direita')}><AlignRight size={18} /></button>
                     </div>
                   </div>
-                  
+
                   <div className="pmkt-form-group">
                     <label>Página de Exibição</label>
                     <select name="pagina" value={formData.pagina} onChange={handleInputChange}>
@@ -313,7 +313,7 @@ const PainelMarketing = ({ showMessage }) => {
                       <option value="blog">Blog</option>
                     </select>
                   </div>
-                  
+
                   <div className="pmkt-form-group">
                     <label>Ordem (0 é o primeiro)</label>
                     <input type="number" name="ordem" value={formData.ordem} onChange={handleInputChange} min="0" />
@@ -344,7 +344,7 @@ const PainelMarketing = ({ showMessage }) => {
         )}
 
         {activeTab === 'gerenciar' && (
-          <motion.div 
+          <motion.div
             key="tab-gerenciar"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
