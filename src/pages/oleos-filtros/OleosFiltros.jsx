@@ -12,12 +12,22 @@ import ContatoCta from '../../components/ui/ContatoCta';
 import BrandCarousel from '../../components/ui/BrandCarousel';
 import { oilBrands } from '../../data/brands';
 
-const bannerVideoDesktop = "https://res.cloudinary.com/dlyeywiwk/video/upload/v1764821682/wl0kcac1fvfhm2rgdeja.mp4";
 const bannerVideoMobile = "https://res.cloudinary.com/dlyeywiwk/video/upload/v1764822609/fokcyaolucoogjmhusx1.mp4";
+const defaultBanner = {
+  id: 'static-of-desktop',
+  url: 'https://res.cloudinary.com/dlyeywiwk/video/upload/v1764821682/wl0kcac1fvfhm2rgdeja.mp4',
+  tipo: 'video',
+  titulo: 'Óleos e Filtros',
+  pagina: 'oleos-filtros',
+  ordem: 0,
+  ativo: true,
+};
 const workshopPhoto = "https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1765506349/Gemini_Generated_Image_2pi18x2pi18x2pi1_iqwmam.png";
 
 const OleosFiltros = () => {
-  const { media: extraBanners } = useMarketingMedia('oleos-filtros');
+  const { media: marketingBanners } = useMarketingMedia('oleos-filtros', [defaultBanner]);
+  const baseBanner = marketingBanners.find((banner) => banner.id === defaultBanner.id);
+  const extraBanners = marketingBanners.filter((banner) => banner.id !== defaultBanner.id);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -36,7 +46,7 @@ const OleosFiltros = () => {
     }
   };
 
-  const hasCarousel = extraBanners.length > 0;
+  const hasCarousel = marketingBanners.length > 0;
 
   return (
     <div className="of-page-verde">
@@ -57,15 +67,22 @@ const OleosFiltros = () => {
             speed={1200}
             className="of-banner-swiper"
           >
-            {/* Slide original — vídeo */}
-            <SwiperSlide>
-              <video autoPlay loop muted playsInline className="of-video-bg desktop-only" poster="https://res.cloudinary.com/dlyeywiwk/video/upload/f_auto,q_auto,so_0/v1764821682/wl0kcac1fvfhm2rgdeja.jpg">
-                <source src={bannerVideoDesktop} type="video/mp4" />
-              </video>
-              <video autoPlay loop muted playsInline className="of-video-bg mobile-only" poster="https://res.cloudinary.com/dlyeywiwk/video/upload/f_auto,q_auto,so_0,w_800/v1764822609/fokcyaolucoogjmhusx1.jpg">
-                <source src={bannerVideoMobile} type="video/mp4" />
-              </video>
-            </SwiperSlide>
+            {baseBanner && (
+              <SwiperSlide>
+                {baseBanner.tipo === 'video' ? (
+                  <>
+                    <video autoPlay loop muted playsInline className="of-video-bg desktop-only" poster="https://res.cloudinary.com/dlyeywiwk/video/upload/f_auto,q_auto,so_0/v1764821682/wl0kcac1fvfhm2rgdeja.jpg">
+                      <source src={baseBanner.url} type="video/mp4" />
+                    </video>
+                    <video autoPlay loop muted playsInline className="of-video-bg mobile-only" poster="https://res.cloudinary.com/dlyeywiwk/video/upload/f_auto,q_auto,so_0,w_800/v1764822609/fokcyaolucoogjmhusx1.jpg">
+                      <source src={bannerVideoMobile} type="video/mp4" />
+                    </video>
+                  </>
+                ) : (
+                  <img src={baseBanner.url} alt={baseBanner.titulo || 'Banner'} className="of-video-bg" style={{ objectFit: 'cover' }} />
+                )}
+              </SwiperSlide>
+            )}
 
             {/* Slides extras do marketing */}
             {extraBanners.map((banner) => (
@@ -82,12 +99,18 @@ const OleosFiltros = () => {
           </Swiper>
         ) : (
           <>
-            <video autoPlay loop muted playsInline className="of-video-bg desktop-only" poster="https://res.cloudinary.com/dlyeywiwk/video/upload/f_auto,q_auto,so_0/v1764821682/wl0kcac1fvfhm2rgdeja.jpg">
-              <source src={bannerVideoDesktop} type="video/mp4" />
-            </video>
-            <video autoPlay loop muted playsInline className="of-video-bg mobile-only" poster="https://res.cloudinary.com/dlyeywiwk/video/upload/f_auto,q_auto,so_0,w_800/v1764822609/fokcyaolucoogjmhusx1.jpg">
-              <source src={bannerVideoMobile} type="video/mp4" />
-            </video>
+            {baseBanner && (baseBanner.tipo === 'video' ? (
+              <>
+                <video autoPlay loop muted playsInline className="of-video-bg desktop-only" poster="https://res.cloudinary.com/dlyeywiwk/video/upload/f_auto,q_auto,so_0/v1764821682/wl0kcac1fvfhm2rgdeja.jpg">
+                  <source src={baseBanner.url} type="video/mp4" />
+                </video>
+                <video autoPlay loop muted playsInline className="of-video-bg mobile-only" poster="https://res.cloudinary.com/dlyeywiwk/video/upload/f_auto,q_auto,so_0,w_800/v1764822609/fokcyaolucoogjmhusx1.jpg">
+                  <source src={bannerVideoMobile} type="video/mp4" />
+                </video>
+              </>
+            ) : (
+              <img src={baseBanner.url} alt={baseBanner.titulo || 'Banner'} className="of-video-bg" style={{ objectFit: 'cover' }} />
+            ))}
           </>
         )}
         <div className="of-banner-overlay"></div>

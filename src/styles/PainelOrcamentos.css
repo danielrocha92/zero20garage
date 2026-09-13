@@ -104,6 +104,14 @@
     margin: 1rem;
     color: var(--branco);
     overflow: hidden;
+    width: calc(100% - 2rem);
+    max-width: 1400px;
+    box-sizing: border-box;
+}
+
+.orcamento-form-wrapper-marketing {
+    max-width: 1440px;
+    padding: 2rem;
 }
 
 .orcamento-form-wrapper label {

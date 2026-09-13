@@ -9,7 +9,7 @@ import { db } from '../services/firebaseOrcamentos';
  * @param {string} pagina - Nome da página (home, sobre, servicos, oleos-filtros, etc.)
  * @returns {{ media: Array, loading: boolean }}
  */
-const useMarketingMedia = (pagina) => {
+const useMarketingMedia = (pagina, defaultMedia = []) => {
   const [media, setMedia] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -26,9 +26,18 @@ const useMarketingMedia = (pagina) => {
         const snapshot = await getDocs(q);
         const allMedia = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
 
-        // Filtrar: apenas ativo E da página solicitada
-        const filtered = allMedia.filter(
-          (item) => item.ativo === true && item.pagina === pagina
+        const persistedById = new Map(allMedia.map((item) => [item.id, item]));
+        const mergedDefaults = defaultMedia.map((item) => ({
+          ...item,
+          ...persistedById.get(item.id),
+        }));
+        const customMedia = allMedia.filter(
+          (item) => !defaultMedia.some((defaultItem) => defaultItem.id === item.id)
+        );
+
+        // Filtrar: apenas banners ativos, da página solicitada e não excluídos
+        const filtered = [...mergedDefaults, ...customMedia].filter(
+          (item) => item.deleted !== true && item.ativo === true && item.pagina === pagina
         );
 
         setMedia(filtered);

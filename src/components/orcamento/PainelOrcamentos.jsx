@@ -451,7 +451,7 @@ const PainelOrcamentos = () => {
                             </div>
                         </div>
 
-                        <main className="orcamento-form-wrapper" ref={formRef} id="orcamento-form">
+                        <main className={`orcamento-form-wrapper ${tipo === 'marketing' ? 'orcamento-form-wrapper-marketing' : ''}`} ref={formRef} id="orcamento-form">
                             {renderOrcamentoForm()}
 
                             {editingData && (

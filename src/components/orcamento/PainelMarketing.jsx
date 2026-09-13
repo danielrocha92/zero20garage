@@ -35,14 +35,14 @@ const PainelMarketing = ({ showMessage }) => {
   const marketingCollectionRef = collection(db, "marketing_media");
 
   const defaultStaticBanners = [
-    { id: 'static-home-desktop', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429487/home_k6ug8o.jpg', tipo: 'imagem', titulo: 'Especialistas em Motores', subtitulo: 'Sua oficina de confiança', textoBotao: 'Agendar', posicaoTexto: 'esquerda', filtroEscuro: true, pagina: 'home', ordem: 0, ativo: true, isDefault: true },
-    { id: 'static-sobre', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1765200812/IMG_3062_aldoim.jpg', tipo: 'imagem', titulo: 'Nossa História', pagina: 'sobre', ordem: 0, ativo: true, isDefault: true },
-    { id: 'static-servicos', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429508/servicos_gblbyy.jpg', tipo: 'imagem', titulo: 'Nossos Serviços', pagina: 'servicos', ordem: 0, ativo: true, isDefault: true },
-    { id: 'static-orcamento', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1764870173/img-orcamento-dektop_yx6lgf.png', tipo: 'imagem', titulo: 'Faça um Orçamento', pagina: 'orcamento', ordem: 0, ativo: true, isDefault: true },
-    { id: 'static-contato', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429463/contato_ojwrdu.jpg', tipo: 'imagem', titulo: 'Fale Conosco', pagina: 'contato', ordem: 0, ativo: true, isDefault: true },
-    { id: 'static-blog', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429461/blog-header_vzqvrg.jpg', tipo: 'imagem', titulo: 'Dicas e Novidades', pagina: 'blog', ordem: 0, ativo: true, isDefault: true },
-    { id: 'static-footer', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429482/footer_unphiy.jpg', tipo: 'imagem', titulo: 'Visite a Zero 20', pagina: 'footer', ordem: 0, ativo: true, isDefault: true },
-    { id: 'static-of-desktop', url: 'https://res.cloudinary.com/dlyeywiwk/video/upload/v1764821682/wl0kcac1fvfhm2rgdeja.mp4', tipo: 'video', titulo: 'Óleos e Filtros', pagina: 'oleos-filtros', ordem: 0, ativo: true, isDefault: true }
+    { id: 'static-home-desktop', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429487/home_k6ug8o.jpg', tipo: 'imagem', titulo: 'Especialistas em Motores', subtitulo: 'Sua oficina de confiança', textoBotao: 'Agendar', posicaoTexto: 'esquerda', filtroEscuro: true, pagina: 'home', ordem: 0, ativo: true },
+    { id: 'static-sobre', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1765200812/IMG_3062_aldoim.jpg', tipo: 'imagem', titulo: 'Nossa História', pagina: 'sobre', ordem: 0, ativo: true },
+    { id: 'static-servicos', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429508/servicos_gblbyy.jpg', tipo: 'imagem', titulo: 'Nossos Serviços', pagina: 'servicos', ordem: 0, ativo: true },
+    { id: 'static-orcamento', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1764870173/img-orcamento-dektop_yx6lgf.png', tipo: 'imagem', titulo: 'Faça um Orçamento', pagina: 'orcamento', ordem: 0, ativo: true },
+    { id: 'static-contato', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429463/contato_ojwrdu.jpg', tipo: 'imagem', titulo: 'Fale Conosco', pagina: 'contato', ordem: 0, ativo: true },
+    { id: 'static-blog', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429461/blog-header_vzqvrg.jpg', tipo: 'imagem', titulo: 'Dicas e Novidades', pagina: 'blog', ordem: 0, ativo: true },
+    { id: 'static-footer', url: 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1763429482/footer_unphiy.jpg', tipo: 'imagem', titulo: 'Visite a Zero 20', pagina: 'footer', ordem: 0, ativo: true },
+    { id: 'static-of-desktop', url: 'https://res.cloudinary.com/dlyeywiwk/video/upload/v1764821682/wl0kcac1fvfhm2rgdeja.mp4', tipo: 'video', titulo: 'Óleos e Filtros', pagina: 'oleos-filtros', ordem: 0, ativo: true }
   ];
 
   const fetchMedia = async () => {
@@ -50,8 +50,15 @@ const PainelMarketing = ({ showMessage }) => {
     try {
       const q = query(marketingCollectionRef, orderBy("ordem", "asc"));
       const data = await getDocs(q);
-      const fetchedData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      setMediaList([...defaultStaticBanners, ...fetchedData]);
+      const fetchedData = data.docs.map((mediaDoc) => ({ ...mediaDoc.data(), id: mediaDoc.id }));
+      const persistedById = new Map(fetchedData.map((media) => [media.id, media]));
+      const mergedDefaults = defaultStaticBanners
+        .map((banner) => ({ ...banner, ...persistedById.get(banner.id) }))
+        .filter((banner) => !banner.deleted);
+      const customMedia = fetchedData.filter(
+        (media) => !defaultStaticBanners.some((banner) => banner.id === media.id) && !media.deleted
+      );
+      setMediaList([...mergedDefaults, ...customMedia]);
     } catch (error) {
       console.error("Erro ao buscar mídia de marketing:", error);
       showMessage && showMessage("Erro ao carregar banners do marketing.", true);
@@ -147,7 +154,12 @@ const PainelMarketing = ({ showMessage }) => {
 
     try {
       const mediaDoc = doc(db, "marketing_media", id);
-      await deleteDoc(mediaDoc);
+      const isStaticBanner = defaultStaticBanners.some((banner) => banner.id === id);
+      if (isStaticBanner) {
+        await setDoc(mediaDoc, { deleted: true, ordem: 0, updatedAt: new Date().toISOString() }, { merge: true });
+      } else {
+        await deleteDoc(mediaDoc);
+      }
       showMessage && showMessage("Mídia removida com sucesso!");
       fetchMedia();
     } catch (error) {
@@ -233,9 +245,18 @@ const PainelMarketing = ({ showMessage }) => {
               <div className="pmkt-header">
                  <h2>{isEditing ? "Configurações do Banner" : "Criar Novo Banner"}</h2>
                  {isEditing && (
-                   <button type="button" onClick={resetForm} className="pmkt-btn-cancel">
-                     <X size={18} /> Cancelar Edição
-                   </button>
+                   <div className="pmkt-edit-actions">
+                     <button type="button" onClick={resetForm} className="pmkt-btn-cancel">
+                       <X size={18} /> Cancelar Edição
+                     </button>
+                     <button
+                       type="button"
+                       onClick={() => deleteMedia(currentId)}
+                       className="pmkt-btn-delete-form"
+                     >
+                       <Trash2 size={18} /> Excluir Banner
+                     </button>
+                   </div>
                  )}
               </div>
 
@@ -411,14 +432,10 @@ const PainelMarketing = ({ showMessage }) => {
                                 </span>
                               </div>
                               <div className="pmkt-item-actions">
-                                {media.isReadOnly ? (
-                                  <span className="pmkt-readonly-badge">Fixo do Sistema</span>
-                                ) : (
-                                  <>
-                                    <button onClick={() => editMedia(media)} className="pmkt-btn-icon pmkt-edit"><Edit size={16} /></button>
-                                    {!media.isDefault && <button onClick={() => deleteMedia(media.id)} className="pmkt-btn-icon pmkt-delete"><Trash2 size={16} /></button>}
-                                  </>
-                                )}
+                                <>
+                                  <button onClick={() => editMedia(media)} className="pmkt-btn-icon pmkt-edit" title="Editar banner" aria-label="Editar banner"><Edit size={16} /></button>
+                                  <button onClick={() => deleteMedia(media.id)} className="pmkt-btn-icon pmkt-delete" title="Excluir banner" aria-label="Excluir banner"><Trash2 size={16} /></button>
+                                </>
                               </div>
                             </div>
                           ))}
