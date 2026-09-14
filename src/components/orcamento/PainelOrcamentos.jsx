@@ -6,7 +6,7 @@ import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
-import { Settings, Wrench, PlusCircle, Droplet, Megaphone, History, FileSpreadsheet, FileText, LogOut, ShieldCheck } from 'lucide-react';
+import { Settings, Wrench, PlusCircle, Droplet, Megaphone, MessageCircle, History, FileSpreadsheet, FileText, LogOut, ShieldCheck } from 'lucide-react';
 
 import OrcamentoCabecote from './OrcamentoCabecote';
 import MessageBox from '../ui/MessageBox';
@@ -418,6 +418,10 @@ const PainelOrcamentos = () => {
                                     <div className={`card-option ${tipo === 'marketing' ? 'active' : ''}`} onClick={() => { setTipo('marketing'); setEditingData(null); }}>
                                         <div className="icon-wrapper"><Megaphone size={32} /></div>
                                         <span>Painel Marketing</span>
+                                    </div>
+                                    <div className="card-option" onClick={() => navigate('/crm-campanhas')}>
+                                        <div className="icon-wrapper"><MessageCircle size={32} /></div>
+                                        <span>Campanhas</span>
                                     </div>
                                     <div className="card-option" onClick={scrollToHistorico}>
                                         <div className="icon-wrapper"><History size={32} /></div>

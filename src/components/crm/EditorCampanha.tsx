@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styles from './EditorCampanha.module.css';
+import GeradorTemplateIA from './GeradorTemplateIA';
 
 export type TemplateCampanha = { id: string; nome: string; mensagem: string };
 type EditorCampanhaProps = {
@@ -10,7 +11,13 @@ type EditorCampanhaProps = {
   onSelecionarTemplate: (template: TemplateCampanha) => void;
 };
 
-const chips = ['{{nome_cliente}}', '{{veiculo}}', '{{placa}}', '{{os_numero}}', '{{data_limite}}'];
+const chips = [
+  { value: '{{nome_cliente}}', label: 'Nome do cliente' },
+  { value: '{{veiculo}}', label: 'Veículo' },
+  { value: '{{placa}}', label: 'Placa' },
+  { value: '{{os_numero}}', label: 'Número da OS' },
+  { value: '{{data_limite}}', label: 'Data da revisão' },
+];
 
 export default function EditorCampanha({ templates, mensagem, onMensagemChange, onSalvarTemplate, onSelecionarTemplate }: EditorCampanhaProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -30,9 +37,10 @@ export default function EditorCampanha({ templates, mensagem, onMensagemChange, 
   };
 
   return <section className={styles.panel} aria-labelledby="editor-campanha-title">
-    <h2 id="editor-campanha-title">Editor de campanha</h2>
-    <div className={styles.row}><label>Template salvo<select defaultValue="" onChange={(event) => { const selected = templates.find((item) => item.id === event.target.value); if (selected) onSelecionarTemplate(selected); }}><option value="">Selecione um template</option>{templates.map((template) => <option key={template.id} value={template.id}>{template.nome}</option>)}</select></label><label>Novo template<input value={nome} onChange={(event) => setNome(event.target.value)} placeholder="Ex.: Alerta App - 15 Dias" /></label><button type="button" onClick={salvar}>Salvar template</button></div>
-    <div className={styles.chips}>{chips.map((chip) => <button type="button" key={chip} onClick={() => inserir(chip)}>{chip}</button>)}</div>
-    <label className={styles.messageLabel}>Mensagem<textarea ref={textareaRef} value={mensagem} onChange={(event) => onMensagemChange(event.target.value)} rows={6} placeholder="Olá {{nome_cliente}}, identificamos uma revisão próxima..." /></label>
+    <p className={styles.step}>PASSO 2</p><h2 id="editor-campanha-title">Escreva a mensagem</h2><p className={styles.help}>Você pode escolher uma mensagem pronta ou escrever uma nova. Os botões abaixo inserem automaticamente os dados de cada cliente.</p>
+    <GeradorTemplateIA onGenerated={onMensagemChange} />
+    <div className={styles.row}><label>Usar uma mensagem pronta<select defaultValue="" onChange={(event) => { const selected = templates.find((item) => item.id === event.target.value); if (selected) onSelecionarTemplate(selected); }}><option value="">Escolha uma mensagem</option>{templates.map((template) => <option key={template.id} value={template.id}>{template.nome}</option>)}</select></label><label>Nome para salvar esta mensagem<input value={nome} onChange={(event) => setNome(event.target.value)} placeholder="Ex.: Lembrete de revisão" /></label><button type="button" onClick={salvar}>Salvar mensagem</button></div>
+    <p className={styles.chipLabel}>Inserir dados do cliente:</p><div className={styles.chips}>{chips.map((chip) => <button type="button" key={chip.value} onClick={() => inserir(chip.value)}>{chip.label}</button>)}</div>
+    <label className={styles.messageLabel}>Mensagem que será enviada<textarea ref={textareaRef} value={mensagem} onChange={(event) => onMensagemChange(event.target.value)} rows={6} placeholder="Olá {{nome_cliente}}, está na hora de revisar o seu {{veiculo}}..." /></label>
   </section>;
 }
