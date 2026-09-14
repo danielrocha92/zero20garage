@@ -8,10 +8,10 @@ export default async function gerarTemplate(request, response) {
   if (typeof objetivo !== 'string' || !objetivo.trim()) return response.status(400).json({ error: 'Informe o objetivo da mensagem.' });
 
   try {
-    const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
-    const aiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`, {
+    const model = (process.env.GEMINI_MODEL || 'gemini-2.5-flash').replace(/^models\//, '');
+    const aiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
       body: JSON.stringify({
         systemInstruction: {
           parts: [{
@@ -32,8 +32,21 @@ export default async function gerarTemplate(request, response) {
     });
     const data = await aiResponse.json();
     if (!aiResponse.ok) {
-      console.error('Gemini recusou a geração do template:', data.error?.message || data);
-      return response.status(502).json({ error: 'A IA não conseguiu gerar a mensagem agora.' });
+      const providerMessage = data.error?.message || '';
+      console.error('Gemini recusou a geração do template:', {
+        status: aiResponse.status,
+        message: providerMessage,
+      });
+      if (aiResponse.status === 400) {
+        return response.status(502).json({ error: 'O modelo Gemini ou os dados enviados não são válidos. Verifique GEMINI_MODEL na Vercel.' });
+      }
+      if (aiResponse.status === 401 || aiResponse.status === 403) {
+        return response.status(502).json({ error: 'A chave do Gemini foi recusada. Confirme se ela pertence à Gemini API e se a API está habilitada.' });
+      }
+      if (aiResponse.status === 429) {
+        return response.status(502).json({ error: 'A cota gratuita do Gemini foi atingida. Aguarde ou verifique os limites do projeto Google.' });
+      }
+      return response.status(502).json({ error: 'O Gemini está indisponível no momento. Consulte os logs da função na Vercel.' });
     }
     const mensagem = data.candidates?.[0]?.content?.parts?.map((part) => part.text || '').join('').trim();
     if (!mensagem) return response.status(502).json({ error: 'A IA retornou uma mensagem vazia.' });

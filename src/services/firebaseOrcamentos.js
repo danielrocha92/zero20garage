@@ -20,10 +20,13 @@ const db = getFirestore(app);
 
 export async function authenticateUser() {
   try {
-    await signInAnonymously(auth);
+    if (auth.currentUser) return auth.currentUser;
+    const userCredential = await signInAnonymously(auth);
     console.log("✅ Firebase Orcamentos: usuário autenticado anonimamente.");
+    return userCredential.user;
   } catch (error) {
     console.error("❌ Erro Firebase Orcamentos:", error);
+    throw error;
   }
 }
 
