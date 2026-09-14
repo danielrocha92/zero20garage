@@ -41,6 +41,7 @@ const TesteFuncionamento = lazy(() => import('./pages/home/TesteFuncionamento'))
 const Orcamento = lazy(() => import('./pages/orcamento/Orcamento'));
 const GerarPdfPage = lazy(() => import('./components/GerarPdfPage'));
 const TermoGarantia = lazy(() => import('./components/orcamento/TermoGarantia'));
+const CrmCampanhas = lazy(() => import('./pages/crm-campanhas/CrmCampanhas'));
 
 const Blog = lazy(() => import('./pages/blog/Blog'));
 const SinaisRetifica = lazy(() => import('./pages/blog/SinaisRetifica'));
@@ -136,6 +137,14 @@ const AnimatedRoutes = () => {
             element={
               <PrivateRoute>
                 <TermoGarantia />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/crm-campanhas"
+            element={
+              <PrivateRoute>
+                <CrmCampanhas />
               </PrivateRoute>
             }
           />

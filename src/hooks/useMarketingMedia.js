@@ -1,6 +1,6 @@
 // src/hooks/useMarketingMedia.js
 // Hook reutilizável para buscar mídias de marketing do Firebase, filtradas por página.
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '../services/firebaseOrcamentos';
 
@@ -12,6 +12,14 @@ import { db } from '../services/firebaseOrcamentos';
 const useMarketingMedia = (pagina, defaultMedia = []) => {
   const [media, setMedia] = useState([]);
   const [loading, setLoading] = useState(true);
+  const defaultMediaKey = defaultMedia.map((item) => item.id).join('|');
+  const defaultMediaRef = useRef(defaultMedia);
+  const defaultMediaKeyRef = useRef(defaultMediaKey);
+
+  if (defaultMediaKeyRef.current !== defaultMediaKey) {
+    defaultMediaRef.current = defaultMedia;
+    defaultMediaKeyRef.current = defaultMediaKey;
+  }
 
   useEffect(() => {
     if (!pagina) {
@@ -27,12 +35,12 @@ const useMarketingMedia = (pagina, defaultMedia = []) => {
         const allMedia = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
 
         const persistedById = new Map(allMedia.map((item) => [item.id, item]));
-        const mergedDefaults = defaultMedia.map((item) => ({
+        const mergedDefaults = defaultMediaRef.current.map((item) => ({
           ...item,
           ...persistedById.get(item.id),
         }));
         const customMedia = allMedia.filter(
-          (item) => !defaultMedia.some((defaultItem) => defaultItem.id === item.id)
+          (item) => !defaultMediaRef.current.some((defaultItem) => defaultItem.id === item.id)
         );
 
         // Filtrar: apenas banners ativos, da página solicitada e não excluídos
@@ -49,7 +57,7 @@ const useMarketingMedia = (pagina, defaultMedia = []) => {
     };
 
     fetchMedia();
-  }, [pagina]);
+  }, [pagina, defaultMediaKey]);
 
   return { media, loading };
 };
