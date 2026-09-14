@@ -4,6 +4,7 @@ import axios from 'axios';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import TermoGarantiaPDF from './TermoGarantiaPDF';
 import styles from '../../styles/TermoGarantia.module.css';
+import PlanoRevisao from '../PlanoRevisao/PlanoRevisao';
 
 const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
 
@@ -135,7 +136,16 @@ const TermoGarantia = () => {
         totalServicos: formData.totalServicos,
         maoDeObra: formData.maoDeObra,
         totalGeral: formData.totalGeral
-    }
+    },
+    planoRevisao: {
+        cliente: formData.cliente,
+        numeroOS: formData.ordemServico,
+        veiculo: formData.veiculo,
+        placa: formData.placa,
+        kmEntrega: selectedOS?.kmEntrega || selectedOS?.km_entrega || selectedOS?.veiculo?.km_entrega || '',
+        tipoServico: serviceList.map((service) => service.text),
+        revisoes: selectedOS?.plano_revisoes || [],
+    },
   };
 
   return (
@@ -288,13 +298,23 @@ const TermoGarantia = () => {
 
             {/* Actions */}
             <div className={styles.actions}>
-                <PDFDownloadLink document={<TermoGarantiaPDF data={pdfData} />} fileName={`Garantia_${formData.cliente}_${formData.ordemServico}.pdf`}>
+                <PDFDownloadLink document={<TermoGarantiaPDF data={pdfData} />} fileName={`Garantia_PDR_${formData.cliente}_${formData.ordemServico}.pdf`}>
                     {({ blob, url, loading, error }) =>
                         loading ? 'Gerando PDF...' : <button className={styles.button}>Baixar Certificado de Garantia (PDF)</button>
                     }
                 </PDFDownloadLink>
             </div>
         </>
+      )}
+      {selectedOS && (
+        <PlanoRevisao
+          cliente={formData.cliente}
+          numeroOS={formData.ordemServico}
+          veiculo={formData.veiculo}
+          placa={formData.placa}
+          kmEntrega={selectedOS.kmEntrega || selectedOS.km_entrega}
+          tipoServico={serviceList.map((service) => service.text)}
+        />
       )}
     </div>
   );

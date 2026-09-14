@@ -105,6 +105,99 @@ const styles = StyleSheet.create({
     borderTopColor: '#eee',
     paddingTop: 10,
   },
+  planoPage: {
+    padding: 24,
+    fontSize: 9,
+    fontFamily: 'Helvetica',
+  },
+  planoTitle: {
+    color: '#d71920',
+    fontSize: 13,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  via: {
+    borderWidth: 1,
+    borderColor: '#292929',
+    borderStyle: 'solid',
+    padding: 10,
+    marginBottom: 12,
+  },
+  viaHeader: {
+    borderBottomWidth: 2,
+    borderBottomColor: '#d71920',
+    borderBottomStyle: 'solid',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 6,
+    marginBottom: 8,
+  },
+  viaName: {
+    color: '#d71920',
+    fontSize: 10,
+    fontWeight: 'bold',
+  },
+  infoRow: {
+    flexDirection: 'row',
+    marginBottom: 5,
+  },
+  infoItem: {
+    flex: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: '#aaa',
+    borderBottomStyle: 'solid',
+    paddingBottom: 3,
+    marginRight: 8,
+  },
+  infoLabel: {
+    fontWeight: 'bold',
+    fontSize: 7,
+  },
+  services: {
+    borderWidth: 1,
+    borderColor: '#aaa',
+    borderStyle: 'solid',
+    padding: 6,
+    marginTop: 5,
+    marginBottom: 8,
+  },
+  serviceText: {
+    fontSize: 8,
+    marginBottom: 3,
+  },
+  reviews: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  review: {
+    borderWidth: 1,
+    borderColor: '#707070',
+    borderStyle: 'solid',
+    width: '32%',
+    minHeight: 105,
+    padding: 6,
+  },
+  reviewTitle: {
+    backgroundColor: '#ededed',
+    fontSize: 7,
+    fontWeight: 'bold',
+    margin: -6,
+    marginBottom: 8,
+    padding: 5,
+  },
+  reviewText: {
+    fontSize: 8,
+    marginBottom: 7,
+  },
+  signature: {
+    borderTopWidth: 1,
+    borderTopColor: '#777',
+    borderTopStyle: 'solid',
+    fontSize: 6,
+    marginTop: 8,
+    paddingTop: 4,
+  },
 });
 
 const TermoGarantiaPDF = ({ data }) => {
@@ -118,6 +211,7 @@ const TermoGarantiaPDF = ({ data }) => {
     pecas,
     servicos,
     valores,
+    planoRevisao,
   } = data;
 
   // Split parts into two columns
@@ -136,6 +230,51 @@ const TermoGarantiaPDF = ({ data }) => {
   const serviceRows = servicos.length;
 
   const contentHeight = baseHeight + (partRows * itemHeight) + (serviceRows * itemHeight) + 200;
+  const revisoes = planoRevisao?.revisoes || [];
+  const tipoServico = planoRevisao?.tipoServico || [];
+  const veiculoTexto = typeof veiculo === 'string' ? veiculo : veiculo?.descricao || '';
+  const servicoMarcado = (nome) => tipoServico.some((item) => (
+    String(item).toLowerCase().includes(nome.toLowerCase())
+  ));
+
+  const renderPlanoVia = (nome) => (
+    <View style={styles.via}>
+      <View style={styles.viaHeader}>
+        <Text style={{ fontWeight: 'bold' }}>ZER0 20 GARAGE</Text>
+        <Text style={styles.viaName}>{nome}</Text>
+      </View>
+      <View style={styles.infoRow}>
+        <View style={styles.infoItem}><Text><Text style={styles.infoLabel}>CLIENTE: </Text>{cliente || '________________'}</Text></View>
+        <View style={styles.infoItem}><Text><Text style={styles.infoLabel}>OS Nº: </Text>{ordemServico || '________'}</Text></View>
+      </View>
+      <View style={styles.infoRow}>
+        <View style={styles.infoItem}><Text><Text style={styles.infoLabel}>VEÍCULO: </Text>{veiculoTexto || '________________'}</Text></View>
+        <View style={styles.infoItem}><Text><Text style={styles.infoLabel}>PLACA: </Text>{placa || '______'}</Text></View>
+        <View style={styles.infoItem}><Text><Text style={styles.infoLabel}>KM DE ENTREGA: </Text>{planoRevisao?.kmEntrega || '______'}</Text></View>
+      </View>
+      <View style={styles.services}>
+        <Text style={styles.infoLabel}>SERVIÇO REALIZADO</Text>
+        {['Motor Completo', 'Motor Parcial', 'Cabeçote', 'Serviços Diversos'].map((servico) => (
+          <Text key={servico} style={styles.serviceText}>
+            {servicoMarcado(servico) ? '☑' : '☐'} {servico}
+          </Text>
+        ))}
+      </View>
+      <View style={styles.reviews}>
+        {['1ª REVISÃO/TROCA DE ÓLEO', '2ª REVISÃO/TROCA DE ÓLEO', '3ª REVISÃO/TROCA DE ÓLEO'].map((titulo, index) => {
+          const revisao = revisoes[index] || {};
+          return (
+            <View key={titulo} style={styles.review}>
+              <Text style={styles.reviewTitle}>{titulo}</Text>
+              <Text style={styles.reviewText}>KM Previsto: {revisao.kmPrevisto || revisao.km_alvo || '____________'}</Text>
+              <Text style={styles.reviewText}>Valor (R$): {revisao.valor || '____________'}</Text>
+              <Text style={styles.signature}>ASSINATURA/CARIMBO: __________________</Text>
+            </View>
+          );
+        })}
+      </View>
+    </View>
+  );
 
   return (
     <Document>
@@ -262,6 +401,11 @@ const TermoGarantiaPDF = ({ data }) => {
             <Text>Avenida Laura Gomes Hannickel, 153 – Capoavinha, Mairiporã/SP</Text>
         </View>
 
+      </Page>
+      <Page size="A4" style={styles.planoPage}>
+        <Text style={styles.planoTitle}>PLANO DE REVISÃO/TROCA DE ÓLEO</Text>
+        {renderPlanoVia('VIA DO CLIENTE')}
+        {renderPlanoVia('VIA DA OFICINA')}
       </Page>
     </Document>
   );
