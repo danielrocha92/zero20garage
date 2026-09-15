@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "api/gerar-template.js": {
-      "runtime": "nodejs22.x"
-    }
-  },
   "headers": [
     {
       "source": "/static/(.*)",
