@@ -29,7 +29,10 @@ export default function GeradorTemplateIA({ onGenerated }: Props) {
       try {
         data = JSON.parse(responseText);
       } catch {
-        throw new Error('O gerador de IA ainda não está disponível neste ambiente. Publique a função /api/gerar-template na Vercel.');
+        if (response.status === 404) {
+          throw new Error('A função /api/gerar-template não foi publicada nesta implantação da Vercel. Faça um novo deploy a partir da raiz do projeto.');
+        }
+        throw new Error('O servidor retornou uma resposta inválida ao gerar o template.');
       }
       if (!response.ok || !data.mensagem) throw new Error(data.error || 'Não foi possível criar a mensagem.');
       onGenerated(data.mensagem);

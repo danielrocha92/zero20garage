@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "api/gerar-template.js": {
+      "maxDuration": 30
+    }
+  },
   "headers": [
     {
       "source": "/static/(.*)",

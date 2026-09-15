@@ -25,7 +25,11 @@ export async function authenticateUser() {
     console.log("✅ Firebase Orcamentos: usuário autenticado anonimamente.");
     return userCredential.user;
   } catch (error) {
-    console.error("❌ Erro Firebase Orcamentos:", error);
+    if (error?.code === 'auth/admin-restricted-operation') {
+      console.error("❌ Login anônimo desativado. Ative Authentication > Sign-in method > Anonymous no projeto zero20garage-api-orcamentos.");
+    } else {
+      console.error("❌ Erro Firebase Orcamentos:", error);
+    }
     throw error;
   }
 }
