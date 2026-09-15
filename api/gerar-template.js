@@ -3,7 +3,7 @@ const allowedVariables = '{{nome_cliente}}, {{veiculo}}, {{placa}}, {{os_numero}
 export default async function gerarTemplate(request, response) {
   if (request.method !== 'POST') return response.status(405).json({ error: 'Método não permitido.' });
   const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) return response.status(500).json({ error: 'Gerador de IA não configurado. Adicione GEMINI_API_KEY na Vercel.' });
+  if (!apiKey) return response.status(500).json({ error: 'Gerador de IA não configurado. Defina GEMINI_API_KEY no ambiente local (.env.local) ou nas variáveis da Vercel.' });
   const { objetivo, tom } = request.body || {};
   if (typeof objetivo !== 'string' || !objetivo.trim()) return response.status(400).json({ error: 'Informe o objetivo da mensagem.' });
 

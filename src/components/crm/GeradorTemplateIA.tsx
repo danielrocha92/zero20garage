@@ -30,7 +30,7 @@ export default function GeradorTemplateIA({ onGenerated }: Props) {
         data = JSON.parse(responseText);
       } catch {
         if (response.status === 404) {
-          throw new Error('A função /api/gerar-template não foi publicada nesta implantação da Vercel. Faça um novo deploy a partir da raiz do projeto.');
+          throw new Error('A API não está disponível neste servidor local. Execute "npm run start:vercel" na raiz do projeto ou use a versão publicada na Vercel.');
         }
         throw new Error('O servidor retornou uma resposta inválida ao gerar o template.');
       }
