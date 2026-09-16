@@ -33,7 +33,7 @@ const UploadImagemOrcamento = ({ orcamentoId, onUploaded }) => {
       }
     };
     fetchOrcamento();
-  }, [orcamentoId, authToken]);
+  }, [orcamentoId, authToken, API_BASE_URL]);
 
   useEffect(() => {
     const objectUrls = selectedFiles.map(file => URL.createObjectURL(file));

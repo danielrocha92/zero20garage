@@ -22,35 +22,48 @@ export default async function gerarTemplate(request, response) {
 
   try {
     const model = (process.env.GEMINI_MODEL || getLocalEnvironmentValue('GEMINI_MODEL') || 'gemini-3.6-flash').replace(/^models\//, '');
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
-      body: JSON.stringify({
-        systemInstruction: {
-          parts: [{
-            text: `Você cria mensagens curtas de pós-venda para uma oficina mecânica brasileira. Escreva em português do Brasil, sem markdown, sem promessas indevidas e com chamada clara para ação. Use somente estas variáveis exatamente como estão quando fizer sentido: ${allowedVariables}. Não invente descontos, datas ou serviços.`,
-          }],
-        },
-        contents: [{
-          role: 'user',
-          parts: [{
-            text: `Objetivo: ${objetivo.trim()}\nTom: ${typeof tom === 'string' ? tom : 'amigável e profissional'}`,
-          }],
-        }],
-        generationConfig: {
-          temperature: 0.7,
-          maxOutputTokens: 300,
-        },
-      }),
-    };
+    const basePrompt = `Você cria mensagens curtas e completas de pós-venda para uma oficina mecânica brasileira. Escreva em português do Brasil, sem markdown e sem promessas indevidas. Sempre conclua todas as frases, termine a mensagem com uma chamada clara para ação e escreva entre 2 e 4 frases. Use somente estas variáveis exatamente como estão quando fizer sentido: ${allowedVariables}. Não invente descontos, datas ou serviços.`;
+    const userPrompt = `Objetivo: ${objetivo.trim()}\nTom: ${typeof tom === 'string' ? tom : 'amigável e profissional'}`;
     let aiResponse;
     let data;
+    let lastFinishReason = '';
+    let lastMessage = '';
+
     for (let attempt = 0; attempt < 3; attempt += 1) {
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+        body: JSON.stringify({
+          systemInstruction: {
+            parts: [{
+              text: attempt === 0
+                ? basePrompt
+                : `${basePrompt} A resposta anterior foi cortada antes do fim da frase. Responda novamente com 2 a 4 frases completas, sem deixar uma frase pela metade, e termine com uma CTA clara.`,
+            }],
+          },
+          contents: [{
+            role: 'user',
+            parts: [{
+              text: userPrompt,
+            }],
+          }],
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 400 + (attempt * 200),
+          },
+        }),
+      };
+
       aiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, requestOptions);
       data = await aiResponse.json();
-      if (aiResponse.status !== 503 || attempt === 2) break;
+      lastFinishReason = data.candidates?.[0]?.finishReason || '';
+      lastMessage = data.candidates?.[0]?.content?.parts?.map((part) => part.text || '').join('').trim() || '';
+
+      if (aiResponse.status !== 503 && lastFinishReason !== 'MAX_TOKENS') break;
+      if (attempt === 2) break;
       await new Promise((resolveRetry) => setTimeout(resolveRetry, 500 * (attempt + 1)));
     }
+
     if (!aiResponse.ok) {
       const providerMessage = data.error?.message || '';
       console.error('Gemini recusou a geração do template:', {
@@ -78,9 +91,16 @@ export default async function gerarTemplate(request, response) {
           : 'O Gemini está indisponível no momento. Consulte os logs da função.',
       });
     }
-    const mensagem = data.candidates?.[0]?.content?.parts?.map((part) => part.text || '').join('').trim();
-    if (!mensagem) return response.status(502).json({ error: 'A IA retornou uma mensagem vazia.' });
-    return response.status(200).json({ mensagem });
+
+    if (!lastMessage) return response.status(502).json({ error: 'A IA retornou uma mensagem vazia.' });
+    if (lastFinishReason === 'MAX_TOKENS') {
+      return response.status(502).json({ error: 'A IA cortou a resposta antes de concluir a frase. Tente novamente com uma solicitação mais curta.' });
+    }
+    if (!/[.!?]$/.test(lastMessage.trim())) {
+      return response.status(502).json({ error: 'A IA gerou uma mensagem incompleta. Tente novamente.' });
+    }
+
+    return response.status(200).json({ mensagem: lastMessage });
   } catch (error) {
     console.error('Erro ao gerar template com IA:', error);
     return response.status(502).json({ error: 'Falha ao conectar ao serviço de IA.' });
