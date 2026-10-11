@@ -16,7 +16,9 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 6mm;
-  padding-bottom: 3mm;
+  padding: 4mm 2mm;
+  background: #fff;
+  border-bottom: 2px solid #d71920;
 }
 
 .logoTopo {
@@ -39,9 +41,11 @@
 /* Vias (Via do Cliente e Via da Oficina) */
 .via {
   border: 1px solid #292929;
-  margin-bottom: 10mm; /* Aumentado espaçamento entre vias conforme pedido */
+  margin-bottom: 10mm;
   padding: 5mm;
   border-radius: 4px;
+  background: #fff;
+  color: #1d1d1d;
 }
 
 .via:last-of-type {
@@ -50,25 +54,30 @@
 
 .cabecalhoVia {
   align-items: center;
+  background: #fff;
   border-bottom: 2px solid #d71920;
   display: flex;
   justify-content: space-between;
-  padding-bottom: 0.4rem;
+  padding: 0.4rem 0;
+  margin-bottom: 0;
 }
 
 .cabecalhoVia strong,
 .cabecalhoVia span {
   display: block;
+  color: #1d1d1d;
 }
 
 .cabecalhoVia strong {
   font-size: 1.05rem;
   letter-spacing: 0.5px;
+  color: #1d1d1d;
 }
 
 .cabecalhoVia span {
   font-size: 0.7rem;
   margin-top: 0.15rem;
+  color: #555;
 }
 
 .cabecalhoVia h2 {
@@ -92,6 +101,7 @@
   margin: 0;
   padding: 0.25rem 0;
   font-size: 0.8rem;
+  color: #1d1d1d;
 }
 
 .dados p:last-child {
@@ -152,6 +162,8 @@
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
+  background: #fff;
+  color: #1d1d1d;
 }
 
 .blocoRevisao h3 {
@@ -183,6 +195,8 @@
   margin-top: 4mm;
   padding-top: 3mm;
   border-top: 1px solid #ccc;
+  background: #fff;
+  color: #1d1d1d;
 }
 
 .avisoImportante {
