@@ -44,14 +44,39 @@ function Orcamento() {
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === 'telefone') {
+      const raw = value.replace(/\D/g, '').slice(0, 11);
+      let formatted = raw;
+      if (raw.length > 2 && raw.length <= 6) {
+        formatted = `(${raw.slice(0, 2)}) ${raw.slice(2)}`;
+      } else if (raw.length > 6 && raw.length <= 10) {
+        formatted = `(${raw.slice(0, 2)}) ${raw.slice(2, 6)}-${raw.slice(6)}`;
+      } else if (raw.length > 10) {
+        formatted = `(${raw.slice(0, 2)}) ${raw.slice(2, 7)}-${raw.slice(7)}`;
+      } else if (raw.length > 0) {
+        formatted = `(${raw}`;
+      }
+      setFormData({ ...formData, [name]: formatted });
+      return;
+    }
     setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage('');
+
+    const telDigits = (formData.telefone || '').replace(/\D/g, '');
+    if (!telDigits || telDigits.length < 10) {
+      setErrorMessage('Por favor, informe seu número de WhatsApp com DDD para envio do orçamento.');
+      setSuccess(false);
+      return;
+    }
+
     setLoading(true);
     setSuccess(null);
 
@@ -120,7 +145,9 @@ function Orcamento() {
 
             <form className="orcamento-form-apple" onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="nome">Nome:</label>
+                <label htmlFor="nome">
+                  Nome: <span className="campo-obrigatorio">*</span>
+                </label>
                 <input
                   type="text"
                   id="nome"
@@ -133,7 +160,9 @@ function Orcamento() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">E-mail:</label>
+                <label htmlFor="email">
+                  E-mail: <span className="campo-obrigatorio">*</span>
+                </label>
                 <input
                   type="email"
                   id="email"
@@ -146,15 +175,19 @@ function Orcamento() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="telefone">Telefone:</label>
+                <label htmlFor="telefone">
+                  WhatsApp: <span className="campo-obrigatorio">*</span>
+                </label>
                 <input
                   type="tel"
                   id="telefone"
                   name="telefone"
                   value={formData.telefone}
                   onChange={handleChange}
-                  placeholder="Digite seu telefone"
+                  required
+                  placeholder="(11) 99999-9999"
                 />
+                <span className="campo-dica">Obrigatório com DDD para envio da proposta e contato direto.</span>
               </div>
 
               <div className="form-group">
@@ -194,8 +227,8 @@ function Orcamento() {
               {success !== null && (
                 <div className={`feedback ${success ? 'feedback-success' : 'feedback-error'}`}>
                   {success
-                    ? 'Formulário enviado com sucesso!'
-                    : 'Ocorreu um erro ao enviar o formulário. Tente novamente!'}
+                    ? 'Orçamento solicitado com sucesso! Entraremos em contato via WhatsApp.'
+                    : errorMessage || 'Ocorreu um erro ao enviar o formulário. Tente novamente!'}
                 </div>
               )}
             </form>

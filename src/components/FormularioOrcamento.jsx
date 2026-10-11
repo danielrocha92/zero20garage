@@ -129,6 +129,13 @@ const FormularioOrcamento = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const telefoneLimpo = (formData.telefone || '').replace(/\D/g, '');
+    if (!telefoneLimpo || telefoneLimpo.length < 10) {
+      showMessage('O número do WhatsApp do cliente é obrigatório para finalizar o orçamento!', true);
+      return;
+    }
+
     const pecasSelecionadas = formatarSelecionados(formData.pecas);
     const servicosSelecionados = formatarSelecionados(formData.servicos);
 
@@ -152,10 +159,10 @@ const FormularioOrcamento = ({
         <section className="client-vehicle-section">
           <h2>Informações do Cliente e Veículo</h2>
           <input type="text" name="ordemServico" placeholder="OS" value={formData.ordemServico} onChange={handleInputChange} autoComplete="off" />
-          <input type="text" name="nome" placeholder="Cliente" value={formData.nome} onChange={handleInputChange} autoComplete="name" />
+          <input type="text" name="nome" placeholder="Cliente *" value={formData.nome} onChange={handleInputChange} autoComplete="name" required />
           <input type="text" name="veiculo" placeholder="Veículo" value={formData.veiculo} onChange={handleInputChange} autoComplete="off" />
           <input type="text" name="placa" placeholder="Placa" value={formData.placa} onChange={handleInputChange} autoComplete="off" />
-          <input type="text" name="telefone" placeholder="Telefone" value={formData.telefone} onChange={handleInputChange} autoComplete="tel" />
+          <input type="tel" name="telefone" placeholder="WhatsApp do Cliente * (com DDD)" value={formData.telefone} onChange={handleInputChange} autoComplete="tel" required />
           <input type="date" name="data" value={formData.data} onChange={handleInputChange} autoComplete="bday" />
         </section>
 

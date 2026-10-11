@@ -107,6 +107,20 @@ textarea:focus {
   box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.3);
 }
 
+.campo-obrigatorio {
+  color: #ff3b3b;
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+.campo-ajuda {
+  display: block;
+  font-size: 0.78rem;
+  color: #a8a8a8;
+  margin-top: 4px;
+  line-height: 1.3;
+}
+
 /* =================================
    LAYOUT DE PEÇAS E SERVIÇOS
    ================================= */

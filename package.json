@@ -10,6 +10,7 @@
     "node": "22.x"
   },
   "scripts": {
+    "dev": "react-app-rewired start",
     "start": "react-app-rewired start",
     "dev:vercel": "npx vercel dev",
     "start:vercel": "npx vercel dev",

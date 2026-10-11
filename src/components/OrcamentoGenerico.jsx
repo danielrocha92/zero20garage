@@ -237,6 +237,21 @@ const OrcamentoGenerico = ({
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    if (name === "telefone") {
+      const raw = value.replace(/\D/g, "").slice(0, 11);
+      let formatted = raw;
+      if (raw.length > 2 && raw.length <= 6) {
+        formatted = `(${raw.slice(0, 2)}) ${raw.slice(2)}`;
+      } else if (raw.length > 6 && raw.length <= 10) {
+        formatted = `(${raw.slice(0, 2)}) ${raw.slice(2, 6)}-${raw.slice(6)}`;
+      } else if (raw.length > 10) {
+        formatted = `(${raw.slice(0, 2)}) ${raw.slice(2, 7)}-${raw.slice(7)}`;
+      } else if (raw.length > 0) {
+        formatted = `(${raw}`;
+      }
+      setFormData((prev) => ({ ...prev, [name]: formatted }));
+      return;
+    }
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -296,17 +311,21 @@ const OrcamentoGenerico = ({
     e.preventDefault();
 
     // 1. Validação do Cliente
-    if (!formData.nome) {
+    if (!formData.nome || !formData.nome.trim()) {
       showLocalMessage("O campo Cliente é obrigatório!", true);
       return;
     }
 
-    // 2. Validação do Telefone
-    // Limpa o telefone para verificar só os dígitos ou caracteres esperados
-    const telefoneLimpo = formData.telefone.replace(/[\s()-]/g, "");
-    if (formData.telefone && !regexTelefone.test(formData.telefone) && !/^\d{10,11}$/.test(telefoneLimpo)) {
-        showLocalMessage("Telefone inválido! Formatos aceitos: (XX) XXXXX-XXXX ou XXXXXXXXXXX (somente dígitos)", true);
-        return;
+    // 2. Validação do WhatsApp do Cliente (Obrigatório para pós-venda e cartela de clientes)
+    const telefoneLimpo = (formData.telefone || "").replace(/[\s()-]/g, "");
+    if (!telefoneLimpo) {
+      showLocalMessage("O número do WhatsApp do cliente é obrigatório para finalizar o orçamento!", true);
+      return;
+    }
+
+    if (!regexTelefone.test(formData.telefone) && !/^\d{10,11}$/.test(telefoneLimpo)) {
+      showLocalMessage("WhatsApp inválido! Formatos aceitos: (XX) 9XXXX-XXXX ou (XX) XXXX-XXXX (com DDD).", true);
+      return;
     }
 
     // 3. Validação da Placa
@@ -394,7 +413,9 @@ const formatarItens = (lista) =>
     </div>
 
     <div className="form-group">
-      <label>Cliente:</label>
+      <label>
+        Cliente: <span className="campo-obrigatorio">*</span>
+      </label>
       <input
         type="text"
         name="nome"
@@ -442,12 +463,16 @@ const formatarItens = (lista) =>
     </div>
 
     <div className="form-group">
-      <label>Telefone:</label>
+      <label>
+        WhatsApp do Cliente: <span className="campo-obrigatorio">*</span>
+      </label>
       <input
-        type="text"
+        type="tel"
         name="telefone"
+        placeholder="(11) 99999-9999"
         value={formData.telefone}
         onChange={handleInputChange}
+        required
         className={
           formData.telefone &&
           !regexTelefone.test(formData.telefone.replace(/[\s()-]/g, '')) &&
@@ -456,6 +481,7 @@ const formatarItens = (lista) =>
             : ''
         }
       />
+      <small className="campo-ajuda">Obrigatório com DDD para envio da proposta, garantia e fidelização do cliente.</small>
     </div>
   </div>
 </section>

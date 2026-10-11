@@ -64,7 +64,7 @@ const ClienteVeiculoForm = ({ formData, handleChange }) => {
           />
         </div>
         <div className="form-group">
-          <label>Telefone:</label>
+          <label>WhatsApp / Telefone: *</label>
           <input
             type="tel"
             name="telefone"

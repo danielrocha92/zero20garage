@@ -103,6 +103,12 @@ const PainelOrcamentos = () => {
 
     const handleSalvar = async (dados) => {
         console.log("Salvando orçamento com os seguintes dados:", dados);
+        const telefoneLimpo = (dados.telefone || '').replace(/[\s()-]/g, "");
+        if (!telefoneLimpo || telefoneLimpo.length < 10) {
+            showMessageBox('O número de WhatsApp do cliente é obrigatório para finalizar e salvar o orçamento!', true);
+            return;
+        }
+
         const envio = { ...dados, tipo };
         let url = `${API_BASE_URL}/api/orcamentos`;
         let method = 'POST';
