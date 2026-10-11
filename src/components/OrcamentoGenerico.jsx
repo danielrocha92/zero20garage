@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-// Force rebuild 2
+// Force rebuild 3
 import "../styles/OrcamentoGenerico.css";
+
+const LOGO_GARAGE = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto,w_200,h_200,c_limit/v1763429492/logo_mqvkvh.png';
+const LOGO_OLEOS = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto,w_200/v1791741485/92344bf9-f620-4e74-a498-28f06ba2a12e.png';
 
 const OrcamentoGenerico = ({
   onSubmit,
@@ -396,7 +399,12 @@ const formatarItens = (lista) =>
 
   return (
     <div className="orcamento-container">
-      <h1>{titulo}</h1>
+      {/* Cabeçalho com as duas logos */}
+      <header className="orcamento-header-logos">
+        <img src={LOGO_GARAGE} alt="Zero 20 Garage" className="orcamento-logo" />
+        <h1 className="orcamento-titulo-header">{titulo}</h1>
+        <img src={LOGO_OLEOS} alt="Zero 20 Óleos e Filtros" className="orcamento-logo" />
+      </header>
       <form onSubmit={handleSubmit}>
 <section className="client-vehicle-section">
   <h2>Informações do Cliente e Veículo</h2>

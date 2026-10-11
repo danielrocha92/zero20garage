@@ -1,6 +1,9 @@
 import React from 'react';
 import styles from './PlanoRevisao.module.css';
 
+const LOGO_GARAGE = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429488/imagem-og_trb3ws.jpg';
+const LOGO_OLEOS = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1791741485/92344bf9-f620-4e74-a498-28f06ba2a12e.png';
+
 type Revisao = {
   kmPrevisto?: string | number;
   valor?: string | number;
@@ -14,6 +17,7 @@ export interface PlanoRevisaoProps {
   kmEntrega?: string | number;
   tipoServico?: string[];
   revisoes?: Revisao[];
+  observacoes?: string;
 }
 
 const servicos = [
@@ -37,6 +41,7 @@ const PlanoRevisao: React.FC<PlanoRevisaoProps> = ({
   kmEntrega = '',
   tipoServico = [],
   revisoes = [],
+  observacoes = '',
 }) => {
   const via = (titulo: string) => (
     <section className={styles.via} aria-label={titulo}>
@@ -49,25 +54,30 @@ const PlanoRevisao: React.FC<PlanoRevisaoProps> = ({
       </header>
 
       <div className={styles.dados}>
-        <p><b>CLIENTE</b><span>{cliente || '________________________________'}</span></p>
-        <p><b>OS Nº</b><span>{numeroOS || '____________'}</span></p>
-        <p><b>VEÍCULO</b><span>{veiculo || '________________________________'}</span></p>
-        <p><b>PLACA</b><span>{placa || '________'}</span></p>
-        <p><b>KM DE ENTREGA</b><span>{kmEntrega || '________ km'}</span></p>
+        <p><b>CLIENTE:</b> <span>{cliente}</span></p>
+        <p><b>OS Nº:</b> <span>{numeroOS}</span></p>
+        <p><b>VEÍCULO:</b> <span>{veiculo}</span></p>
+        <p><b>PLACA:</b> <span>{placa}</span></p>
+        <p><b>KM DE ENTREGA:</b> <span>{kmEntrega ? `${kmEntrega} km` : ''}</span></p>
       </div>
 
       <fieldset className={styles.servicos}>
         <legend>SERVIÇO REALIZADO</legend>
-        {servicos.map((servico) => (
-          <label key={servico}>
-            <input
-              type="checkbox"
-              checked={tipoServico.some((item) => item.toLowerCase().includes(servico.toLowerCase()))}
-              readOnly
-            />
-            {servico}
-          </label>
-        ))}
+        <div className={styles.servicosLista}>
+          {servicos.map((servico) => (
+            <label key={servico} className={styles.servicoItem}>
+              <input
+                type="checkbox"
+                checked={tipoServico.some((item) => item.toLowerCase().includes(servico.toLowerCase()))}
+                readOnly
+              />
+              {servico}
+            </label>
+          ))}
+        </div>
+        <div className={styles.obsCampo}>
+          <span>Obs: {observacoes || '____________________________________________________________________'}</span>
+        </div>
       </fieldset>
 
       <div className={styles.revisoes}>
@@ -76,10 +86,11 @@ const PlanoRevisao: React.FC<PlanoRevisaoProps> = ({
           return (
             <section className={styles.blocoRevisao} key={tituloRevisao}>
               <h3>{tituloRevisao}</h3>
-              <p><b>KM Previsto:</b> {revisao.kmPrevisto || '________________'}</p>
-              <p><b>Valor (R$):</b> {revisao.valor || '________________'}</p>
-              <div className={styles.assinatura}>
-                ASSINATURA/CARIMBO: __________________________________
+              <p><b>KM Previsto:</b> <span>{revisao.kmPrevisto || ''}</span></p>
+              <p><b>Valor (R$):</b> <span>{revisao.valor || ''}</span></p>
+              <div className={styles.assinaturaContainer}>
+                <span>ASSINATURA/CARIMBO:</span>
+                <div className={styles.espacoAssinatura} />
               </div>
             </section>
           );
@@ -90,8 +101,24 @@ const PlanoRevisao: React.FC<PlanoRevisaoProps> = ({
 
   return (
     <article className={styles.planoRevisao}>
+      <header className={styles.topoGeral}>
+        <img src={LOGO_GARAGE} alt="Zero 20 Garage" className={styles.logoTopo} />
+        <h1 className={styles.tituloPrincipal}>PLANO DE REVISÃO/TROCA DE ÓLEO</h1>
+        <img src={LOGO_OLEOS} alt="Zero 20 Óleos e Filtros" className={styles.logoTopo} />
+      </header>
+
       {via('VIA DO CLIENTE')}
       {via('VIA DA OFICINA')}
+
+      <footer className={styles.rodapePlano}>
+        <p className={styles.avisoImportante}>
+          IMPORTANTE: As revisões preventivas devem ser realizadas estritamente nos prazos e quilometragens estipulados acima para a validação contínua da garantia.
+        </p>
+        <div className={styles.blocoAssinaturaCliente}>
+          <div className={styles.linhaAssinaturaCliente} />
+          <span>ASSINATURA DO CLIENTE</span>
+        </div>
+      </footer>
     </article>
   );
 };

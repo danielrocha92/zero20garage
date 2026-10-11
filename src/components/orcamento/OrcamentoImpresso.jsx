@@ -6,7 +6,8 @@ import { useExcelExporter } from "../../hooks/useExcelExporter";
 import { formatDate, formatValue } from "../../utils/formatters";
 import BudgetSection from "../BudgetSection";
 
-const logo = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429460/background_l7aa2x.jpg';
+const LOGO_GARAGE = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429488/imagem-og_trb3ws.jpg';
+const LOGO_OLEOS = 'https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto,w_200/v1791741485/92344bf9-f620-4e74-a498-28f06ba2a12e.png';
 
 // Componente para as imagens, pode até ficar no mesmo arquivo se for pequeno.
 const ImagensVeiculo = ({ imagens }) => (
@@ -44,10 +45,11 @@ const OrcamentoImpresso = ({ orcamento, onClose }) => {
       <div className="orcamento-impresso-content" ref={componentRef}>
         {/* Cabeçalho */}
         <div className="header-impresso">
+          <img src={LOGO_GARAGE} alt="Zero 20 Garage" className="logo-impresso" />
           <h1 className="titulo-impresso">
             ORÇAMENTO - {orcamento.tipo === "motor" ? "MOTOR COMPLETO/PARCIAL" : "CABEÇOTE"}
           </h1>
-          <img src={logo} alt="Logo Zero20Garage" className="logo-impresso" />
+          <img src={LOGO_OLEOS} alt="Zero 20 Óleos e Filtros" className="logo-impresso" />
         </div>
 
         {/* Informações */}
