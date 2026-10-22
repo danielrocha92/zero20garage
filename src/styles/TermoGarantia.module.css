@@ -193,7 +193,25 @@
 
 .previewContainer {
     margin-top: 40px;
-    text-align: center;
+    text-align: left;
+}
+
+.pdfPreviewFrame {
+    width: 100%;
+    height: min(1100px, 85vh);
+    min-height: 640px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    background: #252525;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.pdfViewer {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
 }
 
 .actions {

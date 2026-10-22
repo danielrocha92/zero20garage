@@ -6,6 +6,9 @@
   max-width: 210mm;
   page-break-before: always;
   padding: 8mm;
+  min-height: 297mm;
+  display: flex;
+  flex-direction: column;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
@@ -41,7 +44,7 @@
 /* Vias (Via do Cliente e Via da Oficina) */
 .via {
   border: 1px solid #292929;
-  margin-bottom: 10mm;
+  margin-bottom: 15mm;
   padding: 5mm;
   border-radius: 4px;
   background: #fff;
@@ -49,7 +52,7 @@
 }
 
 .via:last-of-type {
-  margin-bottom: 6mm;
+  margin-bottom: 0;
 }
 
 .cabecalhoVia {
@@ -90,7 +93,7 @@
 .dados {
   display: grid;
   gap: 0.45rem 1rem;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   margin: 0.8rem 0;
 }
 
@@ -105,7 +108,7 @@
 }
 
 .dados p:last-child {
-  grid-column: 1 / -1;
+  grid-column: auto;
 }
 
 .dados b,
@@ -138,6 +141,13 @@
   align-items: center;
   gap: 0.35rem;
   cursor: pointer;
+}
+
+.servicoItem input {
+  accent-color: #222;
+  height: 12px;
+  margin: 0;
+  width: 12px;
 }
 
 .obsCampo {
@@ -187,13 +197,13 @@
 }
 
 .espacoAssinatura {
-  height: 28px; /* Espaço livre para carimbar ou assinar, sem linha conforme anotação */
+  height: 50px; /* Espaço livre para carimbar ou assinar, sem linha conforme anotação */
 }
 
 /* Rodapé do Plano */
 .rodapePlano {
   margin-top: 4mm;
-  padding-top: 3mm;
+  padding-top: 3.5mm;
   border-top: 1px solid #ccc;
   background: #fff;
   color: #1d1d1d;
@@ -211,13 +221,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3mm;
+  margin-top: auto;
+  padding-top: 3.5mm;
+}
+
+.blocoAssinaturaCliente::before {
+  content: '';
+  height: 37px;
 }
 
 .linhaAssinaturaCliente {
-  width: 260px;
+  width: 255px;
   border-bottom: 1px solid #222;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .blocoAssinaturaCliente span {
@@ -237,9 +253,6 @@
     grid-template-columns: 1fr;
   }
 
-  .dados p:last-child {
-    grid-column: auto;
-  }
 }
 
 @media print {
@@ -248,6 +261,7 @@
     margin: 0;
     max-width: none;
     padding: 0;
+    min-height: 297mm;
     width: 100%;
   }
 

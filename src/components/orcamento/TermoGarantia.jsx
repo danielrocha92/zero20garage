@@ -1,10 +1,9 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import { PDFDownloadLink } from '@react-pdf/renderer';
+import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
 import TermoGarantiaPDF from './TermoGarantiaPDF';
 import styles from '../../styles/TermoGarantia.module.css';
-import PlanoRevisao from '../PlanoRevisao/PlanoRevisao';
 
 const API_BASE_URL = 'https://api-orcamento-n49u.onrender.com';
 
@@ -142,6 +141,7 @@ const TermoGarantia = () => {
         numeroOS: formData.ordemServico,
         veiculo: formData.veiculo,
         placa: formData.placa,
+        dataEntrega: formData.dataEntrega,
         kmEntrega: selectedOS?.kmEntrega || selectedOS?.km_entrega || selectedOS?.veiculo?.km_entrega || '',
         tipoServico: serviceList.map((service) => service.text),
         revisoes: selectedOS?.plano_revisoes || [],
@@ -304,17 +304,16 @@ const TermoGarantia = () => {
                     }
                 </PDFDownloadLink>
             </div>
+
+            <section className={styles.previewContainer}>
+                <h2 className={styles.sectionTitle}>3. Prévia dos documentos para impressão</h2>
+                <div className={styles.pdfPreviewFrame}>
+                    <PDFViewer className={styles.pdfViewer} showToolbar>
+                        <TermoGarantiaPDF data={pdfData} />
+                    </PDFViewer>
+                </div>
+            </section>
         </>
-      )}
-      {selectedOS && (
-        <PlanoRevisao
-          cliente={formData.cliente}
-          numeroOS={formData.ordemServico}
-          veiculo={formData.veiculo}
-          placa={formData.placa}
-          kmEntrega={selectedOS.kmEntrega || selectedOS.km_entrega}
-          tipoServico={serviceList.map((service) => service.text)}
-        />
       )}
     </div>
   );

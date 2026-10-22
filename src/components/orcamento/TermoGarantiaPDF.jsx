@@ -4,48 +4,52 @@ import { Page, Text, View, Document, StyleSheet, Image } from '@react-pdf/render
 
 const LOGO_GARAGE = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1763429488/imagem-og_trb3ws.jpg';
 const LOGO_OLEOS = 'https://res.cloudinary.com/dlyeywiwk/image/upload/v1791741485/92344bf9-f620-4e74-a498-28f06ba2a12e.png';
-
 // Register fonts if needed, sticking to standard Helvetica for now to ensure compatibility
 // Font.register({ family: 'Roboto', src: 'https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2' });
 
 const styles = StyleSheet.create({
   page: {
-    padding: 30,
-    fontSize: 10,
+    padding: 22,
+    fontSize: 7.5,
     fontFamily: 'Helvetica',
-    lineHeight: 1.5,
+    lineHeight: 1.15,
+  },
+  certificateContent: {
+    width: '100%',
+    transformOriginX: 0,
+    transformOriginY: 0,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 12,
     position: 'relative',
-    height: 80,
+    height: 52,
   },
   logo: {
-    width: 100,
-    height: 80,
+    width: 68,
+    height: 52,
     objectFit: 'contain',
     position: 'absolute',
     right: 0,
   },
   title: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
     textTransform: 'uppercase',
   },
   section: {
-    marginBottom: 10,
+    marginBottom: 5,
   },
   sectionTitle: {
-    fontSize: 12,
+    fontSize: 9,
     fontWeight: 'bold',
-    marginBottom: 5,
-    marginTop: 10,
+    marginBottom: 3,
+    marginTop: 5,
     backgroundColor: '#f0f0f0',
-    padding: 4,
+    padding: 3,
   },
   row: {
     flexDirection: 'row',
@@ -61,7 +65,7 @@ const styles = StyleSheet.create({
   },
   textBlock: {
     textAlign: 'justify',
-    marginBottom: 10,
+    marginBottom: 4,
   },
   columns: {
     flexDirection: 'row',
@@ -72,7 +76,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   listItem: {
-    marginBottom: 2,
+    marginBottom: 1,
   },
   table: {
     display: 'table',
@@ -80,7 +84,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#bfbfbf',
-    marginBottom: 10,
+    marginBottom: 5,
   },
   tableRow: {
     flexDirection: 'row',
@@ -90,28 +94,45 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#bfbfbf',
-    padding: 5,
+    padding: 3,
   },
   tableCellHeader: {
     fontWeight: 'bold',
-    fontSize: 10,
+    fontSize: 7.5,
   },
   tableCell: {
-    fontSize: 10,
+    fontSize: 7.5,
   },
-  footer: {
-    marginTop: 30,
+  contactFooter: {
+    marginTop: 8,
     textAlign: 'center',
-    fontSize: 8,
-    color: '#666',
     borderTopWidth: 1,
     borderTopColor: '#eee',
-    paddingTop: 10,
+    paddingTop: 8,
+  },
+  contactName: {
+    fontSize: 7,
+    lineHeight: 1.25,
+    color: '#444',
+    marginBottom: 4,
+  },
+  contactDetails: {
+    fontSize: 6.5,
+    lineHeight: 1.35,
+    color: '#777',
   },
   planoPage: {
-    padding: 20,
+    padding: 23,
     fontSize: 9,
     fontFamily: 'Helvetica',
+    flexDirection: 'column',
+  },
+  planoContent: {
+    width: '100%',
+    flexGrow: 1,
+    flexDirection: 'column',
+    transformOriginX: 0,
+    transformOriginY: 0,
   },
   planoTopHeader: {
     flexDirection: 'row',
@@ -122,24 +143,33 @@ const styles = StyleSheet.create({
   },
   planoLogo: {
     width: 72,
-    height: 46,
+    height: 39,
     objectFit: 'contain',
   },
   planoTitle: {
     color: '#d71920',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
     flex: 1,
     marginHorizontal: 6,
   },
+  planoDataEntrega: {
+    flex: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: '#aaa',
+    borderBottomStyle: 'solid',
+    paddingBottom: 2,
+    marginRight: 8,
+  },
   via: {
     borderWidth: 1,
     borderColor: '#292929',
     borderStyle: 'solid',
-    padding: 8,
-    marginBottom: 14,
+    padding: 14,
+    marginBottom: 42.5,
   },
+  viaLast: { marginBottom: 0 },
   viaHeader: {
     borderBottomWidth: 2,
     borderBottomColor: '#d71920',
@@ -154,6 +184,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: 'bold',
   },
+  viaGarageName: { fontWeight: 'bold' },
   infoRow: {
     flexDirection: 'row',
     marginBottom: 4,
@@ -188,8 +219,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 14,
   },
+  serviceCheckbox: {
+    width: 9,
+    height: 9,
+    borderWidth: 1,
+    borderColor: '#222',
+    borderStyle: 'solid',
+    marginRight: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  serviceCheckboxMark: {
+    fontSize: 8,
+    lineHeight: 1,
+    fontWeight: 'bold',
+  },
   serviceText: {
-    fontSize: 7.5,
+    fontSize: 9.6,
   },
   servicesObs: {
     marginTop: 4,
@@ -207,50 +253,49 @@ const styles = StyleSheet.create({
     borderColor: '#707070',
     borderStyle: 'solid',
     width: '32%',
-    minHeight: 85,
+    minHeight: 75,
     padding: 5,
   },
   reviewTitle: {
     backgroundColor: '#ededed',
-    fontSize: 7,
+    fontSize: 8.4,
     fontWeight: 'bold',
     margin: -5,
     marginBottom: 5,
     padding: 3,
   },
   reviewText: {
-    fontSize: 7.5,
+    fontSize: 9,
     marginBottom: 4,
   },
   signatureContainer: {
     marginTop: 4,
   },
   signatureLabel: {
-    fontSize: 6.5,
+    fontSize: 7.8,
     fontWeight: 'bold',
   },
   signatureSpace: {
-    height: 25,
+    height: 38,
   },
   planoFooter: {
-    marginTop: 4,
+    marginTop: 'auto',
     paddingTop: 4,
-    borderTopWidth: 1,
-    borderTopColor: '#ccc',
   },
   planoFooterAviso: {
-    fontSize: 6.5,
+    fontSize: 7,
     color: '#333',
     textAlign: 'justify',
-    lineHeight: 1.3,
+    lineHeight: 1.15,
     marginBottom: 6,
   },
+  planoFooterAvisoDestaque: { fontWeight: 'bold' },
   planoAssinaturaClienteWrapper: {
     alignItems: 'center',
-    marginTop: 4,
+    marginTop: 3.5,
   },
   planoLinhaAssinatura: {
-    width: 230,
+    width: 191.25,
     borderBottomWidth: 1,
     borderBottomColor: '#222',
     marginBottom: 3,
@@ -260,7 +305,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  planoPageSignatureSpacer: { height: 28 },
 });
+
+const RodapeContato = () => (
+  <View style={styles.contactFooter}>
+    <Text style={styles.contactName}>Zero 20 Garage</Text>
+    <Text style={styles.contactDetails}>(11) 94109-7471 – zero20garage@hotmail.com</Text>
+    <Text style={styles.contactDetails}>Avenida Laura Gomes Hannickel, 153 – Capoavinha, Mairiporã/SP</Text>
+  </View>
+);
 
 const TermoGarantiaPDF = ({ data }) => {
   const {
@@ -281,33 +335,32 @@ const TermoGarantiaPDF = ({ data }) => {
   const pecasCol1 = pecas.slice(0, midPoint);
   const pecasCol2 = pecas.slice(midPoint);
 
-  // Calculate dynamic height
-  // Base height for static content (Header, Footer, Titles, Texts, Table, etc.)
-  // Increased base height to accomodate relative footer and spacing
-  const A4_WIDTH = 595.28;
-  const baseHeight = 1200;
-  const itemHeight = 30; // Adjusted estimate per item line
-
-  const partRows = Math.ceil(pecas.length / 2);
-  const serviceRows = servicos.length;
-
-  const contentHeight = baseHeight + (partRows * itemHeight) + (serviceRows * itemHeight) + 200;
   const revisoes = planoRevisao?.revisoes || [];
   const tipoServico = planoRevisao?.tipoServico || [];
   const veiculoTexto = typeof veiculo === 'string' ? veiculo : veiculo?.descricao || '';
+  const countLines = (value, charsPerLine) => Math.max(1, Math.ceil(String(value || '').length / charsPerLine));
+  const pecasLinhas = pecasCol1.concat(pecasCol2).reduce((total, item) => total + countLines(item, 76), 0);
+  const servicosLinhas = servicos.reduce((total, item) => total + countLines(item, 130), 0);
+  const certificateEstimatedHeight = 620 + (pecasLinhas + servicosLinhas) * 8;
+  const certificateScale = Math.min(1, 796 / certificateEstimatedHeight);
+  const observacoes = planoRevisao?.observacoes || '';
+  const revisoesChars = revisoes.reduce((total, revisao) => total + String(revisao.kmPrevisto || revisao.km_alvo || '').length + String(revisao.valor || '').length, 0);
+  const planEstimatedHeight = 660 + countLines(observacoes, 105) * 20 + Math.ceil(revisoesChars / 110) * 9;
+  const planScale = Math.min(1, 796 / planEstimatedHeight);
   const servicoMarcado = (nome) => tipoServico.some((item) => (
     String(item).toLowerCase().includes(nome.toLowerCase())
   ));
 
-  const renderPlanoVia = (nome) => (
-    <View style={styles.via}>
+  const renderPlanoVia = (nome, isLast = false) => (
+    <View style={[styles.via, isLast && styles.viaLast]}>
       <View style={styles.viaHeader}>
-        <Text style={{ fontWeight: 'bold' }}>ZER0 20 GARAGE</Text>
+          <Text style={styles.viaGarageName}>ZERO 20 GARAGE</Text>
         <Text style={styles.viaName}>{nome}</Text>
       </View>
       <View style={styles.infoRow}>
         <View style={styles.infoItem}><Text><Text style={styles.infoLabel}>CLIENTE: </Text>{cliente || ''}</Text></View>
         <View style={styles.infoItem}><Text><Text style={styles.infoLabel}>OS Nº: </Text>{ordemServico || ''}</Text></View>
+        <View style={styles.planoDataEntrega}><Text><Text style={styles.infoLabel}>DATA DE ENTREGA: </Text>{planoRevisao?.dataEntrega || dataEntrega || ''}</Text></View>
       </View>
       <View style={styles.infoRow}>
         <View style={styles.infoItem}><Text><Text style={styles.infoLabel}>VEÍCULO: </Text>{veiculoTexto || ''}</Text></View>
@@ -319,9 +372,10 @@ const TermoGarantiaPDF = ({ data }) => {
         <View style={styles.servicesRow}>
           {['Motor Completo', 'Motor Parcial', 'Cabeçote', 'Serviços Diversos'].map((servico) => (
             <View key={servico} style={styles.serviceItem}>
-              <Text style={styles.serviceText}>
-                {servicoMarcado(servico) ? '☑' : '☐'} {servico}
-              </Text>
+              <View style={styles.serviceCheckbox}>
+                {servicoMarcado(servico) && <Text style={styles.serviceCheckboxMark}>X</Text>}
+              </View>
+              <Text style={styles.serviceText}>{servico}</Text>
             </View>
           ))}
         </View>
@@ -348,7 +402,8 @@ const TermoGarantiaPDF = ({ data }) => {
 
   return (
     <Document>
-      <Page size={[A4_WIDTH, contentHeight]} style={styles.page}>
+      <Page size="A4" style={styles.page} wrap={false}>
+       <View style={[styles.certificateContent, { transform: [{ scale: certificateScale }] }]}>
 
         {/* Header */}
         <View style={styles.header}>
@@ -451,7 +506,7 @@ const TermoGarantiaPDF = ({ data }) => {
             <Text style={styles.sectionTitle}>4. Exceções à Garantia:</Text>
             <Text style={styles.listItem}>• Peças que não tenham sido objeto de substituição não serão cobertas.</Text>
             <Text style={styles.listItem}>• Eventuais novos defeitos ou falhas que venham a surgir no motor após a realização da retífica serão considerados como novos serviços, não incluídos na cobertura.</Text>
-            <Text style={styles.listItem}>• A garantia será válida somente se o veículo for mantido e utilizado conforme as orientações fornecidas pela Zero 20 Garage, incluindo troca de óleo, utilização de combustíveis adequados e respeito ao intervalo de manutenção recomendado.</Text>
+            <Text style={styles.listItem}>• A validade da garantia estipulada neste certificado está condicionada ao cumprimento, por parte do cliente, de todas as orientações e recomendações de uso, manutenção e cuidados preventivos fornecidas pelo mecânico responsável. É de responsabilidade do cliente acompanhar regularmente os indicadores do painel do veículo, observar luzes de advertência e sinais de anormalidade, especialmente alertas de superaquecimento, baixa pressão do óleo, elevação da temperatura do motor, ruídos incomuns ou perda de desempenho, interrompendo o uso do veículo quando necessário para evitar danos maiores.</Text>
             <Text style={styles.listItem}>• Em casos excepcionais, se o veículo apresentar falhas, o cliente poderá solicitar a análise do caso.</Text>
             <Text style={styles.listItem}>• Não haverá reembolso de peças já instaladas no veículo, sob nenhuma circunstância.</Text>
             <Text style={styles.listItem}>• Clientes inadimplentes não terão direito à garantia. Todos os pagamentos pendentes devem ser regularizados antes de qualquer solicitação de garantia.</Text>
@@ -465,30 +520,30 @@ const TermoGarantiaPDF = ({ data }) => {
 
 
         {/* Footer */}
-        <View style={styles.footer} wrap={false}>
-            <Text>Zero 20 Garage</Text>
-            <Text>(11) 94109-7471 – zero20garage@hotmail.com</Text>
-            <Text>Avenida Laura Gomes Hannickel, 153 – Capoavinha, Mairiporã/SP</Text>
-        </View>
-
+        <RodapeContato />
+       </View>
       </Page>
-      <Page size="A4" style={styles.planoPage}>
+      <Page size="A4" style={styles.planoPage} wrap={false}>
+       <View style={[styles.planoContent, { transform: [{ scale: planScale }] }]}>
         <View style={styles.planoTopHeader}>
           <Image src={LOGO_GARAGE} style={styles.planoLogo} />
           <Text style={styles.planoTitle}>PLANO DE REVISÃO/TROCA DE ÓLEO</Text>
           <Image src={LOGO_OLEOS} style={styles.planoLogo} />
         </View>
         {renderPlanoVia('VIA DO CLIENTE')}
-        {renderPlanoVia('VIA DA OFICINA')}
+        {renderPlanoVia('VIA DA OFICINA', true)}
         <View style={styles.planoFooter}>
           <Text style={styles.planoFooterAviso}>
-            IMPORTANTE: As revisões preventivas devem ser realizadas estritamente nos prazos e quilometragens estipulados acima para a validação contínua da garantia.
+            <Text style={styles.planoFooterAvisoDestaque}>É obrigatória a troca do óleo do motor e do filtro de óleo a cada 10.000 km, ou conforme o intervalo previsto no plano de troca de óleo fornecido ao cliente, respeitando sempre o prazo ou a quilometragem estabelecidos nesse plano.</Text> A realização das manutenções dentro dos intervalos recomendados é condição essencial para a preservação da garantia. O descumprimento dessa exigência, especialmente a não realização da troca de óleo e filtro no intervalo estipulado, poderá acarretar a perda da cobertura da garantia, observadas as condições do certificado e a legislação aplicável. O cliente deverá guardar os comprovantes das manutenções realizadas para eventual verificação.
           </Text>
           <View style={styles.planoAssinaturaClienteWrapper}>
+            <View style={styles.planoPageSignatureSpacer} />
             <View style={styles.planoLinhaAssinatura} />
             <Text style={styles.planoTextoAssinatura}>ASSINATURA DO CLIENTE</Text>
           </View>
+          <RodapeContato />
         </View>
+       </View>
       </Page>
     </Document>
   );

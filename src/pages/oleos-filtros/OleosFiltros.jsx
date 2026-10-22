@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Droplet, ShieldCheck, Award, Settings, ArrowRight } from 'lucide-react';
+import { Droplet, ShieldCheck, Award, Settings, ArrowRight, MapPin, ExternalLink } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade } from 'swiper/modules';
 import useMarketingMedia from '../../hooks/useMarketingMedia';
@@ -23,6 +23,7 @@ const defaultBanner = {
   ativo: true,
 };
 const workshopPhoto = "https://res.cloudinary.com/dlyeywiwk/image/upload/f_auto,q_auto/v1765506349/Gemini_Generated_Image_2pi18x2pi18x2pi1_iqwmam.png";
+const mapsUrl = 'https://www.google.com/maps/place/ZERO+20+%C3%93LEOS+E+FILTROS+EM+MAIRIPOR%C3%83+-+S%C3%83O+PAULO/@-23.3263583,-46.577035,17z/data=!3m1!4b1!4m6!3m5!1s0x94ceedc177c667b7:0xc914e86ffb163244!8m2!3d-23.3263583!4d-46.5744601!16s%2Fg%2F11zf613ql3?hl=pt-BR&entry=ttu&g_ep=EgoyMDI2MTAxOS4wIKXMDSoASAFQAw%3D%3D';
 
 const OleosFiltros = () => {
   const { media: marketingBanners } = useMarketingMedia('oleos-filtros', [defaultBanner]);
@@ -195,7 +196,22 @@ const OleosFiltros = () => {
         </motion.div>
       </section>
 
-      {/* 7. CTA e Contato */}
+      {/* 7. Localização da unidade de Óleos e Filtros */}
+      <section className="of-location-section wrapper-padrao">
+        <motion.div className="of-location-card" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+          <div className="of-location-icon"><MapPin size={30} aria-hidden="true" /></div>
+          <div className="of-location-copy">
+            <span className="of-location-eyebrow">Visite nossa unidade</span>
+            <h2 className="of-location-title">Zero 20 Óleos e Filtros</h2>
+            <p>Encontre nossa unidade em Mairiporã e trace sua rota pelo Google Maps.</p>
+          </div>
+          <a className="of-location-link" href={mapsUrl} target="_blank" rel="noopener noreferrer">
+            Abrir no Google Maps <ExternalLink size={17} aria-hidden="true" />
+          </a>
+        </motion.div>
+      </section>
+
+      {/* 8. CTA e Contato */}
       <div className="of-contato-wrapper wrapper-padrao">
          <ContatoCta />
       </div>

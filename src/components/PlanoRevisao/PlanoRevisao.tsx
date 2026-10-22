@@ -15,6 +15,7 @@ export interface PlanoRevisaoProps {
   veiculo?: string;
   placa?: string;
   kmEntrega?: string | number;
+  dataEntrega?: string;
   tipoServico?: string[];
   revisoes?: Revisao[];
   observacoes?: string;
@@ -39,6 +40,7 @@ const PlanoRevisao: React.FC<PlanoRevisaoProps> = ({
   veiculo = '',
   placa = '',
   kmEntrega = '',
+  dataEntrega = '',
   tipoServico = [],
   revisoes = [],
   observacoes = '',
@@ -47,7 +49,7 @@ const PlanoRevisao: React.FC<PlanoRevisaoProps> = ({
     <section className={styles.via} aria-label={titulo}>
       <header className={styles.cabecalhoVia}>
         <div>
-          <strong>ZER0 20 GARAGE</strong>
+          <strong>ZERO 20 GARAGE</strong>
           <span>PLANO DE REVISÃO E GARANTIA</span>
         </div>
         <h2>{titulo}</h2>
@@ -56,6 +58,7 @@ const PlanoRevisao: React.FC<PlanoRevisaoProps> = ({
       <div className={styles.dados}>
         <p><b>CLIENTE:</b> <span>{cliente}</span></p>
         <p><b>OS Nº:</b> <span>{numeroOS}</span></p>
+        <p><b>DATA DE ENTREGA:</b> <span>{dataEntrega}</span></p>
         <p><b>VEÍCULO:</b> <span>{veiculo}</span></p>
         <p><b>PLACA:</b> <span>{placa}</span></p>
         <p><b>KM DE ENTREGA:</b> <span>{kmEntrega ? `${kmEntrega} km` : ''}</span></p>
@@ -112,7 +115,7 @@ const PlanoRevisao: React.FC<PlanoRevisaoProps> = ({
 
       <footer className={styles.rodapePlano}>
         <p className={styles.avisoImportante}>
-          IMPORTANTE: As revisões preventivas devem ser realizadas estritamente nos prazos e quilometragens estipulados acima para a validação contínua da garantia.
+          <strong>É obrigatória a troca do óleo do motor e do filtro de óleo a cada 10.000 km, ou conforme o intervalo previsto no plano de troca de óleo fornecido ao cliente, respeitando sempre o prazo ou a quilometragem estabelecidos nesse plano.</strong> A realização das manutenções dentro dos intervalos recomendados é condição essencial para a preservação da garantia. O descumprimento dessa exigência, especialmente a não realização da troca de óleo e filtro no intervalo estipulado, poderá acarretar a perda da cobertura da garantia, observadas as condições do certificado e a legislação aplicável. O cliente deverá guardar os comprovantes das manutenções realizadas para eventual verificação.
         </p>
         <div className={styles.blocoAssinaturaCliente}>
           <div className={styles.linhaAssinaturaCliente} />

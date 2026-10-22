@@ -521,6 +521,89 @@
     color: var(--of-text-light);
 }
 
+.of-location-section {
+    padding-top: 0;
+}
+
+.of-location-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: clamp(1.4rem, 3vw, 2.1rem);
+    background:
+        radial-gradient(circle at 8% 50%, rgba(0, 210, 106, 0.16), transparent 28%),
+        linear-gradient(135deg, #171c20, #111519);
+    border: 1px solid rgba(0, 210, 106, 0.22);
+    border-radius: 22px;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+}
+
+.of-location-icon {
+    display: grid;
+    width: 62px;
+    height: 62px;
+    flex: 0 0 62px;
+    place-items: center;
+    color: var(--of-green-primary);
+    background: rgba(0, 210, 106, 0.12);
+    border: 1px solid rgba(0, 210, 106, 0.22);
+    border-radius: 18px;
+}
+
+.of-location-copy {
+    flex: 1;
+}
+
+.of-location-eyebrow {
+    color: var(--of-green-primary);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.of-location-title {
+    margin: 0.35rem 0;
+    color: #fff;
+    font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+    font-weight: 800;
+}
+
+.of-location-copy p {
+    margin: 0;
+    color: var(--of-text-muted);
+    line-height: 1.55;
+}
+
+.of-location-link {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 0.85rem 1.2rem;
+    color: #062313;
+    font-size: 0.9rem;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+    background: var(--of-green-gradient);
+    border-radius: 12px;
+    box-shadow: var(--of-glow);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.of-location-link:hover {
+    color: #062313;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0, 210, 106, 0.42);
+}
+
+.of-location-link:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 4px;
+}
+
 /* 7. Responsividade */
 @media (max-width: 1024px) {
     .of-intro-section {
@@ -597,6 +680,16 @@
         padding: 2rem;
         text-align: center;
         justify-content: center;
+    }
+
+    .of-location-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .of-location-link {
+        width: 100%;
+        white-space: normal;
     }
 
     .desktop-only {
